@@ -1,6 +1,6 @@
 {
   "name": "@bring/blocks-client",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Client package for bring-blocks",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -15,7 +15,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "GPL-2.0",
   "devDependencies": {
     "@types/react": "^18.0.32",
     "@types/react-dom": "^18.0.11",
