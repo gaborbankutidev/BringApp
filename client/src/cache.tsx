@@ -1,16 +1,16 @@
 import React from "react";
-import type { FC } from "react";
-import { useBringContext } from "./context/bring-context";
-import { createBringElement } from "./render";
+import type {FC} from "react";
+import {useBringContext} from "./context/bring-context";
+import {createBringElement} from "./render";
 
 export const Cache: FC = () => {
-  const { entityContent, componentMap } = useBringContext();
+	const {entityContent, componentMap} = useBringContext();
 
-  return (
-    <>
-      {entityContent.layout
-        ? createBringElement(entityContent.layout, componentMap, true)
-        : createBringElement(entityContent.main, componentMap)}
-    </>
-  );
+	return (
+		<>
+			{entityContent.layout
+				? createBringElement(entityContent.layout, componentMap, true)
+				: createBringElement(entityContent.main, componentMap)}
+		</>
+	);
 };

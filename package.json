@@ -1,0 +1,25 @@
+{
+	"name": "bring-blocks",
+	"version": "0.1.0",
+	"description": "",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"format": "yarn format:prettier --write",
+		"format:check": "yarn format:prettier --check",
+		"format:prettier": "prettier \"./**/*.{ts,tsx,js,jsx,json,css,md,yml,yaml,php}\""
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/gaborbankutidev/BringBlocks.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "GPL-2.0",
+	"bugs": {
+		"url": "https://github.com/gaborbankutidev/BringBlocks/issues"
+	},
+	"homepage": "https://github.com/gaborbankutidev/BringBlocks#readme",
+	"devDependencies": {
+		"prettier": "^2.8.7"
+	}
+}

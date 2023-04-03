@@ -1,11 +1,11 @@
 export {
-  makeBringStylesClassNames,
-  makeResponsiveClassNames,
+	makeBringStylesClassNames,
+	makeResponsiveClassNames,
 } from "./make-class-names";
 export type {
-  BringStyles,
-  BringStylesConfig,
-  ResponsiveValue,
-  Sides,
+	BringStyles,
+	BringStylesConfig,
+	ResponsiveValue,
+	Sides,
 } from "./types";
-export { BringStylesDefaultValue } from "./utils";
+export {BringStylesDefaultValue} from "./utils";
