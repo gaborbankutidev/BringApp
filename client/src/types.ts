@@ -115,35 +115,3 @@ export type BringNode = {
   props: { [key: string]: any };
   children?: BringNode[];
 };
-
-export type NestedKeyOf<ObjectType extends object> = {
-  [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends object
-    ?
-        | `${Key}`
-        | `${Key}.${NestedKeyOf<ObjectType[Key]> extends infer U extends string
-            ? U
-            : never}`
-    : `${Key}`;
-}[keyof ObjectType & (string | number)];
-
-type DeepRequired<T extends Obj> = {
-  [P in keyof T]-?: T[P] extends Obj ? DeepRequired<T[P]> : T[P];
-};
-
-type NestedTypedKeyOfOnRequired<ObjectType extends Obj, T> = {
-  [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends T
-    ? `${Key}`
-    : ObjectType[Key] extends Obj
-    ? `${Key}.${NestedTypedKeyOfOnRequired<
-        ObjectType[Key],
-        T
-      > extends infer U extends string
-        ? U
-        : never}`
-    : never;
-}[keyof ObjectType & (string | number)];
-
-export type NestedTypedKeyOf<
-  ObjectType extends Obj,
-  T
-> = NestedTypedKeyOfOnRequired<DeepRequired<ObjectType>, T>;

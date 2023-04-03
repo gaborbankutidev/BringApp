@@ -1,3 +1,5 @@
+import { DashIcon } from "./dashicon.types";
+
 type DisplayValue =
   | "block"
   | "inline-block"
@@ -57,4 +59,15 @@ export type BringStyles = {
     p?: Sides;
   };
   visibility?: ResponsiveValue<boolean>;
+};
+
+type ResponsiveLabel = {
+  label: string;
+  icon: DashIcon;
+};
+
+export type ResponsiveLabels = {
+  "": ResponsiveLabel;
+  md: ResponsiveLabel;
+  lg: ResponsiveLabel;
 };
