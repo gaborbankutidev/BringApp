@@ -1,0 +1,53 @@
+import React from "react";
+import clsx from "clsx";
+import {
+	BringStylesConfig,
+	FCC,
+	makeBringStylesClassNames,
+} from "@bring/blocks-client";
+import {Debug} from "@bring/blocks-editor";
+
+export type {{component-name}}Props = {
+	// primitives
+	boolean: boolean;
+	number: number;
+	string: string;
+	deep: {
+		a1: {
+			a2: {
+				boolean: boolean;
+				number: number;
+			};
+		};
+	};
+};
+
+export const bringStylesConfig: BringStylesConfig = {
+	spacing: {
+		m: {t: {}, b: {}},
+	},
+	visibility: {
+		"": "block",
+		md: "block",
+		lg: "block",
+	},
+};
+
+export const {{component-name}}: FCC<{{component-name}}Props> = ({
+	className,
+	bringStyles,
+	...props
+}) => {
+	return (
+		<div
+			className={clsx(
+				className,
+				makeBringStylesClassNames(bringStylesConfig, bringStyles),
+				"border",
+				"border-black",
+			)}
+		>
+			<Debug value={props} />
+		</div>
+	);
+};
