@@ -15,6 +15,9 @@ export {
 	BringStylesDefaultValue,
 	makeBringStylesClassNames,
 	makeResponsiveClassNames,
+	BringStylesConfig,
 } from "./styles";
+
+export {FCC} from "./types";
 
 export {postContent} from "./components/post-content";
