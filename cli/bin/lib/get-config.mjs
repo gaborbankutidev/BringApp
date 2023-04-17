@@ -19,6 +19,9 @@ export function readUserConfig() {
 export function getConfig() {
 	const baseConfig = {
 		componentsFolderPath: "./src/components/",
+		clientPath: "./src/client.tsx",
+		componentsIndexPath: "./src/components/index.ts",
+		indexPath: "./src/index.ts",
 	};
 	const maybeUserConfig = readUserConfig();
 	if (!maybeUserConfig.success) {
@@ -28,5 +31,9 @@ export function getConfig() {
 	return {
 		componentsFolderPath:
 			userConfig.componentsFolderPath ?? baseConfig.componentsFolderPath,
+		clientPath: userConfig.clientPath ?? baseConfig.clientPath,
+		componentsIndexPath:
+			userConfig.componentsIndexPath ?? baseConfig.componentsIndexPath,
+		indexPath: userConfig.indexPath ?? baseConfig.indexPath,
 	};
 }

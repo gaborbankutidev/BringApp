@@ -8,9 +8,13 @@ import {
 import type {BlockConfig} from "@bring/blocks-editor";
 import {{{component-name}}Props, {{component-name}}, bringStylesConfig} from "./{{component-name-kebab}}";
 
-export const {{component-name-camel}}Config: BlockConfig<{{component-name}}Props> = {
+export const {{component-name-camel}} = {
 	Component: {{component-name}},
 	componentName: "{{component-name}}",
+};
+
+export const {{component-name-camel}}Config: BlockConfig<{{component-name}}Props> = {
+	...{{component-name-camel}},
 	attributes: {
 		boolean: booleanAttributeSource(),
 		number: numberAttributeSource(),

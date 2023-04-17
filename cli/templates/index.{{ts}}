@@ -1,7 +1,2 @@
-import {{{component-name-camel}}Config} from "./{{component-name-kebab}}-config";
-import {registerBringBlock, registerBringComponent} from "@bringteam/bringblocks";
-
 export * from "./{{component-name-kebab}}";
-
-export const register{{component-name}}Component = () => registerBringComponent({{component-name-camel}}Config);
-export const register{{component-name}}Block = () => registerBringBlock({{component-name-camel}}Config);
+export * from "./{{component-name-kebab}}-config";

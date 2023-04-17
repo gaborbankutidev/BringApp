@@ -22,7 +22,7 @@ export type {{component-name}}Props = {
 	};
 };
 
-export const bringStylesConfig: BringStylesConfig = {
+export const {{component-name-camel}}BringStylesConfig: BringStylesConfig = {
 	spacing: {
 		m: {t: {}, b: {}},
 	},
@@ -42,7 +42,7 @@ export const {{component-name}}: FCC<{{component-name}}Props> = ({
 		<div
 			className={clsx(
 				className,
-				makeBringStylesClassNames(bringStylesConfig, bringStyles),
+				makeBringStylesClassNames({{component-name-camel}}BringStylesConfig, bringStyles),
 				"border",
 				"border-black",
 			)}

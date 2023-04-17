@@ -1,12 +1,13 @@
 // @ts-check
 import path from "path";
-import {existsSync} from "fs";
+import {existsSync, writeFileSync} from "fs";
 import _ from "lodash";
 
 import {errmsg, infomsg, successmsg} from "../lib/chalk.mjs";
 import {readTemplates} from "./read-templates.mjs";
 import {fillTemplates} from "./fill-templates.mjs";
 import {writeTemplates} from "./write-templates.mjs";
+import {updateIndexFiles} from "./update-index-files.mjs";
 
 /** @type {string[]} */
 const templateNames = [
@@ -67,5 +68,6 @@ export function scaffoldBlock(args, config) {
 		filledFileContentsWithNames,
 		config.componentsFolderPath,
 	);
+	updateIndexFiles(componentName, config);
 	successmsg(`\`${componentName}\` successfully generated!`);
 }
