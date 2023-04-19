@@ -13,17 +13,11 @@ export type {
 	BringContextType,
 	BringNode,
 	Defined,
-	DynamicEntityList,
 	DynamicEntityOptions,
 	DynamicEntityProps,
 	EntityContent,
 	EntityProps,
-	EntityType,
 	FCC,
-	GridNumType,
-	ImageType,
-	LinkType,
-	MenuItemType,
 	MenuType,
 	NestedKeyOf,
 	NestedTypedKeyOf,
@@ -56,3 +50,4 @@ export {
 	optionsToNumberOptions,
 } from "./controls";
 export {Debug, EditorCard, Link, _useLink} from "./components";
+export {defaultImageValue} from "./utils";
