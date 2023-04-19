@@ -16,8 +16,17 @@ export {
 	makeBringStylesClassNames,
 	makeResponsiveClassNames,
 	BringStylesConfig,
+	ResponsiveValue,
 } from "./styles";
 
-export {FCC} from "./types";
+export {
+	FCC,
+	GridNumType,
+	ImageType,
+	LinkType,
+	MenuItemType,
+	DynamicEntityList,
+	EntityType,
+} from "./types";
 
 export {postContent} from "./components/post-content";
