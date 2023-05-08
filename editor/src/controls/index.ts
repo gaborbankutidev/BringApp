@@ -6,6 +6,7 @@ export {TextareaControl} from "./primitive/textarea-control";
 export {SelectControl} from "./primitive/select-control";
 export {NumberSelectControl} from "./primitive/number-select-control";
 export {ComboboxControl} from "./primitive/combobox-control";
+export {NumberComboboxControl} from "./primitive/number-combobox-control";
 
 export {ImageControl} from "./object/image-control";
 export {

@@ -17,7 +17,7 @@ export function isPathControl<vT, pT extends Obj = {}>(
 // generates option list for SelectControl
 export function makeOptions<T extends string>(
 	options: OptionList<T>,
-	withDefault = true,
+	withDefault: boolean | string = true,
 ): SelectControlOptions<T> {
 	const optionList = options.map((option) =>
 		Array.isArray(option)
@@ -29,17 +29,17 @@ export function makeOptions<T extends string>(
 		? [
 				...optionList,
 				{
-					label: "Default",
+					label: withDefault === true ? "Default" : withDefault,
 					value: "",
 				},
 		  ]
 		: optionList;
 }
 
-// generates option list for NumberControl
+// generates option list for NumberSelectControl
 export function makeNumberOptions<T extends number>(
 	options: NumberOptionList<T>,
-	withDefault = true,
+	withDefault: boolean | string = true,
 ): NumberSelectControlOptions<T> {
 	const optionList = options.map((option) =>
 		Array.isArray(option)
@@ -51,7 +51,7 @@ export function makeNumberOptions<T extends number>(
 		? [
 				...optionList,
 				{
-					label: "Default",
+					label: withDefault === true ? "Default" : withDefault,
 					value: 0,
 				},
 		  ]

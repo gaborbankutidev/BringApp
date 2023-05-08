@@ -9,7 +9,7 @@ import type {ControlByPath, ControlByValue, ControlType} from "../types";
 import {useControlContext} from "../context";
 import {isPathControl} from "../utils";
 
-type _SelectControl = {
+type _ComboboxControl = {
 	options: {
 		label: string;
 		value: string;
@@ -17,7 +17,7 @@ type _SelectControl = {
 };
 
 export const ComboboxControl = <pT extends Obj = {}>(
-	props: ControlType<string, pT> & _SelectControl,
+	props: ControlType<string, pT> & _ComboboxControl,
 ) =>
 	isPathControl(props) ? (
 		<ComboboxControlByPath {...props} />
@@ -25,19 +25,44 @@ export const ComboboxControl = <pT extends Obj = {}>(
 		<ComboboxControlByValue {...props} />
 	);
 
-const ComboboxControlByValue: FC<ControlByValue<string> & _SelectControl> = ({
+function ComboboxControlByPath<pT extends Obj>({
+	path,
+	updateHandling,
+	...props
+}: ControlByPath<pT, string> & _ComboboxControl): JSX.Element {
+	const {attributes, setAttributes} = useControlContext();
+	const value = get(attributes, path);
+
+	return (
+		<ComboboxControl
+			updateHandling="by-value"
+			value={value}
+			setValue={(newValue) => {
+				const newAttributes = cloneDeep(attributes);
+				set(newAttributes, path, newValue);
+				setAttributes(newAttributes);
+			}}
+			{...props}
+		/>
+	);
+}
+
+const ComboboxControlByValue: FC<ControlByValue<string> & _ComboboxControl> = ({
 	label,
 	value,
 	setValue,
 	setDefault = true,
+	defaultValue = "",
 	show = true,
 	options,
 }) =>
 	show ? (
 		<WPComboboxControl
 			label={`${label} ${value === undefined ? " - Default" : ""}`}
-			onChange={setValue}
-			value={value ?? ""}
+			onChange={(newValue) => {
+				newValue ? setValue(newValue) : setValue(undefined);
+			}}
+			value={value ?? defaultValue}
 			help={
 				setDefault &&
 				value !== undefined && (
@@ -53,43 +78,3 @@ const ComboboxControlByValue: FC<ControlByValue<string> & _SelectControl> = ({
 			options={options}
 		/>
 	) : null;
-
-function ComboboxControlByPath<pT extends Obj>({
-	label,
-	path,
-	setDefault = true,
-	show = true,
-	options,
-}: ControlByPath<pT, string> & _SelectControl): JSX.Element {
-	const {attributes, setAttributes} = useControlContext();
-	const value = get(attributes, path);
-
-	return show ? (
-		<WPComboboxControl
-			label={`${label} ${value === undefined ? " - Default" : ""}`}
-			value={value ?? ""}
-			onChange={(newValue) => {
-				const newAttributes = cloneDeep(attributes);
-				set(newAttributes, path, newValue);
-				setAttributes(newAttributes);
-			}}
-			help={
-				setDefault &&
-				value !== undefined && (
-					<button
-						onClick={() => {
-							const newAttributes = cloneDeep(attributes);
-							set(newAttributes, path, undefined);
-							setAttributes(newAttributes);
-						}}
-					>
-						Set to default
-					</button>
-				)
-			}
-			options={options}
-		/>
-	) : (
-		<></>
-	);
-}

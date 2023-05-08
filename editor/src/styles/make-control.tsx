@@ -10,6 +10,7 @@ export function makeBringStylesControl(bringStylesConfig: BringStylesConfig) {
 	const m = bringStylesConfig.spacing?.m;
 	const p = bringStylesConfig.spacing?.p;
 	const v = bringStylesConfig.visibility;
+
 	return () => (
 		<>
 			{m && (

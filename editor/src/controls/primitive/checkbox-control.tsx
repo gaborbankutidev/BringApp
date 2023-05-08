@@ -19,40 +19,24 @@ export const CheckboxControl = <pT extends Obj = {}>(
 	);
 
 function CheckboxControlByPath<pT extends Obj>({
-	label,
 	path,
-	setDefault = true,
-	show = true,
+	updateHandling,
+	...props
 }: ControlByPath<pT, boolean>): JSX.Element {
 	const {attributes, setAttributes} = useControlContext();
 	const value = get(attributes, path);
 
-	return show ? (
-		<WPCheckboxControl
-			label={`${label} ${value === undefined ? " - Default" : ""}`}
-			checked={value ?? false}
-			onChange={(newValue) => {
+	return (
+		<CheckboxControlByValue
+			updateHandling="by-value"
+			value={value}
+			setValue={(newValue) => {
 				const newAttributes = cloneDeep(attributes);
 				set(newAttributes, path, newValue);
 				setAttributes(newAttributes);
 			}}
-			help={
-				setDefault &&
-				value !== undefined && (
-					<button
-						onClick={() => {
-							const newAttributes = cloneDeep(attributes);
-							set(newAttributes, path, undefined);
-							setAttributes(newAttributes);
-						}}
-					>
-						Set to default
-					</button>
-				)
-			}
+			{...props}
 		/>
-	) : (
-		<></>
 	);
 }
 
@@ -61,13 +45,14 @@ const CheckboxControlByValue: FC<ControlByValue<boolean>> = ({
 	value,
 	setValue,
 	setDefault = true,
+	defaultValue = false,
 	show = true,
 }) =>
 	show ? (
 		<WPCheckboxControl
 			label={`${label} ${value === undefined ? " - Default" : ""}`}
 			onChange={setValue}
-			checked={value ?? false}
+			checked={value ?? defaultValue}
 			help={
 				setDefault &&
 				value !== undefined && (

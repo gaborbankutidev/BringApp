@@ -72,7 +72,7 @@ export function editorInit(blockList: BlockConfig<any>[]) {
 				}, 1000);
 			}
 		});
-		console.log("BringBlocks inited");
+		console.log("BringBlocks Editor initialized!");
 	}, 1000);
 }
 

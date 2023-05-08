@@ -1,6 +1,6 @@
 import {registerBlockType} from "@wordpress/blocks";
 import type {Obj} from "../types";
-import {objectAttributeSource} from "./attributes";
+import {objectAttributeSource, stringAttributeSource} from "./attributes";
 import {makeEdit} from "./make-edit";
 import {makeSave} from "./make-save";
 import type {BlockConfig} from "./types";
@@ -15,7 +15,7 @@ export function registerBringBlock<Props extends Obj>(
 	registerBlockType(`bring/${title.toLowerCase()}`, {
 		title,
 		description: config.description ?? `${config.title} block by Bring`,
-		category: "widgets",
+		category: "widgets", // todo custom category
 		icon: config.icon ?? "block-default",
 		supports: {
 			html: false,
@@ -23,8 +23,9 @@ export function registerBringBlock<Props extends Obj>(
 		attributes: {
 			...config.attributes,
 			bringStyles: objectAttributeSource(BringStylesDefaultValue),
+			// todo add id
 		},
 		edit: makeEdit(config),
-		save: makeSave(config),
+		save: makeSave(config), // refactor save hooks and use InnedBlock instead
 	});
 }

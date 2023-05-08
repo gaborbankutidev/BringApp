@@ -1,5 +1,6 @@
-import {SelectControl as WPSelectControl} from "@wordpress/components";
-import React, {FC} from "react";
+import React from "react";
+import type {FC} from "react";
+import {ComboboxControl as WPComboboxControl} from "@wordpress/components";
 import get from "lodash.get";
 import set from "lodash.set";
 import cloneDeep from "lodash.clonedeep";
@@ -8,32 +9,32 @@ import type {ControlByPath, ControlByValue, ControlType} from "../types";
 import {useControlContext} from "../context";
 import {isPathControl} from "../utils";
 
-type _NumberSelectControl = {
+type _NumberComboboxControl = {
 	options: {
 		label: string;
 		value: number;
 	}[];
 };
 
-export const NumberSelectControl = <pT extends Obj = {}>(
-	props: ControlType<number, pT> & _NumberSelectControl,
+export const NumberComboboxControl = <pT extends Obj = {}>(
+	props: ControlType<number, pT> & _NumberComboboxControl,
 ) =>
 	isPathControl(props) ? (
-		<NumberSelectControlByPath {...props} />
+		<NumberComboboxControlByPath {...props} />
 	) : (
-		<NumberSelectControlByValue {...props} />
+		<NumberComboboxControlByValue {...props} />
 	);
 
-function NumberSelectControlByPath<pT extends Obj>({
+function NumberComboboxControlByPath<pT extends Obj>({
 	path,
 	updateHandling,
 	...props
-}: ControlByPath<pT, number> & _NumberSelectControl) {
+}: ControlByPath<pT, number> & _NumberComboboxControl): JSX.Element {
 	const {attributes, setAttributes} = useControlContext();
 	const value = get(attributes, path);
 
 	return (
-		<NumberSelectControlByValue
+		<NumberComboboxControl
 			updateHandling="by-value"
 			value={value}
 			setValue={(newValue) => {
@@ -46,18 +47,25 @@ function NumberSelectControlByPath<pT extends Obj>({
 	);
 }
 
-const NumberSelectControlByValue: FC<
-	ControlByValue<number> & _NumberSelectControl
+const NumberComboboxControlByValue: FC<
+	ControlByValue<number> & _NumberComboboxControl
 > = ({label, value, setValue, setDefault = true, show = true, options}) =>
 	show ? (
-		<WPSelectControl
+		<WPComboboxControl
 			label={`${label} ${value === undefined ? " - Default" : ""}`}
+			//onChange={setValue}
 			onChange={(newValue) => {
+				if (!newValue) {
+					setValue(undefined);
+					return;
+				}
+
 				const parsedNewValue = parseInt(newValue);
 				if (isNaN(parsedNewValue)) {
 					alert("Value can not be set because it's a NaN");
 					return;
 				}
+
 				setValue(parsedNewValue);
 			}}
 			value={value ? value.toString() : ""}

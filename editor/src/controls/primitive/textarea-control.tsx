@@ -21,45 +21,24 @@ export const TextareaControl = <pT extends Obj = {}>(
 	);
 
 function TextareaControlByPath<pT extends Obj>({
-	label,
 	path,
-	setDefault = true,
-	show = true,
-	rows = 4,
+	updateHandling,
+	...props
 }: ControlByPath<pT, string> & _TextareaControl): JSX.Element {
 	const {attributes, setAttributes} = useControlContext();
 	const value = get(attributes, path);
 
-	const contentRows = value ? value.split(/\r\n|\r|\n/).length : rows;
-	const textareaRows = contentRows > rows - 1 ? contentRows + 1 : rows;
-
-	return show ? (
-		<WPTextareaControl
-			label={`${label} ${value === undefined ? " - Default" : ""}`}
-			value={value ?? ""}
-			onChange={(newValue) => {
+	return (
+		<TextareaControlByValue
+			updateHandling="by-value"
+			value={value}
+			setValue={(newValue) => {
 				const newAttributes = cloneDeep(attributes);
 				set(newAttributes, path, newValue);
 				setAttributes(newAttributes);
 			}}
-			help={
-				setDefault &&
-				value !== undefined && (
-					<button
-						onClick={() => {
-							const newAttributes = cloneDeep(attributes);
-							set(newAttributes, path, undefined);
-							setAttributes(newAttributes);
-						}}
-					>
-						Set to default
-					</button>
-				)
-			}
-			rows={textareaRows}
+			{...props}
 		/>
-	) : (
-		<></>
 	);
 }
 
@@ -68,6 +47,7 @@ const TextareaControlByValue: FC<ControlByValue<string> & _TextareaControl> = ({
 	value,
 	setValue,
 	setDefault = true,
+	defaultValue = "",
 	show = true,
 	rows = 4,
 }) => {
@@ -78,7 +58,7 @@ const TextareaControlByValue: FC<ControlByValue<string> & _TextareaControl> = ({
 		<WPTextareaControl
 			label={`${label} ${value === undefined ? " - Default" : ""}`}
 			onChange={setValue}
-			value={value ?? ""}
+			value={value ?? defaultValue}
 			help={
 				setDefault &&
 				value !== undefined && (
@@ -91,7 +71,6 @@ const TextareaControlByValue: FC<ControlByValue<string> & _TextareaControl> = ({
 					</button>
 				)
 			}
-			type="text"
 			rows={textareaRows}
 		/>
 	) : null;

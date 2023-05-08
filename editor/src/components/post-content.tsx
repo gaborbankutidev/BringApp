@@ -8,8 +8,8 @@ export const postContentConfig: BlockConfig = {
 	description:
 		"Post content will be rendered were this component is used in the layout.",
 	icon: "admin-page",
-	Edit: ({isSelected = false}) => (
-		<EditorCard color="grey" name="PostContent" isSelected={isSelected}>
+	Edit: () => (
+		<EditorCard color="grey" name="PostContent">
 			<div>Post Content will be rendered here.</div>
 		</EditorCard>
 	),

@@ -18,18 +18,41 @@ export const ToggleControl = <pT extends Obj = {}>(
 		<ToggleControlByValue {...props} />
 	);
 
+function ToggleControlByPath<pT extends Obj>({
+	path,
+	updateHandling,
+	...props
+}: ControlByPath<pT, boolean>): JSX.Element {
+	const {attributes, setAttributes} = useControlContext();
+	const value = get(attributes, path);
+
+	return (
+		<ToggleControlByValue
+			updateHandling="by-value"
+			value={value}
+			setValue={(newValue) => {
+				const newAttributes = cloneDeep(attributes);
+				set(newAttributes, path, newValue);
+				setAttributes(newAttributes);
+			}}
+			{...props}
+		/>
+	);
+}
+
 const ToggleControlByValue: FC<ControlByValue<boolean>> = ({
 	label,
 	value,
 	setValue,
 	setDefault = true,
+	defaultValue = false,
 	show = true,
 }) =>
 	show ? (
 		<WPToggleControl
 			label={`${label} ${value === undefined ? " - Default" : ""}`}
 			onChange={setValue}
-			checked={value ?? false}
+			checked={value ?? defaultValue}
 			help={
 				setDefault &&
 				value !== undefined && (
@@ -44,41 +67,3 @@ const ToggleControlByValue: FC<ControlByValue<boolean>> = ({
 			}
 		/>
 	) : null;
-
-function ToggleControlByPath<pT extends Obj>({
-	label,
-	path,
-	setDefault = true,
-	show = true,
-}: ControlByPath<pT, boolean>): JSX.Element {
-	const {attributes, setAttributes} = useControlContext();
-	const value = get(attributes, path);
-
-	return show ? (
-		<WPToggleControl
-			label={`${label} ${value === undefined ? " - Default" : ""}`}
-			checked={value ?? false}
-			onChange={(newValue) => {
-				const newAttributes = cloneDeep(attributes);
-				set(newAttributes, path, newValue);
-				setAttributes(newAttributes);
-			}}
-			help={
-				setDefault &&
-				value !== undefined && (
-					<button
-						onClick={() => {
-							const newAttributes = cloneDeep(attributes);
-							set(newAttributes, path, undefined);
-							setAttributes(newAttributes);
-						}}
-					>
-						Set to default
-					</button>
-				)
-			}
-		/>
-	) : (
-		<></>
-	);
-}

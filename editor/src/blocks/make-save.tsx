@@ -8,10 +8,11 @@ export function makeSave<Props extends Obj>(config: BlockConfig<Props>) {
 	return ({attributes}: BlockSave<Props>) => {
 		const {key, parentKey, ...props} = attributes;
 
+		// TODO use editor hooks instead
 		bringStoreBlockNode(parentKey, {
 			key,
 			component: config.componentName,
-			props,
+			props, // calculate bringStyleClassNames and do not save bringStyles
 		});
 
 		return <InnerBlocks.Content />;

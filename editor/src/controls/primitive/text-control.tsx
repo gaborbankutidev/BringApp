@@ -19,40 +19,24 @@ export const TextControl = <pT extends Obj = {}>(
 	);
 
 function TextControlByPath<pT extends Obj>({
-	label,
 	path,
-	setDefault = true,
-	show = true,
+	updateHandling,
+	...props
 }: ControlByPath<pT, string>): JSX.Element {
 	const {attributes, setAttributes} = useControlContext();
 	const value = get(attributes, path);
 
-	return show ? (
-		<WPTextControl
-			label={`${label} ${value === undefined ? " - Default" : ""}`}
-			value={value ?? 0}
-			onChange={(newValue) => {
+	return (
+		<TextControlByValue
+			updateHandling="by-value"
+			value={value}
+			setValue={(newValue) => {
 				const newAttributes = cloneDeep(attributes);
 				set(newAttributes, path, newValue);
 				setAttributes(newAttributes);
 			}}
-			help={
-				setDefault &&
-				value !== undefined && (
-					<button
-						onClick={() => {
-							const newAttributes = cloneDeep(attributes);
-							set(newAttributes, path, undefined);
-							setAttributes(newAttributes);
-						}}
-					>
-						Set to default
-					</button>
-				)
-			}
+			{...props}
 		/>
-	) : (
-		<></>
 	);
 }
 
@@ -61,13 +45,14 @@ const TextControlByValue: FC<ControlByValue<string>> = ({
 	value,
 	setValue,
 	setDefault = true,
+	defaultValue = "",
 	show = true,
 }) =>
 	show ? (
 		<WPTextControl
 			label={`${label} ${value === undefined ? " - Default" : ""}`}
 			onChange={setValue}
-			value={value ?? ""}
+			value={value ?? defaultValue}
 			help={
 				setDefault &&
 				value !== undefined && (

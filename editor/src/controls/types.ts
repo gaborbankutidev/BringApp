@@ -1,28 +1,29 @@
 import type {FC} from "react";
 import type {BlockControl} from "../blocks";
-import type {ImageType, NestedTypedKeyOf, Obj} from "../types";
+import type {ImageType, NestedKeyOf, NestedTypedKeyOf, Obj} from "../types";
+import {ResponsiveValue} from "../styles/types";
 
-type _ControlType = {
+type _ControlType<dVT> = {
 	label: string;
 	setDefault?: boolean;
-	//default?: vT;
+	defaultValue?: dVT;
 	show?: boolean;
 };
 
-export type ControlByPath<pT extends Obj, vT> = _ControlType & {
+export type ControlByPath<pT extends Obj, vT, dVT = vT> = _ControlType<dVT> & {
 	updateHandling?: "by-path";
 	path: NestedTypedKeyOf<pT, vT>;
 };
 
-export type ControlByValue<vT> = _ControlType & {
+export type ControlByValue<vT, dVT = vT> = _ControlType<dVT> & {
 	updateHandling: "by-value";
 	value: vT | undefined;
-	setValue: (newValue: vT | any) => void;
+	setValue: (newValue: vT | undefined) => void;
 };
 
-export type ControlType<vT, pT extends Obj = {}> =
-	| ControlByPath<pT, vT>
-	| ControlByValue<vT>;
+export type ControlType<vT, pT extends Obj = {}, dVT = vT> =
+	| ControlByPath<pT, vT, dVT>
+	| ControlByValue<vT, dVT>;
 
 // ===========
 
@@ -34,7 +35,7 @@ type _ArrayControlType<vT> = {
 };
 
 export type ArrayControlByPath<pT extends Obj, vT> = _ArrayControlType<vT> & {
-	updateHandling: "by-path";
+	updateHandling?: "by-path";
 	path: NestedTypedKeyOf<pT, vT>;
 };
 
@@ -53,17 +54,25 @@ export type ArrayControlType<vT, pT extends Obj = {}> =
 type _ControlConfigType<Props extends Obj = {}> = {
 	label: string;
 	setDefault?: boolean;
-	show?: string | ((attributes: Props) => boolean);
+	show?: NestedKeyOf<Props> | ((attributes: Props) => boolean);
 };
 
 type CheckboxControlConfigType<Props extends Obj = {}> = {
 	type: "checkbox";
 	path: NestedTypedKeyOf<Props, boolean>;
+	defaultValue?: boolean;
+} & _ControlConfigType<Props>;
+
+type ResponsiveCheckboxControlConfigType<Props extends Obj = {}> = {
+	type: "responsive-checkbox";
+	path: NestedTypedKeyOf<Props, ResponsiveValue<boolean>>;
+	defaultValue?: ResponsiveValue<boolean>;
 } & _ControlConfigType<Props>;
 
 type ToggleControlConfigType<Props extends Obj = {}> = {
 	type: "toggle";
 	path: NestedTypedKeyOf<Props, boolean>;
+	defaultValue?: boolean;
 } & _ControlConfigType<Props>;
 
 type RangeControlConfigType<Props extends Obj = {}> = {
@@ -71,17 +80,28 @@ type RangeControlConfigType<Props extends Obj = {}> = {
 	path: NestedTypedKeyOf<Props, number>;
 	min?: number;
 	max?: number;
+	defaultValue?: number;
+} & _ControlConfigType<Props>;
+
+type ResponsiveRangeControlConfigType<Props extends Obj = {}> = {
+	type: "responsive-range";
+	path: NestedTypedKeyOf<Props, ResponsiveValue<number>>;
+	min?: number;
+	max?: number;
+	defaultValue?: ResponsiveValue<number>;
 } & _ControlConfigType<Props>;
 
 type TextControlConfigType<Props extends Obj = {}> = {
 	type: "text";
 	path: NestedTypedKeyOf<Props, string>;
+	defaultValue?: string;
 } & _ControlConfigType<Props>;
 
 type TextareaControlConfigType<Props extends Obj = {}> = {
 	type: "textarea";
 	path: NestedTypedKeyOf<Props, string>;
 	rows?: number;
+	defaultValue?: string;
 } & _ControlConfigType<Props>;
 
 type SelectControlConfigType<Props extends Obj = {}> = {
@@ -91,6 +111,17 @@ type SelectControlConfigType<Props extends Obj = {}> = {
 		label: string;
 		value: string;
 	}[];
+	defaultValue?: string;
+} & _ControlConfigType<Props>;
+
+type NumberSelectControlConfigType<Props extends Obj = {}> = {
+	type: "number-select";
+	path: NestedTypedKeyOf<Props, number>;
+	options: {
+		label: string;
+		value: number;
+	}[];
+	defaultValue?: string;
 } & _ControlConfigType<Props>;
 
 type ComboboxControlConfigType<Props extends Obj = {}> = {
@@ -100,6 +131,17 @@ type ComboboxControlConfigType<Props extends Obj = {}> = {
 		label: string;
 		value: string;
 	}[];
+	defaultValue?: string;
+} & _ControlConfigType<Props>;
+
+type NumberComboboxControlConfigType<Props extends Obj = {}> = {
+	type: "number-combobox";
+	path: NestedTypedKeyOf<Props, number>;
+	options: {
+		label: string;
+		value: number;
+	}[];
+	defaultValue?: number;
 } & _ControlConfigType<Props>;
 
 type ImageControlConfigType<Props extends Obj = {}> = {
@@ -119,12 +161,16 @@ type ImageArrayControlConfigType<Props extends Obj = {}> = {
 
 export type ControlConfigType<Props extends Obj = {}> =
 	| CheckboxControlConfigType<Props>
+	| ResponsiveCheckboxControlConfigType<Props>
 	| ToggleControlConfigType<Props>
 	| RangeControlConfigType<Props>
+	| ResponsiveRangeControlConfigType<Props>
 	| TextControlConfigType<Props>
 	| TextareaControlConfigType<Props>
 	| SelectControlConfigType<Props>
+	| NumberSelectControlConfigType<Props>
 	| ComboboxControlConfigType<Props>
+	| NumberComboboxControlConfigType<Props>
 	| ImageControlConfigType<Props>
 	| TextArrayControlConfigType<Props>
 	| ImageArrayControlConfigType<Props>;
@@ -132,8 +178,10 @@ export type ControlConfigType<Props extends Obj = {}> =
 export type ControlsConfigType<Props extends Obj = {}> =
 	| (
 			| {
-					panel: string;
+					panel?: "Advanced" | string;
 					controls: (ControlConfigType<Props> | FC<BlockControl<Props>>)[];
+					initialOpen?: boolean;
+					show?: NestedKeyOf<Props> | ((attributes: Props) => boolean);
 			  }
 			| FC<BlockControl<Props>>
 	  )[]

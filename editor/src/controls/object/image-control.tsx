@@ -21,79 +21,25 @@ export const ImageControl = <pT extends Obj = {}>(
 	);
 
 function ImageControlByPath<pT extends Obj>({
-	label,
 	path,
-	show = true,
+	updateHandling,
+	...props
 }: ControlByPath<pT, ImageType>) {
 	const {attributes, setAttributes} = useControlContext();
 	const value = get(attributes, path);
 
-	return show ? (
-		<MediaUploadCheck
-			fallback={
-				<div>You don't have permission to access the media library</div>
-			}
-		>
-			<MediaUpload
-				title={label ?? "Select image"}
-				onSelect={(value) => {
-					const newAttributes = cloneDeep(attributes);
-					set(newAttributes, path, {
-						src: value["url"] ?? "",
-						alt: value["alt"] ?? "",
-						id: value.id ?? null,
-					});
-					setAttributes(newAttributes);
-				}}
-				allowedTypes={["image"]}
-				value={value?.id ?? undefined}
-				render={({open}) => (
-					<>
-						<Button
-							className={
-								!value.src
-									? "editor-post-featured-image__toggle"
-									: "editor-post-featured-image__preview"
-							}
-							onClick={open}
-						>
-							{value.src ? (
-								<div>
-									<img src={value.src} alt={value.alt ?? ""} />
-								</div>
-							) : (
-								<p>Select image</p>
-							)}
-						</Button>
-						<div
-							style={{
-								display: "grid",
-								gridAutoFlow: "column",
-								gap: "12px",
-								padding: "12px",
-							}}
-						>
-							<Button variant="link" onClick={open}>
-								Select image
-							</Button>
-
-							<Button
-								isDestructive
-								variant="link"
-								onClick={() => {
-									const newAttributes = cloneDeep(attributes);
-									set(newAttributes, path, {id: null, src: "", alt: ""});
-									setAttributes(newAttributes);
-								}}
-							>
-								Delete image
-							</Button>
-						</div>
-					</>
-				)}
-			/>
-		</MediaUploadCheck>
-	) : null;
+	return (
+		<ImageControlByValue
+			updateHandling="by-value"
+			value={value}
+			setValue={(newValue) => {
+				const newAttributes = cloneDeep(attributes);
+				set(newAttributes, path, newValue);
+				setAttributes(newAttributes);
+			}}
+			{...props}
+		/>
+	);
 }
 
 const ImageControlByValue: FC<ControlByValue<ImageType>> = ({

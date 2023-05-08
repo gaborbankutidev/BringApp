@@ -26,42 +26,24 @@ export const SelectControl = <pT extends Obj = {}>(
 	);
 
 function SelectControlByPath<pT extends Obj>({
-	label,
 	path,
-	setDefault = true,
-	show = true,
-	options,
+	updateHandling,
+	...props
 }: ControlByPath<pT, string> & _SelectControl): JSX.Element {
 	const {attributes, setAttributes} = useControlContext();
 	const value = get(attributes, path);
 
-	return show ? (
-		<WPSelectControl
-			label={`${label} ${value === undefined ? " - Default" : ""}`}
-			value={value ?? ""}
-			onChange={(newValue) => {
+	return (
+		<SelectControlByValue
+			updateHandling="by-value"
+			value={value}
+			setValue={(newValue) => {
 				const newAttributes = cloneDeep(attributes);
 				set(newAttributes, path, newValue);
 				setAttributes(newAttributes);
 			}}
-			help={
-				setDefault &&
-				value !== undefined && (
-					<button
-						onClick={() => {
-							const newAttributes = cloneDeep(attributes);
-							set(newAttributes, path, undefined);
-							setAttributes(newAttributes);
-						}}
-					>
-						Set to default
-					</button>
-				)
-			}
-			options={options}
+			{...props}
 		/>
-	) : (
-		<></>
 	);
 }
 
@@ -70,6 +52,7 @@ const SelectControlByValue: FC<ControlByValue<string> & _SelectControl> = ({
 	value,
 	setValue,
 	setDefault = true,
+	defaultValue = "",
 	show = true,
 	options,
 }) =>
@@ -77,7 +60,7 @@ const SelectControlByValue: FC<ControlByValue<string> & _SelectControl> = ({
 		<WPSelectControl
 			label={`${label} ${value === undefined ? " - Default" : ""}`}
 			onChange={setValue}
-			value={value ?? ""}
+			value={value ?? defaultValue}
 			help={
 				setDefault &&
 				value !== undefined && (

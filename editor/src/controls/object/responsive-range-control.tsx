@@ -52,6 +52,7 @@ const ResponsiveRangeControlByValue: FC<ControlByValue<ResponsiveValue>> = ({
 	setValue,
 	show = true,
 	updateHandling,
+	defaultValue,
 	...props
 }) => {
 	const [selectedSize, setSelectedSize] = useState<keyof ResponsiveLabels>("");
@@ -62,7 +63,6 @@ const ResponsiveRangeControlByValue: FC<ControlByValue<ResponsiveValue>> = ({
 				{objectKeys(screenSizes).map((screenSize) => (
 					<Button
 						variant={selectedSize === screenSize ? "primary" : "secondary"}
-						// @ts-expect-error Expression produces a union type that is too complex to represent. I don't have mental capacity to fix this
 						icon={<Icon icon={screenSizes[screenSize].icon} />}
 						onClick={() => setSelectedSize(screenSize)}
 						isSmall={true}
@@ -72,6 +72,7 @@ const ResponsiveRangeControlByValue: FC<ControlByValue<ResponsiveValue>> = ({
 					</Button>
 				))}
 			</div>
+
 			<RangeControl
 				updateHandling="by-value"
 				label={`${label} - ${screenSizes[selectedSize].label}`}
@@ -81,6 +82,7 @@ const ResponsiveRangeControlByValue: FC<ControlByValue<ResponsiveValue>> = ({
 					newObject[selectedSize] = newValue;
 					setValue(newObject);
 				}}
+				defaultValue={defaultValue ? defaultValue[selectedSize] : 0}
 				{...props}
 			/>
 		</>

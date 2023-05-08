@@ -46,7 +46,15 @@ function ResponsiveCheckboxControlByPath<pT extends Obj>({
 
 const ResponsiveCheckboxControlByValue: FC<
 	ControlByValue<ResponsiveValue<boolean>>
-> = ({label, value = {}, setValue, show = true, updateHandling, ...props}) => {
+> = ({
+	label,
+	value = {},
+	setValue,
+	show = true,
+	updateHandling,
+	defaultValue,
+	...props
+}) => {
 	const [selectedSize, setSelectedSize] = useState<keyof ResponsiveLabels>("");
 
 	return show ? (
@@ -55,7 +63,6 @@ const ResponsiveCheckboxControlByValue: FC<
 				{objectKeys(screenSizes).map((screenSize) => (
 					<Button
 						variant={selectedSize === screenSize ? "primary" : "secondary"}
-						// @ts-expect-error Expression produces a union type that is too complex to represent. I don't have mental capacity to fix this
 						icon={<Icon icon={screenSizes[screenSize].icon} />}
 						onClick={() => setSelectedSize(screenSize)}
 						isSmall={true}
@@ -69,6 +76,7 @@ const ResponsiveCheckboxControlByValue: FC<
 					</Button>
 				))}
 			</div>
+
 			<CheckboxControl
 				updateHandling="by-value"
 				label={`${label} - ${screenSizes[selectedSize].label}`}
@@ -78,6 +86,7 @@ const ResponsiveCheckboxControlByValue: FC<
 					newObject[selectedSize] = newValue;
 					setValue(newObject);
 				}}
+				defaultValue={defaultValue ? defaultValue[selectedSize] : false}
 				{...props}
 			/>
 		</>

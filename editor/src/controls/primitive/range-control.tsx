@@ -21,44 +21,24 @@ export const RangeControl = <pT extends Obj = {}>(
 	);
 
 function RangeControlByPath<pT extends Obj>({
-	label,
 	path,
-	setDefault = true,
-	show = true,
-	min,
-	max,
+	updateHandling,
+	...props
 }: ControlByPath<pT, number> & _NumberControl): JSX.Element {
 	const {attributes, setAttributes} = useControlContext();
 	const value = get(attributes, path);
 
-	return show ? (
-		<WPRangeControl
-			label={`${label} ${value === undefined ? " - Default" : ""}`}
-			value={value ?? 0}
-			onChange={(newValue) => {
+	return (
+		<RangeControlByValue
+			updateHandling="by-value"
+			value={value}
+			setValue={(newValue) => {
 				const newAttributes = cloneDeep(attributes);
 				set(newAttributes, path, newValue);
 				setAttributes(newAttributes);
 			}}
-			help={
-				setDefault &&
-				value !== undefined && (
-					<button
-						onClick={() => {
-							const newAttributes = cloneDeep(attributes);
-							set(newAttributes, path, undefined);
-							setAttributes(newAttributes);
-						}}
-					>
-						Set to default
-					</button>
-				)
-			}
-			min={min}
-			max={max}
+			{...props}
 		/>
-	) : (
-		<></>
 	);
 }
 
@@ -67,6 +47,7 @@ const RangeControlByValue: FC<ControlByValue<number> & _NumberControl> = ({
 	value,
 	setValue,
 	setDefault = true,
+	defaultValue = 0,
 	show = true,
 	min,
 	max,
@@ -75,7 +56,7 @@ const RangeControlByValue: FC<ControlByValue<number> & _NumberControl> = ({
 		<>
 			<WPRangeControl
 				label={`${label} ${value === undefined ? " - Default" : ""}`}
-				value={value ?? 0}
+				value={value ?? defaultValue}
 				onChange={setValue}
 				help={
 					setDefault &&

@@ -5,6 +5,7 @@ import {BringContextProvider} from "@bring/blocks-client";
 import type {Obj} from "../types";
 import type {BlockConfig, BlockKeys, BlockEdit} from "./types";
 import {makeControls} from "./make-controls";
+import {ControlContextProvider} from "../controls/context";
 
 export function makeEdit<Props extends Obj>(config: BlockConfig<Props>) {
 	return ({
@@ -30,30 +31,34 @@ export function makeEdit<Props extends Obj>(config: BlockConfig<Props>) {
 		}
 
 		return (
-			// TODO: this should be refactored
 			<BringContextProvider componentMap={new Map()}>
-				{config.Controls &&
-					makeControls<Props>(attributes, setAttributes, config.Controls)}
-				{config.Edit ? (
-					<config.Edit
-						attributes={attributes}
-						setAttributes={setAttributes}
-						clientId={clientId}
-						isSelected={isSelected ?? false}
-					>
-						<InnerBlocks allowedBlocks={config.allowedBlocks} />
-					</config.Edit>
-				) : (
-					<EditorCard
-						color="grey"
-						isSelected={isSelected ?? false}
-						name={config.componentName}
-					>
-						<config.Component {...attributes}>
+				<ControlContextProvider
+					attributes={attributes}
+					setAttributes={setAttributes}
+				>
+					{config.Controls &&
+						makeControls<Props>(attributes, setAttributes, config.Controls)}
+					{config.Edit ? (
+						<config.Edit
+							attributes={attributes}
+							setAttributes={setAttributes}
+							clientId={clientId}
+							isSelected={isSelected ?? false}
+						>
 							<InnerBlocks allowedBlocks={config.allowedBlocks} />
-						</config.Component>
-					</EditorCard>
-				)}
+						</config.Edit>
+					) : (
+						<EditorCard
+							color="grey"
+							isSelected={isSelected ?? false}
+							name={config.componentName}
+						>
+							<config.Component {...attributes}>
+								<InnerBlocks allowedBlocks={config.allowedBlocks} />
+							</config.Component>
+						</EditorCard>
+					)}
+				</ControlContextProvider>
 			</BringContextProvider>
 		);
 	};

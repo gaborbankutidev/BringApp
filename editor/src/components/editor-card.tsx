@@ -1,13 +1,21 @@
 import React, {useState} from "react";
 import type {FC, ReactNode} from "react";
 
-type EditorColorType = "blue" | "green" | "lime" | "orange" | "grey";
+const editorColors = {
+	blue: "#38bdf8",
+	green: "#4ade80",
+	lime: "#a3e635",
+	orange: "#fb923c",
+	grey: "#9ca3af",
+} as const;
+
+type EditorColorType = keyof typeof editorColors;
 
 type EditorCardType = {
 	children: ReactNode | ReactNode[];
 	color: EditorColorType;
 	name: string;
-	isSelected: boolean;
+	isSelected?: boolean;
 	showActions?: boolean;
 };
 
@@ -15,24 +23,15 @@ export const EditorCard: FC<EditorCardType> = ({
 	color,
 	name,
 	children,
-	isSelected,
 	showActions = true,
 }) => {
 	const [showContent, setShowContent] = useState(true);
-
-	const colors = {
-		blue: "#38bdf8",
-		green: "#4ade80",
-		lime: "#fb923c",
-		orange: "#fb923c",
-		grey: "#9ca3af",
-	};
 
 	return (
 		<div
 			style={{
 				border: "2px solid",
-				borderColor: colors[color],
+				borderColor: editorColors[color],
 				width: "100%",
 				height: "100%",
 				minHeight: "32px",
@@ -45,8 +44,8 @@ export const EditorCard: FC<EditorCardType> = ({
 					fontSize: "0.875rem",
 					lineHeight: "1.25rem",
 					padding: "4px",
-					backgroundColor: colors[color],
-					display: isSelected ? "flex" : "none",
+					backgroundColor: editorColors[color],
+					display: "flex",
 					zIndex: 20,
 					right: 0,
 					top: 0,
@@ -72,7 +71,7 @@ export const EditorCard: FC<EditorCardType> = ({
 						: {
 								textAlign: "center",
 								padding: "16px",
-								backgroundColor: colors[color],
+								backgroundColor: editorColors[color],
 								height: "100%",
 						  }
 				}
