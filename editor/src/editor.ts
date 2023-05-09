@@ -21,7 +21,7 @@ declare global {
 	}
 }
 
-function disableReusableBlocks() {
+/* function disableReusableBlocks() {
 	// remove reusable blocks
 	dispatch("core/block-editor").updateSettings({
 		// @ts-ignore
@@ -41,7 +41,7 @@ function disableReusableBlocks() {
 			});
 		}
 	});
-}
+} */
 
 export function editorInit(blockList: BlockConfig<any>[]) {
 	if (window.bringContent) {
@@ -49,7 +49,7 @@ export function editorInit(blockList: BlockConfig<any>[]) {
 		return;
 	}
 
-	disableReusableBlocks();
+	// disableReusableBlocks();
 
 	blockList.push(postContentConfig);
 	blockList.map((blockConfig) => {
