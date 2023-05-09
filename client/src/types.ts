@@ -1,12 +1,10 @@
 import type {FC} from "react";
-import type {BringStyles} from "./styles/types";
 
 export type Obj = Record<string, unknown>;
 export type Defined<T> = Exclude<T, undefined>;
 
-export type FCC<P = {}> = FC<
-	P & {className?: string; bringStyles?: BringStyles}
->;
+export type FCC<P = {}> = FC<P & {className?: string}>;
+
 export type GridNumType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
 export type ImageType = {
@@ -36,7 +34,7 @@ export type MenuType = {
 // ===========
 
 export type EntityType = "post" | "taxonomy" | "author";
-export type DynamicEntityOptions = [number, string][] | null;
+
 export type DynamicEntityList<T = {}> = ({id: number} & T)[] | null;
 export type DynamicEntityProps<T extends {[key: string]: any} = {}> =
 	| ({
@@ -48,19 +46,6 @@ export type DynamicEntityProps<T extends {[key: string]: any} = {}> =
 			url: string;
 	  } & T)
 	| null;
-
-// todo refactor ->
-export type OptionList<T extends string = string> = ([T, string] | T)[];
-export type SelectControlOptions<T extends string = string> = {
-	label: string;
-	value: T | "";
-}[];
-export type NumberOptionList<T extends number = number> = ([T, string] | T)[];
-export type NumberSelectControlOptions<T extends number = number> = {
-	label: string;
-	value: T | 0;
-}[];
-// refactor end
 
 export type SiteProps<SP> = {
 	logo: string | null;
@@ -91,8 +76,14 @@ export type BringContextType<
 	EP extends {[key: string]: any} = {},
 > = {
 	siteProps: SiteProps<SP>;
+
 	entityContent: EntityContent;
+	setEntityContent: (entityContent: EntityContent) => void;
 	entityProps: EntityProps<EP>;
+	setEntityProps: (entityProps: EntityProps<EP>) => void;
+
+	componentMap: Map<string, FC<any>>;
+
 	dynamicCache: Map<string, any>;
 	contentCache: Map<
 		string,

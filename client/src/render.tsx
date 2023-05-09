@@ -1,4 +1,5 @@
-import React, {FC} from "react";
+import React from "react";
+import type {FC, ReactNode} from "react";
 import type {BringNode} from "./types";
 
 interface ErrorComponentInterface {
@@ -13,54 +14,33 @@ export function createBringElement(
 	nodes: BringNode[],
 	componentMap: Map<string, FC<any>>,
 	isPostContentAllowed: boolean = false,
-): (
-	| React.FunctionComponentElement<ErrorComponentInterface>
-	| React.DetailedReactHTMLElement<
-			React.InputHTMLAttributes<HTMLInputElement>,
-			HTMLInputElement
-	  >
-)[] {
-	let result = [];
-	for (const node of nodes) {
-		// check if component is a function
-		const component = componentMap.get(node.component);
+) {
+	return nodes.map((node) => {
+		const Component = componentMap.get(node.component);
 
-		if (component === undefined) {
-			result.push(
-				React.createElement(Error, {name: node.component, key: node.key}, []),
-			);
+		// check if component is a function
+		if (Component === undefined) {
 			console.log(
 				'Component is not a function, inserting "Error" component instead...',
 			);
-			continue;
-		}
-
-		// render children
-		let children: (
-			| React.FunctionComponentElement<ErrorComponentInterface>
-			| React.DetailedReactHTMLElement<
-					React.InputHTMLAttributes<HTMLInputElement>,
-					HTMLInputElement
-			  >
-		)[] = [];
-		if (node.children?.length) {
-			children = createBringElement(
-				node.children,
-				componentMap,
-				isPostContentAllowed,
-			);
+			return <Error name={node.component} key={node.key} />;
 		}
 
 		// if PostContent is not allowed skip PostContent
 		if (!isPostContentAllowed && node.component === "PostContent") {
-			continue;
+			return null;
 		}
 
-		// create and push element
-		result.push(
-			React.createElement(component, {key: node.key, ...node.props}, children),
-		);
-	}
+		// render children
+		const children = node.children?.length
+			? createBringElement(node.children, componentMap, isPostContentAllowed)
+			: [];
 
-	return result;
+		// create element
+		return (
+			<Component {...node.props} key={node.key}>
+				{children}
+			</Component>
+		);
+	});
 }

@@ -1,37 +1,47 @@
 import React from "react";
-import type {FC} from "react";
+import type {FC, ReactNode} from "react";
 import {createRoot} from "react-dom/client";
-import {postContent} from "./components/post-content";
-import {BringContextProvider} from "./context/bring-context";
-import {Cache} from "./cache";
-import {Page} from "./page";
+import {BringContextProvider} from "./context";
+import {Cache, Page, postContent} from "./components";
 
 export function clientInit(
 	componentList: {componentName: string; Component: FC<any>}[],
-	Wrapper: FC<{children: React.ReactNode}> = React.Fragment,
+	Wrapper: FC<{children: ReactNode}> = React.Fragment,
 ) {
 	const componentMap = new Map<string, FC<any>>();
+
+	// Add build in components
 	componentList.push(postContent);
+
+	// Add component list
 	componentList.forEach(({Component, componentName}) =>
 		componentMap.set(componentName, Component),
 	);
 
+	// init cache root
 	const bringCache = document.getElementById("bringCache");
 	if (bringCache) {
 		const root = createRoot(bringCache);
+
 		root.render(
 			<BringContextProvider componentMap={componentMap}>
-				{React.createElement(Wrapper, null, <Cache />)}
+				<Wrapper>
+					<Cache />
+				</Wrapper>
 			</BringContextProvider>,
 		);
 	}
 
+	// init page root
 	const bringContent = document.getElementById("bringContent");
 	if (bringContent) {
 		const root = createRoot(bringContent);
+
 		root.render(
 			<BringContextProvider componentMap={componentMap}>
-				{React.createElement(Wrapper, null, <Page />)}
+				<Wrapper>
+					<Page />
+				</Wrapper>
 			</BringContextProvider>,
 		);
 	}

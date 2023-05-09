@@ -1,13 +1,18 @@
 import {useState, useEffect, useCallback} from "react";
-import {useBringContext} from "../context/bring-context";
+import {useBringContext} from "../context";
 import type {DynamicEntityList, EntityType} from "../types";
 
+type Options = {
+	entitySlug?: string;
+	limit: number;
+	customData?: {[key: string]: any};
+	customDataKey?: boolean | number | string;
+	disableCache?: boolean;
+};
+
 export const useDynamicEntityList = <T extends {[key: string]: any} = {}>(
-	entitySlug: string,
 	entityType: EntityType = "post",
-	limit = 0, // 0 for no limit
-	customData?: {[key: string]: any},
-	customDataKey?: boolean | number | string,
+	{entitySlug, limit = 0, customData, customDataKey}: Options,
 ) => {
 	// store queried entity
 	const [entityList, setEntityList] = useState<DynamicEntityList<T>>(null);

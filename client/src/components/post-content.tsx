@@ -1,7 +1,7 @@
 import React from "react";
 import type {FC} from "react";
 import {createBringElement} from "../render";
-import {useBringContext} from "../context/bring-context";
+import {useBringContext} from "../context";
 
 export const PostContent: FC = () => {
 	const {entityContent, componentMap} = useBringContext();

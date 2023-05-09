@@ -1,6 +1,6 @@
-import React, {useContext, useState} from "react";
-import type {FC} from "react";
-import {BringContextType, EntityContent, EntityProps} from "../types";
+import React, {useState, createContext, useContext, useMemo} from "react";
+import type {FC, ReactNode} from "react";
+import {BringContextType} from "./types";
 
 declare global {
 	// Interface is needed to augment global `Window`
@@ -9,13 +9,7 @@ declare global {
 	}
 }
 
-export const BringContext = React.createContext<
-	BringContextType & {
-		setEntityContent: (entityContent: EntityContent) => void;
-		setEntityProps: (entityProps: EntityProps) => void;
-		componentMap: Map<string, FC<any>>;
-	}
->({
+const BringContext = createContext<BringContextType>({
 	...window.bringCache,
 	setEntityContent: () => {},
 	setEntityProps: () => {},
@@ -23,19 +17,24 @@ export const BringContext = React.createContext<
 });
 
 export const BringContextProvider: FC<{
-	children: React.ReactNode;
-	componentMap: Map<string, FC<any>>;
-}> = ({children, componentMap}) => {
-	const siteProps = window.bringCache.siteProps;
+	children: ReactNode;
+	componentMap?: Map<string, FC<any>>;
+}> = ({children, componentMap = new Map()}) => {
+	const siteProps = useMemo(() => window.bringCache.siteProps, []);
+
 	const [entityContent, setEntityContent] = useState(
 		window.bringCache.entityContent,
 	);
 	const [entityProps, setEntityProps] = useState(window.bringCache.entityProps);
-	const dynamicCache = new Map<string, any>(
-		Object.entries(window.bringCache.dynamicCache),
+
+	const dynamicCache = useMemo(
+		() => new Map<string, any>(Object.entries(window.bringCache.dynamicCache)),
+		[],
 	);
-	const contentCache = new Map<string, any>(
-		Object.entries(window.bringCache.contentCache),
+
+	const contentCache = useMemo(
+		() => new Map<string, any>(Object.entries(window.bringCache.contentCache)),
+		[],
 	);
 
 	return (

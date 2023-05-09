@@ -1,10 +1,10 @@
 import {useState, useEffect, useRef, useCallback} from "react";
 
-export const useElementDimensions = <E extends HTMLElement>({
+export const useElementDimensions = <Element extends HTMLElement>({
 	width = 0,
 	height = 0,
 }) => {
-	const ref = useRef<E>(null);
+	const ref = useRef<Element>(null);
 
 	const [elementDimensions, setElementDimensions] = useState({
 		width: ref.current?.clientWidth ?? 0,

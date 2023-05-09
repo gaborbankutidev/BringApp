@@ -1,6 +1,6 @@
 {
 	"name": "@bring/blocks-client",
-	"version": "0.1.6",
+	"version": "0.1.7",
 	"description": "Client package for bring-blocks",
 	"main": "dist/index.cjs.js",
 	"module": "dist/index.esm.js",
@@ -14,7 +14,7 @@
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [],
-	"author": "",
+	"author": "Bring Team Ltd.",
 	"license": "GPL-2.0",
 	"devDependencies": {
 		"@types/react": "^18.0.32",
@@ -24,8 +24,8 @@
 		"typescript": "^5.0.3"
 	},
 	"peerDependencies": {
-		"react": "^18.0.0",
-		"react-dom": "^18.0.0"
+		"react": "18.2.0",
+		"react-dom": "18.2.0"
 	},
 	"dependencies": {
 		"react-intersection-observer": "^9.4.3"

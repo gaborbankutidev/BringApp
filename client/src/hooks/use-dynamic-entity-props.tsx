@@ -1,14 +1,24 @@
 import {useState, useEffect, useCallback} from "react";
 import {useInView} from "react-intersection-observer";
 import type {DynamicEntityProps, EntityType} from "../types";
-import {useBringContext} from "../context/bring-context";
+import {useBringContext} from "../context";
+
+type Options = {
+	lazy?: boolean;
+	customData?: {[key: string]: any};
+	customDataKey?: boolean | number | string;
+	disableCache?: boolean;
+};
 
 export const useDynamicEntityProps = <T extends {[key: string]: any} = {}>(
-	entityId?: number,
+	entityId: number,
 	entityType: EntityType = "post",
-	lazy: boolean = true,
-	customData?: {[key: string]: any},
-	customDataKey?: boolean | number | string,
+	{
+		lazy = true,
+		customData = {},
+		customDataKey,
+		disableCache = false,
+	}: Options = {},
 ) => {
 	// store queried entity
 	const [entityProps, setEntityProps] = useState<DynamicEntityProps<T>>(null);
