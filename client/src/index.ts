@@ -13,6 +13,8 @@ export {
 
 export {clientInit} from "./client-init";
 
+export {BringContextProvider} from "./context";
+
 export {
 	Obj,
 	Defined,
