@@ -5,7 +5,7 @@ export {
 	imageAttributeSource,
 	numberAttributeSource,
 	objectAttributeSource,
-	registerBringBlock,
+	//registerBringBlock,
 	stringAttributeSource,
 } from "./blocks";
 
