@@ -31,7 +31,7 @@ export function makeEdit<Props extends Obj>(config: BlockConfig<Props>) {
 		}
 
 		return (
-			<BringContextProvider componentMap={new Map()}>
+			<BringContextProvider>
 				<ControlContextProvider
 					attributes={attributes}
 					setAttributes={setAttributes}

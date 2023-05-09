@@ -1,6 +1,6 @@
 import {registerBlockType} from "@wordpress/blocks";
 import type {Obj} from "../types";
-import {objectAttributeSource, stringAttributeSource} from "./attributes";
+import {objectAttributeSource} from "./attributes";
 import {makeEdit} from "./make-edit";
 import {makeSave} from "./make-save";
 import type {BlockConfig} from "./types";
