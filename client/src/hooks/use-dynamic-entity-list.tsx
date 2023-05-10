@@ -4,7 +4,7 @@ import type {DynamicEntityList, EntityType} from "../types";
 
 type Options = {
 	entitySlug?: string;
-	limit: number;
+	limit?: number;
 	customData?: {[key: string]: any};
 	customDataKey?: boolean | number | string;
 	disableCache?: boolean;
@@ -12,7 +12,7 @@ type Options = {
 
 export const useDynamicEntityList = <T extends {[key: string]: any} = {}>(
 	entityType: EntityType = "post",
-	{entitySlug, limit = 0, customData, customDataKey}: Options,
+	{entitySlug, limit = 0, customData, customDataKey}: Options = {},
 ) => {
 	// store queried entity
 	const [entityList, setEntityList] = useState<DynamicEntityList<T>>(null);

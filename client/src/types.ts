@@ -3,7 +3,9 @@ import type {FC} from "react";
 export type Obj = Record<string, unknown>;
 export type Defined<T> = Exclude<T, undefined>;
 
-export type FCC<P = {}> = FC<P & {className?: string; id?: string}>;
+export type FCC<P = {}> = FC<
+	P & {className?: string | undefined; id?: string | undefined}
+>;
 
 export type GridNumType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
