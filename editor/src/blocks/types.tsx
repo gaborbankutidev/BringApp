@@ -69,7 +69,7 @@ export type BlockConfig<Props extends Obj = {}> = {
 	description?: string;
 	icon?: BlockIcon;
 	componentName: string;
-	Component: FCC<ClientAttributes<Props>>;
+	Component: FCC<Props>;
 	attributes?: BlockAttributesConfig<Props>;
 	previewAttributes?: ClientAttributes<Props>;
 	allowedBlocks?: string[];
