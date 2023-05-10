@@ -1,6 +1,6 @@
 import {registerBlockType} from "@wordpress/blocks";
 import type {Obj} from "../types";
-import {objectAttributeSource} from "./attributes";
+import {objectAttributeSource, stringAttributeSource} from "./attributes";
 import {makeEdit} from "./make-edit";
 import {makeSave} from "./make-save";
 import type {BlockConfig} from "./types";
@@ -22,10 +22,10 @@ export function registerBringBlock<Props extends Obj>(
 		},
 		attributes: {
 			...config.attributes,
+			id: stringAttributeSource(),
 			bringStyles: objectAttributeSource(BringStylesDefaultValue),
-			// todo add id
 		},
-		edit: makeEdit(config),
-		save: makeSave(config), // refactor save hooks and use InnedBlock instead
+		edit: makeEdit<Props>(config),
+		save: makeSave<Props>(config), // refactor save hooks and use InnedBlock instead
 	});
 }

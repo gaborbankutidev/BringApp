@@ -5,10 +5,7 @@ export type Obj = Record<string, unknown>;
 export type Defined<T> = Exclude<T, undefined>;
 
 export type FCB<Props = {}> = FC<
-	Props & {className?: string; bringStyles?: BringStyles}
->;
-export type FCC<P = {}> = FC<
-	P & {className?: string; bringStyles?: BringStyles}
+	Props & {className?: string; id?: string; bringStyles?: BringStyles}
 >;
 
 export type GridNumType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;

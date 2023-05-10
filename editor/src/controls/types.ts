@@ -1,5 +1,4 @@
 import type {FC} from "react";
-import type {BlockControl} from "../blocks";
 import type {ImageType, NestedKeyOf, NestedTypedKeyOf, Obj} from "../types";
 import {ResponsiveValue} from "../styles/types";
 
@@ -174,15 +173,3 @@ export type ControlConfigType<Props extends Obj = {}> =
 	| ImageControlConfigType<Props>
 	| TextArrayControlConfigType<Props>
 	| ImageArrayControlConfigType<Props>;
-
-export type ControlsConfigType<Props extends Obj = {}> =
-	| (
-			| {
-					panel?: "Advanced" | string;
-					controls: (ControlConfigType<Props> | FC<BlockControl<Props>>)[];
-					initialOpen?: boolean;
-					show?: NestedKeyOf<Props> | ((attributes: Props) => boolean);
-			  }
-			| FC<BlockControl<Props>>
-	  )[]
-	| FC<BlockControl<Props>>;

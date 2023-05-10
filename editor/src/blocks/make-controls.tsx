@@ -6,8 +6,8 @@ import {
 } from "@wordpress/block-editor";
 import get from "lodash.get";
 import type {Obj} from "../types";
-import type {BlockKeys} from "./types";
-import type {ControlsConfigType} from "../controls/types";
+import type {Attributes, BlockControlsConfig} from "./types";
+
 import {
 	CheckboxControl,
 	ToggleControl,
@@ -26,9 +26,9 @@ import {
 } from "../controls";
 
 export function makeControls<Props extends Obj>(
-	attributes: Props & BlockKeys,
-	setAttributes: (attributes: Partial<Props & BlockKeys>) => void,
-	Controls: ControlsConfigType<Props>,
+	attributes: Attributes<Props>,
+	setAttributes: (attributes: Partial<Attributes<Props>>) => void,
+	Controls: BlockControlsConfig<Props>,
 ) {
 	return (
 		<InspectorControls key="bring-controls">

@@ -1,11 +1,22 @@
 import React from "react";
-import {InnerBlocks} from "@wordpress/block-editor";
+import {InnerBlocks, InspectorAdvancedControls} from "@wordpress/block-editor";
 import {EditorCard} from "../components";
 import {BringContextProvider} from "@bring/blocks-client";
 import type {Obj} from "../types";
-import type {BlockConfig, BlockKeys, BlockEdit} from "./types";
+import type {Attributes, BlockConfig} from "./types";
 import {makeControls} from "./make-controls";
 import {ControlContextProvider} from "../controls/context";
+import {makeBringStylesClassNames} from "../styles";
+import {twJoin} from "tailwind-merge";
+import {TextControl} from "../controls";
+import {makeBringStylesControl} from "../styles";
+
+type EditType<Props> = {
+	attributes: Attributes<Props>;
+	setAttributes: (attributes: Partial<Attributes<Props>>) => void;
+	isSelected?: boolean;
+	clientId: string;
+};
 
 export function makeEdit<Props extends Obj>(config: BlockConfig<Props>) {
 	return ({
@@ -13,22 +24,29 @@ export function makeEdit<Props extends Obj>(config: BlockConfig<Props>) {
 		setAttributes,
 		clientId,
 		isSelected,
-	}: BlockEdit<Props>) => {
+	}: EditType<Props>) => {
+		const {key, parentKey, className, id, bringStyles, ...props} = attributes;
+
 		// set key on load
-		if (attributes.key !== clientId) {
-			setAttributes({key: clientId} as Partial<Props & BlockKeys>);
+		if (key !== clientId) {
+			setAttributes({key: clientId} as Partial<Attributes<Props>>);
 		}
 
 		// set parentKey on load
-		const parentKeys = window.wp.data
+		const editorParentKeys = window.wp.data
 			.select("core/block-editor")
 			.getBlockParents(clientId);
-		const parentKey = parentKeys.length
-			? (parentKeys[parentKeys.length - 1] as string)
+		const editorParentKey = editorParentKeys.length
+			? editorParentKeys[editorParentKeys.length - 1]
 			: "";
-		if (attributes.parentKey !== parentKey) {
-			setAttributes({parentKey} as Partial<Props & BlockKeys>);
+		if (parentKey !== editorParentKey) {
+			setAttributes({parentKey: editorParentKey} as Partial<Attributes<Props>>);
 		}
+
+		// calculate bring styles class names
+		const joinedClassName = config.styles
+			? twJoin(makeBringStylesClassNames(config.styles, bringStyles), className)
+			: className;
 
 		return (
 			<BringContextProvider>
@@ -36,8 +54,20 @@ export function makeEdit<Props extends Obj>(config: BlockConfig<Props>) {
 					attributes={attributes}
 					setAttributes={setAttributes}
 				>
+					<InspectorAdvancedControls>
+						<TextControl
+							updateHandling="by-value"
+							label="Id"
+							value={attributes.id}
+							setValue={(newValue) => {
+								setAttributes({id: newValue} as Partial<Attributes<Props>>);
+							}}
+						/>
+					</InspectorAdvancedControls>
 					{config.Controls &&
 						makeControls<Props>(attributes, setAttributes, config.Controls)}
+					{config.styles && <>{makeBringStylesControl(config.styles)}</>}
+
 					{config.Edit ? (
 						<config.Edit
 							attributes={attributes}
@@ -53,7 +83,11 @@ export function makeEdit<Props extends Obj>(config: BlockConfig<Props>) {
 							isSelected={isSelected ?? false}
 							name={config.componentName}
 						>
-							<config.Component {...attributes}>
+							<config.Component
+								className={joinedClassName}
+								id={id}
+								{...(props as any)}
+							>
 								<InnerBlocks allowedBlocks={config.allowedBlocks} />
 							</config.Component>
 						</EditorCard>

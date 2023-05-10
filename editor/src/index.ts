@@ -47,7 +47,6 @@ export {editorInit} from "./editor";
 
 export type {
 	FCB,
-	FCC, // todo remove
 	MenuType, // ?
 	ImageType, // ?
 	// lists

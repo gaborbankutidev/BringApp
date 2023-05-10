@@ -1,6 +1,6 @@
 {
 	"name": "@bring/blocks-editor",
-	"version": "0.1.7",
+	"version": "0.1.8",
 	"description": "Editor package for bring-blocks",
 	"main": "dist/index.cjs.js",
 	"module": "dist/index.esm.js",
@@ -20,7 +20,8 @@
 	"dependencies": {
 		"lodash.clonedeep": "4.5.0",
 		"lodash.get": "4.4.2",
-		"lodash.set": "4.3.2"
+		"lodash.set": "4.3.2",
+		"tailwind-merge": "^1.12.0"
 	},
 	"devDependencies": {
 		"@bring/blocks-client": "0.1.9",
