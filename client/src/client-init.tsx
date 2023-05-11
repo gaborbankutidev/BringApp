@@ -1,6 +1,6 @@
 import React from "react";
 import type {FC, ReactNode} from "react";
-import {createRoot} from "react-dom/client";
+import {createRoot, hydrateRoot} from "react-dom/client";
 import {BringContextProvider} from "./context";
 import {Cache, Page, postContent} from "./components";
 
@@ -35,14 +35,19 @@ export function clientInit(
 	// init page root
 	const bringContent = document.getElementById("bringContent");
 	if (bringContent) {
-		const root = createRoot(bringContent);
-
-		root.render(
+		const BringContent = (
 			<BringContextProvider componentMap={componentMap}>
 				<Wrapper>
 					<Page />
 				</Wrapper>
-			</BringContextProvider>,
+			</BringContextProvider>
 		);
+
+		if (bringContent.getAttribute("data-disable-hydration")) {
+			const root = createRoot(bringContent);
+			root.render(BringContent);
+		} else {
+			hydrateRoot(bringContent, BringContent);
+		}
 	}
 }
