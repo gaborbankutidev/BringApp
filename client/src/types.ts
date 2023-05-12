@@ -80,9 +80,7 @@ export type BringContextType<
 	siteProps: SiteProps<SP>;
 
 	entityContent: EntityContent;
-	setEntityContent: (entityContent: EntityContent) => void;
 	entityProps: EntityProps<EP>;
-	setEntityProps: (entityProps: EntityProps<EP>) => void;
 
 	componentMap: Map<string, FC<any>>;
 
@@ -98,6 +96,8 @@ export type BringContextType<
 			isLoading?: boolean;
 		}
 	>;
+
+	navigate: (href: string) => void;
 };
 
 // ===========

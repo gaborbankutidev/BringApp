@@ -1,4 +1,4 @@
-export {postContent} from "./components/";
+export {postContent, Link} from "./components/";
 
 export {
 	initStaticHooks,
@@ -9,6 +9,7 @@ export {
 	useWPSendForm,
 	useElementDimensions,
 	useWindowDimensions,
+	useNavigate,
 } from "./hooks";
 
 export type {

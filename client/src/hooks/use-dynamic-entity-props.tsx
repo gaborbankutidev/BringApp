@@ -1,4 +1,4 @@
-import {useState, useEffect, useCallback} from "react";
+import {useState, useEffect, useMemo, useCallback} from "react";
 import {useInView} from "react-intersection-observer";
 import type {DynamicEntityProps, EntityType} from "../types";
 import {useBringContext} from "../context";
@@ -7,57 +7,15 @@ type Options = {
 	lazy?: boolean;
 	customData?: {[key: string]: any};
 	customDataKey?: boolean | number | string;
-	disableCache?: boolean;
 };
 
-export const useDynamicEntityProps = <T extends {[key: string]: any} = {}>(
+async function getEntityProps(
 	entityId: number,
-	entityType: EntityType = "post",
-	{
-		lazy = true,
-		customData = {},
-		customDataKey,
-		disableCache = false,
-	}: Options = {},
-) => {
-	// store queried entity
-	const [entityProps, setEntityProps] = useState<DynamicEntityProps<T>>(null);
-
-	// intersection observer for lazy loading
-	const {ref, inView: wasOnScreen} = useInView({
-		triggerOnce: true,
-		skip: !lazy,
-	});
-
-	// dynamic cache to find and store entityProps
-	const {dynamicCache} = useBringContext();
-
-	// flag if value is stored in cache but waiting to be resolved
-	const [isWaiting, setWaiting] = useState(0);
-	const waitForCache = useCallback(
-		() => setTimeout(() => setWaiting(isWaiting + 1), 50),
-		[setWaiting],
-	);
-
-	const getEntityProps = useCallback(async () => {
-		const cacheKey = customDataKey
-			? `${entityType}_${entityId}_${customDataKey}`
-			: `${entityType}_${entityId}`;
-
-		const cachedData = dynamicCache.get(cacheKey);
-		if (cachedData === true) {
-			waitForCache();
-			return;
-		} else if (cachedData) {
-			setEntityProps(cachedData);
-			return;
-		}
-
-		// store value to cache to show this is waiting to be resolved
-		dynamicCache.set(cacheKey, true);
-
-		// fetch data
-		const request = await fetch("/wp-json/bring/dynamic/props", {
+	entityType: EntityType,
+	customData = {},
+) {
+	try {
+		const response = await fetch("/wp-json/bring/dynamic/props", {
 			method: "POST",
 			body: JSON.stringify({entityId, entityType, customData}),
 			headers: {
@@ -65,22 +23,77 @@ export const useDynamicEntityProps = <T extends {[key: string]: any} = {}>(
 			},
 		});
 
-		const data = await request.json();
-		if (data.data === null) {
+		const responseData = await response.json();
+		return responseData.data;
+	} catch (error) {
+		console.error(error);
+		return null;
+	}
+}
+
+export const useDynamicEntityProps = <T extends {[key: string]: any} = {}>(
+	entityId: number | null | undefined,
+	entityType: EntityType | null | undefined,
+	{lazy = true, customData = {}, customDataKey}: Options = {},
+) => {
+	// get value from cache
+	const {dynamicCache} = useBringContext();
+	const {cacheKey, cachedProps} = useMemo(() => {
+		if (!entityId || !entityType) {
+			return {cacheKey: null, cachedProps: null};
+		}
+
+		const cacheKey = customDataKey
+			? `prop_${entityType}_${entityId}_${customDataKey}`
+			: `prop_${entityType}_${entityId}`;
+		const cachedProps = dynamicCache.get(cacheKey) ?? null;
+
+		return {cacheKey, cachedProps};
+	}, [entityId, entityType, customDataKey, dynamicCache]);
+
+	// set cached value as initial state
+	const [entityProps, setEntityProps] =
+		useState<DynamicEntityProps<T>>(cachedProps);
+
+	// intersection observer for lazy loading
+	const {ref, inView: wasOnScreen} = useInView({
+		triggerOnce: true,
+		skip: !lazy,
+	});
+
+	// update entity props on change of input params
+	useEffect(() => {
+		setEntityProps(cachedProps);
+	}, [cachedProps]);
+
+	// query entity props
+	useEffect(() => {
+		// do not query if entity props are set
+		if (entityProps) {
 			return;
 		}
 
-		setEntityProps(data.data);
-		dynamicCache.set(cacheKey, data.data);
-	}, [entityType, entityId, customDataKey, dynamicCache, setEntityProps]);
-
-	useEffect(() => {
-		if (lazy && wasOnScreen && entityId) {
-			getEntityProps();
-		} else if (!lazy && entityId) {
-			getEntityProps();
+		// do not query if entity type & id => cacheKey are not set
+		if (!entityId || !entityType || !cacheKey) {
+			return;
 		}
-	}, [entityId, entityType, lazy, wasOnScreen, isWaiting, customDataKey]);
 
-	return {entity: entityProps, ref};
+		// do not query if lazy but was not on screen
+		if (lazy && !wasOnScreen) {
+			return;
+		}
+
+		// query entity props & set cache & state
+		getEntityProps(entityId, entityType, customData).then(
+			(queriedEntityProps) => {
+				if (!queriedEntityProps) {
+					return;
+				}
+				setEntityProps(queriedEntityProps);
+				dynamicCache.set(cacheKey, queriedEntityProps);
+			},
+		);
+	}, [entityId, entityType, cacheKey, lazy, wasOnScreen, dynamicCache]);
+
+	return {entityProps, ref};
 };

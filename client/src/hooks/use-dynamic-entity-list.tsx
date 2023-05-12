@@ -1,50 +1,23 @@
-import {useState, useEffect, useCallback} from "react";
+import {useState, useEffect, useMemo, useCallback} from "react";
 import {useBringContext} from "../context";
 import type {DynamicEntityList, EntityType} from "../types";
+import {useInView} from "react-intersection-observer";
 
 type Options = {
-	entitySlug?: string;
 	limit?: number;
+	lazy?: boolean;
 	customData?: {[key: string]: any};
 	customDataKey?: boolean | number | string;
-	disableCache?: boolean;
 };
 
-export const useDynamicEntityList = <T extends {[key: string]: any} = {}>(
-	entityType: EntityType = "post",
-	{entitySlug, limit = 0, customData, customDataKey}: Options = {},
-) => {
-	// store queried entity
-	const [entityList, setEntityList] = useState<DynamicEntityList<T>>(null);
-
-	// dynamic cache to find and store entityProps
-	const {dynamicCache} = useBringContext();
-
-	// flag if value is stored in cache but waiting to be resolved
-	const [isWaiting, setWaiting] = useState(0);
-	const waitForCache = useCallback(
-		() => setTimeout(() => setWaiting(isWaiting + 1), 50),
-		[setWaiting],
-	);
-
-	const getEntityList = useCallback(async () => {
-		const cacheKey = customDataKey
-			? `${entityType}_${entitySlug}_${limit}_${customDataKey}`
-			: `${entityType}_${entitySlug}_${limit}`;
-
-		const cachedData = dynamicCache.get(cacheKey);
-		if (cachedData === true) {
-			waitForCache();
-			return;
-		} else if (cachedData) {
-			setEntityList(cachedData);
-			return;
-		}
-
-		// store value to cache to show this is waiting to be resolved
-		dynamicCache.set(cacheKey, true);
-
-		const request = await fetch("/wp-json/bring/dynamic/list", {
+async function getEntityList(
+	entitySlug: string,
+	entityType: EntityType,
+	limit: number = 0,
+	customData = {},
+) {
+	try {
+		const response = await fetch("/wp-json/bring/dynamic/list", {
 			method: "POST",
 			body: JSON.stringify({entitySlug, entityType, limit, customData}),
 			headers: {
@@ -52,18 +25,85 @@ export const useDynamicEntityList = <T extends {[key: string]: any} = {}>(
 			},
 		});
 
-		const data = (await request.json()) as {data: DynamicEntityList<T>};
-		if (data.data === null) {
+		const responseData = await response.json();
+		return responseData.data;
+	} catch (error) {
+		console.error(error);
+		return null;
+	}
+}
+
+export const useDynamicEntityList = <T extends {[key: string]: any} = {}>(
+	entitySlug: string | null | undefined,
+	entityType: EntityType | null | undefined,
+	{limit = 0, lazy = true, customData = {}, customDataKey}: Options = {},
+) => {
+	// get value from cache
+	const {dynamicCache} = useBringContext();
+	const {cacheKey, cachedList} = useMemo(() => {
+		if (!entitySlug || !entityType) {
+			return {cacheKey: null, cachedList: null};
+		}
+
+		const cacheKey = customDataKey
+			? `list_${entityType}_${entitySlug}_${limit}_${customDataKey}`
+			: `list_${entityType}_${entitySlug}_${limit}`;
+		const cachedList = dynamicCache.get(cacheKey) ?? null;
+
+		return {cacheKey, cachedList};
+	}, [entitySlug, entityType, limit, customDataKey, dynamicCache]);
+
+	// set cached value as initial state
+	const [entityList, setEntityList] =
+		useState<DynamicEntityList<T>>(cachedList);
+
+	// intersection observer for lazy loading
+	const {ref, inView: wasOnScreen} = useInView({
+		triggerOnce: true,
+		skip: !lazy,
+	});
+
+	// update entity list on change of input params
+	useEffect(() => {
+		setEntityList(cachedList);
+	}, [cachedList]);
+
+	// query entity props
+	useEffect(() => {
+		// do not query if entity list is set
+		if (entityList) {
 			return;
 		}
 
-		setEntityList(data.data);
-		dynamicCache.set(cacheKey, data.data);
-	}, [entitySlug, entityType, customDataKey, dynamicCache, setEntityList]);
+		// do not query if entity slug & type => cacheKey are not set
+		if (!entitySlug || !entityType || !cacheKey) {
+			return;
+		}
 
-	useEffect(() => {
-		getEntityList();
-	}, [entitySlug, entityType, limit, customDataKey, isWaiting]);
+		// do not query if lazy but was not on screen
+		if (lazy && !wasOnScreen) {
+			return;
+		}
 
-	return entityList;
+		// query entity list & set cache & state
+		getEntityList(entitySlug, entityType, limit, customData).then(
+			(queriedEntityList) => {
+				if (!queriedEntityList) {
+					return;
+				}
+				setEntityList(queriedEntityList);
+				dynamicCache.set(cacheKey, queriedEntityList);
+			},
+		);
+	}, [
+		entitySlug,
+		entityType,
+		limit,
+		cacheKey,
+		lazy,
+		wasOnScreen,
+		dynamicCache,
+	]);
+
+	return {entityList, ref};
 };
