@@ -36,24 +36,20 @@ export const useDynamicEntityProps = <T extends {[key: string]: any} = {}>(
 	entityType: EntityType | null | undefined,
 	{lazy = true, customData = {}, customDataKey}: Options = {},
 ) => {
-	// get value from cache
 	const {dynamicCache} = useBringContext();
-	const {cacheKey, cachedProps} = useMemo(() => {
+
+	// set cached value as initial state
+	const [entityProps, setEntityProps] = useState<DynamicEntityProps<T>>(() => {
 		if (!entityId || !entityType) {
-			return {cacheKey: null, cachedProps: null};
+			return null;
 		}
 
 		const cacheKey = customDataKey
 			? `prop_${entityType}_${entityId}_${customDataKey}`
 			: `prop_${entityType}_${entityId}`;
-		const cachedProps = dynamicCache.get(cacheKey) ?? null;
 
-		return {cacheKey, cachedProps};
-	}, [entityId, entityType, customDataKey, dynamicCache]);
-
-	// set cached value as initial state
-	const [entityProps, setEntityProps] =
-		useState<DynamicEntityProps<T>>(cachedProps);
+		return dynamicCache.get(cacheKey) ?? null;
+	});
 
 	// intersection observer for lazy loading
 	const {ref, inView: wasOnScreen} = useInView({
@@ -61,20 +57,22 @@ export const useDynamicEntityProps = <T extends {[key: string]: any} = {}>(
 		skip: !lazy,
 	});
 
-	// update entity props on change of input params
-	useEffect(() => {
-		setEntityProps(cachedProps);
-	}, [cachedProps]);
-
 	// query entity props
 	useEffect(() => {
-		// do not query if entity props are set
-		if (entityProps) {
+		// set null if entityId or entityType are null
+		if (!entityId || !entityType) {
 			return;
 		}
 
-		// do not query if entity type & id => cacheKey are not set
-		if (!entityId || !entityType || !cacheKey) {
+		// get cached props
+		const cacheKey = customDataKey
+			? `prop_${entityType}_${entityId}_${customDataKey}`
+			: `prop_${entityType}_${entityId}`;
+		const cachedProps = dynamicCache.get(cacheKey) ?? null;
+
+		// set and return if it was already cached
+		if (cachedProps) {
+			setEntityProps(cachedProps);
 			return;
 		}
 
@@ -93,7 +91,7 @@ export const useDynamicEntityProps = <T extends {[key: string]: any} = {}>(
 				dynamicCache.set(cacheKey, queriedEntityProps);
 			},
 		);
-	}, [entityId, entityType, cacheKey, lazy, wasOnScreen, dynamicCache]);
+	}, [entityId, entityType, customDataKey, lazy, wasOnScreen, dynamicCache]);
 
 	return {entityProps, ref};
 };

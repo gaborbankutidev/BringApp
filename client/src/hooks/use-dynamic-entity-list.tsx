@@ -38,24 +38,20 @@ export const useDynamicEntityList = <T extends {[key: string]: any} = {}>(
 	entityType: EntityType | null | undefined,
 	{limit = 0, lazy = true, customData = {}, customDataKey}: Options = {},
 ) => {
-	// get value from cache
 	const {dynamicCache} = useBringContext();
-	const {cacheKey, cachedList} = useMemo(() => {
+
+	// set cached value as initial state
+	const [entityList, setEntityList] = useState<DynamicEntityList<T>>(() => {
 		if (!entitySlug || !entityType) {
-			return {cacheKey: null, cachedList: null};
+			return null;
 		}
 
 		const cacheKey = customDataKey
 			? `list_${entityType}_${entitySlug}_${limit}_${customDataKey}`
 			: `list_${entityType}_${entitySlug}_${limit}`;
-		const cachedList = dynamicCache.get(cacheKey) ?? null;
 
-		return {cacheKey, cachedList};
-	}, [entitySlug, entityType, limit, customDataKey, dynamicCache]);
-
-	// set cached value as initial state
-	const [entityList, setEntityList] =
-		useState<DynamicEntityList<T>>(cachedList);
+		return dynamicCache.get(cacheKey) ?? null;
+	});
 
 	// intersection observer for lazy loading
 	const {ref, inView: wasOnScreen} = useInView({
@@ -63,20 +59,23 @@ export const useDynamicEntityList = <T extends {[key: string]: any} = {}>(
 		skip: !lazy,
 	});
 
-	// update entity list on change of input params
+	// query entity list
 	useEffect(() => {
-		setEntityList(cachedList);
-	}, [cachedList]);
-
-	// query entity props
-	useEffect(() => {
-		// do not query if entity list is set
-		if (entityList) {
+		// set null if entitySlug or entityType are null
+		if (!entitySlug || !entityType) {
+			setEntityList(null);
 			return;
 		}
 
-		// do not query if entity slug & type => cacheKey are not set
-		if (!entitySlug || !entityType || !cacheKey) {
+		// get cached list
+		const cacheKey = customDataKey
+			? `list_${entityType}_${entitySlug}_${limit}_${customDataKey}`
+			: `list_${entityType}_${entitySlug}_${limit}`;
+		const cachedList = dynamicCache.get(cacheKey) ?? null;
+
+		// set and return if it was already cached
+		if (cachedList) {
+			setEntityList(cachedList);
 			return;
 		}
 
@@ -99,7 +98,7 @@ export const useDynamicEntityList = <T extends {[key: string]: any} = {}>(
 		entitySlug,
 		entityType,
 		limit,
-		cacheKey,
+		customDataKey,
 		lazy,
 		wasOnScreen,
 		dynamicCache,
