@@ -181,13 +181,15 @@ export function makeControls<Props extends Obj>(
 						<InspectorAdvancedControls>
 							{panelControls}
 						</InspectorAdvancedControls>
-					) : (
+					) : Panel.panel ? (
 						<PanelBody
 							title={Panel.panel}
 							initialOpen={Panel.initialOpen ?? false}
 						>
 							{panelControls}
 						</PanelBody>
+					) : (
+						<PanelBody>{panelControls}</PanelBody>
 					);
 				})
 			)}
