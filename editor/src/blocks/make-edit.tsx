@@ -66,7 +66,7 @@ export function makeEdit<Props extends Obj>(config: BlockConfig<Props>) {
 					</InspectorAdvancedControls>
 					{config.Controls &&
 						makeControls<Props>(attributes, setAttributes, config.Controls)}
-					{config.styles && <>{makeBringStylesControl(config.styles)}</>}
+					{config.styles && makeBringStylesControl(config.styles)}
 
 					{config.Edit ? (
 						<config.Edit

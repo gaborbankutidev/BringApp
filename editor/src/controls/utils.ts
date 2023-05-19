@@ -27,11 +27,11 @@ export function makeOptions<T extends string>(
 
 	return withDefault
 		? [
-				...optionList,
 				{
 					label: withDefault === true ? "Default" : withDefault,
 					value: "",
 				},
+				...optionList,
 		  ]
 		: optionList;
 }
@@ -49,11 +49,11 @@ export function makeNumberOptions<T extends number>(
 
 	return withDefault
 		? [
-				...optionList,
 				{
 					label: withDefault === true ? "Default" : withDefault,
 					value: 0,
 				},
+				...optionList,
 		  ]
 		: optionList;
 }

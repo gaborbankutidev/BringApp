@@ -1,6 +1,7 @@
 import React from "react";
 import type {FC} from "react";
 import {PanelBody} from "@wordpress/components";
+import {InspectorControls} from "@wordpress/block-editor";
 import type {BringStylesConfig, Sides} from "./types";
 import {objectKeys} from "../utils";
 import {ResponsiveCheckboxControl, ResponsiveRangeControl} from "../controls";
@@ -11,8 +12,8 @@ export function makeBringStylesControl(bringStylesConfig: BringStylesConfig) {
 	const p = bringStylesConfig.spacing?.p;
 	const v = bringStylesConfig.visibility;
 
-	return () => (
-		<>
+	return (
+		<InspectorControls key="bring-styles">
 			{m && (
 				<PanelBody title="Margin" initialOpen={false}>
 					<SidesControl type="m" sides={m} />
@@ -31,7 +32,7 @@ export function makeBringStylesControl(bringStylesConfig: BringStylesConfig) {
 					/>
 				</PanelBody>
 			)}
-		</>
+		</InspectorControls>
 	);
 }
 

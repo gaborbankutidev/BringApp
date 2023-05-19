@@ -2,21 +2,23 @@ import {useState, useEffect} from "react";
 import type {
 	DynamicEntityOptions,
 	EntityType,
-	SelectControlOptions,
+	NumberSelectControlOptions,
 } from "../types";
 
-export const useDynamicEntityOptions = (
-	entityType: EntityType = "post",
-	{
-		entitySlug,
-		customData,
-	}: {entitySlug?: string; customData?: any} | undefined = {},
-) => {
-	const [entityOptions, setEntityOptions] =
-		useState<SelectControlOptions | null>(null);
+type Options = {
+	entitySlug?: string;
+	customData?: {[key: string]: any};
+	customDataKey?: boolean | number | string;
+	withDefault?: boolean;
+};
 
-	const getPostIds = async () => {
-		const request = await fetch("/wp-json/bring/dynamic/options", {
+async function getEntityOptions(
+	entityType: EntityType,
+	entitySlug: string = "",
+	customData = {},
+) {
+	try {
+		const response = await fetch("/wp-json/bring/dynamic/options", {
 			method: "POST",
 			body: JSON.stringify({entityType, entitySlug, customData}),
 			headers: {
@@ -24,23 +26,47 @@ export const useDynamicEntityOptions = (
 			},
 		});
 
-		const data = (await request.json()) as {data: DynamicEntityOptions};
-		if (data.data === null) {
-			return;
+		const responseData = (await response.json()) as {
+			data: DynamicEntityOptions;
+		};
+
+		if (!responseData.data) {
+			return null;
 		}
 
-		const options = data.data.map((item) => ({
-			value: item[0].toString(),
+		return responseData.data.map((item) => ({
+			value: item[0],
 			label: item[1],
 		}));
-		options.push({value: "", label: "Default"});
+	} catch (error) {
+		console.error(error);
+		return null;
+	}
+}
 
-		setEntityOptions(options);
-	};
+export const useDynamicEntityOptions = (
+	entityType: EntityType = "post",
+	{entitySlug, customData, customDataKey, withDefault = true}: Options = {},
+) => {
+	const [entityOptions, setEntityOptions] =
+		useState<NumberSelectControlOptions | null>(null);
 
 	useEffect(() => {
-		getPostIds();
-	}, [entityType, entitySlug]);
+		getEntityOptions(entityType, entitySlug, customData).then(
+			(queriedEntityOptions) => {
+				if (!queriedEntityOptions) {
+					setEntityOptions(null);
+					return;
+				}
+
+				setEntityOptions(
+					withDefault
+						? [{value: 0, label: "Unset"}, ...queriedEntityOptions]
+						: queriedEntityOptions,
+				);
+			},
+		);
+	}, [entityType, entitySlug, customDataKey]);
 
 	return entityOptions;
 };
