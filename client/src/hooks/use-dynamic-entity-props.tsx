@@ -61,6 +61,7 @@ export const useDynamicEntityProps = <T extends {[key: string]: any} = {}>(
 	useEffect(() => {
 		// set null if entityId or entityType are null
 		if (!entityId || !entityType) {
+			setEntityProps(null);
 			return;
 		}
 
