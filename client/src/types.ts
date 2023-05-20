@@ -82,21 +82,9 @@ export type BringContextType<
 	entityContent: EntityContent;
 	entityProps: EntityProps<EP>;
 
-	componentMap: Map<string, FC<any>>;
-
 	dynamicCache: Map<string, any>;
-	contentCache: Map<
-		string,
-		{
-			url: string;
-			content?: {
-				entityContent: {main: BringNode[]; layout?: BringNode[]};
-				entityProps: EntityProps<EP>;
-			};
-			isLoading?: boolean;
-		}
-	>;
 
+	componentMap: Map<string, FC<any>>;
 	navigate: (href: string) => void;
 };
 

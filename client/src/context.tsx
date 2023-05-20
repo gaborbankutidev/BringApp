@@ -37,11 +37,6 @@ export const BringContextProvider: FC<{
 		[],
 	);
 
-	const contentCache = useMemo(
-		() => new Map<string, any>(Object.entries(window.bringCache.contentCache)),
-		[],
-	);
-
 	const navigate = useCallback(
 		async (href: string) => {
 			const [url, queryString] = href.split("?");
@@ -100,7 +95,6 @@ export const BringContextProvider: FC<{
 				entityContent,
 				entityProps,
 				dynamicCache,
-				contentCache,
 				componentMap,
 				navigate,
 			}}
