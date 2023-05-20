@@ -17,17 +17,6 @@ declare global {
 					getBlockParents: (arg0: string) => string[];
 				};
 			};
-			/* 			blocks: {
-				getBlockTypes: () => {name: string}[];
-				unregisterBlockType: (blockName: string) => void;
-			};
-			hooks: {
-				addFilter: (
-					c: string,
-					s: string,
-					fn: (settings: any, name: string) => any,
-				) => void;
-			}; */
 		};
 	}
 }
@@ -54,27 +43,6 @@ function disableReusableBlocks() {
 	});
 }
 
-/* function disableDefaultBlocks(bringBlocks: string[]) {
-	const allowedBlocks = [...bringBlocks, "core/paragraph"];
-	const registeredBlocks = window.wp.blocks.getBlockTypes();
-
-	registeredBlocks.forEach((block) => {
-		if (allowedBlocks.includes(block.name)) {
-			return;
-		}
-		console.log(block.name);
-		window.wp.blocks.unregisterBlockType(block.name);
-	});
-}
-
-function disableDefaultBlock(bringBlocks: string[], name: string) {
-	const allowedBlocks = [...bringBlocks, "core/paragraph"];
-	if (allowedBlocks.includes(name)) {
-		return;
-	}
-	window.wp.blocks.unregisterBlockType(name);
-} */
-
 export function editorInit(blockList: BlockConfig<any>[]) {
 	if (window.bringContent) {
 		console.error("Double init bring");
@@ -88,21 +56,6 @@ export function editorInit(blockList: BlockConfig<any>[]) {
 	blockList.map((blockConfig) => {
 		registerBringBlock<any>(blockConfig);
 	});
-
-	/* 	// disable default blocks
-	const bringBlocks = blockList.map((block) => {
-		const name = block.title ?? block.componentName;
-		return `bring/${name.toLowerCase()}`;
-	});
-
-	window.wp.hooks.addFilter(
-		"blocks.registerBlockType",
-		"bring/init",
-		function (settings, name) {
-			disableDefaultBlock(bringBlocks, name);
-			return settings;
-		},
-	); */
 
 	// set an elegant timeout for waiting for WP because no `saved` event or documentation is available!
 	setTimeout(() => {
