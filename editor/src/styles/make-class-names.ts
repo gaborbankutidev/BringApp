@@ -72,14 +72,14 @@ export const makeBringStylesClassNames = (
 	return ClassNames.join(" ");
 };
 
-export const makeResponsiveClassNames = (
+export const makeResponsiveClassNames = <T = number>(
 	className: string,
-	responsiveValue: ResponsiveValue,
-	responsiveConfig: ResponsiveValue = {},
+	responsiveValue: ResponsiveValue<T>,
+	responsiveConfig: ResponsiveValue<T> = {},
 ) => {
 	const ClassNames: string[] = [];
 
-	const addClassName = (size: keyof ResponsiveValue, value?: number) =>
+	const addClassName = (size: keyof ResponsiveValue<T>, value?: T) =>
 		value !== undefined &&
 		ClassNames.push(
 			size ? `${size}:${className}-${value}` : `${className}-${value}`,
