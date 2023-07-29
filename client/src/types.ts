@@ -1,10 +1,15 @@
 import type {FC} from "react";
+import {BringStylesClassNames} from "./styles";
 
 export type Obj = Record<string, unknown>;
 export type Defined<T> = Exclude<T, undefined>;
 
 export type FCC<P = {}> = FC<
-	P & {className?: string | undefined; id?: string | undefined}
+	P & {
+		bringStylesClassNames?: BringStylesClassNames | undefined;
+		className?: string | undefined;
+		id?: string | undefined;
+	}
 >;
 
 export type GridNumType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;

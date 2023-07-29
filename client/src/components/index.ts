@@ -1,4 +1,4 @@
-export {Cache} from "../components/cache";
-export {Page} from "../components/page";
+export {Cache} from "./cache";
+export {Page} from "./page";
 export {postContent, PostContent} from "./post-content";
 export {Link} from "./link";

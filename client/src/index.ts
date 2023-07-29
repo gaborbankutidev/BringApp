@@ -12,14 +12,8 @@ export {
 	useNavigate,
 } from "./hooks";
 
-export type {
-	BringStyles,
-	BringStylesConfig,
-	ResponsiveLabels,
-	ResponsiveValue,
-	Sides,
-} from "./styles";
-export {makeBringStylesClassNames, makeResponsiveClassNames} from "./styles";
+export type {BringStylesClassNames, ResponsiveValue} from "./styles";
+export {makeResponsiveClassNames} from "./styles";
 
 export {clientInit} from "./client-init";
 
