@@ -1,3 +1,4 @@
+import type {ResponsiveValue} from "@bring/blocks-client";
 import {DashIcon} from "./dashicon.types";
 
 type DisplayValue =
@@ -21,12 +22,6 @@ type DisplayValue =
 	| "inline-grid"
 	| "contents"
 	| "list-item";
-
-export type ResponsiveValue<T = number> = {
-	""?: T;
-	md?: T;
-	lg?: T;
-};
 
 type ResponsiveDisplayValueConfig = {
 	"": DisplayValue;

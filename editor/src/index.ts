@@ -37,11 +37,7 @@ export {
 
 export {useDynamicEntityOptions} from "./hooks";
 
-export {
-	makeBringStylesClassNames,
-	makeResponsiveClassNames,
-	makeBringStylesControl,
-} from "./styles";
+export {makeBringStylesClassNames, makeBringStylesControl} from "./styles";
 
 export {editorInit} from "./editor";
 

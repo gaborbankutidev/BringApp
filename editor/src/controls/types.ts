@@ -1,6 +1,6 @@
 import type {FC} from "react";
 import type {ImageType, NestedKeyOf, NestedTypedKeyOf, Obj} from "../types";
-import {ResponsiveValue} from "../styles/types";
+import type {ResponsiveValue} from "@bring/blocks-client";
 
 type _ControlType<dVT> = {
 	label: string;

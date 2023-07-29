@@ -1,29 +1,34 @@
+import {ResponsiveValue, BringStylesClassNames} from "@bring/blocks-client";
 import {objectKeys} from "../utils";
 import {screenSizes} from "./utils";
-import type {
-	BringStyles,
-	BringStylesConfig,
-	ResponsiveValue,
-	Sides,
-} from "./types";
+import type {BringStyles, BringStylesConfig, Sides} from "./types";
 
 export const makeBringStylesClassNames = (
 	bringStylesConfig: BringStylesConfig,
 	bringStyles?: BringStyles,
-) => {
-	const ClassNames: string[] = [];
+): BringStylesClassNames => {
+	const marginClassNames: string[] = [];
+	const paddingClassNames: string[] = [];
+	const visibilityClassNames: string[] = [];
+	const classNames: string[] = [];
+
 	const addClassName = (
 		spacing: "m" | "p",
 		side: keyof Sides,
 		size: keyof ResponsiveValue,
 		value?: number,
-	) =>
-		value !== undefined &&
-		ClassNames.push(
-			size
-				? `${size}:${spacing}${side}-${value}`
-				: `${spacing}${side}-${value}`,
-		);
+	) => {
+		if (value === undefined) {
+			return;
+		}
+
+		const s = size
+			? `${size}:${spacing}${side}-${value}`
+			: `${spacing}${side}-${value}`;
+
+		spacing === "m" ? marginClassNames.push(s) : paddingClassNames.push(s);
+		classNames.push(s);
+	};
 
 	// margin
 	const mC = bringStylesConfig?.spacing?.m;
@@ -63,31 +68,20 @@ export const makeBringStylesClassNames = (
 	const vC = bringStylesConfig?.visibility;
 	const vV = bringStyles?.visibility;
 	vC &&
-		objectKeys(vC).map((size) =>
-			ClassNames.push(
-				(size ? `${size}:` : "") + (vV && vV[size] ? "hidden" : vC[size]),
-			),
-		);
+		objectKeys(vC).map((size) => {
+			const v =
+				(size ? `${size}:` : "") + (vV && vV[size] ? "hidden" : vC[size]);
 
-	return ClassNames.join(" ");
-};
+			visibilityClassNames.push(v);
+			classNames.push(v);
+		});
 
-export const makeResponsiveClassNames = <T = number>(
-	className: string,
-	responsiveValue: ResponsiveValue<T>,
-	responsiveConfig: ResponsiveValue<T> = {},
-) => {
-	const ClassNames: string[] = [];
-
-	const addClassName = (size: keyof ResponsiveValue<T>, value?: T) =>
-		value !== undefined &&
-		ClassNames.push(
-			size ? `${size}:${className}-${value}` : `${className}-${value}`,
-		);
-
-	objectKeys(screenSizes).map((size) =>
-		addClassName(size, responsiveValue[size] ?? responsiveConfig[size]),
-	);
-
-	return ClassNames.join(" ");
+	return {
+		spacing: {
+			m: marginClassNames.join(" "),
+			p: paddingClassNames.join(" "),
+		},
+		visibility: "",
+		classNames: classNames.join(" "),
+	};
 };
