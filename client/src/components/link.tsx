@@ -1,12 +1,11 @@
-import React, {useCallback} from "react";
+import React, {FC, useCallback} from "react";
 import {useBringContext} from "../context";
-import {FCC} from "../types";
 
-type LinkProps = {
+export type LinkProps = {
 	external?: boolean;
 } & React.AnchorHTMLAttributes<HTMLAnchorElement>;
 
-export const Link: FCC<LinkProps> = ({
+export const Link: FC<LinkProps> = ({
 	href,
 	onClick,
 	external = false,
