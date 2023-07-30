@@ -51,10 +51,10 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     to-fast-properties "^2.0.0"
 
-"@bring/blocks-client@0.1.18":
-  version "0.1.18"
-  resolved "https://registry.yarnpkg.com/@bring/blocks-client/-/blocks-client-0.1.18.tgz#6642bf2888f39401f7403709abb89692d2cadfc4"
-  integrity sha512-7WzxZMdg9JJXt6auAaVZ+evStmPQrAd9WHx/tro9WQ1fdJg1nHFcjuvAJ3G3TSdNMPMaQiw7lvZw2RHsrQK1nw==
+"@bring/blocks-client@0.1.19":
+  version "0.1.19"
+  resolved "https://registry.yarnpkg.com/@bring/blocks-client/-/blocks-client-0.1.19.tgz#c6a4003171f62dbd9db2bb1ca2c138490aa7c29c"
+  integrity sha512-FA0pGoA1AnO6ycO3G7ad7G8JF8ncNtE9wFVUTGEnUV9KF1YdCj/BoqxBLjDyxGXGAARB2D0sHCTs64X9U+ZxtQ==
   dependencies:
     react-intersection-observer "^9.4.3"
 
