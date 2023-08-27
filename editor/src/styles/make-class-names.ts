@@ -81,7 +81,7 @@ export const makeBringStylesClassNames = (
 			m: marginClassNames.join(" "),
 			p: paddingClassNames.join(" "),
 		},
-		visibility: "",
+		visibility: visibilityClassNames.join(" "),
 		classNames: classNames.join(" "),
 	};
 };

@@ -14,7 +14,7 @@ export function registerBringBlock<Props extends Obj>(
 	// @ts-expect-error: Expect error here because Wordpress's `registerBlockType` types are so complicated TS can't infer the correct types
 	registerBlockType(`bring/${title.toLowerCase()}`, {
 		title,
-		description: config.description ?? `${config.title} block by Bring`,
+		description: config.description ?? `${title} block by Bring`,
 		category: "widgets", // todo custom category
 		icon: config.icon ?? "block-default",
 		supports: {
@@ -24,6 +24,9 @@ export function registerBringBlock<Props extends Obj>(
 			...config.attributes,
 			id: stringAttributeSource(),
 			bringStyles: objectAttributeSource(BringStylesDefaultValue),
+		},
+		example: config.previewAttributes && {
+			attributes: config.previewAttributes,
 		},
 		edit: makeEdit<Props>(config),
 		save: makeSave<Props>(config), // refactor save hooks and use InnedBlock instead
