@@ -1,8 +1,16 @@
 import React from "react";
 import type {FC, ReactNode} from "react";
 import {createRoot, hydrateRoot} from "react-dom/client";
+import {renderToString} from "react-dom/server";
 import {BringContextProvider} from "./context";
 import {Cache, Page, postContent} from "./components";
+
+declare global {
+	// Interface is needed to augment global `Window`
+	interface Window {
+		bringRenderToString: () => string;
+	}
+}
 
 export function clientInit(
 	componentList: {componentName: string; Component: FC<any>}[],
@@ -23,13 +31,17 @@ export function clientInit(
 	if (bringCache) {
 		const root = createRoot(bringCache);
 
-		root.render(
+		const BringContent = (
 			<BringContextProvider componentMap={componentMap}>
 				<Wrapper>
 					<Cache />
 				</Wrapper>
-			</BringContextProvider>,
+			</BringContextProvider>
 		);
+
+		root.render(BringContent);
+
+		window.bringRenderToString = () => renderToString(BringContent);
 	}
 
 	// init page root
@@ -49,5 +61,7 @@ export function clientInit(
 		} else {
 			hydrateRoot(bringContent, BringContent);
 		}
+
+		window.bringRenderToString = () => renderToString(BringContent);
 	}
 }
