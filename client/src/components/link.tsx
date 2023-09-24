@@ -9,7 +9,7 @@ export const Link: FC<LinkProps> = ({
 	href,
 	onClick,
 	external = false,
-	target,
+	target = "_self",
 	children,
 	...props
 }) => {
@@ -17,16 +17,17 @@ export const Link: FC<LinkProps> = ({
 
 	const handleClick = useCallback(
 		(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-			if (!href) {
+			// call onClick prop if it exists
+			onClick && onClick(event);
+
+			// if href is not set, or target is not self, or the url is external, do nothing (fall back to default behavior)
+			if (!href || !["", "_self", "_top"].includes(target) || external) {
 				return;
 			}
 
+			// prevent default behavior and navigate
 			event.preventDefault();
-			onClick && onClick(event);
-
-			target === "_blank" && window.open(href, "_blank");
-
-			external ? (window.location.href = href) : navigate(href);
+			navigate(href);
 		},
 		[navigate, href],
 	);

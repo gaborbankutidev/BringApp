@@ -15,6 +15,18 @@ declare global {
 	}
 }
 
+function scrollToElement(id: string, retries: number = 10) {
+	const element = document.getElementById(id);
+	console.log("scrollToElement", id, element, retries);
+	if (element) {
+		element.scrollIntoView({behavior: "smooth"});
+	} else if (retries > 0) {
+		setTimeout(function () {
+			scrollToElement(id, retries - 1);
+		}, 100);
+	}
+}
+
 const BringContext = React.createContext<BringContextType>({
 	...window.bringCache,
 	navigate: () => {},
@@ -39,10 +51,16 @@ export const BringContextProvider: FC<{
 
 	const navigate = useCallback(
 		async (href: string) => {
-			const [url, queryString] = href.split("?");
+			// split url
+			const [_href, scrollToId] = href.split("#");
+			const [url, queryString] = _href.split("?");
+
+			// append bringCSR=1 to query string
 			const params = new URLSearchParams(queryString);
 			params.append("bringCSR", "1");
+
 			try {
+				// fetch data
 				const response = await fetch(`${url}?${params.toString()}`, {
 					method: "GET",
 					headers: {
@@ -60,16 +78,27 @@ export const BringContextProvider: FC<{
 					entityProps: BringContextType["entityProps"];
 				};
 
+				// check if data is valid
 				if (!data.bringCSR) {
 					throw "wrong data";
 				}
 
+				// set date to state and trigger re-render
 				setEntityContent(data.entityContent);
 				setEntityProps(data.entityProps);
-				document.body.scrollTop = 0; // For Safari
-				document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+
+				// add to history
 				history.pushState(data, "", href);
+
+				// scroll to top or the element
+				if (scrollToId) {
+					scrollToElement(scrollToId);
+				} else {
+					document.body.scrollTop = 0; // For Safari
+					document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+				}
 			} catch (error) {
+				// redirect to href on error
 				window.location.href = href;
 				console.error(error);
 			}
