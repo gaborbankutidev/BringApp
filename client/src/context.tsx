@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import type {FC, ReactNode} from "react";
 import {BringContextType} from "./types";
+import {updateRankMathHeader} from "./utils";
 
 declare global {
 	// Interface is needed to augment global `Window`
@@ -17,7 +18,6 @@ declare global {
 
 function scrollToElement(id: string, retries: number = 10) {
 	const element = document.getElementById(id);
-	console.log("scrollToElement", id, element, retries);
 	if (element) {
 		element.scrollIntoView({behavior: "smooth"});
 	} else if (retries > 0) {
@@ -36,7 +36,8 @@ const BringContext = React.createContext<BringContextType>({
 export const BringContextProvider: FC<{
 	children: ReactNode;
 	componentMap?: Map<string, FC<any>>;
-}> = ({children, componentMap = new Map()}) => {
+	rankMath?: boolean;
+}> = ({children, componentMap = new Map(), rankMath = false}) => {
 	const siteProps = useMemo(() => window.bringCache.siteProps, []);
 
 	const [entityContent, setEntityContent] = useState(
@@ -84,6 +85,7 @@ export const BringContextProvider: FC<{
 				}
 
 				// set date to state and trigger re-render
+				rankMath && url && updateRankMathHeader(url);
 				setEntityContent(data.entityContent);
 				setEntityProps(data.entityProps);
 
@@ -112,6 +114,7 @@ export const BringContextProvider: FC<{
 			if (!event?.state?.bringCSR) {
 				return;
 			}
+			rankMath && updateRankMathHeader(window.location.href);
 			setEntityContent(event.state.entityContent);
 			setEntityProps(event.state.entityProps);
 		};

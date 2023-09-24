@@ -15,6 +15,7 @@ declare global {
 export function clientInit(
 	componentList: {componentName: string; Component: FC<any>}[],
 	Wrapper: FC<{children: ReactNode}> = React.Fragment,
+	options: {rankMath?: boolean} = {rankMath: false},
 ) {
 	const componentMap = new Map<string, FC<any>>();
 
@@ -48,7 +49,10 @@ export function clientInit(
 	const bringContent = document.getElementById("bringContent");
 	if (bringContent) {
 		const BringContent = (
-			<BringContextProvider componentMap={componentMap}>
+			<BringContextProvider
+				componentMap={componentMap}
+				rankMath={options.rankMath}
+			>
 				<Wrapper>
 					<Page />
 				</Wrapper>
