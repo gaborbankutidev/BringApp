@@ -27,7 +27,7 @@ function scrollToElement(id: string, retries: number = 10) {
 	}
 }
 
-const bringContextinitialValue =
+const bringContextInitialValue =
 	typeof window === "undefined"
 		? {
 				siteProps: {logo: null, url: "", menus: []},
@@ -47,7 +47,7 @@ const bringContextinitialValue =
 		: window.bringCache;
 
 const BringContext = React.createContext<BringContextType>({
-	...bringContextinitialValue,
+	...bringContextInitialValue,
 	navigate: () => {},
 	componentMap: new Map<string, FC<any>>(),
 });
