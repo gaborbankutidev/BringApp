@@ -27,8 +27,27 @@ function scrollToElement(id: string, retries: number = 10) {
 	}
 }
 
+const bringContextinitialValue =
+	typeof window === "undefined"
+		? {
+				siteProps: {logo: null, url: "", menus: []},
+				entityContent: {main: []},
+				entityProps: {
+					entityType: null,
+					entitySlug: null,
+					entityId: 0,
+					name: null,
+					excerpt: null,
+					description: null,
+					image: null,
+					url: null,
+				},
+				dynamicCache: new Map<string, any>(),
+		  }
+		: window.bringCache;
+
 const BringContext = React.createContext<BringContextType>({
-	...window.bringCache,
+	...bringContextinitialValue,
 	navigate: () => {},
 	componentMap: new Map<string, FC<any>>(),
 });

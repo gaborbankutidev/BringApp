@@ -33,4 +33,6 @@ export type {
 	EntityType,
 } from "./types";
 
+export {createBringElement} from "./render";
+
 export {defaultImageValue, objectKeys} from "./utils";
