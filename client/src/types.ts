@@ -29,6 +29,7 @@ export type MenuItemType = {
 	url?: string;
 	name: string;
 	target: string;
+	classes: string;
 	children?: MenuItemType[];
 };
 
