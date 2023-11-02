@@ -1,6 +1,5 @@
 import React from "react";
 import {InnerBlocks} from "@wordpress/block-editor";
-import {twJoin} from "tailwind-merge";
 import {bringStoreBlockNode} from "../editor";
 import type {Obj} from "../types";
 import type {BlockConfig, Attributes} from "./types";

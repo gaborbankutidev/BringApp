@@ -64,7 +64,6 @@ export function makeControls<Props extends Obj>(
 							);
 						}
 
-						// destructure and use newly typed path property
 						// casting to unknown here because typescript can't infer NestedTypedKeyOf
 						const props = {
 							...Control,

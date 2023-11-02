@@ -52,7 +52,7 @@ export function editorInit(blockList: BlockConfig<any>[]) {
 	disableReusableBlocks();
 
 	// register bring blocks
-	blockList.push(postContentConfig);
+	//blockList.push(postContentConfig);
 	blockList.map((blockConfig) => {
 		registerBringBlock<any>(blockConfig);
 	});
@@ -134,7 +134,7 @@ function bringUpdate() {
 		return;
 	}
 
-	fetch("/wp-json/bring/update/content-object", {
+	fetch("/wp-json/bring/editor/save", {
 		method: "POST",
 		headers: {
 			Authorization: window.jwt.token,

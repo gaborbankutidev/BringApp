@@ -83,7 +83,7 @@ const ResponsiveRangeControlByValue: FC<ControlByValue<ResponsiveValue>> = ({
 					newObject[selectedSize] = newValue;
 					setValue(newObject);
 				}}
-				defaultValue={defaultValue ? defaultValue[selectedSize] : 0}
+				defaultValue={defaultValue ? defaultValue[selectedSize] ?? 0 : 0}
 				{...props}
 			/>
 		</>

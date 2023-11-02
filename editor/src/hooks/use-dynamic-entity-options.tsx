@@ -18,8 +18,8 @@ async function getEntityOptions(
 	customData = {},
 ) {
 	try {
-		const response = await fetch("/wp-json/bring/dynamic/options", {
-			method: "POST",
+		const response = await fetch("/wp-json/bring/editor/options", {
+			method: "GET",
 			body: JSON.stringify({entityType, entitySlug, customData}),
 			headers: {
 				"Content-Type": "application/json",

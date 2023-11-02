@@ -1,7 +1,7 @@
 import React from "react";
 import {InnerBlocks, InspectorAdvancedControls} from "@wordpress/block-editor";
 import {EditorCard} from "../components";
-import {BringContextProvider} from "@bring/blocks-client";
+//import {BringContextProvider} from "@bring/blocks-client";
 import type {Obj} from "../types";
 import type {Attributes, BlockConfig} from "./types";
 import {makeControls} from "./make-controls";
@@ -45,55 +45,56 @@ export function makeEdit<Props extends Obj>(config: BlockConfig<Props>) {
 
 		// calculate bring styles class names
 		const joinedClassName = config.styles
-			? twJoin(makeBringStylesClassNames(config.styles, bringStyles), className)
+			? twJoin(
+					makeBringStylesClassNames(config.styles, bringStyles).classNames,
+					className,
+			  )
 			: className;
 
 		return (
-			<BringContextProvider>
-				<ControlContextProvider
-					attributes={attributes}
-					setAttributes={setAttributes}
-				>
-					<InspectorAdvancedControls>
-						<TextControl
-							updateHandling="by-value"
-							label="Id"
-							value={attributes.id}
-							setValue={(newValue) => {
-								setAttributes({id: newValue} as Partial<Attributes<Props>>);
-							}}
-						/>
-					</InspectorAdvancedControls>
-					{config.Controls &&
-						makeControls<Props>(attributes, setAttributes, config.Controls)}
-					{config.styles && makeBringStylesControl(config.styles)}
+			<ControlContextProvider
+				attributes={attributes}
+				setAttributes={setAttributes}
+			>
+				<InspectorAdvancedControls>
+					<TextControl
+						updateHandling="by-value"
+						label="Id"
+						value={attributes.id}
+						setValue={(newValue) => {
+							setAttributes({id: newValue} as Partial<Attributes<Props>>);
+						}}
+					/>
+				</InspectorAdvancedControls>
+				{config.Controls &&
+					makeControls<Props>(attributes, setAttributes, config.Controls)}
+				{config.styles && makeBringStylesControl(config.styles)}
 
-					{config.Edit ? (
-						<config.Edit
-							attributes={attributes}
-							setAttributes={setAttributes}
-							clientId={clientId}
-							isSelected={isSelected ?? false}
+				{config.Edit ? (
+					<config.Edit
+						attributes={attributes}
+						setAttributes={setAttributes}
+						clientId={clientId}
+						isSelected={isSelected ?? false}
+					>
+						<InnerBlocks allowedBlocks={config.allowedBlocks} />
+					</config.Edit>
+				) : (
+					<EditorCard
+						color="grey"
+						isSelected={isSelected ?? false}
+						name={config.componentName}
+					>
+						<config.Component
+							className={joinedClassName}
+							id={id}
+							{...(props as any)}
 						>
 							<InnerBlocks allowedBlocks={config.allowedBlocks} />
-						</config.Edit>
-					) : (
-						<EditorCard
-							color="grey"
-							isSelected={isSelected ?? false}
-							name={config.componentName}
-						>
-							<config.Component
-								className={joinedClassName}
-								id={id}
-								{...(props as any)}
-							>
-								<InnerBlocks allowedBlocks={config.allowedBlocks} />
-							</config.Component>
-						</EditorCard>
-					)}
-				</ControlContextProvider>
-			</BringContextProvider>
+						</config.Component>
+					</EditorCard>
+				)}
+			</ControlContextProvider>
 		);
 	};
 }

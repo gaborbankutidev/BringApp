@@ -42,6 +42,7 @@ const SidesControl: FC<{type: "m" | "p"; sides: Sides}> = ({type, sides}) => (
 			<ResponsiveRangeControl<Record<string, any>>
 				label={`${spacingLabels[type]} ${sideLabels[side]}`}
 				path={`bringStyles.spacing.${type}.${side}`}
+				defaultValue={sides[side]}
 			/>
 		))}
 	</>
