@@ -1,3 +1,5 @@
+"use client";
+
 import {useSendForm} from "./use-send-form";
 
 export const useWPSendForm = <PayloadT>(
@@ -10,7 +12,7 @@ export const useWPSendForm = <PayloadT>(
 		{success: true; message: string},
 		{success: false; message: string},
 		{formName: string; formData: PayloadT}
-	>(options?.formUrl ?? "/wp-json/bring-form/submit");
+	>(options?.formUrl ?? "/wp-json/bring/form/submit");
 	const send = async (formData: PayloadT) => {
 		useSendFormResult.send({formName, formData});
 	};

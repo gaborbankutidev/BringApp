@@ -1,5 +1,5 @@
-export {Cache} from "./cache";
-export {Page} from "./page";
-export {postContent, PostContent} from "./post-content";
-export {Link} from "./link";
-export type {LinkProps} from "./link";
+export {default as Debug} from "./debug";
+export {default as makeHeader} from "./header";
+export {default as makeFooter} from "./footer";
+export {default as makeMain} from "./main";
+export {default as makeLayout} from "./layout";

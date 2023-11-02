@@ -1,5 +1,6 @@
 client/dist
 client/node_modules
+old_client
 
 editor/dist
 editor/node_modules
