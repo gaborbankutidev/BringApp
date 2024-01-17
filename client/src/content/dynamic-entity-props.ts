@@ -8,7 +8,7 @@ async function getDynamicEntityProps<T = {}>(
 ) {
 	try {
 		const response = await fetch(`${url}/wp-json/bring/dynamic/props`, {
-			method: "GET",
+			method: "POST",
 			body: JSON.stringify({entityId, entityType, customData}),
 			headers: {
 				"Content-Type": "application/json",

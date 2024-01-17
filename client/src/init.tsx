@@ -1,20 +1,19 @@
 import type {ReactNode} from "react";
-import {
-	getDynamicEntityProps,
-	getDynamicEntityList,
-	getSiteProps,
-	getEntity,
-	createBringElement,
-} from "./content";
-import type {
-	BringNode,
-	EntityProps,
-	EntityType,
-	FCC,
-	Obj,
-	SiteProps,
-} from "./types";
 import {makeFooter, makeHeader, makeLayout, makeMain} from "./components";
+import {
+	createBringElement,
+	getDynamicEntityList,
+	getDynamicEntityProps,
+	getEntity,
+	getSiteProps,
+} from "./content";
+import {
+	useDynamicEntityList,
+	useDynamicEntityProps,
+	type DynamicEntityListOptions,
+	type DynamicEntityPropsOptions,
+} from "./hooks";
+import type {BringNode, EntityProps, EntityType, FCC, SiteProps} from "./types";
 
 function init<
 	EP = {}, // EntityProps
@@ -49,6 +48,16 @@ function init<
 			customData = {},
 		) =>
 			getDynamicEntityList<T>(wpURL, entitySlug, entityType, limit, customData),
+		useDynamicEntityProps: <T = {},>(
+			entityId: number,
+			entityType: EntityType,
+			options: DynamicEntityPropsOptions = {},
+		) => useDynamicEntityProps<T>(wpURL, entityId, entityType, options),
+		useDynamicEntityList: <T = {},>(
+			entitySlug: string,
+			entityType: EntityType,
+			options: DynamicEntityListOptions = {},
+		) => useDynamicEntityList<T>(wpURL, entitySlug, entityType, options),
 		// Content
 		getSiteProps: () => getSiteProps<SP, M, MI>(wpURL),
 		getEntity: (slug: string | string[] = "") => getEntity<EP>(wpURL, slug),

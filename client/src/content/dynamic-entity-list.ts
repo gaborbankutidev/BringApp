@@ -9,7 +9,7 @@ async function getDynamicEntityList<T = {}>(
 ) {
 	try {
 		const response = await fetch(`${url}/wp-json/bring/dynamic/list`, {
-			method: "GET",
+			method: "POST",
 			body: JSON.stringify({entitySlug, entityType, limit, customData}),
 			headers: {
 				"Content-Type": "application/json",
