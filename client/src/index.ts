@@ -25,6 +25,7 @@ export type {
 	FCC,
 	GridNumType,
 	ImageType,
+	MediaType,
 	MenuItemType,
 	SiteProps,
 	Entity,

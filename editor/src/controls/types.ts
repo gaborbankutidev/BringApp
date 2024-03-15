@@ -1,5 +1,11 @@
 import type {FC} from "react";
-import type {ImageType, NestedKeyOf, NestedTypedKeyOf, Obj} from "../types";
+import type {
+	ImageType,
+	MediaType,
+	NestedKeyOf,
+	NestedTypedKeyOf,
+	Obj,
+} from "../types";
 import type {ResponsiveValue} from "@bring/blocks-client";
 
 type _ControlType<dVT> = {
@@ -143,6 +149,12 @@ type NumberComboboxControlConfigType<Props extends Obj = {}> = {
 	defaultValue?: number;
 } & _ControlConfigType<Props>;
 
+type MediaControlConfigType<Props extends Obj = {}> = {
+	type: "media";
+	allowedTypes?: string[];
+	path: NestedTypedKeyOf<Props, MediaType>;
+} & _ControlConfigType<Props>;
+
 type ImageControlConfigType<Props extends Obj = {}> = {
 	type: "image";
 	path: NestedTypedKeyOf<Props, ImageType>;
@@ -172,4 +184,5 @@ export type ControlConfigType<Props extends Obj = {}> =
 	| NumberComboboxControlConfigType<Props>
 	| ImageControlConfigType<Props>
 	| TextArrayControlConfigType<Props>
-	| ImageArrayControlConfigType<Props>;
+	| ImageArrayControlConfigType<Props>
+	| MediaControlConfigType<Props>;

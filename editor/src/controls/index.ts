@@ -9,6 +9,7 @@ export {ComboboxControl} from "./primitive/combobox-control";
 export {NumberComboboxControl} from "./primitive/number-combobox-control";
 
 export {ImageControl} from "./object/image-control";
+export {MediaControl} from "./object/media-control";
 export {
 	ImageArrayControl,
 	TextArrayControl,

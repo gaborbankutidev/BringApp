@@ -6,6 +6,7 @@ export {
 	numberAttributeSource,
 	objectAttributeSource,
 	stringAttributeSource,
+	mediaAttributeSource,
 } from "./blocks";
 
 export {Debug, EditorCard} from "./components";
@@ -44,6 +45,7 @@ export type {
 	FCB,
 	MenuType, // ?
 	ImageType, // ?
+	MediaType,
 	// lists
 	DynamicEntityOptions,
 	OptionList,

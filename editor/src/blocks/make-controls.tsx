@@ -23,6 +23,7 @@ import {
 	ResponsiveRangeControl,
 	NumberComboboxControl,
 	NumberSelectControl,
+	MediaControl,
 } from "../controls";
 
 export function makeControls<Props extends Obj>(
@@ -148,6 +149,13 @@ export function makeControls<Props extends Obj>(
 								return (
 									<NumberSelectControl
 										{...(props as Parameters<typeof NumberSelectControl>[0])}
+									/>
+								);
+
+							case "media":
+								return (
+									<MediaControl
+										{...(props as Parameters<typeof MediaControl>[0])}
 									/>
 								);
 
