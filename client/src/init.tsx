@@ -14,6 +14,7 @@ import {
 	type DynamicEntityPropsOptions,
 } from "./hooks";
 import type {BringNode, EntityProps, EntityType, FCC, SiteProps} from "./types";
+import {makeUseWPSendForm} from "./hooks/use-wp-send-form";
 
 function init<
 	EP = {}, // EntityProps
@@ -76,6 +77,7 @@ function init<
 				context,
 				PostContent,
 			),
+		useWPSendForm: makeUseWPSendForm(wpURL),
 		// Components
 		Header: makeHeader<EP, SP, M, MI, CTX>(wpURL, componentMap),
 		Footer: makeFooter<EP, SP, M, MI, CTX>(wpURL, componentMap),
