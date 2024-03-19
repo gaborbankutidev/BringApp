@@ -4,7 +4,7 @@ import {getEntity} from "../content";
 
 export type HeadProps = {
 	children?: React.ReactNode;
-	slug: string | null;
+	slug: string | string[] | null;
 };
 
 function makeHead<EP = {}>(wpURL: string) {
