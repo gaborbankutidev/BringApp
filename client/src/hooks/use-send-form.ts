@@ -25,7 +25,15 @@ type FetchState<SuccessT, ErrorT> =
 	| ErrorState<ErrorT>
 	| IdleState;
 
-export const useSendForm = <SuccessT, ErrorT, PayloadT>(formUrl: string) => {
+export type UseSendFormOptions<SuccessT, ErrorT, PayloadT> = {
+	onSuccess?: ((data: SuccessT, payload: PayloadT) => void) | undefined;
+	onError?: ((error: ErrorT, payload: PayloadT) => void) | undefined;
+};
+
+export const useSendForm = <SuccessT, ErrorT, PayloadT>(
+	formUrl: string,
+	options?: UseSendFormOptions<SuccessT, ErrorT, PayloadT> | undefined,
+) => {
 	const [state, setState] = useState<FetchState<SuccessT, ErrorT>>({
 		state: "idle",
 	});
@@ -50,12 +58,14 @@ export const useSendForm = <SuccessT, ErrorT, PayloadT>(formUrl: string) => {
 				state: "success",
 				data: resBody,
 			});
+			options?.onSuccess !== undefined && options.onSuccess(resBody, formData);
 		} else {
 			const resError = (await res.json()) as ErrorT;
 			setState({
 				state: "error",
 				error: resError,
 			});
+			options?.onError !== undefined && options.onError(resError, formData);
 		}
 	};
 
