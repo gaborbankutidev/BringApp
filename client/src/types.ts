@@ -87,6 +87,8 @@ export type Entity<EP = {}> = {
 
 	props: EntityProps<EP>;
 	content: EntityContent;
+	head: string | null;
+	responseCode?: 200;
 };
 
 // ===========
