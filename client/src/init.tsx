@@ -1,5 +1,11 @@
 import type {ReactNode} from "react";
-import {makeFooter, makeHeader, makeLayout, makeMain} from "./components";
+import {
+	makeFooter,
+	makeHead,
+	makeHeader,
+	makeLayout,
+	makeMain,
+} from "./components";
 import {
 	createBringElement,
 	getDynamicEntityList,
@@ -83,6 +89,7 @@ function init<
 		Footer: makeFooter<EP, SP, M, MI, CTX>(wpURL, componentMap),
 		Main: makeMain<EP, SP, M, MI, CTX>(wpURL, componentMap),
 		Layout: makeLayout<EP, SP, M, MI, CTX>(wpURL, componentMap),
+		Head: makeHead<EP>(wpURL),
 	};
 }
 
