@@ -16,7 +16,14 @@ function makeFooter<EP = {}, SP = {}, M = {}, MI = {}, CTX = {}>(
 		const siteProps = await getSiteProps<SP, M, MI>(wpURL);
 		const entity = await getEntity<EP>(wpURL, slug);
 
-		return entity?.content.footer ? (
+		if (
+			!entity ||
+			!(entity?.responseCode === undefined || entity.responseCode === 200)
+		) {
+			return null;
+		}
+
+		return entity.content.footer ? (
 			<footer>
 				{createBringElement(
 					entity.content.footer,

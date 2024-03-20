@@ -4,7 +4,6 @@ export {Debug} from "./components";
 // Hooks
 export {
 	useSendForm,
-	useWPSendForm,
 	useElementDimensions,
 	useWindowDimensions,
 	type FormState,
