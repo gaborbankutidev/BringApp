@@ -10,7 +10,7 @@ export {
 } from "./hooks";
 
 // Init
-export {default as init} from "./init";
+export {init, initWithComponents} from "./init";
 
 // Styles
 export type {BringStylesClassNames, ResponsiveValue} from "./styles";
