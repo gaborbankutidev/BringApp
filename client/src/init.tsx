@@ -22,7 +22,7 @@ import {
 import type {BringNode, EntityProps, EntityType, FCC, SiteProps} from "./types";
 import {makeUseWPSendForm} from "./hooks/use-wp-send-form";
 
-function init<
+export function initWithComponents<
 	EP = {}, // EntityProps
 	SP = {}, // SiteProps
 	M = {}, // Menu
@@ -41,6 +41,36 @@ function init<
 		componentMap.set(componentName, Component),
 	);
 
+	return {
+		// Component map dependents
+		createBringElement: (
+			nodes: BringNode[],
+			entityProps: EntityProps<EP>,
+			siteProps: SiteProps<SP, M, MI>,
+			context: CTX = {} as CTX,
+			PostContent: ReactNode = null,
+		) =>
+			createBringElement(
+				nodes,
+				componentMap,
+				entityProps,
+				siteProps,
+				context,
+				PostContent,
+			),
+		Header: makeHeader<EP, SP, M, MI, CTX>(wpURL, componentMap),
+		Footer: makeFooter<EP, SP, M, MI, CTX>(wpURL, componentMap),
+		Main: makeMain<EP, SP, M, MI, CTX>(wpURL, componentMap),
+		Layout: makeLayout<EP, SP, M, MI, CTX>(wpURL, componentMap),
+	};
+}
+
+export function init<
+	EP = {}, // EntityProps
+	SP = {}, // SiteProps
+	M = {}, // Menu
+	MI = {}, // MenuItem
+>(wpURL: string) {
 	return {
 		// Dynamics
 		getDynamicEntityProps: <T = {},>(
@@ -68,29 +98,7 @@ function init<
 		// Content
 		getSiteProps: () => getSiteProps<SP, M, MI>(wpURL),
 		getEntity: (slug: string | string[] = "") => getEntity<EP>(wpURL, slug),
-		createBringElement: (
-			nodes: BringNode[],
-			entityProps: EntityProps<EP>,
-			siteProps: SiteProps<SP, M, MI>,
-			context: CTX = {} as CTX,
-			PostContent: ReactNode = null,
-		) =>
-			createBringElement(
-				nodes,
-				componentMap,
-				entityProps,
-				siteProps,
-				context,
-				PostContent,
-			),
 		useWPSendForm: makeUseWPSendForm(wpURL),
-		// Components
-		Header: makeHeader<EP, SP, M, MI, CTX>(wpURL, componentMap),
-		Footer: makeFooter<EP, SP, M, MI, CTX>(wpURL, componentMap),
-		Main: makeMain<EP, SP, M, MI, CTX>(wpURL, componentMap),
-		Layout: makeLayout<EP, SP, M, MI, CTX>(wpURL, componentMap),
 		Head: makeHead<EP>(wpURL),
 	};
 }
-
-export default init;
