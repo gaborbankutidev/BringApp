@@ -1,5 +1,6 @@
+import React from "react";
+import {createBringElement, getEntity, getSiteProps} from "../content";
 import {FCC} from "../types";
-import {getEntity, getSiteProps, createBringElement} from "../content";
 
 function makeMain<EP = {}, SP = {}, M = {}, MI = {}, CTX = {}>(
 	wpURL: string,
@@ -15,22 +16,23 @@ function makeMain<EP = {}, SP = {}, M = {}, MI = {}, CTX = {}>(
 		const siteProps = await getSiteProps<SP, M, MI>(wpURL);
 		const entity = await getEntity<EP>(wpURL, slug);
 
-		if (
-			!entity ||
-			!(entity?.responseCode === undefined || entity.responseCode === 200)
-		) {
+		if (!entity) {
 			return null;
 		}
 
-		return entity.content.main
-			? createBringElement(
-					entity.content.main,
-					componentMap,
-					entity.props,
-					siteProps,
-					context,
-			  )
-			: null;
+		return (
+			<>
+				{entity.content.main
+					? createBringElement(
+							entity.content.main,
+							componentMap,
+							entity.props,
+							siteProps,
+							context,
+					  )
+					: null}
+			</>
+		);
 	};
 
 	return Main;

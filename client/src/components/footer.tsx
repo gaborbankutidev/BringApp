@@ -16,10 +16,7 @@ function makeFooter<EP = {}, SP = {}, M = {}, MI = {}, CTX = {}>(
 		const siteProps = await getSiteProps<SP, M, MI>(wpURL);
 		const entity = await getEntity<EP>(wpURL, slug);
 
-		if (
-			!entity ||
-			!(entity?.responseCode === undefined || entity.responseCode === 200)
-		) {
+		if (!entity) {
 			return null;
 		}
 

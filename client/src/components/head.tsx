@@ -13,10 +13,7 @@ function makeHead<EP = {}>(wpURL: string) {
 		return (
 			<head>
 				{children}
-				{entity &&
-					(entity.responseCode === undefined || entity.responseCode === 200) &&
-					entity.head &&
-					parse(entity.head)}
+				{entity?.content.head && parse(entity.content.head)}
 			</head>
 		);
 	};
