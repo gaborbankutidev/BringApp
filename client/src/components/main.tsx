@@ -21,15 +21,19 @@ function makeMain<EP = {}, SP = {}, M = {}, MI = {}, CTX = {}>(
 			return null;
 		}
 
-		return entity.content.main
-			? createBringElement(
-					entity.content.main,
-					componentMap,
-					entity.props,
-					siteProps,
-					context,
-			  )
-			: null;
+		return (
+			<>
+				{entity.content.main
+					? createBringElement(
+							entity.content.main,
+							componentMap,
+							entity.props,
+							siteProps,
+							context,
+					  )
+					: null}
+			</>
+		);
 	};
 
 	return Main;
