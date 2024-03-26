@@ -26,18 +26,25 @@ type GetEntityResponseType<EP> =
 	| ErrorResponse
 	| NotFoundResponse;
 
-async function getEntity<EP = {}>(url: string, slug: string | string[] = "") {
+async function getEntity<EP = {}>(
+	wpURL: string,
+	dataToken: string,
+	slug: string | string[] = "",
+) {
 	const joinedSlug = typeof slug === "string" ? slug : slug.join("/");
 
 	// fetch entity
 	let responseData = null;
 	try {
-		const response = await fetch(`${url}/${joinedSlug}`, {
-			method: "GET",
-			headers: {
-				"Content-Type": "application/json",
+		const response = await fetch(
+			`${wpURL}/${joinedSlug}/?data_token=${dataToken}`,
+			{
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+				},
 			},
-		});
+		);
 
 		responseData = (await response.json()) as GetEntityResponseType<EP>; // TODO: parse with zod
 	} catch (error) {

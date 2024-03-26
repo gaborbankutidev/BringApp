@@ -4,6 +4,7 @@ import {getEntity, getSiteProps, createBringElement} from "../content";
 
 function makeFooter<EP = {}, SP = {}, M = {}, MI = {}, CTX = {}>(
 	wpURL: string,
+	dataToken: string,
 	componentMap: Map<string, FCC<any, EP, SP, M, MI, CTX>>,
 ) {
 	const Footer = async ({
@@ -14,7 +15,7 @@ function makeFooter<EP = {}, SP = {}, M = {}, MI = {}, CTX = {}>(
 		context?: CTX;
 	}) => {
 		const siteProps = await getSiteProps<SP, M, MI>(wpURL);
-		const entity = await getEntity<EP>(wpURL, slug);
+		const entity = await getEntity<EP>(wpURL, dataToken, slug);
 
 		if (!entity) {
 			return null;

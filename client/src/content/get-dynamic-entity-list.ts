@@ -1,14 +1,14 @@
 import type {DynamicEntityList, EntityType} from "../types";
 
 async function getDynamicEntityList<T = {}>(
-	url: string,
+	wpURL: string,
 	entitySlug: string,
 	entityType: EntityType,
 	limit: number = 0,
 	customData = {},
 ) {
 	try {
-		const response = await fetch(`${url}/wp-json/bring/dynamic/list`, {
+		const response = await fetch(`${wpURL}/wp-json/bring/dynamic/list`, {
 			method: "POST",
 			body: JSON.stringify({entitySlug, entityType, limit, customData}),
 			headers: {

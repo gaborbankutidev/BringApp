@@ -1,3 +1,5 @@
+"use client";
+
 import {useEffect, useState} from "react";
 import {useInView} from "react-intersection-observer";
 import {getDynamicEntityList} from "../content";
@@ -11,7 +13,7 @@ export type Options = {
 };
 
 export function useDynamicEntityList<T = {}>(
-	url: string,
+	wpURL: string,
 	entitySlug: string | null | undefined,
 	entityType: EntityType | null | undefined,
 	{limit = 0, lazy = true, customData = {}, customDataKey}: Options = {},
@@ -39,7 +41,7 @@ export function useDynamicEntityList<T = {}>(
 
 		// query entity list & set cache & state
 		getDynamicEntityList<T>(
-			url,
+			wpURL,
 			entitySlug,
 			entityType,
 			limit,

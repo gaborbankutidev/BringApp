@@ -1,3 +1,5 @@
+"use client";
+
 import {useEffect, useState} from "react";
 import {useInView} from "react-intersection-observer";
 import {getDynamicEntityProps} from "../content";
@@ -10,7 +12,7 @@ export type Options = {
 };
 
 export function useDynamicEntityProps<T = {}>(
-	url: string,
+	wpURL: string,
 	entityId: number | null | undefined,
 	entityType: EntityType | null | undefined,
 	{lazy = true, customData = {}, customDataKey}: Options = {},
@@ -37,7 +39,7 @@ export function useDynamicEntityProps<T = {}>(
 		}
 
 		// query entity props & set cache & state
-		getDynamicEntityProps<T>(url, entityId, entityType, customData).then(
+		getDynamicEntityProps<T>(wpURL, entityId, entityType, customData).then(
 			(queriedEntityProps) => {
 				if (!queriedEntityProps) {
 					return;

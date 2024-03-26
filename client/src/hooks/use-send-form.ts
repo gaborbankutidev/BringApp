@@ -31,7 +31,7 @@ export type UseSendFormOptions<SuccessT, ErrorT, PayloadT> = {
 };
 
 export const useSendForm = <SuccessT, ErrorT, PayloadT>(
-	formUrl: string,
+	url: string,
 	options?: UseSendFormOptions<SuccessT, ErrorT, PayloadT> | undefined,
 ) => {
 	const [state, setState] = useState<FetchState<SuccessT, ErrorT>>({
@@ -43,7 +43,7 @@ export const useSendForm = <SuccessT, ErrorT, PayloadT>(
 			state: "loading",
 		});
 
-		const res = await fetch(formUrl, {
+		const res = await fetch(url, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

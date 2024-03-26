@@ -2,8 +2,8 @@
 
 import {UseSendFormOptions, useSendForm} from "./use-send-form";
 
-export const makeUseWPSendForm = (formUrl?: string | undefined) => {
-	const defaultFormUrl = `${formUrl ?? ""}/wp-json/bring/form/submit`;
+export const makeUseWPSendForm = (wpURL?: string | undefined) => {
+	const defaultFormUrl = `${wpURL ?? ""}/wp-json/bring/form/submit`;
 
 	return <PayloadT>(
 		formName: string,

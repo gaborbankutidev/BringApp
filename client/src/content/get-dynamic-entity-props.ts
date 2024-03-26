@@ -1,13 +1,13 @@
 import type {DynamicEntityProps, EntityType} from "../types";
 
 async function getDynamicEntityProps<T = {}>(
-	url: string,
+	wpURL: string,
 	entityId: number,
 	entityType: EntityType,
 	customData = {},
 ) {
 	try {
-		const response = await fetch(`${url}/wp-json/bring/dynamic/props`, {
+		const response = await fetch(`${wpURL}/wp-json/bring/dynamic/props`, {
 			method: "POST",
 			body: JSON.stringify({entityId, entityType, customData}),
 			headers: {

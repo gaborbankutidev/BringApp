@@ -4,6 +4,7 @@ import {getEntity, getSiteProps, createBringElement} from "../content";
 
 function makeLayout<EP = {}, SP = {}, M = {}, MI = {}, CTX = {}>(
 	wpURL: string,
+	dataToken: string,
 	componentMap: Map<string, FCC<any, EP, SP, M, MI, CTX>>,
 ) {
 	const Layout = async ({
@@ -16,7 +17,7 @@ function makeLayout<EP = {}, SP = {}, M = {}, MI = {}, CTX = {}>(
 		children: ReactNode;
 	}) => {
 		const siteProps = await getSiteProps<SP, M, MI>(wpURL);
-		const entity = await getEntity<EP>(wpURL, slug);
+		const entity = await getEntity<EP>(wpURL, dataToken, slug);
 
 		if (!entity) {
 			return null;

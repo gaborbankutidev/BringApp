@@ -7,9 +7,9 @@ export type HeadProps = {
 	slug: string | string[] | null;
 };
 
-function makeHead<EP = {}>(wpURL: string) {
+function makeHead<EP = {}>(wpURL: string, dataToken: string) {
 	const Head = async ({children, slug}: HeadProps) => {
-		const entity = slug ? await getEntity<EP>(wpURL, slug) : null;
+		const entity = slug ? await getEntity<EP>(wpURL, dataToken, slug) : null;
 		return (
 			<head>
 				{children}
