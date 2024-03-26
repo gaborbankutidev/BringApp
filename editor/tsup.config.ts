@@ -4,7 +4,6 @@ export default defineConfig({
 	entry: ["src/index.ts"],
 	format: ["cjs", "esm"],
 	external: [
-		"@bring/blocks-client",
 		"@wordpress/blocks",
 		"@wordpress/block-editor",
 		"@wordpress/components",

@@ -73,13 +73,6 @@
     "@babel/helper-validator-identifier" "^7.22.20"
     to-fast-properties "^2.0.0"
 
-"@bring/blocks-client@0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@bring/blocks-client/-/blocks-client-0.2.1.tgz#8da944f63b3770b6c0bc7e6f96301dea95187758"
-  integrity sha512-4KWtmtj33OJjq9SU7D1+hJL09wcSKjaHI5Wb/faZsSQ3dO/CPkKTzxVvLrDzLQX/Cvrmp8lx3eTnAOtFRO75wA==
-  dependencies:
-    react-intersection-observer "^9.5.3"
-
 "@emotion/babel-plugin@^11.11.0":
   version "11.11.0"
   resolved "https://registry.yarnpkg.com/@emotion/babel-plugin/-/babel-plugin-11.11.0.tgz#c2d872b6a7767a9d176d007f5b31f7d504bb5d6c"
@@ -2488,11 +2481,6 @@ react-easy-crop@^4.5.1:
   dependencies:
     normalize-wheel "^1.0.1"
     tslib "2.0.1"
-
-react-intersection-observer@^9.5.3:
-  version "9.5.3"
-  resolved "https://registry.yarnpkg.com/react-intersection-observer/-/react-intersection-observer-9.5.3.tgz#f47a31ed3a0359cbbfdb91a53d7470ac2ab7b3c7"
-  integrity sha512-NJzagSdUPS5rPhaLsHXYeJbsvdpbJwL6yCHtMk91hc0ufQ2BnXis+0QQ9NBh6n9n+Q3OyjR6OQLShYbaNBkThQ==
 
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"

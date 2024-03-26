@@ -1,9 +1,9 @@
 import type {FC, ReactNode} from "react";
 import type {BlockIcon} from "@wordpress/blocks";
-import type {FCC} from "@bring/blocks-client";
 import type {NestedKeyOf, Obj} from "../types";
 import type {ControlConfigType} from "../controls/types";
 import {BringStyles, BringStylesConfig} from "../styles/types";
+import {FCC} from "../client-types";
 
 export type ClientAttributes<Props> = Omit<Props, "children">;
 
