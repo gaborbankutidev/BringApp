@@ -31,13 +31,13 @@ async function getEntity<EP = {}>(
 	dataToken: string,
 	slug: string | string[] = "",
 ) {
-	const joinedSlug = typeof slug === "string" ? slug : slug.join("/");
+	const joinedSlug = (typeof slug === "string" ? slug : slug.join("/")) + "/";
 
 	// fetch entity
 	let responseData = null;
 	try {
 		const response = await fetch(
-			`${wpURL}/${joinedSlug}/?data_token=${dataToken}`,
+			`${wpURL}/${joinedSlug}?data_token=${dataToken}`,
 			{
 				method: "GET",
 				headers: {
