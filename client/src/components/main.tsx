@@ -24,7 +24,7 @@ function makeMain<EP = {}, SP = {}, M = {}, MI = {}, CTX = {}>(
 			onNotFound,
 			slug,
 		);
-		console.log("test");
+
 		if (!entity) {
 			return null;
 		}
