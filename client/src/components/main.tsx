@@ -5,6 +5,8 @@ import {FCC} from "../types";
 function makeMain<EP = {}, SP = {}, M = {}, MI = {}, CTX = {}>(
 	wpURL: string,
 	dataToken: string,
+	onRedirect: (redirectTo: string, responseCode: number) => void,
+	onNotFound: () => void,
 	componentMap: Map<string, FCC<any, EP, SP, M, MI, CTX>>,
 ) {
 	const Main = async ({
@@ -15,8 +17,14 @@ function makeMain<EP = {}, SP = {}, M = {}, MI = {}, CTX = {}>(
 		context?: CTX;
 	}) => {
 		const siteProps = await getSiteProps<SP, M, MI>(wpURL);
-		const entity = await getEntity<EP>(wpURL, dataToken, slug);
-
+		const entity = await getEntity<EP>(
+			wpURL,
+			dataToken,
+			onRedirect,
+			onNotFound,
+			slug,
+		);
+		console.log("test");
 		if (!entity) {
 			return null;
 		}
@@ -30,7 +38,7 @@ function makeMain<EP = {}, SP = {}, M = {}, MI = {}, CTX = {}>(
 							entity.props,
 							siteProps,
 							context,
-					  )
+						)
 					: null}
 			</>
 		);

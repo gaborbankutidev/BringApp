@@ -1,11 +1,5 @@
 import type {ReactNode} from "react";
-import {
-	makeFooter,
-	makeHead,
-	makeHeader,
-	makeLayout,
-	makeMain,
-} from "./components";
+import {makeFooter, makeHeader, makeLayout, makeMain} from "./components";
 import {createBringElement, getEntity} from "./content";
 import type {BringNode, EntityProps, FCC, SiteProps} from "./types";
 
@@ -18,6 +12,8 @@ export function initRender<
 >(
 	wpURL: string,
 	dataToken: string,
+	onRedirect: (redirectTo: string, responseCode: number) => void,
+	onNotFound: () => void,
 	componentList: {
 		componentName: string;
 		Component: FCC<any, EP, SP, M, MI, CTX>;
@@ -46,11 +42,34 @@ export function initRender<
 				PostContent,
 			),
 		getEntity: (slug: string | string[] = "") =>
-			getEntity<EP>(wpURL, dataToken, slug),
-		Head: makeHead<EP>(wpURL, dataToken),
-		Header: makeHeader<EP, SP, M, MI, CTX>(wpURL, dataToken, componentMap),
-		Footer: makeFooter<EP, SP, M, MI, CTX>(wpURL, dataToken, componentMap),
-		Main: makeMain<EP, SP, M, MI, CTX>(wpURL, dataToken, componentMap),
-		Layout: makeLayout<EP, SP, M, MI, CTX>(wpURL, dataToken, componentMap),
+			getEntity<EP>(wpURL, dataToken, onRedirect, onNotFound, slug),
+		Header: makeHeader<EP, SP, M, MI, CTX>(
+			wpURL,
+			dataToken,
+			onRedirect,
+			onNotFound,
+			componentMap,
+		),
+		Footer: makeFooter<EP, SP, M, MI, CTX>(
+			wpURL,
+			dataToken,
+			onRedirect,
+			onNotFound,
+			componentMap,
+		),
+		Main: makeMain<EP, SP, M, MI, CTX>(
+			wpURL,
+			dataToken,
+			onRedirect,
+			onNotFound,
+			componentMap,
+		),
+		Layout: makeLayout<EP, SP, M, MI, CTX>(
+			wpURL,
+			dataToken,
+			onRedirect,
+			onNotFound,
+			componentMap,
+		),
 	};
 }

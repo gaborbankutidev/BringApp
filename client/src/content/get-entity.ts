@@ -29,6 +29,8 @@ type GetEntityResponseType<EP> =
 async function getEntity<EP = {}>(
 	wpURL: string,
 	dataToken: string,
+	onRedirect: (redirectTo: string, responseCode: number) => void,
+	onNotFound: () => void,
 	slug: string | string[] = "",
 ) {
 	const joinedSlug = (typeof slug === "string" ? slug : slug.join("/")) + "/";
@@ -59,15 +61,13 @@ async function getEntity<EP = {}>(
 		responseData.responseCode === 307 ||
 		responseData.responseCode === 308
 	) {
-		console.log(
-			`Redirecting from ${joinedSlug} to, ${responseData.redirectTo}`,
-		);
+		onRedirect(responseData.redirectTo, responseData.responseCode);
 		return null;
 	}
 
 	// handle not found
 	if (responseData.responseCode === 404) {
-		console.log(`Entity not found at ${joinedSlug}`);
+		onNotFound();
 		return null;
 	}
 

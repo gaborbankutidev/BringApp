@@ -61,7 +61,6 @@ export type SiteProps<SP = {}, M = {}, MI = {}> = {
 } & SP;
 
 export type EntityContent = {
-	head: string | null;
 	header: BringNode[] | null;
 	main: BringNode[] | null;
 	footer: BringNode[] | null;
