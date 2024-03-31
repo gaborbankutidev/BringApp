@@ -1,4 +1,4 @@
-import type {ResponsiveValue} from "@bring/blocks-client";
+import {ResponsiveValue} from "../client-types";
 import {DashIcon} from "./dashicon.types";
 
 type DisplayValue =

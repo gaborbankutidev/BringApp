@@ -1,7 +1,6 @@
 import React from "react";
 import {InnerBlocks, InspectorAdvancedControls} from "@wordpress/block-editor";
 import {EditorCard} from "../components";
-//import {BringContextProvider} from "@bring/blocks-client";
 import type {Obj} from "../types";
 import type {Attributes, BlockConfig} from "./types";
 import {makeControls} from "./make-controls";

@@ -12,7 +12,7 @@ import {isPathControl} from "../utils";
 import {objectKeys} from "../../utils";
 import {screenSizes} from "../../styles/utils";
 import type {ResponsiveLabels} from "../../styles/types";
-import type {ResponsiveValue} from "@bring/blocks-client";
+import {ResponsiveValue} from "../../client-types";
 
 export const ResponsiveCheckboxControl = <pT extends Obj = {}>(
 	props: ControlType<ResponsiveValue<boolean>, pT>,

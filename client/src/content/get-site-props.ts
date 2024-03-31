@@ -1,8 +1,8 @@
 import type {SiteProps} from "../types";
 
-async function getSiteProps<SP = {}, M = {}, MI = {}>(url: string) {
+async function getSiteProps<SP = {}, M = {}, MI = {}>(wpURL: string) {
 	try {
-		const response = await fetch(`${url}/wp-json/bring/dynamic/site`, {
+		const response = await fetch(`${wpURL}/wp-json/bring/dynamic/site`, {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",

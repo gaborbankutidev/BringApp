@@ -4,6 +4,9 @@ import {getEntity, getSiteProps, createBringElement} from "../content";
 
 function makeFooter<EP = {}, SP = {}, M = {}, MI = {}, CTX = {}>(
 	wpURL: string,
+	dataToken: string,
+	onRedirect: (redirectTo: string, responseCode: number) => void,
+	onNotFound: () => void,
 	componentMap: Map<string, FCC<any, EP, SP, M, MI, CTX>>,
 ) {
 	const Footer = async ({
@@ -14,9 +17,19 @@ function makeFooter<EP = {}, SP = {}, M = {}, MI = {}, CTX = {}>(
 		context?: CTX;
 	}) => {
 		const siteProps = await getSiteProps<SP, M, MI>(wpURL);
-		const entity = await getEntity<EP>(wpURL, slug);
+		const entity = await getEntity<EP>(
+			wpURL,
+			dataToken,
+			onRedirect,
+			onNotFound,
+			slug,
+		);
 
-		return entity?.content.footer ? (
+		if (!entity) {
+			return null;
+		}
+
+		return entity.content.footer ? (
 			<footer>
 				{createBringElement(
 					entity.content.footer,

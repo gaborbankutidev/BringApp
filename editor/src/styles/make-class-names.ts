@@ -1,7 +1,7 @@
-import {ResponsiveValue, BringStylesClassNames} from "@bring/blocks-client";
 import {objectKeys} from "../utils";
 import {screenSizes} from "./utils";
 import type {BringStyles, BringStylesConfig, Sides} from "./types";
+import {BringStylesClassNames, ResponsiveValue} from "../client-types";
 
 export const makeBringStylesClassNames = (
 	bringStylesConfig: BringStylesConfig,
