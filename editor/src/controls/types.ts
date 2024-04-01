@@ -182,7 +182,7 @@ export type ControlConfigType<Props extends Obj = {}> =
 	| NumberSelectControlConfigType<Props>
 	| ComboboxControlConfigType<Props>
 	| NumberComboboxControlConfigType<Props>
+	| MediaControlConfigType<Props>
 	| ImageControlConfigType<Props>
 	| TextArrayControlConfigType<Props>
-	| ImageArrayControlConfigType<Props>
-	| MediaControlConfigType<Props>;
+	| ImageArrayControlConfigType<Props>;

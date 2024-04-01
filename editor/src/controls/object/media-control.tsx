@@ -1,14 +1,14 @@
-import React from "react";
 import {MediaUpload, MediaUploadCheck} from "@wordpress/block-editor";
 import {Button} from "@wordpress/components";
+import cloneDeep from "lodash.clonedeep";
 import get from "lodash.get";
 import set from "lodash.set";
-import cloneDeep from "lodash.clonedeep";
+import React from "react";
 import type {MediaType, Obj} from "../../types";
-import type {ControlByPath, ControlByValue, ControlType} from "../types";
-import {useControlContext} from "../context";
-import {isPathControl} from "../utils";
 import {defaultMediaValue} from "../../utils";
+import {useControlContext} from "../context";
+import type {ControlByPath, ControlByValue, ControlType} from "../types";
+import {isPathControl} from "../utils";
 
 type MediaOption = string[];
 
