@@ -1,15 +1,15 @@
 import {ImageType, MediaType} from "./types";
 
-export const defaultImageValue = {
+export const defaultImageValue: ImageType = {
 	id: null,
-	src: "https://wp-template.bringblocks.com/wp-content/uploads/screenshot.jpg",
-	alt: "Bring Theme Placeholder Image",
+	src: "",
+	alt: "",
 };
 
 export const defaultMediaValue: MediaType = {
 	id: null,
-	src: "https://wp-template.bringblocks.com/wp-content/uploads/screenshot.jpg",
-	alt: "Bring Theme Placeholder Image",
+	src: "",
+	alt: "",
 };
 
 export const objectKeys = <Obj extends object>(obj?: Obj): (keyof Obj)[] => {
