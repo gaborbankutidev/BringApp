@@ -5,6 +5,7 @@ export {
 	arrayAttributeSource,
 	objectAttributeSource,
 	imageAttributeSource,
+	mediaAttributeSource,
 } from "./attributes";
 
 export {registerBringBlock} from "./register";

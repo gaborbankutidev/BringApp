@@ -43,6 +43,7 @@ export type {
 	FCC,
 	GridNumType,
 	ImageType,
+	MediaType,
 	MenuItemType,
 	MenuType,
 	Obj,

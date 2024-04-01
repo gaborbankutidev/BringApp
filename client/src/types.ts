@@ -20,11 +20,19 @@ export type FCC<P = {}, EP = {}, SP = {}, M = {}, MI = {}, CTX = {}> = FC<
 
 export type GridNumType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
-export type ImageType = {
+export type MediaType = {
+	id: number | null;
+	title?: string;
+	filename?: string;
 	src?: string;
 	alt?: string;
-	id: number | null;
+	description?: string;
+	caption?: string;
+	mime?: string;
+	type?: string;
 };
+
+export type ImageType = MediaType;
 
 export type MenuItemType<T = {}> = {
 	name: string;

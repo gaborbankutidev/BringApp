@@ -1,6 +1,12 @@
 import type {FC} from "react";
-import type {ImageType, NestedKeyOf, NestedTypedKeyOf, Obj} from "../types";
 import {ResponsiveValue} from "../client-types";
+import type {
+	ImageType,
+	MediaType,
+	NestedKeyOf,
+	NestedTypedKeyOf,
+	Obj,
+} from "../types";
 
 type _ControlType<dVT> = {
 	label: string;
@@ -143,6 +149,12 @@ type NumberComboboxControlConfigType<Props extends Obj = {}> = {
 	defaultValue?: number;
 } & _ControlConfigType<Props>;
 
+type MediaControlConfigType<Props extends Obj = {}> = {
+	type: "media";
+	allowedTypes?: string[];
+	path: NestedTypedKeyOf<Props, MediaType>;
+} & _ControlConfigType<Props>;
+
 type ImageControlConfigType<Props extends Obj = {}> = {
 	type: "image";
 	path: NestedTypedKeyOf<Props, ImageType>;
@@ -170,6 +182,7 @@ export type ControlConfigType<Props extends Obj = {}> =
 	| NumberSelectControlConfigType<Props>
 	| ComboboxControlConfigType<Props>
 	| NumberComboboxControlConfigType<Props>
+	| MediaControlConfigType<Props>
 	| ImageControlConfigType<Props>
 	| TextArrayControlConfigType<Props>
 	| ImageArrayControlConfigType<Props>;
