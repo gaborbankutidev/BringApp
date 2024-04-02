@@ -19,7 +19,7 @@ async function getEntityOptions(
 ) {
 	try {
 		const response = await fetch("/wp-json/bring/editor/options", {
-			method: "GET",
+			method: "POST",
 			body: JSON.stringify({entityType, entitySlug, customData}),
 			headers: {
 				"Content-Type": "application/json",
