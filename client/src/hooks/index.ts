@@ -1,3 +1,5 @@
+export {useSiteProps} from "./use-site-props";
+
 export {
 	useDynamicEntityList,
 	type Options as DynamicEntityListOptions,

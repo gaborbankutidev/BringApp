@@ -1,6 +1,7 @@
 "use client";
 
 import {
+	useSiteProps,
 	useDynamicEntityList,
 	useDynamicEntityProps,
 	type DynamicEntityListOptions,
@@ -16,6 +17,7 @@ export function initClient<
 	MI = {}, // MenuItem
 >(wpURL: string) {
 	return {
+		useSiteProps: () => useSiteProps<SP, M, MI>(wpURL),
 		useDynamicEntityProps: <T = {},>(
 			entityId: number,
 			entityType: EntityType,

@@ -12,6 +12,7 @@ export {
 
 // Hooks
 export {
+	useSiteProps,
 	useDynamicEntityList,
 	useDynamicEntityProps,
 	useElementDimensions,
