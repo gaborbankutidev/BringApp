@@ -52,7 +52,7 @@ export function editorInit(blockList: BlockConfig<any>[]) {
 	disableReusableBlocks();
 
 	// register bring blocks
-	//blockList.push(postContentConfig);
+	blockList.push(postContentConfig);
 	blockList.map((blockConfig) => {
 		registerBringBlock<any>(blockConfig);
 	});
