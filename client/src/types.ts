@@ -48,6 +48,11 @@ export type MenuType<T = {}, iT = {}> = {
 	items: MenuItemType<iT>[];
 } & T;
 
+export type MenuLocationType = {
+	key: string;
+	menuId: number;
+};
+
 // ===========
 
 export type EntityType = "post" | "taxonomy" | "author";
@@ -66,6 +71,7 @@ export type DynamicEntityProps<T = {}> =
 
 export type SiteProps<SP = {}, M = {}, MI = {}> = {
 	menus: MenuType<M, MI>[];
+	menuLocations: MenuLocationType[];
 } & SP;
 
 export type EntityContent = {

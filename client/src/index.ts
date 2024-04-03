@@ -47,6 +47,7 @@ export type {
 	MediaType,
 	MenuItemType,
 	MenuType,
+	MenuLocationType,
 	Obj,
 	SiteProps,
 } from "./types";
