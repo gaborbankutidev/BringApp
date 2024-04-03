@@ -11,7 +11,6 @@ import {makeUseWPSendForm} from "./hooks/use-wp-send-form";
 import type {EntityType} from "./types";
 
 export function initClient<
-	EP = {}, // EntityProps
 	SP = {}, // SiteProps
 	M = {}, // Menu
 	MI = {}, // MenuItem

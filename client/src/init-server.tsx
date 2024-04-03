@@ -6,7 +6,6 @@ import {
 import type {EntityType} from "./types";
 
 export function initServer<
-	EP = {}, // EntityProps
 	SP = {}, // SiteProps
 	M = {}, // Menu
 	MI = {}, // MenuItem

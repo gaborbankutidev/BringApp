@@ -36,7 +36,7 @@ export type ImageType = MediaType;
 
 export type MenuItemType<T = {}> = {
 	name: string;
-	url?: string;
+	url: string;
 	target: string;
 	classes: string;
 	children?: MenuItemType<T>[];
