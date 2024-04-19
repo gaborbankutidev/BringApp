@@ -1,5 +1,16 @@
 import type {DynamicEntityList, EntityType} from "../types";
 
+/**
+ * Retrieves a dynamic entity list from a WordPress site.
+ *
+ * @template T - The type of data contained in the dynamic entity list.
+ * @param wpURL - The URL of the WordPress site.
+ * @param entitySlug - The slug of the dynamic entity.
+ * @param entityType - The type of the dynamic entity.
+ * @param limit - The maximum number of entities to retrieve (default: 0).
+ * @param customData - Additional custom data to include in the request (default: {}).
+ * @returns A promise that resolves to the dynamic entity list.
+ */
 async function getDynamicEntityList<T = {}>(
 	wpURL: string,
 	entitySlug: string,
