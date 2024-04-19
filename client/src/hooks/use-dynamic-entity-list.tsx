@@ -12,6 +12,16 @@ export type Options = {
 	customDataKey?: boolean | number | string;
 };
 
+/**
+ * Custom hook for fetching and managing a dynamic entity list.
+ *
+ * @template T - The type of the entity list items.
+ * @param {string} wpURL - The URL of the WordPress site.
+ * @param {string | null | undefined} entitySlug - The slug of the entity.
+ * @param {EntityType | null | undefined} entityType - The type of the entity.
+ * @param {Options} options - Additional options for the hook.
+ * @returns {Object} - An object containing the entity list and a ref for the intersection observer.
+ */
 export function useDynamicEntityList<T = {}>(
 	wpURL: string,
 	entitySlug: string | null | undefined,

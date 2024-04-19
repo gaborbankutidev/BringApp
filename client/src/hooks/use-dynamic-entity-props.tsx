@@ -11,6 +11,16 @@ export type Options = {
 	customDataKey?: boolean | number | string;
 };
 
+/**
+ * Custom hook for fetching dynamic entity props.
+ *
+ * @template T - The type of the entity props.
+ * @param {string} wpURL - The WordPress URL.
+ * @param {number | null | undefined} entityId - The ID of the entity.
+ * @param {EntityType | null | undefined} entityType - The type of the entity.
+ * @param {Options} options - Additional options for the hook.
+ * @returns {{ entityProps: DynamicEntityProps<T> | null, ref: React.RefObject<any> }} - The entity props and a ref for lazy loading.
+ */
 export function useDynamicEntityProps<T = {}>(
 	wpURL: string,
 	entityId: number | null | undefined,
@@ -19,26 +29,26 @@ export function useDynamicEntityProps<T = {}>(
 ) {
 	const [entityProps, setEntityProps] = useState<DynamicEntityProps<T>>(null);
 
-	// intersection observer for lazy loading
+	// Intersection observer for lazy loading
 	const {ref, inView: wasOnScreen} = useInView({
 		triggerOnce: true,
 		skip: !lazy,
 	});
 
-	// query entity props
+	// Query entity props
 	useEffect(() => {
-		// set null if entityId or entityType are null
+		// Set null if entityId or entityType are null
 		if (!entityId || !entityType) {
 			setEntityProps(null);
 			return;
 		}
 
-		// do not query if lazy but was not on screen
+		// Do not query if lazy but was not on screen
 		if (lazy && !wasOnScreen) {
 			return;
 		}
 
-		// query entity props & set cache & state
+		// Query entity props & set cache & state
 		getDynamicEntityProps<T>(wpURL, entityId, entityType, customData).then(
 			(queriedEntityProps) => {
 				if (!queriedEntityProps) {

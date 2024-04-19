@@ -2,6 +2,10 @@
 
 import {useState, useEffect, useCallback} from "react";
 
+/**
+ * Custom hook that returns the dimensions of the window.
+ * @returns An object containing the width and height of the window.
+ */
 export const useWindowDimensions = () => {
 	const getWindowDimensions = useCallback(() => {
 		const {innerWidth: width, innerHeight: height} = window;

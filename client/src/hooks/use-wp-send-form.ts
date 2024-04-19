@@ -2,6 +2,14 @@
 
 import {UseSendFormOptions, useSendForm} from "./use-send-form";
 
+/**
+ * Custom hook for sending form data to a WordPress endpoint.
+ *
+ * @param wpURL - The URL of the WordPress site.
+ * @returns A function that can be used to send form data and the state of the form submission.
+ *
+ * @template PayloadT - The type of the form data payload.
+ */
 export const makeUseWPSendForm = (wpURL?: string | undefined) => {
 	const defaultFormUrl = `${wpURL ?? ""}/wp-json/bring/form/submit`;
 
