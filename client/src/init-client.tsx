@@ -1,11 +1,11 @@
 "use client";
 
 import {
-	useSiteProps,
 	useDynamicEntityList,
 	useDynamicEntityProps,
-	type DynamicEntityListOptions,
-	type DynamicEntityPropsOptions,
+	useSiteProps,
+	type UseDynamicEntityListOptions,
+	type UseDynamicEntityPropsOptions,
 } from "./hooks";
 import {makeUseWPSendForm} from "./hooks/use-wp-send-form";
 import type {EntityType} from "./types";
@@ -20,12 +20,12 @@ export function initClient<
 		useDynamicEntityProps: <T = {},>(
 			entityId: number,
 			entityType: EntityType,
-			options: DynamicEntityPropsOptions = {},
+			options: UseDynamicEntityPropsOptions = {},
 		) => useDynamicEntityProps<T>(wpURL, entityId, entityType, options),
 		useDynamicEntityList: <T = {},>(
 			entitySlug: string,
 			entityType: EntityType,
-			options: DynamicEntityListOptions = {},
+			options: UseDynamicEntityListOptions = {},
 		) => useDynamicEntityList<T>(wpURL, entitySlug, entityType, options),
 		useWPSendForm: makeUseWPSendForm(wpURL),
 	};

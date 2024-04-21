@@ -2,6 +2,8 @@ import {
 	getDynamicEntityList,
 	getDynamicEntityProps,
 	getSiteProps,
+	type GetDynamicEntityListOptions,
+	type GetDynamicEntityPropsOptions,
 } from "./content";
 import type {EntityType} from "./types";
 
@@ -14,15 +16,13 @@ export function initServer<
 		getDynamicEntityProps: <T = {},>(
 			entityId: number,
 			entityType: EntityType,
-			customData: any = {},
-		) => getDynamicEntityProps<T>(wpURL, entityId, entityType, customData),
+			options: GetDynamicEntityPropsOptions = {},
+		) => getDynamicEntityProps<T>(wpURL, entityId, entityType, options),
 		getDynamicEntityList: <T = {},>(
 			entitySlug: string,
 			entityType: EntityType,
-			limit: number = 0,
-			customData = {},
-		) =>
-			getDynamicEntityList<T>(wpURL, entitySlug, entityType, limit, customData),
+			options: GetDynamicEntityListOptions = {},
+		) => getDynamicEntityList<T>(wpURL, entitySlug, entityType, options),
 		getSiteProps: () => getSiteProps<SP, M, MI>(wpURL),
 	};
 }

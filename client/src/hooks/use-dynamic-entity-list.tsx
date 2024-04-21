@@ -7,17 +7,25 @@ import type {DynamicEntityList, EntityType} from "../types";
 
 export type Options = {
 	limit?: number;
+	offset?: number;
 	lazy?: boolean;
 	customData?: {[key: string]: any};
-	customDataKey?: boolean | number | string;
+	cache?: "force-cache" | "no-store";
 };
 
 export function useDynamicEntityList<T = {}>(
 	wpURL: string,
 	entitySlug: string | null | undefined,
 	entityType: EntityType | null | undefined,
-	{limit = 0, lazy = true, customData = {}, customDataKey}: Options = {},
+	{
+		limit = 0,
+		offset = 0,
+		lazy = true,
+		customData = {},
+		cache = "force-cache",
+	}: Options = {},
 ) {
+	const customDataKey = JSON.stringify(customData);
 	const [entityList, setEntityList] = useState<DynamicEntityList<T>>(null);
 
 	// intersection observer for lazy loading
@@ -40,19 +48,18 @@ export function useDynamicEntityList<T = {}>(
 		}
 
 		// query entity list & set cache & state
-		getDynamicEntityList<T>(
-			wpURL,
-			entitySlug,
-			entityType,
+		getDynamicEntityList<T>(wpURL, entitySlug, entityType, {
 			limit,
+			offset,
 			customData,
-		).then((queriedEntityList) => {
+			cache,
+		}).then((queriedEntityList) => {
 			if (!queriedEntityList) {
 				return;
 			}
 			setEntityList(queriedEntityList);
 		});
-	}, [entitySlug, entityType, limit, customDataKey, lazy, wasOnScreen]);
+	}, [entitySlug, entityType, limit, offset, customDataKey, lazy, wasOnScreen]);
 
 	return {entityList, ref};
 }

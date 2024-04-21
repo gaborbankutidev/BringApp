@@ -8,15 +8,16 @@ import type {DynamicEntityProps, EntityType} from "../types";
 export type Options = {
 	lazy?: boolean;
 	customData?: {[key: string]: any};
-	customDataKey?: boolean | number | string;
+	cache?: "force-cache" | "no-store";
 };
 
 export function useDynamicEntityProps<T = {}>(
 	wpURL: string,
 	entityId: number | null | undefined,
 	entityType: EntityType | null | undefined,
-	{lazy = true, customData = {}, customDataKey}: Options = {},
+	{lazy = true, customData = {}, cache}: Options = {},
 ) {
+	const customDataKey = JSON.stringify(customData);
 	const [entityProps, setEntityProps] = useState<DynamicEntityProps<T>>(null);
 
 	// intersection observer for lazy loading
@@ -39,14 +40,15 @@ export function useDynamicEntityProps<T = {}>(
 		}
 
 		// query entity props & set cache & state
-		getDynamicEntityProps<T>(wpURL, entityId, entityType, customData).then(
-			(queriedEntityProps) => {
-				if (!queriedEntityProps) {
-					return;
-				}
-				setEntityProps(queriedEntityProps);
-			},
-		);
+		getDynamicEntityProps<T>(wpURL, entityId, entityType, {
+			customData,
+			cache,
+		}).then((queriedEntityProps) => {
+			if (!queriedEntityProps) {
+				return;
+			}
+			setEntityProps(queriedEntityProps);
+		});
 	}, [entityId, entityType, customDataKey, lazy, wasOnScreen]);
 
 	return {entityProps, ref};
