@@ -57,7 +57,13 @@ export type MenuLocationType = {
 
 export type EntityType = "post" | "taxonomy" | "author";
 
-export type DynamicEntityList<T = {}> = ({id: number} & T)[] | null;
+export type DynamicEntityList<T = {}> =
+	| ({
+			entityType: EntityType | null;
+			entitySlug: string | null;
+			entityId: number;
+	  } & T)[]
+	| null;
 export type DynamicEntityProps<T = {}> =
 	| ({
 			entityType: EntityType | null;
