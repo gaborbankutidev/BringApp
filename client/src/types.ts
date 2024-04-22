@@ -62,6 +62,12 @@ export type DynamicEntityList<T = {}> =
 			entityType: EntityType | null;
 			entitySlug: string | null;
 			entityId: number;
+			name: string;
+			image: ImageType | null;
+			excerpt: string | null;
+			description: string | null;
+			slug: string | null;
+			url: string;
 	  } & T)[]
 	| null;
 export type DynamicEntityProps<T = {}> =
