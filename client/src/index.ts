@@ -1,5 +1,11 @@
 // Components
-export {Debug} from "./components";
+export {
+	Debug,
+	type DynamicEntityListClientRenderProps,
+	type DynamicEntityListRenderProps,
+	type DynamicEntityPropsClientRenderProps,
+	type DynamicEntityPropsRenderProps,
+} from "./components";
 
 // Content
 export {
