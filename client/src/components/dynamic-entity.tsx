@@ -13,35 +13,37 @@ export type DynamicEntityPropsRenderProps<T, P> = {
 };
 
 export type EntityProps<T, P> = {
-	wpURL: string;
 	entityId?: number;
 	entityType?: EntityType;
 	options?: GetDynamicEntityPropsOptions;
 	Render?: (props: DynamicEntityPropsRenderProps<T, P>) => ReactNode;
 };
 
-async function DynamicEntity<T, P>({
-	wpURL,
-	entityId = 0,
-	entityType = "post",
-	options = {},
-	Render = (props) => (
-		<div className="border">
-			<Debug value={props} />
-		</div>
-	),
-}: EntityProps<T, P>) {
-	const {entityProps, params} = await getDynamicEntityProps<T, P>(
-		wpURL,
-		entityId,
-		entityType,
-		options,
-	);
-	if (!entityProps) {
-		return null;
-	}
+function makeDynamicEntity(wpURL: string) {
+	const DynamicEntity = async <T = {}, P = {}>({
+		entityId = 0,
+		entityType = "post",
+		options = {},
+		Render = (props) => (
+			<div className="border">
+				<Debug value={props} />
+			</div>
+		),
+	}: EntityProps<T, P>) => {
+		const {entityProps, params} = await getDynamicEntityProps<T, P>(
+			wpURL,
+			entityId,
+			entityType,
+			options,
+		);
+		if (!entityProps) {
+			return null;
+		}
 
-	return <Render entityProps={entityProps} params={params} />;
+		return <Render entityProps={entityProps} params={params} />;
+	};
+
+	return DynamicEntity;
 }
 
-export default DynamicEntity;
+export default makeDynamicEntity;

@@ -1,18 +1,18 @@
 export {default as Debug} from "./debug";
 export {
-	default as DynamicEntity,
+	default as makeDynamicEntity,
 	type DynamicEntityPropsRenderProps,
 } from "./dynamic-entity";
 export {
-	default as DynamicEntityClient,
+	default as makeDynamicEntityClient,
 	type DynamicEntityPropsClientRenderProps,
 } from "./dynamic-entity-client";
 export {
-	default as DynamicEntityList,
+	default as makeDynamicEntityList,
 	type DynamicEntityListRenderProps,
 } from "./dynamic-entity-list";
 export {
-	default as DynamicEntityListClient,
+	default as makeDynamicEntityListClient,
 	type DynamicEntityListClientRenderProps,
 } from "./dynamic-entity-list-client";
 export {default as makeFooter} from "./footer";
