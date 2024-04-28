@@ -78,7 +78,7 @@ export type DynamicEntityProps<T = {}> = {
 	excerpt: string | null;
 	description: string | null;
 	slug: string | null;
-	url: string;
+	url: string | null;
 } & T;
 
 export type SiteProps<SP = {}, M = {}, MI = {}> = {
