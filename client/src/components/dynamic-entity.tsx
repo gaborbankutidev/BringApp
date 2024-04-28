@@ -7,7 +7,7 @@ import {
 import type {DynamicEntityProps, EntityType} from "../types";
 import Debug from "./debug";
 
-export type DynamicEntityPropsRenderProps<T, P> = {
+export type DynamicEntityPropsRenderProps<T = {}, P = {}> = {
 	entityProps: DynamicEntityProps<T>;
 	params?: GetDynamicEntityPropsParams<P>;
 };
