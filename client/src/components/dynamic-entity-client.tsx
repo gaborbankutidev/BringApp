@@ -7,20 +7,18 @@ import {
 import type {DynamicEntityProps, EntityType} from "../types";
 import Debug from "./debug";
 
+export type DynamicEntityPropsClientRenderProps<T, P> = {
+	entityProps: DynamicEntityProps<T>;
+	params?: GetDynamicEntityPropsParams<P>;
+	ref?: (node?: Element | null | undefined) => void;
+};
+
 export type EntityProps<T, P> = {
 	wpURL: string;
 	entityId?: number;
 	entityType?: EntityType;
 	options?: UseDynamicEntityPropsOptions;
-	Render?: ({
-		entityProps,
-		params,
-		ref,
-	}: {
-		entityProps: DynamicEntityProps<T>;
-		params?: GetDynamicEntityPropsParams<P>;
-		ref?: (node?: Element | null | undefined) => void;
-	}) => ReactNode;
+	Render?: (props: DynamicEntityPropsClientRenderProps<T, P>) => ReactNode;
 };
 
 function DynamicEntityClient<T, P>({

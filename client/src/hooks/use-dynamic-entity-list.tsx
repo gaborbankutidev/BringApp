@@ -25,6 +25,7 @@ export function useDynamicEntityList<T = {}, P = {}>(
 		lazy = true,
 		customData = {},
 		cache = "force-cache",
+		updateKey,
 	}: UseDynamicEntityListOptions = {},
 ) {
 	const customDataKey = JSON.stringify(customData);
@@ -65,7 +66,16 @@ export function useDynamicEntityList<T = {}, P = {}>(
 			}
 			setQueriedList(queried);
 		});
-	}, [entitySlug, entityType, limit, offset, customDataKey, lazy, wasOnScreen]);
+	}, [
+		entitySlug,
+		entityType,
+		limit,
+		offset,
+		customDataKey,
+		lazy,
+		wasOnScreen,
+		updateKey,
+	]);
 
 	return queriedList
 		? {entityList: queriedList.entityList, params: queriedList.params, ref}

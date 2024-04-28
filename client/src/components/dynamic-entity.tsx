@@ -7,18 +7,17 @@ import {
 import type {DynamicEntityProps, EntityType} from "../types";
 import Debug from "./debug";
 
+export type DynamicEntityPropsRenderProps<T, P> = {
+	entityProps: DynamicEntityProps<T>;
+	params?: GetDynamicEntityPropsParams<P>;
+};
+
 export type EntityProps<T, P> = {
 	wpURL: string;
 	entityId?: number;
 	entityType?: EntityType;
 	options?: GetDynamicEntityPropsOptions;
-	Render?: ({
-		entityProps,
-		params,
-	}: {
-		entityProps: DynamicEntityProps<T>;
-		params?: GetDynamicEntityPropsParams<P>;
-	}) => ReactNode;
+	Render?: (props: DynamicEntityPropsRenderProps<T, P>) => ReactNode;
 };
 
 async function DynamicEntity<T, P>({

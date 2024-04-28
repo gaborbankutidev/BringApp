@@ -9,7 +9,7 @@ import type {
 } from "../types";
 import Debug from "./debug";
 
-export type DynamicEntityListRenderProps<T, P> = {
+export type DynamicEntityListClientRenderProps<T, P> = {
 	entityList: DynamicEntityListType<T>;
 	params?: GetDynamicEntityListParams<P>;
 	ref?: (node?: Element | null | undefined) => void;
@@ -21,7 +21,7 @@ export type DynamicEntityListProps<T, P> = {
 	entitySlug?: string;
 	entityType?: EntityType;
 	options?: UseDynamicEntityListOptions;
-	Render?: (props: DynamicEntityListRenderProps<T, P>) => ReactNode;
+	Render?: (props: DynamicEntityListClientRenderProps<T, P>) => ReactNode;
 };
 
 function DynamicEntityListClient<T = {}, P = {}>({

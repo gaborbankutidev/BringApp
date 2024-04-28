@@ -1,6 +1,12 @@
 "use client";
 
-import {DynamicEntityClient, DynamicEntityListClient} from "./components";
+import {type ReactNode} from "react";
+import {
+	DynamicEntityClient,
+	DynamicEntityListClient,
+	type DynamicEntityListClientRenderProps,
+	type DynamicEntityPropsClientRenderProps,
+} from "./components";
 import {
 	useDynamicEntityList,
 	useDynamicEntityProps,
@@ -34,13 +40,22 @@ export function initClient<
 			entityId: number,
 			entityType: EntityType,
 			options: UseDynamicEntityPropsOptions = {},
-		) => DynamicEntityClient<T, P>({wpURL, entityId, entityType, options}),
+			Render?: (props: DynamicEntityPropsClientRenderProps<T, P>) => ReactNode,
+		) =>
+			DynamicEntityClient<T, P>({wpURL, entityId, entityType, options, Render}),
 		DynamicEntityList: <T = {}, P = {}>(
 			entitySlug: string,
 			entityType: EntityType,
 			options: UseDynamicEntityListOptions = {},
+			Render?: (props: DynamicEntityListClientRenderProps<T, P>) => ReactNode,
 		) =>
-			DynamicEntityListClient<T, P>({wpURL, entitySlug, entityType, options}),
+			DynamicEntityListClient<T, P>({
+				wpURL,
+				entitySlug,
+				entityType,
+				options,
+				Render,
+			}),
 
 		useWPSendForm: makeUseWPSendForm(wpURL),
 	};

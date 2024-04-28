@@ -1,4 +1,10 @@
-import {DynamicEntity, DynamicEntityList} from "./components";
+import {type ReactNode} from "react";
+import {
+	DynamicEntity,
+	DynamicEntityList,
+	type DynamicEntityListRenderProps,
+	type DynamicEntityPropsRenderProps,
+} from "./components";
 import {
 	getDynamicEntityList,
 	getDynamicEntityProps,
@@ -31,11 +37,14 @@ export function initServer<
 			entityId: number,
 			entityType: EntityType,
 			options: GetDynamicEntityPropsOptions = {},
-		) => DynamicEntity<T, P>({wpURL, entityId, entityType, options}),
+			Render?: (props: DynamicEntityPropsRenderProps<T, P>) => ReactNode,
+		) => DynamicEntity<T, P>({wpURL, entityId, entityType, options, Render}),
 		DynamicEntityList: <T = {}, P = {}>(
 			entitySlug: string,
 			entityType: EntityType,
 			options: GetDynamicEntityListOptions = {},
-		) => DynamicEntityList<T, P>({wpURL, entitySlug, entityType, options}),
+			Render?: (props: DynamicEntityListRenderProps<T, P>) => ReactNode,
+		) =>
+			DynamicEntityList<T, P>({wpURL, entitySlug, entityType, options, Render}),
 	};
 }
