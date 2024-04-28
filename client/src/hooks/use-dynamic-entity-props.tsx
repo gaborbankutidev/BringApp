@@ -2,23 +2,34 @@
 
 import {useEffect, useState} from "react";
 import {useInView} from "react-intersection-observer";
-import {getDynamicEntityProps} from "../content";
+import {
+	getDynamicEntityProps,
+	type GetDynamicEntityPropsOptions,
+	type GetDynamicEntityPropsParams,
+} from "../content";
 import type {DynamicEntityProps, EntityType} from "../types";
 
-export type Options = {
+export type UseDynamicEntityPropsOptions = {
 	lazy?: boolean;
-	customData?: {[key: string]: any};
-	cache?: "force-cache" | "no-store";
-};
+	updateKey?: boolean | number | string;
+} & GetDynamicEntityPropsOptions;
 
-export function useDynamicEntityProps<T = {}>(
+export function useDynamicEntityProps<T = {}, P = {}>(
 	wpURL: string,
 	entityId: number | null | undefined,
 	entityType: EntityType | null | undefined,
-	{lazy = true, customData = {}, cache}: Options = {},
+	{
+		lazy = true,
+		customData = {},
+		cache,
+		updateKey,
+	}: UseDynamicEntityPropsOptions = {},
 ) {
 	const customDataKey = JSON.stringify(customData);
-	const [entityProps, setEntityProps] = useState<DynamicEntityProps<T>>(null);
+	const [queriedProps, setQueriedProps] = useState<{
+		entityProps: DynamicEntityProps<T>;
+		params: GetDynamicEntityPropsParams<P>;
+	} | null>(null);
 
 	// intersection observer for lazy loading
 	const {ref, inView: wasOnScreen} = useInView({
@@ -30,7 +41,7 @@ export function useDynamicEntityProps<T = {}>(
 	useEffect(() => {
 		// set null if entityId or entityType are null
 		if (!entityId || !entityType) {
-			setEntityProps(null);
+			setQueriedProps(null);
 			return;
 		}
 
@@ -40,16 +51,27 @@ export function useDynamicEntityProps<T = {}>(
 		}
 
 		// query entity props & set cache & state
-		getDynamicEntityProps<T>(wpURL, entityId, entityType, {
+		getDynamicEntityProps<T, P>(wpURL, entityId, entityType, {
 			customData,
 			cache,
-		}).then((queriedEntityProps) => {
-			if (!queriedEntityProps) {
+		}).then((queried) => {
+			if (!queried.entityProps) {
 				return;
 			}
-			setEntityProps(queriedEntityProps);
+			setQueriedProps(
+				queried as {
+					entityProps: DynamicEntityProps<T>;
+					params: GetDynamicEntityPropsParams<P>;
+				},
+			);
 		});
-	}, [entityId, entityType, customDataKey, lazy, wasOnScreen]);
+	}, [entityId, entityType, customDataKey, lazy, wasOnScreen, updateKey]);
 
-	return {entityProps, ref};
+	return queriedProps?.entityProps
+		? {
+				entityProps: queriedProps.entityProps,
+				params: queriedProps.params,
+				ref,
+			}
+		: {entityProps: null, params: {} as P, ref};
 }

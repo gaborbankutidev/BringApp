@@ -57,32 +57,29 @@ export type MenuLocationType = {
 
 export type EntityType = "post" | "taxonomy" | "author";
 
-export type DynamicEntityList<T = {}> =
-	| ({
-			entityType: EntityType | null;
-			entitySlug: string | null;
-			entityId: number;
-			name: string;
-			image: ImageType | null;
-			excerpt: string | null;
-			description: string | null;
-			slug: string | null;
-			url: string;
-	  } & T)[]
-	| null;
-export type DynamicEntityProps<T = {}> =
-	| ({
-			entityType: EntityType | null;
-			entitySlug: string | null;
-			entityId: number;
-			name: string;
-			image: ImageType | null;
-			excerpt: string | null;
-			description: string | null;
-			slug: string | null;
-			url: string;
-	  } & T)
-	| null;
+export type DynamicEntityList<T = {}> = ({
+	entityType: EntityType | null;
+	entitySlug: string | null;
+	entityId: number;
+	name: string;
+	image: ImageType | null;
+	excerpt: string | null;
+	description: string | null;
+	slug: string | null;
+	url: string | null;
+} & T)[];
+
+export type DynamicEntityProps<T = {}> = {
+	entityType: EntityType | null;
+	entitySlug: string | null;
+	entityId: number;
+	name: string;
+	image: ImageType | null;
+	excerpt: string | null;
+	description: string | null;
+	slug: string | null;
+	url: string;
+} & T;
 
 export type SiteProps<SP = {}, M = {}, MI = {}> = {
 	menus: MenuType<M, MI>[];

@@ -2,31 +2,36 @@
 
 import {useEffect, useState} from "react";
 import {useInView} from "react-intersection-observer";
-import {getDynamicEntityList} from "../content";
+import {
+	getDynamicEntityList,
+	type GetDynamicEntityListOptions,
+	type GetDynamicEntityListParams,
+} from "../content";
 import type {DynamicEntityList, EntityType} from "../types";
 
-export type Options = {
-	limit?: number;
-	offset?: number;
+export type UseDynamicEntityListOptions = {
 	lazy?: boolean;
-	customData?: {[key: string]: any};
-	cache?: "force-cache" | "no-store";
-};
+	updateKey?: boolean | number | string;
+} & GetDynamicEntityListOptions;
 
-export function useDynamicEntityList<T = {}>(
+export function useDynamicEntityList<T = {}, P = {}>(
 	wpURL: string,
 	entitySlug: string | null | undefined,
 	entityType: EntityType | null | undefined,
 	{
 		limit = 0,
 		offset = 0,
+		page = 1,
 		lazy = true,
 		customData = {},
 		cache = "force-cache",
-	}: Options = {},
+	}: UseDynamicEntityListOptions = {},
 ) {
 	const customDataKey = JSON.stringify(customData);
-	const [entityList, setEntityList] = useState<DynamicEntityList<T>>(null);
+	const [queriedList, setQueriedList] = useState<{
+		entityList: DynamicEntityList<T>;
+		params: GetDynamicEntityListParams<P>;
+	} | null>(null);
 
 	// intersection observer for lazy loading
 	const {ref, inView: wasOnScreen} = useInView({
@@ -38,7 +43,7 @@ export function useDynamicEntityList<T = {}>(
 	useEffect(() => {
 		// set null if entitySlug or entityType are null
 		if (!entitySlug || !entityType) {
-			setEntityList(null);
+			setQueriedList(null);
 			return;
 		}
 
@@ -48,18 +53,25 @@ export function useDynamicEntityList<T = {}>(
 		}
 
 		// query entity list & set cache & state
-		getDynamicEntityList<T>(wpURL, entitySlug, entityType, {
+		getDynamicEntityList<T, P>(wpURL, entitySlug, entityType, {
 			limit,
 			offset,
+			page,
 			customData,
 			cache,
-		}).then((queriedEntityList) => {
-			if (!queriedEntityList) {
+		}).then((queried) => {
+			if (!queried.entityList) {
 				return;
 			}
-			setEntityList(queriedEntityList);
+			setQueriedList(queried);
 		});
 	}, [entitySlug, entityType, limit, offset, customDataKey, lazy, wasOnScreen]);
 
-	return {entityList, ref};
+	return queriedList
+		? {entityList: queriedList.entityList, params: queriedList.params, ref}
+		: {
+				entityList: null,
+				params: {count: 0} as GetDynamicEntityListParams<P>,
+				ref,
+			};
 }

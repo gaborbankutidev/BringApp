@@ -1,5 +1,6 @@
 "use client";
 
+import {DynamicEntityClient, DynamicEntityListClient} from "./components";
 import {
 	useDynamicEntityList,
 	useDynamicEntityProps,
@@ -17,6 +18,7 @@ export function initClient<
 >(wpURL: string) {
 	return {
 		useSiteProps: () => useSiteProps<SP, M, MI>(wpURL),
+
 		useDynamicEntityProps: <T = {},>(
 			entityId: number,
 			entityType: EntityType,
@@ -27,6 +29,19 @@ export function initClient<
 			entityType: EntityType,
 			options: UseDynamicEntityListOptions = {},
 		) => useDynamicEntityList<T>(wpURL, entitySlug, entityType, options),
+
+		DynamicEntity: <T = {}, P = {}>(
+			entityId: number,
+			entityType: EntityType,
+			options: UseDynamicEntityPropsOptions = {},
+		) => DynamicEntityClient<T, P>({wpURL, entityId, entityType, options}),
+		DynamicEntityList: <T = {}, P = {}>(
+			entitySlug: string,
+			entityType: EntityType,
+			options: UseDynamicEntityListOptions = {},
+		) =>
+			DynamicEntityListClient<T, P>({wpURL, entitySlug, entityType, options}),
+
 		useWPSendForm: makeUseWPSendForm(wpURL),
 	};
 }

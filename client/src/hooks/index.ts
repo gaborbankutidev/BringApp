@@ -2,11 +2,11 @@ export {useSiteProps} from "./use-site-props";
 
 export {
 	useDynamicEntityList,
-	type Options as UseDynamicEntityListOptions,
+	type UseDynamicEntityListOptions,
 } from "./use-dynamic-entity-list";
 export {
 	useDynamicEntityProps,
-	type Options as UseDynamicEntityPropsOptions,
+	type UseDynamicEntityPropsOptions,
 } from "./use-dynamic-entity-props";
 
 export {useSendForm} from "./use-send-form";

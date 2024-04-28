@@ -1,3 +1,4 @@
+import {DynamicEntity, DynamicEntityList} from "./components";
 import {
 	getDynamicEntityList,
 	getDynamicEntityProps,
@@ -13,16 +14,28 @@ export function initServer<
 	MI = {}, // MenuItem
 >(wpURL: string) {
 	return {
-		getDynamicEntityProps: <T = {},>(
+		getSiteProps: () => getSiteProps<SP, M, MI>(wpURL),
+
+		getDynamicEntityProps: <T = {}, P = {}>(
 			entityId: number,
 			entityType: EntityType,
 			options: GetDynamicEntityPropsOptions = {},
-		) => getDynamicEntityProps<T>(wpURL, entityId, entityType, options),
-		getDynamicEntityList: <T = {},>(
+		) => getDynamicEntityProps<T, P>(wpURL, entityId, entityType, options),
+		getDynamicEntityList: <T = {}, P = {}>(
 			entitySlug: string,
 			entityType: EntityType,
 			options: GetDynamicEntityListOptions = {},
-		) => getDynamicEntityList<T>(wpURL, entitySlug, entityType, options),
-		getSiteProps: () => getSiteProps<SP, M, MI>(wpURL),
+		) => getDynamicEntityList<T, P>(wpURL, entitySlug, entityType, options),
+
+		DynamicEntity: <T = {}, P = {}>(
+			entityId: number,
+			entityType: EntityType,
+			options: GetDynamicEntityPropsOptions = {},
+		) => DynamicEntity<T, P>({wpURL, entityId, entityType, options}),
+		DynamicEntityList: <T = {}, P = {}>(
+			entitySlug: string,
+			entityType: EntityType,
+			options: GetDynamicEntityListOptions = {},
+		) => DynamicEntityList<T, P>({wpURL, entitySlug, entityType, options}),
 	};
 }
