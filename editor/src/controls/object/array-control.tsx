@@ -10,16 +10,28 @@ import type {ArrayControlType, ControlByValue} from "../types";
 import {useControlContext} from "../context";
 import {ImageControl, TextControl} from "..";
 
+/**
+ * ImageArrayControl component.
+ */
 export const ImageArrayControl = makeArrayControl<ImageType>({
 	control: ImageControl,
 	defaultItem: defaultImageValue,
 });
 
+/**
+ * TextArrayControl component.
+ */
 export const TextArrayControl = makeArrayControl<string>({
 	control: TextControl,
 	defaultItem: "",
 });
 
+/**
+ * A function that creates an array control component.
+ *
+ * @param args - The arguments for defining an array control component.
+ * @returns A function that creates an array control component.
+ */
 export function makeArrayControl<vT>(args: {
 	control: FC<ControlByValue<vT>>;
 	defaultItem: vT;

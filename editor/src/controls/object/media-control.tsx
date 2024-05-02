@@ -12,11 +12,22 @@ import {isPathControl} from "../utils";
 
 type MediaOption = string[];
 
+/**
+ * Props for the MediaControl component.
+ */
 type MediaControlProps = {
 	allowedTypes?: MediaOption;
 	Preview?: React.FC<MediaType>;
 };
 
+/**
+ * A control component that renders a media upload component.
+ *
+ * @template pT - The type of the attributes object.
+ *
+ * @param props - The props for the MediaControl component.
+ * @returns The rendered MediaControl component.
+ */
 export const MediaControl = <pT extends Obj = {}>(
 	props: ControlType<MediaType, pT> & MediaControlProps,
 ) =>
@@ -26,6 +37,16 @@ export const MediaControl = <pT extends Obj = {}>(
 		<MediaControlByValue {...props} />
 	);
 
+/**
+ *  A control component that renders a media upload component based on a path.
+ *
+ * @template pT - The type of the attributes object.
+ *
+ * @param path - The path to the value in the attributes object.
+ * @param updateHandling - The update handling strategy.
+ * @param props - The rest of the props for the MediaControlByPath component.
+ * @returns The rendered MediaControlByPath component.
+ */
 function MediaControlByPath<pT extends Obj>({
 	path,
 	updateHandling,

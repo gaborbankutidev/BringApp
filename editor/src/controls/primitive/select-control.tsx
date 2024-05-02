@@ -9,6 +9,9 @@ import type {ControlByPath, ControlByValue, ControlType} from "../types";
 import {useControlContext} from "../context";
 import {isPathControl} from "../utils";
 
+/**
+ * Props for the SelectControl component.
+ */
 type _SelectControl = {
 	options: {
 		label: string;
@@ -16,6 +19,13 @@ type _SelectControl = {
 	}[];
 };
 
+/**
+ * A control component that renders a select dropdown.
+ *
+ * @template pT - The type of additional properties for the control.
+ *
+ * @param props - The props for the SelectControl component.
+ */
 export const SelectControl = <pT extends Obj = {}>(
 	props: ControlType<string, pT> & _SelectControl,
 ) =>
@@ -25,6 +35,13 @@ export const SelectControl = <pT extends Obj = {}>(
 		<SelectControlByValue {...props} />
 	);
 
+/**
+ * A control component that renders a select dropdown based on a path.
+ *
+ * @template pT - The type of additional properties for the control.
+ *
+ * @param props - The props for the SelectControlByPath component.
+ */
 function SelectControlByPath<pT extends Obj>({
 	path,
 	updateHandling,
@@ -47,6 +64,10 @@ function SelectControlByPath<pT extends Obj>({
 	);
 }
 
+/**
+ * A control component that renders a select dropdown based on a value.
+ * @param props - The props for the SelectControlByValue component.
+ */
 const SelectControlByValue: FC<ControlByValue<string> & _SelectControl> = ({
 	label,
 	value,

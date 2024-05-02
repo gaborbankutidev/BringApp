@@ -9,6 +9,9 @@ import type {ControlByPath, ControlByValue, ControlType} from "../types";
 import {useControlContext} from "../context";
 import {isPathControl} from "../utils";
 
+/**
+ * Represents a combobox control component.
+ */
 type _ComboboxControl = {
 	options: {
 		label: string;
@@ -16,6 +19,11 @@ type _ComboboxControl = {
 	}[];
 };
 
+/**
+ * ComboboxControl component.
+ * @param props - The props for the ComboboxControl component.
+ * @returns A React component representing a combobox control.
+ */
 export const ComboboxControl = <pT extends Obj = {}>(
 	props: ControlType<string, pT> & _ComboboxControl,
 ) =>
@@ -25,6 +33,11 @@ export const ComboboxControl = <pT extends Obj = {}>(
 		<ComboboxControlByValue {...props} />
 	);
 
+/**
+ * ComboboxControlByPath component.
+ * @param props - The props for the ComboboxControlByPath component.
+ * @returns A React component representing a combobox control by path.
+ */
 function ComboboxControlByPath<pT extends Obj>({
 	path,
 	updateHandling,
@@ -47,6 +60,11 @@ function ComboboxControlByPath<pT extends Obj>({
 	);
 }
 
+/**
+ * ComboboxControlByValue component.
+ * @param props - The props for the ComboboxControlByValue component.
+ * @returns A React component representing a combobox control by value.
+ */
 const ComboboxControlByValue: FC<ControlByValue<string> & _ComboboxControl> = ({
 	label,
 	value,
