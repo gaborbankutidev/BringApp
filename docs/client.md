@@ -1,7 +1,5 @@
 # Bring Blocks Client
 
-## Setup and usage
-
 ## Functions
 
 ```ts
