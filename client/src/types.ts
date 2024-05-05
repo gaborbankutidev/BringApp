@@ -35,10 +35,12 @@ export type MediaType = {
 export type ImageType = MediaType;
 
 export type MenuItemType<T = {}> = {
+	id?: number;
 	name: string;
 	url: string;
-	target: string;
-	classes: string;
+	description?: string;
+	target?: string;
+	classes?: string;
 	children?: MenuItemType<T>[];
 } & T;
 
