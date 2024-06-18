@@ -11,6 +11,10 @@ export type GetDynamicEntityPropsOptions = {
 	cache?: "force-cache" | "no-store";
 };
 
+/**
+ * Represents the dynamic entity properties.
+ * @template T - Additional properties type
+ */
 export type GetDynamicEntityPropsParams<P> = P;
 
 /**

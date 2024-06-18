@@ -17,6 +17,11 @@ export type GetDynamicEntityListOptions = {
 	cache?: "force-cache" | "no-store";
 };
 
+/**
+ * Represents the parameters for retrieving a dynamic entity list.
+ * @template P - Additional properties type
+ * @property count - The number of entities in the list.
+ */
 export type GetDynamicEntityListParams<P> = {count: number} & P;
 
 /**

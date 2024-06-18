@@ -2,6 +2,9 @@ import type {Entity} from "../types";
 
 /**
  * Represents a successful response with an entity.
+ * @template EP - The entity properties type.
+ * @property responseCode - The response code.
+ * @property entity - The entity.
  */
 type SuccessResponse<EP> = {
 	responseCode: 200;
@@ -10,6 +13,9 @@ type SuccessResponse<EP> = {
 
 /**
  * Represents a redirect response.
+ * @property responseCode - The response code.
+ * @property redirectTo - The URL to redirect to.
+ * @property entity - The entity.
  */
 type RedirectResponse = {
 	responseCode: 301 | 302 | 307 | 308;
@@ -19,6 +25,8 @@ type RedirectResponse = {
 
 /**
  * Represents an error response.
+ * @property responseCode - The response code.
+ * @property entity - The entity.
  */
 type ErrorResponse = {
 	responseCode: 400;
@@ -27,6 +35,7 @@ type ErrorResponse = {
 
 /**
  * Represents a not found response.
+ * @property responseCode - The response code.
  */
 type NotFoundResponse = {
 	responseCode: 404;
@@ -34,6 +43,7 @@ type NotFoundResponse = {
 
 /**
  * Represents the possible response types for the `getEntity` function.
+ * @template EP - The entity properties type.
  */
 type GetEntityResponseType<EP> =
 	| SuccessResponse<EP>

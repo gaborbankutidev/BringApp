@@ -59,7 +59,21 @@ export function initServer<
 		 */
 		getSiteProps: () => getSiteProps<SP, M, MI>(wpURL),
 
+		/**
+		 * Renders the dynamic entity on the server with the given render function.
+		 * @template T - Additional properties type
+		 * @template P - Additional parameters type
+		 * @param props - The properties of the dynamic entity client.
+		 * @returns The rendered dynamic entity.
+		 */
 		DynamicEntity: makeDynamicEntity(wpURL),
+		/**
+		 * Renders the dynamic entity list on the server with the given render function.
+		 * @template T - Additional properties type
+		 * @template P - Additional parameters type
+		 * @param props - The properties of the dynamic entity list client.
+		 * @returns The rendered dynamic entity list.
+		 */
 		DynamicEntityList: makeDynamicEntityList(wpURL),
 	};
 }

@@ -62,7 +62,22 @@ export function initClient<
 			options: UseDynamicEntityListOptions = {},
 		) => useDynamicEntityList<T>(wpURL, entitySlug, entityType, options),
 
+		/**
+		 * Renders the dynamic entity on the client with the given render function.
+		 * @template T - Additional properties type
+		 * @template P - Additional parameters type
+		 * @param props - The properties of the dynamic entity client.
+		 * @returns The rendered dynamic entity.
+		 */
 		DynamicEntity: makeDynamicEntityClient(wpURL),
+
+		/**
+		 * Renders the dynamic entity list on the client with the given render function.
+		 * @template T - Additional properties type
+		 * @template P - Additional parameters type
+		 * @param props - The properties of the dynamic entity list client.
+		 * @returns The rendered dynamic entity list.
+		 */
 		DynamicEntityList: makeDynamicEntityListClient(wpURL),
 		/**
 		 * Retrieves the WP send form hook.
