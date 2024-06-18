@@ -33,7 +33,7 @@ jobs:
         run: yarn install:packages
 
       - name: Run yarn check
-        run: yarn check
+        run: yarn checks
 
       - name: Run build
         run: yarn build
