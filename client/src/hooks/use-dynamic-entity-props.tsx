@@ -2,32 +2,50 @@
 
 import {useEffect, useState} from "react";
 import {useInView} from "react-intersection-observer";
-import {getDynamicEntityProps} from "../content";
+import {
+	getDynamicEntityProps,
+	type GetDynamicEntityPropsOptions,
+	type GetDynamicEntityPropsParams,
+} from "../content";
 import type {DynamicEntityProps, EntityType} from "../types";
 
-export type Options = {
+/**
+ * Represents the options for fetching dynamic entity props.
+ * @template P - Additional properties type
+ * @property lazy - Whether to lazy load the entity props.
+ * @property updateKey - A key to update the entity props.
+ */
+export type UseDynamicEntityPropsOptions = {
 	lazy?: boolean;
-	customData?: {[key: string]: any};
-	customDataKey?: boolean | number | string;
-};
+	updateKey?: boolean | number | string;
+} & GetDynamicEntityPropsOptions;
 
 /**
  * Custom hook for fetching dynamic entity props.
  *
  * @template T - The type of the entity props.
- * @param {string} wpURL - The WordPress URL.
- * @param {number | null | undefined} entityId - The ID of the entity.
- * @param {EntityType | null | undefined} entityType - The type of the entity.
- * @param {Options} options - Additional options for the hook.
- * @returns {{ entityProps: DynamicEntityProps<T> | null, ref: React.RefObject<any> }} - The entity props and a ref for lazy loading.
+ * @param wpURL - The WordPress URL.
+ * @param entityId - The ID of the entity.
+ * @param entityType - The type of the entity.
+ * @param options - The options for fetching the entity props.
+ * @returns - The entity props and a ref for lazy loading.
  */
-export function useDynamicEntityProps<T = {}>(
+export function useDynamicEntityProps<T = {}, P = {}>(
 	wpURL: string,
 	entityId: number | null | undefined,
 	entityType: EntityType | null | undefined,
-	{lazy = true, customData = {}, customDataKey}: Options = {},
+	{
+		lazy = true,
+		customData = {},
+		cache,
+		updateKey,
+	}: UseDynamicEntityPropsOptions = {},
 ) {
-	const [entityProps, setEntityProps] = useState<DynamicEntityProps<T>>(null);
+	const customDataKey = JSON.stringify(customData);
+	const [queriedProps, setQueriedProps] = useState<{
+		entityProps: DynamicEntityProps<T>;
+		params: GetDynamicEntityPropsParams<P>;
+	} | null>(null);
 
 	// Intersection observer for lazy loading
 	const {ref, inView: wasOnScreen} = useInView({
@@ -39,7 +57,7 @@ export function useDynamicEntityProps<T = {}>(
 	useEffect(() => {
 		// Set null if entityId or entityType are null
 		if (!entityId || !entityType) {
-			setEntityProps(null);
+			setQueriedProps(null);
 			return;
 		}
 
@@ -48,16 +66,28 @@ export function useDynamicEntityProps<T = {}>(
 			return;
 		}
 
-		// Query entity props & set cache & state
-		getDynamicEntityProps<T>(wpURL, entityId, entityType, customData).then(
-			(queriedEntityProps) => {
-				if (!queriedEntityProps) {
-					return;
-				}
-				setEntityProps(queriedEntityProps);
-			},
-		);
-	}, [entityId, entityType, customDataKey, lazy, wasOnScreen]);
+		// query entity props & set cache & state
+		getDynamicEntityProps<T, P>(wpURL, entityId, entityType, {
+			customData,
+			cache,
+		}).then((queried) => {
+			if (!queried.entityProps) {
+				return;
+			}
+			setQueriedProps(
+				queried as {
+					entityProps: DynamicEntityProps<T>;
+					params: GetDynamicEntityPropsParams<P>;
+				},
+			);
+		});
+	}, [entityId, entityType, customDataKey, lazy, wasOnScreen, updateKey]);
 
-	return {entityProps, ref};
+	return queriedProps?.entityProps
+		? {
+				entityProps: queriedProps.entityProps,
+				params: queriedProps.params,
+				ref,
+			}
+		: {entityProps: null, params: {} as P, ref};
 }

@@ -1,6 +1,6 @@
 import React, {type ReactNode} from "react";
+import {createBringElement, getEntity, getSiteProps} from "../content";
 import type {FCC} from "../types";
-import {getEntity, getSiteProps, createBringElement} from "../content";
 
 function makeLayout<EP = {}, SP = {}, M = {}, MI = {}, CTX = {}>(
 	wpURL: string,
@@ -16,7 +16,7 @@ function makeLayout<EP = {}, SP = {}, M = {}, MI = {}, CTX = {}>(
 	}: {
 		slug?: string | string[];
 		context?: CTX;
-		children: ReactNode;
+		children?: ReactNode;
 	}) => {
 		const siteProps = await getSiteProps<SP, M, MI>(wpURL);
 		const entity = await getEntity<EP>(

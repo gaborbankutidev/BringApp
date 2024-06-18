@@ -1,11 +1,15 @@
 "use client";
 
 import {
-	useSiteProps,
+	makeDynamicEntityClient,
+	makeDynamicEntityListClient,
+} from "./components";
+import {
 	useDynamicEntityList,
 	useDynamicEntityProps,
-	type DynamicEntityListOptions,
-	type DynamicEntityPropsOptions,
+	useSiteProps,
+	type UseDynamicEntityListOptions,
+	type UseDynamicEntityPropsOptions,
 } from "./hooks";
 import {makeUseWPSendForm} from "./hooks/use-wp-send-form";
 import type {EntityType} from "./types";
@@ -41,7 +45,7 @@ export function initClient<
 		useDynamicEntityProps: <T = {},>(
 			entityId: number,
 			entityType: EntityType,
-			options: DynamicEntityPropsOptions = {},
+			options: UseDynamicEntityPropsOptions = {},
 		) => useDynamicEntityProps<T>(wpURL, entityId, entityType, options),
 
 		/**
@@ -55,9 +59,11 @@ export function initClient<
 		useDynamicEntityList: <T = {},>(
 			entitySlug: string,
 			entityType: EntityType,
-			options: DynamicEntityListOptions = {},
+			options: UseDynamicEntityListOptions = {},
 		) => useDynamicEntityList<T>(wpURL, entitySlug, entityType, options),
 
+		DynamicEntity: makeDynamicEntityClient(wpURL),
+		DynamicEntityList: makeDynamicEntityListClient(wpURL),
 		/**
 		 * Retrieves the WP send form hook.
 		 * @returns {object} The WP send form hook.

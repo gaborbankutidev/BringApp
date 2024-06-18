@@ -1,7 +1,10 @@
+import {makeDynamicEntity, makeDynamicEntityList} from "./components";
 import {
 	getDynamicEntityList,
 	getDynamicEntityProps,
 	getSiteProps,
+	type GetDynamicEntityListOptions,
+	type GetDynamicEntityPropsOptions,
 } from "./content";
 import type {EntityType} from "./types";
 /**
@@ -25,14 +28,14 @@ export function initServer<
 		 * @template T - The type of the entity props.
 		 * @param {number} entityId - The ID of the entity.
 		 * @param {EntityType} entityType - The type of the entity.
-		 * @param {any} customData - Custom data to be passed to the API.
+		 * @param {GetDynamicEntityPropsOptions} options - The options for retrieving the entity props.
 		 * @returns {Promise<T>} - A promise that resolves to the entity props.
 		 */
-		getDynamicEntityProps: <T = {},>(
+		getDynamicEntityProps: <T = {}, P = {}>(
 			entityId: number,
 			entityType: EntityType,
-			customData: any = {},
-		) => getDynamicEntityProps<T>(wpURL, entityId, entityType, customData),
+			options: GetDynamicEntityPropsOptions = {},
+		) => getDynamicEntityProps<T, P>(wpURL, entityId, entityType, options),
 
 		/**
 		 * Retrieves a list of dynamic entities.
@@ -40,17 +43,14 @@ export function initServer<
 		 * @template T - The type of the entity list.
 		 * @param {string} entitySlug - The slug of the entity.
 		 * @param {EntityType} entityType - The type of the entity.
-		 * @param {number} limit - The maximum number of entities to retrieve. Defaults to 0 (no limit).
-		 * @param {any} customData - Custom data to be passed to the API.
+		 * @param {GetDynamicEntityListOptions} options - The options for retrieving the entity list.
 		 * @returns {Promise<T>} - A promise that resolves to the entity list.
 		 */
-		getDynamicEntityList: <T = {},>(
+		getDynamicEntityList: <T = {}, P = {}>(
 			entitySlug: string,
 			entityType: EntityType,
-			limit: number = 0,
-			customData = {},
-		) =>
-			getDynamicEntityList<T>(wpURL, entitySlug, entityType, limit, customData),
+			options: GetDynamicEntityListOptions = {},
+		) => getDynamicEntityList<T, P>(wpURL, entitySlug, entityType, options),
 
 		/**
 		 * Retrieves the properties of the site.
@@ -58,5 +58,8 @@ export function initServer<
 		 * @returns {Promise<SP>} - A promise that resolves to the site props.
 		 */
 		getSiteProps: () => getSiteProps<SP, M, MI>(wpURL),
+
+		DynamicEntity: makeDynamicEntity(wpURL),
+		DynamicEntityList: makeDynamicEntityList(wpURL),
 	};
 }

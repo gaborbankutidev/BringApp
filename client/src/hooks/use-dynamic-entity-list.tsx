@@ -2,33 +2,53 @@
 
 import {useEffect, useState} from "react";
 import {useInView} from "react-intersection-observer";
-import {getDynamicEntityList} from "../content";
+import {
+	getDynamicEntityList,
+	type GetDynamicEntityListOptions,
+	type GetDynamicEntityListParams,
+} from "../content";
 import type {DynamicEntityList, EntityType} from "../types";
 
-export type Options = {
-	limit?: number;
+/**
+ * Represents the options for fetching a dynamic entity list.
+ * @template P - Additional properties type
+ * @property lazy - Whether to lazy load the entity list.
+ * @property updateKey - A key to update the entity list.
+ */
+export type UseDynamicEntityListOptions = {
 	lazy?: boolean;
-	customData?: {[key: string]: any};
-	customDataKey?: boolean | number | string;
-};
+	updateKey?: boolean | number | string;
+} & GetDynamicEntityListOptions;
 
 /**
  * Custom hook for fetching and managing a dynamic entity list.
  *
  * @template T - The type of the entity list items.
- * @param {string} wpURL - The URL of the WordPress site.
- * @param {string | null | undefined} entitySlug - The slug of the entity.
- * @param {EntityType | null | undefined} entityType - The type of the entity.
- * @param {Options} options - Additional options for the hook.
- * @returns {Object} - An object containing the entity list and a ref for the intersection observer.
+ * @param wpURL - The URL of the WordPress site.
+ * @param entitySlug - The slug of the entity.
+ * @param entityType - The type of the entity.
+ * @param options - The options for fetching the entity list.
+ * @returns - An object containing the entity list and a ref for the intersection observer.
  */
-export function useDynamicEntityList<T = {}>(
+export function useDynamicEntityList<T = {}, P = {}>(
 	wpURL: string,
 	entitySlug: string | null | undefined,
 	entityType: EntityType | null | undefined,
-	{limit = 0, lazy = true, customData = {}, customDataKey}: Options = {},
+	{
+		limit = 0,
+		offset = 0,
+		page = 1,
+		lazy = true,
+		customData = {},
+		cache = "force-cache",
+		updateKey,
+	}: UseDynamicEntityListOptions = {},
 ) {
-	const [entityList, setEntityList] = useState<DynamicEntityList<T>>(null);
+	const customDataKey = JSON.stringify(customData);
+	const [queriedList, setQueriedList] = useState<{
+		entityList: DynamicEntityList<T>;
+		params: GetDynamicEntityListParams<P>;
+	} | null>(null);
 
 	// intersection observer for lazy loading
 	const {ref, inView: wasOnScreen} = useInView({
@@ -40,7 +60,7 @@ export function useDynamicEntityList<T = {}>(
 	useEffect(() => {
 		// set null if entitySlug or entityType are null
 		if (!entitySlug || !entityType) {
-			setEntityList(null);
+			setQueriedList(null);
 			return;
 		}
 
@@ -50,19 +70,34 @@ export function useDynamicEntityList<T = {}>(
 		}
 
 		// query entity list & set cache & state
-		getDynamicEntityList<T>(
-			wpURL,
-			entitySlug,
-			entityType,
+		getDynamicEntityList<T, P>(wpURL, entitySlug, entityType, {
 			limit,
+			offset,
+			page,
 			customData,
-		).then((queriedEntityList) => {
-			if (!queriedEntityList) {
+			cache,
+		}).then((queried) => {
+			if (!queried.entityList) {
 				return;
 			}
-			setEntityList(queriedEntityList);
+			setQueriedList(queried);
 		});
-	}, [entitySlug, entityType, limit, customDataKey, lazy, wasOnScreen]);
+	}, [
+		entitySlug,
+		entityType,
+		limit,
+		offset,
+		customDataKey,
+		lazy,
+		wasOnScreen,
+		updateKey,
+	]);
 
-	return {entityList, ref};
+	return queriedList
+		? {entityList: queriedList.entityList, params: queriedList.params, ref}
+		: {
+				entityList: null,
+				params: {count: 0} as GetDynamicEntityListParams<P>,
+				ref,
+			};
 }

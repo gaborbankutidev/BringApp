@@ -73,10 +73,12 @@ export type ImageType = MediaType;
  * @template T - Additional properties type
  */
 export type MenuItemType<T = {}> = {
+	id?: number;
 	name: string;
 	url: string;
-	target: string;
-	classes: string;
+	description?: string;
+	target?: string;
+	classes?: string;
 	children?: MenuItemType<T>[];
 } & T;
 
@@ -105,28 +107,36 @@ export type MenuLocationType = {
 export type EntityType = "post" | "taxonomy" | "author";
 
 /**
- * Represents a dynamic entity list, which is an array of objects with an ID and optional additional properties, or null.
+ * Represents a dynamic entity list, which is an array of objects with entity properties and additional properties.
  * @template T - Additional properties type
  */
-export type DynamicEntityList<T = {}> = ({id: number} & T)[] | null;
+export type DynamicEntityList<T = {}> = ({
+	entityType: EntityType | null;
+	entitySlug: string | null;
+	entityId: number;
+	name: string;
+	image: ImageType | null;
+	excerpt: string | null;
+	description: string | null;
+	slug: string | null;
+	url: string | null;
+} & T)[];
 
 /**
  * Represents dynamic entity properties, which can have different shapes depending on the entity type.
  * @template T - Additional properties type
  */
-export type DynamicEntityProps<T = {}> =
-	| ({
-			entityType: EntityType | null;
-			entitySlug: string | null;
-			entityId: number;
-			name: string;
-			image: ImageType | null;
-			excerpt: string | null;
-			description: string | null;
-			slug: string | null;
-			url: string;
-	  } & T)
-	| null;
+export type DynamicEntityProps<T = {}> = {
+	entityType: EntityType | null;
+	entitySlug: string | null;
+	entityId: number;
+	name: string;
+	image: ImageType | null;
+	excerpt: string | null;
+	description: string | null;
+	slug: string | null;
+	url: string | null;
+} & T;
 
 /**
  * Represents site properties, which include menus and menu locations.
