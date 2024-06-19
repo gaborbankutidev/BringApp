@@ -12,6 +12,7 @@ import {ImageControl, TextControl} from "..";
 
 /**
  * ImageArrayControl component.
+ * @returns The rendered ImageArrayControl component.
  */
 export const ImageArrayControl = makeArrayControl<ImageType>({
 	control: ImageControl,
@@ -20,6 +21,7 @@ export const ImageArrayControl = makeArrayControl<ImageType>({
 
 /**
  * TextArrayControl component.
+ * @returns The rendered TextArrayControl component.
  */
 export const TextArrayControl = makeArrayControl<string>({
 	control: TextControl,

@@ -14,6 +14,8 @@ type MediaOption = string[];
 
 /**
  * Props for the MediaControl component.
+ * @property allowedTypes - The allowed media types.
+ * @property Preview - The preview component for the media.
  */
 type MediaControlProps = {
 	allowedTypes?: MediaOption;

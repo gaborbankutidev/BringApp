@@ -1,5 +1,8 @@
 /**
  * Represents the default image value.
+ * @property id - The image ID.
+ * @property src - The image source URL.
+ * @property alt - The image alt text.
  */
 export const defaultImageValue = {
 	id: null,

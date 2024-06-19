@@ -11,25 +11,12 @@ import type {BringNode, EntityProps, FCC, SiteProps} from "./types";
  * @template M - Menu
  * @template MI - MenuItem
  * @template CTX - Context
- * @param {string} wpURL - The WordPress URL.
- * @param {string} dataToken - The data token.
- * @param {(redirectTo: string, responseCode: number) => void} onRedirect - Callback function for redirecting.
- * @param {() => void} onNotFound - Callback function for handling not found pages.
- * @param {Array<{componentName: string; Component: FCC<any, EP, SP, M, MI, CTX>}>} componentList - List of components.
- * @returns {{
- *   createBringElement: (
- *     nodes: BringNode[],
- *     entityProps: EntityProps<EP>,
- *     siteProps: SiteProps<SP, M, MI>,
- *     context: CTX,
- *     PostContent: ReactNode
- *   ) => any;
- *   getEntity: (slug: string | string[]) => Promise<EP>;
- *   Header: any;
- *   Footer: any;
- *   Main: any;
- *   Layout: any;
- * }} - Object containing various functions and components for rendering BringBlocks.
+ * @param wpURL - The WordPress URL.
+ * @param dataToken - The data token.
+ * @param onRedirect - Callback function for redirecting.
+ * @param onNotFound - Callback function for handling not found pages.
+ * @param componentList - List of components.
+ * @returns Object containing various functions and components for rendering BringBlocks.
  */
 export function initRender<
 	EP = {}, // EntityProps
@@ -57,12 +44,12 @@ export function initRender<
 		/**
 		 * Creates a BringElement component.
 		 *
-		 * @param {BringNode[]} nodes - The nodes to render.
-		 * @param {EntityProps<EP>} entityProps - The entity props.
-		 * @param {SiteProps<SP, M, MI>} siteProps - The site props.
-		 * @param {CTX} context - The context.
-		 * @param {ReactNode} PostContent - The post content.
-		 * @returns {any} - The rendered component.
+		 * @param nodes - The nodes to render.
+		 * @param entityProps - The entity props.
+		 * @param siteProps - The site props.
+		 * @param context - The context.
+		 * @param PostContent - The post content.
+		 * @returns The rendered component.
 		 */
 		createBringElement: (
 			nodes: BringNode[],
@@ -83,14 +70,16 @@ export function initRender<
 		/**
 		 * Retrieves an entity from the WordPress API.
 		 *
-		 * @param {string | string[]} slug - The entity slug.
-		 * @returns {Promise<EP>} - The entity data.
+		 * @param slug - The entity slug.
+		 * @returns The entity data.
 		 */
 		getEntity: (slug: string | string[] = "") =>
 			getEntity<EP>(wpURL, dataToken, onRedirect, onNotFound, slug),
 
 		/**
 		 * The Header component.
+		 * @param props - The properties of the Header component.
+		 * @returns The rendered Header component.
 		 */
 		Header: makeHeader<EP, SP, M, MI, CTX>(
 			wpURL,
@@ -102,6 +91,8 @@ export function initRender<
 
 		/**
 		 * The Footer component.
+		 * @param props - The properties of the Footer component.
+		 * @returns The rendered Footer component.
 		 */
 		Footer: makeFooter<EP, SP, M, MI, CTX>(
 			wpURL,
@@ -113,6 +104,8 @@ export function initRender<
 
 		/**
 		 * The Main component.
+		 * @param props - The properties of the Main component.
+		 * @returns The rendered Main component.
 		 */
 		Main: makeMain<EP, SP, M, MI, CTX>(
 			wpURL,
@@ -124,6 +117,8 @@ export function initRender<
 
 		/**
 		 * The Layout component.
+		 * @param props - The properties of the Layout component.
+		 * @returns The rendered Layout component.
 		 */
 		Layout: makeLayout<EP, SP, M, MI, CTX>(
 			wpURL,

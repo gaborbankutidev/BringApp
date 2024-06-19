@@ -7,14 +7,15 @@ import {
 	type GetDynamicEntityPropsOptions,
 } from "./content";
 import type {EntityType} from "./types";
+
 /**
  *  Initializes Bring Blocks functions that should be run on the server.
  *
  * @template SP - SiteProps
  * @template M - Menu
  * @template MI - MenuItem
- * @param {string} wpURL - The WordPress URL.
- * @returns {Object} - An object containing functions to retrieve dynamic entity props, dynamic entity list, and site props.
+ * @param wpURL - The WordPress URL.
+ * @returns An object containing functions to retrieve dynamic entity props, dynamic entity list, and site props.
  */
 export function initServer<
 	SP = {}, // SiteProps
@@ -26,10 +27,10 @@ export function initServer<
 		 * Retrieves the properties of a dynamic entity.
 		 *
 		 * @template T - The type of the entity props.
-		 * @param {number} entityId - The ID of the entity.
-		 * @param {EntityType} entityType - The type of the entity.
-		 * @param {GetDynamicEntityPropsOptions} options - The options for retrieving the entity props.
-		 * @returns {Promise<T>} - A promise that resolves to the entity props.
+		 * @param entityId - The ID of the entity.
+		 * @param entityType - The type of the entity.
+		 * @param options - The options for retrieving the entity props.
+		 * @returns A promise that resolves to the entity props.
 		 */
 		getDynamicEntityProps: <T = {}, P = {}>(
 			entityId: number,
@@ -41,10 +42,10 @@ export function initServer<
 		 * Retrieves a list of dynamic entities.
 		 *
 		 * @template T - The type of the entity list.
-		 * @param {string} entitySlug - The slug of the entity.
-		 * @param {EntityType} entityType - The type of the entity.
-		 * @param {GetDynamicEntityListOptions} options - The options for retrieving the entity list.
-		 * @returns {Promise<T>} - A promise that resolves to the entity list.
+		 * @param entitySlug - The slug of the entity.
+		 * @param entityType - The type of the entity.
+		 * @param options - The options for retrieving the entity list.
+		 * @returns A promise that resolves to the entity list.
 		 */
 		getDynamicEntityList: <T = {}, P = {}>(
 			entitySlug: string,
@@ -55,7 +56,7 @@ export function initServer<
 		/**
 		 * Retrieves the properties of the site.
 		 *
-		 * @returns {Promise<SP>} - A promise that resolves to the site props.
+		 * @returns A promise that resolves to the site props.
 		 */
 		getSiteProps: () => getSiteProps<SP, M, MI>(wpURL),
 

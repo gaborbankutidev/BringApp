@@ -50,6 +50,15 @@ export type GridNumType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
 /**
  * Represents a media type with optional properties.
+ * @property id - The media ID.
+ * @property title - The media title.
+ * @property filename - The media filename.
+ * @property src - The media source URL.
+ * @property alt - The media alt text.
+ * @property description - The media description.
+ * @property caption - The media caption.
+ * @property mime - The media MIME type.
+ * @property type - The media type.
  */
 export type MediaType = {
 	id: number | null;
@@ -71,6 +80,13 @@ export type ImageType = MediaType;
 /**
  * Represents a menu item with optional children.
  * @template T - Additional properties type
+ * @property id - The menu item ID.
+ * @property name - The menu item name.
+ * @property url - The menu item URL.
+ * @property description - The menu item description.
+ * @property target - The menu item target.
+ * @property classes - The menu item classes.
+ * @property children - The menu item children.
  */
 export type MenuItemType<T = {}> = {
 	id?: number;
@@ -86,6 +102,9 @@ export type MenuItemType<T = {}> = {
  * Represents a menu with optional additional properties and menu items.
  * @template T - Additional properties type
  * @template iT - Menu Item type
+ * @property id - The menu ID.
+ * @property name - The menu name.
+ * @property items - The menu items.
  */
 export type MenuType<T = {}, iT = {}> = {
 	id: number;
@@ -95,6 +114,8 @@ export type MenuType<T = {}, iT = {}> = {
 
 /**
  * Represents a menu location with a key and associated menu ID.
+ * @property key - The menu location key.
+ * @property menuId - The associated menu ID.
  */
 export type MenuLocationType = {
 	key: string;
@@ -125,6 +146,15 @@ export type DynamicEntityList<T = {}> = ({
 /**
  * Represents dynamic entity properties, which can have different shapes depending on the entity type.
  * @template T - Additional properties type
+ * @property entityType - The entity type.
+ * @property entitySlug - The entity slug.
+ * @property entityId - The entity ID.
+ * @property name - The entity name.
+ * @property image - The entity image.
+ * @property excerpt - The entity excerpt.
+ * @property description - The entity description.
+ * @property slug - The entity slug.
+ * @property url - The entity URL.
  */
 export type DynamicEntityProps<T = {}> = {
 	entityType: EntityType | null;
@@ -143,6 +173,8 @@ export type DynamicEntityProps<T = {}> = {
  * @template SP - Site Props type
  * @template M - Menu type
  * @template MI - Menu Item type
+ * @property menus - The site menus.
+ * @property menuLocations - The site menu locations.
  */
 export type SiteProps<SP = {}, M = {}, MI = {}> = {
 	menus: MenuType<M, MI>[];
@@ -151,6 +183,10 @@ export type SiteProps<SP = {}, M = {}, MI = {}> = {
 
 /**
  * Represents the content of an entity, which includes header, main, footer, and layout sections.
+ * @property header - The header content.
+ * @property main - The main content.
+ * @property footer - The footer content.
+ * @property layout - The layout content.
  */
 export type EntityContent = {
 	header: BringNode[] | null;
@@ -162,6 +198,15 @@ export type EntityContent = {
 /**
  * Represents entity properties, which include entity type, slug, ID, URL, name, excerpt, description, and image.
  * @template EP - Entity Props type
+ * @property entityType - The entity type.
+ * @property entitySlug - The entity slug.
+ * @property entityId - The entity ID.
+ * @property url - The entity URL.
+ * @property slug - The entity slug.
+ * @property name - The entity name.
+ * @property excerpt - The entity excerpt.
+ * @property description - The entity description.
+ * @property image - The entity image.
  */
 export type EntityProps<EP = {}> = {
 	entityType: EntityType | null;
@@ -179,6 +224,11 @@ export type EntityProps<EP = {}> = {
 /**
  * Represents an entity, which has an ID, slug, type, props, and content.
  * @template EP - Entity Props type
+ * @property id - The entity ID.
+ * @property slug - The entity slug.
+ * @property type - The entity type.
+ * @property props - The entity props.
+ * @property content - The entity content.
  */
 export type Entity<EP = {}> = {
 	id: number | null;
@@ -191,6 +241,10 @@ export type Entity<EP = {}> = {
 
 /**
  * Represents a node in the BringBlocks component tree, which has a key, component name, props, and optional children.
+ * @property key - The node key.
+ * @property component - The node component name.
+ * @property props - The node props.
+ * @property children - The node children.
  */
 export type BringNode = {
 	key: string;

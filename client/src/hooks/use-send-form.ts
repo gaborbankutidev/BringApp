@@ -9,6 +9,7 @@ export type FormState = "loading" | "success" | "error" | "idle";
 
 /**
  * Represents the loading state of the form submission.
+ * @property state - The current state of the form submission.
  */
 type LoadingState = {
 	state: "loading";
@@ -17,6 +18,8 @@ type LoadingState = {
 /**
  * Represents the success state of the form submission.
  * @template SuccessT - The type of the success response.
+ * @property state - The current state of the form submission.
+ * @property data - The success response data.
  */
 type SuccessState<SuccessT> = {
 	state: "success";
@@ -26,6 +29,7 @@ type SuccessState<SuccessT> = {
 /**
  * Represents the error state of the form submission.
  * @template ErrorT - The type of the error response.
+ * @property state - The current state of the form submission.
  */
 type ErrorState<ErrorT> = {
 	state: "error";
@@ -34,6 +38,7 @@ type ErrorState<ErrorT> = {
 
 /**
  * Represents the idle state of the form submission.
+ * @property state - The current state of the form submission.
  */
 type IdleState = {
 	state: "idle";
@@ -55,6 +60,8 @@ type FetchState<SuccessT, ErrorT> =
  * @template SuccessT - The type of the success response.
  * @template ErrorT - The type of the error response.
  * @template PayloadT - The type of the form data payload.
+ * @property onSuccess - The callback function to handle success responses.
+ * @property onError - The callback function to handle error responses.
  */
 export type UseSendFormOptions<SuccessT, ErrorT, PayloadT> = {
 	onSuccess?: ((data: SuccessT, payload: PayloadT) => void) | undefined;

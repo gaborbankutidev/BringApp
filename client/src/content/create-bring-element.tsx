@@ -3,6 +3,7 @@ import type {BringNode} from "../types";
 
 /**
  * Represents the props of the error component.
+ * @property name - The name of the component that encountered the error.
  */
 interface ErrorComponentInterface {
 	name: string;
@@ -63,7 +64,7 @@ export default function createBringElement(
 					siteProps,
 					context,
 					PostContent,
-			  )
+				)
 			: [];
 
 		// create element

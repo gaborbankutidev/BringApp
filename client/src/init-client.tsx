@@ -19,8 +19,8 @@ import type {EntityType} from "./types";
  * @template SP - SiteProps
  * @template M - Menu
  * @template MI - MenuItem
- * @param {string} wpURL - The WordPress URL.
- * @returns {object} The initialized client object.
+ * @param wpURL - The WordPress URL.
+ * @returns The initialized client object.
  */
 export function initClient<
 	SP = {}, // SiteProps
@@ -30,17 +30,17 @@ export function initClient<
 	const client = {
 		/**
 		 * Retrieves the site props.
-		 * @returns {object} The site props.
+		 * @returns The site props.
 		 */
 		useSiteProps: () => useSiteProps<SP, M, MI>(wpURL),
 
 		/**
 		 * Retrieves the dynamic entity props.
 		 * @template T - The type of the entity props.
-		 * @param {number} entityId - The ID of the entity.
-		 * @param {EntityType} entityType - The type of the entity.
-		 * @param {DynamicEntityPropsOptions} options - The options for retrieving the entity props.
-		 * @returns {object} The dynamic entity props.
+		 * @param entityId - The ID of the entity.
+		 * @param entityType - The type of the entity.
+		 * @param options - The options for retrieving the entity props.
+		 * @returns The dynamic entity props.
 		 */
 		useDynamicEntityProps: <T = {},>(
 			entityId: number,
@@ -51,10 +51,10 @@ export function initClient<
 		/**
 		 * Retrieves the dynamic entity list.
 		 * @template T - The type of the entity list.
-		 * @param {string} entitySlug - The slug of the entity.
-		 * @param {EntityType} entityType - The type of the entity.
-		 * @param {DynamicEntityListOptions} options - The options for retrieving the entity list.
-		 * @returns {object} The dynamic entity list.
+		 * @param entitySlug - The slug of the entity.
+		 * @param entityType - The type of the entity.
+		 * @param options - The options for retrieving the entity list.
+		 * @returns The dynamic entity list.
 		 */
 		useDynamicEntityList: <T = {},>(
 			entitySlug: string,
@@ -81,7 +81,7 @@ export function initClient<
 		DynamicEntityList: makeDynamicEntityListClient(wpURL),
 		/**
 		 * Retrieves the WP send form hook.
-		 * @returns {object} The WP send form hook.
+		 * @returns The WP send form hook.
 		 */
 		useWPSendForm: makeUseWPSendForm(wpURL),
 	};
