@@ -9,9 +9,9 @@
 		"dist/"
 	],
 	"scripts": {
-		"build": "tsup",
-		"watch": "tsup --watch",
-		"checks": "tsc",
+		"build": "tsc",
+		"dev": "tsup --watch",
+		"types": "tsc",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [],
@@ -24,8 +24,6 @@
 		"@bring/typescript-config": "*",
 		"@types/react": "^18.2.73",
 		"@types/react-dom": "^18.2.23",
-		"npm-run-all": "^4.1.5",
-		"tsup": "^6.7.0",
 		"typescript": "^5.4.3"
 	},
 	"peerDependencies": {
