@@ -2,6 +2,13 @@ import type {ResponsiveValue} from "./types";
 
 const screenSizes = ["", "md", "lg"] as const;
 
+/**
+ * Makes responsive class names.
+ * @param className - The class name.
+ * @param responsiveValue - The responsive value.
+ * @param responsiveConfig - The responsive config.
+ * @returns The responsive class names.
+ */
 export const makeResponsiveClassNames = <T = number>(
 	className: string,
 	responsiveValue: ResponsiveValue<T>,

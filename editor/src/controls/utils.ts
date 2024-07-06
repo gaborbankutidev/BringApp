@@ -8,13 +8,23 @@ import type {
 import {capitalize} from "../utils";
 import type {ControlByPath, ControlType} from "./types";
 
+/**
+ * Checks if a control is a path control.
+ * @param props - The control properties.
+ * @returns True if the control is a path control, false otherwise.
+ */
 export function isPathControl<vT, pT extends Obj = {}>(
 	props: ControlType<vT, pT>,
 ): props is ControlByPath<pT, vT> {
 	return props.updateHandling !== "by-value";
 }
 
-// generates option list for SelectControl
+/**
+ * Generates an option list for a SelectControl.
+ * @param options - The options for the SelectControl.
+ * @param withDefault - Whether to include a default option. Defaults to true.
+ * @returns The generated SelectControlOptions.
+ */
 export function makeOptions<T extends string>(
 	options: OptionList<T>,
 	withDefault: boolean | string = true,
@@ -32,11 +42,16 @@ export function makeOptions<T extends string>(
 					value: "",
 				},
 				...optionList,
-		  ]
+			]
 		: optionList;
 }
 
-// generates option list for NumberSelectControl
+/**
+ * Generates an option list for a NumberSelectControl.
+ * @param options - The options for the NumberSelectControl.
+ * @param withDefault - Whether to include a default option. Defaults to true.
+ * @returns The generated NumberSelectControlOptions.
+ */
 export function makeNumberOptions<T extends number>(
 	options: NumberOptionList<T>,
 	withDefault: boolean | string = true,
@@ -54,10 +69,15 @@ export function makeNumberOptions<T extends number>(
 					value: 0,
 				},
 				...optionList,
-		  ]
+			]
 		: optionList;
 }
 
+/**
+ * Converts options of a SelectControl to options of a NumberSelectControl.
+ * @param selectOptions - The options of the SelectControl.
+ * @returns The converted NumberSelectControlOptions.
+ */
 export const optionsToNumberOptions = <From extends string>(
 	selectOptions: SelectControlOptions<From>,
 ): NumberSelectControlOptions<number> =>

@@ -14,6 +14,14 @@ import {screenSizes} from "../../styles/utils";
 import type {ResponsiveLabels} from "../../styles/types";
 import {ResponsiveValue} from "../../client-types";
 
+/**
+ * A control component that renders a responsive checkbox control.
+ *
+ * @template pT - The type of the attributes object.
+ *
+ * @param props - The props for the ResponsiveCheckboxControl component.
+ * @returns The rendered ResponsiveCheckboxControl component.
+ */
 export const ResponsiveCheckboxControl = <pT extends Obj = {}>(
 	props: ControlType<ResponsiveValue<boolean>, pT>,
 ) =>
@@ -23,6 +31,16 @@ export const ResponsiveCheckboxControl = <pT extends Obj = {}>(
 		<ResponsiveCheckboxControlByValue {...props} />
 	);
 
+/**
+ * A control component that renders a responsive checkbox control based on a path.
+ *
+ * @template pT - The type of the attributes object.
+ *
+ * @param path - The path to the value in the attributes object.
+ * @param updateHandling - The update handling strategy.
+ * @param props - The rest of the props for the ResponsiveCheckboxControlByPath component.
+ * @returns The rendered ResponsiveCheckboxControlByPath component.
+ */
 function ResponsiveCheckboxControlByPath<pT extends Obj>({
 	path,
 	updateHandling,
@@ -45,6 +63,19 @@ function ResponsiveCheckboxControlByPath<pT extends Obj>({
 	);
 }
 
+/**
+ * A control component that renders a responsive checkbox control based on a value.
+ *
+ * @param label - The label for the checkbox input.
+ * @param value - The value of the checkbox input.
+ * @param setValue - The function to set the value of the checkbox input.
+ * @param show - Whether to show the checkbox input.
+ * @param updateHandling - The update handling strategy.
+ * @param defaultValue - The default value for the checkbox input.
+ * @param props - The rest of the props for the ResponsiveCheckboxControlByValue component.
+ *
+ * @returns The rendered ResponsiveCheckboxControlByValue component.
+ */
 const ResponsiveCheckboxControlByValue: FC<
 	ControlByValue<ResponsiveValue<boolean>>
 > = ({

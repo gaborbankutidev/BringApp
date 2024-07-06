@@ -1,12 +1,30 @@
 import type {DynamicEntityProps, EntityType} from "../types";
 
+/**
+ * Represents the options for retrieving dynamic entity properties.
+ * @template P - Additional properties type
+ * @property customData - Custom data to include in the request.
+ * @property cache - The cache mode for the request.
+ */
 export type GetDynamicEntityPropsOptions = {
 	customData?: {[key: string]: any};
 	cache?: "force-cache" | "no-store";
 };
 
+/**
+ * Represents the dynamic entity properties.
+ * @template T - Additional properties type
+ */
 export type GetDynamicEntityPropsParams<P> = P;
 
+/**
+ * Retrieves dynamic entity properties from a WordPress site.
+ * @param wpURL - The URL of the WordPress site.
+ * @param entityId - The ID of the entity.
+ * @param entityType - The type of the entity.
+ * @param options - The options for retrieving the dynamic entity properties.
+ * @returns A promise that resolves to the dynamic entity properties.
+ */
 async function getDynamicEntityProps<T = {}, P = {}>(
 	wpURL: string,
 	entityId: number,

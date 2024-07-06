@@ -1,15 +1,35 @@
 import React, {type ReactNode, type FC} from "react";
 import type {BringNode} from "../types";
 
+/**
+ * Represents the props of the error component.
+ * @property name - The name of the component that encountered the error.
+ */
 interface ErrorComponentInterface {
 	name: string;
 }
 
-// TODO create a better error component
+/**
+ * Error component to be rendered when there is an error while rendering a component.
+ *
+ * @param name - The name of the component that encountered the error.
+ * @returns The React element representing the error component.
+ */
 const Error: FC<ErrorComponentInterface> = ({name}) => (
 	<div>Error while rendering {name}</div>
 );
 
+/**
+ * Creates a React element tree based on the provided BringNodes.
+ *
+ * @param nodes - An array of BringNodes representing the elements to be rendered.
+ * @param componentMap - A map of component names to React components.
+ * @param entityProps - Props to be passed to the entity components.
+ * @param siteProps - Props to be passed to the site components.
+ * @param context - Additional context to be passed to the components.
+ * @param PostContent - The ReactNode representing the PostContent component.
+ * @returns An array of React elements representing the rendered components.
+ */
 export default function createBringElement(
 	nodes: BringNode[],
 	componentMap: Map<string, FC<any>>,
@@ -44,7 +64,7 @@ export default function createBringElement(
 					siteProps,
 					context,
 					PostContent,
-			  )
+				)
 			: [];
 
 		// create element

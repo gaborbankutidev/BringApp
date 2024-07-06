@@ -3,6 +3,21 @@ import {makeFooter, makeHeader, makeLayout, makeMain} from "./components";
 import {createBringElement, getEntity} from "./content";
 import type {BringNode, EntityProps, FCC, SiteProps} from "./types";
 
+/**
+ * Initializes the rendering of BringBlocks components.
+ *
+ * @template EP - EntityProps
+ * @template SP - SiteProps
+ * @template M - Menu
+ * @template MI - MenuItem
+ * @template CTX - Context
+ * @param wpURL - The WordPress URL.
+ * @param dataToken - The data token.
+ * @param onRedirect - Callback function for redirecting.
+ * @param onNotFound - Callback function for handling not found pages.
+ * @param componentList - List of components.
+ * @returns Object containing various functions and components for rendering BringBlocks.
+ */
 export function initRender<
 	EP = {}, // EntityProps
 	SP = {}, // SiteProps
@@ -26,6 +41,16 @@ export function initRender<
 	);
 
 	return {
+		/**
+		 * Creates a BringElement component.
+		 *
+		 * @param nodes - The nodes to render.
+		 * @param entityProps - The entity props.
+		 * @param siteProps - The site props.
+		 * @param context - The context.
+		 * @param PostContent - The post content.
+		 * @returns The rendered component.
+		 */
 		createBringElement: (
 			nodes: BringNode[],
 			entityProps: EntityProps<EP>,
@@ -41,8 +66,21 @@ export function initRender<
 				context,
 				PostContent,
 			),
+
+		/**
+		 * Retrieves an entity from the WordPress API.
+		 *
+		 * @param slug - The entity slug.
+		 * @returns The entity data.
+		 */
 		getEntity: (slug: string | string[] = "") =>
 			getEntity<EP>(wpURL, dataToken, onRedirect, onNotFound, slug),
+
+		/**
+		 * The Header component.
+		 * @param props - The properties of the Header component.
+		 * @returns The rendered Header component.
+		 */
 		Header: makeHeader<EP, SP, M, MI, CTX>(
 			wpURL,
 			dataToken,
@@ -50,6 +88,12 @@ export function initRender<
 			onNotFound,
 			componentMap,
 		),
+
+		/**
+		 * The Footer component.
+		 * @param props - The properties of the Footer component.
+		 * @returns The rendered Footer component.
+		 */
 		Footer: makeFooter<EP, SP, M, MI, CTX>(
 			wpURL,
 			dataToken,
@@ -57,6 +101,12 @@ export function initRender<
 			onNotFound,
 			componentMap,
 		),
+
+		/**
+		 * The Main component.
+		 * @param props - The properties of the Main component.
+		 * @returns The rendered Main component.
+		 */
 		Main: makeMain<EP, SP, M, MI, CTX>(
 			wpURL,
 			dataToken,
@@ -64,6 +114,12 @@ export function initRender<
 			onNotFound,
 			componentMap,
 		),
+
+		/**
+		 * The Layout component.
+		 * @param props - The properties of the Layout component.
+		 * @returns The rendered Layout component.
+		 */
 		Layout: makeLayout<EP, SP, M, MI, CTX>(
 			wpURL,
 			dataToken,

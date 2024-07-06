@@ -1,5 +1,14 @@
 import type {DynamicEntityList, EntityType} from "../types";
 
+/**
+ * Represents the options for retrieving a dynamic entity list.
+ * @template P - Additional properties type
+ * @property limit - The maximum number of entities to retrieve.
+ * @property offset - The number of entities to skip.
+ * @property page - The page number to retrieve.
+ * @property customData - Custom data to include in the request.
+ * @property cache - The cache mode for the request.
+ */
 export type GetDynamicEntityListOptions = {
 	limit?: number;
 	offset?: number;
@@ -8,8 +17,23 @@ export type GetDynamicEntityListOptions = {
 	cache?: "force-cache" | "no-store";
 };
 
+/**
+ * Represents the parameters for retrieving a dynamic entity list.
+ * @template P - Additional properties type
+ * @property count - The number of entities in the list.
+ */
 export type GetDynamicEntityListParams<P> = {count: number} & P;
 
+/**
+ * Retrieves a dynamic entity list from a WordPress site.
+ *
+ * @template T - The type of data contained in the dynamic entity list.
+ * @param wpURL - The URL of the WordPress site.
+ * @param entitySlug - The slug of the dynamic entity.
+ * @param entityType - The type of the dynamic entity.
+ * @param options - The options for retrieving the dynamic entity list.
+ * @returns A promise that resolves to the dynamic entity list.
+ */
 async function getDynamicEntityList<T = {}, P = {}>(
 	wpURL: string,
 	entitySlug: string,

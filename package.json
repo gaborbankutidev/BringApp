@@ -15,7 +15,9 @@
 		"build": "concurrently -n \"Client,Editor\" -c \"yellow.bold,cyan.bold\" \"yarn build:client\" \"yarn build:editor\"",
 		"format": "yarn format:prettier --write",
 		"format:check": "yarn format:prettier --check",
-		"format:prettier": "prettier \"./**/*.{ts,tsx,js,jsx,json,css,md,yml,yaml,php}\""
+		"format:prettier": "prettier \"./**/*.{ts,tsx,js,jsx,json,css,md,yml,yaml,php}\"",
+		"docs": "typedoc",
+		"dev:docs": "typedoc --watch --preserveWatchOutput"
 	},
 	"repository": {
 		"type": "git",
@@ -30,6 +32,9 @@
 	"homepage": "https://github.com/gaborbankutidev/BringBlocks#readme",
 	"devDependencies": {
 		"concurrently": "^8.2.2",
-		"prettier": "^3.2.5"
+		"prettier": "^3.2.5",
+		"typedoc": "^0.25.13",
+		"typedoc-plugin-markdown": "^4.0.3",
+		"typescript": "^5.4.5"
 	}
 }

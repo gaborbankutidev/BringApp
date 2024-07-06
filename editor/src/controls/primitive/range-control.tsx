@@ -11,6 +11,11 @@ import {isPathControl} from "../utils";
 
 type _NumberControl = {min?: number; max?: number};
 
+/**
+ * A custom range control component.
+ *
+ * @template pT - The type of additional properties for the control.
+ */
 export const RangeControl = <pT extends Obj = {}>(
 	props: ControlType<number, pT> & _NumberControl,
 ) =>
@@ -20,6 +25,15 @@ export const RangeControl = <pT extends Obj = {}>(
 		<RangeControlByValue {...props} />
 	);
 
+/**
+ * A range control component that works with a control path.
+ *
+ * @template pT - The type of additional properties for the control.
+ *
+ * @param props - The props for the RangeControlByPath component.
+ * @returns The rendered RangeControlByPath component.
+ *
+ */
 function RangeControlByPath<pT extends Obj>({
 	path,
 	updateHandling,
@@ -42,6 +56,10 @@ function RangeControlByPath<pT extends Obj>({
 	);
 }
 
+/**
+ * A range control component that works with a control value.
+ * @param props - The props for the RangeControlByValue component.
+ */
 const RangeControlByValue: FC<ControlByValue<number> & _NumberControl> = ({
 	label,
 	value,

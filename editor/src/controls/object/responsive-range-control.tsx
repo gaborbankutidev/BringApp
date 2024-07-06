@@ -14,8 +14,19 @@ import {screenSizes} from "../../styles/utils";
 import type {ResponsiveLabels} from "../../styles/types";
 import {ResponsiveValue} from "../../client-types";
 
+/**
+ * Props for the ResponsiveRangeControl component.
+ */
 type _NumberControl = {min?: number; max?: number};
 
+/**
+ * A control component that renders a responsive range control.
+ *
+ * @template pT - The type of the attributes object.
+ *
+ * @param props - The props for the ResponsiveRangeControl component.
+ * @returns The rendered ResponsiveRangeControl component.
+ */
 export const ResponsiveRangeControl = <pT extends Obj = {}>(
 	props: ControlType<ResponsiveValue, pT> & _NumberControl,
 ) =>
@@ -25,6 +36,15 @@ export const ResponsiveRangeControl = <pT extends Obj = {}>(
 		<ResponsiveRangeControlByValue {...props} />
 	);
 
+/**
+ * A control component that renders a responsive range control based on a path.
+ *
+ * @template pT - The type of the attributes object.
+ *
+ * @param path - The path to the value in the attributes object.
+ * @param updateHandling - The update handling strategy.
+ * @returns The rendered ResponsiveRangeControlByPath component.
+ */
 function ResponsiveRangeControlByPath<pT extends Obj>({
 	path,
 	updateHandling,
@@ -47,6 +67,18 @@ function ResponsiveRangeControlByPath<pT extends Obj>({
 	);
 }
 
+/**
+ * A control component that renders a responsive range control based on a value.
+ *
+ * @param label - The label for the range input.
+ * @param value - The value of the range input.
+ * @param setValue - The function to set the value of the range input.
+ * @param show - Whether to show the range input.
+ * @param updateHandling - The update handling strategy.
+ * @param defaultValue - The default value for the range input.
+ * @param props - The rest of the props for the ResponsiveRangeControlByValue component.
+ * @returns The rendered ResponsiveRangeControlByValue component.
+ */
 const ResponsiveRangeControlByValue: FC<ControlByValue<ResponsiveValue>> = ({
 	label,
 	value = {},

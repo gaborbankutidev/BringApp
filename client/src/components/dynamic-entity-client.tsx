@@ -7,6 +7,13 @@ import {
 import type {DynamicEntityProps, EntityType} from "../types";
 import Debug from "./debug";
 
+/**
+ * Represents the properties for rendering a dynamic entity.
+ * @template T - Additional properties type
+ * @template P - Additional parameters type
+ * @property entityProps - The dynamic entity properties.
+ * @property params - The parameters for retrieving the dynamic entity properties.
+ */
 export type DynamicEntityPropsClientRenderProps<T = {}, P = {}> = {
 	entityProps: DynamicEntityProps<T>;
 	params?: GetDynamicEntityPropsParams<P>;

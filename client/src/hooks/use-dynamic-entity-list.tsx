@@ -9,11 +9,27 @@ import {
 } from "../content";
 import type {DynamicEntityList, EntityType} from "../types";
 
+/**
+ * Represents the options for fetching a dynamic entity list.
+ * @template P - Additional properties type
+ * @property lazy - Whether to lazy load the entity list.
+ * @property updateKey - A key to update the entity list.
+ */
 export type UseDynamicEntityListOptions = {
 	lazy?: boolean;
 	updateKey?: boolean | number | string;
 } & GetDynamicEntityListOptions;
 
+/**
+ * Custom hook for fetching and managing a dynamic entity list.
+ *
+ * @template T - The type of the entity list items.
+ * @param wpURL - The URL of the WordPress site.
+ * @param entitySlug - The slug of the entity.
+ * @param entityType - The type of the entity.
+ * @param options - The options for fetching the entity list.
+ * @returns - An object containing the entity list and a ref for the intersection observer.
+ */
 export function useDynamicEntityList<T = {}, P = {}>(
 	wpURL: string,
 	entitySlug: string | null | undefined,
