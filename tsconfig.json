@@ -1,11 +1,6 @@
 {
-	"compilerOptions": {
-		"target": "ES2020",
-		"module": "commonjs",
-		"esModuleInterop": true,
-		"strict": true,
-		"skipLibCheck": true,
-		"jsx": "react"
-	},
-	"include": ["editor/src/**/*", "client/src/**/*"]
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"display": "React Library",
+	"extends": "@bring/typescript-config/react-library.json",
+	"include": ["packages/**/*"]
 }

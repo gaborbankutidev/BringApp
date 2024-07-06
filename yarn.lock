@@ -2071,7 +2071,6 @@ __metadata:
     tsup: "npm:^8.1.0"
     turbo: "npm:^2.0.6"
     typedoc: "npm:^0.26.3"
-    typedoc-plugin-markdown: "npm:^4.1.2"
     typescript: "npm:^5.5.3"
   languageName: unknown
   linkType: soft
@@ -4751,15 +4750,6 @@ __metadata:
   bin:
     turbo: bin/turbo
   checksum: 10c0/3edf8f5fa3fc2456c47f0c0b150c92c670594564fa96b1a90db06c888364a8cc2612081823b685ec31813831a622d71955c3c880d0aa3a0cf10f97d1666f2e35
-  languageName: node
-  linkType: hard
-
-"typedoc-plugin-markdown@npm:^4.1.2":
-  version: 4.1.2
-  resolution: "typedoc-plugin-markdown@npm:4.1.2"
-  peerDependencies:
-    typedoc: 0.26.x
-  checksum: 10c0/d7376d8930185a657979205789cb198e235fda7b6e2118472de92987d95593df53efddaf7940ff4c3e55324d29d9e2ab6d9ea279ae6ffdcb222cb8ccf0d7200a
   languageName: node
   linkType: hard
 
