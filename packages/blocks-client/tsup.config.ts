@@ -4,7 +4,7 @@ export default defineConfig({
 	entry: ["src/index.ts"],
 	format: ["cjs", "esm"],
 	external: ["react", "react-dom"],
-	minify: true,
+	minify: false,
 	dts: true,
 	clean: true,
 	outExtension({format}) {

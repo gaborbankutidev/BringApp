@@ -1,0 +1,19 @@
+{
+	"name": "@bring/blocks-cli",
+	"version": "0.1.0",
+	"description": "CLI package for initializing a new BringBlocks project",
+	"bin": {
+		"create-bring-app": "dist/index.js"
+	},
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch",
+		"types": "tsc"
+	},
+	"devDependencies": {
+		"typescript": "^5.4.2"
+	},
+	"keywords": [],
+	"license": "GPL-2.0-or-later",
+	"author": "Bring Team Ltd."
+}

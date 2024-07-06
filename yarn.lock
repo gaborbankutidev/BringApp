@@ -191,6 +191,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@bring/blocks-cli@workspace:packages/create-bring-app":
+  version: 0.0.0-use.local
+  resolution: "@bring/blocks-cli@workspace:packages/create-bring-app"
+  dependencies:
+    typescript: "npm:^5.4.2"
+  bin:
+    create-bring-app: dist/index.js
+  languageName: unknown
+  linkType: soft
+
 "@bring/blocks-client@workspace:packages/blocks-client":
   version: 0.0.0-use.local
   resolution: "@bring/blocks-client@workspace:packages/blocks-client"

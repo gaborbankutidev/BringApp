@@ -11,7 +11,7 @@ export default defineConfig({
 		"react",
 		"react-dom",
 	],
-	minify: true,
+	minify: false,
 	dts: true,
 	clean: true,
 	outExtension({format}) {
