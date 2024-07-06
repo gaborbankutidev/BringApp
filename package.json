@@ -1,40 +1,29 @@
 {
-	"name": "bring-blocks",
-	"version": "0.2.0",
+	"name": "bringblocks-project",
+	"version": "0.0.0",
+	"private": true,
 	"description": "GPL-2.0-or-later",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"install:client": "cd client && yarn install --frozen-lockfile",
-		"install:editor": "cd editor && yarn install --frozen-lockfile",
-		"install:packages": "concurrently -n \"Client,Editor\" -c \"yellow.bold,cyan.bold\" \"yarn install:client\" \"yarn install:editor\"",
-		"checks:client": "cd client && yarn checks",
-		"checks:editor": "cd editor && yarn checks",
-		"checks": "concurrently -n \"Client,Editor\" -c \"yellow.bold,cyan.bold\" \"yarn checks:client\" \"yarn checks:editor\"",
-		"build:client": "cd client && yarn build",
-		"build:editor": "cd editor && yarn build",
-		"build": "concurrently -n \"Client,Editor\" -c \"yellow.bold,cyan.bold\" \"yarn build:client\" \"yarn build:editor\"",
+		"build": "turbo build",
+		"dev": "turbo dev",
+		"lint": "turbo lint",
 		"format": "yarn format:prettier --write",
 		"format:check": "yarn format:prettier --check",
-		"format:prettier": "prettier \"./**/*.{ts,tsx,js,jsx,json,css,md,yml,yaml,php}\"",
+		"format:prettier": "prettier \"./**/*.{ts,tsx,js,jsx,json,css,md,yml,yaml}\"",
 		"docs": "typedoc",
 		"dev:docs": "typedoc --watch --preserveWatchOutput"
 	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/gaborbankutidev/BringBlocks.git"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "GPL-2.0-or-later",
-	"bugs": {
-		"url": "https://github.com/gaborbankutidev/BringBlocks/issues"
-	},
-	"homepage": "https://github.com/gaborbankutidev/BringBlocks#readme",
 	"devDependencies": {
-		"concurrently": "^8.2.2",
 		"prettier": "^3.2.5",
-		"typedoc": "^0.25.13",
-		"typedoc-plugin-markdown": "^4.0.3",
-		"typescript": "^5.4.5"
-	}
+		"prettier-plugin-pkg": "^0.18.1",
+		"tsup": "^8.1.0",
+		"turbo": "^2.0.6",
+		"typedoc": "^0.26.3",
+		"typedoc-plugin-markdown": "^4.1.2",
+		"typescript": "^5.5.3"
+	},
+	"packageManager": "yarn@4.3.1",
+	"workspaces": [
+		"packages/*"
+	]
 }

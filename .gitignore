@@ -1,11 +1,3 @@
-client/dist
-client/node_modules
-old_client
-
-editor/dist
-editor/node_modules
-
-cli/dist
-cli/node_modules
-
 node_modules
+.turbo
+dist
