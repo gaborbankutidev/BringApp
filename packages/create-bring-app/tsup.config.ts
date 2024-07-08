@@ -7,5 +7,5 @@ export default defineConfig({
 	minify: true,
 	dts: false,
 	clean: true,
-	target: "node18",
+	target: "node20",
 });

@@ -10,7 +10,7 @@
 			"dependsOn": ["^lint"]
 		},
 		"types": {
-			"dependsOn": ["^lint"]
+			"dependsOn": ["^types"]
 		},
 		"test": {
 			"dependsOn": ["^test", "^lint", "^types"]
