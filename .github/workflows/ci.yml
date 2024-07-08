@@ -33,11 +33,14 @@ jobs:
    - name: Install dependencies
      run: yarn install --frozen-lockfile
 
-   - name: Install package depdendencies
-     run: yarn install:packages
+   - name: Run typecheck
+     run: yarn types
 
-   - name: Run yarn check
-     run: yarn checks
+   - name: Run lint
+     run: yarn lint
 
    - name: Run build
      run: yarn build
+
+   - name: Run tests
+     run: yarn test
