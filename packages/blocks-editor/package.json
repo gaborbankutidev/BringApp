@@ -1,0 +1,49 @@
+{
+	"name": "@bring/blocks-editor",
+	"version": "0.2.7",
+	"description": "Editor package for bring-blocks",
+	"author": "Bring Team Ltd.",
+	"license": "GPL-2.0-or-later",
+	"main": "dist/index.cjs.js",
+	"module": "dist/index.esm.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist/"
+	],
+	"keywords": [],
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch",
+		"lint": "echo TODO: add eslint",
+		"test": "echo TODO: add tests",
+		"types": "tsc"
+	},
+	"peerDependencies": {
+		"@wordpress/block-editor": "^12.22.0",
+		"@wordpress/blocks": "^12.31.0",
+		"@wordpress/components": "^27.2.0",
+		"@wordpress/data": "^9.24.0"
+	},
+	"dependencies": {
+		"lodash.clonedeep": "^4.5.0",
+		"lodash.get": "^4.4.2",
+		"lodash.set": "^4.3.2",
+		"tailwind-merge": "^2.2.2"
+	},
+	"devDependencies": {
+		"@bring/typescript-config": "*",
+		"@types/lodash.clonedeep": "^4.5.9",
+		"@types/lodash.get": "^4.4.9",
+		"@types/lodash.set": "^4.3.9",
+		"@types/react": "^18.2.73",
+		"@types/react-dom": "^18.2.23",
+		"@types/wordpress__block-editor": "^11.5.13",
+		"@types/wordpress__blocks": "^12.5.12",
+		"@types/wordpress__components": "^23.0.12",
+		"@wordpress/block-editor": "^12.22.0",
+		"@wordpress/blocks": "^12.31.0",
+		"@wordpress/components": "^27.2.0",
+		"@wordpress/data": "^9.24.0",
+		"typescript": "^5.4.2"
+	}
+}
