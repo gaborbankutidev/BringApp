@@ -1,0 +1,14 @@
+name: Staging CD
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - staging
+
+jobs:
+  deploy-staging:
+    uses: ./.github/workflows/cd.yml
+    secrets: inherit
+    with:
+      environment: staging

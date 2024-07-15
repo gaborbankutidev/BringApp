@@ -1,0 +1,37 @@
+{
+	"name": "@bring/bring-app",
+	"license": "GPL-2.0-or-later",
+	"private": true,
+	"workspaces": [
+		"next"
+	],
+	"scripts": {
+		"build": "conc yarn:build:next yarn:build:editor",
+		"build:blocks": "cd ./next && yarn build:blocks",
+		"build:ci": "conc yarn:build:next:ci yarn:build:editor",
+		"build:editor": "conc yarn:build:blocks yarn:build:tailwind",
+		"build:next": "cd ./next && yarn build:next",
+		"build:next:ci": "cd ./next && yarn build:next:ci",
+		"build:tailwind": "cd ./next && yarn build:tailwind",
+		"checks": "conc yarn:format:check yarn:checks:next",
+		"checks:next": "cd ./next && yarn checks",
+		"format": "prettier --write .",
+		"format:check": "prettier --check .",
+		"prepare": "husky",
+		"storybook": "cd ./next && yarn watch:storybook",
+		"devapp": "conc yarn:watch:next yarn:watch:tailwind yarn:watch:blocks",
+		"watch:blocks": "cd ./next && yarn watch:blocks",
+		"watch:next": "cd ./next && yarn watch:next",
+		"watch:tailwind": "cd ./next && yarn watch:tailwind"
+	},
+	"devDependencies": {
+		"@prettier/plugin-php": "^0.22.2",
+		"concurrently": "^8.2.2",
+		"husky": "^9.0.11",
+		"lint-staged": "^15.2.2",
+		"prettier": "^3.2.5",
+		"prettier-plugin-organize-imports": "^4.0.0",
+		"prettier-plugin-pkg": "^0.18.1",
+		"prettier-plugin-tailwindcss": "0.5.13"
+	}
+}

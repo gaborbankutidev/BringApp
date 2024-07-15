@@ -1,0 +1,70 @@
+import type {BP} from "@/bring";
+import type {ColorType} from "@/styles";
+import {
+	twJoin,
+	type AlignType,
+	type DirectionType,
+	type JustifyType,
+} from "@/utils";
+import type {GridNumType, ResponsiveValue} from "@bring/blocks-client";
+import {makeResponsiveClassNames} from "@bring/blocks-client";
+import type {ReactNode} from "react";
+import Column from "./column";
+
+export type ColumnBlockProps = {
+	children: ReactNode;
+
+	colSpan?: ResponsiveValue<GridNumType>;
+	rowSpan?: ResponsiveValue;
+	gap?: ResponsiveValue;
+
+	direction?: DirectionType;
+	justify?: JustifyType;
+	align?: AlignType;
+
+	backgroundColor?: ColorType;
+};
+
+const ColumnBlock = ({
+	children,
+
+	colSpan = {},
+	rowSpan = {},
+	gap = {},
+
+	direction = "vertical",
+	justify,
+	align,
+
+	backgroundColor,
+
+	bringStylesClassNames,
+	className,
+	id,
+}: BP<ColumnBlockProps>) => {
+	const classNames = twJoin(
+		makeResponsiveClassNames("col-span", colSpan, {"": 1}),
+		makeResponsiveClassNames("row-span", rowSpan),
+		makeResponsiveClassNames("gap", gap, {"": 4}),
+		"mx-0 px-0",
+		backgroundColor && `bg-${backgroundColor}`,
+		direction === "vertical" && "flex-col",
+		justify && `justify-${justify}`,
+		align && `items-${align}`,
+		bringStylesClassNames?.classNames,
+		className,
+	);
+
+	return (
+		<Column className={classNames} id={id}>
+			{children}
+		</Column>
+	);
+};
+
+export const column = {
+	Component: ColumnBlock,
+	componentName: "Column",
+};
+
+export default ColumnBlock;
