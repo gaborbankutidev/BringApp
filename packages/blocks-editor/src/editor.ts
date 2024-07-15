@@ -40,7 +40,7 @@ function disableReusableBlocks() {
 	});
 }
 
-export function editorInit(blockList: BlockConfig<any>[], wpBaseURL: string) {
+export function editorInit(blockList: BlockConfig<any>[], wpBaseURL: string = "") {
 	if (window.bringContent) {
 		console.error("Double init bring");
 		return;
