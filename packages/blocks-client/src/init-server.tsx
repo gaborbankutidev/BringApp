@@ -21,7 +21,7 @@ export function initServer<
 	SP = {}, // SiteProps
 	M = {}, // Menu
 	MI = {}, // MenuItem
->(wpURL: string) {
+>(wpURL: string = "") {
 	return {
 		/**
 		 * Retrieves the properties of a dynamic entity.

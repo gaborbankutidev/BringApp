@@ -1,9 +1,6 @@
 "use client";
 
-import {
-	makeDynamicEntityClient,
-	makeDynamicEntityListClient,
-} from "./components";
+import {makeDynamicEntityClient, makeDynamicEntityListClient} from "./components";
 import {
 	useDynamicEntityList,
 	useDynamicEntityProps,
@@ -26,7 +23,7 @@ export function initClient<
 	SP = {}, // SiteProps
 	M = {}, // Menu
 	MI = {}, // MenuItem
->(wpURL: string) {
+>(wpURL: string = "") {
 	const client = {
 		/**
 		 * Retrieves the site props.
