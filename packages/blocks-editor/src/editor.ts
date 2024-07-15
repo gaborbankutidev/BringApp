@@ -31,10 +31,7 @@ function disableReusableBlocks() {
 	// Erase the existence of any reusable blocks.
 	subscribe(() => {
 		const settings = select("core/block-editor").getSettings() as any;
-		if (
-			settings.__experimentalReusableBlocks &&
-			settings.__experimentalReusableBlocks.length > 0
-		) {
+		if (settings.__experimentalReusableBlocks && settings.__experimentalReusableBlocks.length > 0) {
 			dispatch("core/block-editor").updateSettings({
 				// @ts-ignore
 				__experimentalReusableBlocks: [],
@@ -43,7 +40,7 @@ function disableReusableBlocks() {
 	});
 }
 
-export function editorInit(blockList: BlockConfig<any>[]) {
+export function editorInit(blockList: BlockConfig<any>[], wpBaseURL: string) {
 	if (window.bringContent) {
 		console.error("Double init bring");
 		return;
@@ -69,7 +66,7 @@ export function editorInit(blockList: BlockConfig<any>[]) {
 			if (isSavingPost && !isAutosavingPost) {
 				console.log("Save");
 				setTimeout(() => {
-					bringUpdate();
+					bringUpdate(wpBaseURL);
 				}, 1000);
 			}
 		});
@@ -129,12 +126,12 @@ export function bringStoreBlockNode(parentKey: string, node: BringNode) {
 	parentNode.children.push(node);
 }
 
-function bringUpdate() {
+function bringUpdate(wpBaseURL: string) {
 	if (!window.bringContent) {
 		return;
 	}
 
-	fetch("/wp-json/bring/editor/save", {
+	fetch(`${wpBaseURL}/wp-json/bring/editor/save`, {
 		method: "POST",
 		headers: {
 			Authorization: window.jwt.token,
