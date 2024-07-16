@@ -23,8 +23,6 @@ export const arrayAttributeSource = <V,>(initialValue: V[] = []) =>
 export const objectAttributeSource = <V extends Obj>(initialValue?: V) =>
 	attributeSource("object", initialValue);
 
-export const imageAttributeSource = () =>
-	objectAttributeSource<ImageType>(defaultImageValue);
+export const imageAttributeSource = () => objectAttributeSource<ImageType>(defaultImageValue);
 
-export const mediaAttributeSource = () =>
-	objectAttributeSource<MediaType>(defaultMediaValue);
+export const mediaAttributeSource = () => objectAttributeSource<MediaType>(defaultMediaValue);

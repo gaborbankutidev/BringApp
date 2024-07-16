@@ -72,9 +72,14 @@ function NumberComboboxControlByPath<pT extends Obj>({
  * @param options - The options for the combobox.
  * @returns The rendered NumberComboboxControlByValue component.
  */
-const NumberComboboxControlByValue: FC<
-	ControlByValue<number> & _NumberComboboxControl
-> = ({label, value, setValue, setDefault = true, show = true, options}) =>
+const NumberComboboxControlByValue: FC<ControlByValue<number> & _NumberComboboxControl> = ({
+	label,
+	value,
+	setValue,
+	setDefault = true,
+	show = true,
+	options,
+}) =>
 	show ? (
 		<WPComboboxControl
 			label={`${label} ${value === undefined ? " - Default" : ""}`}

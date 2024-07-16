@@ -1,4 +1,4 @@
-import type {SiteProps} from "../types";
+import type { SiteProps } from "../types";
 
 /**
  * Retrieves the site properties from the specified WordPress URL.
@@ -11,20 +11,20 @@ import type {SiteProps} from "../types";
  * @returns A promise that resolves to the site properties.
  */
 async function getSiteProps<SP = {}, M = {}, MI = {}>(wpURL: string) {
-	try {
-		const response = await fetch(`${wpURL}/wp-json/bring/dynamic/site`, {
-			method: "GET",
-			headers: {
-				"Content-Type": "application/json",
-			},
-		});
+  try {
+    const response = await fetch(`${wpURL}/wp-json/bring/dynamic/site`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-		const responseData = await response.json();
-		return responseData.data as SiteProps<SP, M, MI>;
-	} catch (error) {
-		console.error(error);
-		return null;
-	}
+    const responseData = await response.json();
+    return responseData.data as SiteProps<SP, M, MI>;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 }
 
 export default getSiteProps;

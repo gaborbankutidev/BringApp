@@ -19,12 +19,7 @@ type EditorCardType = {
 	showActions?: boolean;
 };
 
-export const EditorCard: FC<EditorCardType> = ({
-	color,
-	name,
-	children,
-	showActions = true,
-}) => {
+export const EditorCard: FC<EditorCardType> = ({color, name, children, showActions = true}) => {
 	const [showContent, setShowContent] = useState(true);
 
 	return (
@@ -73,7 +68,7 @@ export const EditorCard: FC<EditorCardType> = ({
 								padding: "16px",
 								backgroundColor: editorColors[color],
 								height: "100%",
-						  }
+							}
 				}
 			>
 				{name}

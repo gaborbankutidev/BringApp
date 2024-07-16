@@ -1,6 +1,6 @@
 {
-	"$schema": "https://json.schemastore.org/tsconfig",
-	"display": "React Library",
-	"extends": "@bring/typescript-config/react-library.json",
-	"include": ["packages/**/*"]
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "React Library",
+  "extends": "@bring/typescript-config/react-library.json",
+  "include": ["packages/**/*"]
 }

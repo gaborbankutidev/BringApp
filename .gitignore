@@ -1,6 +1,9 @@
 node_modules
 .turbo
 dist
+build
+vendor
+.next
 
 .pnp.*
 .yarn/*

@@ -15,11 +15,11 @@
 		"build:tailwind": "cd ./next && yarn build:tailwind",
 		"checks": "conc yarn:format:check yarn:checks:next",
 		"checks:next": "cd ./next && yarn checks",
+		"dev": "conc yarn:watch:next yarn:watch:tailwind yarn:watch:blocks",
 		"format": "prettier --write .",
 		"format:check": "prettier --check .",
 		"prepare": "husky",
 		"storybook": "cd ./next && yarn watch:storybook",
-		"devapp": "conc yarn:watch:next yarn:watch:tailwind yarn:watch:blocks",
 		"watch:blocks": "cd ./next && yarn watch:blocks",
 		"watch:next": "cd ./next && yarn watch:next",
 		"watch:tailwind": "cd ./next && yarn watch:tailwind"

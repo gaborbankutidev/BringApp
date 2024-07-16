@@ -82,16 +82,7 @@ export function useDynamicEntityList<T = {}, P = {}>(
 			}
 			setQueriedList(queried);
 		});
-	}, [
-		entitySlug,
-		entityType,
-		limit,
-		offset,
-		customDataKey,
-		lazy,
-		wasOnScreen,
-		updateKey,
-	]);
+	}, [entitySlug, entityType, limit, offset, customDataKey, lazy, wasOnScreen, updateKey]);
 
 	return queriedList
 		? {entityList: queriedList.entityList, params: queriedList.params, ref}

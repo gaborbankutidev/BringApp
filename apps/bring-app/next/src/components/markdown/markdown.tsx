@@ -70,10 +70,12 @@ const parseAlt = (alt: string | undefined) => {
 	const parts = alt.split(/--caption:|--source:/);
 
 	value.alt = parts[0] ?? "";
-	value.caption = alt.includes("--caption:") ? parts[1] ?? "" : "";
+	value.caption = alt.includes("--caption:") ? (parts[1] ?? "") : "";
 
 	if (alt.includes("--source:")) {
-		value.source = alt.includes("--caption:") ? parts[2] ?? "" : parts[1] ?? "";
+		value.source = alt.includes("--caption:")
+			? (parts[2] ?? "")
+			: (parts[1] ?? "");
 	}
 
 	return value;

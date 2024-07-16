@@ -1,21 +1,21 @@
 {
-	"name": "@bring/blocks-cli",
-	"version": "0.1.0",
-	"description": "CLI package for initializing a new BringBlocks project",
-	"author": "Bring Team Ltd.",
-	"license": "GPL-2.0-or-later",
-	"bin": {
-		"create-bring-app": "dist/index.js"
-	},
-	"keywords": [],
-	"scripts": {
-		"build": "tsup",
-		"dev": "tsup --watch",
-		"lint": "echo TODO: add eslint",
-		"test": "echo TODO: add tests",
-		"types": "tsc"
-	},
-	"devDependencies": {
-		"typescript": "^5.4.2"
-	}
+  "name": "@bring/blocks-cli",
+  "version": "0.1.0",
+  "description": "CLI package for initializing a new BringBlocks project",
+  "author": "Bring Team Ltd.",
+  "license": "GPL-2.0-or-later",
+  "bin": {
+    "create-bring-app": "dist/index.js"
+  },
+  "keywords": [],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "echo TODO: add eslint",
+    "test": "echo TODO: add tests",
+    "types": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.2"
+  }
 }

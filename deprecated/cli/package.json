@@ -2,14 +2,14 @@
 	"name": "@bring/blocks-cli",
 	"version": "0.1.0",
 	"description": "CLI package for bring-blocks",
+	"author": "",
+	"license": "GPL-2.0",
 	"bin": {
 		"bring-cli": "bin/index.mjs"
 	},
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
-	"author": "",
-	"license": "GPL-2.0",
 	"devDependencies": {
 		"chalk": "^5.2.0",
 		"lodash": "^4.17.21",

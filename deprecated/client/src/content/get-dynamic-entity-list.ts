@@ -56,16 +56,13 @@ async function getDynamicEntityList<T = {}, P = {}>(
 	});
 
 	try {
-		const response = await fetch(
-			`${wpURL}/wp-json/bring/dynamic/list?${params.toString()}`,
-			{
-				method: "GET",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				cache,
+		const response = await fetch(`${wpURL}/wp-json/bring/dynamic/list?${params.toString()}`, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
 			},
-		);
+			cache,
+		});
 
 		const responseRaw = await response.json();
 		const responseData = responseRaw.data as {

@@ -1,12 +1,12 @@
-import React, {type ReactNode, type FC} from "react";
-import type {BringNode} from "../types";
+import React, { type ReactNode, type FC } from "react";
+import type { BringNode } from "../types";
 
 /**
  * Represents the props of the error component.
  * @property name - The name of the component that encountered the error.
  */
 interface ErrorComponentInterface {
-	name: string;
+  name: string;
 }
 
 /**
@@ -15,8 +15,8 @@ interface ErrorComponentInterface {
  * @param name - The name of the component that encountered the error.
  * @returns The React element representing the error component.
  */
-const Error: FC<ErrorComponentInterface> = ({name}) => (
-	<div>Error while rendering {name}</div>
+const Error: FC<ErrorComponentInterface> = ({ name }) => (
+  <div>Error while rendering {name}</div>
 );
 
 /**
@@ -31,53 +31,53 @@ const Error: FC<ErrorComponentInterface> = ({name}) => (
  * @returns An array of React elements representing the rendered components.
  */
 export default function createBringElement(
-	nodes: BringNode[],
-	componentMap: Map<string, FC<any>>,
-	entityProps: any = {},
-	siteProps: any = {},
-	context: any = {},
-	PostContent: ReactNode = null,
+  nodes: BringNode[],
+  componentMap: Map<string, FC<any>>,
+  entityProps: any = {},
+  siteProps: any = {},
+  context: any = {},
+  PostContent: ReactNode = null,
 ) {
-	return nodes.map((node) => {
-		// check if component is PostContent and return PostContent ReactNode
-		if (node.component === "PostContent") {
-			return PostContent;
-		}
+  return nodes.map((node) => {
+    // check if component is PostContent and return PostContent ReactNode
+    if (node.component === "PostContent") {
+      return PostContent;
+    }
 
-		// get component
-		const Component = componentMap.get(node.component);
+    // get component
+    const Component = componentMap.get(node.component);
 
-		// check if component is a function
-		if (Component === undefined) {
-			console.log(
-				'Component is not a function, inserting "Error" component instead...',
-			);
-			return <Error name={node.component} key={node.key} />;
-		}
+    // check if component is a function
+    if (Component === undefined) {
+      console.log(
+        'Component is not a function, inserting "Error" component instead...',
+      );
+      return <Error name={node.component} key={node.key} />;
+    }
 
-		// render children
-		const children = node.children?.length
-			? createBringElement(
-					node.children,
-					componentMap,
-					entityProps,
-					siteProps,
-					context,
-					PostContent,
-				)
-			: [];
+    // render children
+    const children = node.children?.length
+      ? createBringElement(
+          node.children,
+          componentMap,
+          entityProps,
+          siteProps,
+          context,
+          PostContent,
+        )
+      : [];
 
-		// create element
-		return (
-			<Component
-				{...node.props}
-				key={node.key}
-				entityProps={entityProps}
-				siteProps={siteProps}
-				context={context}
-			>
-				{children}
-			</Component>
-		);
-	});
+    // create element
+    return (
+      <Component
+        {...node.props}
+        key={node.key}
+        entityProps={entityProps}
+        siteProps={siteProps}
+        context={context}
+      >
+        {children}
+      </Component>
+    );
+  });
 }

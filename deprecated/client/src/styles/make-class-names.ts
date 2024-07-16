@@ -18,13 +18,9 @@ export const makeResponsiveClassNames = <T = number>(
 
 	const addClassName = (size: keyof ResponsiveValue<T>, value?: T) =>
 		value !== undefined &&
-		classNames.push(
-			size ? `${size}:${className}-${value}` : `${className}-${value}`,
-		);
+		classNames.push(size ? `${size}:${className}-${value}` : `${className}-${value}`);
 
-	screenSizes.map((size) =>
-		addClassName(size, responsiveValue[size] ?? responsiveConfig[size]),
-	);
+	screenSizes.map((size) => addClassName(size, responsiveValue[size] ?? responsiveConfig[size]));
 
 	return classNames.join(" ");
 };

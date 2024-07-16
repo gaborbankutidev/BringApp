@@ -1,10 +1,10 @@
-import React, {type ReactNode} from "react";
-import {type GetDynamicEntityPropsParams} from "../content";
+import React, { type ReactNode } from "react";
+import { type GetDynamicEntityPropsParams } from "../content";
 import {
-	useDynamicEntityProps,
-	type UseDynamicEntityPropsOptions,
+  useDynamicEntityProps,
+  type UseDynamicEntityPropsOptions,
 } from "../hooks";
-import type {DynamicEntityProps, EntityType} from "../types";
+import type { DynamicEntityProps, EntityType } from "../types";
 import Debug from "./debug";
 
 /**
@@ -15,21 +15,21 @@ import Debug from "./debug";
  * @property params - The parameters for retrieving the dynamic entity properties.
  */
 export type DynamicEntityPropsClientRenderProps<T = {}, P = {}> = {
-	entityProps: DynamicEntityProps<T>;
-	params?: GetDynamicEntityPropsParams<P>;
-	ref?: (node?: Element | null | undefined) => void;
+  entityProps: DynamicEntityProps<T>;
+  params?: GetDynamicEntityPropsParams<P>;
+  ref?: (node?: Element | null | undefined) => void;
 };
 
 export type EntityProps<T, P> = {
-	entityId?: number;
-	entityType?: EntityType;
-	options?: UseDynamicEntityPropsOptions;
-	Render?: (props: DynamicEntityPropsClientRenderProps<T, P>) => ReactNode;
+  entityId?: number;
+  entityType?: EntityType;
+  options?: UseDynamicEntityPropsOptions;
+  Render?: (props: DynamicEntityPropsClientRenderProps<T, P>) => ReactNode;
 };
 
 function makeDynamicEntityClient(wpURL: string) {
-	// prettier-ignore
-	const DynamicEntityClient = <T={}, P = {}>({
+  // prettier-ignore
+  const DynamicEntityClient = <T={}, P = {}>({
 		entityId = 0,
 		entityType = "post",
 		options = {},
@@ -52,7 +52,7 @@ function makeDynamicEntityClient(wpURL: string) {
 		return <Render entityProps={entityProps} params={params} ref={ref} />;
 	};
 
-	return DynamicEntityClient;
+  return DynamicEntityClient;
 }
 
 export default makeDynamicEntityClient;

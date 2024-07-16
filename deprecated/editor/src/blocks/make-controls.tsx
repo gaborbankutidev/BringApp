@@ -1,9 +1,6 @@
 import React from "react";
 import {PanelBody} from "@wordpress/components";
-import {
-	InspectorControls,
-	InspectorAdvancedControls,
-} from "@wordpress/block-editor";
+import {InspectorControls, InspectorAdvancedControls} from "@wordpress/block-editor";
 import get from "lodash.get";
 import type {Obj} from "../types";
 import type {Attributes, BlockControlsConfig} from "./types";
@@ -38,9 +35,7 @@ export function makeControls<Props extends Obj>(
 			) : (
 				Controls.map((Panel) => {
 					if (typeof Panel === "function") {
-						return (
-							<Panel attributes={attributes} setAttributes={setAttributes} />
-						);
+						return <Panel attributes={attributes} setAttributes={setAttributes} />;
 					}
 
 					// evaluate panel show
@@ -48,8 +43,8 @@ export function makeControls<Props extends Obj>(
 						Panel.show === undefined
 							? true
 							: typeof Panel.show === "function"
-							? Panel.show(attributes)
-							: !!get(attributes, Panel.show);
+								? Panel.show(attributes)
+								: !!get(attributes, Panel.show);
 					if (!showPanel) {
 						return null;
 					}
@@ -57,12 +52,7 @@ export function makeControls<Props extends Obj>(
 					// iterate controls
 					const panelControls = Panel.controls.map((Control) => {
 						if (typeof Control === "function") {
-							return (
-								<Control
-									attributes={attributes}
-									setAttributes={setAttributes}
-								/>
-							);
+							return <Control attributes={attributes} setAttributes={setAttributes} />;
 						}
 
 						// casting to unknown here because typescript can't infer NestedTypedKeyOf
@@ -72,111 +62,57 @@ export function makeControls<Props extends Obj>(
 								Control.show === undefined
 									? true
 									: typeof Control.show === "function"
-									? Control.show(attributes)
-									: !!get(attributes, Control.show),
+										? Control.show(attributes)
+										: !!get(attributes, Control.show),
 							updateHandling: "by-path" as const,
 						} as unknown;
 
 						switch (Control.type) {
 							case "checkbox":
-								return (
-									<CheckboxControl
-										{...(props as Parameters<typeof CheckboxControl>[0])}
-									/>
-								);
+								return <CheckboxControl {...(props as Parameters<typeof CheckboxControl>[0])} />;
 							case "responsive-checkbox":
 								return (
 									<ResponsiveCheckboxControl
-										{...(props as Parameters<
-											typeof ResponsiveCheckboxControl
-										>[0])}
+										{...(props as Parameters<typeof ResponsiveCheckboxControl>[0])}
 									/>
 								);
 
 							case "toggle":
-								return (
-									<ToggleControl
-										{...(props as Parameters<typeof ToggleControl>[0])}
-									/>
-								);
+								return <ToggleControl {...(props as Parameters<typeof ToggleControl>[0])} />;
 
 							case "range":
-								return (
-									<RangeControl
-										{...(props as Parameters<typeof RangeControl>[0])}
-									/>
-								);
+								return <RangeControl {...(props as Parameters<typeof RangeControl>[0])} />;
 							case "responsive-range":
 								return (
-									<ResponsiveRangeControl
-										{...(props as Parameters<typeof ResponsiveRangeControl>[0])}
-									/>
+									<ResponsiveRangeControl {...(props as Parameters<typeof ResponsiveRangeControl>[0])} />
 								);
 
 							case "text":
-								return (
-									<TextControl
-										{...(props as Parameters<typeof TextControl>[0])}
-									/>
-								);
+								return <TextControl {...(props as Parameters<typeof TextControl>[0])} />;
 							case "textarea":
-								return (
-									<TextareaControl
-										{...(props as Parameters<typeof TextareaControl>[0])}
-									/>
-								);
+								return <TextareaControl {...(props as Parameters<typeof TextareaControl>[0])} />;
 
 							case "combobox":
-								return (
-									<ComboboxControl
-										{...(props as Parameters<typeof ComboboxControl>[0])}
-									/>
-								);
+								return <ComboboxControl {...(props as Parameters<typeof ComboboxControl>[0])} />;
 							case "number-combobox":
 								return (
-									<NumberComboboxControl
-										{...(props as Parameters<typeof NumberComboboxControl>[0])}
-									/>
+									<NumberComboboxControl {...(props as Parameters<typeof NumberComboboxControl>[0])} />
 								);
 
 							case "select":
-								return (
-									<SelectControl
-										{...(props as Parameters<typeof SelectControl>[0])}
-									/>
-								);
+								return <SelectControl {...(props as Parameters<typeof SelectControl>[0])} />;
 							case "number-select":
-								return (
-									<NumberSelectControl
-										{...(props as Parameters<typeof NumberSelectControl>[0])}
-									/>
-								);
+								return <NumberSelectControl {...(props as Parameters<typeof NumberSelectControl>[0])} />;
 
 							case "media":
-								return (
-									<MediaControl
-										{...(props as Parameters<typeof MediaControl>[0])}
-									/>
-								);
+								return <MediaControl {...(props as Parameters<typeof MediaControl>[0])} />;
 
 							case "image":
-								return (
-									<ImageControl
-										{...(props as Parameters<typeof ImageControl>[0])}
-									/>
-								);
+								return <ImageControl {...(props as Parameters<typeof ImageControl>[0])} />;
 							case "image-array":
-								return (
-									<ImageArrayControl
-										{...(props as Parameters<typeof ImageArrayControl>[0])}
-									/>
-								);
+								return <ImageArrayControl {...(props as Parameters<typeof ImageArrayControl>[0])} />;
 							case "text-array":
-								return (
-									<TextArrayControl
-										{...(props as Parameters<typeof TextArrayControl>[0])}
-									/>
-								);
+								return <TextArrayControl {...(props as Parameters<typeof TextArrayControl>[0])} />;
 							default:
 								break;
 						}
@@ -185,14 +121,9 @@ export function makeControls<Props extends Obj>(
 					});
 
 					return Panel.panel === "Advanced" ? (
-						<InspectorAdvancedControls>
-							{panelControls}
-						</InspectorAdvancedControls>
+						<InspectorAdvancedControls>{panelControls}</InspectorAdvancedControls>
 					) : Panel.panel ? (
-						<PanelBody
-							title={Panel.panel}
-							initialOpen={Panel.initialOpen ?? false}
-						>
+						<PanelBody title={Panel.panel} initialOpen={Panel.initialOpen ?? false}>
 							{panelControls}
 						</PanelBody>
 					) : (

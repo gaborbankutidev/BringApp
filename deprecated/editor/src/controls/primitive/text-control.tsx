@@ -16,14 +16,8 @@ import {isPathControl} from "../utils";
  *
  * @param props - The props for the TextControl component.
  */
-export const TextControl = <pT extends Obj = {}>(
-	props: ControlType<string, pT>,
-) =>
-	isPathControl(props) ? (
-		<TextControlByPath {...props} />
-	) : (
-		<TextControlByValue {...props} />
-	);
+export const TextControl = <pT extends Obj = {}>(props: ControlType<string, pT>) =>
+	isPathControl(props) ? <TextControlByPath {...props} /> : <TextControlByValue {...props} />;
 
 /**
  * A control component that renders a text input based on a path.

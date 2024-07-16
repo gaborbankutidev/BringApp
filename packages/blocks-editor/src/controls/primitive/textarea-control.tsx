@@ -1,18 +1,18 @@
 import React from "react";
-import type {FC} from "react";
-import {TextareaControl as WPTextareaControl} from "@wordpress/components";
+import type { FC } from "react";
+import { TextareaControl as WPTextareaControl } from "@wordpress/components";
 import get from "lodash.get";
 import set from "lodash.set";
 import cloneDeep from "lodash.clonedeep";
-import type {Obj} from "../../types";
-import type {ControlByPath, ControlByValue, ControlType} from "../types";
-import {useControlContext} from "../context";
-import {isPathControl} from "../utils";
+import type { Obj } from "../../types";
+import type { ControlByPath, ControlByValue, ControlType } from "../types";
+import { useControlContext } from "../context";
+import { isPathControl } from "../utils";
 
 /**
  * Props for the TextareaControl component.
  */
-type _TextareaControl = {rows?: number};
+type _TextareaControl = { rows?: number };
 
 /**
  * A control component that renders a textarea input.
@@ -23,13 +23,13 @@ type _TextareaControl = {rows?: number};
  * @returns The rendered TextareaControl component.
  */
 export const TextareaControl = <pT extends Obj = {}>(
-	props: ControlType<string, pT> & _TextareaControl,
+  props: ControlType<string, pT> & _TextareaControl,
 ) =>
-	isPathControl(props) ? (
-		<TextareaControlByPath {...props} />
-	) : (
-		<TextareaControlByValue {...props} />
-	);
+  isPathControl(props) ? (
+    <TextareaControlByPath {...props} />
+  ) : (
+    <TextareaControlByValue {...props} />
+  );
 
 /**
  * A control component that renders a textarea input based on a path.
@@ -40,25 +40,25 @@ export const TextareaControl = <pT extends Obj = {}>(
  * @returns The rendered TextareaControlByPath component.
  */
 function TextareaControlByPath<pT extends Obj>({
-	path,
-	updateHandling,
-	...props
+  path,
+  updateHandling,
+  ...props
 }: ControlByPath<pT, string> & _TextareaControl): JSX.Element {
-	const {attributes, setAttributes} = useControlContext();
-	const value = get(attributes, path);
+  const { attributes, setAttributes } = useControlContext();
+  const value = get(attributes, path);
 
-	return (
-		<TextareaControlByValue
-			updateHandling="by-value"
-			value={value}
-			setValue={(newValue) => {
-				const newAttributes = cloneDeep(attributes);
-				set(newAttributes, path, newValue);
-				setAttributes(newAttributes);
-			}}
-			{...props}
-		/>
-	);
+  return (
+    <TextareaControlByValue
+      updateHandling="by-value"
+      value={value}
+      setValue={(newValue) => {
+        const newAttributes = cloneDeep(attributes);
+        set(newAttributes, path, newValue);
+        setAttributes(newAttributes);
+      }}
+      {...props}
+    />
+  );
 }
 
 /**
@@ -74,35 +74,35 @@ function TextareaControlByPath<pT extends Obj>({
  * @returns The rendered TextareaControlByValue component.
  */
 const TextareaControlByValue: FC<ControlByValue<string> & _TextareaControl> = ({
-	label,
-	value,
-	setValue,
-	setDefault = true,
-	defaultValue = "",
-	show = true,
-	rows = 4,
+  label,
+  value,
+  setValue,
+  setDefault = true,
+  defaultValue = "",
+  show = true,
+  rows = 4,
 }) => {
-	const contentRows = value ? value.split(/\r\n|\r|\n/).length : rows;
-	const textareaRows = contentRows > rows - 1 ? contentRows + 1 : rows;
+  const contentRows = value ? value.split(/\r\n|\r|\n/).length : rows;
+  const textareaRows = contentRows > rows - 1 ? contentRows + 1 : rows;
 
-	return show ? (
-		<WPTextareaControl
-			label={`${label} ${value === undefined ? " - Default" : ""}`}
-			onChange={setValue}
-			value={value ?? defaultValue}
-			help={
-				setDefault &&
-				value !== undefined && (
-					<button
-						onClick={() => {
-							setValue(undefined);
-						}}
-					>
-						Set to default
-					</button>
-				)
-			}
-			rows={textareaRows}
-		/>
-	) : null;
+  return show ? (
+    <WPTextareaControl
+      label={`${label} ${value === undefined ? " - Default" : ""}`}
+      onChange={setValue}
+      value={value ?? defaultValue}
+      help={
+        setDefault &&
+        value !== undefined && (
+          <button
+            onClick={() => {
+              setValue(undefined);
+            }}
+          >
+            Set to default
+          </button>
+        )
+      }
+      rows={textareaRows}
+    />
+  ) : null;
 };

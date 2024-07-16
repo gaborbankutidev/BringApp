@@ -15,9 +15,7 @@ interface ErrorComponentInterface {
  * @param name - The name of the component that encountered the error.
  * @returns The React element representing the error component.
  */
-const Error: FC<ErrorComponentInterface> = ({name}) => (
-	<div>Error while rendering {name}</div>
-);
+const Error: FC<ErrorComponentInterface> = ({name}) => <div>Error while rendering {name}</div>;
 
 /**
  * Creates a React element tree based on the provided BringNodes.
@@ -49,22 +47,13 @@ export default function createBringElement(
 
 		// check if component is a function
 		if (Component === undefined) {
-			console.log(
-				'Component is not a function, inserting "Error" component instead...',
-			);
+			console.log('Component is not a function, inserting "Error" component instead...');
 			return <Error name={node.component} key={node.key} />;
 		}
 
 		// render children
 		const children = node.children?.length
-			? createBringElement(
-					node.children,
-					componentMap,
-					entityProps,
-					siteProps,
-					context,
-					PostContent,
-				)
+			? createBringElement(node.children, componentMap, entityProps, siteProps, context, PostContent)
 			: [];
 
 		// create element

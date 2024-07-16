@@ -21,23 +21,16 @@ export type Attributes<Props> = ClientAttributes<Props> & EditorAttributes;
 
 type AttributeSource<V> = {type: string; default: V | undefined};
 type BlockAttributesConfig<Props> = {
-	[k in keyof ClientAttributes<Props>]: AttributeSource<
-		ClientAttributes<Props>[k]
-	>;
+	[k in keyof ClientAttributes<Props>]: AttributeSource<ClientAttributes<Props>[k]>;
 };
 
 export type BlockControlsConfig<Props extends Obj = {}> =
 	| (
 			| {
 					panel?: "Advanced" | string;
-					controls: (
-						| ControlConfigType<Attributes<Props>>
-						| BlockControl<Props>
-					)[];
+					controls: (ControlConfigType<Attributes<Props>> | BlockControl<Props>)[];
 					initialOpen?: boolean;
-					show?:
-						| NestedKeyOf<Attributes<Props>>
-						| ((attributes: Attributes<Props>) => boolean);
+					show?: NestedKeyOf<Attributes<Props>> | ((attributes: Attributes<Props>) => boolean);
 			  }
 			| BlockControl<Props>
 	  )[]

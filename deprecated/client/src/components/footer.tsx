@@ -9,21 +9,9 @@ function makeFooter<EP = {}, SP = {}, M = {}, MI = {}, CTX = {}>(
 	onNotFound: () => void,
 	componentMap: Map<string, FCC<any, EP, SP, M, MI, CTX>>,
 ) {
-	const Footer = async ({
-		slug = "",
-		context,
-	}: {
-		slug?: string | string[];
-		context?: CTX;
-	}) => {
+	const Footer = async ({slug = "", context}: {slug?: string | string[]; context?: CTX}) => {
 		const siteProps = await getSiteProps<SP, M, MI>(wpURL);
-		const entity = await getEntity<EP>(
-			wpURL,
-			dataToken,
-			onRedirect,
-			onNotFound,
-			slug,
-		);
+		const entity = await getEntity<EP>(wpURL, dataToken, onRedirect, onNotFound, slug);
 
 		if (!entity) {
 			return null;
@@ -31,13 +19,7 @@ function makeFooter<EP = {}, SP = {}, M = {}, MI = {}, CTX = {}>(
 
 		return entity.content.footer ? (
 			<footer>
-				{createBringElement(
-					entity.content.footer,
-					componentMap,
-					entity.props,
-					siteProps,
-					context,
-				)}
+				{createBringElement(entity.content.footer, componentMap, entity.props, siteProps, context)}
 			</footer>
 		) : null;
 	};

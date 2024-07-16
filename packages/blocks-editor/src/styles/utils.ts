@@ -1,46 +1,46 @@
-import {BringStyles, ResponsiveLabels} from "./types";
+import { BringStyles, ResponsiveLabels } from "./types";
 
 export const BringStylesDefaultValue: BringStyles = {
-	spacing: {
-		m: {
-			t: {},
-			b: {},
-			l: {},
-			r: {},
-		},
-		p: {
-			t: {},
-			b: {},
-			l: {},
-			r: {},
-		},
-	},
-	visibility: {},
+  spacing: {
+    m: {
+      t: {},
+      b: {},
+      l: {},
+      r: {},
+    },
+    p: {
+      t: {},
+      b: {},
+      l: {},
+      r: {},
+    },
+  },
+  visibility: {},
 };
 
 export const sideLabels = {
-	t: "top",
-	b: "bottom",
-	l: "left",
-	r: "right",
+  t: "top",
+  b: "bottom",
+  l: "left",
+  r: "right",
 };
 
 export const spacingLabels = {
-	m: "Margin",
-	p: "Padding",
+  m: "Margin",
+  p: "Padding",
 };
 
 export const screenSizes: ResponsiveLabels = {
-	"": {
-		label: "Mobile",
-		icon: "smartphone",
-	},
-	md: {
-		label: "Tablet",
-		icon: "tablet",
-	},
-	lg: {
-		label: "Desktop",
-		icon: "laptop",
-	},
+  "": {
+    label: "Mobile",
+    icon: "smartphone",
+  },
+  md: {
+    label: "Tablet",
+    icon: "tablet",
+  },
+  lg: {
+    label: "Desktop",
+    icon: "laptop",
+  },
 };

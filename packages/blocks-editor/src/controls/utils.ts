@@ -1,12 +1,12 @@
 import type {
-	Obj,
-	OptionList,
-	SelectControlOptions,
-	NumberOptionList,
-	NumberSelectControlOptions,
+  Obj,
+  OptionList,
+  SelectControlOptions,
+  NumberOptionList,
+  NumberSelectControlOptions,
 } from "../types";
-import {capitalize} from "../utils";
-import type {ControlByPath, ControlType} from "./types";
+import { capitalize } from "../utils";
+import type { ControlByPath, ControlType } from "./types";
 
 /**
  * Checks if a control is a path control.
@@ -14,9 +14,9 @@ import type {ControlByPath, ControlType} from "./types";
  * @returns True if the control is a path control, false otherwise.
  */
 export function isPathControl<vT, pT extends Obj = {}>(
-	props: ControlType<vT, pT>,
+  props: ControlType<vT, pT>,
 ): props is ControlByPath<pT, vT> {
-	return props.updateHandling !== "by-value";
+  return props.updateHandling !== "by-value";
 }
 
 /**
@@ -26,24 +26,24 @@ export function isPathControl<vT, pT extends Obj = {}>(
  * @returns The generated SelectControlOptions.
  */
 export function makeOptions<T extends string>(
-	options: OptionList<T>,
-	withDefault: boolean | string = true,
+  options: OptionList<T>,
+  withDefault: boolean | string = true,
 ): SelectControlOptions<T> {
-	const optionList = options.map((option) =>
-		Array.isArray(option)
-			? {label: option[1], value: option[0]}
-			: {label: capitalize(option), value: option},
-	);
+  const optionList = options.map((option) =>
+    Array.isArray(option)
+      ? { label: option[1], value: option[0] }
+      : { label: capitalize(option), value: option },
+  );
 
-	return withDefault
-		? [
-				{
-					label: withDefault === true ? "Default" : withDefault,
-					value: "",
-				},
-				...optionList,
-			]
-		: optionList;
+  return withDefault
+    ? [
+        {
+          label: withDefault === true ? "Default" : withDefault,
+          value: "",
+        },
+        ...optionList,
+      ]
+    : optionList;
 }
 
 /**
@@ -53,24 +53,24 @@ export function makeOptions<T extends string>(
  * @returns The generated NumberSelectControlOptions.
  */
 export function makeNumberOptions<T extends number>(
-	options: NumberOptionList<T>,
-	withDefault: boolean | string = true,
+  options: NumberOptionList<T>,
+  withDefault: boolean | string = true,
 ): NumberSelectControlOptions<T> {
-	const optionList = options.map((option) =>
-		Array.isArray(option)
-			? {label: option[1], value: option[0]}
-			: {label: capitalize(`${option}`), value: option},
-	);
+  const optionList = options.map((option) =>
+    Array.isArray(option)
+      ? { label: option[1], value: option[0] }
+      : { label: capitalize(`${option}`), value: option },
+  );
 
-	return withDefault
-		? [
-				{
-					label: withDefault === true ? "Default" : withDefault,
-					value: 0,
-				},
-				...optionList,
-			]
-		: optionList;
+  return withDefault
+    ? [
+        {
+          label: withDefault === true ? "Default" : withDefault,
+          value: 0,
+        },
+        ...optionList,
+      ]
+    : optionList;
 }
 
 /**
@@ -79,9 +79,9 @@ export function makeNumberOptions<T extends number>(
  * @returns The converted NumberSelectControlOptions.
  */
 export const optionsToNumberOptions = <From extends string>(
-	selectOptions: SelectControlOptions<From>,
+  selectOptions: SelectControlOptions<From>,
 ): NumberSelectControlOptions<number> =>
-	selectOptions.map(({label, value}) => ({
-		label,
-		value: parseInt(value),
-	}));
+  selectOptions.map(({ label, value }) => ({
+    label,
+    value: parseInt(value),
+  }));
