@@ -8884,6 +8884,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"blocks-wp-aaf3bf@workspace:packages/blocks-wp":
+  version: 0.0.0-use.local
+  resolution: "blocks-wp-aaf3bf@workspace:packages/blocks-wp"
+  languageName: unknown
+  linkType: soft
+
 "bn.js@npm:^4.0.0, bn.js@npm:^4.1.0, bn.js@npm:^4.11.9":
   version: 4.12.0
   resolution: "bn.js@npm:4.12.0"

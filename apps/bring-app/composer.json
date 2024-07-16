@@ -18,7 +18,7 @@
 	],
 	"require": {
 		"vlucas/phpdotenv": "^5.6",
-		"bring/blocks-wp": "0.2.18"
+		"bring/blocks-wp": "@dev"
 	},
 	"require-dev": {
 		"php-stubs/acf-pro-stubs": "^6.1.7",
@@ -28,5 +28,11 @@
 	},
 	"config": {
 		"vendor-dir": "bring-theme/vendor"
-	}
+	},
+	"repositories": [
+		{
+			"type": "path",
+			"url": "../../packages/blocks-wp"
+		}
+	]
 }

@@ -4,21 +4,15 @@
 		"Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
 		"This file is @generated automatically"
 	],
-	"content-hash": "2b8c61c53ff4cb7cc803de1d82d4cb58",
+	"content-hash": "e2812f0381c41f0dec3b17f5bee6da14",
 	"packages": [
 		{
 			"name": "bring/blocks-wp",
-			"version": "0.2.18",
-			"source": {
-				"type": "git",
-				"url": "https://github.com/gaborbankutidev/BringBlocksWp.git",
-				"reference": "bd6d19b29b3f426dc211e8995349ec45283c6700"
-			},
+			"version": "0.2.32",
 			"dist": {
-				"type": "zip",
-				"url": "https://api.github.com/repos/gaborbankutidev/BringBlocksWp/zipball/bd6d19b29b3f426dc211e8995349ec45283c6700",
-				"reference": "bd6d19b29b3f426dc211e8995349ec45283c6700",
-				"shasum": ""
+				"type": "path",
+				"url": "../../packages/blocks-wp",
+				"reference": "1dbf93152bd096a81c17c6c22f924883af52089a"
 			},
 			"require": {
 				"firebase/php-jwt": "^6.5"
@@ -35,18 +29,20 @@
 					"Bring\\BlocksWP\\": "src/"
 				}
 			},
-			"notification-url": "https://packagist.org/downloads/",
+			"scripts": {
+				"lint": [
+					"vendor/bin/phpstan analyse"
+				]
+			},
 			"authors": [
 				{
 					"name": "Bring Theme Ltd.",
 					"homepage": "https://thebringteam.com/"
 				}
 			],
-			"support": {
-				"issues": "https://github.com/gaborbankutidev/BringBlocksWp/issues",
-				"source": "https://github.com/gaborbankutidev/BringBlocksWp/tree/0.2.18"
-			},
-			"time": "2024-03-31T22:19:01+00:00"
+			"transport-options": {
+				"relative": true
+			}
 		},
 		{
 			"name": "firebase/php-jwt",
@@ -84,7 +80,9 @@
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["BSD-3-Clause"],
+			"license": [
+				"BSD-3-Clause"
+			],
 			"authors": [
 				{
 					"name": "Neuman Vong",
@@ -99,7 +97,10 @@
 			],
 			"description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
 			"homepage": "https://github.com/firebase/php-jwt",
-			"keywords": ["jwt", "php"],
+			"keywords": [
+				"jwt",
+				"php"
+			],
 			"support": {
 				"issues": "https://github.com/firebase/php-jwt/issues",
 				"source": "https://github.com/firebase/php-jwt/tree/v6.10.0"
@@ -134,7 +135,9 @@
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "Graham Campbell",
@@ -203,7 +206,9 @@
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["Apache-2.0"],
+			"license": [
+				"Apache-2.0"
+			],
 			"authors": [
 				{
 					"name": "Johannes M. Schmitt",
@@ -217,7 +222,12 @@
 				}
 			],
 			"description": "Option Type for PHP",
-			"keywords": ["language", "option", "php", "type"],
+			"keywords": [
+				"language",
+				"option",
+				"php",
+				"type"
+			],
 			"support": {
 				"issues": "https://github.com/schmittjoh/php-option/issues",
 				"source": "https://github.com/schmittjoh/php-option/tree/1.9.2"
@@ -265,13 +275,17 @@
 				}
 			},
 			"autoload": {
-				"files": ["bootstrap.php"],
+				"files": [
+					"bootstrap.php"
+				],
 				"psr-4": {
 					"Symfony\\Polyfill\\Ctype\\": ""
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "Gert de Pagter",
@@ -284,7 +298,12 @@
 			],
 			"description": "Symfony polyfill for ctype functions",
 			"homepage": "https://symfony.com",
-			"keywords": ["compatibility", "ctype", "polyfill", "portable"],
+			"keywords": [
+				"compatibility",
+				"ctype",
+				"polyfill",
+				"portable"
+			],
 			"support": {
 				"source": "https://github.com/symfony/polyfill-ctype/tree/v1.29.0"
 			},
@@ -335,13 +354,17 @@
 				}
 			},
 			"autoload": {
-				"files": ["bootstrap.php"],
+				"files": [
+					"bootstrap.php"
+				],
 				"psr-4": {
 					"Symfony\\Polyfill\\Mbstring\\": ""
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "Nicolas Grekas",
@@ -354,7 +377,13 @@
 			],
 			"description": "Symfony polyfill for the Mbstring extension",
 			"homepage": "https://symfony.com",
-			"keywords": ["compatibility", "mbstring", "polyfill", "portable", "shim"],
+			"keywords": [
+				"compatibility",
+				"mbstring",
+				"polyfill",
+				"portable",
+				"shim"
+			],
 			"support": {
 				"source": "https://github.com/symfony/polyfill-mbstring/tree/v1.29.0"
 			},
@@ -399,14 +428,20 @@
 				}
 			},
 			"autoload": {
-				"files": ["bootstrap.php"],
+				"files": [
+					"bootstrap.php"
+				],
 				"psr-4": {
 					"Symfony\\Polyfill\\Php80\\": ""
 				},
-				"classmap": ["Resources/stubs"]
+				"classmap": [
+					"Resources/stubs"
+				]
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "Ion Bazan",
@@ -423,7 +458,12 @@
 			],
 			"description": "Symfony polyfill backporting some PHP 8.0+ features to lower PHP versions",
 			"homepage": "https://symfony.com",
-			"keywords": ["compatibility", "polyfill", "portable", "shim"],
+			"keywords": [
+				"compatibility",
+				"polyfill",
+				"portable",
+				"shim"
+			],
 			"support": {
 				"source": "https://github.com/symfony/polyfill-php80/tree/v1.29.0"
 			},
@@ -490,7 +530,9 @@
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["BSD-3-Clause"],
+			"license": [
+				"BSD-3-Clause"
+			],
 			"authors": [
 				{
 					"name": "Graham Campbell",
@@ -504,7 +546,11 @@
 				}
 			],
 			"description": "Loads environment variables from `.env` to `getenv()`, `$_ENV` and `$_SERVER` automagically.",
-			"keywords": ["dotenv", "env", "environment"],
+			"keywords": [
+				"dotenv",
+				"env",
+				"environment"
+			],
 			"support": {
 				"issues": "https://github.com/vlucas/phpdotenv/issues",
 				"source": "https://github.com/vlucas/phpdotenv/tree/v5.6.0"
@@ -551,10 +597,17 @@
 			},
 			"type": "library",
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["GPL-2.0-or-later"],
+			"license": [
+				"GPL-2.0-or-later"
+			],
 			"description": "Advanced Custom Fields PRO stubs for static analysis.",
 			"homepage": "https://github.com/php-stubs/acf-pro-stubs",
-			"keywords": ["PHPStan", "acf", "static analysis", "wordpress"],
+			"keywords": [
+				"PHPStan",
+				"acf",
+				"static analysis",
+				"wordpress"
+			],
 			"support": {
 				"issues": "https://github.com/php-stubs/acf-pro-stubs/issues",
 				"source": "https://github.com/php-stubs/acf-pro-stubs/tree/v6.2.7"
@@ -592,10 +645,16 @@
 			},
 			"type": "library",
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"description": "WordPress function and class declaration stubs for static analysis.",
 			"homepage": "https://github.com/php-stubs/wordpress-stubs",
-			"keywords": ["PHPStan", "static analysis", "wordpress"],
+			"keywords": [
+				"PHPStan",
+				"static analysis",
+				"wordpress"
+			],
 			"support": {
 				"issues": "https://github.com/php-stubs/wordpress-stubs/issues",
 				"source": "https://github.com/php-stubs/wordpress-stubs/tree/v6.4.3"
@@ -622,15 +681,25 @@
 			"conflict": {
 				"phpstan/phpstan-shim": "*"
 			},
-			"bin": ["phpstan", "phpstan.phar"],
+			"bin": [
+				"phpstan",
+				"phpstan.phar"
+			],
 			"type": "library",
 			"autoload": {
-				"files": ["bootstrap.php"]
+				"files": [
+					"bootstrap.php"
+				]
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"description": "PHPStan - PHP Static Analysis Tool",
-			"keywords": ["dev", "static analysis"],
+			"keywords": [
+				"dev",
+				"static analysis"
+			],
 			"support": {
 				"docs": "https://phpstan.org/user-guide/getting-started",
 				"forum": "https://github.com/phpstan/phpstan/discussions",
@@ -679,14 +748,20 @@
 				}
 			},
 			"autoload": {
-				"files": ["bootstrap.php"],
+				"files": [
+					"bootstrap.php"
+				],
 				"psr-4": {
 					"Symfony\\Polyfill\\Php73\\": ""
 				},
-				"classmap": ["Resources/stubs"]
+				"classmap": [
+					"Resources/stubs"
+				]
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "Nicolas Grekas",
@@ -699,7 +774,12 @@
 			],
 			"description": "Symfony polyfill backporting some PHP 7.3+ features to lower PHP versions",
 			"homepage": "https://symfony.com",
-			"keywords": ["compatibility", "polyfill", "portable", "shim"],
+			"keywords": [
+				"compatibility",
+				"polyfill",
+				"portable",
+				"shim"
+			],
 			"support": {
 				"source": "https://github.com/symfony/polyfill-php73/tree/v1.29.0"
 			},
@@ -753,7 +833,9 @@
 			"type": "phpstan-extension",
 			"extra": {
 				"phpstan": {
-					"includes": ["extension.neon"]
+					"includes": [
+						"extension.neon"
+					]
 				}
 			},
 			"autoload": {
@@ -762,7 +844,9 @@
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"description": "WordPress extensions for PHPStan",
 			"keywords": [
 				"PHPStan",
@@ -780,7 +864,9 @@
 	],
 	"aliases": [],
 	"minimum-stability": "stable",
-	"stability-flags": [],
+	"stability-flags": {
+		"bring/blocks-wp": 20
+	},
 	"prefer-stable": false,
 	"prefer-lowest": false,
 	"platform": [],
