@@ -260,7 +260,7 @@ export type MarkdownBlockProps = {
 	color?: ColorType;
 };
 
-const MarkdownBlock = ({
+export const MarkdownBlock = ({
 	source = "manual",
 	content = "",
 	align,
