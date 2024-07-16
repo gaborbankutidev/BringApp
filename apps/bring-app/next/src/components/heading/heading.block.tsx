@@ -6,7 +6,7 @@ import {
 	colorOptions,
 	textAlignOptions,
 	textSourceOptions,
-} from "@/editor/utils";
+} from "@/editor/utils/options";
 import {
 	numberAttributeSource,
 	stringAttributeSource,

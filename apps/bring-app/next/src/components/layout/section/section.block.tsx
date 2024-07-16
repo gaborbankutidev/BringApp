@@ -2,7 +2,7 @@ import {
 	section,
 	type SectionBlockProps as SectionProps,
 } from "@/components/layout/section";
-import {colorOptions} from "@/editor/utils";
+import {colorOptions} from "@/editor/utils/options";
 import {
 	booleanAttributeSource,
 	imageAttributeSource,

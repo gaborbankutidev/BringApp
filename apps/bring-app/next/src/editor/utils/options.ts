@@ -1,4 +1,5 @@
 import {colorList} from "@/styles";
+import {makeOptions} from "@bring/blocks-editor";
 import {
 	alignList,
 	directionList,
@@ -9,8 +10,7 @@ import {
 	taxonomyList,
 	textAlignList,
 	textSourceList,
-} from "@/utils";
-import {makeOptions} from "@bring/blocks-editor";
+} from "./lists";
 
 export const colorOptions = makeOptions([...colorList]);
 export const directionOptions = makeOptions([...directionList]);

@@ -12,7 +12,7 @@ import {
 import {RowControls} from "./row.controls";
 import {RowEdit} from "./row.edit";
 
-import {colorOptions} from "@/editor/utils";
+import {colorOptions} from "@/editor/utils/options";
 import {objectKeys} from "@bring/blocks-client";
 
 const rowConfig: BlockConfig<RowProps> = {

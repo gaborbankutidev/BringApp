@@ -4,7 +4,7 @@ import {
 	colorOptions,
 	directionOptions,
 	justifyOptions,
-} from "@/editor/utils";
+} from "@/editor/utils/options";
 import {
 	objectAttributeSource,
 	stringAttributeSource,

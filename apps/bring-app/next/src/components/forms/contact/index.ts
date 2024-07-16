@@ -1,8 +1,5 @@
 import ContactForm from "./contact";
-export type {ContactFormProps} from "./contact";
-export {contactForm} from "./contact-block";
-export type {ContactFormBlockProps} from "./contact-block";
-export {ContactFormBlock};
-export default ContactForm;
+export {contactForm} from "./contact";
+export type {ContactFormBlockProps, ContactFormProps} from "./contact";
 
-import ContactFormBlock from "./contact-block";
+export default ContactForm;

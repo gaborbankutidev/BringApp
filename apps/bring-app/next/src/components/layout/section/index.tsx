@@ -1,4 +1,4 @@
 import Section from "./section";
 export default Section;
-
-export {section, type SectionBlockProps} from "./section-block";
+export {section} from "./section";
+export type {SectionBlockProps} from "./section";

@@ -1,4 +1,7 @@
+import type {BP} from "@/bring";
 import Image from "@/components/image";
+import type {TextAlignType, TextSourceType} from "@/editor/utils/lists";
+import type {ColorType} from "@/styles";
 import {twJoin, twMerge} from "@/utils";
 import Link from "next/link";
 import type {FC, ReactElement, ReactNode} from "react";
@@ -247,6 +250,57 @@ const Markdown: FC<MarkdownProps> = ({
 			{content}
 		</ReactMarkdown>
 	);
+};
+
+export type MarkdownBlockProps = {
+	source?: TextSourceType;
+	content?: string;
+	elementsClassName: {[key in MarkdownElements]?: string};
+	align?: TextAlignType;
+	color?: ColorType;
+};
+
+const MarkdownBlock = ({
+	source = "manual",
+	content = "",
+	align,
+	color,
+
+	bringStylesClassNames,
+	elementsClassName,
+	className,
+	entityProps,
+}: BP<MarkdownBlockProps>) => {
+	const classNames = twJoin(
+		align && `text-${align}`,
+		color && `text-${color}`,
+		bringStylesClassNames?.classNames,
+		className,
+	);
+
+	if (source !== "manual") {
+		if (!entityProps) {
+			return null;
+		}
+
+		const dynamicContent = entityProps[source];
+		return dynamicContent ? (
+			<Markdown content={dynamicContent} className={classNames} />
+		) : null;
+	}
+
+	return (
+		<Markdown
+			content={content}
+			className={classNames}
+			elementsClassName={elementsClassName}
+		/>
+	);
+};
+
+export const markdown = {
+	Component: MarkdownBlock,
+	componentName: "Markdown",
 };
 
 export default Markdown;

@@ -1,5 +1,5 @@
 import {divider, type DividerProps} from "@/components/divider";
-import {colorOptions} from "@/editor/utils";
+import {colorOptions} from "@/editor/utils/options";
 import {
 	booleanAttributeSource,
 	numberAttributeSource,

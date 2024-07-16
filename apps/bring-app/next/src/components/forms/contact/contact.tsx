@@ -8,6 +8,7 @@ import {useForm} from "react-hook-form";
 import {BiEnvelope, BiLoader, BiPaperPlane, BiUser} from "react-icons/bi";
 import {z} from "zod";
 
+import {type BP} from "@/bring";
 import Button from "@/components/button";
 import Heading from "@/components/heading";
 import {Checkbox, Input, Textarea} from "../components";
@@ -135,9 +136,25 @@ const ContactForm = ({title, button = "Send", ...props}: ContactFormProps) => {
 	);
 };
 
-export default ContactForm;
+export type ContactFormBlockProps = {title?: string; button?: string};
+
+const ContactFormBlock = ({
+	title,
+	button,
+	bringStylesClassNames,
+	className = "",
+	id,
+}: BP<ContactFormBlockProps>) => {
+	const classNames = twJoin(bringStylesClassNames?.classNames, className);
+
+	return (
+		<ContactForm title={title} button={button} className={classNames} id={id} />
+	);
+};
 
 export const contactForm = {
-	Component: ContactForm,
+	Component: ContactFormBlock,
 	componentName: "ContactForm",
 };
+
+export default ContactForm;

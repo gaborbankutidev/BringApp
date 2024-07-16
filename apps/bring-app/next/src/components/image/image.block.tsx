@@ -1,5 +1,5 @@
 import {image, imageSizes, type ImageBlockProps} from "@/components/image";
-import {sourceOptions} from "@/editor/utils";
+import {sourceOptions} from "@/editor/utils/options";
 import {
 	booleanAttributeSource,
 	imageAttributeSource,

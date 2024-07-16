@@ -1,4 +1,7 @@
-import {twMerge} from "@/utils";
+import type {BP} from "@/bring";
+import type {TextAlignType, TextSourceType} from "@/editor/utils/lists";
+import type {ColorType} from "@/styles";
+import {twJoin, twMerge} from "@/utils";
 import {type FC} from "react";
 import Markdown from "../markdown";
 
@@ -23,5 +26,48 @@ const Heading: FC<HeadingProps> = ({
 		</H>
 	);
 };
+
+export type HeadingBlockProps = {
+	source?: TextSourceType;
+	title: string;
+	level?: HeadingLevel;
+	align?: TextAlignType;
+	color?: ColorType;
+};
+
+const HeadingBlock = ({
+	source = "manual",
+	title,
+	level = 2,
+	align,
+	color,
+
+	entityProps,
+	bringStylesClassNames,
+	className,
+	id,
+}: BP<HeadingBlockProps>) => {
+	const classNames = twJoin(
+		align && `text-${align}`,
+		color && `text-${color}`,
+		bringStylesClassNames?.classNames,
+		className,
+	);
+
+	let headingTitle: string | null = title;
+	if (source !== "manual") {
+		if (!entityProps) return null;
+
+		headingTitle = entityProps[source];
+	}
+
+	return headingTitle !== null ? (
+		<Heading level={level} className={classNames} id={id}>
+			{headingTitle}
+		</Heading>
+	) : null;
+};
+
+export const heading = {Component: HeadingBlock, componentName: "Heading"};
 
 export default Heading;

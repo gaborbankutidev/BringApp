@@ -3,7 +3,11 @@ import {
 	markdownElements,
 	type MarkdownBlockProps as MarkdownProps,
 } from "@/components/markdown";
-import {alignOptions, colorOptions, textSourceOptions} from "@/editor/utils";
+import {
+	alignOptions,
+	colorOptions,
+	textSourceOptions,
+} from "@/editor/utils/options";
 import {
 	objectAttributeSource,
 	stringAttributeSource,

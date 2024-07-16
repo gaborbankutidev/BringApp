@@ -9,10 +9,10 @@ const webpack = require("webpack");
  */
 // @ts-ignore
 const defaultConfig = require("@wordpress/scripts/config/webpack.config.js");
-const newConfig = {...defaultConfig};
+const editorConfig = {...defaultConfig};
 
-newConfig.resolve.alias = {
-	...newConfig.resolve.alias,
+editorConfig.resolve.alias = {
+	...editorConfig.resolve.alias,
 	"@/bring/client": path.resolve(__dirname, "src/editor/bring/client"),
 	"@/bring/server": path.resolve(__dirname, "src/editor/bring/server"),
 	"@": path.resolve(__dirname, "./src/"),
@@ -20,11 +20,11 @@ newConfig.resolve.alias = {
 	"next/link": path.resolve(__dirname, "src/editor/components/next-link.tsx"),
 };
 
-newConfig.plugins = [
-	...newConfig.plugins,
+editorConfig.plugins = [
+	...editorConfig.plugins,
 	new webpack.ProvidePlugin({
 		process: path.resolve(__dirname, "process-mock.js"),
 	}),
 ];
 
-module.exports = newConfig;
+module.exports = editorConfig;
