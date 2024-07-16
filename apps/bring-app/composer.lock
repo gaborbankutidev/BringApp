@@ -4,7 +4,7 @@
 		"Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
 		"This file is @generated automatically"
 	],
-	"content-hash": "e2812f0381c41f0dec3b17f5bee6da14",
+	"content-hash": "eeddc648d5be462dcbcc0c927f38c943",
 	"packages": [
 		{
 			"name": "bring/blocks-wp",
@@ -12,7 +12,7 @@
 			"dist": {
 				"type": "path",
 				"url": "../../packages/blocks-wp",
-				"reference": "1dbf93152bd096a81c17c6c22f924883af52089a"
+				"reference": "ad3793465abbe8bcf490f06193e599ca74cd6180"
 			},
 			"require": {
 				"firebase/php-jwt": "^6.5"
@@ -41,31 +41,32 @@
 				}
 			],
 			"transport-options": {
+				"symlink": true,
 				"relative": true
 			}
 		},
 		{
 			"name": "firebase/php-jwt",
-			"version": "v6.10.0",
+			"version": "v6.10.1",
 			"source": {
 				"type": "git",
 				"url": "https://github.com/firebase/php-jwt.git",
-				"reference": "a49db6f0a5033aef5143295342f1c95521b075ff"
+				"reference": "500501c2ce893c824c801da135d02661199f60c5"
 			},
 			"dist": {
 				"type": "zip",
-				"url": "https://api.github.com/repos/firebase/php-jwt/zipball/a49db6f0a5033aef5143295342f1c95521b075ff",
-				"reference": "a49db6f0a5033aef5143295342f1c95521b075ff",
+				"url": "https://api.github.com/repos/firebase/php-jwt/zipball/500501c2ce893c824c801da135d02661199f60c5",
+				"reference": "500501c2ce893c824c801da135d02661199f60c5",
 				"shasum": ""
 			},
 			"require": {
-				"php": "^7.4||^8.0"
+				"php": "^8.0"
 			},
 			"require-dev": {
-				"guzzlehttp/guzzle": "^6.5||^7.4",
+				"guzzlehttp/guzzle": "^7.4",
 				"phpspec/prophecy-phpunit": "^2.0",
 				"phpunit/phpunit": "^9.5",
-				"psr/cache": "^1.0||^2.0",
+				"psr/cache": "^2.0||^3.0",
 				"psr/http-client": "^1.0",
 				"psr/http-factory": "^1.0"
 			},
@@ -103,9 +104,9 @@
 			],
 			"support": {
 				"issues": "https://github.com/firebase/php-jwt/issues",
-				"source": "https://github.com/firebase/php-jwt/tree/v6.10.0"
+				"source": "https://github.com/firebase/php-jwt/tree/v6.10.1"
 			},
-			"time": "2023-12-01T16:26:39+00:00"
+			"time": "2024-05-18T18:05:11+00:00"
 		},
 		{
 			"name": "graham-campbell/result-type",
@@ -246,16 +247,16 @@
 		},
 		{
 			"name": "symfony/polyfill-ctype",
-			"version": "v1.29.0",
+			"version": "v1.30.0",
 			"source": {
 				"type": "git",
 				"url": "https://github.com/symfony/polyfill-ctype.git",
-				"reference": "ef4d7e442ca910c4764bce785146269b30cb5fc4"
+				"reference": "0424dff1c58f028c451efff2045f5d92410bd540"
 			},
 			"dist": {
 				"type": "zip",
-				"url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/ef4d7e442ca910c4764bce785146269b30cb5fc4",
-				"reference": "ef4d7e442ca910c4764bce785146269b30cb5fc4",
+				"url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/0424dff1c58f028c451efff2045f5d92410bd540",
+				"reference": "0424dff1c58f028c451efff2045f5d92410bd540",
 				"shasum": ""
 			},
 			"require": {
@@ -305,7 +306,7 @@
 				"portable"
 			],
 			"support": {
-				"source": "https://github.com/symfony/polyfill-ctype/tree/v1.29.0"
+				"source": "https://github.com/symfony/polyfill-ctype/tree/v1.30.0"
 			},
 			"funding": [
 				{
@@ -321,20 +322,20 @@
 					"type": "tidelift"
 				}
 			],
-			"time": "2024-01-29T20:11:03+00:00"
+			"time": "2024-05-31T15:07:36+00:00"
 		},
 		{
 			"name": "symfony/polyfill-mbstring",
-			"version": "v1.29.0",
+			"version": "v1.30.0",
 			"source": {
 				"type": "git",
 				"url": "https://github.com/symfony/polyfill-mbstring.git",
-				"reference": "9773676c8a1bb1f8d4340a62efe641cf76eda7ec"
+				"reference": "fd22ab50000ef01661e2a31d850ebaa297f8e03c"
 			},
 			"dist": {
 				"type": "zip",
-				"url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/9773676c8a1bb1f8d4340a62efe641cf76eda7ec",
-				"reference": "9773676c8a1bb1f8d4340a62efe641cf76eda7ec",
+				"url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/fd22ab50000ef01661e2a31d850ebaa297f8e03c",
+				"reference": "fd22ab50000ef01661e2a31d850ebaa297f8e03c",
 				"shasum": ""
 			},
 			"require": {
@@ -385,7 +386,7 @@
 				"shim"
 			],
 			"support": {
-				"source": "https://github.com/symfony/polyfill-mbstring/tree/v1.29.0"
+				"source": "https://github.com/symfony/polyfill-mbstring/tree/v1.30.0"
 			},
 			"funding": [
 				{
@@ -401,20 +402,20 @@
 					"type": "tidelift"
 				}
 			],
-			"time": "2024-01-29T20:11:03+00:00"
+			"time": "2024-06-19T12:30:46+00:00"
 		},
 		{
 			"name": "symfony/polyfill-php80",
-			"version": "v1.29.0",
+			"version": "v1.30.0",
 			"source": {
 				"type": "git",
 				"url": "https://github.com/symfony/polyfill-php80.git",
-				"reference": "87b68208d5c1188808dd7839ee1e6c8ec3b02f1b"
+				"reference": "77fa7995ac1b21ab60769b7323d600a991a90433"
 			},
 			"dist": {
 				"type": "zip",
-				"url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/87b68208d5c1188808dd7839ee1e6c8ec3b02f1b",
-				"reference": "87b68208d5c1188808dd7839ee1e6c8ec3b02f1b",
+				"url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/77fa7995ac1b21ab60769b7323d600a991a90433",
+				"reference": "77fa7995ac1b21ab60769b7323d600a991a90433",
 				"shasum": ""
 			},
 			"require": {
@@ -465,7 +466,7 @@
 				"shim"
 			],
 			"support": {
-				"source": "https://github.com/symfony/polyfill-php80/tree/v1.29.0"
+				"source": "https://github.com/symfony/polyfill-php80/tree/v1.30.0"
 			},
 			"funding": [
 				{
@@ -481,7 +482,7 @@
 					"type": "tidelift"
 				}
 			],
-			"time": "2024-01-29T20:11:03+00:00"
+			"time": "2024-05-31T15:07:36+00:00"
 		},
 		{
 			"name": "vlucas/phpdotenv",
@@ -616,16 +617,16 @@
 		},
 		{
 			"name": "php-stubs/wordpress-stubs",
-			"version": "v6.4.3",
+			"version": "v6.5.3",
 			"source": {
 				"type": "git",
 				"url": "https://github.com/php-stubs/wordpress-stubs.git",
-				"reference": "6105bdab2f26c0204fe90ecc53d5684754550e8f"
+				"reference": "e611a83292d02055a25f83291a98fadd0c21e092"
 			},
 			"dist": {
 				"type": "zip",
-				"url": "https://api.github.com/repos/php-stubs/wordpress-stubs/zipball/6105bdab2f26c0204fe90ecc53d5684754550e8f",
-				"reference": "6105bdab2f26c0204fe90ecc53d5684754550e8f",
+				"url": "https://api.github.com/repos/php-stubs/wordpress-stubs/zipball/e611a83292d02055a25f83291a98fadd0c21e092",
+				"reference": "e611a83292d02055a25f83291a98fadd0c21e092",
 				"shasum": ""
 			},
 			"require-dev": {
@@ -633,7 +634,7 @@
 				"nikic/php-parser": "^4.13",
 				"php": "^7.4 || ~8.0.0",
 				"php-stubs/generator": "^0.8.3",
-				"phpdocumentor/reflection-docblock": "^5.3",
+				"phpdocumentor/reflection-docblock": "5.3",
 				"phpstan/phpstan": "^1.10.49",
 				"phpunit/phpunit": "^9.5",
 				"szepeviktor/phpcs-psr-12-neutron-hybrid-ruleset": "^0.11"
@@ -657,22 +658,22 @@
 			],
 			"support": {
 				"issues": "https://github.com/php-stubs/wordpress-stubs/issues",
-				"source": "https://github.com/php-stubs/wordpress-stubs/tree/v6.4.3"
+				"source": "https://github.com/php-stubs/wordpress-stubs/tree/v6.5.3"
 			},
-			"time": "2024-02-11T18:56:19+00:00"
+			"time": "2024-05-08T02:12:31+00:00"
 		},
 		{
 			"name": "phpstan/phpstan",
-			"version": "1.10.66",
+			"version": "1.11.7",
 			"source": {
 				"type": "git",
 				"url": "https://github.com/phpstan/phpstan.git",
-				"reference": "94779c987e4ebd620025d9e5fdd23323903950bd"
+				"reference": "52d2bbfdcae7f895915629e4694e9497d0f8e28d"
 			},
 			"dist": {
 				"type": "zip",
-				"url": "https://api.github.com/repos/phpstan/phpstan/zipball/94779c987e4ebd620025d9e5fdd23323903950bd",
-				"reference": "94779c987e4ebd620025d9e5fdd23323903950bd",
+				"url": "https://api.github.com/repos/phpstan/phpstan/zipball/52d2bbfdcae7f895915629e4694e9497d0f8e28d",
+				"reference": "52d2bbfdcae7f895915629e4694e9497d0f8e28d",
 				"shasum": ""
 			},
 			"require": {
@@ -715,26 +716,22 @@
 				{
 					"url": "https://github.com/phpstan",
 					"type": "github"
-				},
-				{
-					"url": "https://tidelift.com/funding/github/packagist/phpstan/phpstan",
-					"type": "tidelift"
 				}
 			],
-			"time": "2024-03-28T16:17:31+00:00"
+			"time": "2024-07-06T11:17:41+00:00"
 		},
 		{
 			"name": "symfony/polyfill-php73",
-			"version": "v1.29.0",
+			"version": "v1.30.0",
 			"source": {
 				"type": "git",
 				"url": "https://github.com/symfony/polyfill-php73.git",
-				"reference": "21bd091060673a1177ae842c0ef8fe30893114d2"
+				"reference": "ec444d3f3f6505bb28d11afa41e75faadebc10a1"
 			},
 			"dist": {
 				"type": "zip",
-				"url": "https://api.github.com/repos/symfony/polyfill-php73/zipball/21bd091060673a1177ae842c0ef8fe30893114d2",
-				"reference": "21bd091060673a1177ae842c0ef8fe30893114d2",
+				"url": "https://api.github.com/repos/symfony/polyfill-php73/zipball/ec444d3f3f6505bb28d11afa41e75faadebc10a1",
+				"reference": "ec444d3f3f6505bb28d11afa41e75faadebc10a1",
 				"shasum": ""
 			},
 			"require": {
@@ -781,7 +778,7 @@
 				"shim"
 			],
 			"support": {
-				"source": "https://github.com/symfony/polyfill-php73/tree/v1.29.0"
+				"source": "https://github.com/symfony/polyfill-php73/tree/v1.30.0"
 			},
 			"funding": [
 				{
@@ -797,20 +794,20 @@
 					"type": "tidelift"
 				}
 			],
-			"time": "2024-01-29T20:11:03+00:00"
+			"time": "2024-05-31T15:07:36+00:00"
 		},
 		{
 			"name": "szepeviktor/phpstan-wordpress",
-			"version": "v1.3.4",
+			"version": "v1.3.5",
 			"source": {
 				"type": "git",
 				"url": "https://github.com/szepeviktor/phpstan-wordpress.git",
-				"reference": "891d0767855a32c886a439efae090408cc1fa156"
+				"reference": "7f8cfe992faa96b6a33bbd75c7bace98864161e7"
 			},
 			"dist": {
 				"type": "zip",
-				"url": "https://api.github.com/repos/szepeviktor/phpstan-wordpress/zipball/891d0767855a32c886a439efae090408cc1fa156",
-				"reference": "891d0767855a32c886a439efae090408cc1fa156",
+				"url": "https://api.github.com/repos/szepeviktor/phpstan-wordpress/zipball/7f8cfe992faa96b6a33bbd75c7bace98864161e7",
+				"reference": "7f8cfe992faa96b6a33bbd75c7bace98864161e7",
 				"shasum": ""
 			},
 			"require": {
@@ -825,7 +822,8 @@
 				"php-parallel-lint/php-parallel-lint": "^1.1",
 				"phpstan/phpstan-strict-rules": "^1.2",
 				"phpunit/phpunit": "^8.0 || ^9.0",
-				"szepeviktor/phpcs-psr-12-neutron-hybrid-ruleset": "^0.8"
+				"szepeviktor/phpcs-psr-12-neutron-hybrid-ruleset": "^1.0",
+				"wp-coding-standards/wpcs": "3.1.0 as 2.3.0"
 			},
 			"suggest": {
 				"swissspidy/phpstan-no-private": "Detect usage of internal core functions, classes and methods"
@@ -857,9 +855,9 @@
 			],
 			"support": {
 				"issues": "https://github.com/szepeviktor/phpstan-wordpress/issues",
-				"source": "https://github.com/szepeviktor/phpstan-wordpress/tree/v1.3.4"
+				"source": "https://github.com/szepeviktor/phpstan-wordpress/tree/v1.3.5"
 			},
-			"time": "2024-03-21T16:32:59+00:00"
+			"time": "2024-06-28T22:27:19+00:00"
 		}
 	],
 	"aliases": [],
