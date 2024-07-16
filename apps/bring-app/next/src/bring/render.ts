@@ -1,5 +1,5 @@
 import {env} from "@/env.mjs";
-import {initRender} from "@bring/blocks-client";
+import {initRender} from "@bring/blocks-client/init-render";
 import {notFound, redirect} from "next/navigation";
 import {componentList} from "./list";
 import type {EP} from "./types";

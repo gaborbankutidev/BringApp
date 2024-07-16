@@ -1,10 +1,8 @@
 import {twMerge} from "@/utils";
-import {
-	makeResponsiveClassNames,
-	type BP,
-	type GridNumType,
-	type ResponsiveValue,
-} from "@bring/blocks-client";
+
+import type {ResponsiveValue} from "@bring/blocks-client/styles";
+import {makeResponsiveClassNames} from "@bring/blocks-client/styles";
+import {type BP, type GridNumType} from "@bring/blocks-client/types";
 import {type ReactNode} from "react";
 
 export type SplitProps = {

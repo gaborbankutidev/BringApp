@@ -8,8 +8,9 @@ import type {ColorType} from "@/styles";
 import {twJoin, twMerge} from "@/utils";
 import type {ReactNode} from "react";
 
-import type {GridNumType, ResponsiveValue} from "@bring/blocks-client";
-import {makeResponsiveClassNames} from "@bring/blocks-client";
+import type {ResponsiveValue} from "@bring/blocks-client/styles";
+import {makeResponsiveClassNames} from "@bring/blocks-client/styles";
+import type {GridNumType} from "@bring/blocks-client/types";
 
 export type ColumnProps = {
 	children?: ReactNode;

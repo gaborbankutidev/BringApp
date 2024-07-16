@@ -1,8 +1,8 @@
 import type {BP} from "@/bring";
 import type {SourceType} from "@/editor/utils/lists";
 import {twJoin, twMerge} from "@/utils";
-import type {ImageType} from "@bring/blocks-client";
-import {defaultImageValue} from "@bring/blocks-client";
+import type {ImageType} from "@bring/blocks-client/types";
+import {defaultImageValue} from "@bring/blocks-client/utils";
 import MarkdownInline from "../markdown/markdown-inline";
 import ImageContent, {type ImageContentProps} from "./image-content";
 

@@ -1,7 +1,7 @@
 "use client";
 
 import {env} from "@/env.mjs";
-import {initClient} from "@bring/blocks-client";
+import {initClient} from "@bring/blocks-client/init-client";
 import type {EP} from "./types";
 
 export const {useDynamicEntityProps, useWPSendForm} = initClient<EP>(
