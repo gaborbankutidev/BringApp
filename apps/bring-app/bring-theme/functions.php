@@ -12,6 +12,7 @@ use BringTheme\Env\Env;
 use BringTheme\Forms\Forms;
 use BringTheme\General\General;
 use BringTheme\Post\Post;
+use BringTheme\Plugins\Plugins;
 
 // No direct access
 defined("ABSPATH") or die("Hey, do not do this 😱");
@@ -66,3 +67,6 @@ Enqueue::init();
 Forms::init();
 General::init();
 Post::init();
+
+// init plugins
+Plugins::init();
