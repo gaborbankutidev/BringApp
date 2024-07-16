@@ -1,5 +1,9 @@
 import type {ReactNode} from "react";
-import {makeFooter, makeHeader, makeLayout, makeMain} from "./components";
+import makeFooter from "./components/footer";
+import makeHeader from "./components/header";
+import makeLayout from "./components/layout";
+import makeMain from "./components/main";
+
 import {createBringElement, getEntity} from "./content";
 import type {BringNode, EntityProps, FCC, SiteProps} from "./types";
 
