@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import {useState} from "react";
 
 /**
  * Represents the possible states of the form submission.
@@ -12,7 +12,7 @@ export type FormState = "loading" | "success" | "error" | "idle";
  * @property state - The current state of the form submission.
  */
 type LoadingState = {
-  state: "loading";
+	state: "loading";
 };
 
 /**
@@ -22,8 +22,8 @@ type LoadingState = {
  * @property data - The success response data.
  */
 type SuccessState<SuccessT> = {
-  state: "success";
-  data: SuccessT;
+	state: "success";
+	data: SuccessT;
 };
 
 /**
@@ -32,8 +32,8 @@ type SuccessState<SuccessT> = {
  * @property state - The current state of the form submission.
  */
 type ErrorState<ErrorT> = {
-  state: "error";
-  error: ErrorT;
+	state: "error";
+	error: ErrorT;
 };
 
 /**
@@ -41,7 +41,7 @@ type ErrorState<ErrorT> = {
  * @property state - The current state of the form submission.
  */
 type IdleState = {
-  state: "idle";
+	state: "idle";
 };
 
 /**
@@ -50,10 +50,10 @@ type IdleState = {
  * @template ErrorT - The type of the error response.
  */
 type FetchState<SuccessT, ErrorT> =
-  | LoadingState
-  | SuccessState<SuccessT>
-  | ErrorState<ErrorT>
-  | IdleState;
+	| LoadingState
+	| SuccessState<SuccessT>
+	| ErrorState<ErrorT>
+	| IdleState;
 
 /**
  * Represents the configuration options for the useSendForm hook.
@@ -64,8 +64,8 @@ type FetchState<SuccessT, ErrorT> =
  * @property onError - The callback function to handle error responses.
  */
 export type UseSendFormOptions<SuccessT, ErrorT, PayloadT> = {
-  onSuccess?: ((data: SuccessT, payload: PayloadT) => void) | undefined;
-  onError?: ((error: ErrorT, payload: PayloadT) => void) | undefined;
+	onSuccess?: ((data: SuccessT, payload: PayloadT) => void) | undefined;
+	onError?: ((error: ErrorT, payload: PayloadT) => void) | undefined;
 };
 
 /**
@@ -75,50 +75,50 @@ export type UseSendFormOptions<SuccessT, ErrorT, PayloadT> = {
  * @returns An object containing the current state and a function to send the form data.
  */
 export const useSendForm = <SuccessT, ErrorT, PayloadT>(
-  url: string,
-  options?: UseSendFormOptions<SuccessT, ErrorT, PayloadT> | undefined,
+	url: string,
+	options?: UseSendFormOptions<SuccessT, ErrorT, PayloadT> | undefined,
 ) => {
-  /**
-   * Represents the current state of the form submission.
-   */
-  const [state, setState] = useState<FetchState<SuccessT, ErrorT>>({
-    state: "idle",
-  });
+	/**
+	 * Represents the current state of the form submission.
+	 */
+	const [state, setState] = useState<FetchState<SuccessT, ErrorT>>({
+		state: "idle",
+	});
 
-  /**
-   * Sends the form data to the specified URL.
-   * @param formData - The form data to send.
-   */
-  const send = async (formData: PayloadT) => {
-    setState({
-      state: "loading",
-    });
+	/**
+	 * Sends the form data to the specified URL.
+	 * @param formData - The form data to send.
+	 */
+	const send = async (formData: PayloadT) => {
+		setState({
+			state: "loading",
+		});
 
-    const res = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
+		const res = await fetch(url, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Accept: "application/json",
+			},
+			body: JSON.stringify(formData),
+		});
 
-    if (res.ok === true) {
-      const resBody = (await res.json()) as SuccessT;
-      setState({
-        state: "success",
-        data: resBody,
-      });
-      options?.onSuccess !== undefined && options.onSuccess(resBody, formData);
-    } else {
-      const resError = (await res.json()) as ErrorT;
-      setState({
-        state: "error",
-        error: resError,
-      });
-      options?.onError !== undefined && options.onError(resError, formData);
-    }
-  };
+		if (res.ok === true) {
+			const resBody = (await res.json()) as SuccessT;
+			setState({
+				state: "success",
+				data: resBody,
+			});
+			options?.onSuccess !== undefined && options.onSuccess(resBody, formData);
+		} else {
+			const resError = (await res.json()) as ErrorT;
+			setState({
+				state: "error",
+				error: resError,
+			});
+			options?.onError !== undefined && options.onError(resError, formData);
+		}
+	};
 
-  return { state, send };
+	return {state, send};
 };

@@ -1,10 +1,10 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "BringBlocks client",
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"display": "BringBlocks client",
 
-  "extends": "@bring/typescript-config/react-library.json",
-  "compilerOptions": {
-    "outDir": "dist"
-  },
-  "include": ["src"]
+	"extends": "@bring/typescript-config/react-library.json",
+	"compilerOptions": {
+		"outDir": "dist"
+	},
+	"include": ["src"]
 }

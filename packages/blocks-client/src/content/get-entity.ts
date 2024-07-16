@@ -1,4 +1,4 @@
-import type { Entity } from "../types";
+import type {Entity} from "../types";
 
 /**
  * Represents a successful response with an entity.
@@ -7,8 +7,8 @@ import type { Entity } from "../types";
  * @property entity - The entity.
  */
 type SuccessResponse<EP> = {
-  responseCode: 200;
-  entity: Entity<EP>;
+	responseCode: 200;
+	entity: Entity<EP>;
 };
 
 /**
@@ -18,9 +18,9 @@ type SuccessResponse<EP> = {
  * @property entity - The entity.
  */
 type RedirectResponse = {
-  responseCode: 301 | 302 | 307 | 308;
-  redirectTo: string;
-  entity: null;
+	responseCode: 301 | 302 | 307 | 308;
+	redirectTo: string;
+	entity: null;
 };
 
 /**
@@ -29,8 +29,8 @@ type RedirectResponse = {
  * @property entity - The entity.
  */
 type ErrorResponse = {
-  responseCode: 400;
-  entity: null;
+	responseCode: 400;
+	entity: null;
 };
 
 /**
@@ -38,7 +38,7 @@ type ErrorResponse = {
  * @property responseCode - The response code.
  */
 type NotFoundResponse = {
-  responseCode: 404;
+	responseCode: 404;
 };
 
 /**
@@ -46,10 +46,10 @@ type NotFoundResponse = {
  * @template EP - The entity properties type.
  */
 type GetEntityResponseType<EP> =
-  | SuccessResponse<EP>
-  | RedirectResponse
-  | ErrorResponse
-  | NotFoundResponse;
+	| SuccessResponse<EP>
+	| RedirectResponse
+	| ErrorResponse
+	| NotFoundResponse;
 
 /**
  * Fetches an entity from the specified URL.
@@ -61,60 +61,57 @@ type GetEntityResponseType<EP> =
  * @returns The fetched entity or null if there was an error.
  */
 async function getEntity<EP = {}>(
-  wpURL: string,
-  dataToken: string,
-  onRedirect: (redirectTo: string, responseCode: number) => void,
-  onNotFound: () => void,
-  slug: string | string[] = "",
+	wpURL: string,
+	dataToken: string,
+	onRedirect: (redirectTo: string, responseCode: number) => void,
+	onNotFound: () => void,
+	slug: string | string[] = "",
 ): Promise<Entity<EP> | null> {
-  const joinedSlug = (typeof slug === "string" ? slug : slug.join("/")) + "/";
+	const joinedSlug = (typeof slug === "string" ? slug : slug.join("/")) + "/";
 
-  // fetch entity
-  let responseData = null;
-  try {
-    const response = await fetch(
-      `${wpURL}/${joinedSlug}?data_token=${dataToken}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
-    );
+	// fetch entity
+	let responseData = null;
+	try {
+		const response = await fetch(`${wpURL}/${joinedSlug}?data_token=${dataToken}`, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
 
-    responseData = (await response.json()) as GetEntityResponseType<EP>; // TODO: parse with zod
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
+		responseData = (await response.json()) as GetEntityResponseType<EP>; // TODO: parse with zod
+	} catch (error) {
+		console.error(error);
+		return null;
+	}
 
-  // handle redirect
-  if (
-    responseData.responseCode === 301 ||
-    responseData.responseCode === 302 ||
-    responseData.responseCode === 307 ||
-    responseData.responseCode === 308
-  ) {
-    onRedirect(responseData.redirectTo, responseData.responseCode);
-    return null;
-  }
+	// handle redirect
+	if (
+		responseData.responseCode === 301 ||
+		responseData.responseCode === 302 ||
+		responseData.responseCode === 307 ||
+		responseData.responseCode === 308
+	) {
+		onRedirect(responseData.redirectTo, responseData.responseCode);
+		return null;
+	}
 
-  // handle not found
-  if (responseData.responseCode === 404) {
-    onNotFound();
-    return null;
-  }
+	// handle not found
+	if (responseData.responseCode === 404) {
+		onNotFound();
+		return null;
+	}
 
-  // handle error
-  if (responseData.responseCode !== 200) {
-    console.error(
-      `Error while fetching entity at ${joinedSlug}, response code: ${responseData.responseCode}`,
-    );
-    return null;
-  }
+	// handle error
+	if (responseData.responseCode !== 200) {
+		console.error(
+			`Error while fetching entity at ${joinedSlug}, response code: ${responseData.responseCode}`,
+		);
+		return null;
+	}
 
-  // return entity
-  return responseData.entity;
+	// return entity
+	return responseData.entity;
 }
 
 export default getEntity;

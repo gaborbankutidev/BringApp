@@ -1,38 +1,31 @@
-import React, { type ReactNode } from "react";
+import React, {type ReactNode} from "react";
 
-import { type GetDynamicEntityListParams } from "../content";
-import {
-  useDynamicEntityList,
-  type UseDynamicEntityListOptions,
-} from "../hooks";
+import {type GetDynamicEntityListParams} from "../content";
+import {useDynamicEntityList, type UseDynamicEntityListOptions} from "../hooks";
 import type {
-  DynamicEntityList as DynamicEntityListType,
-  DynamicEntityProps as DynamicEntityPropsType,
-  EntityType,
+	DynamicEntityList as DynamicEntityListType,
+	DynamicEntityProps as DynamicEntityPropsType,
+	EntityType,
 } from "../types";
 import Debug from "./debug";
 
 export type DynamicEntityListClientRenderProps<T = {}, P = {}> = {
-  entityList: DynamicEntityListType<T>;
-  params?: GetDynamicEntityListParams<P>;
-  ref?: (node?: Element | null | undefined) => void;
-  Item?: ({
-    entityProps,
-  }: {
-    entityProps: DynamicEntityPropsType<T>;
-  }) => ReactNode;
+	entityList: DynamicEntityListType<T>;
+	params?: GetDynamicEntityListParams<P>;
+	ref?: (node?: Element | null | undefined) => void;
+	Item?: ({entityProps}: {entityProps: DynamicEntityPropsType<T>}) => ReactNode;
 };
 
 export type DynamicEntityListProps<T, P> = {
-  entitySlug?: string;
-  entityType?: EntityType;
-  options?: UseDynamicEntityListOptions;
-  Render?: (props: DynamicEntityListClientRenderProps<T, P>) => ReactNode;
+	entitySlug?: string;
+	entityType?: EntityType;
+	options?: UseDynamicEntityListOptions;
+	Render?: (props: DynamicEntityListClientRenderProps<T, P>) => ReactNode;
 };
 
 function makeDynamicEntityListClient(wpURL: string) {
-  // prettier-ignore
-  const DynamicEntityListClient = <T={}, P = {}>({
+	// prettier-ignore
+	const DynamicEntityListClient = <T={}, P = {}>({
 		entitySlug = "post",
 		entityType = "post",
 		options = {},
@@ -62,7 +55,7 @@ function makeDynamicEntityListClient(wpURL: string) {
 		return <Render entityList={entityList} params={params} ref={ref} />;
 	};
 
-  return DynamicEntityListClient;
+	return DynamicEntityListClient;
 }
 
 export default makeDynamicEntityListClient;

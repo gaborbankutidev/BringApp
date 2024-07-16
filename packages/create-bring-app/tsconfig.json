@@ -1,10 +1,10 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "BringBlocks editor",
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"display": "BringBlocks editor",
 
-  "extends": "@bring/typescript-config/base.json",
-  "compilerOptions": {
-    "outDir": "dist"
-  },
-  "include": ["src"]
+	"extends": "@bring/typescript-config/base.json",
+	"compilerOptions": {
+		"outDir": "dist"
+	},
+	"include": ["src"]
 }

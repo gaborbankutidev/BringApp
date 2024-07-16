@@ -1,13 +1,13 @@
-import React from "react";
-import type { FC } from "react";
-import { ToggleControl as WPToggleControl } from "@wordpress/components";
+import {ToggleControl as WPToggleControl} from "@wordpress/components";
+import cloneDeep from "lodash.clonedeep";
 import get from "lodash.get";
 import set from "lodash.set";
-import cloneDeep from "lodash.clonedeep";
-import type { Obj } from "../../types";
-import type { ControlByPath, ControlByValue, ControlType } from "../types";
-import { useControlContext } from "../context";
-import { isPathControl } from "../utils";
+import type {FC} from "react";
+import React from "react";
+import type {Obj} from "../../types";
+import {useControlContext} from "../context";
+import type {ControlByPath, ControlByValue, ControlType} from "../types";
+import {isPathControl} from "../utils";
 
 /**
  * A control component that renders a toggle input.
@@ -17,14 +17,8 @@ import { isPathControl } from "../utils";
  * @param props - The props for the ToggleControl component.
  * @returns The rendered ToggleControl component.
  */
-export const ToggleControl = <pT extends Obj = {}>(
-  props: ControlType<boolean, pT>,
-) =>
-  isPathControl(props) ? (
-    <ToggleControlByPath {...props} />
-  ) : (
-    <ToggleControlByValue {...props} />
-  );
+export const ToggleControl = <pT extends Obj = {}>(props: ControlType<boolean, pT>) =>
+	isPathControl(props) ? <ToggleControlByPath {...props} /> : <ToggleControlByValue {...props} />;
 
 /**
  * A control component that renders a toggle input based on a path.
@@ -37,25 +31,25 @@ export const ToggleControl = <pT extends Obj = {}>(
  * @returns The rendered ToggleControlByPath component.
  */
 function ToggleControlByPath<pT extends Obj>({
-  path,
-  updateHandling,
-  ...props
+	path,
+	updateHandling,
+	...props
 }: ControlByPath<pT, boolean>): JSX.Element {
-  const { attributes, setAttributes } = useControlContext();
-  const value = get(attributes, path);
+	const {attributes, setAttributes} = useControlContext();
+	const value = get(attributes, path);
 
-  return (
-    <ToggleControlByValue
-      updateHandling="by-value"
-      value={value}
-      setValue={(newValue) => {
-        const newAttributes = cloneDeep(attributes);
-        set(newAttributes, path, newValue);
-        setAttributes(newAttributes);
-      }}
-      {...props}
-    />
-  );
+	return (
+		<ToggleControlByValue
+			updateHandling="by-value"
+			value={value}
+			setValue={(newValue) => {
+				const newAttributes = cloneDeep(attributes);
+				set(newAttributes, path, newValue);
+				setAttributes(newAttributes);
+			}}
+			{...props}
+		/>
+	);
 }
 
 /**
@@ -70,29 +64,29 @@ function ToggleControlByPath<pT extends Obj>({
  * @returns The rendered ToggleControlByValue component.
  */
 const ToggleControlByValue: FC<ControlByValue<boolean>> = ({
-  label,
-  value,
-  setValue,
-  setDefault = true,
-  defaultValue = false,
-  show = true,
+	label,
+	value,
+	setValue,
+	setDefault = true,
+	defaultValue = false,
+	show = true,
 }) =>
-  show ? (
-    <WPToggleControl
-      label={`${label} ${value === undefined ? " - Default" : ""}`}
-      onChange={setValue}
-      checked={value ?? defaultValue}
-      help={
-        setDefault &&
-        value !== undefined && (
-          <button
-            onClick={() => {
-              setValue(undefined);
-            }}
-          >
-            Set to default
-          </button>
-        )
-      }
-    />
-  ) : null;
+	show ? (
+		<WPToggleControl
+			label={`${label} ${value === undefined ? " - Default" : ""}`}
+			onChange={setValue}
+			checked={value ?? defaultValue}
+			help={
+				setDefault &&
+				value !== undefined && (
+					<button
+						onClick={() => {
+							setValue(undefined);
+						}}
+					>
+						Set to default
+					</button>
+				)
+			}
+		/>
+	) : null;

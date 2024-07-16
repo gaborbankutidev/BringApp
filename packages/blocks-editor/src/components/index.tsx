@@ -1,2 +1,2 @@
-export { Debug } from "./debug";
-export { EditorCard } from "./editor-card";
+export {Debug} from "./debug";
+export {EditorCard} from "./editor-card";

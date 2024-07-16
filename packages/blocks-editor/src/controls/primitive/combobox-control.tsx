@@ -1,22 +1,22 @@
-import React from "react";
-import type { FC } from "react";
-import { ComboboxControl as WPComboboxControl } from "@wordpress/components";
+import {ComboboxControl as WPComboboxControl} from "@wordpress/components";
+import cloneDeep from "lodash.clonedeep";
 import get from "lodash.get";
 import set from "lodash.set";
-import cloneDeep from "lodash.clonedeep";
-import type { Obj } from "../../types";
-import type { ControlByPath, ControlByValue, ControlType } from "../types";
-import { useControlContext } from "../context";
-import { isPathControl } from "../utils";
+import type {FC} from "react";
+import React from "react";
+import type {Obj} from "../../types";
+import {useControlContext} from "../context";
+import type {ControlByPath, ControlByValue, ControlType} from "../types";
+import {isPathControl} from "../utils";
 
 /**
  * Represents a combobox control component.
  */
 type _ComboboxControl = {
-  options: {
-    label: string;
-    value: string;
-  }[];
+	options: {
+		label: string;
+		value: string;
+	}[];
 };
 
 /**
@@ -25,13 +25,13 @@ type _ComboboxControl = {
  * @returns A React component representing a combobox control.
  */
 export const ComboboxControl = <pT extends Obj = {}>(
-  props: ControlType<string, pT> & _ComboboxControl,
+	props: ControlType<string, pT> & _ComboboxControl,
 ) =>
-  isPathControl(props) ? (
-    <ComboboxControlByPath {...props} />
-  ) : (
-    <ComboboxControlByValue {...props} />
-  );
+	isPathControl(props) ? (
+		<ComboboxControlByPath {...props} />
+	) : (
+		<ComboboxControlByValue {...props} />
+	);
 
 /**
  * ComboboxControlByPath component.
@@ -39,25 +39,25 @@ export const ComboboxControl = <pT extends Obj = {}>(
  * @returns A React component representing a combobox control by path.
  */
 function ComboboxControlByPath<pT extends Obj>({
-  path,
-  updateHandling,
-  ...props
+	path,
+	updateHandling,
+	...props
 }: ControlByPath<pT, string> & _ComboboxControl): JSX.Element {
-  const { attributes, setAttributes } = useControlContext();
-  const value = get(attributes, path);
+	const {attributes, setAttributes} = useControlContext();
+	const value = get(attributes, path);
 
-  return (
-    <ComboboxControl
-      updateHandling="by-value"
-      value={value}
-      setValue={(newValue) => {
-        const newAttributes = cloneDeep(attributes);
-        set(newAttributes, path, newValue);
-        setAttributes(newAttributes);
-      }}
-      {...props}
-    />
-  );
+	return (
+		<ComboboxControl
+			updateHandling="by-value"
+			value={value}
+			setValue={(newValue) => {
+				const newAttributes = cloneDeep(attributes);
+				set(newAttributes, path, newValue);
+				setAttributes(newAttributes);
+			}}
+			{...props}
+		/>
+	);
 }
 
 /**
@@ -66,33 +66,33 @@ function ComboboxControlByPath<pT extends Obj>({
  * @returns A React component representing a combobox control by value.
  */
 const ComboboxControlByValue: FC<ControlByValue<string> & _ComboboxControl> = ({
-  label,
-  value,
-  setValue,
-  setDefault = true,
-  defaultValue = "",
-  show = true,
-  options,
+	label,
+	value,
+	setValue,
+	setDefault = true,
+	defaultValue = "",
+	show = true,
+	options,
 }) =>
-  show ? (
-    <WPComboboxControl
-      label={`${label} ${value === undefined ? " - Default" : ""}`}
-      onChange={(newValue) => {
-        newValue ? setValue(newValue) : setValue(undefined);
-      }}
-      value={value ?? defaultValue}
-      help={
-        setDefault &&
-        value !== undefined && (
-          <button
-            onClick={() => {
-              setValue(undefined);
-            }}
-          >
-            Set to default
-          </button>
-        )
-      }
-      options={options}
-    />
-  ) : null;
+	show ? (
+		<WPComboboxControl
+			label={`${label} ${value === undefined ? " - Default" : ""}`}
+			onChange={(newValue) => {
+				newValue ? setValue(newValue) : setValue(undefined);
+			}}
+			value={value ?? defaultValue}
+			help={
+				setDefault &&
+				value !== undefined && (
+					<button
+						onClick={() => {
+							setValue(undefined);
+						}}
+					>
+						Set to default
+					</button>
+				)
+			}
+			options={options}
+		/>
+	) : null;

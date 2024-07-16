@@ -27,7 +27,3 @@ module.exports = {
   tailwindConfig: "./next/tailwind.config.ts",
   tailwindFunctions: ["twJoin", "twMerge"],
 };
-
-const config = {};
-
-module.exports = config;

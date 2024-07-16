@@ -1,8 +1,8 @@
 {
-  "$schema": "https://typedoc-plugin-markdown.org/schema.json",
-  "entryPoints": [
-    "./packages/blocks-editor/src/index.ts",
-    "./packages/blocks-client/src/index.ts"
-  ],
-  "out": "docs/typedoc"
+	"$schema": "https://typedoc-plugin-markdown.org/schema.json",
+	"entryPoints": [
+		"./packages/blocks-editor/src/index.ts",
+		"./packages/blocks-client/src/index.ts"
+	],
+	"out": "docs/typedoc"
 }

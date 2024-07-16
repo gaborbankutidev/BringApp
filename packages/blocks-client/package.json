@@ -1,34 +1,34 @@
 {
-  "name": "@bring/blocks-client",
-  "version": "0.2.29",
-  "description": "Client package for bring-blocks",
-  "author": "Bring Team Ltd.",
-  "license": "GPL-2.0-or-later",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist/"
-  ],
-  "keywords": [],
-  "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
-    "lint": "echo TODO: add eslint",
-    "test": "echo TODO: add tests",
-    "types": "tsc"
-  },
-  "peerDependencies": {
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
-  },
-  "dependencies": {
-    "react-intersection-observer": "^9.8.1"
-  },
-  "devDependencies": {
-    "@bring/typescript-config": "*",
-    "@types/react": "^18.2.73",
-    "@types/react-dom": "^18.2.23",
-    "typescript": "^5.4.3"
-  }
+	"name": "@bring/blocks-client",
+	"version": "0.2.29",
+	"description": "Client package for bring-blocks",
+	"author": "Bring Team Ltd.",
+	"license": "GPL-2.0-or-later",
+	"main": "dist/index.cjs.js",
+	"module": "dist/index.esm.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist/"
+	],
+	"keywords": [],
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch",
+		"lint": "echo TODO: add eslint",
+		"test": "echo TODO: add tests",
+		"types": "tsc"
+	},
+	"peerDependencies": {
+		"react": "18.2.0",
+		"react-dom": "18.2.0"
+	},
+	"dependencies": {
+		"react-intersection-observer": "^9.8.1"
+	},
+	"devDependencies": {
+		"@bring/typescript-config": "*",
+		"@types/react": "^18.2.73",
+		"@types/react-dom": "^18.2.23",
+		"typescript": "^5.4.3"
+	}
 }

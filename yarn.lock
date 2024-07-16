@@ -1633,19 +1633,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bring/blocks-client@npm:0.2.28":
-  version: 0.2.28
-  resolution: "@bring/blocks-client@npm:0.2.28"
-  dependencies:
-    react-intersection-observer: "npm:^9.8.1"
-  peerDependencies:
-    react: 18.2.0
-    react-dom: 18.2.0
-  checksum: 10c0/70472ad8ca15ed0c9c7b6e1cbc7d56b4ee623c2d7a6bd09cfbeecbcb81d55adefd349948c97250685ccd4a61fb4fe31cec82f00355a1c6b363d60755260628f0
-  languageName: node
-  linkType: hard
-
-"@bring/blocks-client@workspace:packages/blocks-client":
+"@bring/blocks-client@npm:*, @bring/blocks-client@workspace:packages/blocks-client":
   version: 0.0.0-use.local
   resolution: "@bring/blocks-client@workspace:packages/blocks-client"
   dependencies:
@@ -1660,24 +1648,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bring/blocks-editor@npm:0.2.7":
-  version: 0.2.7
-  resolution: "@bring/blocks-editor@npm:0.2.7"
-  dependencies:
-    lodash.clonedeep: "npm:^4.5.0"
-    lodash.get: "npm:^4.4.2"
-    lodash.set: "npm:^4.3.2"
-    tailwind-merge: "npm:^2.2.2"
-  peerDependencies:
-    "@wordpress/block-editor": ^12.22.0
-    "@wordpress/blocks": ^12.31.0
-    "@wordpress/components": ^27.2.0
-    "@wordpress/data": ^9.24.0
-  checksum: 10c0/807ff293646620a9935be5f74a6e4067dd9248efc099a6da5247dd4613df242a520b7c6076b03d000857adc8417ba20604fe2597c10aeb23fbeda1ddd8feb1cd
-  languageName: node
-  linkType: hard
-
-"@bring/blocks-editor@workspace:packages/blocks-editor":
+"@bring/blocks-editor@npm:*, @bring/blocks-editor@workspace:packages/blocks-editor":
   version: 0.0.0-use.local
   resolution: "@bring/blocks-editor@workspace:packages/blocks-editor"
   dependencies:
@@ -17579,8 +17550,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "next@workspace:apps/bring-app/next"
   dependencies:
-    "@bring/blocks-client": "npm:0.2.28"
-    "@bring/blocks-editor": "npm:0.2.7"
+    "@bring/blocks-client": "npm:*"
+    "@bring/blocks-editor": "npm:*"
     "@hookform/resolvers": "npm:^3.3.4"
     "@sentry/nextjs": "npm:^7.109.0"
     "@storybook/addon-essentials": "npm:^7.5.1"

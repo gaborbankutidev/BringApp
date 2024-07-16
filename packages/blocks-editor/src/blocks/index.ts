@@ -1,12 +1,12 @@
 export {
-  booleanAttributeSource,
-  numberAttributeSource,
-  stringAttributeSource,
-  arrayAttributeSource,
-  objectAttributeSource,
-  imageAttributeSource,
-  mediaAttributeSource,
+	arrayAttributeSource,
+	booleanAttributeSource,
+	imageAttributeSource,
+	mediaAttributeSource,
+	numberAttributeSource,
+	objectAttributeSource,
+	stringAttributeSource,
 } from "./attributes";
 
-export { registerBringBlock } from "./register";
-export type { BlockEdit, BlockControl, BlockConfig } from "./types";
+export {registerBringBlock} from "./register";
+export type {BlockConfig, BlockControl, BlockEdit} from "./types";
