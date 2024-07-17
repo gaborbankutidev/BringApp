@@ -25,7 +25,7 @@ $dotenv->safeLoad();
 Config::init([
 	"DATA_TOKEN" => Env::DATA_TOKEN(),
 	"JWT_SECRET_KEY" => Env::JWT_SECRET_KEY(),
-	"NEXT_URL" => Env::NEXT_URL(),
+	"NEXT_BASE_URL" => Env::NEXT_BASE_URL(),
 ])
 	// Turn on layout features
 	->useHeader()

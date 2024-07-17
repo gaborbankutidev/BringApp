@@ -88,7 +88,7 @@ class Config {
 	private static $blocks = ["postcontent"];
 
 	/**
-	 * @var array{DATA_TOKEN:string,JWT_SECRET_KEY:string,NEXT_URL:string}|null
+	 * @var array{DATA_TOKEN:string,JWT_SECRET_KEY:string,NEXT_BASE_URL:string}|null
 	 */
 	private static $env = null;
 
@@ -234,7 +234,7 @@ class Config {
 
 	// Init & Public static getter methods
 	/**
-	 * @param array{DATA_TOKEN:string,JWT_SECRET_KEY:string,NEXT_URL:string} $env
+	 * @param array{DATA_TOKEN:string,JWT_SECRET_KEY:string,NEXT_BASE_URL:string} $env
 	 * @return Config
 	 */
 	public static function init($env) {
@@ -383,7 +383,7 @@ class Config {
 	}
 
 	/**
-	 * @return array{DATA_TOKEN:string,JWT_SECRET_KEY:string,NEXT_URL:string}
+	 * @return array{DATA_TOKEN:string,JWT_SECRET_KEY:string,NEXT_BASE_URL:string}
 	 */
 	public static function getEnv() {
 		if (self::$env === null) {

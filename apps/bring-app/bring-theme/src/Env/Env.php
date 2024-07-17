@@ -21,8 +21,8 @@ class Env {
 	/**
 	 * @return string
 	 */
-	public static function NEXT_URL() {
-		return Helpers::createStringEnvVariable("NEXT_URL");
+	public static function NEXT_BASE_URL() {
+		return Helpers::createStringEnvVariable("NEXT_BASE_URL");
 	}
 
 	/**
