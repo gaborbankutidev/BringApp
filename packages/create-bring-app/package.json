@@ -23,6 +23,7 @@
 	},
 	"devDependencies": {
 		"@types/fs-extra": "^11",
+		"concurrently": "^8.2.2",
 		"typescript": "^5.4.2"
 	}
 }
