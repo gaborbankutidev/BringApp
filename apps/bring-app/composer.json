@@ -32,7 +32,10 @@
 	"repositories": [
 		{
 			"type": "path",
-			"url": "../../packages/blocks-wp"
+			"url": "../../packages/blocks-wp",
+			"options": {
+				"symlink": false
+			}
 		}
 	]
 }

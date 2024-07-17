@@ -4,7 +4,7 @@
 		"Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
 		"This file is @generated automatically"
 	],
-	"content-hash": "eeddc648d5be462dcbcc0c927f38c943",
+	"content-hash": "80d5ec9b98fd8dee789bf473a2baa174",
 	"packages": [
 		{
 			"name": "bring/blocks-wp",
@@ -12,7 +12,7 @@
 			"dist": {
 				"type": "path",
 				"url": "../../packages/blocks-wp",
-				"reference": "ad3793465abbe8bcf490f06193e599ca74cd6180"
+				"reference": "aa8940070ef13e5f978ab19ba23eb9fafccfc58e"
 			},
 			"require": {
 				"firebase/php-jwt": "^6.5"
@@ -41,7 +41,7 @@
 				}
 			],
 			"transport-options": {
-				"symlink": true,
+				"symlink": false,
 				"relative": true
 			}
 		},
