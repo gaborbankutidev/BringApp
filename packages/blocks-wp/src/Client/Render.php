@@ -41,7 +41,7 @@ class Render {
 		// Redirect to next site if data token is not set
 		$data_token = isset($_GET["data_token"]) ? strval($_GET["data_token"]) : null;
 		if (!$data_token) {
-			wp_redirect(Config::getEnv()["NEXT_URL"] . "/" . $wp->request);
+			wp_redirect(Config::getEnv()["NEXT_BASE_URL"] . "/" . $wp->request);
 			exit();
 		}
 
