@@ -14,3 +14,4 @@ vendor
 !.yarn/versions
 
 docs/typedoc
+packages/create-bring-app/template

@@ -5,17 +5,24 @@
 	"author": "Bring Team Ltd.",
 	"license": "GPL-2.0-or-later",
 	"bin": {
-		"create-bring-app": "dist/index.js"
+		"create-bring-app": "./dist/index.js"
 	},
 	"keywords": [],
 	"scripts": {
-		"build": "tsup",
+		"build": "conc yarn:build:src yarn:copy:template",
+		"build:src": "tsup",
+		"copy:template": "node scripts/copy.mjs",
 		"dev": "tsup --watch",
 		"lint": "echo TODO: add eslint",
 		"test": "echo TODO: add tests",
 		"types": "tsc"
 	},
+	"dependencies": {
+		"@inquirer/prompts": "^5.1.3",
+		"fs-extra": "^11.2.0"
+	},
 	"devDependencies": {
+		"@types/fs-extra": "^11",
 		"typescript": "^5.4.2"
 	}
 }
