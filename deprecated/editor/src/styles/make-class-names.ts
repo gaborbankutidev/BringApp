@@ -22,9 +22,7 @@ export const makeBringStylesClassNames = (
 			return;
 		}
 
-		const s = size
-			? `${size}:${spacing}${side}-${value}`
-			: `${spacing}${side}-${value}`;
+		const s = size ? `${size}:${spacing}${side}-${value}` : `${spacing}${side}-${value}`;
 
 		spacing === "m" ? marginClassNames.push(s) : paddingClassNames.push(s);
 		classNames.push(s);
@@ -40,9 +38,7 @@ export const makeBringStylesClassNames = (
 					"m",
 					side,
 					size,
-					mV && mV[side] && mV[side]![size] !== undefined
-						? mV[side]![size]
-						: mC[side]![size],
+					mV && mV[side] && mV[side]![size] !== undefined ? mV[side]![size] : mC[side]![size],
 				),
 			);
 		});
@@ -57,9 +53,7 @@ export const makeBringStylesClassNames = (
 					"p",
 					side,
 					size,
-					pV && pV[side] && pV[side]![size] !== undefined
-						? pV[side]![size]
-						: pC[side]![size],
+					pV && pV[side] && pV[side]![size] !== undefined ? pV[side]![size] : pC[side]![size],
 				),
 			);
 		});
@@ -69,8 +63,7 @@ export const makeBringStylesClassNames = (
 	const vV = bringStyles?.visibility;
 	vC &&
 		objectKeys(vC).map((size) => {
-			const v =
-				(size ? `${size}:` : "") + (vV && vV[size] ? "hidden" : vC[size]);
+			const v = (size ? `${size}:` : "") + (vV && vV[size] ? "hidden" : vC[size]);
 
 			visibilityClassNames.push(v);
 			classNames.push(v);

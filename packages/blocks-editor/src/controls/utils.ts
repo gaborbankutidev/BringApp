@@ -1,9 +1,9 @@
 import type {
+	NumberOptionList,
+	NumberSelectControlOptions,
 	Obj,
 	OptionList,
 	SelectControlOptions,
-	NumberOptionList,
-	NumberSelectControlOptions,
 } from "../types";
 import {capitalize} from "../utils";
 import type {ControlByPath, ControlType} from "./types";

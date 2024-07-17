@@ -1,12 +1,6 @@
 import type {FC} from "react";
 import {ResponsiveValue} from "../client-types";
-import type {
-	ImageType,
-	MediaType,
-	NestedKeyOf,
-	NestedTypedKeyOf,
-	Obj,
-} from "../types";
+import type {ImageType, MediaType, NestedKeyOf, NestedTypedKeyOf, Obj} from "../types";
 
 type _ControlType<dVT> = {
 	label: string;

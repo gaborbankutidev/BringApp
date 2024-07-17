@@ -19,11 +19,7 @@ type _NumberControl = {min?: number; max?: number};
 export const RangeControl = <pT extends Obj = {}>(
 	props: ControlType<number, pT> & _NumberControl,
 ) =>
-	isPathControl(props) ? (
-		<RangeControlByPath {...props} />
-	) : (
-		<RangeControlByValue {...props} />
-	);
+	isPathControl(props) ? <RangeControlByPath {...props} /> : <RangeControlByValue {...props} />;
 
 /**
  * A range control component that works with a control path.

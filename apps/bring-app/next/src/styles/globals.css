@@ -1,0 +1,159 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	html {
+		font-family: "Montserrat", "Helvetica", "open-sans";
+		@apply text-16 text-blue-900;
+	}
+
+	/* Headings */
+
+	h1 {
+		@apply font-bold;
+	}
+
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		@apply font-semibold;
+	}
+
+	h1,
+	.h1,
+	.h1 h1,
+	.h1 h2,
+	.h1 h3,
+	.h1 h4,
+	.h1 h5,
+	.h1 h6 {
+		@apply text-28s uppercase tracking-[.14em];
+	}
+
+	h2,
+	.h2,
+	.h2 h1,
+	.h2 h2,
+	.h2 h3,
+	.h2 h4,
+	.h2 h5,
+	.h2 h6 {
+		@apply text-26s tracking-[.02em];
+	}
+
+	h3,
+	.h3,
+	.h3 h1,
+	.h3 h2,
+	.h3 h3,
+	.h3 h4,
+	.h3 h5,
+	.h3 h6 {
+		@apply text-18s uppercase tracking-[.14em];
+	}
+
+	h4,
+	.h4,
+	.h4 h1,
+	.h4 h2,
+	.h4 h3,
+	.h4 h4,
+	.h4 h5,
+	.h4 h6 {
+		@apply text-18s tracking-[.1em];
+	}
+
+	h5,
+	.h5,
+	.h5 h1,
+	.h5 h2,
+	.h5 h3,
+	.h5 h4,
+	.h5 h5,
+	.h5 h6 {
+		@apply text-15s;
+	}
+
+	h6,
+	.h6,
+	.h6 h1,
+	.h6 h2,
+	.h6 h3,
+	.h6 h4,
+	.h6 h5,
+	.h6 h6 {
+		@apply text-13;
+	}
+
+	.hl-1 {
+		@apply text-22 font-medium tracking-[.01em];
+	}
+
+	.hl-2 {
+		@apply text-18 font-medium tracking-[.01em];
+	}
+
+	/* Markdown */
+	.md h1,
+	.md h2,
+	.md h3,
+	.md h4,
+	.md h5,
+	.md h6 {
+		@apply mb-2 mt-6 pb-2;
+	}
+
+	.md p {
+		@apply mb-3;
+	}
+
+	.md ul {
+		@apply mb-3 list-disc pl-8;
+	}
+	.md ol {
+		@apply mb-3 list-decimal pl-8;
+	}
+	.md li {
+		@apply mt-1 first:mt-0;
+	}
+
+	.md a {
+		@apply text-orange hover:text-orange-200;
+	}
+
+	.md figure {
+		@apply mb-3;
+	}
+
+	.md strong {
+		@apply font-semibold;
+	}
+
+	.md code {
+		padding: 0.2em 0.4em;
+		margin: 0;
+		font-size: 85%;
+		background-color: rgba(27, 31, 35, 0.05);
+		border-radius: 3px;
+	}
+
+	/* Content */
+	#bringContent {
+		@apply flex min-h-screen flex-col;
+	}
+
+	#bringContent > main {
+		@apply flex-grow;
+	}
+}
+
+.block-editor .hide-in-editor {
+	display: none !important;
+}
+
+.block-editor .visible-in-editor {
+	opacity: 1 !important;
+}

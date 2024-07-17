@@ -18,12 +18,7 @@ type EditType<Props> = {
 };
 
 export function makeEdit<Props extends Obj>(config: BlockConfig<Props>) {
-	return ({
-		attributes,
-		setAttributes,
-		clientId,
-		isSelected,
-	}: EditType<Props>) => {
+	return ({attributes, setAttributes, clientId, isSelected}: EditType<Props>) => {
 		const {key, parentKey, className, id, bringStyles, ...props} = attributes;
 
 		// set key on load
@@ -32,9 +27,7 @@ export function makeEdit<Props extends Obj>(config: BlockConfig<Props>) {
 		}
 
 		// set parentKey on load
-		const editorParentKeys = window.wp.data
-			.select("core/block-editor")
-			.getBlockParents(clientId);
+		const editorParentKeys = window.wp.data.select("core/block-editor").getBlockParents(clientId);
 		const editorParentKey = editorParentKeys.length
 			? editorParentKeys[editorParentKeys.length - 1]
 			: "";
@@ -44,17 +37,11 @@ export function makeEdit<Props extends Obj>(config: BlockConfig<Props>) {
 
 		// calculate bring styles class names
 		const joinedClassName = config.styles
-			? twJoin(
-					makeBringStylesClassNames(config.styles, bringStyles).classNames,
-					className,
-			  )
+			? twJoin(makeBringStylesClassNames(config.styles, bringStyles).classNames, className)
 			: className;
 
 		return (
-			<ControlContextProvider
-				attributes={attributes}
-				setAttributes={setAttributes}
-			>
+			<ControlContextProvider attributes={attributes} setAttributes={setAttributes}>
 				<InspectorAdvancedControls>
 					<TextControl
 						updateHandling="by-value"
@@ -65,8 +52,7 @@ export function makeEdit<Props extends Obj>(config: BlockConfig<Props>) {
 						}}
 					/>
 				</InspectorAdvancedControls>
-				{config.Controls &&
-					makeControls<Props>(attributes, setAttributes, config.Controls)}
+				{config.Controls && makeControls<Props>(attributes, setAttributes, config.Controls)}
 				{config.styles && makeBringStylesControl(config.styles)}
 
 				{config.Edit ? (
@@ -79,16 +65,8 @@ export function makeEdit<Props extends Obj>(config: BlockConfig<Props>) {
 						<InnerBlocks allowedBlocks={config.allowedBlocks} />
 					</config.Edit>
 				) : (
-					<EditorCard
-						color="grey"
-						isSelected={isSelected ?? false}
-						name={config.componentName}
-					>
-						<config.Component
-							className={joinedClassName}
-							id={id}
-							{...(props as any)}
-						>
+					<EditorCard color="grey" isSelected={isSelected ?? false} name={config.componentName}>
+						<config.Component className={joinedClassName} id={id} {...(props as any)}>
 							<InnerBlocks allowedBlocks={config.allowedBlocks} />
 						</config.Component>
 					</EditorCard>

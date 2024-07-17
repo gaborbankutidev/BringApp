@@ -1,0 +1,11 @@
+includes:
+    - bring-theme/vendor/szepeviktor/phpstan-wordpress/extension.neon
+
+parameters:
+	level: 9
+	paths:
+		- bring-theme/src
+		- bring-theme/index.php
+		- bring-theme/functions.php
+	bootstrapFiles:
+		- bring-theme/vendor/php-stubs/acf-pro-stubs/acf-pro-stubs.php

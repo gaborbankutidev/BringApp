@@ -1,12 +1,12 @@
-import React from "react";
-import type {FC} from "react";
 import {SelectControl as WPSelectControl} from "@wordpress/components";
+import cloneDeep from "lodash.clonedeep";
 import get from "lodash.get";
 import set from "lodash.set";
-import cloneDeep from "lodash.clonedeep";
+import type {FC} from "react";
+import React from "react";
 import type {Obj} from "../../types";
-import type {ControlByPath, ControlByValue, ControlType} from "../types";
 import {useControlContext} from "../context";
+import type {ControlByPath, ControlByValue, ControlType} from "../types";
 import {isPathControl} from "../utils";
 
 /**
@@ -29,11 +29,7 @@ type _SelectControl = {
 export const SelectControl = <pT extends Obj = {}>(
 	props: ControlType<string, pT> & _SelectControl,
 ) =>
-	isPathControl(props) ? (
-		<SelectControlByPath {...props} />
-	) : (
-		<SelectControlByValue {...props} />
-	);
+	isPathControl(props) ? <SelectControlByPath {...props} /> : <SelectControlByValue {...props} />;
 
 /**
  * A control component that renders a select dropdown based on a path.

@@ -1,12 +1,12 @@
-import React from "react";
-import type {FC} from "react";
 import {RangeControl as WPRangeControl} from "@wordpress/components";
+import cloneDeep from "lodash.clonedeep";
 import get from "lodash.get";
 import set from "lodash.set";
-import cloneDeep from "lodash.clonedeep";
+import type {FC} from "react";
+import React from "react";
 import type {Obj} from "../../types";
-import type {ControlByPath, ControlByValue, ControlType} from "../types";
 import {useControlContext} from "../context";
+import type {ControlByPath, ControlByValue, ControlType} from "../types";
 import {isPathControl} from "../utils";
 
 type _NumberControl = {min?: number; max?: number};
@@ -19,11 +19,7 @@ type _NumberControl = {min?: number; max?: number};
 export const RangeControl = <pT extends Obj = {}>(
 	props: ControlType<number, pT> & _NumberControl,
 ) =>
-	isPathControl(props) ? (
-		<RangeControlByPath {...props} />
-	) : (
-		<RangeControlByValue {...props} />
-	);
+	isPathControl(props) ? <RangeControlByPath {...props} /> : <RangeControlByValue {...props} />;
 
 /**
  * A range control component that works with a control path.

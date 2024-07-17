@@ -6,9 +6,7 @@ import {makeSave} from "./make-save";
 import type {BlockConfig} from "./types";
 import {BringStylesDefaultValue} from "../styles/utils";
 
-export function registerBringBlock<Props extends Obj>(
-	config: BlockConfig<Props>,
-) {
+export function registerBringBlock<Props extends Obj>(config: BlockConfig<Props>) {
 	const title = config.title ? config.title : config.componentName;
 
 	// @ts-expect-error: Expect error here because Wordpress's `registerBlockType` types are so complicated TS can't infer the correct types

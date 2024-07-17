@@ -1,11 +1,11 @@
 import {SelectControl as WPSelectControl} from "@wordpress/components";
-import React, {FC} from "react";
+import cloneDeep from "lodash.clonedeep";
 import get from "lodash.get";
 import set from "lodash.set";
-import cloneDeep from "lodash.clonedeep";
+import React, {FC} from "react";
 import type {Obj} from "../../types";
-import type {ControlByPath, ControlByValue, ControlType} from "../types";
 import {useControlContext} from "../context";
+import type {ControlByPath, ControlByValue, ControlType} from "../types";
 import {isPathControl} from "../utils";
 
 /**
@@ -64,9 +64,14 @@ function NumberSelectControlByPath<pT extends Obj>({
  * @param  props - The props for the NumberSelectControlByValue component.
  * @returns The rendered NumberSelectControlByValue component, or null if show is false.
  */
-const NumberSelectControlByValue: FC<
-	ControlByValue<number> & _NumberSelectControl
-> = ({label, value, setValue, setDefault = true, show = true, options}) =>
+const NumberSelectControlByValue: FC<ControlByValue<number> & _NumberSelectControl> = ({
+	label,
+	value,
+	setValue,
+	setDefault = true,
+	show = true,
+	options,
+}) =>
 	show ? (
 		<WPSelectControl
 			label={`${label} ${value === undefined ? " - Default" : ""}`}

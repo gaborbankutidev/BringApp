@@ -10,11 +10,7 @@ export {NumberComboboxControl} from "./primitive/number-combobox-control";
 
 export {ImageControl} from "./object/image-control";
 export {MediaControl} from "./object/media-control";
-export {
-	ImageArrayControl,
-	TextArrayControl,
-	makeArrayControl,
-} from "./object/array-control";
+export {ImageArrayControl, TextArrayControl, makeArrayControl} from "./object/array-control";
 export {ResponsiveCheckboxControl} from "./object/responsive-checkbox-control";
 export {ResponsiveRangeControl} from "./object/responsive-range-control";
 

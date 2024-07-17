@@ -1,29 +1,26 @@
-import React from "react";
+import {InspectorAdvancedControls, InspectorControls} from "@wordpress/block-editor";
 import {PanelBody} from "@wordpress/components";
-import {
-	InspectorControls,
-	InspectorAdvancedControls,
-} from "@wordpress/block-editor";
 import get from "lodash.get";
+import React from "react";
 import type {Obj} from "../types";
 import type {Attributes, BlockControlsConfig} from "./types";
 
 import {
 	CheckboxControl,
-	ToggleControl,
 	ComboboxControl,
-	TextControl,
-	TextareaControl,
-	RangeControl,
-	SelectControl,
-	ImageControl,
 	ImageArrayControl,
-	TextArrayControl,
-	ResponsiveCheckboxControl,
-	ResponsiveRangeControl,
+	ImageControl,
+	MediaControl,
 	NumberComboboxControl,
 	NumberSelectControl,
-	MediaControl,
+	RangeControl,
+	ResponsiveCheckboxControl,
+	ResponsiveRangeControl,
+	SelectControl,
+	TextArrayControl,
+	TextControl,
+	TextareaControl,
+	ToggleControl,
 } from "../controls";
 
 export function makeControls<Props extends Obj>(
@@ -38,9 +35,7 @@ export function makeControls<Props extends Obj>(
 			) : (
 				Controls.map((Panel) => {
 					if (typeof Panel === "function") {
-						return (
-							<Panel attributes={attributes} setAttributes={setAttributes} />
-						);
+						return <Panel attributes={attributes} setAttributes={setAttributes} />;
 					}
 
 					// evaluate panel show
@@ -48,8 +43,8 @@ export function makeControls<Props extends Obj>(
 						Panel.show === undefined
 							? true
 							: typeof Panel.show === "function"
-							? Panel.show(attributes)
-							: !!get(attributes, Panel.show);
+								? Panel.show(attributes)
+								: !!get(attributes, Panel.show);
 					if (!showPanel) {
 						return null;
 					}
@@ -58,10 +53,7 @@ export function makeControls<Props extends Obj>(
 					const panelControls = Panel.controls.map((Control) => {
 						if (typeof Control === "function") {
 							return (
-								<Control
-									attributes={attributes}
-									setAttributes={setAttributes}
-								/>
+								<Control attributes={attributes} setAttributes={setAttributes} />
 							);
 						}
 
@@ -72,8 +64,8 @@ export function makeControls<Props extends Obj>(
 								Control.show === undefined
 									? true
 									: typeof Control.show === "function"
-									? Control.show(attributes)
-									: !!get(attributes, Control.show),
+										? Control.show(attributes)
+										: !!get(attributes, Control.show),
 							updateHandling: "by-path" as const,
 						} as unknown;
 
@@ -185,14 +177,9 @@ export function makeControls<Props extends Obj>(
 					});
 
 					return Panel.panel === "Advanced" ? (
-						<InspectorAdvancedControls>
-							{panelControls}
-						</InspectorAdvancedControls>
+						<InspectorAdvancedControls>{panelControls}</InspectorAdvancedControls>
 					) : Panel.panel ? (
-						<PanelBody
-							title={Panel.panel}
-							initialOpen={Panel.initialOpen ?? false}
-						>
+						<PanelBody title={Panel.panel} initialOpen={Panel.initialOpen ?? false}>
 							{panelControls}
 						</PanelBody>
 					) : (

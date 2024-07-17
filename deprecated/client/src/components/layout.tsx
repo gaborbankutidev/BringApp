@@ -19,13 +19,7 @@ function makeLayout<EP = {}, SP = {}, M = {}, MI = {}, CTX = {}>(
 		children?: ReactNode;
 	}) => {
 		const siteProps = await getSiteProps<SP, M, MI>(wpURL);
-		const entity = await getEntity<EP>(
-			wpURL,
-			dataToken,
-			onRedirect,
-			onNotFound,
-			slug,
-		);
+		const entity = await getEntity<EP>(wpURL, dataToken, onRedirect, onNotFound, slug);
 
 		if (!entity) {
 			return null;

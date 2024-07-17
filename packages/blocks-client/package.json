@@ -4,9 +4,58 @@
 	"description": "Client package for bring-blocks",
 	"author": "Bring Team Ltd.",
 	"license": "GPL-2.0-or-later",
-	"main": "dist/index.cjs.js",
-	"module": "dist/index.esm.js",
-	"types": "dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.esm.js",
+			"require": "./dist/index.cjs.js"
+		},
+		"./utils": {
+			"types": "./dist/utils.d.ts",
+			"import": "./dist/utils.esm.js",
+			"require": "./dist/utils.cjs.js"
+		},
+		"./init-client": {
+			"types": "./dist/init-client.d.ts",
+			"import": "./dist/init-client.esm.js",
+			"require": "./dist/init-client.cjs.js"
+		},
+		"./init-server": {
+			"types": "./dist/init-server.d.ts",
+			"import": "./dist/init-server.esm.js",
+			"require": "./dist/init-server.cjs.js"
+		},
+		"./init-render": {
+			"types": "./dist/init-render.d.ts",
+			"import": "./dist/init-render.esm.js",
+			"require": "./dist/init-render.cjs.js"
+		},
+		"./components": {
+			"types": "./dist/components/index.d.ts",
+			"import": "./dist/components/index.esm.js",
+			"require": "./dist/components/index.cjs.js"
+		},
+		"./content": {
+			"types": "./dist/content/index.d.ts",
+			"import": "./dist/content/index.esm.js",
+			"require": "./dist/content/index.cjs.js"
+		},
+		"./hooks": {
+			"types": "./dist/hooks/index.d.ts",
+			"import": "./dist/hooks/index.esm.js",
+			"require": "./dist/hooks/index.cjs.js"
+		},
+		"./styles": {
+			"types": "./dist/styles/index.d.ts",
+			"import": "./dist/styles/index.esm.js",
+			"require": "./dist/styles/index.cjs.js"
+		},
+		"./types": {
+			"types": "./dist/types.d.ts",
+			"import": "./dist/types.esm.js",
+			"require": "./dist/types.cjs.js"
+		}
+	},
 	"files": [
 		"dist/"
 	],

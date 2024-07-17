@@ -1,4 +1,4 @@
-import {select, subscribe, dispatch} from "@wordpress/data";
+import {dispatch, select, subscribe} from "@wordpress/data";
 import {BlockConfig, registerBringBlock} from "./blocks";
 import {postContentConfig} from "./components/post-content";
 import type {BringNode} from "./types";
@@ -31,7 +31,10 @@ function disableReusableBlocks() {
 	// Erase the existence of any reusable blocks.
 	subscribe(() => {
 		const settings = select("core/block-editor").getSettings() as any;
-		if (settings.__experimentalReusableBlocks && settings.__experimentalReusableBlocks.length > 0) {
+		if (
+			settings.__experimentalReusableBlocks &&
+			settings.__experimentalReusableBlocks.length > 0
+		) {
 			dispatch("core/block-editor").updateSettings({
 				// @ts-ignore
 				__experimentalReusableBlocks: [],

@@ -1,6 +1,6 @@
 "use client";
 
-import {useState, useEffect, useCallback} from "react";
+import {useCallback, useEffect, useState} from "react";
 
 /**
  * Custom hook that returns the dimensions of the window.
@@ -15,9 +15,7 @@ export const useWindowDimensions = () => {
 		};
 	}, []);
 
-	const [windowDimensions, setWindowDimensions] = useState(
-		getWindowDimensions(),
-	);
+	const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
 
 	const handleResize = useCallback(
 		() => setWindowDimensions(getWindowDimensions()),

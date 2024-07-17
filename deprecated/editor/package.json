@@ -2,21 +2,27 @@
 	"name": "@bring/blocks-editor",
 	"version": "0.2.7",
 	"description": "Editor package for bring-blocks",
+	"author": "Bring Team Ltd.",
+	"license": "GPL-2.0-or-later",
 	"main": "dist/index.cjs.js",
 	"module": "dist/index.esm.js",
 	"types": "dist/index.d.ts",
 	"files": [
 		"dist/"
 	],
+	"keywords": [],
 	"scripts": {
 		"build": "tsup",
-		"watch": "tsup --watch",
 		"checks": "tsc",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"watch": "tsup --watch"
 	},
-	"keywords": [],
-	"author": "Bring Team Ltd.",
-	"license": "GPL-2.0-or-later",
+	"peerDependencies": {
+		"@wordpress/block-editor": "^12.22.0",
+		"@wordpress/blocks": "^12.31.0",
+		"@wordpress/components": "^27.2.0",
+		"@wordpress/data": "^9.24.0"
+	},
 	"dependencies": {
 		"lodash.clonedeep": "^4.5.0",
 		"lodash.get": "^4.4.2",
@@ -38,11 +44,5 @@
 		"@wordpress/data": "^9.24.0",
 		"tsup": "^6.7.0",
 		"typescript": "^5.4.2"
-	},
-	"peerDependencies": {
-		"@wordpress/block-editor": "^12.22.0",
-		"@wordpress/blocks": "^12.31.0",
-		"@wordpress/components": "^27.2.0",
-		"@wordpress/data": "^9.24.0"
 	}
 }

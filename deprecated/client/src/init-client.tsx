@@ -1,9 +1,6 @@
 "use client";
 
-import {
-	makeDynamicEntityClient,
-	makeDynamicEntityListClient,
-} from "./components";
+import {makeDynamicEntityClient, makeDynamicEntityListClient} from "./components";
 import {
 	useDynamicEntityList,
 	useDynamicEntityProps,

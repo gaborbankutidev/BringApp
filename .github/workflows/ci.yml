@@ -1,46 +1,46 @@
 name: CI
 
 on:
- push:
-  branches:
-   - master
- pull_request:
-  branches:
-   - master
+    push:
+        branches:
+            - master
+    pull_request:
+        branches:
+            - master
 
 concurrency:
- group: ci-${{ github.event.pull_request.number || github.ref }}
- cancel-in-progress: true
+    group: ci-${{ github.event.pull_request.number || github.ref }}
+    cancel-in-progress: true
 
 jobs:
- checks_and_build:
-  name: Checks and Build
-  runs-on: ubuntu-latest
+    checks_and_build:
+        name: Checks and Build
+        runs-on: ubuntu-latest
 
-  steps:
-   - name: Checkout files
-     uses: actions/checkout@v4
+        steps:
+            - name: Checkout files
+              uses: actions/checkout@v4
 
-   - name: Enable Corepack
-     run: corepack enable
+            - name: Enable Corepack
+              run: corepack enable
 
-   - name: Setup node
-     uses: actions/setup-node@v4
-     with:
-      node-version: 20
-      cache: "yarn"
+            - name: Setup node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: "yarn"
 
-   - name: Install dependencies
-     run: yarn install --immutable
+            - name: Install dependencies
+              run: yarn install --immutable
 
-   - name: Run typecheck
-     run: yarn types
+            - name: Run typecheck
+              run: yarn types
 
-   - name: Run lint
-     run: yarn lint
+            - name: Run lint
+              run: yarn lint
 
-   - name: Run build
-     run: yarn build
+            - name: Run build
+              run: yarn build
 
-   - name: Run tests
-     run: yarn test
+            - name: Run tests
+              run: yarn test

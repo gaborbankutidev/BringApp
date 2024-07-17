@@ -72,15 +72,12 @@ async function getEntity<EP = {}>(
 	// fetch entity
 	let responseData = null;
 	try {
-		const response = await fetch(
-			`${wpURL}/${joinedSlug}?data_token=${dataToken}`,
-			{
-				method: "GET",
-				headers: {
-					"Content-Type": "application/json",
-				},
+		const response = await fetch(`${wpURL}/${joinedSlug}?data_token=${dataToken}`, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
 			},
-		);
+		});
 
 		responseData = (await response.json()) as GetEntityResponseType<EP>; // TODO: parse with zod
 	} catch (error) {

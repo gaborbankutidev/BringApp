@@ -31,10 +31,7 @@ function disableReusableBlocks() {
 	// Erase the existence of any reusable blocks.
 	subscribe(() => {
 		const settings = select("core/block-editor").getSettings() as any;
-		if (
-			settings.__experimentalReusableBlocks &&
-			settings.__experimentalReusableBlocks.length > 0
-		) {
+		if (settings.__experimentalReusableBlocks && settings.__experimentalReusableBlocks.length > 0) {
 			dispatch("core/block-editor").updateSettings({
 				// @ts-ignore
 				__experimentalReusableBlocks: [],

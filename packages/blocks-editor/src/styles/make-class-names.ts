@@ -1,7 +1,7 @@
-import {objectKeys} from "../utils";
-import {screenSizes} from "./utils";
-import type {BringStyles, BringStylesConfig, Sides} from "./types";
 import {BringStylesClassNames, ResponsiveValue} from "../client-types";
+import {objectKeys} from "../utils";
+import type {BringStyles, BringStylesConfig, Sides} from "./types";
+import {screenSizes} from "./utils";
 
 export const makeBringStylesClassNames = (
 	bringStylesConfig: BringStylesConfig,
@@ -22,9 +22,7 @@ export const makeBringStylesClassNames = (
 			return;
 		}
 
-		const s = size
-			? `${size}:${spacing}${side}-${value}`
-			: `${spacing}${side}-${value}`;
+		const s = size ? `${size}:${spacing}${side}-${value}` : `${spacing}${side}-${value}`;
 
 		spacing === "m" ? marginClassNames.push(s) : paddingClassNames.push(s);
 		classNames.push(s);
@@ -69,8 +67,7 @@ export const makeBringStylesClassNames = (
 	const vV = bringStyles?.visibility;
 	vC &&
 		objectKeys(vC).map((size) => {
-			const v =
-				(size ? `${size}:` : "") + (vV && vV[size] ? "hidden" : vC[size]);
+			const v = (size ? `${size}:` : "") + (vV && vV[size] ? "hidden" : vC[size]);
 
 			visibilityClassNames.push(v);
 			classNames.push(v);
