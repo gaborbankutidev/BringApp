@@ -1,13 +1,13 @@
-export type {BlockConfig, BlockControl, BlockEdit} from "./blocks";
 export {
 	arrayAttributeSource,
 	booleanAttributeSource,
 	imageAttributeSource,
+	mediaAttributeSource,
 	numberAttributeSource,
 	objectAttributeSource,
 	stringAttributeSource,
-	mediaAttributeSource,
 } from "./blocks";
+export type {BlockConfig, BlockControl, BlockEdit} from "./blocks";
 
 export {Debug, EditorCard} from "./components";
 
@@ -15,23 +15,23 @@ export {
 	// primitive
 	CheckboxControl,
 	ComboboxControl,
+	ImageArrayControl,
+	// object
+	ImageControl,
 	NumberComboboxControl,
 	NumberSelectControl,
 	RangeControl,
+	ResponsiveCheckboxControl,
+	ResponsiveRangeControl,
 	SelectControl,
+	TextArrayControl,
 	TextControl,
 	TextareaControl,
 	ToggleControl,
-	// object
-	ImageControl,
-	ImageArrayControl,
-	TextArrayControl,
-	ResponsiveCheckboxControl,
-	ResponsiveRangeControl,
 	makeArrayControl,
+	makeNumberOptions,
 	// util
 	makeOptions,
-	makeNumberOptions,
 	optionsToNumberOptions,
 } from "./controls";
 
@@ -42,21 +42,21 @@ export {makeBringStylesClassNames, makeBringStylesControl} from "./styles";
 export {editorInit} from "./editor";
 
 export type {
-	FCB,
-	MenuType, // ?
-	ImageType, // ?
-	MediaType,
+	Defined,
 	// lists
 	DynamicEntityOptions,
-	OptionList,
-	SelectControlOptions,
+	FCB, // ?
+	ImageType, // ?
+	MediaType,
+	MenuType,
+	NestedKeyOf,
+	NestedTypedKeyOf,
 	NumberOptionList,
 	NumberSelectControlOptions,
 	// utils
 	Obj,
-	Defined,
-	NestedKeyOf,
-	NestedTypedKeyOf,
+	OptionList,
+	SelectControlOptions,
 } from "./types";
 
 export {defaultImageValue} from "./utils";

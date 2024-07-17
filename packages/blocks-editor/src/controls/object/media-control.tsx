@@ -33,11 +33,7 @@ type MediaControlProps = {
 export const MediaControl = <pT extends Obj = {}>(
 	props: ControlType<MediaType, pT> & MediaControlProps,
 ) =>
-	isPathControl(props) ? (
-		<MediaControlByPath {...props} />
-	) : (
-		<MediaControlByValue {...props} />
-	);
+	isPathControl(props) ? <MediaControlByPath {...props} /> : <MediaControlByValue {...props} />;
 
 /**
  *  A control component that renders a media upload component based on a path.

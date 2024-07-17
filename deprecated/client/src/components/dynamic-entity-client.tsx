@@ -1,9 +1,6 @@
 import React, {type ReactNode} from "react";
 import {type GetDynamicEntityPropsParams} from "../content";
-import {
-	useDynamicEntityProps,
-	type UseDynamicEntityPropsOptions,
-} from "../hooks";
+import {useDynamicEntityProps, type UseDynamicEntityPropsOptions} from "../hooks";
 import type {DynamicEntityProps, EntityType} from "../types";
 import Debug from "./debug";
 

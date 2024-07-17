@@ -1,10 +1,10 @@
-import React from "react";
-import type {FC} from "react";
-import {PanelBody} from "@wordpress/components";
 import {InspectorControls} from "@wordpress/block-editor";
-import type {BringStylesConfig, Sides} from "./types";
-import {objectKeys} from "../utils";
+import {PanelBody} from "@wordpress/components";
+import type {FC} from "react";
+import React from "react";
 import {ResponsiveCheckboxControl, ResponsiveRangeControl} from "../controls";
+import {objectKeys} from "../utils";
+import type {BringStylesConfig, Sides} from "./types";
 import {sideLabels, spacingLabels} from "./utils";
 
 export function makeBringStylesControl(bringStylesConfig: BringStylesConfig) {

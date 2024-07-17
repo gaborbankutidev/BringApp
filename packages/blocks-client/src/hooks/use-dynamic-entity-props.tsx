@@ -34,12 +34,7 @@ export function useDynamicEntityProps<T = {}, P = {}>(
 	wpURL: string,
 	entityId: number | null | undefined,
 	entityType: EntityType | null | undefined,
-	{
-		lazy = true,
-		customData = {},
-		cache,
-		updateKey,
-	}: UseDynamicEntityPropsOptions = {},
+	{lazy = true, customData = {}, cache, updateKey}: UseDynamicEntityPropsOptions = {},
 ) {
 	const customDataKey = JSON.stringify(customData);
 	const [queriedProps, setQueriedProps] = useState<{

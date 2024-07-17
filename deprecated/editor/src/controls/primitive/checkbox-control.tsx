@@ -15,9 +15,7 @@ import {isPathControl} from "../utils";
  * @param props - The props for the CheckboxControl component.
  * @returns The rendered CheckboxControl component.
  */
-export const CheckboxControl = <pT extends Obj = {}>(
-	props: ControlType<boolean, pT>,
-) =>
+export const CheckboxControl = <pT extends Obj = {}>(props: ControlType<boolean, pT>) =>
 	isPathControl(props) ? (
 		<CheckboxControlByPath {...props} />
 	) : (

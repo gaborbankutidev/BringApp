@@ -1,0 +1,60 @@
+name: CD
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+    secrets:
+      CLOSTE_PASSWORD:
+        required: true
+      CLOSTE_PORT:
+        required: true
+      CLOSTE_USER:
+        required: true
+      CLOSTE_HOST:
+        required: true
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Build and Deploy
+    environment: ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout files
+        uses: actions/checkout@v4
+
+      - name: Setup composer cache
+        uses: actions/cache@v4
+        with:
+          path: /tmp/composer-cache
+          key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+
+      - name: Cache composer dependencies
+        uses: php-actions/composer@v6
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "yarn"
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build
+        run: yarn build:editor
+
+      - name: Install sshpass
+        run: sudo apt-get install sshpass
+
+      - name: Deploy
+        run: ./deploy.sh ${{ secrets.CLOSTE_PASSWORD }} ${{ secrets.CLOSTE_PORT }} ${{ secrets.CLOSTE_USER }} ${{ secrets.CLOSTE_HOST }}

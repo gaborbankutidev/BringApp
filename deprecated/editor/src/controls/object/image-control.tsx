@@ -11,9 +11,7 @@ import {MediaControl} from "./media-control";
  * @param props - The props for the ImageControl component.
  * @returns The rendered ImageControl component.
  */
-export const ImageControl = <pT extends Obj = {}>(
-	props: ControlType<ImageType, pT>,
-) => (
+export const ImageControl = <pT extends Obj = {}>(props: ControlType<ImageType, pT>) => (
 	<MediaControl
 		Preview={(value) => (
 			<div>

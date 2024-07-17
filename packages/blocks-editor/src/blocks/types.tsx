@@ -1,9 +1,9 @@
-import type {FC, ReactNode} from "react";
 import type {BlockIcon} from "@wordpress/blocks";
-import type {NestedKeyOf, Obj} from "../types";
+import type {FC, ReactNode} from "react";
+import {FCC} from "../client-types";
 import type {ControlConfigType} from "../controls/types";
 import {BringStyles, BringStylesConfig} from "../styles/types";
-import {FCC} from "../client-types";
+import type {NestedKeyOf, Obj} from "../types";
 
 export type ClientAttributes<Props> = Omit<Props, "children">;
 
@@ -21,19 +21,14 @@ export type Attributes<Props> = ClientAttributes<Props> & EditorAttributes;
 
 type AttributeSource<V> = {type: string; default: V | undefined};
 type BlockAttributesConfig<Props> = {
-	[k in keyof ClientAttributes<Props>]: AttributeSource<
-		ClientAttributes<Props>[k]
-	>;
+	[k in keyof ClientAttributes<Props>]: AttributeSource<ClientAttributes<Props>[k]>;
 };
 
 export type BlockControlsConfig<Props extends Obj = {}> =
 	| (
 			| {
 					panel?: "Advanced" | string;
-					controls: (
-						| ControlConfigType<Attributes<Props>>
-						| BlockControl<Props>
-					)[];
+					controls: (ControlConfigType<Attributes<Props>> | BlockControl<Props>)[];
 					initialOpen?: boolean;
 					show?:
 						| NestedKeyOf<Attributes<Props>>

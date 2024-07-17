@@ -1,12 +1,12 @@
-import React from "react";
-import type {FC} from "react";
 import {ComboboxControl as WPComboboxControl} from "@wordpress/components";
+import cloneDeep from "lodash.clonedeep";
 import get from "lodash.get";
 import set from "lodash.set";
-import cloneDeep from "lodash.clonedeep";
+import type {FC} from "react";
+import React from "react";
 import type {Obj} from "../../types";
-import type {ControlByPath, ControlByValue, ControlType} from "../types";
 import {useControlContext} from "../context";
+import type {ControlByPath, ControlByValue, ControlType} from "../types";
 import {isPathControl} from "../utils";
 
 /**
@@ -72,9 +72,14 @@ function NumberComboboxControlByPath<pT extends Obj>({
  * @param options - The options for the combobox.
  * @returns The rendered NumberComboboxControlByValue component.
  */
-const NumberComboboxControlByValue: FC<
-	ControlByValue<number> & _NumberComboboxControl
-> = ({label, value, setValue, setDefault = true, show = true, options}) =>
+const NumberComboboxControlByValue: FC<ControlByValue<number> & _NumberComboboxControl> = ({
+	label,
+	value,
+	setValue,
+	setDefault = true,
+	show = true,
+	options,
+}) =>
 	show ? (
 		<WPComboboxControl
 			label={`${label} ${value === undefined ? " - Default" : ""}`}

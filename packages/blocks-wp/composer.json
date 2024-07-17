@@ -1,0 +1,28 @@
+{
+	"name": "bring/blocks-wp",
+	"type": "library",
+	"version": "0.2.32",
+	"autoload": {
+		"psr-4": {
+			"Bring\\BlocksWP\\": "src/"
+		}
+	},
+	"scripts": {
+		"lint": "vendor/bin/phpstan analyse"
+	},
+	"authors": [
+		{
+			"name": "Bring Theme Ltd.",
+			"homepage": "https://thebringteam.com/"
+		}
+	],
+	"require": {
+		"firebase/php-jwt": "^6.5"
+	},
+	"require-dev": {
+		"php-stubs/acf-pro-stubs": "^6.1.7",
+		"phpstan/phpstan": "^1.10",
+		"php-stubs/wordpress-stubs": "^6.4",
+		"szepeviktor/phpstan-wordpress": "^1.3"
+	}
+}

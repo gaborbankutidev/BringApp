@@ -1,14 +1,14 @@
-import React from "react";
-import type {FC} from "react";
 import {Button, Icon} from "@wordpress/components";
+import cloneDeep from "lodash.clonedeep";
 import get from "lodash.get";
 import set from "lodash.set";
-import cloneDeep from "lodash.clonedeep";
+import type {FC} from "react";
+import React from "react";
+import {ImageControl, TextControl} from "..";
 import type {ImageType, Obj} from "../../types";
 import {defaultImageValue} from "../../utils";
-import type {ArrayControlType, ControlByValue} from "../types";
 import {useControlContext} from "../context";
-import {ImageControl, TextControl} from "..";
+import type {ArrayControlType, ControlByValue} from "../types";
 
 /**
  * ImageArrayControl component.
@@ -34,18 +34,10 @@ export const TextArrayControl = makeArrayControl<string>({
  * @param args - The arguments for defining an array control component.
  * @returns A function that creates an array control component.
  */
-export function makeArrayControl<vT>(args: {
-	control: FC<ControlByValue<vT>>;
-	defaultItem: vT;
-}) {
+export function makeArrayControl<vT>(args: {control: FC<ControlByValue<vT>>; defaultItem: vT}) {
 	return function <pT extends Obj>(props: ArrayControlType<vT, pT>) {
 		if (props.updateHandling === "by-value") {
-			const {
-				value,
-				setValue,
-				defaultItem = args.defaultItem,
-				show = true,
-			} = props;
+			const {value, setValue, defaultItem = args.defaultItem, show = true} = props;
 			return show ? (
 				<>
 					{value.map((item, index) => (
@@ -92,7 +84,9 @@ export function makeArrayControl<vT>(args: {
 									onClick={() => {
 										const newArray = [...value];
 										const e =
-											newArray[index < newArray.length - 1 ? index + 1 : index];
+											newArray[
+												index < newArray.length - 1 ? index + 1 : index
+											];
 										newArray[index < newArray.length - 1 ? index + 1 : index] =
 											item;
 										if (e === undefined) {

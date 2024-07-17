@@ -17,14 +17,8 @@ import {isPathControl} from "../utils";
  * @param props - The props for the ToggleControl component.
  * @returns The rendered ToggleControl component.
  */
-export const ToggleControl = <pT extends Obj = {}>(
-	props: ControlType<boolean, pT>,
-) =>
-	isPathControl(props) ? (
-		<ToggleControlByPath {...props} />
-	) : (
-		<ToggleControlByValue {...props} />
-	);
+export const ToggleControl = <pT extends Obj = {}>(props: ControlType<boolean, pT>) =>
+	isPathControl(props) ? <ToggleControlByPath {...props} /> : <ToggleControlByValue {...props} />;
 
 /**
  * A control component that renders a toggle input based on a path.

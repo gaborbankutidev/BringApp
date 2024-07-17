@@ -76,9 +76,7 @@ function ResponsiveCheckboxControlByPath<pT extends Obj>({
  *
  * @returns The rendered ResponsiveCheckboxControlByValue component.
  */
-const ResponsiveCheckboxControlByValue: FC<
-	ControlByValue<ResponsiveValue<boolean>>
-> = ({
+const ResponsiveCheckboxControlByValue: FC<ControlByValue<ResponsiveValue<boolean>>> = ({
 	label,
 	value = {},
 	setValue,

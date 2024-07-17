@@ -9,21 +9,9 @@ function makeMain<EP = {}, SP = {}, M = {}, MI = {}, CTX = {}>(
 	onNotFound: () => void,
 	componentMap: Map<string, FCC<any, EP, SP, M, MI, CTX>>,
 ) {
-	const Main = async ({
-		slug = "",
-		context,
-	}: {
-		slug?: string | string[];
-		context?: CTX;
-	}) => {
+	const Main = async ({slug = "", context}: {slug?: string | string[]; context?: CTX}) => {
 		const siteProps = await getSiteProps<SP, M, MI>(wpURL);
-		const entity = await getEntity<EP>(
-			wpURL,
-			dataToken,
-			onRedirect,
-			onNotFound,
-			slug,
-		);
+		const entity = await getEntity<EP>(wpURL, dataToken, onRedirect, onNotFound, slug);
 
 		if (!entity) {
 			return null;

@@ -1,18 +1,18 @@
-import React, {useState} from "react";
-import type {FC} from "react";
 import {Button, Icon} from "@wordpress/components";
+import cloneDeep from "lodash.clonedeep";
 import get from "lodash.get";
 import set from "lodash.set";
-import cloneDeep from "lodash.clonedeep";
-import type {Obj} from "../../types";
-import type {ControlByPath, ControlByValue, ControlType} from "../types";
-import {useControlContext} from "../context";
+import type {FC} from "react";
+import React, {useState} from "react";
 import {RangeControl} from "..";
-import {isPathControl} from "../utils";
-import {objectKeys} from "../../utils";
-import {screenSizes} from "../../styles/utils";
-import type {ResponsiveLabels} from "../../styles/types";
 import {ResponsiveValue} from "../../client-types";
+import type {ResponsiveLabels} from "../../styles/types";
+import {screenSizes} from "../../styles/utils";
+import type {Obj} from "../../types";
+import {objectKeys} from "../../utils";
+import {useControlContext} from "../context";
+import type {ControlByPath, ControlByValue, ControlType} from "../types";
+import {isPathControl} from "../utils";
 
 /**
  * Props for the ResponsiveRangeControl component.
@@ -115,7 +115,7 @@ const ResponsiveRangeControlByValue: FC<ControlByValue<ResponsiveValue>> = ({
 					newObject[selectedSize] = newValue;
 					setValue(newObject);
 				}}
-				defaultValue={defaultValue ? defaultValue[selectedSize] ?? 0 : 0}
+				defaultValue={defaultValue ? (defaultValue[selectedSize] ?? 0) : 0}
 				{...props}
 			/>
 		</>

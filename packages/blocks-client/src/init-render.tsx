@@ -1,5 +1,9 @@
 import type {ReactNode} from "react";
-import {makeFooter, makeHeader, makeLayout, makeMain} from "./components";
+import makeFooter from "./components/footer";
+import makeHeader from "./components/header";
+import makeLayout from "./components/layout";
+import makeMain from "./components/main";
+
 import {createBringElement, getEntity} from "./content";
 import type {BringNode, EntityProps, FCC, SiteProps} from "./types";
 
@@ -36,7 +40,9 @@ export function initRender<
 ) {
 	// Create component map
 	const componentMap = new Map<string, any>();
-	componentList.forEach(({Component, componentName}) => componentMap.set(componentName, Component));
+	componentList.forEach(({Component, componentName}) =>
+		componentMap.set(componentName, Component),
+	);
 
 	return {
 		/**
@@ -71,14 +77,26 @@ export function initRender<
 		 * @param props - The properties of the Header component.
 		 * @returns The rendered Header component.
 		 */
-		Header: makeHeader<EP, SP, M, MI, CTX>(wpURL, dataToken, onRedirect, onNotFound, componentMap),
+		Header: makeHeader<EP, SP, M, MI, CTX>(
+			wpURL,
+			dataToken,
+			onRedirect,
+			onNotFound,
+			componentMap,
+		),
 
 		/**
 		 * The Footer component.
 		 * @param props - The properties of the Footer component.
 		 * @returns The rendered Footer component.
 		 */
-		Footer: makeFooter<EP, SP, M, MI, CTX>(wpURL, dataToken, onRedirect, onNotFound, componentMap),
+		Footer: makeFooter<EP, SP, M, MI, CTX>(
+			wpURL,
+			dataToken,
+			onRedirect,
+			onNotFound,
+			componentMap,
+		),
 
 		/**
 		 * The Main component.
@@ -92,6 +110,12 @@ export function initRender<
 		 * @param props - The properties of the Layout component.
 		 * @returns The rendered Layout component.
 		 */
-		Layout: makeLayout<EP, SP, M, MI, CTX>(wpURL, dataToken, onRedirect, onNotFound, componentMap),
+		Layout: makeLayout<EP, SP, M, MI, CTX>(
+			wpURL,
+			dataToken,
+			onRedirect,
+			onNotFound,
+			componentMap,
+		),
 	};
 }

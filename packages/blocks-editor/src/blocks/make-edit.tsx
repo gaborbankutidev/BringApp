@@ -1,14 +1,13 @@
-import React from "react";
 import {InnerBlocks, InspectorAdvancedControls} from "@wordpress/block-editor";
-import {EditorCard} from "../components";
-import type {Obj} from "../types";
-import type {Attributes, BlockConfig} from "./types";
-import {makeControls} from "./make-controls";
-import {ControlContextProvider} from "../controls/context";
-import {makeBringStylesClassNames} from "../styles";
+import React from "react";
 import {twJoin} from "tailwind-merge";
+import {EditorCard} from "../components";
 import {TextControl} from "../controls";
-import {makeBringStylesControl} from "../styles";
+import {ControlContextProvider} from "../controls/context";
+import {makeBringStylesClassNames, makeBringStylesControl} from "../styles";
+import type {Obj} from "../types";
+import {makeControls} from "./make-controls";
+import type {Attributes, BlockConfig} from "./types";
 
 type EditType<Props> = {
 	attributes: Attributes<Props>;
@@ -18,12 +17,7 @@ type EditType<Props> = {
 };
 
 export function makeEdit<Props extends Obj>(config: BlockConfig<Props>) {
-	return ({
-		attributes,
-		setAttributes,
-		clientId,
-		isSelected,
-	}: EditType<Props>) => {
+	return ({attributes, setAttributes, clientId, isSelected}: EditType<Props>) => {
 		const {key, parentKey, className, id, bringStyles, ...props} = attributes;
 
 		// set key on load
@@ -44,17 +38,11 @@ export function makeEdit<Props extends Obj>(config: BlockConfig<Props>) {
 
 		// calculate bring styles class names
 		const joinedClassName = config.styles
-			? twJoin(
-					makeBringStylesClassNames(config.styles, bringStyles).classNames,
-					className,
-			  )
+			? twJoin(makeBringStylesClassNames(config.styles, bringStyles).classNames, className)
 			: className;
 
 		return (
-			<ControlContextProvider
-				attributes={attributes}
-				setAttributes={setAttributes}
-			>
+			<ControlContextProvider attributes={attributes} setAttributes={setAttributes}>
 				<InspectorAdvancedControls>
 					<TextControl
 						updateHandling="by-value"
@@ -65,8 +53,7 @@ export function makeEdit<Props extends Obj>(config: BlockConfig<Props>) {
 						}}
 					/>
 				</InspectorAdvancedControls>
-				{config.Controls &&
-					makeControls<Props>(attributes, setAttributes, config.Controls)}
+				{config.Controls && makeControls<Props>(attributes, setAttributes, config.Controls)}
 				{config.styles && makeBringStylesControl(config.styles)}
 
 				{config.Edit ? (
@@ -84,11 +71,7 @@ export function makeEdit<Props extends Obj>(config: BlockConfig<Props>) {
 						isSelected={isSelected ?? false}
 						name={config.componentName}
 					>
-						<config.Component
-							className={joinedClassName}
-							id={id}
-							{...(props as any)}
-						>
+						<config.Component className={joinedClassName} id={id} {...(props as any)}>
 							<InnerBlocks allowedBlocks={config.allowedBlocks} />
 						</config.Component>
 					</EditorCard>

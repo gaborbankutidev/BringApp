@@ -1,9 +1,5 @@
-import {useState, useEffect} from "react";
-import type {
-	DynamicEntityOptions,
-	EntityType,
-	NumberSelectControlOptions,
-} from "../types";
+import {useEffect, useState} from "react";
+import type {DynamicEntityOptions, EntityType, NumberSelectControlOptions} from "../types";
 
 type Options = {
 	entitySlug?: string;
@@ -12,11 +8,7 @@ type Options = {
 	withDefault?: boolean;
 };
 
-async function getEntityOptions(
-	entityType: EntityType,
-	entitySlug: string = "",
-	customData = {},
-) {
+async function getEntityOptions(entityType: EntityType, entitySlug: string = "", customData = {}) {
 	try {
 		const response = await fetch("/wp-json/bring/editor/options", {
 			method: "POST",
@@ -48,24 +40,21 @@ export const useDynamicEntityOptions = (
 	entityType: EntityType = "post",
 	{entitySlug, customData, customDataKey, withDefault = true}: Options = {},
 ) => {
-	const [entityOptions, setEntityOptions] =
-		useState<NumberSelectControlOptions | null>(null);
+	const [entityOptions, setEntityOptions] = useState<NumberSelectControlOptions | null>(null);
 
 	useEffect(() => {
-		getEntityOptions(entityType, entitySlug, customData).then(
-			(queriedEntityOptions) => {
-				if (!queriedEntityOptions) {
-					setEntityOptions(null);
-					return;
-				}
+		getEntityOptions(entityType, entitySlug, customData).then((queriedEntityOptions) => {
+			if (!queriedEntityOptions) {
+				setEntityOptions(null);
+				return;
+			}
 
-				setEntityOptions(
-					withDefault
-						? [{value: 0, label: "Unset"}, ...queriedEntityOptions]
-						: queriedEntityOptions,
-				);
-			},
-		);
+			setEntityOptions(
+				withDefault
+					? [{value: 0, label: "Unset"}, ...queriedEntityOptions]
+					: queriedEntityOptions,
+			);
+		});
 	}, [entityType, entitySlug, customDataKey]);
 
 	return entityOptions;

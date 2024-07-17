@@ -1,8 +1,5 @@
 export {default as Debug} from "./debug";
-export {
-	default as makeDynamicEntity,
-	type DynamicEntityPropsRenderProps,
-} from "./dynamic-entity";
+export {default as makeDynamicEntity, type DynamicEntityPropsRenderProps} from "./dynamic-entity";
 export {
 	default as makeDynamicEntityClient,
 	type DynamicEntityPropsClientRenderProps,

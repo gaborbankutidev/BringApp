@@ -29,11 +29,7 @@ type _SelectControl = {
 export const SelectControl = <pT extends Obj = {}>(
 	props: ControlType<string, pT> & _SelectControl,
 ) =>
-	isPathControl(props) ? (
-		<SelectControlByPath {...props} />
-	) : (
-		<SelectControlByValue {...props} />
-	);
+	isPathControl(props) ? <SelectControlByPath {...props} /> : <SelectControlByValue {...props} />;
 
 /**
  * A control component that renders a select dropdown based on a path.
