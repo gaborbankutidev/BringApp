@@ -24,6 +24,7 @@ const dirsToRemove = [
 	"node_modules",
 	".vscode",
 	"tsconfig.tsbuildinfo",
+	".config",
 ];
 
 function removeFiles() {
@@ -39,6 +40,8 @@ function main() {
 
 	copyTemplateFiles();
 	console.log("Template copied successfully!");
+
+	fsExtra.copySync(`${templateDir}/.config`, cliTemplateDir);
 
 	removeFiles();
 	console.log("Unnecessary files removed successfully!");

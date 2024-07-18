@@ -4,7 +4,10 @@
 
 	"extends": "@bring/typescript-config/base.json",
 	"compilerOptions": {
-		"outDir": "dist"
+		"outDir": "dist",
+		"target": "es2020",
+		"module": "es2020",
+		"moduleResolution": "Bundler"
 	},
 	"include": ["src", "bin/test.mjs"]
 }

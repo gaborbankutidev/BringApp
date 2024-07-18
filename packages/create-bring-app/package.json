@@ -1,6 +1,7 @@
 {
 	"name": "@bring/blocks-cli",
 	"version": "0.1.0",
+	"type": "module",
 	"description": "CLI package for initializing a new BringBlocks project",
 	"author": "Bring Team Ltd.",
 	"license": "GPL-2.0-or-later",
