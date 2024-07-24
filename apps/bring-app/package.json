@@ -19,6 +19,8 @@
 		"format": "prettier --write .",
 		"format:check": "prettier --check .",
 		"prepare": "husky",
+		"services:down": "docker compose down",
+		"services:up": "docker compose up -d",
 		"storybook": "cd ./next && yarn watch:storybook",
 		"watch:blocks": "cd ./next && yarn watch:blocks",
 		"watch:next": "cd ./next && yarn watch:next",
