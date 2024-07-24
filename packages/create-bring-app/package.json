@@ -1,7 +1,7 @@
 {
 	"name": "@bring/blocks-cli",
 	"version": "0.1.0",
-	"type": "module",
+	"type": "commonjs",
 	"description": "CLI package for initializing a new BringBlocks project",
 	"author": "Bring Team Ltd.",
 	"license": "GPL-2.0-or-later",
@@ -12,7 +12,7 @@
 	"scripts": {
 		"build": "conc yarn:build:src yarn:copy:template",
 		"build:src": "tsup",
-		"copy:template": "node scripts/copy.mjs",
+		"copy:template": "tsx scripts/copy.ts",
 		"dev": "tsup --watch",
 		"lint": "echo TODO: add eslint",
 		"test": "echo TODO: add tests",
@@ -25,6 +25,7 @@
 	"devDependencies": {
 		"@types/fs-extra": "^11",
 		"concurrently": "^8.2.2",
+		"tsx": "^4.16.2",
 		"typescript": "^5.4.2"
 	}
 }
