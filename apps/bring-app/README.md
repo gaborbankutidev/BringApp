@@ -15,10 +15,10 @@ A template for a project with BringBlocks & Next.js app router.
 
 - `bring-theme/`  
   Theme folder for WordPress
-- `editor/`  
-  For configuring the blocks for the editor
 - `next/`  
   For the frontend that mirrors the routing of WordPress
+- `wordpress/`
+  The wordpress folder for local development
 
 ## Important scripts
 
