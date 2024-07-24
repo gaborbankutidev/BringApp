@@ -4,11 +4,12 @@ A template for a project with BringBlocks & Next.js app router.
 
 ## Setup
 
-- Create a new site in `Local`
-- Symlink the `bring-theme/` folder into the themes folder of the `Local` site
-- Import the BringTemplate with All in One Wp migration
-- Install dependencies with `yarn install` and `composer install`
-- Start the development with `yarn watch`
+- Install dependencies with `yarn install` and `composer install` then `composer dump-autoload`
+- Start the backend services with `docker composer up -d`
+- Build the theme and start the development with `yarn watch`
+- Log into wordpress admin, go to Settings->Permalinks and set it to `/%postname%/`
+- Activate the Bring Theme and complete the required plugin installation steps
+- Happy building!
 
 ## Folders
 
