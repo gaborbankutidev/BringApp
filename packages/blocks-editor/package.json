@@ -4,9 +4,53 @@
 	"description": "Editor package for bring-blocks",
 	"author": "Bring Team Ltd.",
 	"license": "GPL-2.0-or-later",
-	"main": "dist/index.cjs.js",
-	"module": "dist/index.esm.js",
-	"types": "dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.esm.js",
+			"require": "./dist/index.cjs.js"
+		},
+		"./blocks": {
+			"types": "./dist/blocks/index.d.ts",
+			"import": "./dist/blocks/index.esm.js",
+			"require": "./dist/blocks/index.cjs.js"
+		},
+		"./components": {
+			"types": "./dist/components/index.d.ts",
+			"import": "./dist/components/index.esm.js",
+			"require": "./dist/components/index.cjs.js"
+		},
+		"./hooks": {
+			"types": "./dist/hooks/index.d.ts",
+			"import": "./dist/hooks/index.esm.js",
+			"require": "./dist/hooks/index.cjs.js"
+		},
+		"./controls": {
+			"types": "./dist/controls/index.d.ts",
+			"import": "./dist/controls/index.esm.js",
+			"require": "./dist/controls/index.cjs.js"
+		},
+		"./styles": {
+			"types": "./dist/styles/index.d.ts",
+			"import": "./dist/styles/index.esm.js",
+			"require": "./dist/styles/index.cjs.js"
+		},
+		"./utils": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.esm.js",
+			"require": "./dist/index.cjs.js"
+		},
+		"./types": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.esm.js",
+			"require": "./dist/index.cjs.js"
+		},
+		"./editor": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.esm.js",
+			"require": "./dist/index.cjs.js"
+		}
+	},
 	"files": [
 		"dist/"
 	],
