@@ -88,6 +88,11 @@ class Config {
 	private static $blocks = ["postcontent"];
 
 	/**
+	 * @var array<string>
+	 */
+	private static $ignore_paths = [];
+
+	/**
 	 * @var array{DATA_TOKEN:string,JWT_SECRET_KEY:string,NEXT_BASE_URL:string}|null
 	 */
 	private static $env = null;
@@ -229,6 +234,14 @@ class Config {
 	 */
 	public function useRankMath($v = true) {
 		self::$rankMath = $v;
+		return $this;
+	}
+
+	/**
+	 * @param array<string> $paths
+	 * @return Config
+	 */
+	public function ignorePaths($paths) {
 		return $this;
 	}
 
@@ -399,5 +412,12 @@ class Config {
 	 */
 	public static function getIsInitialized() {
 		return self::$is_initialized;
+	}
+
+	/**
+	 * @return array<string>
+	 */
+	public static function getIgnorePaths() {
+		return self::$ignore_paths;
 	}
 }
