@@ -1,15 +1,10 @@
 import fsExtra from "fs-extra";
 import path from "path";
+import {ROOT} from "../constants";
 
-const bringBlocksEditorPackageJsonPath = path.join(
-	__dirname,
-	"../../../blocks-editor/package.json",
-);
-const bringBlocksClientPackageJsonPath = path.join(
-	__dirname,
-	"../../../blocks-client/package.json",
-);
-const bringBlocksWpComposerJsonPath = path.join(__dirname, "../../../blocks-wp/composer.json");
+const bringBlocksEditorPackageJsonPath = path.join(ROOT, "../blocks-editor/package.json");
+const bringBlocksClientPackageJsonPath = path.join(ROOT, "../blocks-client/package.json");
+const bringBlocksWpComposerJsonPath = path.join(ROOT, "../blocks-wp/composer.json");
 
 export type PackageVersions = {
 	bringBlocksClient: string;

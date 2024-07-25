@@ -2,6 +2,7 @@ import {execSync} from "child_process";
 import fsExtra from "fs-extra";
 import {CLIConfig} from "./config";
 import {templateDir} from "./constants";
+import {updateProjectName} from "./update-project-name";
 
 function copyTemplateFiles(path: string) {
 	fsExtra.copySync(templateDir, path);
@@ -22,6 +23,8 @@ export async function runCLI(config: CLIConfig) {
 	}
 
 	copyTemplateFiles(config.directory);
+
+	updateProjectName(config.directory, config.directory); // TODO: Add project name as a config option
 
 	if (config.runInstall) {
 		console.log(`Running ${config.packageManager} install...`);
@@ -47,5 +50,6 @@ export async function runCLI(config: CLIConfig) {
 
 	console.log("To get started, run the following commands:");
 	console.log(`  cd ${config.directory}`);
+	!config.runInstall && console.log(`  ${config.packageManager} install`);
 	console.log(`  ${config.packageManager} dev`);
 }
