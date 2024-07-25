@@ -1,7 +1,6 @@
 /**
  * DO NOT MOVE THIS FILE
  */
-
 import path from "path";
 import {fileURLToPath} from "url";
 
