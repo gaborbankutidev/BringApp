@@ -1,11 +1,10 @@
-node_modules
+# turbo
 .turbo
-dist
-build
-vendor
-.next
 
-.pnp.*
+# docs
+docs/typedoc
+
+# yarn
 .yarn/*
 !.yarn/patches
 !.yarn/plugins
@@ -13,5 +12,48 @@ vendor
 !.yarn/sdks
 !.yarn/versions
 
-docs/typedoc
 packages/create-bring-app/template
+
+# dependencies
+vendor
+node_modules
+
+# next.js
+.next/
+/out/
+next-env.d.ts
+
+# storybook
+.storybook-build
+.storybook-css
+storybook-static
+
+# production
+build
+dist
+
+# misc
+.DS_Store
+*.pem
+
+# local env files
+.env
+.env*.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+
+# lint
+.eslintcache
+
+# idea
+.idea
+
+# wordpress
+apps/bring-app/wordpress
+
+# nginx logs
+**/nginx/logs

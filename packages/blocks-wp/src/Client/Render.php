@@ -38,6 +38,12 @@ class Render {
 			return;
 		}
 
+		// Bypass for paths listed in config
+		$ignore_paths = Config::getIgnorePaths();
+		if (in_array($wp->request, $ignore_paths)) {
+			return;
+		}
+
 		// Redirect to next site if data token is not set
 		$data_token = isset($_GET["data_token"]) ? strval($_GET["data_token"]) : null;
 		if (!$data_token) {

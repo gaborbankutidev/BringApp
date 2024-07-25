@@ -4,20 +4,21 @@ A template for a project with BringBlocks & Next.js app router.
 
 ## Setup
 
-- Create a new site in `Local`
-- Symlink the `bring-theme/` folder into the themes folder of the `Local` site
-- Import the BringTemplate with All in One Wp migration
-- Install dependencies with `yarn install` and `composer install`
-- Start the development with `yarn watch`
+- Initialize a new project with `npx create-bring-app`
+- Start the backend services in docker with `yarn services:up`
+- Build the theme and start the development with `yarn watch`
+- Log into wordpress admin, go to Settings->Permalinks and set it to `/%postname%/`
+- Activate the Bring Theme and complete the required plugin installation steps
+- Happy building!
 
 ## Folders
 
 - `bring-theme/`  
   Theme folder for WordPress
-- `editor/`  
-  For configuring the blocks for the editor
 - `next/`  
   For the frontend that mirrors the routing of WordPress
+- `wordpress/`
+  The wordpress folder for local development
 
 ## Important scripts
 
