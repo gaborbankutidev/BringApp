@@ -13,8 +13,8 @@ A template for a project with BringBlocks & Next.js app router.
 
 ## Folders
 
-- `bring-theme/`  
-  Theme folder for WordPress
+- `themes/`  
+  Themes for WordPress containing the core Bring Theme and the Project Child Theme
 - `next/`  
   For the frontend that mirrors the routing of WordPress
 - `wordpress/`
