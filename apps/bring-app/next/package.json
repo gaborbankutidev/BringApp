@@ -3,19 +3,19 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"build:blocks": "wp-scripts build editor.config.ts --output-filename=../../bring-theme/build/blocks.js --config webpack.editor.config.js",
+		"build:blocks": "wp-scripts build editor.config.ts --output-filename=../../themes/project-theme/build/blocks.js --config webpack.editor.config.js",
 		"build:next": "next build",
 		"build:next:ci": "dotenv -e .env.test -- yarn build:next",
 		"build:storybook": "storybook build",
-		"build:tailwind": "tailwindcss -i ./src/styles/globals.css -o ../bring-theme/build/tailwind.css --minify",
+		"build:tailwind": "tailwindcss -i ./src/styles/globals.css -o ../themes/project-theme/build/tailwind.css --minify",
 		"checks": "conc yarn:types yarn:lint --success=all",
 		"lint": "eslint . --max-warnings 0",
 		"start": "next start",
 		"types": "tsc",
-		"watch:blocks": "wp-scripts start editor.config.ts --output-filename=../../bring-theme/build/blocks.js --config webpack.editor.config.js",
+		"watch:blocks": "wp-scripts start editor.config.ts --output-filename=../../themes/project-theme/build/blocks.js --config webpack.editor.config.js",
 		"watch:next": "NODE_TLS_REJECT_UNAUTHORIZED=0 next dev",
 		"watch:storybook": "storybook dev -p 6006",
-		"watch:tailwind": "tailwindcss -i ./src/styles/globals.css -o ../bring-theme/build/tailwind.css --watch"
+		"watch:tailwind": "tailwindcss -i ./src/styles/globals.css -o ../themes/project-theme/build/tailwind.css --watch"
 	},
 	"dependencies": {
 		"@bring/blocks-client": "*",

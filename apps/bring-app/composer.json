@@ -3,11 +3,11 @@
 	"type": "project",
 	"$schema": "https://raw.githubusercontent.com/composer/composer/main/res/composer-schema.json",
 	"scripts": {
-		"lint": "bring-theme/vendor/bin/phpstan analyse"
+		"lint": "themes/bring-theme/vendor/bin/phpstan analyse"
 	},
 	"autoload": {
 		"psr-4": {
-			"BringTheme\\": "bring-theme/src/"
+			"BringTheme\\": "themes/bring-theme/src/"
 		}
 	},
 	"authors": [
@@ -27,7 +27,7 @@
 		"szepeviktor/phpstan-wordpress": "^1.3"
 	},
 	"config": {
-		"vendor-dir": "bring-theme/vendor"
+		"vendor-dir": "themes/bring-theme/vendor"
 	},
 	"repositories": [
 		{
