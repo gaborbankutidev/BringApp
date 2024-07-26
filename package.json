@@ -13,7 +13,7 @@
 	],
 	"packageManager": "yarn@4.3.1",
 	"scripts": {
-		"after:install": "yarn install:composer:pkg && yarn install:composer:app",
+		"after:install": "node ./scripts/after-install.mjs",
 		"all": "turbo types test lint build",
 		"build": "turbo build",
 		"build:app": "turbo build --filter=@bring/bring-app",
