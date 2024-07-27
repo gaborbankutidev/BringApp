@@ -57,7 +57,9 @@ Config::init([
 		"heading",
 		"image",
 		"markdown",
-	]);
+	])->ignorePaths([
+		"/rest-api/docs", // swagger 
+	])
 
 // init bring
 BringBlocks::init();
