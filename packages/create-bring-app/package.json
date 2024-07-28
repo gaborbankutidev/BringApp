@@ -10,9 +10,7 @@
 	},
 	"keywords": [],
 	"scripts": {
-		"build": "conc yarn:build:src yarn:copy:template",
-		"build:src": "tsup",
-		"copy:template": "tsx scripts/copy.ts",
+		"build": "tsup",
 		"dev": "tsup --watch",
 		"lint": "echo TODO: add eslint",
 		"test": "echo TODO: add tests",
@@ -20,10 +18,12 @@
 	},
 	"dependencies": {
 		"@inquirer/prompts": "^5.1.3",
-		"fs-extra": "^11.2.0"
+		"fs-extra": "^11.2.0",
+		"lodash.kebabcase": "^4.1.1"
 	},
 	"devDependencies": {
 		"@types/fs-extra": "^11",
+		"@types/lodash.kebabcase": "^4",
 		"concurrently": "^8.2.2",
 		"tsx": "^4.16.2",
 		"typescript": "^5.4.2"

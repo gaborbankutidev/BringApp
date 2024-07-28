@@ -2,6 +2,7 @@
 
 import {confirm, input} from "@inquirer/prompts";
 import fsExtra from "fs-extra";
+import kebabCase from "lodash.kebabcase";
 import {getPkgManager} from "./get-package-manager";
 import {runCLI} from "./run-cli";
 
@@ -11,9 +12,15 @@ async function main() {
 	const packageManager = getPkgManager();
 	console.log(`Detected package manager: ${packageManager}`);
 
+	const projectName = await input({
+		message: "What is the name of your project?",
+		default: "My Bring App",
+		required: true,
+	});
+
 	const directory = await input({
-		message: "What is the name of your app?",
-		default: "my-bring-app",
+		message: "What is the directory for your project?",
+		default: kebabCase(projectName),
 		required: true,
 	});
 
@@ -44,6 +51,7 @@ async function main() {
 	});
 
 	runCLI({
+		projectName,
 		directory,
 		overwrite,
 		runInstall,

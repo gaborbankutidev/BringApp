@@ -1,11 +1,16 @@
 import {execSync} from "child_process";
 import fsExtra from "fs-extra";
 import {CLIConfig} from "./config";
-import {templateDir} from "./constants";
+import {sshUrl} from "./constants";
+import {updatePackageVersions} from "./update-package-versions";
 import {updateProjectName} from "./update-project-name";
 
 function copyTemplateFiles(path: string) {
-	fsExtra.copySync(templateDir, path);
+	execSync(`git clone ${sshUrl} ./${path}/.temp`, {
+		stdio: "inherit",
+	});
+	fsExtra.copySync(`./${path}/.temp/apps/bring-app`, `./${path}`);
+	fsExtra.removeSync(`./${path}/.temp`);
 }
 
 function removeDir(path: string) {
@@ -24,7 +29,9 @@ export async function runCLI(config: CLIConfig) {
 
 	copyTemplateFiles(config.directory);
 
-	updateProjectName(config.directory, config.directory); // TODO: Add project name as a config option
+	updatePackageVersions(config.directory);
+
+	updateProjectName(config.directory, config.projectName); 
 
 	if (config.runInstall) {
 		console.log(`Running ${config.packageManager} install...`);
