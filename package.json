@@ -13,7 +13,7 @@
 	],
 	"packageManager": "yarn@4.3.1",
 	"scripts": {
-		"after:install": "yarn install:composer:pkg && yarn install:composer:app",
+		"after:install": "node ./scripts/after-install.mjs",
 		"all": "turbo types test lint build",
 		"build": "turbo build",
 		"build:app": "turbo build --filter=@bring/bring-app",
@@ -30,7 +30,7 @@
 		"install:composer:pkg": "cd packages/blocks-wp && composer install && composer dump-autoload",
 		"lint": "turbo lint",
 		"services:down": "docker compose -f ./apps/bring-app/docker-compose.yml down",
-		"services:up": "docker compose -f ./apps/bring-app/docker-compose.yml up && docker compose -f ./apps/bring-app/docker-compose.yml logs -f",
+		"services:up": "docker compose -f ./apps/bring-app/docker-compose.yml up -d && docker compose -f ./apps/bring-app/docker-compose.yml logs -f",
 		"test": "turbo test",
 		"types": "turbo types"
 	},
