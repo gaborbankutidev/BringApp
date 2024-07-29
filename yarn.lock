@@ -1678,6 +1678,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@bring/blocks-wp@workspace:packages/blocks-wp":
+  version: 0.0.0-use.local
+  resolution: "@bring/blocks-wp@workspace:packages/blocks-wp"
+  languageName: unknown
+  linkType: soft
+
 "@bring/bring-app@workspace:apps/bring-app":
   version: 0.0.0-use.local
   resolution: "@bring/bring-app@workspace:apps/bring-app"
@@ -9424,12 +9430,6 @@ __metadata:
   checksum: 10c0/02847e1d2cb089c9dc6958add42e3cdeaf07d13f575973963335ac0fdece563a50ac770ac4c8fa06492d2dd276f6cc3b7f08c7cd9c7a7ad0f8d388b2a28def5f
   languageName: node
   linkType: hard
-
-"blocks-wp-aaf3bf@workspace:packages/blocks-wp":
-  version: 0.0.0-use.local
-  resolution: "blocks-wp-aaf3bf@workspace:packages/blocks-wp"
-  languageName: unknown
-  linkType: soft
 
 "bn.js@npm:^4.0.0, bn.js@npm:^4.1.0, bn.js@npm:^4.11.9":
   version: 4.12.0
