@@ -55,3 +55,6 @@ apps/bring-app/wordpress
 
 # nginx logs
 **/nginx/logs
+
+# npm
+.npmrc

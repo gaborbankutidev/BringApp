@@ -44,3 +44,46 @@ jobs:
 
             - name: Run tests
               run: yarn test
+    release:
+        name: Release
+        if: github.ref == 'refs/heads/master'
+        needs: checks_and_build
+
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout files
+              uses: actions/checkout@v4
+
+            - name: Enable Corepack
+              run: corepack enable
+
+            - name: Setup node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: "yarn"
+
+            - name: Install dependencies
+              run: yarn install --immutable
+
+            - name: Creating .npmrc
+              run: |
+                  cat << EOF > "$HOME/.npmrc"
+                    //registry.npmjs.org/:_authToken=$NPM_TOKEN
+                  EOF
+              env:
+                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+            - name: Publish
+              run: yarn publish-packages
+
+            - name: Commit and push changes
+              run: |
+                  git config --global user.name 'Deploy Bot'
+                  git config --global user.email 'team@bring.team'
+                  if ! git diff-index --quiet HEAD; then
+                    git add .
+                    git commit -m "Deploy packages"
+                    git push
+                    git push --tags
+                  fi

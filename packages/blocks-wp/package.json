@@ -1,4 +1,6 @@
 {
+	"name": "@bring/blocks-wp",
+	"version": "0.2.32",
 	"private": "true",
 	"scripts": {
 		"lint": "vendor/bin/phpstan analyse"
