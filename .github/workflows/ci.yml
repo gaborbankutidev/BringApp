@@ -12,6 +12,9 @@ concurrency:
     group: ci-${{ github.event.pull_request.number || github.ref }}
     cancel-in-progress: true
 
+permissions:
+    contents: write
+
 jobs:
     checks_and_build:
         name: Checks and Build
