@@ -29,7 +29,9 @@ function updateProjectThemeName(directory: string, projectName: string) {
 
 	fsExtra.writeFileSync(
 		themeCssPath,
-		themeCss.replace("Project Theme", projectTheme).replace("project-theme", projectThemeKebab),
+		themeCss
+			.replaceAll("Project Theme", projectTheme)
+			.replaceAll("project-theme", projectThemeKebab),
 	);
 
 	// Rename theme directory
@@ -46,7 +48,7 @@ function updateProjectThemeName(directory: string, projectName: string) {
 
 	fsExtra.writeFileSync(
 		nextPackageJsonPath,
-		nextPackageJson.replace("project-theme", projectThemeKebab),
+		nextPackageJson.replaceAll("project-theme", projectThemeKebab),
 	);
 
 	// Update theme name in docker-compose.yml
@@ -57,7 +59,7 @@ function updateProjectThemeName(directory: string, projectName: string) {
 
 	fsExtra.writeFileSync(
 		dockerComposePath,
-		dockerCompose.replace("project-theme", projectThemeKebab),
+		dockerCompose.replaceAll("project-theme", projectThemeKebab),
 	);
 
 	// Update theme name in deploy.sh
@@ -66,5 +68,5 @@ function updateProjectThemeName(directory: string, projectName: string) {
 		encoding: "utf-8",
 	});
 
-	fsExtra.writeFileSync(deployShPath, deploySh.replace("project-theme", projectThemeKebab));
+	fsExtra.writeFileSync(deployShPath, deploySh.replaceAll("project-theme", projectThemeKebab));
 }

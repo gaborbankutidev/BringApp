@@ -4,6 +4,7 @@
 
 	"extends": "@bring/typescript-config/base.json",
 	"compilerOptions": {
+		"lib": ["es2021"],
 		"outDir": "dist",
 		"target": "es2020",
 		"module": "es2020",
