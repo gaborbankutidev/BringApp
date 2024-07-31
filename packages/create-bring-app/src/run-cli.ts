@@ -7,9 +7,37 @@ import {updatePackageVersions} from "./update-package-versions";
 import {updateProjectName} from "./update-project-name";
 
 function copyTemplateFiles(path: string) {
-	execSync(`git clone ${sshUrl} ./${path}/.temp`, {
-		stdio: "inherit",
+	const tempFolder = `./${path}/.temp`;
+
+	fsExtra.mkdirSync(tempFolder, {
+		recursive: true,
 	});
+
+	execSync("git init", {
+		stdio: "ignore",
+		cwd: tempFolder,
+	});
+
+	execSync(`git remote add origin ${sshUrl}`, {
+		stdio: "inherit",
+		cwd: tempFolder,
+	});
+
+	execSync("git sparse-checkout init --cone", {
+		stdio: "inherit",
+		cwd: tempFolder,
+	});
+
+	execSync("git sparse-checkout set apps/bring-app", {
+		stdio: "inherit",
+		cwd: tempFolder,
+	});
+
+	execSync("git pull origin master", {
+		stdio: "inherit",
+		cwd: tempFolder,
+	});
+
 	fsExtra.copySync(`./${path}/.temp/apps/bring-app`, `./${path}`);
 	fsExtra.removeSync(`./${path}/.temp`);
 }
