@@ -31,12 +31,12 @@ export async function runCLI(config: CLIConfig) {
 
 	updatePackageVersions(config.directory);
 
-	updateProjectName(config.directory, config.projectName); 
+	updateProjectName(config.directory, config.projectName);
 
 	if (config.runInstall) {
-		console.log(`Running ${config.packageManager} install...`);
+		console.log(`Running yarn install...`);
 
-		execSync(`${config.packageManager} install`, {
+		execSync(`yarn install`, {
 			cwd: config.directory,
 			stdio: "inherit",
 		});
@@ -57,6 +57,6 @@ export async function runCLI(config: CLIConfig) {
 
 	console.log("To get started, run the following commands:");
 	console.log(`  cd ${config.directory}`);
-	!config.runInstall && console.log(`  ${config.packageManager} install`);
-	console.log(`  ${config.packageManager} dev`);
+	!config.runInstall && console.log(`  yarn install`);
+	console.log(`  yarn dev`);
 }

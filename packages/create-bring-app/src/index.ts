@@ -3,14 +3,10 @@
 import {confirm, input} from "@inquirer/prompts";
 import fsExtra from "fs-extra";
 import kebabCase from "lodash.kebabcase";
-import {getPkgManager} from "./get-package-manager";
 import {runCLI} from "./run-cli";
 
 async function main() {
 	console.log("Welcome to the Bring app generator!");
-
-	const packageManager = getPkgManager();
-	console.log(`Detected package manager: ${packageManager}`);
 
 	const projectName = await input({
 		message: "What is the name of your project?",
@@ -41,7 +37,7 @@ async function main() {
 	}
 
 	const runInstall = await confirm({
-		message: "Do you want to run the package manager install command?",
+		message: "Do you want to run the install command?",
 		default: true,
 	});
 
@@ -56,7 +52,6 @@ async function main() {
 		overwrite,
 		runInstall,
 		initGit,
-		packageManager,
 	});
 }
 
