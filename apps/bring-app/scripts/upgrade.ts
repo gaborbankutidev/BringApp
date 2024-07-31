@@ -11,6 +11,13 @@ function updateComposer() {
 	});
 }
 
+function install() {
+	execSync("yarn install", {
+		stdio: "inherit",
+		cwd: CWD,
+	});
+}
+
 function updateNext() {
 	const nextPath = path.join(CWD, "next");
 
@@ -22,27 +29,60 @@ function updateNext() {
 	);
 }
 
-function updateTheme() {
-	const themePath = path.join(CWD, "/themes/bring-theme");
-	const tempPath = path.join(CWD, "/.temp");
+function addNewTheme() {
+	const themeFolder = path.join(CWD, "/themes/bring-theme");
+	const tempFolder = path.join(CWD, "/.temp");
 
-	execSync(`git clone ${SSH_URL} ${tempPath}`, {
-		stdio: "inherit",
+	fsExtra.mkdirSync(tempFolder, {
+		recursive: true,
 	});
+
+	execSync("git init", {
+		stdio: "ignore",
+		cwd: tempFolder,
+	});
+
+	execSync(`git remote add origin ${SSH_URL}`, {
+		stdio: "inherit",
+		cwd: tempFolder,
+	});
+
+	execSync("git sparse-checkout init --cone", {
+		stdio: "inherit",
+		cwd: tempFolder,
+	});
+
+	execSync("git sparse-checkout set apps/bring-app/themes/bring-theme", {
+		stdio: "inherit",
+		cwd: tempFolder,
+	});
+
+	execSync("git pull origin master", {
+		stdio: "inherit",
+		cwd: tempFolder,
+	});
+
 	fsExtra.copySync(
-		path.join(tempPath, "/apps/bring-app/themes/bring-theme"),
-		themePath,
+		path.join(tempFolder, "/apps/bring-app/themes/bring-theme"),
+		themeFolder,
 		{
 			overwrite: true,
 		},
 	);
-	fsExtra.removeSync(tempPath);
+	fsExtra.removeSync(tempFolder);
+}
+
+function removeOldTheme() {
+	const themeFolder = path.join(CWD, "/themes/bring-theme");
+	fsExtra.removeSync(themeFolder);
 }
 
 function main() {
+	removeOldTheme();
+	addNewTheme();
 	updateComposer();
 	updateNext();
-	updateTheme();
+	install();
 }
 
 main();
