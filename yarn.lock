@@ -1690,13 +1690,16 @@ __metadata:
   resolution: "@bring/bring-app@workspace:apps/bring-app"
   dependencies:
     "@prettier/plugin-php": "npm:^0.22.2"
+    "@types/fs-extra": "npm:^11"
     concurrently: "npm:^8.2.2"
+    fs-extra: "npm:^11.2.0"
     husky: "npm:^9.0.11"
     lint-staged: "npm:^15.2.2"
     prettier: "npm:^3.2.5"
     prettier-plugin-organize-imports: "npm:^4.0.0"
     prettier-plugin-pkg: "npm:^0.18.1"
     prettier-plugin-tailwindcss: "npm:0.5.13"
+    tsx: "npm:^4.16.2"
   languageName: unknown
   linkType: soft
 
