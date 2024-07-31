@@ -11,22 +11,13 @@ function updateComposer() {
 	});
 }
 
-function install() {
-	execSync("yarn install", {
-		stdio: "inherit",
-		cwd: CWD,
-	});
-}
-
 function updateNext() {
 	const nextPath = path.join(CWD, "next");
 
-	execSync(
-		`cd ${nextPath} && yarn upgrade --latest @bring/blocks-client && yarn upgrade --latest @bring/blocks-editor`,
-		{
-			stdio: "inherit",
-		},
-	);
+	execSync(`yarn up @bring/blocks-client @bring/blocks-editor`, {
+		stdio: "inherit",
+		cwd: nextPath,
+	});
 }
 
 function addNewTheme() {
@@ -82,7 +73,6 @@ function main() {
 	addNewTheme();
 	updateComposer();
 	updateNext();
-	install();
 }
 
 main();
