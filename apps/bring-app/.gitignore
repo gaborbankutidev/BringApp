@@ -1,9 +1,3 @@
-# turbo
-.turbo
-
-# docs
-docs/typedoc
-
 # yarn
 .yarn/*
 !.yarn/patches
@@ -12,11 +6,12 @@ docs/typedoc
 !.yarn/sdks
 !.yarn/versions
 
-packages/create-bring-app/template
-
 # dependencies
 vendor
 node_modules
+
+# turbo
+.turbo
 
 # next.js
 .next/
@@ -30,7 +25,6 @@ storybook-static
 
 # production
 build
-dist
 
 # misc
 .DS_Store
@@ -46,14 +40,11 @@ dist
 # typescript
 *.tsbuildinfo
 
+# turbo
+.turbo
+
 # lint
 .eslintcache
 
 # idea
 .idea
-
-# wordpress
-apps/bring-app/wordpress
-
-# nginx logs
-**/nginx/logs
