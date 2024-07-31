@@ -1,0 +1,4 @@
+{
+	"phpstan.path": "./themes/bring-theme/vendor/phpstan/phpstan/phpstan",
+	"phpstan.binPath": "themes/bring-theme/vendor/bin/phpstan"
+}
