@@ -6,6 +6,7 @@
 		"next"
 	],
 	"scripts": {
+		"after:install": "node ./scripts/after-install.mjs",
 		"build": "conc yarn:build:next yarn:build:editor",
 		"build:blocks": "cd ./next && yarn build:blocks",
 		"build:ci": "conc yarn:build:next:ci yarn:build:editor",
