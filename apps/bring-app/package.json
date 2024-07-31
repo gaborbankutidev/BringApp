@@ -24,18 +24,24 @@
 		"services:down": "docker compose down",
 		"services:up": "docker compose up -d",
 		"storybook": "cd ./next && yarn watch:storybook",
+		"upgrade:bring": "tsx scripts/upgrade.ts",
 		"watch:blocks": "cd ./next && yarn watch:blocks",
 		"watch:next": "cd ./next && yarn watch:next",
 		"watch:tailwind": "cd ./next && yarn watch:tailwind"
 	},
 	"devDependencies": {
 		"@prettier/plugin-php": "^0.22.2",
+		"@types/fs-extra": "^11",
 		"concurrently": "^8.2.2",
 		"husky": "^9.0.11",
 		"lint-staged": "^15.2.2",
 		"prettier": "^3.2.5",
 		"prettier-plugin-organize-imports": "^4.0.0",
 		"prettier-plugin-pkg": "^0.18.1",
-		"prettier-plugin-tailwindcss": "0.5.13"
+		"prettier-plugin-tailwindcss": "0.5.13",
+		"tsx": "^4.16.2"
+	},
+	"dependencies": {
+		"fs-extra": "^11.2.0"
 	}
 }
