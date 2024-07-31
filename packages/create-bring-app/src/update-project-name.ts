@@ -9,7 +9,7 @@ export function updateProjectName(directory: string, projectName: string) {
 	const composerJson = fsExtra.readJsonSync(composerJsonPath);
 
 	packageJson.name = kebabCase(projectName);
-	composerJson.name = kebabCase(projectName);
+	composerJson.name = `${kebabCase(projectName)}/theme`;
 
 	fsExtra.writeJsonSync(packageJsonPath, packageJson, {spaces: 2});
 	fsExtra.writeJsonSync(composerJsonPath, composerJson, {spaces: 2});
@@ -18,8 +18,8 @@ export function updateProjectName(directory: string, projectName: string) {
 }
 
 function updateProjectThemeName(directory: string, projectName: string) {
-	const projectTheme = `${projectName} Theme`;
-	const projectThemeKebab = `${kebabCase(projectName)}-theme`;
+	const projectTheme = projectName;
+	const projectThemeKebab = kebabCase(projectName);
 
 	// Update theme name in style.css
 	const themeCssPath = path.join(directory, "themes/project-theme/style.css");

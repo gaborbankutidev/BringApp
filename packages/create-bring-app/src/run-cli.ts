@@ -2,6 +2,7 @@ import {execSync} from "child_process";
 import fsExtra from "fs-extra";
 import {CLIConfig} from "./config";
 import {sshUrl} from "./constants";
+import {removeComposerRepositories} from "./remove-composer-repositories";
 import {updatePackageVersions} from "./update-package-versions";
 import {updateProjectName} from "./update-project-name";
 
@@ -13,8 +14,8 @@ function copyTemplateFiles(path: string) {
 	fsExtra.removeSync(`./${path}/.temp`);
 }
 
-function removeDir(path: string) {
-	fsExtra.removeSync(path);
+function removeComposerLockFile(path: string) {
+	fsExtra.removeSync(`${path}/composer.lock`);
 }
 
 export async function runCLI(config: CLIConfig) {
@@ -23,7 +24,7 @@ export async function runCLI(config: CLIConfig) {
 	console.log();
 
 	if (config.overwrite) {
-		removeDir(config.directory);
+		fsExtra.removeSync(config.directory);
 		console.log(`Removing the directory ${config.directory}...`);
 	}
 
@@ -32,6 +33,10 @@ export async function runCLI(config: CLIConfig) {
 	updatePackageVersions(config.directory);
 
 	updateProjectName(config.directory, config.projectName);
+
+	removeComposerRepositories(config.directory);
+
+	removeComposerLockFile(config.directory);
 
 	if (config.runInstall) {
 		console.log(`Running yarn install...`);

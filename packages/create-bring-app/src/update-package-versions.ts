@@ -9,7 +9,7 @@ export function updatePackageVersions(folder: string) {
 
 	packageJson.dependencies["@bring/blocks-client"] = "latest";
 	packageJson.dependencies["@bring/blocks-editor"] = "latest";
-	composerJson.require["bring/blocks-wp"] = "latest";
+	composerJson.require["bring/blocks-wp"] = "*";
 
 	fsExtra.writeJsonSync(packageJsonPath, packageJson, {spaces: 2});
 	fsExtra.writeJsonSync(composerJsonPath, composerJson, {spaces: 2});
