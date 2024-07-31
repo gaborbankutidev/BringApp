@@ -49,6 +49,14 @@ export async function runCLI(config: CLIConfig) {
 			cwd: config.directory,
 			stdio: "ignore",
 		});
+		execSync("git add .", {
+			cwd: config.directory,
+			stdio: "ignore",
+		});
+		execSync('git commit -m "Initial commit"', {
+			cwd: config.directory,
+			stdio: "ignore",
+		});
 	}
 
 	console.log();
