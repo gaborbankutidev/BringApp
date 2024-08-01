@@ -1,7 +1,7 @@
 import {execSync} from "child_process";
 import fsExtra from "fs-extra";
 import {CLIConfig} from "./config";
-import {sshUrl} from "./constants";
+import {SSH_URL} from "./constants";
 import {removeComposerRepositories} from "./remove-composer-repositories";
 import {updatePackageVersions} from "./update-package-versions";
 import {updateProjectName} from "./update-project-name";
@@ -18,7 +18,7 @@ function copyTemplateFiles(path: string) {
 		cwd: tempFolder,
 	});
 
-	execSync(`git remote add origin ${sshUrl}`, {
+	execSync(`git remote add origin ${SSH_URL}`, {
 		stdio: "inherit",
 		cwd: tempFolder,
 	});

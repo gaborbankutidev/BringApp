@@ -3,7 +3,7 @@ import fsExtra from "fs-extra";
 import path from "path";
 
 const CWD = process.cwd();
-const SSH_URL = "git@github.com:gaborbankutidev/BringBlocks.git";
+const SSH_URL = "git@github.com:gaborbankutidev/BringApp.git";
 
 function updateComposer() {
 	execSync("composer update bring/blocks-wp", {
