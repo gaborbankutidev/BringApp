@@ -6,7 +6,7 @@ import kebabCase from "lodash.kebabcase";
 import {runCLI} from "./run-cli";
 
 async function main() {
-	console.log("Welcome to Bring App Creator!");
+	console.log("Welcome to the Bring App Creator!");
 
 	const projectName = await input({
 		message: "Please enter the name of your project:",
