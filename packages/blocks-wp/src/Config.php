@@ -242,6 +242,7 @@ class Config {
 	 * @return Config
 	 */
 	public function ignorePaths($paths) {
+		self::$ignore_paths = $paths;
 		return $this;
 	}
 
