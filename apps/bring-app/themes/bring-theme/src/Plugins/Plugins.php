@@ -38,8 +38,6 @@ class Plugins {
 			[
 				"name" => "ACF QuickEdit Fields",
 				"slug" => "acf-quickedit-fields",
-				"source" =>
-					"https://downloads.wordpress.org/plugin/acf-quickedit-fields.3.3.7.zip",
 				"required" => true,
 				"force_activation" => true,
 				"force_deactivation" => true,
@@ -48,7 +46,7 @@ class Plugins {
 				"name" => "Advanced Custom Fields PRO",
 				"slug" => "advanced-custom-fields-pro",
 				"source" =>
-					"https://github.com/pronamic/advanced-custom-fields-pro/releases/download/v6.3.3/advanced-custom-fields-pro-6.3.3.zip",
+					"https://github.com/pronamic/advanced-custom-fields-pro/archive/refs/heads/main.zip",
 				"required" => true,
 				"force_activation" => true,
 				"force_deactivation" => true,
@@ -56,8 +54,6 @@ class Plugins {
 			[
 				"name" => "Disable Comments",
 				"slug" => "disable-comments",
-				"source" =>
-					"https://downloads.wordpress.org/plugin/disable-comments.2.4.6.zip",
 				"required" => true,
 				"force_activation" => true,
 				"force_deactivation" => true,
@@ -65,8 +61,6 @@ class Plugins {
 			[
 				"name" => "Disable Media Pages",
 				"slug" => "disable-media-pages",
-				"source" =>
-					"https://downloads.wordpress.org/plugin/disable-media-pages.3.1.2.zip",
 				"required" => true,
 				"force_activation" => true,
 				"force_deactivation" => true,
@@ -74,39 +68,30 @@ class Plugins {
 			[
 				"name" => "FileBird Lite",
 				"slug" => "filebird",
-				"source" => "https://downloads.wordpress.org/plugin/filebird.zip",
 				"required" => true,
 				"force_deactivation" => true,
 			],
 			[
 				"name" => "Query Monitor",
 				"slug" => "query-monitor",
-				"source" =>
-					"https://downloads.wordpress.org/plugin/query-monitor.3.16.3.zip",
 				"required" => true,
 				"force_deactivation" => true,
 			],
 			[
 				"name" => "Rank Math SEO",
 				"slug" => "seo-by-rank-math",
-				"source" =>
-					"https://downloads.wordpress.org/plugin/seo-by-rank-math.1.0.223.zip",
 				"required" => true,
 				"force_deactivation" => true,
 			],
 			[
 				"name" => "WP API SwaggerUI",
 				"slug" => "wp-api-swaggerui",
-				"source" =>
-					"https://downloads.wordpress.org/plugin/wp-api-swaggerui.1.2.0.zip",
 				"required" => true,
 				"force_deactivation" => true,
 			],
 			[
 				"name" => "WP Mail SMTP",
 				"slug" => "wp-mail-smtp",
-				"source" =>
-					"https://downloads.wordpress.org/plugin/wp-mail-smtp.4.0.1.zip",
 				"required" => true,
 				"force_activation" => true,
 				"force_deactivation" => true,

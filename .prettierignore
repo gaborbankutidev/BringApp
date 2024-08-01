@@ -2,4 +2,4 @@ dist
 node_modules
 deprecated
 .next
-bring-theme/build
+build
