@@ -1,10 +1,10 @@
 {
-	"name": "bringblocks-project",
+	"name": "bringapp",
 	"version": "0.0.0",
 	"description": "GPL-2.0-or-later",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/gaborbankutidev/BringBlocks.git"
+		"url": "git+https://github.com/gaborbankutidev/BringApp.git"
 	},
 	"private": true,
 	"workspaces": [
