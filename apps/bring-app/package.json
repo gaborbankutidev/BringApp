@@ -17,7 +17,7 @@
 		"build:tailwind": "cd ./next && yarn build:tailwind",
 		"checks": "conc yarn:format:check yarn:checks:next",
 		"checks:next": "cd ./next && yarn checks",
-		"dev": "conc yarn:watch:next yarn:watch:tailwind yarn:watch:blocks",
+		"dev": "conc yarn:watch:next yarn:watch:tailwind yarn:watch:blocks yarn:watch:admin-react",
 		"format": "prettier --write .",
 		"format:check": "prettier --check .",
 		"prepare": "husky",
@@ -25,14 +25,19 @@
 		"services:up": "docker compose up -d",
 		"storybook": "cd ./next && yarn watch:storybook",
 		"upgrade:bring": "tsx scripts/upgrade.ts",
+		"watch:admin-react": "esbuild admin-react/index.tsx --bundle --sourcemap --outdir=themes/project-theme/build/custom-pages --watch",
 		"watch:blocks": "cd ./next && yarn watch:blocks",
 		"watch:next": "cd ./next && yarn watch:next",
 		"watch:tailwind": "cd ./next && yarn watch:tailwind"
+	},
+	"dependencies": {
+		"fs-extra": "^11.2.0"
 	},
 	"devDependencies": {
 		"@prettier/plugin-php": "^0.22.2",
 		"@types/fs-extra": "^11",
 		"concurrently": "^8.2.2",
+		"esbuild": "^0.23.0",
 		"husky": "^9.0.11",
 		"lint-staged": "^15.2.2",
 		"prettier": "^3.2.5",
@@ -40,8 +45,5 @@
 		"prettier-plugin-pkg": "^0.18.1",
 		"prettier-plugin-tailwindcss": "0.5.13",
 		"tsx": "^4.16.2"
-	},
-	"dependencies": {
-		"fs-extra": "^11.2.0"
 	}
 }
