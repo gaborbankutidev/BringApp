@@ -3,7 +3,7 @@ import fsExtra from "fs-extra";
 import path from "path";
 
 const CWD = process.cwd();
-const SSH_URL = "git@github.com:gaborbankutidev/BringApp.git";
+const GIT_URL = "https://github.com/gaborbankutidev/BringApp.git";
 
 function updateComposer() {
 	execSync("composer update bring/blocks-wp", {
@@ -33,7 +33,12 @@ function addNewTheme() {
 		cwd: tempFolder,
 	});
 
-	execSync(`git remote add origin ${SSH_URL}`, {
+	execSync(`git remote add origin ${GIT_URL}`, {
+		stdio: "inherit",
+		cwd: tempFolder,
+	});
+
+	execSync(`git remote set-url origin ${GIT_URL}`, {
 		stdio: "inherit",
 		cwd: tempFolder,
 	});
