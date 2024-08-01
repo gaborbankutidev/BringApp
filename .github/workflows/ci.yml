@@ -80,6 +80,24 @@ jobs:
             - name: Publish
               run: yarn publish-packages
 
+            - name: Copy version to composer.json for blocks-wp
+              run: yarn copy:version
+              working-directory: packages/blocks-wp
+
+            - name: Validate Composer JSON
+              run: composer validate --strict --working-dir=packages/blocks-wp
+
+            - name: Notify Packagist
+              env:
+                  PACKAGIST_TOKEN: ${{ secrets.PACKAGIST_TOKEN }}
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  curl -X POST https://packagist.org/api/update-package?username=Bring&apiToken=${PACKAGIST_TOKEN} \
+                  -d '{"repository":{"url":"https://github.com/gaborbankutidev/BringBlocks"}}'
+
+            - name: Format Code
+              run: yarn format
+
             - name: Commit and push changes
               run: |
                   git config --global user.name 'Deploy Bot'
