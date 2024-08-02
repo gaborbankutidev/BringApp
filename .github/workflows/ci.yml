@@ -80,13 +80,6 @@ jobs:
             - name: Publish
               run: yarn publish-packages
 
-            - name: Copy version to composer.json for blocks-wp
-              run: yarn copy:version
-              working-directory: packages/blocks-wp
-
-            - name: Update composer.lock file
-              run: composer update --working-dir=packages/blocks-wp
-
             - name: Validate Composer JSON
               run: composer validate --strict --working-dir=packages/blocks-wp
 
@@ -114,7 +107,7 @@ jobs:
             - name: Tag new version in blocks-wp repository
               run: |
                   cd blocks-wp-temp
-                  VERSION=$(jq -r .version ../packages/blocks-wp/composer.json)
+                  VERSION=$(jq -r .version ../packages/blocks-wp/package.json)
                   git tag "v$VERSION"
                   git push origin --tags
 
