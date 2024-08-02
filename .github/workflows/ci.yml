@@ -12,14 +12,14 @@ concurrency:
     group: ci-${{ github.event.pull_request.number || github.ref }}
     cancel-in-progress: true
 
-# permissions:
-#     contents: write
-#     pull-requests: write
+permissions:
+    contents: write
+    pull-requests: write
 
 jobs:
     checks_and_build:
         name: Checks and Build
-        if: github.event.pull_request.title != 'Automated Package Deployment'
+        if: "!contains(github.event.pull_request.title, 'Automated Package Deployment')"
         runs-on: ubuntu-latest
 
         steps:
@@ -52,7 +52,7 @@ jobs:
     release:
         name: Release
         needs: checks_and_build
-        if: github.ref == 'refs/heads/master' && github.event.pull_request.title != 'Automated Package Deployment'
+        if: github.ref == 'refs/heads/master' && !contains(github.event.pull_request.title, 'Automated Package Deployment')
 
         runs-on: ubuntu-latest
         steps:
@@ -144,7 +144,7 @@ jobs:
             - name: Clean up temporary folders
               run: rm -rf blocks-wp-target
 
-            - name: Create and merge pull request for Package Deployment
+            - name: Create pull request for Updated Packages
               run: |
                   if ! git diff-index --quiet HEAD; then
                     yarn format
@@ -158,10 +158,22 @@ jobs:
                     echo "Created PR: $PR_URL"
 
                     PR_NUMBER=$(gh pr list --head ci-deploy --json number --jq '.[0].number')
-                    gh pr merge $PR_NUMBER --squash --admin
-                    echo "Merged PR: $PR_URL"
-
-                    git push origin --delete ci-deploy
+                    echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
+                    echo "::set-output name=PR_NUMBER::$PR_NUMBER"
                   fi
               env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Approve PR
+              if: steps.create_pr.outputs.PR_NUMBER
+              run: gh pr review ${{ env.PR_NUMBER }} --approve
+              env:
                   GH_TOKEN: ${{ secrets.BLOCKS_WP_PUBLISH_PAT }}
+
+            - name: Merge PR
+              if: steps.create_pr.outputs.PR_NUMBER
+              run: |
+                  gh pr merge ${{ env.PR_NUMBER }} --squash --admin
+                  git push origin --delete ci-deploy
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
