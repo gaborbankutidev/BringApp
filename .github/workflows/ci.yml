@@ -87,30 +87,30 @@ jobs:
             - name: Validate Composer JSON
               run: composer validate --strict --working-dir=packages/blocks-wp
 
-            - name: Clone new repo
+            - name: Clone blocks-wp
               run: |
-                  git clone https://github.com/gaborbankutidev/BringBlocksWp.git new-repo
-                  cd new-repo
+                  git clone https://github.com/gaborbankutidev/BringBlocksWp.git blocks-wp-temp
+                  cd blocks-wp-temp
                   git config user.name 'Deploy Bot'
                   git config user.email 'team@bring.team'
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            - name: Copy PHP package to new repo
+            - name: Update blocks-wp package
               run: |
-                  rsync -av --delete packages/blocks-wp/ new-repo/
-                  cd new-repo
+                  rsync -av --delete packages/blocks-wp/ blocks-wp-temp/
+                  cd blocks-wp-temp
                   git add .
                   git commit -m "Update PHP package"
 
-            - name: Push changes to new repo
+            - name: Push changes to blocks-wp to blocks-wp repository
               run: |
-                  cd new-repo
+                  cd blocks-wp-temp
                   git push
 
-            - name: Tag new version in new repo
+            - name: Tag new version in blocks-wp repository
               run: |
-                  cd new-repo
+                  cd blocks-wp-temp
                   VERSION=$(jq -r .version ../packages/blocks-wp/composer.json)
                   git tag "v$VERSION"
                   git push origin --tags
@@ -126,7 +126,7 @@ jobs:
             - name: Format Code
               run: yarn format
 
-            - name: Commit and push changes in monorepo
+            - name: Commit and push changes
               run: |
                   git config --global user.name 'Deploy Bot'
                   git config --global user.email 'team@bring.team'
