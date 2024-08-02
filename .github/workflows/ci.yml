@@ -87,14 +87,17 @@ jobs:
               run: |
                   git clone https://github.com/gaborbankutidev/BringBlocksWp.git blocks-wp-temp
                   cd blocks-wp-temp
-                  git config user.name 'Deploy Bot'
-                  git config user.email 'team@bring.team'
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+            - name: Configure Git
+              run: |
+                  git config --global user.name 'Deploy Bot'
+                  git config --global user.email 'team@bring.team'
+
             - name: Update blocks-wp package
               run: |
-                  rsync -av --delete packages/blocks-wp/ blocks-wp-temp/
+                  rsync -av --delete --exclude='.git' packages/blocks-wp/ blocks-wp-temp/
                   cd blocks-wp-temp
                   git add .
                   git commit -m "Update PHP package"
@@ -124,8 +127,6 @@ jobs:
 
             - name: Commit and push changes
               run: |
-                  git config --global user.name 'Deploy Bot'
-                  git config --global user.email 'team@bring.team'
                   if ! git diff-index --quiet HEAD; then
                     git add .
                     git commit -m "Deploy packages"
