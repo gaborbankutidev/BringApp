@@ -14,12 +14,25 @@ concurrency:
 
 permissions:
     contents: write
+    pull-requests: write
 
 jobs:
     checks_and_build:
         name: Checks and Build
-        runs-on: ubuntu-latest
+        if: |
+            !(
+              (
+                github.event_name == 'pull_request' &&
+                contains(github.event.pull_request.title, '[Deploy Bot]')
+              ) ||
+              (
+                github.event_name == 'push' &&
+                github.ref == 'refs/heads/master' &&
+                contains(github.event.head_commit.message, '[Deploy Bot]')
+              )
+            )
 
+        runs-on: ubuntu-latest
         steps:
             - name: Checkout files
               uses: actions/checkout@v4
@@ -49,8 +62,12 @@ jobs:
               run: yarn test
     release:
         name: Release
-        if: github.ref == 'refs/heads/master'
         needs: checks_and_build
+        if: |
+            github.ref == 'refs/heads/master' && !(
+              github.event_name == 'push' &&
+              contains(github.event.head_commit.message, '[Deploy Bot]')
+            )
 
         runs-on: ubuntu-latest
         steps:
@@ -83,53 +100,89 @@ jobs:
             - name: Validate Composer JSON
               run: composer validate --strict --working-dir=packages/blocks-wp
 
-            - name: Clone blocks-wp
+            - name: Set up Git
               run: |
-                  git clone https://github.com/gaborbankutidev/BringBlocksWp.git blocks-wp-temp
-                  cd blocks-wp-temp
+                  git config --global user.name 'github-actions[bot]'
+                  git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+                  git config --global url."https://x-access-token:$PAT_TOKEN@github.com/".insteadOf "https://github.com/"
               env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  PAT_TOKEN: ${{ secrets.BLOCKS_WP_PUBLISH_PAT }}
 
-            - name: Configure Git
+            - name: Clone blocks-wp repository and get latest tag
               run: |
-                  git config --global user.name 'Deploy Bot'
-                  git config --global user.email 'team@bring.team'
+                  git clone $BLOCKS_WP_REPOSITORY_URL blocks-wp-target
+                  cd blocks-wp-target
+                  git fetch --tags
+                  LATEST_TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
+                  echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
+              env:
+                  BLOCKS_WP_REPOSITORY_URL: ${{ vars.BLOCKS_WP_REPOSITORY_URL }}
 
-            - name: Update blocks-wp package
+            - name: Check if blocks-wp package needs to be updated
               run: |
-                  rsync -av --delete --exclude='.git' packages/blocks-wp/ blocks-wp-temp/
-                  cd blocks-wp-temp
+                  VERSION=$(jq -r .version packages/blocks-wp/package.json)
+                  echo "VERSION=$VERSION" >> $GITHUB_ENV
+                  if [ "$LATEST_TAG" != "v$VERSION" ]; then
+                    echo "VERSION_CHANGED=true" >> $GITHUB_ENV
+                  else
+                    echo "VERSION_CHANGED=false" >> $GITHUB_ENV
+                  fi
+              env:
+                  LATEST_TAG: ${{ env.LATEST_TAG }}
+
+            - name: Sync blocks-wp package and tag new version
+              if: env.VERSION_CHANGED == 'true'
+              run: |
+                  # Sync the blocks-wp package to the target repository
+                  rsync -av --delete --exclude='.git' packages/blocks-wp/ blocks-wp-target/
+                  cd blocks-wp-target
+
+                  # Add, commit, and push changes
                   git add .
-                  git commit -m "Update PHP package"
+                  git commit -m "Update package"
+                  git push origin master
 
-            - name: Push changes to blocks-wp to blocks-wp repository
-              run: |
-                  cd blocks-wp-temp
-                  git push
-
-            - name: Tag new version in blocks-wp repository
-              run: |
-                  cd blocks-wp-temp
+                  # Tag new version
                   VERSION=$(jq -r .version ../packages/blocks-wp/package.json)
                   git tag "v$VERSION"
                   git push origin --tags
 
             - name: Notify Packagist
+              if: env.VERSION_CHANGED == 'true'
+              run: |
+                  curl -XPOST -H'content-type:application/json' 'https://packagist.org/api/update-package?username=Bring&apiToken=$PACKAGIST_TOKEN' \
+                  -d'{"repository":{"url":"$BLOCKS_WP_REPOSITORY_URL"}}'
               env:
                   PACKAGIST_TOKEN: ${{ secrets.PACKAGIST_TOKEN }}
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: |
-                  curl -X POST https://packagist.org/api/update-package?username=Bring&apiToken=${PACKAGIST_TOKEN} \
-                  -d '{"repository":{"url":"https://github.com/gaborbankutidev/BringBlocksWp.git"}}'
+                  BLOCKS_WP_REPOSITORY_URL: ${{ vars.BLOCKS_WP_REPOSITORY_URL }}
 
-            - name: Format Code
-              run: yarn format
+            - name: Clean up temporary folders
+              run: rm -rf blocks-wp-target
 
-            - name: Commit and push changes
+            - name: Create pull request for Updated Packages
               run: |
                   if ! git diff-index --quiet HEAD; then
+                    echo "Running yarn format"
+                    yarn format
+                    
+                    git checkout -b ci-deploy
                     git add .
-                    git commit -m "Deploy packages"
-                    git push
-                    git push --tags
+                    git commit -m "[Deploy Bot] Package Update"
+                    git push origin ci-deploy
+
+                    PR_URL=$(gh pr create --title "[Deploy Bot] Package Update" --body "Automated package deployment via GitHub Actions" --head ci-deploy --base master)
+                    echo "Created PR: $PR_URL"
+
+                    PR_NUMBER=$(gh pr list --head ci-deploy --json number --jq '.[0].number')
+                    echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
                   fi
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Merge pull request
+              if: env.PR_NUMBER != ''
+              run: |
+                  gh pr merge ${{ env.PR_NUMBER }} --squash --admin
+                  git push origin --delete ci-deploy
+              env:
+                  GH_TOKEN: ${{ secrets.BLOCKS_WP_PUBLISH_PAT }}
