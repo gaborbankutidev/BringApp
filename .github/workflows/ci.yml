@@ -84,6 +84,9 @@ jobs:
               run: yarn copy:version
               working-directory: packages/blocks-wp
 
+            - name: Update composer.lock file
+              run: composer update --working-dir=packages/blocks-wp
+
             - name: Validate Composer JSON
               run: composer validate --strict --working-dir=packages/blocks-wp
 
