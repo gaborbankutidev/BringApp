@@ -87,18 +87,46 @@ jobs:
             - name: Validate Composer JSON
               run: composer validate --strict --working-dir=packages/blocks-wp
 
+            - name: Clone new repo
+              run: |
+                  git clone https://github.com/gaborbankutidev/BringBlocksWp.git new-repo
+                  cd new-repo
+                  git config user.name 'Deploy Bot'
+                  git config user.email 'team@bring.team'
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Copy PHP package to new repo
+              run: |
+                  rsync -av --delete packages/blocks-wp/ new-repo/
+                  cd new-repo
+                  git add .
+                  git commit -m "Update PHP package"
+
+            - name: Push changes to new repo
+              run: |
+                  cd new-repo
+                  git push
+
+            - name: Tag new version in new repo
+              run: |
+                  cd new-repo
+                  VERSION=$(jq -r .version ../packages/blocks-wp/composer.json)
+                  git tag "v$VERSION"
+                  git push origin --tags
+
             - name: Notify Packagist
               env:
                   PACKAGIST_TOKEN: ${{ secrets.PACKAGIST_TOKEN }}
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
                   curl -X POST https://packagist.org/api/update-package?username=Bring&apiToken=${PACKAGIST_TOKEN} \
-                  -d '{"repository":{"url":"https://github.com/gaborbankutidev/BringBlocks"}}'
+                  -d '{"repository":{"url":"https://github.com/gaborbankutidev/BringBlocksWp.git"}}'
 
             - name: Format Code
               run: yarn format
 
-            - name: Commit and push changes
+            - name: Commit and push changes in monorepo
               run: |
                   git config --global user.name 'Deploy Bot'
                   git config --global user.email 'team@bring.team'
