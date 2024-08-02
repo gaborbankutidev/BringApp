@@ -120,7 +120,7 @@ jobs:
               env:
                   LATEST_TAG: ${{ env.LATEST_TAG }}
 
-            - name: Sync blocks-wp package and tag new version
+            - name: Update blocks-wp package & add new version tag
               if: env.VERSION_CHANGED == 'true'
               run: |
                   # Sync the blocks-wp package to the target repository
@@ -165,6 +165,8 @@ jobs:
 
                     PR_NUMBER=$(gh pr list --head ci-deploy --json number --jq '.[0].number')
                     echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
+                  else
+                    echo "No package version changes detected. Skipping deployment."
                   fi
               env:
                   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
