@@ -12,9 +12,9 @@ concurrency:
     group: ci-${{ github.event.pull_request.number || github.ref }}
     cancel-in-progress: true
 
-permissions:
-    contents: write
-    pull-requests: write
+# permissions:
+#     contents: write
+#     pull-requests: write
 
 jobs:
     # checks_and_build:
@@ -163,4 +163,4 @@ jobs:
                     git push origin --delete ci-deploy
                   fi
               env:
-                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  GH_TOKEN: ${{ secrets.BLOCKS_WP_PUBLISH_PAT }}
