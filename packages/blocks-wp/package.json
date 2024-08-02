@@ -1,6 +1,6 @@
 {
 	"name": "@bring/blocks-wp",
-	"version": "0.2.33",
+	"version": "0.3.0",
 	"private": true,
 	"scripts": {
 		"copy:version": "node ./scripts/copy-version.mjs",
