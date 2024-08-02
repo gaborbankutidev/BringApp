@@ -3,7 +3,7 @@
 	"name": "bring/blocks-wp",
 	"description": "Bring BlocksWP",
 	"type": "library",
-	"version": "0.2.32",
+	"version": "0.2.33",
 	"license": "GPL-2.0-or-later",
 	"autoload": {
 		"psr-4": {
