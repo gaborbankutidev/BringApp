@@ -1,7 +1,7 @@
 import {execSync} from "child_process";
 import fsExtra from "fs-extra";
-import {CLIConfig} from "./config";
-import {sshUrl} from "./constants";
+import type {CLIConfig} from "./config";
+import {GIT_URL} from "./constants";
 import {removeComposerRepositories} from "./remove-composer-repositories";
 import {updatePackageVersions} from "./update-package-versions";
 import {updateProjectName} from "./update-project-name";
@@ -18,7 +18,12 @@ function copyTemplateFiles(path: string) {
 		cwd: tempFolder,
 	});
 
-	execSync(`git remote add origin ${sshUrl}`, {
+	execSync(`git remote add origin ${GIT_URL}`, {
+		stdio: "inherit",
+		cwd: tempFolder,
+	});
+
+	execSync(`git remote set-url origin ${GIT_URL}`, {
 		stdio: "inherit",
 		cwd: tempFolder,
 	});
@@ -48,7 +53,7 @@ function removeComposerLockFile(path: string) {
 
 export async function runCLI(config: CLIConfig) {
 	console.log();
-	console.log(`Creating a new Bring app in ${config.directory}`);
+	console.log(`Creating a new Bring App in ${config.directory}`);
 	console.log();
 
 	if (config.overwrite) {
@@ -96,8 +101,32 @@ export async function runCLI(config: CLIConfig) {
 	console.log("Done!");
 	console.log();
 
-	console.log("To get started, run the following commands:");
-	console.log(`  cd ${config.directory}`);
-	!config.runInstall && console.log(`  yarn install`);
-	console.log(`  yarn dev`);
+	console.log("Follow these steps to get started:");
+
+	console.log();
+	console.log(`1. Navigate to your project directory:`);
+	console.log(`   cd ${config.directory}`);
+
+	console.log();
+	console.log(`2. Set up the .env files in the following folders:`);
+	console.log(`   - Root directory`);
+	console.log(`   - next directory`);
+	console.log(`   - bring-theme directory`);
+
+	console.log();
+	console.log("3. Run the following commands to set up and start your project:");
+
+	if (!config.runInstall) {
+		console.log(`   - Install dependencies:`);
+		console.log(`     yarn install`);
+	}
+
+	console.log(`   - Start the backend services:`);
+	console.log(`     yarn services:up`);
+
+	console.log(`   - Launch the development server:`);
+	console.log(`     yarn dev`);
+
+	console.log();
+	console.log("You're all set. Happy coding!");
 }

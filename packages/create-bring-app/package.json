@@ -1,8 +1,8 @@
 {
-	"name": "@bring/blocks-cli",
-	"version": "0.1.0",
+	"name": "@bring/create-app",
+	"version": "0.1.4",
 	"type": "module",
-	"description": "CLI package for initializing a new BringBlocks project",
+	"description": "CLI package for initializing a new Bring App project",
 	"author": "Bring Team Ltd.",
 	"license": "GPL-2.0-or-later",
 	"bin": {

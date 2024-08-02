@@ -29,6 +29,9 @@
 		"watch:next": "cd ./next && yarn watch:next",
 		"watch:tailwind": "cd ./next && yarn watch:tailwind"
 	},
+	"dependencies": {
+		"fs-extra": "^11.2.0"
+	},
 	"devDependencies": {
 		"@prettier/plugin-php": "^0.22.2",
 		"@types/fs-extra": "^11",
@@ -40,8 +43,5 @@
 		"prettier-plugin-pkg": "^0.18.1",
 		"prettier-plugin-tailwindcss": "0.5.13",
 		"tsx": "^4.16.2"
-	},
-	"dependencies": {
-		"fs-extra": "^11.2.0"
 	}
 }

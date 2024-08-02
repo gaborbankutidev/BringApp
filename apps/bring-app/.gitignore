@@ -10,9 +10,6 @@
 vendor
 node_modules
 
-# turbo
-.turbo
-
 # next.js
 .next/
 /out/
@@ -40,11 +37,14 @@ build
 # typescript
 *.tsbuildinfo
 
-# turbo
-.turbo
-
 # lint
 .eslintcache
 
 # idea
 .idea
+
+# wordpress
+wordpress
+
+# nginx logs
+**/nginx/logs

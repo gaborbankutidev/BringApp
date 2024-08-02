@@ -1,2 +1,0 @@
-export * from "./{{component-name-kebab}}";
-export * from "./{{component-name-kebab}}-config";

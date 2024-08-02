@@ -6,16 +6,16 @@ import kebabCase from "lodash.kebabcase";
 import {runCLI} from "./run-cli";
 
 async function main() {
-	console.log("Welcome to the Bring app generator!");
+	console.log("Welcome to the Bring App Creator!");
 
 	const projectName = await input({
-		message: "What is the name of your project?",
+		message: "Please enter the name of your project:",
 		default: "My Bring App",
 		required: true,
 	});
 
 	const directory = await input({
-		message: "What is the directory for your project?",
+		message: "What should be the name of the project directory?",
 		default: kebabCase(projectName),
 		required: true,
 	});

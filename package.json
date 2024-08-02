@@ -1,10 +1,10 @@
 {
-	"name": "bringblocks-project",
+	"name": "bringapp",
 	"version": "0.0.0",
 	"description": "GPL-2.0-or-later",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/gaborbankutidev/BringBlocks.git"
+		"url": "git+https://github.com/gaborbankutidev/BringApp.git"
 	},
 	"private": true,
 	"workspaces": [
@@ -33,18 +33,22 @@
 		"services:down": "docker compose -f ./apps/bring-app/docker-compose.yml down",
 		"services:up": "docker compose -f ./apps/bring-app/docker-compose.yml up -d && docker compose -f ./apps/bring-app/docker-compose.yml logs -f",
 		"test": "turbo test",
-		"types": "turbo types"
+		"types": "turbo types",
+		"watch:wp": "tsx scripts/watcher.ts"
 	},
 	"dependencies": {
 		"@changesets/cli": "^2.27.7"
 	},
 	"devDependencies": {
 		"@prettier/plugin-php": "^0.22.2",
+		"@types/fs-extra": "^11",
+		"fs-extra": "^11.2.0",
 		"prettier": "^3.2.5",
 		"prettier-plugin-organize-imports": "^4.0.0",
 		"prettier-plugin-pkg": "^0.18.1",
 		"prettier-plugin-tailwindcss": "0.5.13",
 		"tsup": "^8.1.0",
+		"tsx": "^4.16.4",
 		"turbo": "^2.0.6",
 		"typedoc": "^0.26.3",
 		"typescript": "^5.5.3"
