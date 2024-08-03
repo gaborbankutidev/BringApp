@@ -26,6 +26,9 @@ jobs:
         steps:
             - name: Checkout files
               uses: actions/checkout@v4
+              with:
+                  ref: ${{github.event.pull_request.head.sha}}
+                  fetch-depth: 0
 
             - name: Enable Corepack
               run: corepack enable
@@ -52,7 +55,7 @@ jobs:
               run: yarn test
 
             - name: Run changeset check
-              run: yarn changeset status
+              run: yarn changeset status --since origin/master
 
     release:
         name: Release
