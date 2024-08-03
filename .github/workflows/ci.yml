@@ -91,8 +91,8 @@ jobs:
               env:
                   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-            - name: Publish
-              run: yarn publish-packages
+            - name: Publish NPM Packages
+              run: yarn release
 
             - name: Validate Composer JSON
               run: composer validate --strict --working-dir=packages/blocks-wp
@@ -105,7 +105,7 @@ jobs:
               env:
                   PAT_TOKEN: ${{ secrets.DEPLOY_BOT_TOKEN }}
 
-            - name: Clone blocks-wp repository and get latest tag
+            - name: Clone blocks-wp repository, get latest tag
               run: |
                   git clone $BLOCKS_WP_REPOSITORY_URL blocks-wp-target
                   cd blocks-wp-target
@@ -127,7 +127,7 @@ jobs:
               env:
                   LATEST_TAG: ${{ env.LATEST_TAG }}
 
-            - name: Update blocks-wp package & add new version tag
+            - name: Commit blocks-wp package update, add new version tag
               if: env.VERSION_CHANGED == 'true'
               run: |
                   # Sync the blocks-wp package to the target repository
