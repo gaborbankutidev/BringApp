@@ -9,7 +9,7 @@ async function main() {
 	console.log("Welcome to the Bring App Creator!");
 
 	const projectName = await input({
-		message: "Please enter the name of your project:",
+		message: "What should be the name of your project?",
 		default: "My Bring App",
 		required: true,
 	});
