@@ -50,6 +50,10 @@ jobs:
 
             - name: Run tests
               run: yarn test
+
+            - name: Run changeset check
+              run: yarn changeset status
+
     release:
         name: Release
         needs: checks_and_build
@@ -96,7 +100,7 @@ jobs:
                   git config --global user.email 'github-actions[bot]@users.noreply.github.com'
                   git config --global url."https://x-access-token:$PAT_TOKEN@github.com/".insteadOf "https://github.com/"
               env:
-                  PAT_TOKEN: ${{ secrets.BLOCKS_WP_PUBLISH_PAT }}
+                  PAT_TOKEN: ${{ secrets.DEPLOY_BOT_TOKEN }}
 
             - name: Clone blocks-wp repository and get latest tag
               run: |
@@ -112,7 +116,7 @@ jobs:
               run: |
                   VERSION=$(jq -r .version packages/blocks-wp/package.json)
                   echo "VERSION=$VERSION" >> $GITHUB_ENV
-                  if [ "$LATEST_TAG" != "v$VERSION" ]; then
+                  if [ "$LATEST_TAG" != "$VERSION" ]; then
                     echo "VERSION_CHANGED=true" >> $GITHUB_ENV
                   else
                     echo "VERSION_CHANGED=false" >> $GITHUB_ENV
@@ -127,14 +131,16 @@ jobs:
                   rsync -av --delete --exclude='.git' packages/blocks-wp/ blocks-wp-target/
                   cd blocks-wp-target
 
+                  # Get new version
+                  VERSION=$(jq -r .version ../packages/blocks-wp/package.json)
+
                   # Add, commit, and push changes
                   git add .
-                  git commit -m "Update package"
+                  git commit -m "[Deploy Bot] Update package - $VERSION"
                   git push origin master
 
                   # Tag new version
-                  VERSION=$(jq -r .version ../packages/blocks-wp/package.json)
-                  git tag "v$VERSION"
+                  git tag "$VERSION"
                   git push origin --tags
 
             - name: Notify Packagist
@@ -149,24 +155,29 @@ jobs:
             - name: Clean up temporary folders
               run: rm -rf blocks-wp-target
 
-            - name: Create pull request for Updated Packages
+            - name: Format code
               run: |
                   if ! git diff-index --quiet HEAD; then
-                    echo "Running yarn format"
                     yarn format
-                    
+                  else
+                    echo "No code changes detected."
+                  fi
+
+            - name: Create pull request for Package Versioning
+              run: |
+                  if ! git diff-index --quiet HEAD; then
                     git checkout -b ci-deploy
                     git add .
-                    git commit -m "[Deploy Bot] Package Update"
+                    git commit -m "[Deploy Bot] Version Packages"
                     git push origin ci-deploy
 
-                    PR_URL=$(gh pr create --title "[Deploy Bot] Package Update" --body "Automated package deployment via GitHub Actions" --head ci-deploy --base master)
+                    PR_URL=$(gh pr create --title "[Deploy Bot] Version Packages" --body "Automated package versioning via GitHub Actions" --head ci-deploy --base master)
                     echo "Created PR: $PR_URL"
 
                     PR_NUMBER=$(gh pr list --head ci-deploy --json number --jq '.[0].number')
                     echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
                   else
-                    echo "No package version changes detected. Skipping deployment."
+                    echo "No package version changes detected."
                   fi
               env:
                   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -177,4 +188,4 @@ jobs:
                   gh pr merge ${{ env.PR_NUMBER }} --squash --admin
                   git push origin --delete ci-deploy
               env:
-                  GH_TOKEN: ${{ secrets.BLOCKS_WP_PUBLISH_PAT }}
+                  GH_TOKEN: ${{ secrets.DEPLOY_BOT_TOKEN }}
