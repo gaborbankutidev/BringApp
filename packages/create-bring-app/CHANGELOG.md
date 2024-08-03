@@ -1,5 +1,12 @@
 # @bring/create-app
 
+## 0.1.6
+
+### Patch Changes
+
+-   2dcb6a6: Initialize husky after git init
+    Fix project folder name validation
+
 ## 0.1.5
 
 ### Patch Changes
