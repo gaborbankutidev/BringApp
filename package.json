@@ -29,6 +29,7 @@
 		"install:composer:app": "cd apps/bring-app && composer install && composer dump-autoload",
 		"install:composer:pkg": "cd packages/blocks-wp && composer install && composer dump-autoload",
 		"lint": "turbo lint",
+		"prepare": "husky",
 		"release": "turbo run build lint test && changeset version && changeset publish",
 		"services:down": "docker compose -f ./apps/bring-app/docker-compose.yml down",
 		"services:up": "docker compose -f ./apps/bring-app/docker-compose.yml up -d && docker compose -f ./apps/bring-app/docker-compose.yml logs -f",
@@ -43,6 +44,8 @@
 		"@prettier/plugin-php": "^0.22.2",
 		"@types/fs-extra": "^11",
 		"fs-extra": "^11.2.0",
+		"husky": "^9.1.4",
+		"lint-staged": "^15.2.8",
 		"prettier": "^3.2.5",
 		"prettier-plugin-organize-imports": "^4.0.0",
 		"prettier-plugin-pkg": "^0.18.1",
@@ -52,5 +55,11 @@
 		"turbo": "^2.0.6",
 		"typedoc": "^0.26.3",
 		"typescript": "^5.5.3"
+	},
+	"lint-staged": {
+		"*.{js,ts,tsx,php}": [
+			"yarn format",
+			"yarn lint"
+		]
 	}
 }
