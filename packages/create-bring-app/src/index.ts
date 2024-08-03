@@ -14,16 +14,18 @@ async function main() {
 		required: true,
 	});
 
-	const directory = await input({
-		message: "What should be the name of the project directory?",
-		default: kebabCase(projectName),
-		required: true,
-	});
+	const projectSlug = kebabCase(
+		await input({
+			message: "What should be the name of the project folder?",
+			default: kebabCase(projectName),
+			required: true,
+		}),
+	);
 
 	let overwrite = false;
 
-	if (fsExtra.existsSync(directory)) {
-		console.log(`The directory ${directory} already exists`);
+	if (fsExtra.existsSync(projectSlug)) {
+		console.log(`The folder ${projectSlug} already exists`);
 
 		overwrite = await confirm({
 			message: "Do you want to overwrite it?",
@@ -42,13 +44,13 @@ async function main() {
 	});
 
 	const initGit = await confirm({
-		message: "Do you want to initialize a git repository?",
+		message: "Do you want to initialize git for the project?",
 		default: true,
 	});
 
 	runCLI({
 		projectName,
-		directory,
+		projectSlug,
 		overwrite,
 		runInstall,
 		initGit,

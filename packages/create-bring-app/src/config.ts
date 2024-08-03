@@ -1,6 +1,6 @@
 export type CLIConfig = {
 	projectName: string;
-	directory: string;
+	projectSlug: string;
 	runInstall: boolean;
 	initGit: boolean;
 	overwrite: boolean;
