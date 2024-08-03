@@ -1,5 +1,7 @@
 import {execSync} from "child_process";
 
+execSync("yarn prepare");
+
 if (process.env.SKIP_COMPOSER_INSTALL) {
 	process.exit(0);
 }

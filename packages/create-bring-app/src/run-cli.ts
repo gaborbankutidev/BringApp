@@ -53,29 +53,29 @@ function removeComposerLockFile(path: string) {
 
 export async function runCLI(config: CLIConfig) {
 	console.log();
-	console.log(`Creating a new Bring App in ${config.directory}`);
+	console.log(`Creating ${config.projectName} in ${config.projectSlug}`);
 	console.log();
 
 	if (config.overwrite) {
-		fsExtra.removeSync(config.directory);
-		console.log(`Removing the directory ${config.directory}...`);
+		fsExtra.removeSync(config.projectSlug);
+		console.log(`Removing folder ${config.projectSlug}...`);
 	}
 
-	copyTemplateFiles(config.directory);
+	copyTemplateFiles(config.projectSlug);
 
-	updatePackageVersions(config.directory);
+	updatePackageVersions(config.projectSlug);
 
-	updateProjectName(config.directory, config.projectName);
+	updateProjectName(config.projectSlug, config.projectName);
 
-	removeComposerRepositories(config.directory);
+	removeComposerRepositories(config.projectSlug);
 
-	removeComposerLockFile(config.directory);
+	removeComposerLockFile(config.projectSlug);
 
 	if (config.runInstall) {
 		console.log(`Running yarn install...`);
 
 		execSync(`yarn install`, {
-			cwd: config.directory,
+			cwd: config.projectSlug,
 			stdio: "inherit",
 		});
 	}
@@ -84,15 +84,19 @@ export async function runCLI(config: CLIConfig) {
 		console.log("Initializing git repository...");
 
 		execSync("git init", {
-			cwd: config.directory,
+			cwd: config.projectSlug,
 			stdio: "ignore",
 		});
 		execSync("git add .", {
-			cwd: config.directory,
+			cwd: config.projectSlug,
 			stdio: "ignore",
 		});
 		execSync('git commit -m "Initial commit"', {
-			cwd: config.directory,
+			cwd: config.projectSlug,
+			stdio: "ignore",
+		});
+		execSync("yarn prepare", {
+			cwd: config.projectSlug,
 			stdio: "ignore",
 		});
 	}
@@ -104,14 +108,14 @@ export async function runCLI(config: CLIConfig) {
 	console.log("Follow these steps to get started:");
 
 	console.log();
-	console.log(`1. Navigate to your project directory:`);
-	console.log(`   cd ${config.directory}`);
+	console.log(`1. Navigate to your project folder:`);
+	console.log(`   cd ${config.projectSlug}`);
 
 	console.log();
 	console.log(`2. Set up the .env files in the following folders:`);
-	console.log(`   - Root directory`);
-	console.log(`   - next directory`);
-	console.log(`   - bring-theme directory`);
+	console.log(`   - Root folder`);
+	console.log(`   - next folder`);
+	console.log(`   - bring-theme folder`);
 
 	console.log();
 	console.log("3. Run the following commands to set up and start your project:");
