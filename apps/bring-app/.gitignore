@@ -48,3 +48,6 @@ wordpress
 
 # nginx logs
 **/nginx/logs
+
+# temp
+.temp

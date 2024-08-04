@@ -60,3 +60,6 @@ apps/bring-app/wordpress
 
 # npm
 .npmrc
+
+# temp
+.temp
