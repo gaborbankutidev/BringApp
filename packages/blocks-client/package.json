@@ -68,16 +68,16 @@
 		"types": "tsc"
 	},
 	"peerDependencies": {
-		"react": "18.2.0",
-		"react-dom": "18.2.0"
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1"
 	},
 	"dependencies": {
-		"react-intersection-observer": "^9.8.1"
+		"react-intersection-observer": "^9.13.0"
 	},
 	"devDependencies": {
 		"@bring/typescript-config": "*",
-		"@types/react": "^18.2.73",
-		"@types/react-dom": "^18.2.23",
-		"typescript": "^5.4.3"
+		"@types/react": "^18.3.3",
+		"@types/react-dom": "^18.3.0",
+		"typescript": "^5.5.4"
 	}
 }
