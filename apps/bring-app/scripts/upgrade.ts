@@ -5,6 +5,68 @@ import path from "path";
 const CWD = process.cwd();
 const GIT_URL = "https://github.com/gaborbankutidev/BringApp.git";
 
+function updateTheme() {
+	const themeFolder = path.join(CWD, "themes/bring-theme");
+	const tempSrcFolder = path.join(CWD, ".temp");
+	const tempThemeFolder = path.join(
+		tempSrcFolder,
+		"apps/bring-app/themes/bring-theme",
+	);
+
+	if (fsExtra.existsSync(tempSrcFolder)) {
+		fsExtra.removeSync(tempSrcFolder);
+	}
+
+	fsExtra.mkdirSync(tempSrcFolder, {
+		recursive: true,
+	});
+
+	execSync("git init", {
+		stdio: "ignore",
+		cwd: tempSrcFolder,
+	});
+
+	execSync(`git remote add origin ${GIT_URL}`, {
+		stdio: "inherit",
+		cwd: tempSrcFolder,
+	});
+
+	execSync(`git remote set-url origin ${GIT_URL}`, {
+		stdio: "inherit",
+		cwd: tempSrcFolder,
+	});
+
+	execSync("git sparse-checkout init --cone", {
+		stdio: "inherit",
+		cwd: tempSrcFolder,
+	});
+
+	execSync("git sparse-checkout set apps/bring-app/themes/bring-theme", {
+		stdio: "inherit",
+		cwd: tempSrcFolder,
+	});
+
+	execSync("git pull origin master", {
+		stdio: "inherit",
+		cwd: tempSrcFolder,
+	});
+
+	const envFilePath = path.join(themeFolder, ".env");
+	const tempEnvFilePath = path.join(tempThemeFolder, ".env");
+
+	if (fsExtra.existsSync(envFilePath)) {
+		fsExtra.moveSync(envFilePath, tempEnvFilePath, {overwrite: true});
+	}
+
+	fsExtra.removeSync(themeFolder);
+
+	fsExtra.copySync(tempThemeFolder, themeFolder, {
+		overwrite: true,
+	});
+
+	fsExtra.removeSync(tempSrcFolder);
+}
+
 function updateComposer() {
 	execSync("composer update bring/blocks-wp", {
 		stdio: "inherit",
@@ -20,62 +82,8 @@ function updateNext() {
 	});
 }
 
-function addNewTheme() {
-	const themeFolder = path.join(CWD, "/themes/bring-theme");
-	const tempFolder = path.join(CWD, "/.temp");
-
-	fsExtra.mkdirSync(tempFolder, {
-		recursive: true,
-	});
-
-	execSync("git init", {
-		stdio: "ignore",
-		cwd: tempFolder,
-	});
-
-	execSync(`git remote add origin ${GIT_URL}`, {
-		stdio: "inherit",
-		cwd: tempFolder,
-	});
-
-	execSync(`git remote set-url origin ${GIT_URL}`, {
-		stdio: "inherit",
-		cwd: tempFolder,
-	});
-
-	execSync("git sparse-checkout init --cone", {
-		stdio: "inherit",
-		cwd: tempFolder,
-	});
-
-	execSync("git sparse-checkout set apps/bring-app/themes/bring-theme", {
-		stdio: "inherit",
-		cwd: tempFolder,
-	});
-
-	execSync("git pull origin master", {
-		stdio: "inherit",
-		cwd: tempFolder,
-	});
-
-	fsExtra.copySync(
-		path.join(tempFolder, "/apps/bring-app/themes/bring-theme"),
-		themeFolder,
-		{
-			overwrite: true,
-		},
-	);
-	fsExtra.removeSync(tempFolder);
-}
-
-function removeOldTheme() {
-	const themeFolder = path.join(CWD, "/themes/bring-theme");
-	fsExtra.removeSync(themeFolder);
-}
-
 function main() {
-	removeOldTheme();
-	addNewTheme();
+	updateTheme();
 	updateComposer();
 	updateNext();
 }
