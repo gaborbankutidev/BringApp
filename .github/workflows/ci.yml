@@ -88,6 +88,9 @@ jobs:
             - name: Publish NPM Packages
               run: yarn release
 
+            - name: Update tags
+              run: git push --follow-tags
+
             - name: Validate Composer JSON
               run: composer validate --strict --working-dir=packages/blocks-wp
 
@@ -140,6 +143,9 @@ jobs:
                   git tag "$VERSION"
                   git push origin --tags
 
+                  # Save new version
+                  echo "BLOCKS_WP_VERSION=$VERSION" >> $GITHUB_ENV
+
             - name: Notify Packagist
               if: env.VERSION_CHANGED == 'true'
               run: |
@@ -148,6 +154,12 @@ jobs:
               env:
                   PACKAGIST_TOKEN: ${{ secrets.PACKAGIST_TOKEN }}
                   BLOCKS_WP_REPOSITORY_URL: ${{ vars.BLOCKS_WP_REPOSITORY_URL }}
+
+            - name: Update version tag
+              if: env.VERSION_CHANGED == 'true' && env.BLOCKS_WP_VERSION != ''
+              run: |
+                  git tag @bring/blocks-wp@$BLOCKS_WP_VERSION
+                  git push --follow-tags
 
             - name: Clean up temporary folders
               run: rm -rf blocks-wp-target
