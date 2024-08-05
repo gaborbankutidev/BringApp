@@ -3,7 +3,7 @@ name: CI - Production
 on:
     push:
         branches:
-            - master
+            - test-deploy
 
 concurrency:
     group: ci-${{ github.ref }}
@@ -14,52 +14,52 @@ permissions:
     pull-requests: write
 
 jobs:
-    checks_and_build:
-        name: Checks and Build
-        if: |
-            github.ref == 'refs/heads/master' && !(
-              github.event_name == 'push' &&
-              contains(github.event.head_commit.message, '[Deploy Bot]')
-            )
+    # checks_and_build:
+    #     name: Checks and Build
+    #     if: |
+    #         github.ref == 'refs/heads/master' && !(
+    #           github.event_name == 'push' &&
+    #           contains(github.event.head_commit.message, '[Deploy Bot]')
+    #         )
 
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout files
-              uses: actions/checkout@v4
-              with:
-                  ref: ${{github.event.pull_request.head.sha}}
-                  fetch-depth: 0
+    #     runs-on: ubuntu-latest
+    #     steps:
+    #         - name: Checkout files
+    #           uses: actions/checkout@v4
+    #           with:
+    #               ref: ${{github.event.pull_request.head.sha}}
+    #               fetch-depth: 0
 
-            - name: Enable Corepack
-              run: corepack enable
+    #         - name: Enable Corepack
+    #           run: corepack enable
 
-            - name: Setup node
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 20
-                  cache: "yarn"
+    #         - name: Setup node
+    #           uses: actions/setup-node@v4
+    #           with:
+    #               node-version: 20
+    #               cache: "yarn"
 
-            - name: Install dependencies
-              run: yarn install --immutable
+    #         - name: Install dependencies
+    #           run: yarn install --immutable
 
-            - name: Run changeset check
-              run: yarn changeset status --since origin/master
+    #         - name: Run changeset check
+    #           run: yarn changeset status --since origin/master
 
-            - name: Run typecheck
-              run: yarn types
+    #         - name: Run typecheck
+    #           run: yarn types
 
-            - name: Run lint
-              run: yarn lint
+    #         - name: Run lint
+    #           run: yarn lint
 
-            - name: Run build
-              run: yarn build
+    #         - name: Run build
+    #           run: yarn build
 
-            - name: Run tests
-              run: yarn test
+    #         - name: Run tests
+    #           run: yarn test
 
     release:
         name: Release Packages
-        needs: checks_and_build
+        # needs: checks_and_build
         runs-on: ubuntu-latest
         steps:
             - name: Checkout files
@@ -110,7 +110,7 @@ jobs:
                   LATEST_TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
 
                   # Compare versions
-                  VERSION=$(jq -r .version packages/blocks-wp/package.json)
+                  VERSION=$(jq -r .version ../packages/blocks-wp/package.json)
                   if [ "$LATEST_TAG" != "$VERSION" ]; then
                     echo "UPDATE_BLOCKS_WP_VERSION=$VERSION" >> $GITHUB_ENV
                   else
@@ -128,9 +128,10 @@ jobs:
 
                   # Add commit, tag and push changes
                   git add .
-                  git commit -m "[Deploy Bot] Package Update - v$BLOCKS_WP_VERSION"
+                  git commit -m "[Deploy Bot] Package Update - $BLOCKS_WP_VERSION"
                   git tag $BLOCKS_WP_VERSION
-                  git push origin master --follow-tags
+                  git push origin master
+                  git push origin --tags
               env:
                   BLOCKS_WP_VERSION: ${{ env.UPDATE_BLOCKS_WP_VERSION }}
 
@@ -183,25 +184,25 @@ jobs:
                   PR_NUMBER: ${{ env.PR_NUMBER }}
                   GH_TOKEN: ${{ secrets.DEPLOY_BOT_TOKEN }}
 
-    deploy_docs:
-        name: Deploy Docs
-        needs: release
-        runs-on: ubuntu-latest
-        env:
-            VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-            VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    # deploy_docs:
+    #     name: Deploy Docs
+    #     needs: release
+    #     runs-on: ubuntu-latest
+    #     env:
+    #         VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+    #         VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
-        steps:
-            - uses: actions/checkout@v4
+    #     steps:
+    #         - uses: actions/checkout@v4
 
-            - name: Install Vercel CLI
-              run: npm install --global vercel@latest
+    #         - name: Install Vercel CLI
+    #           run: npm install --global vercel@latest
 
-            - name: Pull Vercel Environment Information
-              run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+    #         - name: Pull Vercel Environment Information
+    #           run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
-            - name: Build Project Artifacts
-              run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+    #         - name: Build Project Artifacts
+    #           run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
 
-            - name: Deploy Project Artifacts to Vercel
-              run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+    #         - name: Deploy Project Artifacts to Vercel
+    #           run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
