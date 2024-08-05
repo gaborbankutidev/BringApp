@@ -1,5 +1,11 @@
 # @bring/create-app
 
+## 0.1.8
+
+### Patch Changes
+
+-   80519fa: Update package folder name
+
 ## 0.1.7
 
 ### Patch Changes
