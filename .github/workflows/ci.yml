@@ -26,9 +26,6 @@ jobs:
         steps:
             - name: Checkout files
               uses: actions/checkout@v4
-              with:
-                  ref: ${{github.event.pull_request.head.sha}}
-                  fetch-depth: 0
 
             - name: Enable Corepack
               run: corepack enable
@@ -61,6 +58,9 @@ jobs:
         name: Release Packages
         needs: checks_and_build
         runs-on: ubuntu-latest
+        env:
+            BLOCKS_WP_REPOSITORY_URL: ${{ vars.BLOCKS_WP_REPOSITORY_URL }}
+
         steps:
             - name: Checkout files
               uses: actions/checkout@v4
@@ -81,12 +81,15 @@ jobs:
               run: |
                   git config --global user.name 'github-actions[bot]'
                   git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-                  git config --global url."https://x-access-token:$PAT_TOKEN@github.com/".insteadOf "https://github.com/"
+                  git config --global url."https://x-access-token:$ACCESS_TOKEN@github.com/".insteadOf "https://github.com/"
               env:
-                  PAT_TOKEN: ${{ secrets.DEPLOY_BOT_TOKEN }}
+                  ACCESS_TOKEN: ${{ secrets.DEPLOY_BOT_TOKEN }}
 
             - name: Capture current commit hash
               run: echo "CURRENT_COMMIT=$(git rev-parse HEAD)" >> $GITHUB_ENV
+
+            - name: Validate Composer JSON
+              run: composer validate --strict --working-dir=packages/blocks-wp
 
             - name: Create .npmrc
               run: |
@@ -98,9 +101,6 @@ jobs:
 
             - name: Publish NPM Packages
               run: yarn release
-
-            - name: Validate Composer JSON
-              run: composer validate --strict --working-dir=packages/blocks-wp
 
             - name: Check BlocksWp repository version
               run: |
@@ -117,8 +117,6 @@ jobs:
                   else
                     echo "UPDATE_BLOCKS_WP_VERSION=" >> $GITHUB_ENV
                   fi
-              env:
-                  BLOCKS_WP_REPOSITORY_URL: ${{ vars.BLOCKS_WP_REPOSITORY_URL }}
 
             - name: Update BlocksWp repository
               if: env.UPDATE_BLOCKS_WP_VERSION
@@ -143,7 +141,6 @@ jobs:
                   -d'{"repository":{"url":"$BLOCKS_WP_REPOSITORY_URL"}}'
               env:
                   PACKAGIST_TOKEN: ${{ secrets.PACKAGIST_TOKEN }}
-                  BLOCKS_WP_REPOSITORY_URL: ${{ vars.BLOCKS_WP_REPOSITORY_URL }}
 
             - name: Clean up temporary folders
               run: rm -rf blocks-wp-target
