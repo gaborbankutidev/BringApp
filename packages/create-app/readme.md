@@ -1,4 +1,4 @@
 # For testing local you should
 
--   cd packages/create-bring-app/
+-   cd packages/create-app/
 -   npm link

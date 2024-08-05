@@ -4,7 +4,7 @@ A template for a project with BringBlocks & Next.js app router.
 
 ## Setup
 
-- Initialize a new project with `npx create-bring-app`
+- Initialize a new project with `npx @bring/create-app@latest`
 - Start the backend services in docker with `yarn services:up`
 - Build the theme and start the development with `yarn watch`
 - Log into wordpress admin, go to Settings->Permalinks and set it to `/%postname%/`

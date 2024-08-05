@@ -12,7 +12,7 @@ docs/typedoc
 !.yarn/sdks
 !.yarn/versions
 
-packages/create-bring-app/template
+packages/create-app/template
 
 # dependencies
 vendor

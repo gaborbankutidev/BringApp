@@ -1674,9 +1674,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bring/create-app@workspace:packages/create-bring-app":
+"@bring/create-app@workspace:packages/create-app":
   version: 0.0.0-use.local
-  resolution: "@bring/create-app@workspace:packages/create-bring-app"
+  resolution: "@bring/create-app@workspace:packages/create-app"
   dependencies:
     "@inquirer/prompts": "npm:^5.3.6"
     "@types/fs-extra": "npm:^11.0.4"
@@ -1687,7 +1687,7 @@ __metadata:
     tsx: "npm:^4.16.5"
     typescript: "npm:^5.5.4"
   bin:
-    create-bring-app: ./dist/index.js
+    create-app: ./dist/index.js
   languageName: unknown
   linkType: soft
 
