@@ -166,7 +166,7 @@ jobs:
                     git checkout -b ci-deploy
                     git add .
                     git commit -m "[Deploy Bot] Version Packages"
-                    git push origin ci-deploy
+                    git push origin ci-deploy --follow-tags
 
                     PR_URL=$(gh pr create --title "[Deploy Bot] Version Packages" --body "Automated package versioning via GitHub Actions" --head ci-deploy --base master)
                     echo "Created PR: $PR_URL"
