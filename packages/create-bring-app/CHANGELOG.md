@@ -1,5 +1,11 @@
 # @bring/create-app
 
+## 0.1.7
+
+### Patch Changes
+
+-   739e826: Update dependencies
+
 ## 0.1.6
 
 ### Patch Changes
