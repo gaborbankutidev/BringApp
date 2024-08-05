@@ -74,6 +74,14 @@ jobs:
                   node-version: 20
                   cache: "yarn"
 
+            - name: Set up Git
+              run: |
+                  git config --global user.name 'github-actions[bot]'
+                  git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+                  git config --global url."https://x-access-token:$PAT_TOKEN@github.com/".insteadOf "https://github.com/"
+              env:
+                  PAT_TOKEN: ${{ secrets.DEPLOY_BOT_TOKEN }}
+
             - name: Install dependencies
               run: yarn install --immutable
 
@@ -86,62 +94,48 @@ jobs:
                   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
             - name: Publish NPM Packages
-              run: yarn release
+              run: |
+                  yarn release
+                  git push --follow-tags
 
             - name: Validate Composer JSON
               run: composer validate --strict --working-dir=packages/blocks-wp
 
-            - name: Set up Git
+            - name: Check BlocksWp repository version
               run: |
-                  git config --global user.name 'github-actions[bot]'
-                  git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-                  git config --global url."https://x-access-token:$PAT_TOKEN@github.com/".insteadOf "https://github.com/"
-              env:
-                  PAT_TOKEN: ${{ secrets.DEPLOY_BOT_TOKEN }}
-
-            - name: Clone blocks-wp repository, get latest tag
-              run: |
+                  # Get latest version
                   git clone $BLOCKS_WP_REPOSITORY_URL blocks-wp-target
                   cd blocks-wp-target
                   git fetch --tags
                   LATEST_TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
-                  echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
+
+                  # Compare versions
+                  VERSION=$(jq -r .version packages/blocks-wp/package.json)
+                  if [ "$LATEST_TAG" != "$VERSION" ]; then
+                    echo "UPDATE_BLOCKS_WP_VERSION=$VERSION" >> $GITHUB_ENV
+                  else
+                    echo "UPDATE_BLOCKS_WP_VERSION=" >> $GITHUB_ENV
+                  fi
               env:
                   BLOCKS_WP_REPOSITORY_URL: ${{ vars.BLOCKS_WP_REPOSITORY_URL }}
 
-            - name: Check if blocks-wp package needs to be updated
-              run: |
-                  VERSION=$(jq -r .version packages/blocks-wp/package.json)
-                  echo "VERSION=$VERSION" >> $GITHUB_ENV
-                  if [ "$LATEST_TAG" != "$VERSION" ]; then
-                    echo "VERSION_CHANGED=true" >> $GITHUB_ENV
-                  else
-                    echo "VERSION_CHANGED=false" >> $GITHUB_ENV
-                  fi
-              env:
-                  LATEST_TAG: ${{ env.LATEST_TAG }}
-
-            - name: Commit blocks-wp package update, add new version tag
-              if: env.VERSION_CHANGED == 'true'
+            - name: Update BlocksWp repository
+              if: env.UPDATE_BLOCKS_WP_VERSION
               run: |
                   # Sync the blocks-wp package to the target repository
                   rsync -av --delete --exclude='.git' packages/blocks-wp/ blocks-wp-target/
                   cd blocks-wp-target
 
-                  # Get new version
-                  VERSION=$(jq -r .version ../packages/blocks-wp/package.json)
-
-                  # Add, commit, and push changes
+                  # Add commit, tag and push changes
                   git add .
-                  git commit -m "[Deploy Bot] Update package - $VERSION"
-                  git push origin master
-
-                  # Tag new version
-                  git tag "$VERSION"
-                  git push origin --tags
+                  git commit -m "[Deploy Bot] Package Update - v$BLOCKS_WP_VERSION"
+                  git tag $BLOCKS_WP_VERSION
+                  git push origin master --follow-tags
+              env:
+                  BLOCKS_WP_VERSION: ${{ env.UPDATE_BLOCKS_WP_VERSION }}
 
             - name: Notify Packagist
-              if: env.VERSION_CHANGED == 'true'
+              if: env.UPDATE_BLOCKS_WP_VERSION
               run: |
                   curl -XPOST -H'content-type:application/json' 'https://packagist.org/api/update-package?username=Bring&apiToken=$PACKAGIST_TOKEN' \
                   -d'{"repository":{"url":"$BLOCKS_WP_REPOSITORY_URL"}}'
@@ -152,39 +146,41 @@ jobs:
             - name: Clean up temporary folders
               run: rm -rf blocks-wp-target
 
-            - name: Format code
+            - name: Check for code updates
               run: |
                   if ! git diff-index --quiet HEAD; then
-                    yarn format
+                    echo "CODE_UPDATED=true" >> $GITHUB_ENV
                   else
-                    echo "No code changes detected."
+                    echo "CODE_UPDATED=false" >> $GITHUB_ENV
                   fi
+
+            - name: Format code
+              if: env.CODE_UPDATED == 'true'
+              run: yarn format
 
             - name: Create pull request for Package Versioning
+              if: env.CODE_UPDATED == 'true'
               run: |
-                  if ! git diff-index --quiet HEAD; then
-                    git checkout -b ci-deploy
-                    git add .
-                    git commit -m "[Deploy Bot] Version Packages"
-                    git push origin ci-deploy --follow-tags
+                  git checkout -b ci-deploy
+                  git add .
+                  git commit -m "[Deploy Bot] Version Packages"
+                  git push origin ci-deploy --follow-tags
 
-                    PR_URL=$(gh pr create --title "[Deploy Bot] Version Packages" --body "Automated package versioning via GitHub Actions" --head ci-deploy --base master)
-                    echo "Created PR: $PR_URL"
+                  PR_URL=$(gh pr create --title "[Deploy Bot] Version Packages" --body "Automated package versioning via GitHub Actions" --head ci-deploy --base master)
+                  echo "Created PR: $PR_URL"
 
-                    PR_NUMBER=$(gh pr list --head ci-deploy --json number --jq '.[0].number')
-                    echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
-                  else
-                    echo "No package version changes detected."
-                  fi
+                  PR_NUMBER=$(gh pr list --head ci-deploy --json number --jq '.[0].number')
+                  echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
               env:
                   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             - name: Merge pull request
-              if: env.PR_NUMBER != ''
+              if: env.PR_NUMBER
               run: |
-                  gh pr merge ${{ env.PR_NUMBER }} --squash --admin
+                  gh pr merge $PR_NUMBER --squash --admin
                   git push origin --delete ci-deploy
               env:
+                  PR_NUMBER: ${{ env.PR_NUMBER }}
                   GH_TOKEN: ${{ secrets.DEPLOY_BOT_TOKEN }}
 
     deploy_docs:
