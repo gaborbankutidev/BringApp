@@ -43,8 +43,8 @@ function copyTemplateFiles(path: string) {
 		cwd: tempFolder,
 	});
 
-	fsExtra.copySync(`./${path}/.temp/apps/bring-app`, `./${path}`);
-	fsExtra.removeSync(`./${path}/.temp`);
+	fsExtra.copySync(`${tempFolder}/apps/bring-app`, `./${path}`);
+	fsExtra.removeSync(tempFolder);
 }
 
 function removeComposerLockFile(path: string) {
