@@ -12,7 +12,11 @@ concurrency:
 jobs:
     checks_and_build:
         name: Checks and Build
-        if: "!(contains(github.event.pull_request.title, '[Deploy Bot]'))"
+        if: |
+            !(
+              contains(github.event.pull_request.title, '[Deploy Bot]') &&
+              github.event.pull_request.user.login == 'github-actions[bot]'
+            )
         runs-on: ubuntu-latest
         steps:
             - name: Checkout files
