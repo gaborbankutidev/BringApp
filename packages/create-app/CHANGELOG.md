@@ -1,5 +1,11 @@
 # @bring/create-app
 
+## 0.1.10
+
+### Patch Changes
+
+-   882f4f4: Change base branch to main
+
 ## 0.1.9
 
 ### Patch Changes
