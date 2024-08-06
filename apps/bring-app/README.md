@@ -22,7 +22,7 @@ Bring App project starter template.
 
 ## Upgrade packages and theme
 
-- `yarn upgrade:bring`: Upgrade Bring App packages and the Bring Theme core theme
+- `yarn upgrade`: Upgrade all packages and the Bring Theme core theme
 
 ## Important scripts
 
