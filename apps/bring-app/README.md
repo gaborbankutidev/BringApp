@@ -27,7 +27,7 @@ Bring App project starter template.
 ## Important scripts
 
 - `yarn` or `yarn install` : Install all dependencies in all workspaces
-- `composer install` then `composer dump-autoload`: Install all php dependencies (automatically runs after yarn)
+- `composer install` then `composer dump-autoload` : Install all php dependencies (automatically runs after yarn)
 - `yarn dev` : Start development server
 - `yarn build` : Create production build
 - `yarn storybook` : Start storybook development server
