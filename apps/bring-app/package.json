@@ -25,6 +25,7 @@
 		"services:up": "docker compose up -d",
 		"storybook": "cd ./next && yarn watch:storybook",
 		"upgrade": "tsx scripts/upgrade.ts",
+		"upgrade:bring": "tsx scripts/upgrade-bring.ts",
 		"watch:blocks": "cd ./next && yarn watch:blocks",
 		"watch:next": "cd ./next && yarn watch:next",
 		"watch:tailwind": "cd ./next && yarn watch:tailwind"

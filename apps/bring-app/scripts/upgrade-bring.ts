@@ -68,7 +68,7 @@ function updateTheme() {
 }
 
 function updateComposer() {
-	execSync("composer update bring/blocks-wp", {
+	execSync("composer update", {
 		stdio: "inherit",
 	});
 }
@@ -76,7 +76,7 @@ function updateComposer() {
 function updateNext() {
 	const nextPath = path.join(CWD, "next");
 
-	execSync(`yarn up "*"`, {
+	execSync(`yarn up @bring/blocks-client @bring/blocks-editor`, {
 		stdio: "inherit",
 		cwd: nextPath,
 	});
