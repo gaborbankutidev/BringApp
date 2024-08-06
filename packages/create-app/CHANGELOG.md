@@ -1,5 +1,11 @@
 # @bring/create-app
 
+## 0.1.11
+
+### Patch Changes
+
+-   a395ed1: Update readme
+
 ## 0.1.10
 
 ### Patch Changes
