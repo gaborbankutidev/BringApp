@@ -1,7 +1,5 @@
 {
 	"$schema": "https://json.schemastore.org/tsconfig",
-	"display": "BringBlocks editor",
-
 	"extends": "@bring/typescript-config/base.json",
 	"compilerOptions": {
 		"lib": ["es2021"],
@@ -10,5 +8,5 @@
 		"module": "es2020",
 		"moduleResolution": "Bundler"
 	},
-	"include": ["src", "bin/test.mjs"]
+	"include": ["src"]
 }
