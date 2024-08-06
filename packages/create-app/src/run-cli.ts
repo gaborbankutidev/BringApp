@@ -19,27 +19,27 @@ function copyTemplateFiles(path: string) {
 	});
 
 	execSync(`git remote add origin ${GIT_URL}`, {
-		stdio: "inherit",
+		stdio: "ignore",
 		cwd: tempFolder,
 	});
 
 	execSync(`git remote set-url origin ${GIT_URL}`, {
-		stdio: "inherit",
+		stdio: "ignore",
 		cwd: tempFolder,
 	});
 
 	execSync("git sparse-checkout init --cone", {
-		stdio: "inherit",
+		stdio: "ignore",
 		cwd: tempFolder,
 	});
 
 	execSync("git sparse-checkout set apps/bring-app", {
-		stdio: "inherit",
+		stdio: "ignore",
 		cwd: tempFolder,
 	});
 
 	execSync("git pull origin main", {
-		stdio: "inherit",
+		stdio: ["ignore", "ignore", "inherit"],
 		cwd: tempFolder,
 	});
 
@@ -54,10 +54,10 @@ function removeComposerLockFile(path: string) {
 export async function runCLI(config: CLIConfig) {
 	console.log();
 	console.log(`Creating ${config.projectName} in ${config.projectSlug}`);
-	console.log();
 
 	if (config.overwrite) {
 		fsExtra.removeSync(config.projectSlug);
+		console.log();
 		console.log(`Removing folder ${config.projectSlug}...`);
 	}
 
@@ -72,15 +72,17 @@ export async function runCLI(config: CLIConfig) {
 	removeComposerLockFile(config.projectSlug);
 
 	if (config.runInstall) {
+		console.log();
 		console.log(`Running yarn install...`);
 
 		execSync(`yarn install`, {
 			cwd: config.projectSlug,
-			stdio: "inherit",
+			stdio: ["ignore", "ignore", "inherit"],
 		});
 	}
 
 	if (config.initGit) {
+		console.log();
 		console.log("Initializing git repository...");
 
 		execSync("git init", {

@@ -27,27 +27,27 @@ function updateTheme() {
 	});
 
 	execSync(`git remote add origin ${GIT_URL}`, {
-		stdio: "inherit",
+		stdio: "ignore",
 		cwd: tempSrcFolder,
 	});
 
 	execSync(`git remote set-url origin ${GIT_URL}`, {
-		stdio: "inherit",
+		stdio: "ignore",
 		cwd: tempSrcFolder,
 	});
 
 	execSync("git sparse-checkout init --cone", {
-		stdio: "inherit",
+		stdio: "ignore",
 		cwd: tempSrcFolder,
 	});
 
 	execSync("git sparse-checkout set apps/bring-app/themes/bring-theme", {
-		stdio: "inherit",
+		stdio: "ignore",
 		cwd: tempSrcFolder,
 	});
 
 	execSync("git pull origin main", {
-		stdio: "inherit",
+		stdio: ["ignore", "ignore", "inherit"],
 		cwd: tempSrcFolder,
 	});
 
