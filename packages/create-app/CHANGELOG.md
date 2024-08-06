@@ -1,5 +1,11 @@
 # @bring/create-app
 
+## 0.1.9
+
+### Patch Changes
+
+-   90ae9d4: Clean up tsconfig.json
+
 ## 0.1.8
 
 ### Patch Changes
