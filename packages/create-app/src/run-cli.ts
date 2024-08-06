@@ -38,7 +38,7 @@ function copyTemplateFiles(path: string) {
 		cwd: tempFolder,
 	});
 
-	execSync("git pull origin master", {
+	execSync("git pull origin main", {
 		stdio: "inherit",
 		cwd: tempFolder,
 	});

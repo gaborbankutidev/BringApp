@@ -3,7 +3,7 @@ name: CI - Production
 on:
     push:
         branches:
-            - master
+            - main
 
 concurrency:
     group: ci-${{ github.ref }}
@@ -17,7 +17,7 @@ jobs:
     checks_and_build:
         name: Checks and Build
         if: |
-            github.ref == 'refs/heads/master' && !(
+            github.ref == 'refs/heads/main' && !(
               github.event_name == 'push' &&
               contains(github.event.head_commit.message, '[Deploy Bot]')
             )
@@ -40,7 +40,7 @@ jobs:
               run: yarn install --immutable
 
             - name: Run changeset check
-              run: yarn changeset status --since origin/master
+              run: yarn changeset status --since origin/main
 
             - name: Run typecheck
               run: yarn types
@@ -129,7 +129,7 @@ jobs:
                   git add .
                   git commit -m "[Deploy Bot] Package Update - $BLOCKS_WP_VERSION"
                   git tag $BLOCKS_WP_VERSION
-                  git push origin master
+                  git push origin main
                   git push origin --tags
               env:
                   BLOCKS_WP_VERSION: ${{ env.UPDATE_BLOCKS_WP_VERSION }}
@@ -165,7 +165,7 @@ jobs:
                   git commit -m "[Deploy Bot] Version Packages"
                   git push origin ci-deploy
 
-                  PR_URL=$(gh pr create --title "[Deploy Bot] Version Packages" --body "Automated package versioning via GitHub Actions" --head ci-deploy --base master)
+                  PR_URL=$(gh pr create --title "[Deploy Bot] Version Packages" --body "Automated package versioning via GitHub Actions" --head ci-deploy --base main)
                   echo "Created PR: $PR_URL"
 
                   PR_NUMBER=$(gh pr list --head ci-deploy --json number --jq '.[0].number')
@@ -178,9 +178,9 @@ jobs:
               run: |
                   gh pr merge $PR_NUMBER --squash --admin
 
-                  # Get the new commit hash on master
-                  git checkout master
-                  git pull origin master
+                  # Get the new commit hash on main
+                  git checkout main
+                  git pull origin main
                   NEW_COMMIT_HASH=$(git rev-parse HEAD)
 
                   # Move tags from the current local commit to the new merge commit
