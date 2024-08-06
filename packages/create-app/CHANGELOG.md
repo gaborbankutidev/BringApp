@@ -1,5 +1,11 @@
 # @bring/create-app
 
+## 0.1.13
+
+### Patch Changes
+
+-   e850978: Ignore irrelevant stdio
+
 ## 0.1.12
 
 ### Patch Changes
