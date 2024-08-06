@@ -1,4 +1,7 @@
-# For testing local you should
+# @bring/create-app
+
+## Local Testing
 
 -   cd packages/create-app/
--   npm link
+-   run `npm link`
+-   run `npx @bring/create-app`
