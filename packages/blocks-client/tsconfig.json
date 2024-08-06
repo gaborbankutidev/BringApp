@@ -1,7 +1,5 @@
 {
 	"$schema": "https://json.schemastore.org/tsconfig",
-	"display": "BringBlocks client",
-
 	"extends": "@bring/typescript-config/react-library.json",
 	"compilerOptions": {
 		"outDir": "dist"

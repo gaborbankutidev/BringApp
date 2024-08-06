@@ -36,13 +36,6 @@ class Plugins {
 		 */
 		$plugins = [
 			[
-				"name" => "ACF QuickEdit Fields",
-				"slug" => "acf-quickedit-fields",
-				"required" => true,
-				"force_activation" => true,
-				"force_deactivation" => true,
-			],
-			[
 				"name" => "Advanced Custom Fields PRO",
 				"slug" => "advanced-custom-fields-pro",
 				"source" =>
@@ -51,59 +44,17 @@ class Plugins {
 				"force_activation" => true,
 				"force_deactivation" => true,
 			],
-			[
-				"name" => "Disable Comments",
-				"slug" => "disable-comments",
-				"required" => true,
-				"force_activation" => true,
-				"force_deactivation" => true,
-			],
-			[
-				"name" => "Disable Media Pages",
-				"slug" => "disable-media-pages",
-				"required" => true,
-				"force_activation" => true,
-				"force_deactivation" => true,
-			],
-			[
-				"name" => "FileBird Lite",
-				"slug" => "filebird",
-				"required" => true,
-				"force_deactivation" => true,
-			],
-			[
-				"name" => "Query Monitor",
-				"slug" => "query-monitor",
-				"required" => true,
-				"force_deactivation" => true,
-			],
-			[
-				"name" => "Rank Math SEO",
-				"slug" => "seo-by-rank-math",
-				"required" => true,
-				"force_deactivation" => true,
-			],
-			[
-				"name" => "WP API SwaggerUI",
-				"slug" => "wp-api-swaggerui",
-				"required" => true,
-				"force_deactivation" => true,
-			],
-			[
-				"name" => "WP Mail SMTP",
-				"slug" => "wp-mail-smtp",
-				"required" => true,
-				"force_activation" => true,
-				"force_deactivation" => true,
-			],
-			// [
-			// 	"name" => "All-in-One WP Migration",
-			// 	"slug" => "all-in-one-wp-migration",
-			// 	"source" =>
-			// 		"https://downloads.wordpress.org/plugin/all-in-one-wp-migration.7.84.zip",
-			// 	"force_deactivation" => true,
-			// ],
 		];
+
+		/*
+		 * Add plugins defined in the project child theme
+		 */
+		if (
+			function_exists("BringThemeProject\Plugins\bring_theme_project_plugins")
+		) {
+			$child_plugins = \BringThemeProject\Plugins\bring_theme_project_plugins();
+			$plugins = array_merge($plugins, $child_plugins);
+		}
 
 		/*
 		 * Array of configuration settings. Amend each line as needed.

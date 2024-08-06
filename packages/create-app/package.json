@@ -1,0 +1,29 @@
+{
+	"name": "@bring/create-app",
+	"version": "0.1.10",
+	"type": "module",
+	"description": "CLI package for initializing a new Bring App project",
+	"author": "Bring Team Ltd.",
+	"license": "GPL-2.0-or-later",
+	"bin": "./dist/index.js",
+	"keywords": [],
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch",
+		"lint": "echo TODO: add eslint",
+		"test": "echo TODO: add tests",
+		"types": "tsc"
+	},
+	"dependencies": {
+		"@inquirer/prompts": "^5.3.6",
+		"fs-extra": "^11.2.0",
+		"lodash.kebabcase": "^4.1.1"
+	},
+	"devDependencies": {
+		"@types/fs-extra": "^11.0.4",
+		"@types/lodash.kebabcase": "^4.1.9",
+		"concurrently": "^8.2.2",
+		"tsx": "^4.16.5",
+		"typescript": "^5.5.4"
+	}
+}

@@ -12,7 +12,7 @@ docs/typedoc
 !.yarn/sdks
 !.yarn/versions
 
-packages/create-bring-app/template
+packages/create-app/template
 
 # dependencies
 vendor
@@ -57,3 +57,9 @@ apps/bring-app/wordpress
 
 # nginx logs
 **/nginx/logs
+
+# npm
+.npmrc
+
+# temp
+.temp

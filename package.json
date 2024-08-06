@@ -1,10 +1,10 @@
 {
-	"name": "bringblocks-project",
+	"name": "bringapp",
 	"version": "0.0.0",
 	"description": "GPL-2.0-or-later",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/gaborbankutidev/BringBlocks.git"
+		"url": "git+https://github.com/gaborbankutidev/BringApp.git"
 	},
 	"private": true,
 	"workspaces": [
@@ -17,11 +17,11 @@
 		"all": "turbo types test lint build",
 		"build": "turbo build",
 		"build:app": "turbo build --filter=@bring/bring-app",
-		"build:pkg": "turbo build --filter=@bring/blocks-client --filter=@bring/blocks-editor --filter=@bring/blocks-cli",
+		"build:pkg": "turbo build --filter=@bring/blocks-client --filter=@bring/blocks-editor --filter=@bring/create-app",
 		"dev": "turbo dev",
 		"dev:app": "turbo dev --filter=@bring/bring-app",
 		"dev:docs": "typedoc --watch --preserveWatchOutput",
-		"dev:pkg": "turbo dev --filter=@bring/blocks-client --filter=@bring/blocks-editor --filter=@bring/blocks-cli",
+		"dev:pkg": "turbo dev --filter=@bring/blocks-client --filter=@bring/blocks-editor --filter=@bring/create-app",
 		"docs": "typedoc",
 		"format": "yarn format:prettier --write",
 		"format:check": "yarn format:prettier --check",
@@ -29,20 +29,37 @@
 		"install:composer:app": "cd apps/bring-app && composer install && composer dump-autoload",
 		"install:composer:pkg": "cd packages/blocks-wp && composer install && composer dump-autoload",
 		"lint": "turbo lint",
+		"prepare": "husky",
+		"release": "turbo run build lint test && changeset version && changeset publish",
 		"services:down": "docker compose -f ./apps/bring-app/docker-compose.yml down",
 		"services:up": "docker compose -f ./apps/bring-app/docker-compose.yml up -d && docker compose -f ./apps/bring-app/docker-compose.yml logs -f",
 		"test": "turbo test",
-		"types": "turbo types"
+		"types": "turbo types",
+		"watch:wp": "tsx scripts/watcher.ts"
+	},
+	"dependencies": {
+		"@changesets/cli": "^2.27.7"
 	},
 	"devDependencies": {
 		"@prettier/plugin-php": "^0.22.2",
-		"prettier": "^3.2.5",
+		"@types/fs-extra": "^11.0.4",
+		"fs-extra": "^11.2.0",
+		"husky": "^9.1.4",
+		"lint-staged": "^15.2.8",
+		"prettier": "^3.3.3",
 		"prettier-plugin-organize-imports": "^4.0.0",
 		"prettier-plugin-pkg": "^0.18.1",
-		"prettier-plugin-tailwindcss": "0.5.13",
-		"tsup": "^8.1.0",
-		"turbo": "^2.0.6",
-		"typedoc": "^0.26.3",
-		"typescript": "^5.5.3"
+		"prettier-plugin-tailwindcss": "0.5.14",
+		"tsup": "^8.2.4",
+		"tsx": "^4.16.5",
+		"turbo": "^2.0.11",
+		"typedoc": "^0.26.5",
+		"typescript": "^5.5.4"
+	},
+	"lint-staged": {
+		"*.{js,ts,tsx,php}": [
+			"yarn format",
+			"yarn lint --"
+		]
 	}
 }
