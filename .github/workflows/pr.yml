@@ -37,6 +37,9 @@ jobs:
             - name: Install dependencies
               run: yarn install --immutable
 
+            - name: Setup app env
+              run: echo "SKIP_ENV_VALIDATION=true" >> ./apps/bring-app/next/.env
+
             - name: Run changeset check
               run: yarn changeset status --since origin/main
 
