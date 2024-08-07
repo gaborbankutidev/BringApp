@@ -1,5 +1,11 @@
 # @bring/create-app
 
+## 0.1.15
+
+### Patch Changes
+
+-   c269c87: Update CLI wording
+
 ## 0.1.14
 
 ### Patch Changes
