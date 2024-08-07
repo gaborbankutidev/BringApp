@@ -19,22 +19,22 @@ function copyTemplateFiles(path: string) {
 	});
 
 	execSync(`git remote add origin ${GIT_URL}`, {
-		stdio: "inherit",
+		stdio: "ignore",
 		cwd: tempFolder,
 	});
 
 	execSync(`git remote set-url origin ${GIT_URL}`, {
-		stdio: "inherit",
+		stdio: "ignore",
 		cwd: tempFolder,
 	});
 
 	execSync("git sparse-checkout init --cone", {
-		stdio: "inherit",
+		stdio: "ignore",
 		cwd: tempFolder,
 	});
 
 	execSync("git sparse-checkout set apps/bring-app", {
-		stdio: "inherit",
+		stdio: "ignore",
 		cwd: tempFolder,
 	});
 
@@ -54,10 +54,10 @@ function removeComposerLockFile(path: string) {
 export async function runCLI(config: CLIConfig) {
 	console.log();
 	console.log(`Creating ${config.projectName} in ${config.projectSlug}`);
-	console.log();
 
 	if (config.overwrite) {
 		fsExtra.removeSync(config.projectSlug);
+		console.log();
 		console.log(`Removing folder ${config.projectSlug}...`);
 	}
 
@@ -72,6 +72,7 @@ export async function runCLI(config: CLIConfig) {
 	removeComposerLockFile(config.projectSlug);
 
 	if (config.runInstall) {
+		console.log();
 		console.log(`Running yarn install...`);
 
 		execSync(`yarn install`, {
@@ -81,6 +82,7 @@ export async function runCLI(config: CLIConfig) {
 	}
 
 	if (config.initGit) {
+		console.log();
 		console.log("Initializing git repository...");
 
 		execSync("git init", {
@@ -113,9 +115,9 @@ export async function runCLI(config: CLIConfig) {
 
 	console.log();
 	console.log(`2. Set up the .env files in the following folders:`);
-	console.log(`   - Root folder`);
-	console.log(`   - next folder`);
-	console.log(`   - bring-theme folder`);
+	console.log(`   - root`);
+	console.log(`   - next`);
+	console.log(`   - bring-theme`);
 
 	console.log();
 	console.log("3. Run the following commands to set up and start your project:");

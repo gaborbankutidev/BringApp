@@ -18,11 +18,14 @@ export function updateProjectName(directory: string, projectName: string) {
 }
 
 function updateProjectThemeName(directory: string, projectName: string) {
+	const initialProjectTheme = "Project Theme";
+	const initialProjectThemeSlug = "project-theme";
+
 	const projectTheme = projectName;
-	const projectThemeKebab = kebabCase(projectName);
+	const projectThemeSlug = kebabCase(projectName);
 
 	// Update theme name in style.css
-	const themeCssPath = path.join(directory, "themes/project-theme/style.css");
+	const themeCssPath = path.join(directory, `themes/${initialProjectThemeSlug}/style.css`);
 	const themeCss = fsExtra.readFileSync(themeCssPath, {
 		encoding: "utf-8",
 	});
@@ -30,14 +33,14 @@ function updateProjectThemeName(directory: string, projectName: string) {
 	fsExtra.writeFileSync(
 		themeCssPath,
 		themeCss
-			.replaceAll("Project Theme", projectTheme)
-			.replaceAll("project-theme", projectThemeKebab),
+			.replaceAll(initialProjectTheme, projectTheme)
+			.replaceAll(initialProjectThemeSlug, projectThemeSlug),
 	);
 
 	// Rename theme directory
 	fsExtra.renameSync(
-		path.join(directory, "themes/project-theme"),
-		path.join(directory, `themes/${projectThemeKebab}`),
+		path.join(directory, `themes/${initialProjectThemeSlug}`),
+		path.join(directory, `themes/${projectThemeSlug}`),
 	);
 
 	// Update theme name in next/package.json
@@ -48,7 +51,7 @@ function updateProjectThemeName(directory: string, projectName: string) {
 
 	fsExtra.writeFileSync(
 		nextPackageJsonPath,
-		nextPackageJson.replaceAll("project-theme", projectThemeKebab),
+		nextPackageJson.replaceAll(initialProjectThemeSlug, projectThemeSlug),
 	);
 
 	// Update theme name in docker-compose.yml
@@ -59,7 +62,7 @@ function updateProjectThemeName(directory: string, projectName: string) {
 
 	fsExtra.writeFileSync(
 		dockerComposePath,
-		dockerCompose.replaceAll("project-theme", projectThemeKebab),
+		dockerCompose.replaceAll(initialProjectThemeSlug, projectThemeSlug),
 	);
 
 	// Update theme name in deploy.sh
@@ -68,5 +71,8 @@ function updateProjectThemeName(directory: string, projectName: string) {
 		encoding: "utf-8",
 	});
 
-	fsExtra.writeFileSync(deployShPath, deploySh.replaceAll("project-theme", projectThemeKebab));
+	fsExtra.writeFileSync(
+		deployShPath,
+		deploySh.replaceAll(initialProjectThemeSlug, projectThemeSlug),
+	);
 }
