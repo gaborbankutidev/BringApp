@@ -5,9 +5,10 @@ Bring App project starter template.
 ## Setup
 
 - Initialize a new project with `npx @bring/create-app@latest`
+- Create the necessary .env files in the root, next and bring-theme folders
 - Start the backend services in docker with `yarn services:up`
 - Build the theme and start the development with `yarn dev`
-- Log in to WordPress admin, go to Settings -> Permalinks, and set it to `/%postname%/`.
+- Log in to WordPress admin, go to Settings -> Permalinks, and set it to `/%postname%/`
 - Activate your Project Theme and complete the required plugin installation steps
 - Happy building!
 
