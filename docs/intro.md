@@ -1,8 +1,19 @@
-# Bring Blocks
+# Bring App
 
-Bring Blocks comprises three packages tailored for building websites and web applications with NextJS and WordPress. Its main goal is to act as a conduit between WordPress and NextJS, facilitating extensive site customization. It offers the capability to edit pages using WordPress' block editor, all while ensuring optimal site performance. Moreover, it empowers developers to craft their UI components in React and employ NextJS for rendering. It aids developers in generating new blocks for the WordPress block editor, resulting in a highly customizable end product.
+## Introduction
 
-## Setup
+The Bring App is a comprehensive full-stack solution designed for modern web development. It seamlessly integrates the robust capabilities of Next.js for site rendering with WordPress as a headless backend for dynamic content management and UI building. This powerful combination aims to streamline content management and facilitate extensive site customization within the WordPress ecosystem, while providing the flexibility to create custom layouts, pages, and UI block components using React and Tailwind CSS.
+
+Key Features:
+
+-   Seamless Content Management: Effortlessly manage and edit layouts, pages, and posts using the WordPress block editor.
+-   Custom UI Components: Develop unique UI components in React and Tailwind CSS, and seamlessly integrate them as blocks within the WordPress block editor.
+-   Optimal Performance: Ensure your site operates smoothly and efficiently with Next.js’s powerful rendering capabilities.
+-   Flexible and Customizable: Leverage the strengths of both WordPress and Next.js to create a highly customizable and feature-rich end product.
+
+The Bring App empowers developers to harness the best of both WordPress and Next.js, offering endless possibilities for creating dynamic, high-performance websites with ease.
+
+## Project structure
 
 The template contains the following structure:
 

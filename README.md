@@ -42,8 +42,12 @@ Monorepo containing the Bring App project template and its supporting packages.
 
 ## Starting a new project
 
-For initializing a new Bring App project, check out the app [Readme](apps/bring-app/README.md)
+To initialize a new Bring App project, please refer to the app [Readme](apps/bring-app/README.md).
 
 ## Documentation
 
-For the API documentation of the Bring packages, visit our [Docs page](https://bring-app-docs.vercel.app/)
+For API documentation of the Bring packages, visit our [Docs page](https://bring-app-docs.vercel.app/).
+
+## Philosophy
+
+For a comprehensive overview and deeper insights into the project's purpose and structure, please refer to the [Introduction docs](docs/intro.md).
