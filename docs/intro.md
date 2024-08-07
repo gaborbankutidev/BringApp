@@ -8,29 +8,25 @@ The template contains the following structure:
 
 ```txt
 .
-├──
-├── bring-theme
-│   └──  src
-│       └── ...
-├── editor
-│   └── src
-│       ├── blocks
-│       ├── components
-│       └── ...
 ├── next
 │   └─── src
 │       ├── app
 │       ├── bring
 │       ├── components
 │       └── ...
-├── composer.json
+│
+├── themes
+│   ├── bring-theme
+│   └── project-theme
+│
 ├── package.json
+├── composer.json
 └── ...
 ```
 
 The bring/blocks-wp package is used in the bring-theme subfolder.  
-The @bring/blocks-client package is used in the next and editor sub-folders.  
-The @bring/blocks-editor package is used in the editor subfolder.
+The @bring/blocks-client package is used in the next sub-folder.  
+The @bring/blocks-editor package is used in the editor config and components subfolder for creating blocks.
 
 ## Packages
 

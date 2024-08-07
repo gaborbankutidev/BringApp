@@ -5,7 +5,7 @@ Monorepo containing the Bring App project template and its supporting packages.
 ## Setup
 
 -   Install all dependencies in all workspaces with `yarn`
--   Create the necessary .env files in the bring-app, /next and /bring-theme folders
+-   Create the necessary .env files in the _bring-app_, _/next_ and _/themes/bring-theme_ folders
 -   Start the backend services in docker with `yarn services:up`
 -   Build the theme and start the development with `yarn dev`
 -   Log in to WordPress admin, go to Settings -> Permalinks, and set it to `/%postname%/`
@@ -40,6 +40,10 @@ Monorepo containing the Bring App project template and its supporting packages.
 -   `yarn workspace <workspace-name> add <package-name>` : Add new package to one workspace
 -   `yarn workspace <workspace-name> remove <package-name>` : Remove package from one workspace
 
+## Starting a new project
+
+For initializing a new Bring App project, check out the app [Readme](apps/bring-app/README.md)
+
 ## Documentation
 
-For the API documentation of the Bring packages, visit https://bring-app-docs.vercel.app/
+For the API documentation of the Bring packages, visit our [Docs page](https://bring-app-docs.vercel.app/)

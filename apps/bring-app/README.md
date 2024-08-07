@@ -5,7 +5,7 @@ Bring App project starter template.
 ## Setup
 
 - Initialize a new project with `npx @bring/create-app@latest`
-- Create the necessary .env files in the root, next and bring-theme folders
+- Create the necessary .env files in the _root_, _next_ and _themes/bring-theme_ folders
 - Start the backend services in docker with `yarn services:up`
 - Build the theme and start the development with `yarn dev`
 - Log in to WordPress admin, go to Settings -> Permalinks, and set it to `/%postname%/`
@@ -37,4 +37,4 @@ Bring App project starter template.
 
 ## Documentation
 
-For the API documentation of the Bring packages, visit https://bring-app-docs.vercel.app/
+For the API documentation of the Bring packages, visit our [Docs page](https://bring-app-docs.vercel.app/)
