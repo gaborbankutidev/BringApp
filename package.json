@@ -41,9 +41,14 @@
 		"@changesets/cli": "^2.27.7"
 	},
 	"devDependencies": {
+		"@eslint/js": "^9.8.0",
 		"@prettier/plugin-php": "^0.22.2",
+		"@types/eslint": "^9",
 		"@types/fs-extra": "^11.0.4",
+		"eslint": "9.x",
+		"eslint-plugin-react": "^7.35.0",
 		"fs-extra": "^11.2.0",
+		"globals": "^15.9.0",
 		"husky": "^9.1.4",
 		"lint-staged": "^15.2.8",
 		"prettier": "^3.3.3",
@@ -54,12 +59,15 @@
 		"tsx": "^4.16.5",
 		"turbo": "^2.0.11",
 		"typedoc": "^0.26.5",
-		"typescript": "^5.5.4"
+		"typescript": "^5.5.4",
+		"typescript-eslint": "^8.0.1"
 	},
 	"lint-staged": {
-		"*.{js,ts,tsx,php}": [
-			"yarn format",
-			"yarn lint --"
+		"*.{ts,tsx,js,jsx,json,css,md,yml,yaml,php}": [
+			"prettier --write"
+		],
+		"*.{js,mjs,cjs,ts,jsx,tsx}": [
+			"eslint --fix"
 		]
 	}
 }
