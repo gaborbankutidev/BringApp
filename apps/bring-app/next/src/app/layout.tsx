@@ -30,7 +30,8 @@ export default function RootLayout({children}: {children: ReactNode}) {
 				<div className="bringContent">
 					<Providers>
 						<main className="lg:pt-[100px]">{children}</main>
-						<footer className="flex h-[400px] items-center justify-center bg-blue-900 text-white">
+						<footer className="flex h-[400px] items-center justify-center bg-black text-white relative">
+							<div className="absolute bottom-full w-screen h-[200px] bg-gradient-to-t from-black to-transparent" />
 							footer placeholder
 						</footer>
 					</Providers>

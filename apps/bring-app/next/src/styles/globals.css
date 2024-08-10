@@ -5,7 +5,7 @@
 @layer base {
 	html {
 		font-family: "Montserrat", "Helvetica", "open-sans";
-		@apply text-16 text-blue-900;
+		@apply bg-black text-16 text-white;
 	}
 
 	/* Headings */
@@ -121,7 +121,7 @@
 	}
 
 	.md a {
-		@apply text-orange hover:text-orange-200;
+		@apply text-blue-500 underline;
 	}
 
 	.md figure {
@@ -156,4 +156,9 @@
 
 .block-editor .visible-in-editor {
 	opacity: 1 !important;
+}
+
+.radial-gradient {
+	background: rgb(255, 255, 255);
+	background: radial-gradient(rgb(220 38 38) 56%, rgba(0, 0, 0, 1) 70%);
 }

@@ -1,5 +1,5 @@
 import {type Config} from "tailwindcss";
-import {colorsByName, colorsLight} from "./src/styles";
+import {colorsLight} from "./src/styles";
 
 const breakpoints = ["", "md:", "lg:"];
 const sides = ["t", "b", "l", "r"];
@@ -117,7 +117,7 @@ const generateSafelist = () => {
 export default {
 	content: ["./src/**/*.{js,jsx,ts,tsx}"],
 	theme: {
-		colors: colorsByName,
+		// colors: colorsByName,
 		fontSize: generateFontSizeList(),
 	},
 	safelist: generateSafelist(),
