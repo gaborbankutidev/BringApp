@@ -11,7 +11,7 @@
 		"packages/*",
 		"apps/*"
 	],
-	"packageManager": "yarn@4.3.1",
+	"packageManager": "yarn@4.4.0",
 	"scripts": {
 		"after:install": "node ./scripts/after-install.mjs",
 		"all": "turbo types test lint build",
