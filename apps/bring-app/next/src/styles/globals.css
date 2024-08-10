@@ -158,7 +158,22 @@
 	opacity: 1 !important;
 }
 
-.radial-gradient {
+.red-radial-gradient-sm {
 	background: rgb(255, 255, 255);
-	background: radial-gradient(rgb(220 38 38) 56%, rgba(0, 0, 0, 1) 70%);
+	background: radial-gradient(rgb(220 38 38) 20%, transparent 60%);
+}
+
+.teal-radial-gradient-sm {
+	background: rgb(255, 255, 255);
+	background: radial-gradient(rgb(13 148 136) 20%, transparent 60%);
+}
+
+.purple-radial-gradient-sm {
+	background: rgb(255, 255, 255);
+	background: radial-gradient(rgb(147 51 234) 20%, transparent 60%);
+}
+
+.purple-radial-gradient-lg {
+	background: rgb(255, 255, 255);
+	background: radial-gradient(rgb(147 51 234) 56%, transparent 68%);
 }

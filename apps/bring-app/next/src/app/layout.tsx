@@ -29,11 +29,7 @@ export default function RootLayout({children}: {children: ReactNode}) {
 			<body className={montserrat.className}>
 				<div className="bringContent">
 					<Providers>
-						<main className="lg:pt-[100px]">{children}</main>
-						<footer className="flex h-[400px] items-center justify-center bg-black text-white relative">
-							<div className="absolute bottom-full w-screen h-[200px] bg-gradient-to-t from-black to-transparent" />
-							footer placeholder
-						</footer>
+						<main>{children}</main>
 					</Providers>
 				</div>
 			</body>
