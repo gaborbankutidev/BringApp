@@ -14,7 +14,7 @@ export default function Post() {
 	return (
 		<div ref={ref}>
 			{entity && (
-				<div className="bg-gray-800 px-4 py-8 rounded-lg shadow-xl shadow-red-900 w-1/2">
+				<div className="bg-gray-800/60 border border-gray-500/60 px-4 py-8 rounded-lg w-1/2 hover:bg-gray-700/60 cursor-pointer">
 					<p className="text-14 text-red-500 mb-2">
 						Example post from WordPress
 					</p>
