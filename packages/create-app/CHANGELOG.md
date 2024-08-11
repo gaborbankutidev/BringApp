@@ -1,5 +1,11 @@
 # @bring/create-app
 
+## 0.1.17
+
+### Patch Changes
+
+-   a856e18: Updated Docker Compose file name to align with the latest naming conventions
+
 ## 0.1.16
 
 ### Patch Changes
