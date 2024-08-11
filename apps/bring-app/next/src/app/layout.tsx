@@ -29,7 +29,19 @@ export default function RootLayout({children}: {children: ReactNode}) {
 			<body className={montserrat.className}>
 				<div className="bringContent">
 					<Providers>
-						<main>{children}</main>
+						<main>
+							<div className="w-screen h-screen flex items-center relative overflow-hidden pt-10 md:pt-0">
+								<div className="bg-gradient-to-b from-black from-10% to-transparent w-screen h-10 absolute top-0 left-0" />
+								<div className="bg-gradient-to-t from-black from-10% to-transparent w-screen h-10 absolute bottom-0 left-0" />
+
+								<div className="h-full flex justify-center flex-col p-4 md:pl-10 md:w-1/2 text-gray-300">
+									{children}
+								</div>
+
+								<div className="purple-radial-gradient-lg absolute -z-10 h-[160vh] aspect-square md:right-[22%] -right-32" />
+								<div className="bg-gray-950 absolute -z-10 h-[160vh] rounded-full aspect-square md:right-1/3 right-4" />
+							</div>
+						</main>
 					</Providers>
 				</div>
 			</body>
