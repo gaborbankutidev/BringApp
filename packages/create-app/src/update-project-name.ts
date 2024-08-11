@@ -54,8 +54,8 @@ function updateProjectThemeName(directory: string, projectName: string) {
 		nextPackageJson.replaceAll(initialProjectThemeSlug, projectThemeSlug),
 	);
 
-	// Update theme name in docker-compose.yml
-	const dockerComposePath = path.join(directory, "docker-compose.yml");
+	// Update theme name in compose.yml
+	const dockerComposePath = path.join(directory, "compose.yml");
 	const dockerCompose = fsExtra.readFileSync(dockerComposePath, {
 		encoding: "utf-8",
 	});

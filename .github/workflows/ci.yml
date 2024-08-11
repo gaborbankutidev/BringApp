@@ -168,7 +168,7 @@ jobs:
               run: |
                   git checkout -b ci-deploy
                   git add .
-                  git commit -m "[Deploy Bot] Version Packages"
+                  git commit --no-verify -m "[Deploy Bot] Version Packages"
                   git push origin ci-deploy
 
                   PR_URL=$(gh pr create --title "[Deploy Bot] Version Packages" --body "Automated package versioning via GitHub Actions" --head ci-deploy --base main)
