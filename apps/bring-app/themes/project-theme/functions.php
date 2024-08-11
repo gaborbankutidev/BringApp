@@ -11,4 +11,5 @@ function project_theme_enqueue_styles() {
 }
 
 require_once get_stylesheet_directory() . "/plugins.php";
+
 ?>
