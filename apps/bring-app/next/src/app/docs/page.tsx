@@ -1,7 +1,45 @@
 export default function Docs() {
 	return (
-		<div>
-			<h1>Docs</h1>
-		</div>
+		<>
+			<p className="uppercase tracking-wide text-14 md:text-16 xl:text-20">
+				Hit the ground running with
+			</p>
+			<h1 className="tracking-tight font-bold text-[48px] xl:text-[72px] xl:leading-[72px] mb-8">
+				<span className="text-red-600">Bring</span>{" "}
+				<span className="text-white">App</span>{" "}
+				<span className="text-white font-normal">Docs</span>
+			</h1>
+
+			<div className="flex gap-4">
+				<a
+					href="#"
+					target="_blank"
+					rel="noopener noreferrer"
+					className="bg-gray-800/60 border border-gray-500/60 px-4 py-8 rounded-lg md:w-1/2 hover:bg-gray-700/60 cursor-pointer"
+				>
+					<p className="text-14 text-red-500 mb-2">
+						How to initialize your project
+					</p>
+					<h3 className="text-24s mb-4">Project setup</h3>
+
+					<p>
+						Follow the steps to create a new project using BringApp and start
+						building your app with ease.
+					</p>
+				</a>
+
+				<a
+					href="https://bring-app-docs.vercel.app/"
+					target="_blank"
+					rel="noopener noreferrer"
+					className="bg-gray-800/60 border border-gray-500/60 px-4 py-8 rounded-lg md:w-1/2 hover:bg-gray-700/60 cursor-pointer"
+				>
+					<p className="text-14 text-red-500 mb-2">Get to know your tools</p>
+					<h3 className="text-24s mb-4">API documentation</h3>
+
+					<p>Dive deeper in the usage of the packages maintained by Bring</p>
+				</a>
+			</div>
+		</>
 	);
 }

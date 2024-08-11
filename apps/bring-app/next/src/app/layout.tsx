@@ -3,6 +3,7 @@ import {getRankMathTitle} from "@/utils/rank-math";
 import {Montserrat} from "next/font/google";
 import {headers} from "next/headers";
 import {type ReactNode} from "react";
+import Breadcrumb from "./breadcrumb";
 import {Head} from "./head";
 import Providers from "./providers";
 
@@ -31,6 +32,8 @@ export default function RootLayout({children}: {children: ReactNode}) {
 					<Providers>
 						<main>
 							<div className="w-screen h-screen flex items-center relative overflow-hidden pt-10 md:pt-0">
+								<Breadcrumb />
+
 								<div className="bg-gradient-to-b from-black from-10% to-transparent w-screen h-10 absolute top-0 left-0" />
 								<div className="bg-gradient-to-t from-black from-10% to-transparent w-screen h-10 absolute bottom-0 left-0" />
 
