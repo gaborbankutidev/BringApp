@@ -26,27 +26,21 @@ export default function Home() {
 					</p>
 
 					<div className="flex xl:flex-row flex-col gap-4 md:mb-24 mb-8">
-						<button className="text-white text-center md:text-18 bg-gradient-to-r from-60% from-red-600 to-red-900 rounded-full py-2 px-8 transition-all duration-300">
+						<a className="text-white text-center md:text-18 bg-gradient-to-r from-60% from-red-600 to-red-900 bg-[length:200%_100%] hover:bg-right rounded-full py-2 px-8 transition-all duration-300 cursor-pointer">
 							Get Started
-						</button>
+						</a>
 
 						<a
 							target="_blank"
 							rel="noopener noreferrer"
 							href={`${process.env.NEXT_PUBLIC_WP_BASE_URL}/wp-admin/`}
-							className="text-red-600 text-center md:text-18 outline outline-red-600 -outline-offset-2 rounded-full py-2 px-8"
+							className="text-red-600 text-center md:text-18 outline outline-red-600 hover:text-white hover:outline-white -outline-offset-2 rounded-full py-2 px-8 transition-all duration-300"
 						>
 							Open WordPress admin
 						</a>
 					</div>
 
 					<Post />
-				</div>
-
-				<div className="blur-3xl absolute top-0 left-0 w-screen h-screen -z-20">
-					{/* <div className="red-radial-gradient-sm h-[80vh] aspect-square absolute -right-2/3 top-0" /> */}
-					<div className="purple-radial-gradient-sm h-[400px] aspect-square absolute right-0 top-0" />
-					<div className="teal-radial-gradient-sm h-[600px] aspect-square absolute -right-1/4 bottom-0" />
 				</div>
 
 				<div className="purple-radial-gradient-lg absolute -z-10 h-[160vh] aspect-square md:right-[22%] -right-32" />
