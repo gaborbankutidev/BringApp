@@ -2,7 +2,7 @@ import Link from "next/link";
 import Post from "./post";
 
 export default function Home() {
-	const wpHealthCheck = async () => {
+	/* const wpHealthCheck = async () => {
 		const res = await fetch(
 			`${process.env.NEXT_PUBLIC_WP_BASE_URL}/wp-json/bring/healthcheck`,
 		);
@@ -15,7 +15,7 @@ export default function Home() {
 		return true;
 	};
 
-	wpHealthCheck();
+	wpHealthCheck(); */
 
 	return (
 		<>
