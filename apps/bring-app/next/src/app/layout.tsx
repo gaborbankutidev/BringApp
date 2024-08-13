@@ -8,6 +8,8 @@ import Breadcrumb from "./breadcrumb";
 import {Head} from "./head";
 import Providers from "./providers";
 
+export const dynamic = "force-dynamic";
+
 const montserrat = Montserrat({
 	weight: ["300", "400", "500", "600", "700", "800", "900"],
 	style: ["normal", "italic"],

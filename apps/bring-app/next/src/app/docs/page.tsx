@@ -17,7 +17,7 @@ export default function Docs() {
 					rel="noopener noreferrer"
 					className="bg-gray-800/60 border border-gray-500/60 px-4 py-8 rounded-lg md:w-1/2 hover:bg-gray-700/60 cursor-pointer"
 				>
-					<p className="text-14 text-red-500 mb-2">
+					<p className="text-14 text-purple-600 mb-2">
 						How to initialize your project
 					</p>
 					<h3 className="text-24s mb-4">Project setup</h3>
@@ -34,7 +34,7 @@ export default function Docs() {
 					rel="noopener noreferrer"
 					className="bg-gray-800/60 border border-gray-500/60 px-4 py-8 rounded-lg md:w-1/2 hover:bg-gray-700/60 cursor-pointer"
 				>
-					<p className="text-14 text-red-500 mb-2">Get to know your tools</p>
+					<p className="text-14 text-purple-600 mb-2">Get to know your tools</p>
 					<h3 className="text-24s mb-4">API documentation</h3>
 
 					<p>Dive deeper in the usage of the packages maintained by Bring</p>

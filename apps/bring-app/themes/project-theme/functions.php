@@ -12,6 +12,7 @@ function project_theme_enqueue_styles() {
 
 require_once get_stylesheet_directory() . "/plugins.php";
 
+// This is only to test your WordPress installation, you can remove it after you make sure everything is working
 add_action("rest_api_init", function () {
 	register_rest_route("bring", "/healthcheck", [
 		"methods" => "GET",
@@ -25,5 +26,19 @@ add_action("rest_api_init", function () {
 		},
 	]);
 });
+
+add_filter(
+	"bring_dynamic_post_list",
+	function ($items, $entity_slug, $custom_data) {
+		$items = array_map(function ($item) {
+			$item["excerpt"] = get_the_excerpt($item["entityId"]);
+			return $item;
+		}, $items);
+
+		return $items;
+	},
+	10,
+	3,
+);
 
 ?>

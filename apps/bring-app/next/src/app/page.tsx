@@ -2,21 +2,6 @@ import Link from "next/link";
 import Post from "./post";
 
 export default async function Home() {
-	/* const wpHealthCheck = async () => {
-		const res = await fetch(
-			`${process.env.NEXT_PUBLIC_WP_BASE_URL}/wp-json/bring/healthcheck`,
-		);
-
-		if (res.status !== 200) {
-			console.error("WordPress health check failed");
-			return false;
-		}
-
-		return true;
-	};
-
-	wpHealthCheck(); */
-
 	return (
 		<>
 			{/* TODO explanation for main */}
@@ -56,8 +41,6 @@ export default async function Home() {
 					Open WordPress admin
 				</a>
 			</div>
-
-			{/* TODO naming and wp healthcheck + example post layout */}
 			<Post />
 		</>
 	);
