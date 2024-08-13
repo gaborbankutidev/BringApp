@@ -69,7 +69,7 @@ export default function Post() {
 					)}
 
 					{status === "error" && (
-						<Markdown className="text-red-500 text-center">
+						<Markdown className="text-purple-600 text-center">
 							**WordPress not found.** Make sure you configured your environment
 							variables correctly, started your WordPress site with `yarn
 							services:up` and activated your theme.
@@ -78,7 +78,7 @@ export default function Post() {
 
 					{status === "success" && entity && (
 						<>
-							<p className="text-14 text-red-500 mb-2">
+							<p className="text-14 text-purple-600 mb-2">
 								Example post from WordPress
 							</p>
 							<h3 className="text-24s mb-4">{entity.name}</h3>

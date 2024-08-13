@@ -35,7 +35,7 @@ export default function RootLayout({children}: {children: ReactNode}) {
 							<div className="w-screen h-screen flex items-center relative overflow-hidden pt-10 md:pt-0">
 								<Breadcrumb />
 								<a
-									className="cursor-pointer text-white hover:text-red-600 transition-all duration-300"
+									className="cursor-pointer text-white hover:text-purple-600 transition-all duration-300"
 									href="https://github.com/gaborbankutidev/BringApp"
 									target="_blank"
 									rel="noopener noreferrer"
@@ -45,9 +45,6 @@ export default function RootLayout({children}: {children: ReactNode}) {
 										size={32}
 									/>
 								</a>
-
-								<div className="bg-gradient-to-b from-black from-10% to-transparent w-screen h-10 absolute top-0 left-0" />
-								<div className="bg-gradient-to-t from-black from-10% to-transparent w-screen h-10 absolute bottom-0 left-0" />
 
 								<div className="h-full flex justify-center flex-col p-4 md:pl-10 md:w-1/2 text-gray-300">
 									{children}

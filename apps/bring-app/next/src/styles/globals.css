@@ -5,7 +5,7 @@
 @layer base {
 	html {
 		font-family: "Montserrat", "Helvetica", "open-sans";
-		@apply bg-black text-16 text-white;
+		@apply bg-gray-900 text-16 text-white;
 	}
 
 	/* Headings */
