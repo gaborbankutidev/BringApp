@@ -1,26 +1,11 @@
 import Markdown from "@/components/markdown";
 import {getDynamicEntityList} from "@bring/blocks-client/content";
+import Link from "next/link";
 import {twJoin} from "tailwind-merge";
+import {getWpStatus} from "./get-wp-status";
 import Slider from "./slider";
 
-const getWpStatus = async () => {
-	try {
-		const res = await fetch(
-			`${process.env.NEXT_PUBLIC_WP_BASE_URL}/wp-json/bring/healthcheck`,
-		);
-
-		if (res.status !== 200) {
-			return false;
-		}
-
-		return true;
-	} catch (e) {
-		console.error("WordPress health check failed", e);
-		return false;
-	}
-};
-
-export default async function Post() {
+export default async function Posts() {
 	const wpStatus = await getWpStatus();
 
 	const {entityList} = await getDynamicEntityList(
@@ -62,7 +47,8 @@ export default async function Post() {
 
 			<Slider numberOfSlides={entityList?.length ?? 0}>
 				{entityList?.map((entity) => (
-					<div
+					<Link
+						href={entity.url ?? "#"}
 						key={`post-${entity.entityId}`}
 						className={twJoin(
 							"bg-gray-800/60 min-h-[180px] min-w-[280px] border border-gray-500/60 px-4 py-8 rounded-lg md:w-1/2 cursor-pointer hover:bg-gray-700/60 transition-all duration-300",
@@ -73,7 +59,7 @@ export default async function Post() {
 						</p>
 						<h3 className="text-24s mb-4">{entity.name}</h3>
 						<p>{entity.excerpt}</p>
-					</div>
+					</Link>
 				))}
 			</Slider>
 		</div>

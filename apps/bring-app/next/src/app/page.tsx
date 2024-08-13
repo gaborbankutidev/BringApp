@@ -1,12 +1,12 @@
 import Link from "next/link";
-import Post from "./post";
+import {twJoin} from "tailwind-merge";
+import {getWpStatus} from "./get-wp-status";
+import Posts from "./posts";
 
 export default async function Home() {
+	const wpStatus = await getWpStatus();
 	return (
 		<>
-			{/* TODO explanation for main */}
-			{/* <Main /> */}
-
 			{/* TODO respo */}
 
 			<p className="uppercase tracking-wide text-14 md:text-16 xl:text-20">
@@ -36,12 +36,15 @@ export default async function Home() {
 					target="_blank"
 					rel="noopener noreferrer"
 					href={`${process.env.NEXT_PUBLIC_WP_BASE_URL}/wp-admin/`}
-					className="text-white text-center md:text-18 outline outline-purple-600 hover:text-white hover:outline-white -outline-offset-2 rounded-full py-2 px-8 transition-all duration-300"
+					className={twJoin(
+						"text-white text-center md:text-18 outline outline-purple-600 hover:text-white hover:outline-white -outline-offset-2 rounded-full py-2 px-8 transition-all duration-300",
+						!wpStatus && "pointer-events-none opacity-40",
+					)}
 				>
 					Open WordPress admin
 				</a>
 			</div>
-			<Post />
+			<Posts />
 		</>
 	);
 }

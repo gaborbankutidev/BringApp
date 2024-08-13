@@ -8,11 +8,25 @@ const PostLayout = async ({children, slug}: PostLayoutProps) => {
 	if (!entity) return null; // TODO: handle this as an Internal Server Error
 
 	return (
-		<div className="p-8">
-			<h1>{entity.props.name}</h1>
-			<p className="hl-1">Sample post layout, post content in is bellow</p>
-			<div className="border border-brick">{children}</div>
-		</div>
+		<>
+			<p className="uppercase tracking-wide text-14 md:text-16 xl:text-20 text-purple-600">
+				Example post from WordPress
+			</p>
+			<h1 className="tracking-tight font-bold text-[48px] xl:text-[72px] xl:leading-[72px] mb-8">
+				{entity.props.name}
+			</h1>
+
+			<p className="text-gray-200 mb-4">{entity.props.excerpt}</p>
+
+			<p className="text-gray-200 mb-4">
+				Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque a
+				blanditiis natus quibusdam corporis tempore velit numquam. Commodi,
+				consequatur mollitia illo, non totam cumque minima suscipit hic fuga
+				ratione maiores!
+			</p>
+
+			<div>{children}</div>
+		</>
 	);
 };
 
