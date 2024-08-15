@@ -39,18 +39,22 @@ export default function Slider({
 				{children}
 			</div>
 
-			<button onClick={previousSlide}>
-				<BiChevronLeft
-					size={32}
-					className="text-gray-200 hover:text-purple-600 transition-all duration-300"
-				/>
-			</button>
-			<button onClick={nextSlide}>
-				<BiChevronRight
-					size={32}
-					className="text-gray-200 hover:text-purple-600 transition-all duration-300"
-				/>
-			</button>
+			{numberOfSlides > 1 && (
+				<>
+					<button onClick={previousSlide}>
+						<BiChevronLeft
+							size={32}
+							className="text-gray-200 hover:text-purple-600 transition-all duration-300"
+						/>
+					</button>
+					<button onClick={nextSlide}>
+						<BiChevronRight
+							size={32}
+							className="text-gray-200 hover:text-purple-600 transition-all duration-300"
+						/>
+					</button>
+				</>
+			)}
 		</div>
 	);
 }

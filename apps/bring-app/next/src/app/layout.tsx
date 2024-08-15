@@ -48,7 +48,7 @@ export default function RootLayout({children}: {children: ReactNode}) {
 									/>
 								</a>
 
-								<div className="h-full flex justify-center flex-col p-4 md:pl-10 md:w-1/2 text-gray-300">
+								<div className="flex h-[80vh] flex-col p-4 md:pl-10 md:w-1/2 text-gray-300 overflow-y-scroll">
 									{children}
 								</div>
 
