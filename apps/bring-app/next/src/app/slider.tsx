@@ -28,7 +28,9 @@ export default function Slider({
 			{currentSlide !== 0 && (
 				<div className="bg-gradient-to-r from-gray-950 to-transparent absolute top-0 left-0 h-full w-4 z-10" />
 			)}
-			<div className="bg-gradient-to-l from-gray-950 to-transparent absolute top-0 right-0 h-full w-4 z-10" />
+			{numberOfSlides > 2 && (
+				<div className="bg-gradient-to-l from-gray-950 to-transparent absolute top-0 right-0 h-full w-4 z-10" />
+			)}
 
 			<div
 				className="flex gap-4 transition-all duration-300 mb-4"
@@ -39,7 +41,7 @@ export default function Slider({
 				{children}
 			</div>
 
-			{numberOfSlides > 1 && (
+			{numberOfSlides > 2 && (
 				<>
 					<button onClick={previousSlide}>
 						<BiChevronLeft

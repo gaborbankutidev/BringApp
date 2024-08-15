@@ -3,6 +3,9 @@ import {twJoin} from "tailwind-merge";
 import {getWpStatus} from "./get-wp-status";
 import Posts from "./posts";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 3;
+
 export default async function Home() {
 	const wpStatus = await getWpStatus();
 	return (
