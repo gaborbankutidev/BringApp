@@ -49,12 +49,12 @@ export default function RootLayout({children}: {children: ReactNode}) {
 									/>
 								</a>
 
-								<div className="flex h-[80vh] flex-col p-4 md:pl-10 md:w-1/2 text-gray-300 overflow-y-scroll scroll-container">
+								<div className="flex h-[80vh] flex-col p-4 md:pl-10 md:w-2/3 lg:w-1/2 text-gray-300 overflow-y-scroll scroll-container">
 									{children}
 								</div>
 
-								<div className="purple-radial-gradient-lg absolute -z-10 h-[160vh] aspect-square md:right-[22%] -right-32" />
-								<div className="bg-gray-950 absolute -z-10 h-[160vh] rounded-full aspect-square md:right-1/3 right-4" />
+								<div className="purple-radial-gradient-lg absolute hidden md:block -z-10 h-[160vh] aspect-square md:right-[22%] -right-32" />
+								<div className="bg-gray-950 absolute -z-10 h-[160vh] rounded-full aspect-square lg:right-1/3 -right-40" />
 							</div>
 						</main>
 					</Providers>
