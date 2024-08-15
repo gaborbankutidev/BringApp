@@ -163,3 +163,11 @@
 	background: rgb(255, 255, 255);
 	background: radial-gradient(rgb(147 51 234) 50%, transparent 60%);
 }
+
+.scroll-container {
+	-ms-overflow-style: none; /* Internet Explorer 10+ */
+	scrollbar-width: none; /* Firefox */
+}
+.scroll-container::-webkit-scrollbar {
+	display: none; /* Safari and Chrome */
+}
