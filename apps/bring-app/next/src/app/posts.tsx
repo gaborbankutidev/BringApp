@@ -16,36 +16,37 @@ export default async function Posts() {
 
 	return (
 		<div>
-			{wpStatus !== true && !entityList && (
-				<div
-					className={twJoin(
-						"bg-gray-800/60 min-h-[180px] flex justify-center items-center min-w-[280px] border border-gray-500/60 px-4 py-8 rounded-lg md:w-1/2 ",
-						!entityList && wpStatus === null && "animate-pulse",
-					)}
-				>
-					{wpStatus === null && (
-						<div className="flex w-full flex-col gap-4">
-							<div className="bg-gray-800 rounded-md w-full h-4" />
-							<div className="bg-gray-800 rounded-md w-1/2 h-4" />
-						</div>
-					)}
-
-					{wpStatus === false && (
-						<div>
-							<h3 className="text-24s mb-4 text-red-600">
-								WordPress connection failed
-							</h3>
-							<Markdown className="text-red-600">
-								Make sure you configured your environment variables correctly,
-								started your WordPress site with `yarn services:up` and
-								activated your theme.
-							</Markdown>
-						</div>
-					)}
-				</div>
-			)}
-
 			<Slider numberOfSlides={entityList?.length ?? 0}>
+				{wpStatus !== true && !entityList && (
+					<div
+						className={twJoin(
+							"bg-gray-800/60 min-h-[180px] flex justify-center items-center min-w-[280px] border border-gray-500/60 px-4 py-8 rounded-lg md:w-1/2 ",
+							!entityList && wpStatus === null && "animate-pulse",
+							wpStatus === false && "border-red-600",
+						)}
+					>
+						{wpStatus === null && (
+							<div className="flex w-full flex-col gap-4">
+								<div className="bg-gray-800 rounded-md w-full h-4" />
+								<div className="bg-gray-800 rounded-md w-1/2 h-4" />
+							</div>
+						)}
+
+						{wpStatus === false && (
+							<div>
+								<h3 className="text-24s mb-4 text-red-600">
+									WordPress connection failed
+								</h3>
+								<Markdown className="text-red-600">
+									Make sure you configured your environment variables correctly,
+									started your WordPress site with `yarn services:up` and
+									activated your theme.
+								</Markdown>
+							</div>
+						)}
+					</div>
+				)}
+
 				{entityList?.map((entity) => (
 					<Link
 						href={entity.url ?? "#"}
