@@ -4,14 +4,12 @@ import {getWpStatus} from "./get-wp-status";
 import Posts from "./posts";
 
 export const dynamic = "force-dynamic";
-export const revalidate = 3;
+export const revalidate = 0;
 
 export default async function Home() {
 	const wpStatus = await getWpStatus();
 	return (
 		<>
-			{/* TODO respo */}
-
 			<p className="uppercase tracking-wide text-14 md:text-16 xl:text-20">
 				Welcome to your new journey with
 			</p>
