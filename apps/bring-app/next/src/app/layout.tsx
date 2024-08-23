@@ -35,7 +35,7 @@ export default function RootLayout({children}: {children: ReactNode}) {
 				<div className="bringContent">
 					<Providers>
 						<main>
-							<div className="w-screen h-screen flex items-center relative overflow-hidden pt-10 md:pt-0">
+							<div className="w-screen h-screen flex items-center relative pt-10 md:pt-0">
 								<Breadcrumb />
 								<a
 									className="cursor-pointer text-white hover:text-purple-600 transition-all duration-300"
@@ -49,12 +49,12 @@ export default function RootLayout({children}: {children: ReactNode}) {
 									/>
 								</a>
 
-								<div className="flex h-[80vh] flex-col p-4 md:pl-10 md:w-2/3 lg:w-1/2 text-gray-300 overflow-y-scroll scroll-container">
+								<div className="p-4 md:pl-10 w-full md:w-2/3 lg:w-1/2 text-gray-300">
 									{children}
 								</div>
 
-								<div className="purple-radial-gradient-lg absolute hidden md:block -z-10 h-[160vh] aspect-square md:right-[22%] -right-32" />
-								<div className="bg-gray-950 absolute -z-10 h-[160vh] rounded-full aspect-square lg:right-1/3 -right-40" />
+								<div className="purple-radial-gradient-lg fixed -z-10 h-[2400px] aspect-square top-4 -left-[1200px] md:left-auto md:top-auto md:right-[15%] lg:right-1/3 md:translate-x-[240px] -translate-y-[240px] md:translate-y-[0px]" />
+								<div className="bg-gray-950 fixed -z-10 h-[2000px] rounded-full aspect-square top-4 -left-[1000px] md:left-auto md:top-auto md:right-[15%] lg:right-1/3" />
 							</div>
 						</main>
 					</Providers>
