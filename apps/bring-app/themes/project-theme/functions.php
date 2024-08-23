@@ -28,23 +28,6 @@ add_action("rest_api_init", function () {
 	]);
 });
 
-add_filter("bring_blocks_entity_props", function ($a) {
-	$entity_props = ["editUrl"];
-
-	return array_merge($a, $entity_props);
-});
-
-add_filter(
-	"bring_post_props",
-	function ($args, $entity_id) {
-		$args["editUrl"] = "#"; // TODO: Add the edit URL for the post
-
-		return $args;
-	},
-	10,
-	2,
-);
-
 add_filter(
 	"bring_dynamic_post_list",
 	function ($items, $entity_slug, $custom_data) {
