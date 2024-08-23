@@ -34,7 +34,7 @@ export default function RootLayout({children}: {children: ReactNode}) {
 				<div className="bringContent">
 					<Providers>
 						<main>
-							<div className="w-screen h-screen flex items-center relative pt-10 md:pt-0">
+							<div className="w-screen h-screen relative pt-10">
 								<Breadcrumb />
 								<a
 									className="cursor-pointer text-white hover:text-purple-600 transition-all duration-300"
@@ -52,8 +52,8 @@ export default function RootLayout({children}: {children: ReactNode}) {
 									{children}
 								</div>
 
-								<div className="purple-radial-gradient-lg fixed -z-10 h-[2400px] aspect-square top-4 -left-[1200px] md:left-auto md:top-auto md:right-[15%] lg:right-1/3 md:translate-x-[240px] -translate-y-[240px] md:translate-y-[0px]" />
-								<div className="bg-gray-950 fixed -z-10 h-[2000px] rounded-full aspect-square top-4 -left-[1000px] md:left-auto md:top-auto md:right-[15%] lg:right-1/3" />
+								<div className="purple-radial-gradient-lg h-[2400px] aspect-square fixed -z-10  top-4 md:-top-[800px] -right-[800px] md:right-1/4 lg:right-1/3 md:translate-x-[240px] -translate-y-[240px] md:translate-y-[0px]" />
+								<div className="bg-gray-950 h-[2000px] rounded-full aspect-square fixed -z-10 top-4 md:-top-[600px] -right-[600px] md:right-1/4 lg:right-1/3" />
 							</div>
 						</main>
 					</Providers>
