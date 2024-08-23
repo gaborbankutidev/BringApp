@@ -2,7 +2,6 @@ import type {BP as _BP, FCC as _FCC} from "@bring/blocks-client";
 
 export type EP = {
 	mainVideo: string | null;
-	editUrl: string | null;
 };
 
 export type BP<P> = _BP<P, EP>;

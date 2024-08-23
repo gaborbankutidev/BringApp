@@ -1,5 +1,5 @@
 import {getEntity} from "@/bring/render";
-import {BiBulb, BiEdit} from "react-icons/bi";
+import {BiBulb} from "react-icons/bi";
 
 type PostLayoutProps = {children?: React.ReactNode; slug: string | string[]};
 
@@ -14,13 +14,6 @@ const PostLayout = async ({children, slug}: PostLayoutProps) => {
 				<p className="uppercase tracking-wide text-14 md:text-16 xl:text-20 text-purple-600">
 					Example post from WordPress
 				</p>
-
-				<a
-					href={entity.props.editUrl ?? "#"}
-					className="flex items-center justify-center gap-1 text-gray-300 hover:text-purple-600 transition-all duration-300"
-				>
-					<BiEdit /> Edit post
-				</a>
 			</div>
 
 			<h1 className="tracking-tight font-bold text-[48px] xl:text-[72px] xl:leading-[72px] mb-8">
