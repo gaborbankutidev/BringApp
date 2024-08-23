@@ -4,7 +4,7 @@ export default function Docs() {
 			<p className="uppercase tracking-wide text-14 md:text-16 xl:text-20">
 				Hit the ground running with
 			</p>
-			<h1 className="tracking-tight font-bold text-[48px] xl:text-[72px] xl:leading-[72px] mb-8">
+			<h1 className="tracking-tight font-bold text-[48px] xl:text-[72px] xl:leading-[72px] mb-8 -ml-1">
 				<span className="text-purple-600">Bring</span>{" "}
 				<span className="text-white">App</span>{" "}
 				<span className="text-white font-normal">Docs</span>
