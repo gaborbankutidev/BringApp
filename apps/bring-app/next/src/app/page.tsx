@@ -12,7 +12,7 @@ export default async function Home() {
 			<p className="uppercase tracking-wide text-14 md:text-16 xl:text-20">
 				Welcome to your new journey with
 			</p>
-			<h1 className="tracking-tight font-bold text-[48px] md:text-[72px] xl:text-[90px] mb-8 -ml-1">
+			<h1 className="tracking-tight font-bold text-[48px] sm:text-[56px] lg:text-[72px] xl:text-[90px] mb-8 -ml-1">
 				<span className="text-purple-600">Bring</span>{" "}
 				<span className="text-white">App</span>
 			</h1>

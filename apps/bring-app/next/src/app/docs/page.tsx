@@ -4,18 +4,18 @@ export default function Docs() {
 			<p className="uppercase tracking-wide text-14 md:text-16 xl:text-20">
 				Hit the ground running with
 			</p>
-			<h1 className="tracking-tight font-bold text-[48px] xl:text-[72px] xl:leading-[72px] mb-8 -ml-1">
+			<h1 className="tracking-tight font-bold text-[48px] xl:text-[56px] mb-8 -ml-1">
 				<span className="text-purple-600">Bring</span>{" "}
 				<span className="text-white">App</span>{" "}
 				<span className="text-white font-normal">Docs</span>
 			</h1>
 
-			<div className="flex gap-4">
+			<div className="flex gap-4 flex-col w-full lg:flex-row">
 				<a
 					href="#"
 					target="_blank"
 					rel="noopener noreferrer"
-					className="bg-gray-800/60 border border-gray-500/60 px-4 py-8 rounded-lg md:w-1/2 hover:bg-gray-700/60 cursor-pointer"
+					className="bg-gray-800/60 border border-gray-500/60 px-4 py-8 rounded-lg lg:w-1/2 hover:bg-gray-700/60 cursor-pointer"
 				>
 					<p className="text-14 text-purple-600 mb-2">
 						How to initialize your project
@@ -32,7 +32,7 @@ export default function Docs() {
 					href="https://bring-app-docs.vercel.app/"
 					target="_blank"
 					rel="noopener noreferrer"
-					className="bg-gray-800/60 border border-gray-500/60 px-4 py-8 rounded-lg md:w-1/2 hover:bg-gray-700/60 cursor-pointer"
+					className="bg-gray-800/60 border border-gray-500/60 px-4 py-8 rounded-lg lg:w-1/2 hover:bg-gray-700/60 cursor-pointer"
 				>
 					<p className="text-14 text-purple-600 mb-2">Get to know your tools</p>
 					<h3 className="text-24s mb-4">API documentation</h3>
