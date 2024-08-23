@@ -28,6 +28,7 @@ add_action("rest_api_init", function () {
 	]);
 });
 
+// Add excerpt to dynamic post list
 add_filter(
 	"bring_dynamic_post_list",
 	function ($items, $entity_slug, $custom_data) {

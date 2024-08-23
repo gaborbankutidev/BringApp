@@ -4,7 +4,6 @@ import {getWpStatus} from "./get-wp-status";
 import Posts from "./posts";
 
 export const dynamic = "force-dynamic";
-export const revalidate = 0;
 
 export default async function Home() {
 	const wpStatus = await getWpStatus();
@@ -13,7 +12,7 @@ export default async function Home() {
 			<p className="uppercase tracking-wide text-14 md:text-16 xl:text-20">
 				Welcome to your new journey with
 			</p>
-			<h1 className="tracking-tight font-bold text-[48px] md:text-[72px] xl:text-[90px] mb-8 -ml-2">
+			<h1 className="tracking-tight font-bold text-[48px] md:text-[72px] xl:text-[90px] mb-8 -ml-1">
 				<span className="text-purple-600">Bring</span>{" "}
 				<span className="text-white">App</span>
 			</h1>
@@ -39,10 +38,13 @@ export default async function Home() {
 					href={`${process.env.NEXT_PUBLIC_WP_BASE_URL}/wp-admin/`}
 					className={twJoin(
 						"text-white text-center md:text-18 outline outline-purple-600 hover:text-white hover:outline-white -outline-offset-2 rounded-full py-2 px-8 transition-all duration-300",
-						!wpStatus && "pointer-events-none opacity-40",
+						wpStatus === "error" && "pointer-events-none opacity-40",
 					)}
 				>
-					Open WordPress admin
+					{wpStatus === "ok" && "Open WordPress admin"}
+					{wpStatus === "not-set-up" && "Set up WordPress"}
+					{wpStatus === "theme-not-activated" && "Activate WordPress theme"}
+					{wpStatus === "error" && "WordPress error"}
 				</a>
 			</div>
 			<Posts />

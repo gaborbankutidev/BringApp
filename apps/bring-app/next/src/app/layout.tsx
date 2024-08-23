@@ -9,7 +9,6 @@ import {Head} from "./head";
 import Providers from "./providers";
 
 export const dynamic = "force-dynamic";
-export const revalidate = 0;
 
 const montserrat = Montserrat({
 	weight: ["300", "400", "500", "600", "700", "800", "900"],
