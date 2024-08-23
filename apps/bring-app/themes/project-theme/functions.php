@@ -16,14 +16,7 @@ require_once get_stylesheet_directory() . "/plugins.php";
 add_action("rest_api_init", function () {
 	register_rest_route("bring", "/healthcheck", [
 		"methods" => "GET",
-		"callback" => function () {
-			$parent_theme = wp_get_theme("bring-theme");
-			if ($parent_theme->exists()) {
-				return new WP_REST_Response(null, 200);
-			}
-
-			return new WP_REST_Response(null, 500);
-		},
+		"callback" => fn() => new WP_REST_Response(null, 200),
 		"permission_callback" => "__return_true",
 	]);
 });

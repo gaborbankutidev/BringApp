@@ -1,12 +1,12 @@
+import Markdown from "@/components/markdown";
 import Link from "next/link";
 import {twJoin} from "tailwind-merge";
 import {getWpStatus} from "./get-wp-status";
 import Posts from "./posts";
 
-export const dynamic = "force-dynamic";
-
 export default async function Home() {
 	const wpStatus = await getWpStatus();
+
 	return (
 		<>
 			<p className="uppercase tracking-wide text-14 md:text-16 xl:text-20">
@@ -47,6 +47,56 @@ export default async function Home() {
 					{wpStatus === "error" && "WordPress error"}
 				</a>
 			</div>
+
+			{wpStatus === null && (
+				<div className="bg-gray-800/60 min-h-[180px] flex justify-center items-center min-w-[280px] border border-gray-500/60 px-4 py-8 rounded-lg md:w-1/2 animate-pulse">
+					<div className="flex w-full flex-col gap-4">
+						<div className="bg-gray-800 rounded-md w-full h-4" />
+						<div className="bg-gray-800 rounded-md w-1/2 h-4" />
+					</div>
+				</div>
+			)}
+
+			{wpStatus === "not-set-up" && (
+				<div className="bg-gray-800/60 min-h-[180px] flex justify-center items-center min-w-[280px] border border-gray-500/60 px-4 py-8 rounded-lg border-red-600">
+					<div>
+						<h3 className="text-24s mb-4 text-red-600">WordPress not set up</h3>
+						<Markdown className="text-red-600">
+							Make sure you visited `http://localhost:8080` and set up your
+							WordPress installation.
+						</Markdown>
+					</div>
+				</div>
+			)}
+
+			{wpStatus === "theme-not-activated" && (
+				<div className="bg-gray-800/60 min-h-[180px] flex justify-center items-center min-w-[280px] border border-gray-500/60 px-4 py-8 rounded-lg border-red-600">
+					<div>
+						<h3 className="text-24s mb-4 text-red-600">
+							WordPress theme not activated
+						</h3>
+						<Markdown className="text-red-600">
+							Make sure you visited `http://localhost:8080/wp-admin` and
+							activated your project theme.
+						</Markdown>
+					</div>
+				</div>
+			)}
+
+			{wpStatus === "error" && (
+				<div className="bg-gray-800/60 min-h-[180px] flex justify-center items-center min-w-[280px] border border-gray-500/60 px-4 py-8 rounded-lg border-red-600">
+					<div>
+						<h3 className="text-24s mb-4 text-red-600">
+							Unknown WordPress error
+						</h3>
+						<Markdown className="text-red-600">
+							Visit `http://localhost:8080/wp-admin` and check the status of
+							your WordPress installation.
+						</Markdown>
+					</div>
+				</div>
+			)}
+
 			<Posts />
 		</>
 	);
