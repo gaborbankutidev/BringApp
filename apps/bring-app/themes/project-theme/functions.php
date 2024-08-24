@@ -16,7 +16,7 @@ require_once get_stylesheet_directory() . "/plugins.php";
 add_action("rest_api_init", function () {
 	register_rest_route("bring", "/healthcheck", [
 		"methods" => "GET",
-		"callback" => fn() => new WP_REST_Response(null, 200),
+		"callback" => fn() => new WP_REST_Response(["ok" => true], 200),
 		"permission_callback" => "__return_true",
 	]);
 });
