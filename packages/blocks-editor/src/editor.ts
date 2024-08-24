@@ -24,25 +24,27 @@ declare global {
 function disableReusableBlocks() {
 	// remove reusable blocks
 	dispatch("core/block-editor").updateSettings({
-		// @ts-ignore
+		// @ts-expect-error - this does in fact exist
 		__experimentalReusableBlocks: [],
 	});
 
 	// Erase the existence of any reusable blocks.
 	subscribe(() => {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		const settings = select("core/block-editor").getSettings() as any;
 		if (
 			settings.__experimentalReusableBlocks &&
 			settings.__experimentalReusableBlocks.length > 0
 		) {
 			dispatch("core/block-editor").updateSettings({
-				// @ts-ignore
+				// @ts-expect-error - this does in fact exist
 				__experimentalReusableBlocks: [],
 			});
 		}
 	});
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function editorInit(blockList: BlockConfig<any>[], wpBaseURL: string = "") {
 	if (window.bringContent) {
 		console.error("Double init bring");
@@ -54,6 +56,7 @@ export function editorInit(blockList: BlockConfig<any>[], wpBaseURL: string = ""
 	// register bring blocks
 	blockList.push(postContentConfig);
 	blockList.map((blockConfig) => {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		registerBringBlock<any>(blockConfig);
 	});
 
@@ -75,6 +78,9 @@ export function editorInit(blockList: BlockConfig<any>[], wpBaseURL: string = ""
 		});
 		console.log("BringBlocks Editor initialized!");
 	}, 1000);
+
+	// @ts-expect-error - this does in fact exist
+	window.getEditorContentObject = getEditorContentObject;
 }
 
 // recursive search in bring store to find a node
@@ -116,7 +122,7 @@ export function bringStoreBlockNode(parentKey: string, node: BringNode) {
 	}
 
 	// push to the children array of the parent node
-	let parentNode = bringFindBlockNode(parentKey, window.bringContent);
+	const parentNode = bringFindBlockNode(parentKey, window.bringContent);
 	if (parentNode === null) {
 		console.error("Parent node", parentNode);
 		console.error("Parent key", parentKey);
@@ -129,10 +135,45 @@ export function bringStoreBlockNode(parentKey: string, node: BringNode) {
 	parentNode.children.push(node);
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function parseEditorToBringNode(blocks: any) {
+	const nodes = [];
+	for (const block of blocks) {
+		// TODO solve this in a better way
+		const name =
+			block.name.split("/").pop().charAt(0).toUpperCase() +
+			block.name.split("/").pop().slice(1);
+
+		const node: BringNode = {
+			key: block.clientId,
+			component: name,
+			props: block.attributes, // TODO omit key bringStyles and parentKey
+			children: [],
+		};
+
+		if (block.innerBlocks.length) {
+			node.children = parseEditorToBringNode(block.innerBlocks);
+		}
+
+		nodes.push(node);
+	}
+
+	return nodes;
+}
+
+function getEditorContentObject() {
+	const blocks = select("core/block-editor").getBlocks();
+	const parsed = parseEditorToBringNode(blocks);
+	console.log(parsed);
+	return parsed;
+}
+
 function bringUpdate(wpBaseURL: string) {
 	if (!window.bringContent) {
 		return;
 	}
+
+	const content = getEditorContentObject();
 
 	fetch(`${wpBaseURL}/wp-json/bring/editor/save`, {
 		method: "POST",
@@ -141,7 +182,7 @@ function bringUpdate(wpBaseURL: string) {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify({
-			contentObject: window.bringContent,
+			contentObject: content,
 			entityId: select("core/editor").getCurrentPostId(),
 		}),
 	})
