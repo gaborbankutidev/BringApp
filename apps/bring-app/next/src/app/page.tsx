@@ -1,11 +1,13 @@
 import Markdown from "@/components/markdown";
+import {env} from "@/env.mjs";
 import Link from "next/link";
 import {twJoin} from "tailwind-merge";
 import {getWpStatus} from "./get-wp-status";
 import Posts from "./posts";
 
-export default async function Home() {
+const Home = async () => {
 	const wpStatus = await getWpStatus();
+	const wpAdminUrl = `${env.NEXT_PUBLIC_WP_BASE_URL}/wp-admin/`;
 
 	return (
 		<>
@@ -35,13 +37,19 @@ export default async function Home() {
 				<a
 					target="_blank"
 					rel="noopener noreferrer"
-					href={`${process.env.NEXT_PUBLIC_WP_BASE_URL}/wp-admin/`}
+					href={
+						wpStatus === "theme-not-activated"
+							? `${wpAdminUrl}themes.php`
+							: wpAdminUrl
+					}
 					className={twJoin(
 						"text-white text-center md:text-18 outline outline-purple-600 hover:text-white hover:outline-white -outline-offset-2 rounded-full py-2 px-8 transition-all duration-300",
-						wpStatus === "error" && "pointer-events-none opacity-40",
+						(wpStatus === "error" || wpStatus === "unavailable") &&
+							"pointer-events-none opacity-40",
 					)}
 				>
 					{wpStatus === "ok" && "Open WordPress admin"}
+					{wpStatus === "unavailable" && "WordPress is offline"}
 					{wpStatus === "not-set-up" && "Set up WordPress"}
 					{wpStatus === "theme-not-activated" && "Activate WordPress theme"}
 					{wpStatus === "error" && "WordPress error"}
@@ -62,7 +70,7 @@ export default async function Home() {
 					<div>
 						<h3 className="text-24s mb-4 text-red-600">WordPress not set up</h3>
 						<Markdown className="text-red-600">
-							Make sure you visited `http://localhost:8080` and set up your
+							Make sure to visit `http://localhost:8080` and set up your
 							WordPress installation.
 						</Markdown>
 					</div>
@@ -76,8 +84,22 @@ export default async function Home() {
 							WordPress theme not activated
 						</h3>
 						<Markdown className="text-red-600">
-							Make sure you visited `http://localhost:8080/wp-admin` and
-							activated your project theme.
+							Make sure to visit `http://localhost:8080/wp-admin` and activate
+							your project theme.
+						</Markdown>
+					</div>
+				</div>
+			)}
+
+			{wpStatus === "unavailable" && (
+				<div className="bg-gray-800/60 min-h-[180px] flex justify-center items-center min-w-[280px] border border-gray-500/60 px-4 py-8 rounded-lg border-red-600">
+					<div>
+						<h3 className="text-24s mb-4 text-red-600">
+							WordPress is unreachable
+						</h3>
+						<Markdown className="text-red-600">
+							Make sure the backend services are running and Wordpress is
+							reachable at `http://localhost:8080/wp-admin`.
 						</Markdown>
 					</div>
 				</div>
@@ -100,4 +122,6 @@ export default async function Home() {
 			<Posts />
 		</>
 	);
-}
+};
+
+export default Home;

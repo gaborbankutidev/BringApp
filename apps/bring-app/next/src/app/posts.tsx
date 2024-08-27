@@ -1,3 +1,4 @@
+import {env} from "@/env.mjs";
 import {getDynamicEntityList} from "@bring/blocks-client/content";
 import Link from "next/link";
 import {twJoin} from "tailwind-merge";
@@ -5,9 +6,10 @@ import Slider from "./slider";
 
 export default async function Posts() {
 	const {entityList} = await getDynamicEntityList(
-		process.env.NEXT_PUBLIC_WP_BASE_URL ?? "",
+		env.NEXT_PUBLIC_WP_BASE_URL ?? "",
 		"post",
 		"post",
+		{cache: "no-store"},
 	);
 
 	return (

@@ -1,11 +1,31 @@
-export type WpStatus = "ok" | "error" | "not-set-up" | "theme-not-activated";
+import {env} from "@/env.mjs";
+
+export type WpStatus =
+	| "ok"
+	| "not-set-up"
+	| "theme-not-activated"
+	| "unavailable"
+	| "error";
 
 export const getWpStatus = async (): Promise<WpStatus> => {
 	console.log("Checking WordPress status...");
+	let wpStatus: WpStatus = "ok";
 
-	// check if WordPress is set up
+	// Check if WordPress site is running
 	try {
-		const res = await fetch(`${process.env.NEXT_PUBLIC_WP_BASE_URL}/`);
+		await fetch(`${env.NEXT_PUBLIC_WP_BASE_URL}/wp-json/`, {cache: "no-store"});
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	} catch (e) {
+		console.error(
+			"WordPress health check failed while checking if WordPress site is running",
+		);
+		return "unavailable";
+	}
+
+	try {
+		const res = await fetch(`${env.NEXT_PUBLIC_WP_BASE_URL}/wp-json/`, {
+			cache: "no-store",
+		});
 		if (
 			res.status === 200 &&
 			res.redirected &&
@@ -19,31 +39,15 @@ export const getWpStatus = async (): Promise<WpStatus> => {
 		console.error(
 			"WordPress health check failed while checking if WordPress is set up",
 		);
-		return "error";
+		wpStatus = "error";
 	}
 
-	// check if WordPress site is running
-	try {
-		const res = await fetch(`${process.env.NEXT_PUBLIC_WP_BASE_URL}/wp-json/`);
-
-		if (res.status !== 200) {
-			console.error("WordPress site not running");
-			return "error";
-		}
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	} catch (e) {
-		console.error(
-			"WordPress health check failed while checking if WordPress site is running",
-		);
-		return "error";
-	}
-
-	// check if WordPress theme is activated
+	// Check if WordPress theme is activated
 	try {
 		const res = await fetch(
-			`${process.env.NEXT_PUBLIC_WP_BASE_URL}/wp-json/bring/healthcheck`,
+			`${env.NEXT_PUBLIC_WP_BASE_URL}/wp-json/bring/healthcheck`,
+			{cache: "no-store"},
 		);
-
 		if (res.status !== 200) {
 			console.error("WordPress theme not activated");
 			return "theme-not-activated";
@@ -53,9 +57,13 @@ export const getWpStatus = async (): Promise<WpStatus> => {
 		console.error(
 			"WordPress health check failed while checking if WordPress theme is activated",
 		);
-		return "error";
+		wpStatus = "error";
 	}
 
-	console.log("WordPress is active and set up");
-	return "ok";
+	// If no specific errors were found, and status is still "ok"
+	if (wpStatus === "ok") {
+		console.log("WordPress is active and set up");
+	}
+
+	return wpStatus;
 };
