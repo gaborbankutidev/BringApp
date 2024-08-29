@@ -24,7 +24,7 @@ export default async function Posts() {
 						)}
 					>
 						<p className="text-14 text-purple-600 mb-2">
-							Example post from WordPress
+							Example WordPress Post
 						</p>
 						<h3 className="text-24s mb-4">{entity.name}</h3>
 						<p>{entity.excerpt}</p>

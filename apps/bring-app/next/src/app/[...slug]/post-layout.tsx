@@ -1,4 +1,5 @@
 import {getEntity} from "@/bring/render";
+import {env} from "@/env.mjs";
 import {BiBulb} from "react-icons/bi";
 
 type PostLayoutProps = {children?: React.ReactNode; slug: string | string[]};
@@ -12,7 +13,7 @@ const PostLayout = async ({children, slug}: PostLayoutProps) => {
 		<>
 			<div className="flex gap-4 items-center">
 				<p className="uppercase tracking-wide text-14 md:text-16 xl:text-20 text-purple-600">
-					Example post from WordPress
+					Example WordPress Post
 				</p>
 			</div>
 
@@ -20,20 +21,32 @@ const PostLayout = async ({children, slug}: PostLayoutProps) => {
 				{entity.props.name}
 			</h1>
 
-			<div className="flex w-fit items-center gap-2 py-2 px-4 bg-gray-800/60 rounded-md mb-4">
+			<div className="flex w-fit items-center gap-2 py-2 px-4 bg-gray-800/60 rounded-2xl mb-4">
 				<BiBulb size={24} className="text-purple-400" />
 				<p>
 					You can edit this layout in{" "}
 					<code>apps/bring-app/next/src/app/[...slug]/post-layout.tsx</code>
 				</p>
 			</div>
-
-			<div className="bg-gray-800/60 border border-gray-500/60 px-4 py-8 rounded-lg">
-				<p className="text-14 text-purple-600 mb-2">
-					This is where the post content goes
+			<div className="flex w-fit items-center gap-2 py-2 px-4 bg-gray-800/60 rounded-2xl mb-4">
+				<BiBulb size={24} className="text-purple-400" />
+				<p>
+					You can edit the content of this post in the{" "}
+					<a
+						target="_blank"
+						rel="noreferrer"
+						href={`${env.NEXT_PUBLIC_WP_BASE_URL}/wp-admin/post.php?post=${entity.id}&action=edit`}
+					>
+						<code>Wordpress block editor</code>
+					</a>
 				</p>
+			</div>
 
-				<div>{children}</div>
+			<p className="text-14 text-purple-600 mb-2">
+				Post content built in Wordpress
+			</p>
+			<div className="bg-gray-800/60 border border-gray-500/60 px-4 py-8 rounded-lg">
+				{children}
 			</div>
 		</>
 	);
