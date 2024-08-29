@@ -2,12 +2,16 @@ import Markdown from "@/components/markdown";
 import {env} from "@/env.mjs";
 import Link from "next/link";
 import {twJoin} from "tailwind-merge";
-import {getWpStatus} from "./get-wp-status";
+import {getWpStatus, WpStatus} from "./get-wp-status";
 import Posts from "./posts";
+
+const wpAdminUrl = `${env.NEXT_PUBLIC_WP_BASE_URL}/wp-admin/`;
 
 const Home = async () => {
 	const wpStatus = await getWpStatus();
-	const wpAdminUrl = `${env.NEXT_PUBLIC_WP_BASE_URL}/wp-admin/`;
+	const errorNotice = wpHealthCheckNotices.find(
+		({status}) => status === wpStatus,
+	);
 
 	return (
 		<>
@@ -37,84 +41,26 @@ const Home = async () => {
 				<a
 					target="_blank"
 					rel="noopener noreferrer"
-					href={
-						wpStatus === "theme-not-activated"
-							? `${wpAdminUrl}themes.php`
-							: wpAdminUrl
-					}
+					href={errorNotice?.href ? errorNotice.href : wpAdminUrl}
 					className={twJoin(
 						"text-white text-center md:text-18 outline outline-purple-600 hover:text-white hover:outline-white -outline-offset-2 rounded-full py-2 px-8 transition-all duration-300",
 						(wpStatus === "error" || wpStatus === "unavailable") &&
 							"pointer-events-none opacity-40",
 					)}
 				>
-					{wpStatus === "ok" && "Open WordPress admin"}
-					{wpStatus === "unavailable" && "WordPress is offline"}
-					{wpStatus === "not-set-up" && "Set up WordPress"}
-					{wpStatus === "theme-not-activated" && "Activate WordPress theme"}
-					{wpStatus === "error" && "WordPress error"}
+					{wpStatus === "ok"
+						? "Open WordPress admin"
+						: errorNotice
+							? errorNotice.cta
+							: "Unkown error"}
 				</a>
 			</div>
 
-			{wpStatus === null && (
-				<div className="bg-gray-800/60 min-h-[180px] flex justify-center items-center min-w-[280px] border border-gray-500/60 px-4 py-8 rounded-lg md:w-1/2 animate-pulse">
-					<div className="flex w-full flex-col gap-4">
-						<div className="bg-gray-800 rounded-md w-full h-4" />
-						<div className="bg-gray-800 rounded-md w-1/2 h-4" />
-					</div>
-				</div>
-			)}
-
-			{wpStatus === "not-set-up" && (
-				<div className="bg-gray-800/60 min-h-[180px] flex justify-center items-center min-w-[280px] border border-gray-500/60 px-4 py-8 rounded-lg border-red-600">
+			{errorNotice && (
+				<div className="bg-gray-800/60 min-h-[180px] flex items-center border border-gray-500/60 px-4 py-8 rounded-lg border-red-600">
 					<div>
-						<h3 className="text-24s mb-4 text-red-600">WordPress not set up</h3>
-						<Markdown className="text-red-600">
-							Make sure to visit `http://localhost:8080` and set up your
-							WordPress installation.
-						</Markdown>
-					</div>
-				</div>
-			)}
-
-			{wpStatus === "theme-not-activated" && (
-				<div className="bg-gray-800/60 min-h-[180px] flex justify-center items-center min-w-[280px] border border-gray-500/60 px-4 py-8 rounded-lg border-red-600">
-					<div>
-						<h3 className="text-24s mb-4 text-red-600">
-							WordPress theme not activated
-						</h3>
-						<Markdown className="text-red-600">
-							Make sure to visit `http://localhost:8080/wp-admin` and activate
-							your project theme.
-						</Markdown>
-					</div>
-				</div>
-			)}
-
-			{wpStatus === "unavailable" && (
-				<div className="bg-gray-800/60 min-h-[180px] flex justify-center items-center min-w-[280px] border border-gray-500/60 px-4 py-8 rounded-lg border-red-600">
-					<div>
-						<h3 className="text-24s mb-4 text-red-600">
-							WordPress is unreachable
-						</h3>
-						<Markdown className="text-red-600">
-							Make sure the backend services are running and Wordpress is
-							reachable at `http://localhost:8080/wp-admin`.
-						</Markdown>
-					</div>
-				</div>
-			)}
-
-			{wpStatus === "error" && (
-				<div className="bg-gray-800/60 min-h-[180px] flex justify-center items-center min-w-[280px] border border-gray-500/60 px-4 py-8 rounded-lg border-red-600">
-					<div>
-						<h3 className="text-24s mb-4 text-red-600">
-							Unknown WordPress error
-						</h3>
-						<Markdown className="text-red-600">
-							Visit `http://localhost:8080/wp-admin` and check the status of
-							your WordPress installation.
-						</Markdown>
+						<h3 className="text-24s mb-4 text-red-600">{errorNotice.title}</h3>
+						<Markdown className="text-red-600">{errorNotice.notice}</Markdown>
 					</div>
 				</div>
 			)}
@@ -125,3 +71,46 @@ const Home = async () => {
 };
 
 export default Home;
+
+type WpHealthCheckNotice = {
+	status: WpStatus;
+	cta: string;
+	href?: string;
+	title: string;
+	notice: string;
+};
+
+const wpHealthCheckNotices: WpHealthCheckNotice[] = [
+	{
+		status: "error",
+		cta: "WordPress error",
+		title: "Unknown WordPress error",
+		notice: `Visit \`${wpAdminUrl}\` and check the status of your WordPress installation.`,
+	},
+	{
+		status: "unavailable",
+		cta: "WordPress is offline",
+		title: "WordPress is unreachable",
+		notice: `Make sure the backend services are running and Wordpress is reachable at \`${env.NEXT_PUBLIC_WP_BASE_URL}\`.`,
+	},
+	{
+		status: "permalinks-not-setup",
+		cta: "Set up WordPress",
+		href: `${wpAdminUrl}options-permalink.php`,
+		title: "WordPress not set up",
+		notice: `Make sure to visit \`${wpAdminUrl}options-permalink.php\` and set the permalinks to \`%postname%\`.`,
+	},
+	{
+		status: "theme-not-activated",
+		cta: "Activate WordPress theme",
+		href: `${wpAdminUrl}themes.php`,
+		title: "WordPress theme not activated",
+		notice: `Make sure to visit \`${wpAdminUrl}themes.php\` and activate your project theme.`,
+	},
+	{
+		status: "not-set-up",
+		cta: "Set up WordPress",
+		title: "WordPress not set up",
+		notice: `Make sure to visit \`${wpAdminUrl}\` and set up your WordPress installation.`,
+	},
+];

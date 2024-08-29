@@ -3,6 +3,7 @@ import {env} from "@/env.mjs";
 export type WpStatus =
 	| "ok"
 	| "not-set-up"
+	| "permalinks-not-setup"
 	| "theme-not-activated"
 	| "unavailable"
 	| "error";
@@ -44,11 +45,19 @@ export const getWpStatus = async (): Promise<WpStatus> => {
 
 	// Check if WordPress theme is activated
 	try {
-		const res = await fetch(
+		const healthcheckResponse = await fetch(
 			`${env.NEXT_PUBLIC_WP_BASE_URL}/wp-json/bring/healthcheck`,
 			{cache: "no-store"},
 		);
-		if (res.status !== 200) {
+		const contentType = healthcheckResponse.headers.get("content-type");
+
+		if (contentType && !contentType.includes("application/json")) {
+			console.error("WordPress permalinks not set to %postname%");
+			return "permalinks-not-setup";
+		}
+
+		const data = await healthcheckResponse.json();
+		if (healthcheckResponse.status !== 200 || data.ok !== true) {
 			console.error("WordPress theme not activated");
 			return "theme-not-activated";
 		}
