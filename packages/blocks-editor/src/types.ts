@@ -4,6 +4,7 @@ import type {BringStyles} from "./styles/types";
 export type Obj = Record<string, unknown>;
 export type Defined<T> = Exclude<T, undefined>;
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export type FCB<Props = {}> = FC<
 	Props & {className?: string; id?: string; bringStyles?: BringStyles}
 >;
@@ -65,8 +66,16 @@ export type NumberSelectControlOptions<T extends number = number> = {
 export type BringNode = {
 	key: string;
 	component: string;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	props: {[key: string]: any};
 	children?: BringNode[];
+};
+
+export type WpBlock = {
+	clientId: string;
+	name: string;
+	attributes: Record<string, unknown>;
+	innerBlocks: WpBlock[];
 };
 
 // ===========

@@ -40,6 +40,7 @@ export {useDynamicEntityOptions} from "./hooks";
 export {makeBringStylesClassNames, makeBringStylesControl} from "./styles";
 
 export {editorInit} from "./editor";
+export {Editor} from "./editor-new";
 
 export type {
 	Defined,

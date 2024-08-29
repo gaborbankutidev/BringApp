@@ -1,5 +1,3 @@
-import {editorInit} from "@bring/blocks-editor";
-
 // layout
 import column from "@/components/layout/column/column.block";
 import group from "@/components/layout/group/group.block";
@@ -15,6 +13,7 @@ import contactForm from "@/components/forms/contact/contact.block";
 import heading from "@/components/heading/heading.block";
 import image from "@/components/image/image.block";
 import markdown from "@/components/markdown/markdown.block";
+import {Editor} from "@bring/blocks-editor";
 
 const blockList = [
 	// layout
@@ -33,4 +32,9 @@ const blockList = [
 	markdown,
 ];
 
-editorInit(blockList);
+// editorInit(blockList);
+Editor.init(
+	process.env.NEXT_PUBLIC_WP_BASE_URL ?? "",
+	process.env.DATA_TOKEN ?? "",
+	blockList,
+);
