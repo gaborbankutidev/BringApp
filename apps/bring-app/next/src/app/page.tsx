@@ -1,10 +1,5 @@
-import Markdown from "@/components/markdown";
+import {Main} from "@/bring/render";
 
 export default function Home() {
-	const content = `hello ${process.env.NODE_ENV}`;
-	return (
-		<>
-			<Markdown>{content}</Markdown>
-		</>
-	);
+	return <Main />;
 }
