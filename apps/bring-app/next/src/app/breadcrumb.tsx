@@ -1,10 +1,10 @@
 "use client";
+
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {BiArrowBack} from "react-icons/bi";
 
-export default function Breadcrumb() {
-	"use client";
+const Breadcrumb = () => {
 	const path = usePathname();
 	return (
 		<>
@@ -19,4 +19,6 @@ export default function Breadcrumb() {
 			)}
 		</>
 	);
-}
+};
+
+export default Breadcrumb;

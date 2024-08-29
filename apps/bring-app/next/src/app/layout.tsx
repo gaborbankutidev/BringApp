@@ -34,7 +34,7 @@ export default function RootLayout({children}: {children: ReactNode}) {
 				<div className="bringContent">
 					<Providers>
 						<main>
-							<div className="w-screen h-screen relative pt-10">
+							<div className="w-full h-screen relative pt-10">
 								<Breadcrumb />
 								<a
 									className="cursor-pointer text-white hover:text-purple-600 transition-all duration-300"
