@@ -16,14 +16,14 @@ const Home = async () => {
 	return (
 		<>
 			<p className="uppercase tracking-wide text-14 md:text-16 xl:text-20">
-				Welcome to your new journey with
+				Welcome to your journey with
 			</p>
 			<h1 className="tracking-tight font-bold text-[48px] sm:text-[56px] lg:text-[72px] xl:text-[90px] mb-8 -ml-1">
 				<span className="text-purple-600">Bring</span>{" "}
 				<span className="text-white">App</span>
 			</h1>
 
-			<p className="text-gray-200 mb-4">
+			<p className="text-gray-200 mb-6">
 				BringApp is a framework designed to help developers build NextJs
 				applications using WordPress as a headless CMS and site builder. It
 				provides a set of tools and components to help you get started quickly
@@ -92,13 +92,6 @@ const wpHealthCheckNotices: WpHealthCheckNotice[] = [
 		cta: "WordPress is offline",
 		title: "WordPress is unreachable",
 		notice: `Make sure the backend services are running and Wordpress is reachable at \`${env.NEXT_PUBLIC_WP_BASE_URL}\`.`,
-	},
-	{
-		status: "permalinks-not-setup",
-		cta: "Set up WordPress",
-		href: `${wpAdminUrl}options-permalink.php`,
-		title: "WordPress not set up",
-		notice: `Make sure to visit \`${wpAdminUrl}options-permalink.php\` and set the permalinks to \`%postname%\`.`,
 	},
 	{
 		status: "theme-not-activated",

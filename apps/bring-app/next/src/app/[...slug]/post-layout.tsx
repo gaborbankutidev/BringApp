@@ -42,8 +42,8 @@ const PostLayout = async ({children, slug}: PostLayoutProps) => {
 				</p>
 			</div>
 
-			<p className="text-14 text-purple-600 mb-2">
-				Post content built in Wordpress
+			<p className="text-14 text-purple-600 mb-2 mt-4">
+				Post content built with Wordpress
 			</p>
 			<div className="bg-gray-800/60 border border-gray-500/60 px-4 py-8 rounded-lg">
 				{children}

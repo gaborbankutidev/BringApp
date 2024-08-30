@@ -46,7 +46,7 @@ const classNames = [
 ];
 
 // Font sizes
-const fontSizes = [12, 13, 14, 15, 16, 18, 20, 22, 26, 28];
+const fontSizes = [10, 11, 12, 13, 14, 15, 16, 18, 20, 22, 26, 28];
 const lineHeights = [
 	{value: 1, label: "xs"},
 	{value: 1.2, label: "s"},

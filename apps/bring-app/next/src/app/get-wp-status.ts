@@ -51,13 +51,16 @@ export const getWpStatus = async (): Promise<WpStatus> => {
 		);
 		const contentType = healthcheckResponse.headers.get("content-type");
 
-		if (contentType && !contentType.includes("application/json")) {
-			console.error("WordPress permalinks not set to %postname%");
-			return "permalinks-not-setup";
+		if (
+			healthcheckResponse.status !== 200 ||
+			!contentType?.includes("application/json")
+		) {
+			console.error("WordPress theme not activated");
+			return "theme-not-activated";
 		}
 
 		const data = await healthcheckResponse.json();
-		if (healthcheckResponse.status !== 200 || data.ok !== true) {
+		if (data.ok !== true) {
 			console.error("WordPress theme not activated");
 			return "theme-not-activated";
 		}
