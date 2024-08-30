@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import Markdown from "react-markdown";
 
-const Readme = async () => {
+const Readme = () => {
 	const filePath = path.join(process.cwd(), "..", "readme.md");
 	const readmeContent = fs.readFileSync(filePath, "utf8");
 

@@ -1,5 +1,6 @@
 "use client";
-import {ReactNode, useState} from "react";
+
+import {type ReactNode, useState} from "react";
 import {BiChevronLeft, BiChevronRight} from "react-icons/bi";
 
 export default function Slider({

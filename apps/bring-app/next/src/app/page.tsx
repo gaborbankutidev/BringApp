@@ -2,7 +2,7 @@ import Markdown from "@/components/markdown";
 import {env} from "@/env.mjs";
 import Link from "next/link";
 import {twJoin} from "tailwind-merge";
-import {getWpStatus, WpStatus} from "./get-wp-status";
+import {getWpStatus, type WpStatus} from "./get-wp-status";
 import Posts from "./posts";
 
 const wpAdminUrl = `${env.NEXT_PUBLIC_WP_BASE_URL}/wp-admin/`;

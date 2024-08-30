@@ -58,11 +58,12 @@ export const getWpStatus = async (): Promise<WpStatus> => {
 			return "theme-not-activated";
 		}
 
-		const data = await healthcheckResponse.json();
-		if (data.ok !== true) {
+		const data = (await healthcheckResponse.json()) as {ok?: boolean};
+		if (!("ok" in data) || data.ok !== true) {
 			console.error("WordPress theme not activated");
 			return "theme-not-activated";
 		}
+
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	} catch (e) {
 		console.error(
