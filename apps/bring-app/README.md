@@ -8,7 +8,6 @@ Bring App project starter template.
 - Create the necessary .env files in the _root_, _next_ and _themes/bring-theme_ folders
 - Start the backend services in docker with `yarn services:up`
 - Build the theme and start the development with `yarn dev`
-- Log in to WordPress admin, go to Settings -> Permalinks, and set it to `/%postname%/`
 - Activate your Project Theme and complete the required plugin installation steps
 - Happy building!
 

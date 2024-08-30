@@ -3,7 +3,6 @@ import {env} from "@/env.mjs";
 export type WpStatus =
 	| "ok"
 	| "not-set-up"
-	| "permalinks-not-setup"
 	| "theme-not-activated"
 	| "unavailable"
 	| "error";
