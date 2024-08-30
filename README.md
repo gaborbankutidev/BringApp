@@ -8,7 +8,6 @@ Monorepo containing the Bring App project template and its supporting packages.
 -   Create the necessary .env files in the _bring-app_, _/next_ and _/themes/bring-theme_ folders
 -   Start the backend services in docker with `yarn services:up`
 -   Build the theme and start the development with `yarn dev`
--   Log in to WordPress admin, go to Settings -> Permalinks, and set it to `/%postname%/`
 -   Activate your Project Theme and complete the required plugin installation steps
 -   Happy building!
 

@@ -32,7 +32,7 @@
 		"prepare": "husky",
 		"release": "turbo run build lint test && changeset version && changeset publish",
 		"services:down": "docker compose -f ./apps/bring-app/compose.yml down",
-		"services:up": "docker compose -f ./apps/bring-app/compose.yml up -d && docker compose -f ./apps/bring-app/compose.yml logs -f",
+		"services:up": "docker compose -f ./apps/bring-app/compose.yml up",
 		"test": "turbo test",
 		"types": "turbo types",
 		"watch:wp": "tsx scripts/watcher.ts"

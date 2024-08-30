@@ -1,5 +1,5 @@
 import {type Config} from "tailwindcss";
-import {colorsByName, colorsLight} from "./src/styles";
+import {colorsLight} from "./src/styles";
 
 const breakpoints = ["", "md:", "lg:"];
 const sides = ["t", "b", "l", "r"];
@@ -46,7 +46,7 @@ const classNames = [
 ];
 
 // Font sizes
-const fontSizes = [12, 13, 14, 15, 16, 18, 20, 22, 26, 28];
+const fontSizes = [10, 11, 12, 13, 14, 15, 16, 18, 20, 22, 26, 28];
 const lineHeights = [
 	{value: 1, label: "xs"},
 	{value: 1.2, label: "s"},
@@ -117,7 +117,7 @@ const generateSafelist = () => {
 export default {
 	content: ["./src/**/*.{js,jsx,ts,tsx}"],
 	theme: {
-		colors: colorsByName,
+		// colors: colorsByName,
 		fontSize: generateFontSizeList(),
 	},
 	safelist: generateSafelist(),

@@ -5,7 +5,7 @@
 @layer base {
 	html {
 		font-family: "Montserrat", "Helvetica", "open-sans";
-		@apply text-16 text-blue-900;
+		@apply bg-gray-900 text-16 text-white;
 	}
 
 	/* Headings */
@@ -121,7 +121,7 @@
 	}
 
 	.md a {
-		@apply text-orange hover:text-orange-200;
+		@apply text-blue-500 underline;
 	}
 
 	.md figure {
@@ -132,12 +132,13 @@
 		@apply font-semibold;
 	}
 
-	.md code {
+	.md code,
+	code {
 		padding: 0.2em 0.4em;
 		margin: 0;
 		font-size: 85%;
-		background-color: rgba(27, 31, 35, 0.05);
 		border-radius: 3px;
+		@apply bg-gray-700 text-red-600;
 	}
 
 	/* Content */
@@ -156,4 +157,17 @@
 
 .block-editor .visible-in-editor {
 	opacity: 1 !important;
+}
+
+.purple-radial-gradient-lg {
+	background: rgb(255, 255, 255);
+	background: radial-gradient(rgb(147 51 234) 50%, transparent 60%);
+}
+
+.scroll-container {
+	-ms-overflow-style: none; /* Internet Explorer 10+ */
+	scrollbar-width: none; /* Firefox */
+}
+.scroll-container::-webkit-scrollbar {
+	display: none; /* Safari and Chrome */
 }

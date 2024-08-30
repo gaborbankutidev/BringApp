@@ -7,6 +7,7 @@ use Dotenv\Dotenv;
 use Bring\BlocksWP\BringBlocks;
 use Bring\BlocksWP\Config;
 
+use BringTheme\Settings\Settings;
 use BringTheme\Enqueue\Enqueue;
 use BringTheme\Env\Env;
 use BringTheme\Forms\Forms;
@@ -21,6 +22,9 @@ require "vendor/autoload.php";
 
 $dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->safeLoad();
+
+// initialize wordpress settings
+Settings::init();
 
 // config bring
 Config::init([
