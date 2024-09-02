@@ -32,9 +32,4 @@ const blockList = [
 	markdown,
 ];
 
-// editorInit(blockList);
-Editor.init(
-	process.env.NEXT_PUBLIC_WP_BASE_URL ?? "",
-	process.env.DATA_TOKEN ?? "",
-	blockList,
-);
+Editor.init(process.env.NEXT_PUBLIC_WP_BASE_URL ?? "", blockList);

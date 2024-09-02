@@ -1,14 +1,18 @@
+import {registerBlockType} from "@wordpress/blocks";
 import {dispatch, select, subscribe} from "@wordpress/data";
 import {BlockConfig, objectAttributeSource, stringAttributeSource} from "./blocks";
 import {makeEdit} from "./blocks/make-edit";
 import {makeSave} from "./blocks/make-save";
 import {postContentConfig} from "./components/post-content";
+import {makeBringStylesClassNames} from "./styles";
+import {BringStyles} from "./styles/types";
 import {BringStylesDefaultValue} from "./styles/utils";
 import {BringNode, Obj, WpBlock} from "./types";
 
 declare global {
 	// Interface is needed to augment global `Window`
 	interface Window {
+		jwt: {token: string};
 		// Magical bug by WP so declared here :)
 		wp: {
 			data: {
@@ -48,8 +52,7 @@ export class Editor {
 	private wpBaseURL: string;
 	private jwtToken: string;
 	private isSaving: boolean;
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	private blockList: BlockConfig<any>[];
+	private blockList: BlockConfig<any>[]; // eslint-disable-line @typescript-eslint/no-explicit-any
 
 	/**
 	 * Private constructor to initialize the Editor class.
@@ -58,9 +61,9 @@ export class Editor {
 	 * @param blockList - the list of block configurations
 	 */
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	private constructor(wpBaseURL: string, jwtToken: string, blockList: BlockConfig<any>[]) {
+	private constructor(wpBaseURL: string, blockList: BlockConfig<any>[]) {
 		this.wpBaseURL = wpBaseURL;
-		this.jwtToken = jwtToken;
+		this.jwtToken = window.jwt.token;
 		this.isSaving = false;
 		this.blockList = blockList;
 
@@ -77,10 +80,16 @@ export class Editor {
 	 * @returns the instance of the Editor class
 	 */
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	public static init(wpBaseURL: string, jwtToken: string, blockList: BlockConfig<any>[]) {
+	public static init(wpBaseURL: string, blockList: BlockConfig<any>[]) {
+		console.log("🚀 Lanunching Bring Editor...");
 		if (!Editor.instance) {
-			Editor.instance = new Editor(wpBaseURL, jwtToken, blockList);
+			Editor.instance = new Editor(wpBaseURL, blockList);
+		} else {
+			Editor.instance.blockList = blockList;
+			Editor.instance.jwtToken = window.jwt.token;
+			Editor.instance.wpBaseURL = wpBaseURL;
 		}
+		console.log("🚀 Bring Editor Launched! Happy editing!");
 		return this.instance;
 	}
 
@@ -116,14 +125,18 @@ export class Editor {
 	 */
 	private subscribeToSaveEvent() {
 		subscribe(() => {
-			const isSavingPost = select("core/editor").isSavingPost();
-			const isAutosavingPost = select("core/editor").isAutosavingPost();
+			try {
+				const isSavingPost = select("core/editor")?.isSavingPost() ?? false;
+				const isAutosavingPost = select("core/editor")?.isAutosavingPost() ?? false;
 
-			if (this.isSaving && !isSavingPost && !isAutosavingPost) {
-				this.update();
-				this.isSaving = false;
-			} else if (isSavingPost && !isAutosavingPost) {
-				this.isSaving = true;
+				if (this.isSaving && !isSavingPost && !isAutosavingPost) {
+					this.update();
+					this.isSaving = false;
+				} else if (isSavingPost && !isAutosavingPost) {
+					this.isSaving = true;
+				}
+			} catch (e) {
+				console.error(e);
 			}
 		});
 	}
@@ -150,15 +163,13 @@ export class Editor {
 		})
 			.then((res) => {
 				if (res.status !== 200) {
-					alert("There was an issue while saving!");
-					console.error(res);
+					console.error("🚀 There was an issue while saving!", res);
 				} else {
-					console.log("Save is completed");
+					console.log("🚀 Content saved successfully!");
 				}
 			})
 			.catch((err) => {
-				alert("There was an issue while saving!");
-				console.error(err);
+				console.error("🚀 There was an issue while saving!", err);
 			});
 	}
 
@@ -176,6 +187,18 @@ export class Editor {
 			const blockName = block.name.split("/").pop() ?? "";
 			const name = blockName.charAt(0).toUpperCase() + blockName.slice(1);
 
+			const {bringStyles} = block.attributes;
+			const blockConfig = this.blockList.find((b) => b.componentName === name);
+			if (!blockConfig) {
+				console.error(
+					`🚀 Block '${name}' not found in the block list and will not be saved!`,
+				);
+				continue;
+			}
+			const bringStylesClassNames = blockConfig.styles
+				? makeBringStylesClassNames(blockConfig.styles, bringStyles as BringStyles)
+				: {};
+
 			// remove attributes that are not needed to be saved
 			delete block.attributes.key;
 			delete block.attributes.parentKey;
@@ -184,17 +207,18 @@ export class Editor {
 			const node: BringNode = {
 				key: block.clientId,
 				component: name,
-				props: block.attributes,
+				props: {
+					bringStylesClassNames,
+					...block.attributes,
+				},
 				children: [],
 			};
 
 			if (block.innerBlocks.length) {
 				node.children = this.parseBlocks(block.innerBlocks);
 			}
-
 			nodes.push(node);
 		}
-
 		return nodes;
 	}
 
@@ -210,7 +234,7 @@ export class Editor {
 		registerBlockType(`bring/${title.toLowerCase()}`, {
 			title,
 			description: config.description ?? `${title} block by Bring`,
-			category: "widgets", // todo custom category
+			category: "widgets", // TODO custom category
 			icon: config.icon ?? "block-default",
 			supports: {
 				html: false,
@@ -224,7 +248,7 @@ export class Editor {
 				attributes: config.previewAttributes,
 			},
 			edit: makeEdit<Props>(config),
-			save: makeSave<Props>(config), // refactor save hooks and use InnedBlock instead
+			save: makeSave(),
 		});
 	}
 
