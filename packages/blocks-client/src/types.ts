@@ -260,15 +260,10 @@ export type ValidComponentName =
 	`${Lowercase<string>}${ValidComponentNameWithSlash}${Lowercase<string>}`;
 
 export type ComponentListItem<
-	 
 	EP = {}, // EntityProps
-	 
 	SP = {}, // SiteProps
-	 
 	M = {}, // Menu
-	 
 	MI = {}, // MenuItem
-	 
 	CTX = {}, // Context
 > = {
 	componentName: ValidComponentName;
@@ -276,14 +271,9 @@ export type ComponentListItem<
 	Component: FCC<any, EP, SP, M, MI, CTX>;
 };
 export type ComponentList<
-	 
 	EP = {}, // EntityProps
-	 
 	SP = {}, // SiteProps
-	 
 	M = {}, // Menu
-	 
 	MI = {}, // MenuItem
-	 
 	CTX = {}, // Context
 > = ComponentListItem<EP, SP, M, MI, CTX>[];
