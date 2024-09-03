@@ -81,6 +81,6 @@ const ColumnBlock = ({
 export const column = {
 	Component: ColumnBlock,
 	componentName: "bring/column",
-};
+} as const;
 
 export default Column;

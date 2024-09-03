@@ -107,3 +107,8 @@ export type NestedTypedKeyOf<ObjectType extends Obj, T> = NestedTypedKeyOfOnRequ
 	DeepRequired<ObjectType>,
 	T
 >;
+
+type ValidComponentNamePart = `${Lowercase<string> | "-"}${Lowercase<string> | "-" | ""}`;
+type ValidComponentNameWithSlash = `${ValidComponentNamePart}/${ValidComponentNamePart}`;
+export type ValidComponentName =
+	`${Lowercase<string>}${ValidComponentNameWithSlash}${Lowercase<string>}`;

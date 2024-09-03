@@ -64,6 +64,6 @@ const RowBlock = ({
 	);
 };
 
-export const row = {Component: RowBlock, componentName: "bring/row"};
+export const row = {Component: RowBlock, componentName: "bring/row"} as const;
 
 export default Row;

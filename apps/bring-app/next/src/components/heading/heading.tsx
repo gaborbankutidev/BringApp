@@ -71,6 +71,6 @@ const HeadingBlock = ({
 export const heading = {
 	Component: HeadingBlock,
 	componentName: "bring/heading",
-};
+} as const;
 
 export default Heading;

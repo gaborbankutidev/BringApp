@@ -35,6 +35,6 @@ const Split = ({
 	);
 };
 
-export const split = {Component: Split, componentName: "bring/split"};
+export const split = {Component: Split, componentName: "bring/split"} as const;
 
 export default Split;

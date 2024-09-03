@@ -5,7 +5,7 @@ import makeLayout from "./components/layout";
 import makeMain from "./components/main";
 
 import {createBringElement, getEntity} from "./content";
-import type {BringNode, EntityProps, FCC, SiteProps} from "./types";
+import type {BringNode, ComponentList, EntityProps, SiteProps} from "./types";
 
 /**
  * Initializes the rendering of BringBlocks components.
@@ -38,11 +38,7 @@ export function initRender<
 	dataToken: string,
 	onRedirect: (redirectTo: string, responseCode: number) => void,
 	onNotFound: () => void,
-	componentList: {
-		componentName: `${Lowercase<string> | "-"}${Lowercase<string> | "-" | ""}`;
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		Component: FCC<any, EP, SP, M, MI, CTX>;
-	}[],
+	componentList: ComponentList<EP, SP, M, MI>,
 ) {
 	// Create component map
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any

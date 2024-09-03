@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 import type {FC} from "react";
 import {BringStylesClassNames} from "./styles";
 
@@ -252,3 +253,37 @@ export type BringNode = {
 	props: Obj;
 	children?: BringNode[];
 };
+
+type ValidComponentNamePart = `${Lowercase<string> | "-"}${Lowercase<string> | "-" | ""}`;
+type ValidComponentNameWithSlash = `${ValidComponentNamePart}/${ValidComponentNamePart}`;
+export type ValidComponentName =
+	`${Lowercase<string>}${ValidComponentNameWithSlash}${Lowercase<string>}`;
+
+export type ComponentListItem<
+	 
+	EP = {}, // EntityProps
+	 
+	SP = {}, // SiteProps
+	 
+	M = {}, // Menu
+	 
+	MI = {}, // MenuItem
+	 
+	CTX = {}, // Context
+> = {
+	componentName: ValidComponentName;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	Component: FCC<any, EP, SP, M, MI, CTX>;
+};
+export type ComponentList<
+	 
+	EP = {}, // EntityProps
+	 
+	SP = {}, // SiteProps
+	 
+	M = {}, // Menu
+	 
+	MI = {}, // MenuItem
+	 
+	CTX = {}, // Context
+> = ComponentListItem<EP, SP, M, MI, CTX>[];

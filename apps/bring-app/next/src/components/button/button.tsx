@@ -150,6 +150,6 @@ const ButtonBlock = ({
 export const button = {
 	Component: ButtonBlock,
 	componentName: "bring/button",
-};
+} as const;
 
 export default Button;

@@ -155,6 +155,6 @@ const ContactFormBlock = ({
 export const contactForm = {
 	Component: ContactFormBlock,
 	componentName: "bring/contact-form",
-};
+} as const;
 
 export default ContactForm;

@@ -115,6 +115,6 @@ const SectionBlock = ({
 export const section = {
 	Component: SectionBlock,
 	componentName: "bring/section",
-};
+} as const;
 
 export default Section;
