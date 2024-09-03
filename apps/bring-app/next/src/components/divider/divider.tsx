@@ -30,6 +30,6 @@ const Divider = ({
 	);
 };
 
-export const divider = {Component: Divider, componentName: "Divider"};
+export const divider = {Component: Divider, componentName: "bring/divider"};
 
 export default Divider;

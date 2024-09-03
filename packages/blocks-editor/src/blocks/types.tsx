@@ -65,7 +65,8 @@ export type BlockConfig<Props extends Obj = {}> = {
 	title?: string;
 	description?: string;
 	icon?: BlockIcon;
-	componentName: string;
+	componentName: `${Lowercase<string> | "-"}${Lowercase<string> | "-" | ""}`;
+
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	Component: FCC<Props, any, any, any, any, any>;
 	attributes?: BlockAttributesConfig<Props>;

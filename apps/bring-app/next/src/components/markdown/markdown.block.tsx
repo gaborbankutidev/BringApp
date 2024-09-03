@@ -18,6 +18,7 @@ import {contentSample} from "./sample-content";
 
 const markdownConfig: BlockConfig<MarkdownProps> = {
 	...markdown,
+	title: "Markdown",
 	description: "Markdown block is a simple text editor with markdown support",
 	attributes: {
 		source: stringAttributeSource("manual"),

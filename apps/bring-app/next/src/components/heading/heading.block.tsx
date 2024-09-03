@@ -15,6 +15,7 @@ import {
 
 const headingConfig: BlockConfig<HeadingProps> = {
 	...heading,
+	title: "Heading",
 	description: "Heading block",
 	icon: "heading",
 	attributes: {

@@ -8,7 +8,7 @@ const buttonConfig: BlockConfig<ContactFormBlockProps> = {
 			<div>Submit button label: {button}</div>
 		</div>
 	),
-	componentName: "ContactForm",
+	componentName: "bring/contact-form",
 	attributes: {
 		title: stringAttributeSource(),
 		button: stringAttributeSource(),

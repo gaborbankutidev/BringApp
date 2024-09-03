@@ -149,7 +149,7 @@ const ButtonBlock = ({
 
 export const button = {
 	Component: ButtonBlock,
-	componentName: "Button",
+	componentName: "bring/button",
 };
 
 export default Button;

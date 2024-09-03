@@ -7,6 +7,7 @@ import {
 
 const buttonConfig: BlockConfig<ButtonBlockProps> = {
 	...button,
+	title: "Button",
 	attributes: {
 		text: stringAttributeSource("Click here"),
 		href: stringAttributeSource("#"),

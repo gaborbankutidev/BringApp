@@ -23,10 +23,15 @@ import type {BringNode, EntityProps, FCC, SiteProps} from "./types";
  * @returns Object containing various functions and components for rendering BringBlocks.
  */
 export function initRender<
+	// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 	EP = {}, // EntityProps
+	// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 	SP = {}, // SiteProps
+	// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 	M = {}, // Menu
+	// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 	MI = {}, // MenuItem
+	// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 	CTX = {}, // Context
 >(
 	wpURL: string = "",
@@ -34,11 +39,13 @@ export function initRender<
 	onRedirect: (redirectTo: string, responseCode: number) => void,
 	onNotFound: () => void,
 	componentList: {
-		componentName: string;
+		componentName: `${Lowercase<string> | "-"}${Lowercase<string> | "-" | ""}`;
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		Component: FCC<any, EP, SP, M, MI, CTX>;
 	}[],
 ) {
 	// Create component map
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const componentMap = new Map<string, any>();
 	componentList.forEach(({Component, componentName}) =>
 		componentMap.set(componentName, Component),

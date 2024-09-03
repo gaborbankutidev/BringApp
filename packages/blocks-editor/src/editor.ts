@@ -181,17 +181,11 @@ export class Editor {
 	private parseBlocks(blocks: WpBlock[]) {
 		const nodes: BringNode[] = [];
 		for (const block of blocks) {
-			// FIXME solve block name parsing better, this is not safe
-			// and works on the assumption that we follow a certain pattern with the block name
-			// but this is not enforced in any way
-			const blockName = block.name.split("/").pop() ?? "";
-			const name = blockName.charAt(0).toUpperCase() + blockName.slice(1);
-
 			const {bringStyles} = block.attributes;
-			const blockConfig = this.blockList.find((b) => b.componentName === name);
+			const blockConfig = this.blockList.find((b) => b.componentName === block.name);
 			if (!blockConfig) {
 				console.error(
-					`🚀 Block '${name}' not found in the block list and will not be saved!`,
+					`🚀 Block '${block.name}' not found in the block list and will not be saved!`,
 				);
 				continue;
 			}
@@ -206,7 +200,7 @@ export class Editor {
 
 			const node: BringNode = {
 				key: block.clientId,
-				component: name,
+				component: block.name,
 				props: {
 					bringStylesClassNames,
 					...block.attributes,
@@ -231,7 +225,7 @@ export class Editor {
 		const title = config.title ? config.title : config.componentName;
 
 		// @ts-expect-error: Expect error here because Wordpress's `registerBlockType` types are so complicated TS can't infer the correct types
-		registerBlockType(`bring/${title.toLowerCase()}`, {
+		registerBlockType(config.componentName, {
 			title,
 			description: config.description ?? `${title} block by Bring`,
 			category: "widgets", // TODO custom category

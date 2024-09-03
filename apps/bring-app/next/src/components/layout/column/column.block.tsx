@@ -15,6 +15,7 @@ import {ColumnEdit} from "./column.edit";
 
 export const columnConfig: BlockConfig<ColumnBlockProps> = {
 	...column,
+	title: "Column",
 	icon: "align-center",
 	attributes: {
 		colSpan: objectAttributeSource(),

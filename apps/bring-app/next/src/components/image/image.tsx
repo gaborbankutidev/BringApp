@@ -127,6 +127,6 @@ const ImageBlock = ({
 	);
 };
 
-export const image = {Component: ImageBlock, componentName: "Image"};
+export const image = {Component: ImageBlock, componentName: "bring/image"};
 
 export default Image;
