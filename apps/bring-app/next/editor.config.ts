@@ -13,6 +13,7 @@ import contactForm from "@/components/forms/contact/contact.block";
 import heading from "@/components/heading/heading.block";
 import image from "@/components/image/image.block";
 import markdown from "@/components/markdown/markdown.block";
+import {env} from "@/env.mjs";
 import {Editor} from "@bring/blocks-editor";
 
 const blockList = [
@@ -32,4 +33,4 @@ const blockList = [
 	markdown,
 ];
 
-Editor.init(process.env.NEXT_PUBLIC_WP_BASE_URL ?? "", blockList);
+Editor.init(env.NEXT_PUBLIC_WP_BASE_URL, blockList);

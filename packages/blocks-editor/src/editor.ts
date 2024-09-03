@@ -12,7 +12,7 @@ import {BringNode, Obj, WpBlock} from "./types";
 declare global {
 	// Interface is needed to augment global `Window`
 	interface Window {
-		jwt: {token: string};
+		jwt: {token: string}; // FIXME move this to a cookie
 		// Magical bug by WP so declared here :)
 		wp: {
 			data: {
@@ -63,7 +63,7 @@ export class Editor {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	private constructor(wpBaseURL: string, blockList: BlockConfig<any>[]) {
 		this.wpBaseURL = wpBaseURL;
-		this.jwtToken = window.jwt.token;
+		this.jwtToken = window.jwt.token; // FIXME move this to a cookie
 		this.isSaving = false;
 		this.blockList = blockList;
 

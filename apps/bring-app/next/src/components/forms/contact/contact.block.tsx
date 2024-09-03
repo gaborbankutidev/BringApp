@@ -1,14 +1,11 @@
-import {type ContactFormBlockProps} from "@/components/forms/contact";
+import {
+	contactForm,
+	type ContactFormBlockProps,
+} from "@/components/forms/contact";
 import {stringAttributeSource, type BlockConfig} from "@bring/blocks-editor";
 
-const buttonConfig: BlockConfig<ContactFormBlockProps> = {
-	Component: ({title, button}: ContactFormBlockProps) => (
-		<div>
-			<div>Form title: {title}</div>
-			<div>Submit button label: {button}</div>
-		</div>
-	),
-	componentName: "bring/contact-form",
+const contactFormConfig: BlockConfig<ContactFormBlockProps> = {
+	...contactForm,
 	attributes: {
 		title: stringAttributeSource(),
 		button: stringAttributeSource(),
@@ -25,4 +22,4 @@ const buttonConfig: BlockConfig<ContactFormBlockProps> = {
 	],
 };
 
-export default buttonConfig;
+export default contactFormConfig;
