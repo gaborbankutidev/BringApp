@@ -26,6 +26,7 @@ const contactFormConfig: BlockConfig<ContactFormBlockProps> = {
 			initialOpen: true,
 		},
 	],
+	// This is just a mockup of the form, it doesn't actually submit anything
 	Edit: () => (
 		<form className="flex flex-col gap-6">
 			<Heading level={2} className="mb-8">

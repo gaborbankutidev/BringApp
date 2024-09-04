@@ -22,10 +22,10 @@ export const componentList = [
 	split,
 	// components
 	button,
-	contactForm,
 	divider,
 	embed,
 	heading,
 	image,
 	markdown,
+	contactForm,
 ];

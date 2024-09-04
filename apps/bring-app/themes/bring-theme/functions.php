@@ -51,13 +51,13 @@ Config::init([
 		"split",
 		// components
 		"button",
-		"contact-form",
 		"divider",
 		"embed",
 		"heading",
 		"image",
 		"markdown",
 		"post-content",
+		"contact-form",
 	])
 	// Ignore paths
 	->ignorePaths(["rest-api/docs"]);

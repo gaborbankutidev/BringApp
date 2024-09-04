@@ -1,16 +1,15 @@
 "use client";
 
+import {type BP} from "@/bring";
 import {useWPSendForm} from "@/bring/client";
+import Button from "@/components/button";
+import Heading from "@/components/heading";
 import {twJoin} from "@/utils";
 import {zodResolver} from "@hookform/resolvers/zod";
 import React, {useState} from "react";
 import {useForm} from "react-hook-form";
 import {BiEnvelope, BiLoader, BiPaperPlane, BiUser} from "react-icons/bi";
 import {z} from "zod";
-
-import {type BP} from "@/bring";
-import Button from "@/components/button";
-import Heading from "@/components/heading";
 import {Checkbox, Input, Textarea} from "../components";
 
 const contactFormValidation = z.object({
@@ -62,7 +61,7 @@ const ContactForm = ({title, button = "Send", ...props}: ContactFormProps) => {
 			await send(values);
 			setSuccess(true);
 		} catch {
-			setError("Szerver hiba. Kérjük próbálja meg később.");
+			setError("Server error. Please try again later.");
 		} finally {
 			setSubmitting(false);
 		}
@@ -78,32 +77,32 @@ const ContactForm = ({title, button = "Send", ...props}: ContactFormProps) => {
 				)}
 				<Input
 					{...register("name")}
-					label="Név*"
+					label="Name*"
 					error={errors.name?.message}
 					placeholder="John Doe"
 					icon={BiUser}
 				/>
 				<Input
 					{...register("email")}
-					label="E-mail cím*"
+					label="E-mail address*"
 					error={errors.email?.message}
 					placeholder="john_doe@gmail.com"
 					icon={BiEnvelope}
 				/>
 				<Textarea
 					{...register("message")}
-					label="Üzenet (opcionális)"
+					label="Message (optional)"
 					error={errors.message?.message}
-					placeholder="Küldj üzenetet számunkra"
+					placeholder="Say something..."
 				/>
 				<Checkbox
 					{...register("consent")}
 					id="consent"
-					label="Elfogadom az adatkezelési tájékoztatót*"
+					label="I accept the privacy policy*"
 					error={errors.consent?.message}
 				/>
 
-				<div className="text-11 text-right text-grey-800">*Kötelező mezők</div>
+				<div className="text-11 text-right text-grey-800">*Required fields</div>
 
 				<Button
 					as="button"
@@ -116,7 +115,7 @@ const ContactForm = ({title, button = "Send", ...props}: ContactFormProps) => {
 					{isSubmitting ? (
 						<div className="flex items-center gap-4">
 							<BiLoader size={20} className="animate-spin text-orange" />
-							<span>Küldés...</span>
+							<span>Sending...</span>
 						</div>
 					) : (
 						<div className="flex items-center gap-4">
@@ -129,7 +128,7 @@ const ContactForm = ({title, button = "Send", ...props}: ContactFormProps) => {
 			{!error && <p className="mt-6 text-brick">{error}</p>}
 			{isSuccess && (
 				<p className="mt-6 font-bold text-orange-300">
-					Az üzenet sikeresen elküldve.
+					Thank you for your message! We will get back to you soon.
 				</p>
 			)}
 		</div>

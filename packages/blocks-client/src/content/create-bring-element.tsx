@@ -30,15 +30,19 @@ const Error: FC<ErrorComponentInterface> = ({name}) => <div>Error while renderin
  */
 export default function createBringElement(
 	nodes: BringNode[],
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	componentMap: Map<string, FC<any>>,
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	entityProps: any = {},
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	siteProps: any = {},
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	context: any = {},
 	PostContent: ReactNode = null,
 ) {
 	return nodes.map((node) => {
 		// check if component is PostContent and return PostContent ReactNode
-		if (node.component === "PostContent") {
+		if (node.component === "bring/post-content") {
 			return PostContent;
 		}
 
