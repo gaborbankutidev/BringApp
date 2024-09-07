@@ -23,16 +23,11 @@ import type {BringNode, ComponentList, EntityProps, SiteProps} from "./types";
  * @returns Object containing various functions and components for rendering BringBlocks.
  */
 export function initRender<
-	// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-	EP = {}, // EntityProps
-	// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-	SP = {}, // SiteProps
-	// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-	M = {}, // Menu
-	// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-	MI = {}, // MenuItem
-	// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-	CTX = {}, // Context
+	EP = object, // EntityProps
+	SP = object, // SiteProps
+	M = object, // Menu
+	MI = object, // MenuItem
+	CTX = object, // Context
 >(
 	wpURL: string = "",
 	dataToken: string,
