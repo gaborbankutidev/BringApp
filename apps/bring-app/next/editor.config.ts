@@ -1,5 +1,3 @@
-import {editorInit} from "@bring/blocks-editor";
-
 // layout
 import column from "@/components/layout/column/column.block";
 import group from "@/components/layout/group/group.block";
@@ -11,10 +9,11 @@ import split from "@/components/layout/split/split.block";
 import button from "@/components/button/button.block";
 import divider from "@/components/divider/divider.block";
 import embed from "@/components/embed/embed.block";
-import contactForm from "@/components/forms/contact/contact.block";
 import heading from "@/components/heading/heading.block";
 import image from "@/components/image/image.block";
 import markdown from "@/components/markdown/markdown.block";
+import {env} from "@/env.mjs";
+import {Editor} from "@bring/blocks-editor";
 
 const blockList = [
 	// layout
@@ -25,7 +24,6 @@ const blockList = [
 	split,
 	// components
 	button,
-	contactForm,
 	divider,
 	embed,
 	heading,
@@ -33,4 +31,4 @@ const blockList = [
 	markdown,
 ];
 
-editorInit(blockList);
+Editor.init(env.NEXT_PUBLIC_WP_BASE_URL, blockList);

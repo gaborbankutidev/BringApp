@@ -13,6 +13,6 @@ const Embed = ({url, height = 400, className, id}: BP<EmbedProps>) => {
 	) : null;
 };
 
-export const embed = {Component: Embed, componentName: "Embed"};
+export const embed = {Component: Embed, componentName: "bring/embed"} as const;
 
 export default Embed;

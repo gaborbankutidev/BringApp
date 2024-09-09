@@ -112,6 +112,9 @@ const SectionBlock = ({
 	</Section>
 );
 
-export const section = {Component: SectionBlock, componentName: "Section"};
+export const section = {
+	Component: SectionBlock,
+	componentName: "bring/section",
+} as const;
 
 export default Section;

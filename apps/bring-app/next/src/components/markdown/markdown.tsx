@@ -300,7 +300,7 @@ export const MarkdownBlock = ({
 
 export const markdown = {
 	Component: MarkdownBlock,
-	componentName: "Markdown",
-};
+	componentName: "bring/markdown",
+} as const;
 
 export default Markdown;

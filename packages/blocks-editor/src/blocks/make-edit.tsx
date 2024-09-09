@@ -17,6 +17,7 @@ type EditType<Props> = {
 };
 
 export function makeEdit<Props extends Obj>(config: BlockConfig<Props>) {
+	// eslint-disable-next-line react/display-name
 	return ({attributes, setAttributes, clientId, isSelected}: EditType<Props>) => {
 		const {key, parentKey, className, id, bringStyles, ...props} = attributes;
 
@@ -69,8 +70,9 @@ export function makeEdit<Props extends Obj>(config: BlockConfig<Props>) {
 					<EditorCard
 						color="grey"
 						isSelected={isSelected ?? false}
-						name={config.componentName}
+						name={config.title ?? config.componentName}
 					>
+						{/* eslint-disable-next-line @typescript-eslint/no-explicit-any*/}
 						<config.Component className={joinedClassName} id={id} {...(props as any)}>
 							<InnerBlocks allowedBlocks={config.allowedBlocks} />
 						</config.Component>

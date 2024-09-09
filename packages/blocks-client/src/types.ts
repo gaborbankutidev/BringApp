@@ -20,7 +20,7 @@ export type Defined<T> = Exclude<T, undefined>;
  * @template MI - Menu Item type
  * @template CTX - Context type
  */
-export type BP<P = {}, EP = {}, SP = {}, M = {}, MI = {}, CTX = {}> = P & {
+export type BP<P = object, EP = object, SP = object, M = object, MI = object, CTX = object> = P & {
 	bringStylesClassNames?: BringStylesClassNames | undefined;
 	className?: string | undefined;
 	id?: string | undefined;
@@ -39,7 +39,7 @@ export type BP<P = {}, EP = {}, SP = {}, M = {}, MI = {}, CTX = {}> = P & {
  * @template MI - Menu Item type
  * @template CTX - Context type
  */
-export type FCC<P = {}, EP = {}, SP = {}, M = {}, MI = {}, CTX = {}> = FC<
+export type FCC<P = object, EP = object, SP = object, M = object, MI = object, CTX = object> = FC<
 	BP<P, EP, SP, M, MI, CTX>
 >;
 
@@ -88,7 +88,7 @@ export type ImageType = MediaType;
  * @property classes - The menu item classes.
  * @property children - The menu item children.
  */
-export type MenuItemType<T = {}> = {
+export type MenuItemType<T = object> = {
 	id?: number;
 	name: string;
 	url: string;
@@ -106,7 +106,7 @@ export type MenuItemType<T = {}> = {
  * @property name - The menu name.
  * @property items - The menu items.
  */
-export type MenuType<T = {}, iT = {}> = {
+export type MenuType<T = object, iT = object> = {
 	id: number;
 	name: string;
 	items: MenuItemType<iT>[];
@@ -131,7 +131,7 @@ export type EntityType = "post" | "taxonomy" | "author";
  * Represents a dynamic entity list, which is an array of objects with entity properties and additional properties.
  * @template T - Additional properties type
  */
-export type DynamicEntityList<T = {}> = ({
+export type DynamicEntityList<T = object> = ({
 	entityType: EntityType | null;
 	entitySlug: string | null;
 	entityId: number;
@@ -156,7 +156,7 @@ export type DynamicEntityList<T = {}> = ({
  * @property slug - The entity slug.
  * @property url - The entity URL.
  */
-export type DynamicEntityProps<T = {}> = {
+export type DynamicEntityProps<T = object> = {
 	entityType: EntityType | null;
 	entitySlug: string | null;
 	entityId: number;
@@ -176,7 +176,7 @@ export type DynamicEntityProps<T = {}> = {
  * @property menus - The site menus.
  * @property menuLocations - The site menu locations.
  */
-export type SiteProps<SP = {}, M = {}, MI = {}> = {
+export type SiteProps<SP = object, M = object, MI = object> = {
 	menus: MenuType<M, MI>[];
 	menuLocations: MenuLocationType[];
 } & SP;
@@ -208,7 +208,7 @@ export type EntityContent = {
  * @property description - The entity description.
  * @property image - The entity image.
  */
-export type EntityProps<EP = {}> = {
+export type EntityProps<EP = object> = {
 	entityType: EntityType | null;
 	entitySlug: string | null;
 	entityId: number;
@@ -230,7 +230,7 @@ export type EntityProps<EP = {}> = {
  * @property props - The entity props.
  * @property content - The entity content.
  */
-export type Entity<EP = {}> = {
+export type Entity<EP = object> = {
 	id: number | null;
 	slug: string | null;
 	type: EntityType | null;
@@ -252,3 +252,24 @@ export type BringNode = {
 	props: Obj;
 	children?: BringNode[];
 };
+
+export type ComponentName = `${Lowercase<string>}/${Lowercase<string>}`;
+
+export type ComponentListItem<
+	EP = object, // EntityProps
+	SP = object, // SiteProps
+	M = object, // Menu
+	MI = object, // MenuItem
+	CTX = object, // Context
+> = {
+	componentName: ComponentName;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	Component: FCC<any, EP, SP, M, MI, CTX>;
+};
+export type ComponentList<
+	EP = object, // EntityProps
+	SP = object, // SiteProps
+	M = object, // Menu
+	MI = object, // MenuItem
+	CTX = object, // Context
+> = ComponentListItem<EP, SP, M, MI, CTX>[];

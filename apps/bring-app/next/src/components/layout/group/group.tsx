@@ -48,7 +48,7 @@ const Group = ({
 
 export const group = {
 	Component: Group,
-	componentName: "Group",
-};
+	componentName: "bring/group",
+} as const;
 
 export default Group;

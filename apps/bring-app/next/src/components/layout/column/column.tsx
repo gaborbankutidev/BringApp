@@ -80,7 +80,7 @@ const ColumnBlock = ({
 
 export const column = {
 	Component: ColumnBlock,
-	componentName: "Column",
-};
+	componentName: "bring/column",
+} as const;
 
 export default Column;

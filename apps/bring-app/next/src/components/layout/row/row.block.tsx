@@ -17,6 +17,7 @@ import {objectKeys} from "@bring/blocks-client";
 
 const rowConfig: BlockConfig<RowProps> = {
 	...row,
+	title: "Row",
 	icon: "align-center",
 	allowedBlocks: ["bring/column"],
 	attributes: {

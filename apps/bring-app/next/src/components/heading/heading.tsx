@@ -68,6 +68,9 @@ const HeadingBlock = ({
 	) : null;
 };
 
-export const heading = {Component: HeadingBlock, componentName: "Heading"};
+export const heading = {
+	Component: HeadingBlock,
+	componentName: "bring/heading",
+} as const;
 
 export default Heading;

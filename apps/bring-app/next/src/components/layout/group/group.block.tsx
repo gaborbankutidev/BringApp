@@ -15,6 +15,7 @@ import GroupEdit from "./group.edit";
 
 const groupConfig: BlockConfig<GroupProps> = {
 	...group,
+	title: "Group",
 	description: "A group of blocks, can be vertical or horizontal.",
 	icon: "align-center",
 	attributes: {

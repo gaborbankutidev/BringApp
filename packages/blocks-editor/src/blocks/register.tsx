@@ -27,6 +27,6 @@ export function registerBringBlock<Props extends Obj>(config: BlockConfig<Props>
 			attributes: config.previewAttributes,
 		},
 		edit: makeEdit<Props>(config),
-		save: makeSave<Props>(config), // refactor save hooks and use InnedBlock instead
+		save: makeSave(),
 	});
 }

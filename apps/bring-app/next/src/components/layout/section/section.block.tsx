@@ -13,6 +13,7 @@ import {SectionEdit} from "./section.edit";
 
 const sectionConfig: BlockConfig<SectionProps> = {
 	...section,
+	title: "Section",
 	icon: "align-center",
 	allowedBlocks: ["bring/row"],
 	attributes: {

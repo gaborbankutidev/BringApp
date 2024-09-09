@@ -9,6 +9,7 @@ import {
 
 const dividerConfig: BlockConfig<DividerProps> = {
 	...divider,
+	title: "Divider",
 	description: "Divider helps to apply up white space between blocks.",
 	attributes: {
 		withLine: booleanAttributeSource(),

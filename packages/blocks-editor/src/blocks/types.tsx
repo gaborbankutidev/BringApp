@@ -3,7 +3,7 @@ import type {FC, ReactNode} from "react";
 import {FCC} from "../client-types";
 import type {ControlConfigType} from "../controls/types";
 import {BringStyles, BringStylesConfig} from "../styles/types";
-import type {NestedKeyOf, Obj} from "../types";
+import type {NestedKeyOf, Obj, ValidComponentName} from "../types";
 
 export type ClientAttributes<Props> = Omit<Props, "children">;
 
@@ -24,6 +24,7 @@ type BlockAttributesConfig<Props> = {
 	[k in keyof ClientAttributes<Props>]: AttributeSource<ClientAttributes<Props>[k]>;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export type BlockControlsConfig<Props extends Obj = {}> =
 	| (
 			| {
@@ -59,11 +60,14 @@ export type BlockSave<Props> = FC<{
 
 // ===========
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export type BlockConfig<Props extends Obj = {}> = {
 	title?: string;
 	description?: string;
 	icon?: BlockIcon;
-	componentName: string;
+	componentName: ValidComponentName;
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	Component: FCC<Props, any, any, any, any, any>;
 	attributes?: BlockAttributesConfig<Props>;
 	previewAttributes?: ClientAttributes<Props>;

@@ -5,7 +5,7 @@ import makeLayout from "./components/layout";
 import makeMain from "./components/main";
 
 import {createBringElement, getEntity} from "./content";
-import type {BringNode, EntityProps, FCC, SiteProps} from "./types";
+import type {BringNode, ComponentList, EntityProps, SiteProps} from "./types";
 
 /**
  * Initializes the rendering of BringBlocks components.
@@ -23,22 +23,20 @@ import type {BringNode, EntityProps, FCC, SiteProps} from "./types";
  * @returns Object containing various functions and components for rendering BringBlocks.
  */
 export function initRender<
-	EP = {}, // EntityProps
-	SP = {}, // SiteProps
-	M = {}, // Menu
-	MI = {}, // MenuItem
-	CTX = {}, // Context
+	EP = object, // EntityProps
+	SP = object, // SiteProps
+	M = object, // Menu
+	MI = object, // MenuItem
+	CTX = object, // Context
 >(
 	wpURL: string = "",
 	dataToken: string,
 	onRedirect: (redirectTo: string, responseCode: number) => void,
 	onNotFound: () => void,
-	componentList: {
-		componentName: string;
-		Component: FCC<any, EP, SP, M, MI, CTX>;
-	}[],
+	componentList: ComponentList<EP, SP, M, MI>,
 ) {
 	// Create component map
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const componentMap = new Map<string, any>();
 	componentList.forEach(({Component, componentName}) =>
 		componentMap.set(componentName, Component),

@@ -7,6 +7,7 @@ import {
 
 const embedConfig: BlockConfig<EmbedProps> = {
 	...embed,
+	title: "Embed",
 	description: "Embeds a video or other content from a url.",
 	attributes: {
 		url: stringAttributeSource(),

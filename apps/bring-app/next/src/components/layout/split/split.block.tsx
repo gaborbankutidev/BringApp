@@ -6,6 +6,7 @@ import {SplitEdit} from "./split.edit";
 
 const splitConfig: BlockConfig<SplitProps> = {
 	...split,
+	title: "Split",
 	icon: "align-center",
 	attributes: {
 		columnCount: objectAttributeSource(),
