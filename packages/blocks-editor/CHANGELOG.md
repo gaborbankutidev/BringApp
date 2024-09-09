@@ -1,5 +1,11 @@
 # @bring/blocks-editor
 
+## 1.0.0
+
+### Major Changes
+
+-   89f17f0: Refactored the editor interface and fixed errors related to blocks not saving properly
+
 ## 0.3.3
 
 ## 0.3.2
