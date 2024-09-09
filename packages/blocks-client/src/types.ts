@@ -253,10 +253,7 @@ export type BringNode = {
 	children?: BringNode[];
 };
 
-type ValidComponentNamePart = `${Lowercase<string> | "-"}${Lowercase<string> | "-" | ""}`;
-type ValidComponentNameWithSlash = `${ValidComponentNamePart}/${ValidComponentNamePart}`;
-export type ValidComponentName =
-	`${Lowercase<string>}${ValidComponentNameWithSlash}${Lowercase<string>}`;
+export type ComponentName = `${Lowercase<string>}/${Lowercase<string>}`;
 
 export type ComponentListItem<
 	EP = object, // EntityProps
@@ -265,7 +262,7 @@ export type ComponentListItem<
 	MI = object, // MenuItem
 	CTX = object, // Context
 > = {
-	componentName: ValidComponentName;
+	componentName: ComponentName;
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	Component: FCC<any, EP, SP, M, MI, CTX>;
 };
