@@ -1,5 +1,11 @@
 # @bring/create-app
 
+## 0.2.0
+
+### Minor Changes
+
+-   1a1954b: Remove lodash kebabcase dependency to fix numeric value handling in project names
+
 ## 0.1.17
 
 ### Patch Changes
