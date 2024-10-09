@@ -2,8 +2,8 @@
 
 import {confirm, input} from "@inquirer/prompts";
 import fsExtra from "fs-extra";
-import kebabCase from "lodash.kebabcase";
 import {runCLI} from "./run-cli";
+import {kebabCase} from "./utils";
 
 async function main() {
 	console.log("Welcome to the Bring App Creator!");

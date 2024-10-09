@@ -1,6 +1,6 @@
 import fsExtra from "fs-extra";
-import kebabCase from "lodash.kebabcase";
 import path from "path";
+import {kebabCase} from "./utils";
 
 export function updateProjectName(directory: string, projectName: string) {
 	const packageJsonPath = path.join(directory, "package.json");
