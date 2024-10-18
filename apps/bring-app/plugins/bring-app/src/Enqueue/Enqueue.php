@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BringTheme\Enqueue;
+namespace BringApp\Enqueue;
 
 // No direct access
 defined("ABSPATH") or die("Hey, do not do this 😱");

@@ -5,13 +5,13 @@ use Dotenv\Dotenv;
 use Bring\BlocksWP\BringBlocks;
 use Bring\BlocksWP\Config;
 
-use BringTheme\Settings\Settings;
-use BringTheme\Enqueue\Enqueue;
-use BringTheme\Env\Env;
-use BringTheme\Forms\Forms;
-use BringTheme\General\General;
-use BringTheme\Post\Post;
-use BringTheme\Plugins\Plugins;
+use BringApp\Settings\Settings;
+use BringApp\Enqueue\Enqueue;
+use BringApp\Env\Env;
+use BringApp\Forms\Forms;
+use BringApp\General\General;
+use BringApp\Post\Post;
+use BringApp\Plugins\Plugins;
 
 /**
  * The file that defines the core plugin class

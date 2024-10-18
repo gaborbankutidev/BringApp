@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BringTheme\Settings;
+namespace BringApp\Settings;
 
 // No direct access
 defined("ABSPATH") or die("Hey, do not do this 😱");

@@ -5,7 +5,7 @@
 	"type": "project",
 	"autoload": {
 		"psr-4": {
-			"BringTheme\\": "plugins/bring-app/src/"
+			"BringApp\\": "plugins/bring-app/src/"
 		}
 	},
 	"scripts": {
@@ -13,7 +13,7 @@
 	},
 	"authors": [
 		{
-			"name": "Bring Theme Ltd.",
+			"name": "Bring Team Ltd.",
 			"homepage": "https://thebringteam.com/"
 		}
 	],

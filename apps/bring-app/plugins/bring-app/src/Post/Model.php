@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BringTheme\Post;
+namespace BringApp\Post;
 
 // No direct access
 defined("ABSPATH") or die("Hey, do not do this 😱");

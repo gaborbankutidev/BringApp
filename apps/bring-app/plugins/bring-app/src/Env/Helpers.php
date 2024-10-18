@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace BringTheme\Env;
+namespace BringApp\Env;
 
-use BringTheme\Exceptions\EnvironmentVariableMissingException;
-use BringTheme\Exceptions\EnvironmentVariableWrongTypeException;
+use BringApp\Exceptions\EnvironmentVariableMissingException;
+use BringApp\Exceptions\EnvironmentVariableWrongTypeException;
 
 // No direct access
 defined("ABSPATH") or die("Hey, do not do this 😱");

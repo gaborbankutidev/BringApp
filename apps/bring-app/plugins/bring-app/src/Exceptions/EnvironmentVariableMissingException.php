@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BringTheme\Exceptions;
+namespace BringApp\Exceptions;
 
 use Exception;
 use Throwable;
