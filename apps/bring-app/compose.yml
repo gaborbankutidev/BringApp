@@ -26,8 +26,7 @@ services:
       WORDPRESS_DEBUG: true
     volumes:
       - ./wordpress:/var/www/html
-      - ./themes/bring-theme:/var/www/html/wp-content/themes/bring-theme
-      - ./themes/project-theme:/var/www/html/wp-content/themes/project-theme
+      - ./plugins/bring-app:/var/www/html/wp-content/plugins/bring-app
 
   phpmyadmin:
     image: phpmyadmin
@@ -51,8 +50,7 @@ services:
       - ./nginx:/etc/nginx/conf.d
       - ./nginx/logs:/var/log/nginx
       - ./wordpress:/var/www/html
-      - ./themes/bring-theme:/var/www/html/wp-content/themes/bring-theme
-      - ./themes/project-theme:/var/www/html/wp-content/themes/project-theme
+      - ./plugins/bring-app:/var/www/html/wp-content/plugins/bring-app
 
 volumes:
   db_data:
