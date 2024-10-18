@@ -14,7 +14,7 @@ function watchBlocksWp() {
 		if (filename) {
 			console.log(`${filename} file Changed`);
 
-			fsExtra.removeSync(path.join(CWD, "apps/bring-app/themes/bring-theme/vendor/bring"));
+			fsExtra.removeSync(path.join(CWD, "apps/bring-app/plugins/bring-app/vendor/bring"));
 
 			execSync("composer install", {
 				stdio: "inherit",
