@@ -1,7 +1,7 @@
 {
 	"$schema": "https://raw.githubusercontent.com/composer/composer/main/res/composer-schema.json",
-	"name": "bring/template",
-	"description": "Bring App Starter Template",
+	"name": "bring-app/plugin",
+	"description": "Bring App Plugin Starter Template",
 	"type": "project",
 	"autoload": {
 		"psr-4": {
