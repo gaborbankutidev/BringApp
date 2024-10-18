@@ -104,4 +104,34 @@ class Bring_App_Public {
 			false,
 		);
 	}
+
+	/**
+	 * Bring App custom public facing functionality added below.
+	 *
+	 * Actions & filters should be called from the includes/main plugin class.
+	 */
+
+	/* Health Check */
+	public function Bring_App_Health_Check() {
+		register_rest_route("bring", "/healthcheck", [
+			"methods" => "GET",
+			"callback" => fn() => new WP_REST_Response(["ok" => true], 200),
+			"permission_callback" => "__return_true",
+		]);
+	}
+
+	/* Add excerpt to dynamic post list */
+	public function Bring_App_add_excerpt_to_dynamic_post_list(
+		$items,
+		$entity_slug,
+		$custom_data,
+	) {
+		$items = array_map(function ($item) {
+			$item["excerpt"] = get_the_excerpt($item["entityId"]);
+
+			return $item;
+		}, $items);
+
+		return $items;
+	}
 }

@@ -1,5 +1,18 @@
 <?php
 
+use Dotenv\Dotenv;
+
+use Bring\BlocksWP\BringBlocks;
+use Bring\BlocksWP\Config;
+
+use BringTheme\Settings\Settings;
+use BringTheme\Enqueue\Enqueue;
+use BringTheme\Env\Env;
+use BringTheme\Forms\Forms;
+use BringTheme\General\General;
+use BringTheme\Post\Post;
+use BringTheme\Plugins\Plugins;
+
 /**
  * The file that defines the core plugin class
  *
@@ -77,6 +90,7 @@ class Bring_App {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
+		$this->init_app();
 	}
 
 	/**
@@ -96,6 +110,11 @@ class Bring_App {
 	 * @access   private
 	 */
 	private function load_dependencies() {
+		/**
+		 * The class responsible for loading vendor dependencies.
+		 */
+		require_once plugin_dir_path(dirname(__FILE__)) . "vendor/autoload.php";
+
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
@@ -193,6 +212,23 @@ class Bring_App {
 			$plugin_public,
 			"enqueue_scripts",
 		);
+
+		/* Custom functionality actions and filters added below */
+
+		/* This is only to test your WordPress installation, you can remove it after you make sure everything is working */
+		$this->loader->add_action(
+			"rest_api_init",
+			$plugin_public,
+			"Bring_App_Health_Check",
+		);
+
+		$this->loader->add_filter(
+			"bring_dynamic_post_list",
+			$plugin_public,
+			"Bring_App_add_excerpt_to_dynamic_post_list",
+			10,
+			3,
+		);
 	}
 
 	/**
@@ -233,5 +269,69 @@ class Bring_App {
 	 */
 	public function get_version() {
 		return $this->version;
+	}
+
+	/**
+	 * Initialize Bring App functionality.
+	 *
+	 * @since     1.0.0
+	 * @access   public
+	 */
+	public function init_app() {
+		// Load env variables
+		$dotenv = Dotenv::createImmutable(dirname(__DIR__));
+		$dotenv->safeLoad();
+
+		// initialize wordpress settings
+		Settings::init();
+
+		// config bring
+		Config::init([
+			"DATA_TOKEN" => Env::DATA_TOKEN(),
+			"JWT_SECRET_KEY" => Env::JWT_SECRET_KEY(),
+			"NEXT_BASE_URL" => Env::NEXT_BASE_URL(),
+		])
+			// Turn on layout features
+			->useHeader()
+			->useFooter()
+			->useLayout()
+			->useLibrary()
+			// Configure editor & layout
+			->editorPostTypes()
+			->layoutPostTypes()
+			->layoutTaxonomies()
+			// Add entity props
+			->entityProps([])
+			// Further features
+			->forms(["contact"])
+			// Register blocks
+			->blocks([
+				// layout
+				"column",
+				"group",
+				"row",
+				"section",
+				"split",
+				// components
+				"button",
+				"divider",
+				"embed",
+				"heading",
+				"image",
+				"markdown",
+				"post-content",
+				"contact-form",
+			])
+			// Ignore paths
+			->ignorePaths(["rest-api/docs"]);
+
+		// init bring
+		BringBlocks::init();
+
+		// init theme
+		Enqueue::init();
+		Forms::init();
+		General::init();
+		Post::init();
 	}
 }
