@@ -29,5 +29,20 @@ class Bring_App_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
+		self::remove_theme_capabilities_on_activation();
+	}
+
+	/* Function to remove theme-related capabilities on plugin activation */
+	private static function remove_theme_capabilities_on_activation() {
+		global $wp_roles;
+		if (!isset($wp_roles)) {
+			$wp_roles = new WP_Roles();
+		}
+
+		foreach ($wp_roles->roles as $role_name => $role_info) {
+			$role = get_role($role_name);
+			$role->remove_cap("switch_themes");
+			$role->remove_cap("edit_theme_options");
+		}
 	}
 }

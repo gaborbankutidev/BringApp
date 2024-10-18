@@ -187,6 +187,15 @@ class Bring_App {
 			$plugin_admin,
 			"enqueue_scripts",
 		);
+
+		/* Custom functionality actions and filters added below */
+
+		/* Disable the themes setup */
+		$this->loader->add_action(
+			"admin_init",
+			$plugin_admin,
+			"disable_themes_setup",
+		);
 	}
 
 	/**

@@ -104,4 +104,42 @@ class Bring_App_Admin {
 			false,
 		);
 	}
+
+	public function disable_themes_setup() {
+		// 1. Hide the Themes Menu
+		remove_submenu_page("themes.php", "themes.php");
+
+		// 2. Disable Theme Switching
+		function lock_theme($theme) {
+			return "twentytwentyfour"; // Set enforced theme name here
+		}
+		add_filter("template", "lock_theme");
+		add_filter("stylesheet", "lock_theme");
+		add_filter("option_stylesheet", "lock_theme");
+
+		// 3. Restrict Access to Theme Editor, Customizer, and Themes Page via direct URL
+		function disable_theme_editor_access() {
+			global $pagenow;
+			if (
+				$pagenow == "theme-editor.php" ||
+				$pagenow == "customize.php" ||
+				$pagenow == "themes.php" ||
+				$pagenow == "theme-install.php"
+			) {
+				wp_redirect(admin_url());
+				exit();
+			}
+		}
+		add_action("admin_init", "disable_theme_editor_access");
+
+		// 4. Hide Theme Update Notifications
+		function hide_theme_updates() {
+			remove_action("admin_notices", "update_nag", 3);
+			add_filter("pre_site_transient_update_themes", "__return_null");
+		}
+		add_action("admin_menu", "hide_theme_updates");
+
+		// 5. Disable Theme Installation
+		remove_submenu_page("themes.php", "theme-install.php");
+	}
 }
