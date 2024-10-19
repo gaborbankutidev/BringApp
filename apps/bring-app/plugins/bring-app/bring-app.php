@@ -52,6 +52,11 @@ define("BRING_APP_VERSION", "1.0.0");
 define("BRING_APP_THEME", "bring-app-theme");
 
 /**
+ * Disable file editing
+ */
+define("DISALLOW_FILE_EDIT", true);
+
+/**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-bring-app-activator.php
  */

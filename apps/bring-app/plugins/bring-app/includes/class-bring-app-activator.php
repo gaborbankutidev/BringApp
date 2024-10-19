@@ -29,8 +29,14 @@ class Bring_App_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
+		self::set_permalink_structure();
 		self::set_bring_theme();
 		self::remove_theme_capabilities();
+	}
+
+	/* Set permalink structure */
+	private static function set_permalink_structure() {
+		update_option("permalink_structure", "/%postname%/");
 	}
 
 	/* Set Bring Theme on plugin activation */
