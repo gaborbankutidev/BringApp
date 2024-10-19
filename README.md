@@ -7,8 +7,8 @@ Monorepo containing the Bring App project template and its supporting packages.
 -   Install all dependencies in all workspaces with `yarn`
 -   Create the necessary .env files in the _bring-app_, _/next_ and _/plugins/bring-app_ folders
 -   Start the backend services in docker with `yarn services:up`
--   Build the theme and start the development with `yarn dev`
--   Activate your Project Theme and complete the required plugin installation steps
+-   Build the plugin and start the development with `yarn dev`
+-   Activate the Bring App plugin
 -   Happy building!
 
 ## Bring App Folders

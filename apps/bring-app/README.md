@@ -8,7 +8,7 @@ Bring App project starter template.
 - Create the necessary .env files in the _root_, _next_ and _plugins/bring-app_ folders
 - Start the backend services in docker with `yarn services:up`
 - Build the theme and start the development with `yarn dev`
-- Activate your Project Theme and complete the required plugin installation steps
+- Activate the Bring App plugin
 - Happy building!
 
 ## Folders
@@ -22,9 +22,9 @@ Bring App project starter template.
 - `wordpress/`
   The wordpress folder for local development
 
-## Upgrade packages and theme
+## Upgrade packages and plugin
 
-- `yarn upgrade`: Upgrade all packages and the Bring Theme core theme
+- `yarn upgrade`: Upgrade all packages and the Bring App plugin
 
 ## Important scripts
 

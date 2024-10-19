@@ -39,7 +39,7 @@ class Bring_App_Activator {
 		update_option("permalink_structure", "/%postname%/");
 	}
 
-	/* Set Bring Theme on plugin activation */
+	/* Set Bring App Theme on plugin activation */
 	private static function set_bring_theme() {
 		update_option("template", BRING_APP_THEME);
 		update_option("stylesheet", BRING_APP_THEME);
