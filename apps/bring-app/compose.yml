@@ -27,7 +27,7 @@ services:
     volumes:
       - ./wordpress:/var/www/html
       - ./plugins/bring-app:/var/www/html/wp-content/plugins/bring-app
-      - ./themes/bring-theme:/var/www/html/wp-content/themes/bring-theme
+      - ./themes/bring-app-theme:/var/www/html/wp-content/themes/bring-app-theme
 
   phpmyadmin:
     image: phpmyadmin
@@ -52,7 +52,7 @@ services:
       - ./nginx/logs:/var/log/nginx
       - ./wordpress:/var/www/html
       - ./plugins/bring-app:/var/www/html/wp-content/plugins/bring-app
-      - ./themes/bring-theme:/var/www/html/wp-content/themes/bring-theme
+      - ./themes/bring-app-theme:/var/www/html/wp-content/themes/bring-app-theme
 
 volumes:
   db_data:

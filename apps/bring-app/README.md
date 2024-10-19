@@ -5,7 +5,7 @@ Bring App project starter template.
 ## Setup
 
 - Initialize a new project with `npx @bring/create-app@latest`
-- Create the necessary .env files in the _root_, _next_ and _themes/bring-theme_ folders
+- Create the necessary .env files in the _root_, _next_ and _plugins/bring-app_ folders
 - Start the backend services in docker with `yarn services:up`
 - Build the theme and start the development with `yarn dev`
 - Activate your Project Theme and complete the required plugin installation steps
@@ -13,8 +13,10 @@ Bring App project starter template.
 
 ## Folders
 
-- `themes/`  
-  Themes for WordPress containing the core Bring Theme and the Project Child Theme
+- `plugins/bring-app`  
+  The Bring App plugin for WordPress containing the core functionality and project specific customizations
+- `themes/bring-app-theme`  
+  Minimal theme for the headless WordPress Bring App architecture
 - `next/`  
   For the frontend that mirrors the routing of WordPress
 - `wordpress/`

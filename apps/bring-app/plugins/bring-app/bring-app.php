@@ -49,7 +49,7 @@ define("BRING_APP_VERSION", "1.0.0");
 /**
  * Define enforced theme
  */
-define("BRING_APP_THEME", "bring-theme");
+define("BRING_APP_THEME", "bring-app-theme");
 
 /**
  * The code that runs during plugin activation.

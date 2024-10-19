@@ -12,11 +12,11 @@ sshpass -p $password ssh -t -t -oStrictHostKeyChecking=no -p $port $user@$host w
 
 echo "Delete remote plugin & theme folder"
 sshpass -p $password ssh -t -t -oStrictHostKeyChecking=no -p $port $user@$host rm -rf public_html/wp-content/plugins/bring-app
-sshpass -p $password ssh -t -t -oStrictHostKeyChecking=no -p $port $user@$host rm -rf public_html/wp-content/themes/bring-theme
+sshpass -p $password ssh -t -t -oStrictHostKeyChecking=no -p $port $user@$host rm -rf public_html/wp-content/themes/bring-app-theme
 
 echo "Upload new plugin & theme folder"
 sshpass -p $password scp -v -oStrictHostKeyChecking=no -P $port -r ./plugins/bring-app/. $user@$host:public_html/wp-content/plugins/bring-app
-sshpass -p $password scp -v -oStrictHostKeyChecking=no -P $port -r ./themes/bring-theme/. $user@$host:public_html/wp-content/themes/bring-theme
+sshpass -p $password scp -v -oStrictHostKeyChecking=no -P $port -r ./themes/bring-app-theme/. $user@$host:public_html/wp-content/themes/bring-app-theme
 
 echo "Flush cache"
 sshpass -p $password ssh -t -t -oStrictHostKeyChecking=no -p $port $user@$host wp cache flush
