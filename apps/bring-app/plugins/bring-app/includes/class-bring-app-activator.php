@@ -29,11 +29,18 @@ class Bring_App_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
-		self::remove_theme_capabilities_on_activation();
+		self::set_bring_theme();
+		self::remove_theme_capabilities();
+	}
+
+	/* Set Bring Theme on plugin activation */
+	private static function set_bring_theme() {
+		update_option("template", BRING_APP_THEME);
+		update_option("stylesheet", BRING_APP_THEME);
 	}
 
 	/* Function to remove theme-related capabilities on plugin activation */
-	private static function remove_theme_capabilities_on_activation() {
+	private static function remove_theme_capabilities() {
 		global $wp_roles;
 		if (!isset($wp_roles)) {
 			$wp_roles = new WP_Roles();

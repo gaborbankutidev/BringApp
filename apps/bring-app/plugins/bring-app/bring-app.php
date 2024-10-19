@@ -47,6 +47,11 @@ define("BRING_APP_VERSION", "1.0.0");
 	define("BRING_APP_PLUGIN_URL", plugin_dir_url(__FILE__));
 
 /**
+ * Define enforced theme
+ */
+define("BRING_APP_THEME", "bring-theme");
+
+/**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-bring-app-activator.php
  */

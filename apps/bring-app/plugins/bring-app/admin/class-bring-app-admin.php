@@ -111,26 +111,32 @@ class Bring_App_Admin {
 
 		// 2. Disable Theme Switching
 		function lock_theme($theme) {
-			return "twentytwentyfour"; // Set enforced theme name here
+			return BRING_APP_THEME;
 		}
+
 		add_filter("template", "lock_theme");
 		add_filter("stylesheet", "lock_theme");
 		add_filter("option_stylesheet", "lock_theme");
+		add_filter("option_template", "lock_theme");
+		add_filter("pre_option_stylesheet", "lock_theme");
+		add_filter("pre_option_template", "lock_theme");
 
 		// 3. Restrict Access to Theme Editor, Customizer, and Themes Page via direct URL
 		function disable_theme_editor_access() {
 			global $pagenow;
-			if (
-				$pagenow == "theme-editor.php" ||
-				$pagenow == "customize.php" ||
-				$pagenow == "themes.php" ||
-				$pagenow == "theme-install.php"
-			) {
-				wp_redirect(admin_url());
+			$restricted_pages = [
+				"theme-editor.php",
+				"customize.php",
+				"themes.php",
+				"theme-install.php",
+			];
+
+			if (in_array($pagenow, $restricted_pages)) {
+				wp_safe_redirect(admin_url());
 				exit();
 			}
 		}
-		add_action("admin_init", "disable_theme_editor_access");
+		add_action("admin_init", "disable_theme_editor_access", 1);
 
 		// 4. Hide Theme Update Notifications
 		function hide_theme_updates() {
