@@ -1,19 +1,19 @@
 {
 	"$schema": "https://raw.githubusercontent.com/composer/composer/main/res/composer-schema.json",
-	"name": "bring/template",
-	"description": "Bring App Starter Template",
+	"name": "bring-app/plugin",
+	"description": "Bring App Plugin Starter Template",
 	"type": "project",
 	"autoload": {
 		"psr-4": {
-			"BringTheme\\": "themes/bring-theme/src/"
+			"BringApp\\": "plugins/bring-app/src/"
 		}
 	},
 	"scripts": {
-		"lint": "themes/bring-theme/vendor/bin/phpstan analyse"
+		"lint": "plugins/bring-app/vendor/bin/phpstan analyse"
 	},
 	"authors": [
 		{
-			"name": "Bring Theme Ltd.",
+			"name": "Bring Team Ltd.",
 			"homepage": "https://thebringteam.com/"
 		}
 	],
@@ -28,7 +28,7 @@
 		"szepeviktor/phpstan-wordpress": "^1.3"
 	},
 	"config": {
-		"vendor-dir": "themes/bring-theme/vendor"
+		"vendor-dir": "plugins/bring-app/vendor"
 	},
 	"repositories": [
 		{

@@ -5,12 +5,12 @@ import path from "path";
 const CWD = process.cwd();
 const GIT_URL = "https://github.com/gaborbankutidev/BringApp.git";
 
-function updateTheme() {
-	const themeFolder = path.join(CWD, "themes/bring-theme");
+function updatePlugin() {
+	const themeFolder = path.join(CWD, "plugins/bring-app");
 	const tempSrcFolder = path.join(CWD, ".temp");
 	const tempThemeFolder = path.join(
 		tempSrcFolder,
-		"apps/bring-app/themes/bring-theme",
+		"apps/bring-app/plugins/bring-app",
 	);
 
 	if (fsExtra.existsSync(tempSrcFolder)) {
@@ -41,7 +41,7 @@ function updateTheme() {
 		cwd: tempSrcFolder,
 	});
 
-	execSync("git sparse-checkout set apps/bring-app/themes/bring-theme", {
+	execSync("git sparse-checkout set apps/bring-app/plugins/bring-app", {
 		stdio: "inherit",
 		cwd: tempSrcFolder,
 	});
@@ -83,7 +83,7 @@ function updateNext() {
 }
 
 function main() {
-	updateTheme();
+	updatePlugin();
 	updateComposer();
 	updateNext();
 }
