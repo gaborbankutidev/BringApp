@@ -7,7 +7,7 @@ import type {Entity} from "../types";
  * @property entity - The entity.
  */
 type SuccessResponse<EP> = {
-	responseCode: 200;
+	responseCode: "200";
 	entity: Entity<EP>;
 };
 
@@ -18,7 +18,7 @@ type SuccessResponse<EP> = {
  * @property entity - The entity.
  */
 type RedirectResponse = {
-	responseCode: 301 | 302 | 307 | 308;
+	responseCode: "301" | "302" | "307" | "308";
 	redirectTo: string;
 	entity: null;
 };
@@ -29,7 +29,7 @@ type RedirectResponse = {
  * @property entity - The entity.
  */
 type ErrorResponse = {
-	responseCode: 400;
+	responseCode: "400";
 	entity: null;
 };
 
@@ -38,7 +38,7 @@ type ErrorResponse = {
  * @property responseCode - The response code.
  */
 type NotFoundResponse = {
-	responseCode: 404;
+	responseCode: "404";
 };
 
 /**
@@ -67,12 +67,12 @@ async function getEntity<EP = {}>(
 	onNotFound: () => void,
 	slug: string | string[] = "",
 ): Promise<Entity<EP> | null> {
-	const joinedSlug = (typeof slug === "string" ? slug : slug.join("/")) + "/";
+	const joinedSlug = typeof slug === "string" ? slug : slug.join("/");
 
 	// fetch entity
 	let responseData = null;
 	try {
-		const response = await fetch(`${wpURL}/${joinedSlug}?data_token=${dataToken}`, {
+		const response = await fetch(`${wpURL}/wp-json/bring/entity/${joinedSlug}`, {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
@@ -87,23 +87,23 @@ async function getEntity<EP = {}>(
 
 	// handle redirect
 	if (
-		responseData.responseCode === 301 ||
-		responseData.responseCode === 302 ||
-		responseData.responseCode === 307 ||
-		responseData.responseCode === 308
+		responseData.responseCode === "301" ||
+		responseData.responseCode === "302" ||
+		responseData.responseCode === "307" ||
+		responseData.responseCode === "308"
 	) {
-		onRedirect(responseData.redirectTo, responseData.responseCode);
+		onRedirect(responseData.redirectTo, parseInt(responseData.responseCode));
 		return null;
 	}
 
 	// handle not found
-	if (responseData.responseCode === 404) {
+	if (responseData.responseCode === "404") {
 		onNotFound();
 		return null;
 	}
 
 	// handle error
-	if (responseData.responseCode !== 200) {
+	if (responseData.responseCode != "200") {
 		console.error(
 			`Error while fetching entity at ${joinedSlug}, response code: ${responseData.responseCode}`,
 		);
