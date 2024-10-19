@@ -12,7 +12,7 @@ defined("ABSPATH") or die("Hey, do not do this 😱");
  *
  * Use `wp_enqueue_style()` & `wp_enqueue_script()` to enqueue scripts and styles,
  * Use `$theme_version = wp_get_theme()->get("Version")` to get the theme version,
- * Use `get_stylesheet_directory_uri()` to get the theme directory URI
+ * Use `plugin_dir_url(dirname(__FILE__))` to get the plugin directory URI
  */
 class Enqueue {
 	/**

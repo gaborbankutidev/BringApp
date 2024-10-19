@@ -38,6 +38,15 @@ if (!defined("WPINC")) {
 define("BRING_APP_VERSION", "1.0.0");
 
 /**
+ * Define Plugin Path and URL constants
+ */
+!defined("BRING_APP_PLUGIN_PATH") &&
+	define("BRING_APP_PLUGIN_PATH", plugin_dir_path(__FILE__));
+
+!defined("BRING_APP_PLUGIN_URL") &&
+	define("BRING_APP_PLUGIN_URL", plugin_dir_url(__FILE__));
+
+/**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-bring-app-activator.php
  */
