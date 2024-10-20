@@ -5,12 +5,17 @@ import path from "path";
 const CWD = process.cwd();
 const GIT_URL = "https://github.com/gaborbankutidev/BringApp.git";
 
-function updatePlugin() {
-	const themeFolder = path.join(CWD, "plugins/bring-app");
+export function updatePluginAndTheme() {
+	const pluginFolder = path.join(CWD, "plugins/bring-app");
+	const themeFolder = path.join(CWD, "themes/bring-app-theme");
 	const tempSrcFolder = path.join(CWD, ".temp");
-	const tempThemeFolder = path.join(
+	const tempPluginFolder = path.join(
 		tempSrcFolder,
 		"apps/bring-app/plugins/bring-app",
+	);
+	const tempThemeFolder = path.join(
+		tempSrcFolder,
+		"apps/bring-app/themes/bring-app-theme",
 	);
 
 	if (fsExtra.existsSync(tempSrcFolder)) {
@@ -41,25 +46,32 @@ function updatePlugin() {
 		cwd: tempSrcFolder,
 	});
 
-	execSync("git sparse-checkout set apps/bring-app/plugins/bring-app", {
-		stdio: "inherit",
-		cwd: tempSrcFolder,
-	});
+	execSync(
+		"git sparse-checkout set apps/bring-app/plugins/bring-app apps/themes/bring-app-theme",
+		{
+			stdio: "inherit",
+			cwd: tempSrcFolder,
+		},
+	);
 
 	execSync("git pull origin main", {
 		stdio: "inherit",
 		cwd: tempSrcFolder,
 	});
 
-	const envFilePath = path.join(themeFolder, ".env");
-	const tempEnvFilePath = path.join(tempThemeFolder, ".env");
+	const envFilePath = path.join(pluginFolder, ".env");
+	const tempEnvFilePath = path.join(tempPluginFolder, ".env");
 
 	if (fsExtra.existsSync(envFilePath)) {
 		fsExtra.moveSync(envFilePath, tempEnvFilePath, {overwrite: true});
 	}
 
+	fsExtra.removeSync(pluginFolder);
 	fsExtra.removeSync(themeFolder);
 
+	fsExtra.copySync(tempPluginFolder, pluginFolder, {
+		overwrite: true,
+	});
 	fsExtra.copySync(tempThemeFolder, themeFolder, {
 		overwrite: true,
 	});
@@ -68,7 +80,7 @@ function updatePlugin() {
 }
 
 function updateComposer() {
-	execSync("composer update bring/blocks-wp", {
+	execSync("composer update", {
 		stdio: "inherit",
 	});
 }
@@ -83,7 +95,7 @@ function updateNext() {
 }
 
 function main() {
-	updatePlugin();
+	updatePluginAndTheme();
 	updateComposer();
 	updateNext();
 }
