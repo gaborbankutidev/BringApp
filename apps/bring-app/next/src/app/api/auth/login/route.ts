@@ -111,7 +111,7 @@ export async function POST(request: Request) {
 
 	const wpParsedBody = wpParsedBodyResult.data;
 
-	cookies().set("bring-auth-token", wpParsedBody.data.token, {
+	(await cookies()).set("bring-auth-token", wpParsedBody.data.token, {
 		path: "/",
 		httpOnly: true,
 		secure: true,
