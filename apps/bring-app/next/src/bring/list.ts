@@ -11,6 +11,7 @@ import {embed} from "@/components/embed";
 import {heading} from "@/components/heading";
 import {image} from "@/components/image";
 import {markdown} from "@/components/markdown";
+import {paragraph} from "@/components/paragraph";
 
 export const componentList = [
 	// layout
@@ -26,4 +27,5 @@ export const componentList = [
 	heading,
 	image,
 	markdown,
+	paragraph,
 ];

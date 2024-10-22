@@ -1,4 +1,4 @@
-import {registerBlockType} from "@wordpress/blocks";
+import {registerBlockType, setDefaultBlockName} from "@wordpress/blocks";
 import {dispatch, select, subscribe} from "@wordpress/data";
 import {BlockConfig, objectAttributeSource, stringAttributeSource} from "./blocks";
 import {makeEdit} from "./blocks/make-edit";
@@ -67,6 +67,7 @@ export class Editor {
 		this.isSaving = false;
 		this.blockList = blockList;
 
+		this.setDefaultBlock();
 		this.disableReusableBlocks();
 		this.registerBlocks();
 		this.subscribeToSaveEvent();
@@ -116,6 +117,15 @@ export class Editor {
 				});
 			}
 		});
+	}
+
+	/**
+	 * Method to set the default block.
+	 * @param defaultBlockName - the name of the default block (default: "bring/paragraph")
+	 * @returns void
+	 */
+	private setDefaultBlock(defaultBlockName?: string) {
+		setDefaultBlockName(defaultBlockName ?? "bring/paragraph");
 	}
 
 	/**

@@ -54,6 +54,7 @@ Config::init([
 		"section",
 		"split",
 		// components
+		"paragraph",
 		"button",
 		"divider",
 		"embed",
