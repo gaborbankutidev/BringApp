@@ -5,7 +5,7 @@
 	"workspaces": [
 		"next"
 	],
-	"packageManager": "yarn@4.4.0",
+	"packageManager": "yarn@4.5.1",
 	"scripts": {
 		"after:install": "node ./scripts/after-install.mjs",
 		"build": "conc yarn:build:next yarn:build:editor",
