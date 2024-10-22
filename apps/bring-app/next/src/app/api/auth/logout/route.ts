@@ -2,8 +2,8 @@ import {sub} from "date-fns";
 import {cookies} from "next/headers";
 import {NextResponse} from "next/server";
 
-export function POST() {
-	cookies().set("bring-auth-token", "", {
+export async function POST() {
+	(await cookies()).set("bring-auth-token", "", {
 		path: "/",
 		httpOnly: true,
 		secure: true,

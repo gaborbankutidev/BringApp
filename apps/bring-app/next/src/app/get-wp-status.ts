@@ -13,7 +13,7 @@ export const getWpStatus = async (): Promise<WpStatus> => {
 
 	// Check if WordPress site is running
 	try {
-		await fetch(`${env.NEXT_PUBLIC_WP_BASE_URL}/wp-json/`, {cache: "no-store"});
+		await fetch(`${env.NEXT_PUBLIC_WP_BASE_URL}/wp-json/`);
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	} catch (e) {
 		console.error(
@@ -23,9 +23,7 @@ export const getWpStatus = async (): Promise<WpStatus> => {
 	}
 
 	try {
-		const res = await fetch(`${env.NEXT_PUBLIC_WP_BASE_URL}/wp-json/`, {
-			cache: "no-store",
-		});
+		const res = await fetch(`${env.NEXT_PUBLIC_WP_BASE_URL}/wp-json/`);
 		if (
 			res.status === 200 &&
 			res.redirected &&
@@ -46,7 +44,6 @@ export const getWpStatus = async (): Promise<WpStatus> => {
 	try {
 		const healthcheckResponse = await fetch(
 			`${env.NEXT_PUBLIC_WP_BASE_URL}/wp-json/bring/healthcheck`,
-			{cache: "no-store"},
 		);
 		const contentType = healthcheckResponse.headers.get("content-type");
 

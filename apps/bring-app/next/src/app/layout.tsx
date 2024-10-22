@@ -17,14 +17,14 @@ const montserrat = Montserrat({
 });
 
 export async function generateMetadata() {
-	const slug = headers().get("x-slug") ?? "";
+	const slug = (await headers()).get("x-slug") ?? "";
 	return {
 		title: await getRankMathTitle(slug),
 	};
 }
 
-export default function RootLayout({children}: {children: ReactNode}) {
-	const slug = headers().get("x-slug") ?? "";
+export default async function RootLayout({children}: {children: ReactNode}) {
+	const slug = (await headers()).get("x-slug") ?? "";
 
 	return (
 		<html lang="en">

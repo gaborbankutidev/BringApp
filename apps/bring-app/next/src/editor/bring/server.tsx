@@ -13,6 +13,8 @@ import {
 	useDynamicEntityProps,
 } from "./client";
 
+import type {JSX} from "react";
+
 export const getDynamicEntityList = (
 	entitySlug: string,
 	entityType: EntityType,
