@@ -22,7 +22,7 @@
 		"format:check": "prettier --check .",
 		"prepare": "husky",
 		"services:down": "docker compose down",
-		"services:up": "docker compose up -d",
+		"services:up": "docker compose up",
 		"storybook": "cd ./next && yarn watch:storybook",
 		"upgrade": "tsx scripts/upgrade.ts",
 		"upgrade:bring": "tsx scripts/upgrade.ts bring",
