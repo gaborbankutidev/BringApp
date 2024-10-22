@@ -1,5 +1,11 @@
 # @bring/create-app
 
+## 0.3.0
+
+### Minor Changes
+
+-   502f5bd: Move the Bring App functionality into a plugin.
+
 ## 0.2.0
 
 ### Minor Changes
