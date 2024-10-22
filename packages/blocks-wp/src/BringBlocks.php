@@ -13,6 +13,7 @@ use Bring\BlocksWP\Dynamic\Dynamic;
 use Bring\BlocksWP\Exceptions\ConfigNotInitializedException;
 use Bring\BlocksWP\Form\Form;
 use Bring\BlocksWP\Modules\Modules;
+use Bring\BlocksWP\Redirects\Redirects;
 
 class BringBlocks {
 	/**
@@ -27,6 +28,7 @@ class BringBlocks {
 		Client::init();
 		Dynamic::init();
 		Cache::init();
+		Redirects::init();
 
 		Config::getForms() && Form::init();
 		Modules::init();
