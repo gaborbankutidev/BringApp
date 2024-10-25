@@ -1,7 +1,7 @@
 import {cookies} from "next/headers";
 
-export default function Home() {
-	const bringAuthCookie = cookies().get("bring-auth-token");
+export default async function Home() {
+	const bringAuthCookie = (await cookies()).get("bring-auth-token");
 	return (
 		<div className="max-w-lg p-4">
 			<form method="post" action="/api/auth/login">

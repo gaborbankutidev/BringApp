@@ -1,6 +1,7 @@
 import {Main} from "@/bring/render";
 
-const Slug = ({params}: {params: {slug: string | string[]}}) => {
+const Slug = async (props: {params: Promise<{slug: string | string[]}>}) => {
+	const params = await props.params;
 	return <Main slug={params.slug} />;
 };
 
