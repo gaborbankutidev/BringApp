@@ -8,6 +8,10 @@ namespace Bring\BlocksWP\Redirects;
 defined("ABSPATH") or die("Hey, do not do this 😱");
 
 /**
+ * Redirects
+ *
+ * @package Bring\BlocksWP\Redirects
+ * @since 2.0.1
  */
 class Redirects {
 	/**
@@ -16,11 +20,6 @@ class Redirects {
 	 */
 	public static function init() {
 		add_action("init", Model::register(...));
-
-		apply_filters("manage_redirect_posts_columns", [
-			"title" => __("Title"),
-			"redirect_from" => __("Redirect From"),
-			"redirect_to" => __("Redirect To"),
-		]);
+		add_action("admin_init", Admin::init(...));
 	}
 }

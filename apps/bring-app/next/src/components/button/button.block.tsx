@@ -1,5 +1,6 @@
 import {button, type ButtonBlockProps} from "@/components/button";
 import {
+	booleanAttributeSource,
 	makeOptions,
 	stringAttributeSource,
 	type BlockConfig,
@@ -8,11 +9,13 @@ import {
 const buttonConfig: BlockConfig<ButtonBlockProps> = {
 	...button,
 	title: "Button",
+	description: "A simple button",
 	attributes: {
 		text: stringAttributeSource("Click here"),
 		href: stringAttributeSource("#"),
 		variant: stringAttributeSource(),
 		size: stringAttributeSource(),
+		newTab: booleanAttributeSource(),
 	},
 	Controls: [
 		{
