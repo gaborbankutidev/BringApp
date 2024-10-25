@@ -29,7 +29,7 @@ async function getDynamicEntityProps<T = {}, P = {}>(
 	wpURL: string,
 	entityId: number,
 	entityType: EntityType,
-	{customData = {}, cache = "force-cache"}: GetDynamicEntityPropsOptions = {},
+	{customData = {}, cache = "no-store"}: GetDynamicEntityPropsOptions = {},
 ) {
 	const params = new URLSearchParams({
 		entityId: entityId.toString(),

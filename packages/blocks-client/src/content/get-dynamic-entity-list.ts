@@ -43,7 +43,7 @@ async function getDynamicEntityList<T = {}, P = {}>(
 		offset = 0,
 		page = 1,
 		customData = {},
-		cache = "force-cache",
+		cache = "no-store",
 	}: GetDynamicEntityListOptions = {},
 ) {
 	const params = new URLSearchParams({
