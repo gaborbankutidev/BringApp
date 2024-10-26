@@ -10982,6 +10982,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"class-variance-authority@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "class-variance-authority@npm:0.7.0"
+  dependencies:
+    clsx: "npm:2.0.0"
+  checksum: 10c0/e11c57edf4bf50ef1c97bae41d68885afbaaedba26c48b7cc5dfb033390fed7012147e9532168d8c4f3497fce4dff15e20e6e60b8c9c9a4b0fe26b0e804513db
+  languageName: node
+  linkType: hard
+
 "classnames@npm:^2.3.1":
   version: 2.5.1
   resolution: "classnames@npm:2.5.1"
@@ -11140,6 +11149,13 @@ __metadata:
   version: 1.0.4
   resolution: "clone@npm:1.0.4"
   checksum: 10c0/2176952b3649293473999a95d7bebfc9dc96410f6cbd3d2595cf12fd401f63a4bf41a7adbfd3ab2ff09ed60cb9870c58c6acdd18b87767366fabfc163700f13b
+  languageName: node
+  linkType: hard
+
+"clsx@npm:2.0.0":
+  version: 2.0.0
+  resolution: "clsx@npm:2.0.0"
+  checksum: 10c0/c09f43b3144a0b7826b6b11b6a111b2c7440831004eecc02d333533c5e58ef0aa5f2dce071d3b25fbb8c8ea97b45df96c74bcc1d51c8c2027eb981931107b0cd
   languageName: node
   linkType: hard
 
@@ -18075,6 +18091,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lucide-react@npm:^0.453.0":
+  version: 0.453.0
+  resolution: "lucide-react@npm:0.453.0"
+  peerDependencies:
+    react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0-rc
+  checksum: 10c0/eec257049609eff958329943da6e129c8db1969aa789c6e922f59418d7b6f6913c22e971ac7885efc80eeb3e41e180c48afdee92738a63a31ef5a39836037b7e
+  languageName: node
+  linkType: hard
+
 "lunr@npm:^2.3.9":
   version: 2.3.9
   resolution: "lunr@npm:2.3.9"
@@ -19382,6 +19407,8 @@ __metadata:
     "@wordpress/data": "npm:9.24.0"
     "@wordpress/scripts": "npm:27.5.0"
     autoprefixer: "npm:^10.4.20"
+    class-variance-authority: "npm:^0.7.0"
+    clsx: "npm:^2.1.1"
     concurrently: "npm:^8.2.2"
     date-fns: "npm:^3.6.0"
     dotenv-cli: "npm:^7.4.2"
@@ -19392,6 +19419,7 @@ __metadata:
     framer-motion: "npm:^11.3.21"
     fslightbox-react: "npm:^1.7.6"
     html-react-parser: "npm:^5.1.12"
+    lucide-react: "npm:^0.453.0"
     next: "npm:15.0.0"
     postcss: "npm:^8.4.40"
     prop-types: "npm:^15.8.1"
@@ -19404,8 +19432,9 @@ __metadata:
     remark-supersub: "npm:^1.0.0"
     ruts: "npm:^0.15.0"
     storybook: "npm:^7.6.20"
-    tailwind-merge: "npm:^2.4.0"
+    tailwind-merge: "npm:^2.5.4"
     tailwindcss: "npm:^3.4.7"
+    tailwindcss-animate: "npm:^1.0.7"
     typescript: "npm:^5.5.4"
     webpack: "npm:^5.93.0"
     webpack-cli: "npm:^5.1.4"
@@ -24260,6 +24289,22 @@ __metadata:
   version: 2.4.0
   resolution: "tailwind-merge@npm:2.4.0"
   checksum: 10c0/77bd20647d08db78a0bdf7b57d4b904479aee7727f44570f8834d62a1aa56f42d7ae68ac959e3d610c9f188aa164eeefb6c43df4f0c8bb7cfc3418e1575bfecb
+  languageName: node
+  linkType: hard
+
+"tailwind-merge@npm:^2.5.4":
+  version: 2.5.4
+  resolution: "tailwind-merge@npm:2.5.4"
+  checksum: 10c0/6c3d2a1d44344f373859f005e6366f0dbd7f66131d330a51dbe823dab08f71c388b2efcbb2b6a2170ca469581d27079c25cd40c234ca1356c4893ae99c2febb3
+  languageName: node
+  linkType: hard
+
+"tailwindcss-animate@npm:^1.0.7":
+  version: 1.0.7
+  resolution: "tailwindcss-animate@npm:1.0.7"
+  peerDependencies:
+    tailwindcss: "*"
+  checksum: 10c0/ec7dbd1631076b97d66a1fbaaa06e0725fccfa63119221e8d87a997b02dcede98ad88bb1ef6665b968f5d260fcefb10592e0299ca70208d365b37761edf5e19a
   languageName: node
   linkType: hard
 
