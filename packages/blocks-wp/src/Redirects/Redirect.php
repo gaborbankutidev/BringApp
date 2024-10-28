@@ -46,37 +46,55 @@ class Redirect {
 	/**
 	 * Get a redirect by permalink
 	 * @param string $permalink
-	 * @throws RedirectNotFoundException
 	 * @return Redirect|null
 	 */
-	public static function getRedirectByPermalink(string $permalink): Redirect|null {
-		$redirects = Redirect::getAll();
-		foreach ($redirects as $redirect) {
-			$from = $redirect->getFrom();
-
-			$from = rtrim($from, "/");
-			$from = ltrim($from, "/");
-			$permalink = rtrim($permalink, "/");
-			$permalink = ltrim($permalink, "/");
-
-			if ($from === $permalink) {
-				$redirect->incrementHits();
-				return $redirect;
-			}
+	public static function getRedirectByFromPermalink(string $from_permalink): Redirect|null {
+		$redirects = self::getRedirectsByFromPermalink($from_permalink);
+		if (empty($redirects)) {
+			return null;
 		}
 
-		throw new RedirectNotFoundException("Redirect not found");
+		return $redirects[0];
+	}
+
+	/**
+	 * Get all redirects with a given from permalink
+	 * @param string $permalink
+	 * @return array<Redirect>
+	 */
+	public static function getRedirectsByFromPermalink(string $from_permalink): array {
+		$redirects_query = get_posts([
+			"post_type" => "redirect",
+			"numberposts" => -1,
+			"post_status" => "publish",
+			[
+				"meta_query" => [
+					"relation" => "AND",
+					[
+						"key" => "from",
+						"value" => $from_permalink,
+						"compare" => "=",
+					],
+					[
+						"key" => "from",
+						"value" => "",
+						"compare" => "!=",
+					],
+				],
+			],
+		]);
+
+		return array_map(fn($redirect) => new Redirect($redirect->ID), $redirects_query);
 	}
 
 	/**
 	 * Create a new redirect instance
 	 * @param int $id
-	 * @throws RedirectNotFoundException
-	 * @return Redirect
+	 * @return Redirect |  null
 	 */
 	public function __construct(int $id) {
 		if (!get_post_type($id) == "redirect") {
-			throw new RedirectNotFoundException("Redirect not found");
+			return null;
 		}
 
 		$this->id = $id;
@@ -88,31 +106,6 @@ class Redirect {
 		$this->hits = (int) get_post_meta($id, "hits", true);
 
 		return $this;
-	}
-
-	/**
-	 * Get all redirects
-	 * @param string $from
-	 * @param string $to
-	 * @param int $status_code
-	 * @return array<Redirect>
-	 */
-	public static function getAll(): array {
-		$redirects_query = get_posts([
-			"post_type" => "redirect",
-			"numberposts" => -1,
-		]);
-
-		return array_map(function ($redirect_query) {
-			$redirect = (function () use ($redirect_query) {
-				try {
-					return new Redirect($redirect_query->ID);
-				} catch (RedirectNotFoundException $e) {
-					return null;
-				}
-			})();
-			return $redirect;
-		}, $redirects_query);
 	}
 
 	/**

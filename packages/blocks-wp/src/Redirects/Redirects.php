@@ -19,7 +19,7 @@ class Redirects {
 	 * @return void
 	 */
 	public static function init() {
-		add_action("init", Model::register(...));
-		add_action("admin_init", Admin::init(...));
+		Model::register();
+		Admin::init();
 	}
 }

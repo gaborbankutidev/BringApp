@@ -22,8 +22,8 @@ class Admin {
 		self::columns();
 		self::editView();
 		self::save();
-		self::notices();
 		self::styles();
+		self::notices();
 	}
 
 	/**
@@ -45,13 +45,10 @@ class Admin {
 		add_action(
 			"manage_redirect_posts_custom_column",
 			function ($column, $post_id) {
-				$redirect = (function () use ($post_id) {
-					try {
-						return new Redirect($post_id);
-					} catch (RedirectNotFoundException $e) {
-						return null;
-					}
-				})();
+				$redirect = new Redirect($post_id);
+				if ($redirect === null) {
+					return;
+				}
 
 				switch ($column) {
 					case "from":
@@ -73,21 +70,6 @@ class Admin {
 			10,
 			2,
 		);
-
-		add_filter(
-			"post_row_actions",
-			function ($actions, $post) {
-				// Check if this is your custom post type
-				if ($post->post_type === "redirect") {
-					// Remove the "View" link
-					unset($actions["view"]);
-				}
-
-				return $actions;
-			},
-			10,
-			2,
-		);
 	}
 
 	/**
@@ -102,14 +84,7 @@ class Admin {
 				function ($post) {
 					wp_nonce_field("save_redirect_meta", "redirect_meta_nonce");
 
-					$redirect = (function () use ($post) {
-						try {
-							return new Redirect($post->ID);
-						} catch (RedirectNotFoundException $e) {
-							return null;
-						}
-					})();
-
+					$redirect = new Redirect($post->ID);
 					if ($redirect === null) {
 						return;
 					}
@@ -117,7 +92,6 @@ class Admin {
 
                     <p>
                         <label for="redirect_from"><?php _e("From URL", "blocks-wp"); ?></label>
-
                         <input type="text" name="redirect_from" id="redirect_from" value="<?php echo esc_attr(
                         	$redirect->getFrom(),
                         ); ?>" class="widefat">
@@ -194,10 +168,6 @@ class Admin {
                     display: none;
                 }
 
-                #post-preview, .preview.button {
-                    display: none !important;
-                }
-
                 .misc-pub-post-status,
                 .misc-pub-visibility,
                 .edit-post-status,
@@ -226,14 +196,7 @@ class Admin {
 					$data["post_title"] = "Redirect #" . $post_id;
 					$data["post_name"] = sanitize_title($data["post_title"]);
 
-					$redirect = (function () use ($post_id) {
-						try {
-							return new Redirect($post_id);
-						} catch (RedirectNotFoundException $e) {
-							return null;
-						}
-					})();
-
+					$redirect = new Redirect($post_id);
 					if ($redirect === null) {
 						return $data;
 					}
@@ -261,9 +224,19 @@ class Admin {
 				return $post_id;
 			}
 
-			$redirects = Redirect::getAll();
-			foreach ($redirects as $redirect) {
-				if ($redirect->getId() == $post_id) {
+			if (isset($_POST["redirect_from"]) && empty($_POST["redirect_from"])) {
+				set_transient("redirect_error", __("The 'from url' is required.", "blocks-wp"), 30);
+				return $post_id;
+			}
+
+			if (isset($_POST["redirect_to"]) && empty($_POST["redirect_to"])) {
+				set_transient("redirect_error", __("The 'to url' is required.", "blocks-wp"), 30);
+				return $post_id;
+			}
+
+			$from_redirects = Redirect::getRedirectsByFromPermalink($_POST["redirect_from"]);
+			foreach ($from_redirects as $redirect) {
+				if ($redirect->getId() === $post_id) {
 					continue;
 				}
 
@@ -277,6 +250,13 @@ class Admin {
 						30,
 					);
 					return $post_id;
+				}
+			}
+
+			$to_redirects = Redirect::getRedirectsByFromPermalink($_POST["redirect_to"]);
+			foreach ($to_redirects as $redirect) {
+				if ($redirect->getId() === $post_id) {
+					continue;
 				}
 
 				if ($redirect->getFrom() === $_POST["redirect_to"]) {
@@ -292,25 +272,8 @@ class Admin {
 				}
 			}
 
-			$redirect = (function () use ($post_id) {
-				try {
-					return new Redirect($post_id);
-				} catch (RedirectNotFoundException $e) {
-					return null;
-				}
-			})();
-
+			$redirect = new Redirect($post_id);
 			if ($redirect === null) {
-				return $post_id;
-			}
-
-			if (isset($_POST["redirect_from"]) && empty($_POST["redirect_from"])) {
-				set_transient("redirect_error", __("The 'from url' is required.", "blocks-wp"), 30);
-				return $post_id;
-			}
-
-			if (isset($_POST["redirect_to"]) && empty($_POST["redirect_to"])) {
-				set_transient("redirect_error", __("The 'to url' is required.", "blocks-wp"), 30);
 				return $post_id;
 			}
 

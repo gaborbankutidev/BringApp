@@ -19,8 +19,8 @@ class Model {
 	 * @return void
 	 */
 	public static function register() {
-		self::post_type();
-		self::post_meta();
+		add_action("init", self::post_type(...));
+		add_action("init", self::post_meta(...));
 	}
 
 	/**
@@ -58,13 +58,10 @@ class Model {
 				"items_list" => __("Redirects list", "blocks-wp"),
 			],
 			"description" => "Set up redirects",
-			"public" => true,
-			"publicly_queryable" => true,
+			"public" => false,
+			"publicly_queryable" => false,
 			"show_ui" => true,
-			"show_in_rest" => true,
-			"rest_base" => "",
-			"rest_controller_class" => "WP_REST_Posts_Controller",
-			"rest_namespace" => "wp/v2",
+			"show_in_rest" => false,
 			"has_archive" => false,
 			"show_in_menu" => "tools.php",
 			"show_in_nav_menus" => false,
