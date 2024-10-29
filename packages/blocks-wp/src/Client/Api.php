@@ -82,6 +82,7 @@ class Api {
 		}
 
 		$redirect = Redirect::getRedirectByFromPermalink($permalink);
+		$redirect->incrementHits();
 		if ($redirect) {
 			return new WP_REST_Response(
 				[
