@@ -27,13 +27,18 @@ class Bring_App_Deactivator {
 	 * Long Description.
 	 *
 	 * @since    1.0.0
+	 * @return void
 	 */
-	public static function deactivate() {
+	public static function deactivate(): void {
 		self::restore_theme_capabilities_on_deactivation();
 	}
 
-	/* Function to restore theme-related capabilities for admin on plugin deactivation */
-	private static function restore_theme_capabilities_on_deactivation() {
+	/**
+	 * Function to restore theme-related capabilities for admin on plugin deactivation
+	 * @since    1.0.0
+	 * @return void
+	 */
+	private static function restore_theme_capabilities_on_deactivation(): void {
 		global $wp_roles;
 		if (!isset($wp_roles)) {
 			$wp_roles = new WP_Roles();

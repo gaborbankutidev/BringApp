@@ -14,9 +14,17 @@ class Settings {
 	 * @return void
 	 */
 
-	private static $required_permalink_structure = "/%postname%/";
+	/**
+	 * The required permalink structure for the theme.
+	 * @var string
+	 */
+	private static string $required_permalink_structure = "/%postname%/";
 
-	public static function init() {
+	/**
+	 * Initialize the settings.
+	 * @return void
+	 */
+	public static function init(): void {
 		// Hook into the 'pre_update_option_permalink_structure' filter to prevent permalink changes
 		add_filter(
 			"pre_update_option_permalink_structure",
@@ -45,7 +53,10 @@ class Settings {
 	 * @param string $old_value The old permalink structure value.
 	 * @return string The original permalink structure if the change is not allowed.
 	 */
-	public static function prevent_permalink_change($new_value, $old_value) {
+	public static function prevent_permalink_change(
+		$new_value,
+		$old_value,
+	): string {
 		// Check if the new value is different from the desired permalink structure
 		if ($new_value !== self::$required_permalink_structure) {
 			// Set a flag to display an error notice
@@ -61,8 +72,9 @@ class Settings {
 
 	/**
 	 * Enforce the desired permalink structure when the theme is activated.
+	 * @return void
 	 */
-	public static function enforce_permalink_structure() {
+	public static function enforce_permalink_structure(): void {
 		// Get the current permalink structure
 		$current_permalink_structure = get_option("permalink_structure");
 
@@ -84,8 +96,9 @@ class Settings {
 
 	/**
 	 * Display an error notice if the permalink change was prevented.
+	 * @return void
 	 */
-	public static function permalink_change_prevented_notice() {
+	public static function permalink_change_prevented_notice(): void {
 		if (get_option("permalink_change_prevented")) {
 			echo '<div class="notice notice-error"><p>Changing the permalink structure is not allowed. The permalink structure must be set to "Post Name" for this theme to function properly.</p></div>';
 
@@ -96,8 +109,9 @@ class Settings {
 
 	/**
 	 * Display a notice if permalink structure enforcement changes the setting.
+	 * @return void
 	 */
-	public static function custom_permalink_change_notice() {
+	public static function custom_permalink_change_notice(): void {
 		echo '<div class="notice notice-info"><p>The permalink structure has been automatically set to "Post Name" to ensure theme compatibility.</p></div>';
 	}
 }

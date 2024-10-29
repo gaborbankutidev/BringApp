@@ -28,7 +28,7 @@ class Bring_App_Public {
 	 * @access   private
 	 * @var      string    $plugin_name    The ID of this plugin.
 	 */
-	private $plugin_name;
+	private string $plugin_name;
 
 	/**
 	 * The version of this plugin.
@@ -37,7 +37,7 @@ class Bring_App_Public {
 	 * @access   private
 	 * @var      string    $version    The current version of this plugin.
 	 */
-	private $version;
+	private string $version;
 
 	/**
 	 * Initialize the class and set its properties.
@@ -55,8 +55,9 @@ class Bring_App_Public {
 	 * Register the stylesheets for the public-facing side of the site.
 	 *
 	 * @since    1.0.0
+	 * @return void
 	 */
-	public function enqueue_styles() {
+	public function enqueue_styles(): void {
 		/**
 		 * This function is provided for demonstration purposes only.
 		 *
@@ -82,8 +83,9 @@ class Bring_App_Public {
 	 * Register the JavaScript for the public-facing side of the site.
 	 *
 	 * @since    1.0.0
+	 * @return void
 	 */
-	public function enqueue_scripts() {
+	public function enqueue_scripts(): void {
 		/**
 		 * This function is provided for demonstration purposes only.
 		 *
@@ -111,8 +113,12 @@ class Bring_App_Public {
 	 * Actions & filters should be called from the includes/main plugin class.
 	 */
 
-	/* Health Check */
-	public function Bring_App_Health_Check() {
+	/**
+	 * Health Check
+	 * @since    1.0.0
+	 * @return void
+	 */
+	public function Bring_App_Health_Check(): void {
 		register_rest_route("bring", "/healthcheck", [
 			"methods" => "GET",
 			"callback" => fn() => new WP_REST_Response(["ok" => true], 200),
@@ -120,12 +126,19 @@ class Bring_App_Public {
 		]);
 	}
 
-	/* Add excerpt to dynamic post list */
+	/**
+	 * Add excerpt to dynamic post list
+	 * @since    1.0.0
+	 * @param array<array{'entityId':int,'excerpt':string}> $items
+	 * @param string $entity_slug
+	 * @param array<array<mixed>> $custom_data
+	 * @return array<array{'entityId':int,'excerpt':string}>
+	 */
 	public function Bring_App_add_excerpt_to_dynamic_post_list(
-		$items,
-		$entity_slug,
-		$custom_data,
-	) {
+		array $items,
+		string $entity_slug,
+		array $custom_data,
+	): array {
 		$items = array_map(function ($item) {
 			$item["excerpt"] = get_the_excerpt($item["entityId"]);
 

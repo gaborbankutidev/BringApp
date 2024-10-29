@@ -108,8 +108,9 @@ class Bring_App {
 	 *
 	 * @since    1.0.0
 	 * @access   private
+	 * @return void
 	 */
-	private function load_dependencies() {
+	private function load_dependencies(): void {
 		/**
 		 * The class responsible for loading vendor dependencies.
 		 */
@@ -153,8 +154,9 @@ class Bring_App {
 	 *
 	 * @since    1.0.0
 	 * @access   private
+	 * @return void
 	 */
-	private function set_locale() {
+	private function set_locale(): void {
 		$plugin_i18n = new Bring_App_i18n();
 
 		$this->loader->add_action(
@@ -170,8 +172,9 @@ class Bring_App {
 	 *
 	 * @since    1.0.0
 	 * @access   private
+	 * @return void
 	 */
-	private function define_admin_hooks() {
+	private function define_admin_hooks(): void {
 		$plugin_admin = new Bring_App_Admin(
 			$this->get_plugin_name(),
 			$this->get_version(),
@@ -204,8 +207,9 @@ class Bring_App {
 	 *
 	 * @since    1.0.0
 	 * @access   private
+	 * @return void
 	 */
-	private function define_public_hooks() {
+	private function define_public_hooks(): void {
 		$plugin_public = new Bring_App_Public(
 			$this->get_plugin_name(),
 			$this->get_version(),
@@ -244,8 +248,9 @@ class Bring_App {
 	 * Run the loader to execute all of the hooks with WordPress.
 	 *
 	 * @since    1.0.0
+	 * @return void
 	 */
-	public function run() {
+	public function run(): void {
 		$this->loader->run();
 	}
 
@@ -256,7 +261,7 @@ class Bring_App {
 	 * @since     1.0.0
 	 * @return    string    The name of the plugin.
 	 */
-	public function get_plugin_name() {
+	public function get_plugin_name(): string {
 		return $this->plugin_name;
 	}
 
@@ -266,7 +271,7 @@ class Bring_App {
 	 * @since     1.0.0
 	 * @return    Bring_App_Loader    Orchestrates the hooks of the plugin.
 	 */
-	public function get_loader() {
+	public function get_loader(): Bring_App_Loader {
 		return $this->loader;
 	}
 
@@ -285,8 +290,9 @@ class Bring_App {
 	 *
 	 * @since     1.0.0
 	 * @access   public
+	 * @return void
 	 */
-	public function init_app() {
+	public function init_app(): void {
 		// Load env variables
 		$dotenv = Dotenv::createImmutable(dirname(__DIR__));
 		$dotenv->safeLoad();
