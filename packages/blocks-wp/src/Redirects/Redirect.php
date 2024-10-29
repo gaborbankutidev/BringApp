@@ -63,6 +63,7 @@ class Redirect {
 	 * @return array<Redirect>
 	 */
 	public static function getRedirectsByFromPermalink(string $from_permalink): array {
+		$permalink = ltrim($from_permalink, "/");
 		$redirects_query = get_posts([
 			"post_type" => "redirect",
 			"numberposts" => -1,
@@ -71,7 +72,7 @@ class Redirect {
 				"relation" => "AND",
 				[
 					"key" => "from",
-					"value" => $from_permalink,
+					"value" => "/" . $from_permalink,
 					"compare" => "=",
 				],
 				[
