@@ -1,4 +1,10 @@
 import Button from "./button";
 
 export default Button;
-export {buttonVariants} from "./button";
+export {
+	ButtonBlock,
+	button,
+	buttonVariants,
+	type ButtonBlockProps,
+	type ButtonProps,
+} from "./button";

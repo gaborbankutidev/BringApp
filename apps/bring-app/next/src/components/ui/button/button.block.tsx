@@ -1,4 +1,4 @@
-import {button, type ButtonBlockProps} from "@/components/button";
+import {button, type ButtonBlockProps} from "@/components/ui/button";
 import {
 	makeOptions,
 	stringAttributeSource,
@@ -25,14 +25,21 @@ const buttonConfig: BlockConfig<ButtonBlockProps> = {
 					type: "select",
 					label: "Variant",
 					path: "variant",
-					options: makeOptions(["contained", "outlined", "text"]),
-					defaultValue: "contained",
+					options: makeOptions([
+						"primary",
+						"destructive",
+						"outline",
+						"secondary",
+						"ghost",
+						"link",
+					]),
+					defaultValue: "primary",
 				},
 				{
 					type: "select",
 					label: "Size",
 					path: "size",
-					options: makeOptions(["sm", "md"]),
+					options: makeOptions(["sm", "md", "lg", "icon"]),
 					defaultValue: "md",
 				},
 			],
