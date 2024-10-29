@@ -6,7 +6,8 @@ namespace Bring\BlocksWP\Client;
 
 use WP_REST_Response;
 use WP_REST_Request;
-use WP_Error;
+
+use Bring\BlocksWP\Redirects\Redirect;
 
 // No direct access
 defined("ABSPATH") or die("Hey, do not do this 😱");
@@ -64,8 +65,6 @@ class Api {
 			);
 		}
 
-		// TODO handle redirects
-
 		// Set permalink to front page permalink if empty
 		if ($permalink === "") {
 			if (!$front_page_permalink) {
@@ -78,6 +77,18 @@ class Api {
 			}
 
 			$permalink = $front_page_permalink;
+		}
+
+		$redirect = Redirect::getRedirectByFromPermalink($permalink);
+		if ($redirect) {
+			$redirect->incrementHits();
+			return new WP_REST_Response(
+				[
+					"responseCode" => $redirect->getStatusCode(),
+					"redirectTo" => $redirect->getTo(),
+				],
+				200,
+			);
 		}
 
 		// Parse permalink & set wp globals -> The rest api request will be handled as a normal request so all WP Query functions will work

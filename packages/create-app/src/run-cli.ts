@@ -117,7 +117,7 @@ export async function runCLI(config: CLIConfig) {
 	console.log(`2. Set up the .env files in the following folders:`);
 	console.log(`   - root`);
 	console.log(`   - next`);
-	console.log(`   - bring-theme`);
+	console.log(`   - plugins/bring-app`);
 
 	console.log();
 	console.log("3. Run the following commands to set up and start your project:");

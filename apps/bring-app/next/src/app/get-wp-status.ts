@@ -3,7 +3,7 @@ import {env} from "@/env.mjs";
 export type WpStatus =
 	| "ok"
 	| "not-set-up"
-	| "theme-not-activated"
+	| "plugin-not-activated"
 	| "unavailable"
 	| "error";
 
@@ -42,7 +42,7 @@ export const getWpStatus = async (): Promise<WpStatus> => {
 		wpStatus = "error";
 	}
 
-	// Check if WordPress theme is activated
+	// Check if WordPress plugin is activated
 	try {
 		const healthcheckResponse = await fetch(
 			`${env.NEXT_PUBLIC_WP_BASE_URL}/wp-json/bring/healthcheck`,
@@ -54,20 +54,20 @@ export const getWpStatus = async (): Promise<WpStatus> => {
 			healthcheckResponse.status !== 200 ||
 			!contentType?.includes("application/json")
 		) {
-			console.error("WordPress theme not activated");
-			return "theme-not-activated";
+			console.error("WordPress plugin not activated");
+			return "plugin-not-activated";
 		}
 
 		const data = (await healthcheckResponse.json()) as {ok?: boolean};
 		if (!("ok" in data) || data.ok !== true) {
-			console.error("WordPress theme not activated");
-			return "theme-not-activated";
+			console.error("WordPress plugin not activated");
+			return "plugin-not-activated";
 		}
 
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	} catch (e) {
 		console.error(
-			"WordPress health check failed while checking if WordPress theme is activated",
+			"WordPress health check failed while checking if WordPress plugin is activated",
 		);
 		wpStatus = "error";
 	}

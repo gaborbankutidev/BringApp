@@ -94,11 +94,11 @@ const wpHealthCheckNotices: WpHealthCheckNotice[] = [
 		notice: `Make sure the backend services are running and Wordpress is reachable at \`${env.NEXT_PUBLIC_WP_BASE_URL}\`.`,
 	},
 	{
-		status: "theme-not-activated",
-		cta: "Activate WordPress theme",
-		href: `${wpAdminUrl}themes.php`,
-		title: "WordPress theme not activated",
-		notice: `Make sure to visit \`${wpAdminUrl}themes.php\` and activate your project theme.`,
+		status: "plugin-not-activated",
+		cta: "Activate WordPress plugin",
+		href: `${wpAdminUrl}plugins.php`,
+		title: "WordPress plugin not activated",
+		notice: `Make sure to visit \`${wpAdminUrl}plugins.php\` and activate your Bring App plugin.`,
 	},
 	{
 		status: "not-set-up",
