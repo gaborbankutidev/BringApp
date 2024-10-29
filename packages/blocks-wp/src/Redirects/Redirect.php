@@ -45,7 +45,7 @@ class Redirect {
 
 	/**
 	 * Get a redirect by permalink
-	 * @param string $permalink
+	 * @param string $from_permalink
 	 * @return Redirect|null
 	 */
 	public static function getRedirectByFromPermalink(string $from_permalink): Redirect|null {
@@ -59,7 +59,7 @@ class Redirect {
 
 	/**
 	 * Get all redirects with a given from permalink
-	 * @param string $permalink
+	 * @param string $from_permalink
 	 * @return array<Redirect>
 	 */
 	public static function getRedirectsByFromPermalink(string $from_permalink): array {
@@ -96,19 +96,24 @@ class Redirect {
 	 * @return Redirect |  null
 	 */
 	public function __construct(int $id) {
+		$this->id = $id;
 		if (!get_post_type($id) == "redirect") {
-			return null;
+			return;
 		}
 
-		$this->id = $id;
+		$from_post_meta = get_post_meta($id, "from", true);
+		$this->from = is_string($from_post_meta) ? $from_post_meta : "";
 
-		$this->from = get_post_meta($id, "from", true);
-		$this->to = get_post_meta($id, "to", true);
+		$to_post_meta = get_post_meta($id, "to", true);
+		$this->to = is_string($to_post_meta) ? $to_post_meta : "";
 
-		$this->status_code = (int) get_post_meta($id, "status_code", true);
-		$this->hits = (int) get_post_meta($id, "hits", true);
+		$status_code_post_meta = get_post_meta($id, "status_code", true);
+		$this->status_code = is_numeric($status_code_post_meta)
+			? (int) $status_code_post_meta
+			: 307;
 
-		return $this;
+		$hits_post_meta = get_post_meta($id, "hits", true);
+		$this->hits = is_numeric($hits_post_meta) ? (int) $hits_post_meta : 0;
 	}
 
 	/**
@@ -163,7 +168,7 @@ class Redirect {
 
 	/**
 	 * Set destination url of the redirect
-	 * @param string $from
+	 * @param string $to
 	 * @return void
 	 */
 	public function setTo(string $to): void {
@@ -173,7 +178,7 @@ class Redirect {
 
 	/**
 	 * Set status code of the redirect
-	 * @param string $from
+	 * @param int $status_code
 	 * @return void
 	 */
 	public function setStatusCode(int $status_code): void {
@@ -183,7 +188,6 @@ class Redirect {
 
 	/**
 	 * Increment the hit count of the redirect
-	 * @param string $from
 	 * @return void
 	 */
 	public function incrementHits(): void {

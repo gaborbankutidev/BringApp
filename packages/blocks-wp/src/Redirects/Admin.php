@@ -46,7 +46,7 @@ class Admin {
 			"manage_redirect_posts_custom_column",
 			function ($column, $post_id) {
 				$redirect = new Redirect($post_id);
-				if ($redirect === null) {
+				if ($redirect == null) {
 					return;
 				}
 
@@ -85,7 +85,7 @@ class Admin {
 					wp_nonce_field("save_redirect_meta", "redirect_meta_nonce");
 
 					$redirect = new Redirect($post->ID);
-					if ($redirect === null) {
+					if ($redirect == null) {
 						return;
 					}
 					?>
@@ -136,7 +136,7 @@ class Admin {
                    <p>
                           <label for="redirect_hits"><?php _e("Hits", "blocks-wp"); ?></label>
                           <input type="text" disabled name="redirect_hits" id="redirect_hits" value="<?php echo esc_attr(
-                          	$redirect->getHits(),
+                          	(string) $redirect->getHits(),
                           ); ?>">
                           <span class="description"><?php _e(
                           	"Number of times this redirect has been accessed.",
@@ -197,7 +197,7 @@ class Admin {
 					$data["post_name"] = sanitize_title($data["post_title"]);
 
 					$redirect = new Redirect($post_id);
-					if ($redirect === null) {
+					if ($redirect == null) {
 						return $data;
 					}
 
@@ -273,7 +273,7 @@ class Admin {
 			}
 
 			$redirect = new Redirect($post_id);
-			if ($redirect === null) {
+			if ($redirect == null) {
 				return $post_id;
 			}
 
@@ -306,7 +306,12 @@ class Admin {
 	private static function notices() {
 		add_action("admin_notices", function () {
 			if ($error = get_transient("redirect_error")) {
-				add_settings_error("redirect", "redirect_exists", $error, "error");
+				add_settings_error(
+					"redirect",
+					"redirect_exists",
+					is_string($error) ? $error : __("An error occurred.", "blocks-wp"),
+					"error",
+				);
 				settings_errors("redirect");
 				delete_transient("redirect_error");
 			}
