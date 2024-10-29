@@ -1,5 +1,11 @@
 # @bring/create-app
 
+## 0.3.1
+
+### Patch Changes
+
+-   f1c4ca2: Update dependencies
+
 ## 0.3.0
 
 ### Minor Changes
