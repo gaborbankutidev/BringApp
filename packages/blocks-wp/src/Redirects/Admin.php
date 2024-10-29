@@ -278,11 +278,19 @@ class Admin {
 			}
 
 			if (isset($_POST["redirect_from"])) {
-				$redirect->setFrom(sanitize_text_field($_POST["redirect_from"]));
+				$from = sanitize_text_field($_POST["redirect_from"]);
+				$from = rtrim($from, "/");
+				$from = ltrim($from, "/");
+				$from = "/" . $from;
+				$redirect->setFrom($from);
 			}
 
 			if (isset($_POST["redirect_to"])) {
-				$redirect->setTo(sanitize_text_field($_POST["redirect_to"]));
+				$to = sanitize_text_field($_POST["redirect_to"]);
+				$to = rtrim($to, "/");
+				$to = ltrim($to, "/");
+				$to = "/" . $to;
+				$redirect->setTo($to);
 			}
 
 			if (isset($_POST["redirect_status_code"])) {

@@ -67,19 +67,21 @@ class Redirect {
 			"post_type" => "redirect",
 			"numberposts" => -1,
 			"post_status" => "publish",
-			[
-				"meta_query" => [
-					"relation" => "AND",
-					[
-						"key" => "from",
-						"value" => $from_permalink,
-						"compare" => "=",
-					],
-					[
-						"key" => "from",
-						"value" => "",
-						"compare" => "!=",
-					],
+			"meta_query" => [
+				"relation" => "AND",
+				[
+					"key" => "from",
+					"value" => $from_permalink,
+					"compare" => "=",
+				],
+				[
+					"key" => "from",
+					"value" => "",
+					"compare" => "!=",
+				],
+				[
+					"key" => "from",
+					"compare" => "EXISTS",
 				],
 			],
 		]);
