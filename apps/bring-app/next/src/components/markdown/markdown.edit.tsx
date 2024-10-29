@@ -64,8 +64,9 @@ const MarkdownEdit: BlockEdit<MarkdownProps> = ({
 						onClick={() => {
 							setPreview(false);
 						}}
-						onPointerEnterCapture={undefined}
-						onPointerLeaveCapture={undefined}
+						onPointerOverCapture={undefined}
+						onPointerOutCapture={undefined}
+						// @ts-ignore
 						placeholder={undefined}
 					/>
 				</ToolbarGroup>
@@ -81,8 +82,9 @@ const MarkdownEdit: BlockEdit<MarkdownProps> = ({
 						onClick={() => {
 							simpleMdeInstance && undo(simpleMdeInstance);
 						}}
-						onPointerEnterCapture={undefined}
-						onPointerLeaveCapture={undefined}
+						onPointerOverCapture={undefined}
+						onPointerOutCapture={undefined}
+						// @ts-ignore
 						placeholder={undefined}
 					/>
 					<ToolbarButton
@@ -90,8 +92,9 @@ const MarkdownEdit: BlockEdit<MarkdownProps> = ({
 						onClick={() => {
 							simpleMdeInstance && redo(simpleMdeInstance);
 						}}
-						onPointerEnterCapture={undefined}
-						onPointerLeaveCapture={undefined}
+						onPointerOverCapture={undefined}
+						onPointerOutCapture={undefined}
+						// @ts-ignore
 						placeholder={undefined}
 					/>
 
@@ -100,8 +103,9 @@ const MarkdownEdit: BlockEdit<MarkdownProps> = ({
 						onClick={() => {
 							setPreview(true);
 						}}
-						onPointerEnterCapture={undefined}
-						onPointerLeaveCapture={undefined}
+						onPointerOverCapture={undefined}
+						onPointerOutCapture={undefined}
+						// @ts-ignore
 						placeholder={undefined}
 					/>
 				</ToolbarGroup>
@@ -111,8 +115,9 @@ const MarkdownEdit: BlockEdit<MarkdownProps> = ({
 						onClick={() => {
 							simpleMdeInstance && toggleHeadingSmaller(simpleMdeInstance);
 						}}
-						onPointerEnterCapture={undefined}
-						onPointerLeaveCapture={undefined}
+						onPointerOverCapture={undefined}
+						onPointerOutCapture={undefined}
+						// @ts-ignore
 						placeholder={undefined}
 					/>
 
@@ -121,8 +126,9 @@ const MarkdownEdit: BlockEdit<MarkdownProps> = ({
 						onClick={() => {
 							simpleMdeInstance && toggleBold(simpleMdeInstance);
 						}}
-						onPointerEnterCapture={undefined}
-						onPointerLeaveCapture={undefined}
+						onPointerOverCapture={undefined}
+						onPointerOutCapture={undefined}
+						// @ts-ignore
 						placeholder={undefined}
 					/>
 					<ToolbarButton
@@ -130,8 +136,9 @@ const MarkdownEdit: BlockEdit<MarkdownProps> = ({
 						onClick={() => {
 							simpleMdeInstance && toggleItalic(simpleMdeInstance);
 						}}
-						onPointerEnterCapture={undefined}
-						onPointerLeaveCapture={undefined}
+						onPointerOverCapture={undefined}
+						onPointerOutCapture={undefined}
+						// @ts-ignore
 						placeholder={undefined}
 					/>
 					<ToolbarButton
@@ -139,8 +146,9 @@ const MarkdownEdit: BlockEdit<MarkdownProps> = ({
 						onClick={() => {
 							simpleMdeInstance && toggleStrikethrough(simpleMdeInstance);
 						}}
-						onPointerEnterCapture={undefined}
-						onPointerLeaveCapture={undefined}
+						onPointerOverCapture={undefined}
+						onPointerOutCapture={undefined}
+						// @ts-ignore
 						placeholder={undefined}
 					/>
 					<ToolbarButton
@@ -148,8 +156,9 @@ const MarkdownEdit: BlockEdit<MarkdownProps> = ({
 						onClick={() => {
 							simpleMdeInstance && drawLink(simpleMdeInstance);
 						}}
-						onPointerEnterCapture={undefined}
-						onPointerLeaveCapture={undefined}
+						onPointerOverCapture={undefined}
+						onPointerOutCapture={undefined}
+						// @ts-ignore
 						placeholder={undefined}
 					/>
 
@@ -158,8 +167,9 @@ const MarkdownEdit: BlockEdit<MarkdownProps> = ({
 						onClick={() => {
 							simpleMdeInstance && toggleUnorderedList(simpleMdeInstance);
 						}}
-						onPointerEnterCapture={undefined}
-						onPointerLeaveCapture={undefined}
+						onPointerOverCapture={undefined}
+						onPointerOutCapture={undefined}
+						// @ts-ignore
 						placeholder={undefined}
 					/>
 					<ToolbarButton
@@ -167,8 +177,9 @@ const MarkdownEdit: BlockEdit<MarkdownProps> = ({
 						onClick={() => {
 							simpleMdeInstance && toggleOrderedList(simpleMdeInstance);
 						}}
-						onPointerEnterCapture={undefined}
-						onPointerLeaveCapture={undefined}
+						onPointerOverCapture={undefined}
+						onPointerOutCapture={undefined}
+						// @ts-ignore
 						placeholder={undefined}
 					/>
 
@@ -177,8 +188,9 @@ const MarkdownEdit: BlockEdit<MarkdownProps> = ({
 						onClick={() => {
 							simpleMdeInstance && drawHorizontalRule(simpleMdeInstance);
 						}}
-						onPointerEnterCapture={undefined}
-						onPointerLeaveCapture={undefined}
+						onPointerOverCapture={undefined}
+						onPointerOutCapture={undefined}
+						// @ts-ignore
 						placeholder={undefined}
 					/>
 					<ToolbarButton
@@ -186,8 +198,9 @@ const MarkdownEdit: BlockEdit<MarkdownProps> = ({
 						onClick={() => {
 							simpleMdeInstance && drawImage(simpleMdeInstance);
 						}}
-						onPointerEnterCapture={undefined}
-						onPointerLeaveCapture={undefined}
+						onPointerOverCapture={undefined}
+						onPointerOutCapture={undefined}
+						// @ts-ignore
 						placeholder={undefined}
 					/>
 					<ToolbarButton
@@ -195,8 +208,9 @@ const MarkdownEdit: BlockEdit<MarkdownProps> = ({
 						onClick={() => {
 							simpleMdeInstance && toggleBlockquote(simpleMdeInstance);
 						}}
-						onPointerEnterCapture={undefined}
-						onPointerLeaveCapture={undefined}
+						onPointerOverCapture={undefined}
+						onPointerOutCapture={undefined}
+						// @ts-ignore
 						placeholder={undefined}
 					/>
 					<ToolbarButton
@@ -204,8 +218,9 @@ const MarkdownEdit: BlockEdit<MarkdownProps> = ({
 						onClick={() => {
 							simpleMdeInstance && toggleCodeBlock(simpleMdeInstance);
 						}}
-						onPointerEnterCapture={undefined}
-						onPointerLeaveCapture={undefined}
+						onPointerOverCapture={undefined}
+						onPointerOutCapture={undefined}
+						// @ts-ignore
 						placeholder={undefined}
 					/>
 				</ToolbarGroup>
@@ -215,8 +230,9 @@ const MarkdownEdit: BlockEdit<MarkdownProps> = ({
 						onClick={() => {
 							onChange("");
 						}}
-						onPointerEnterCapture={undefined}
-						onPointerLeaveCapture={undefined}
+						onPointerOverCapture={undefined}
+						onPointerOutCapture={undefined}
+						// @ts-ignore
 						placeholder={undefined}
 					/>
 				</ToolbarGroup>

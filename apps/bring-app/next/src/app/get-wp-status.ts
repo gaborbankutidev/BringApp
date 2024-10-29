@@ -17,7 +17,7 @@ export const getWpStatus = async (): Promise<WpStatus> => {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	} catch (e) {
 		console.error(
-			"WordPress health check failed while checking if WordPress site is running",
+			"WordPress health check failed, make sure the WordPress site is running",
 		);
 		return "unavailable";
 	}
