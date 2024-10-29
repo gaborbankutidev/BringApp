@@ -72,15 +72,15 @@
 		"lodash.clonedeep": "^4.5.0",
 		"lodash.get": "^4.4.2",
 		"lodash.set": "^4.3.2",
-		"tailwind-merge": "^2.4.0"
+		"tailwind-merge": "^2.5.4"
 	},
 	"devDependencies": {
 		"@bring/typescript-config": "*",
 		"@types/lodash.clonedeep": "^4.5.9",
 		"@types/lodash.get": "^4.4.9",
 		"@types/lodash.set": "^4.3.9",
-		"@types/react": "^18.3.3",
-		"@types/react-dom": "^18.3.0",
+		"@types/react": "^18.3.12",
+		"@types/react-dom": "^18.3.1",
 		"@types/wordpress__block-editor": "^11.5.15",
 		"@types/wordpress__blocks": "^12.5.14",
 		"@types/wordpress__components": "^23.0.12",
@@ -88,6 +88,6 @@
 		"@wordpress/blocks": "^12.35.0",
 		"@wordpress/components": "^27.6.0",
 		"@wordpress/data": "^9.28.0",
-		"typescript": "^5.5.4"
+		"typescript": "^5.6.3"
 	}
 }
