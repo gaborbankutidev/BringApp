@@ -92,7 +92,7 @@ class Admin {
 
                     <p>
                         <label for="redirect_from"><?php _e("From URL", "blocks-wp"); ?></label>
-                        <input type="text" name="redirect_from" id="redirect_from" value="<?php echo esc_attr(
+                        <input type="text" name="redirect_from" id="redirect_from" placeholder="/sample-page" value="<?php echo esc_attr(
                         	$redirect->getFrom(),
                         ); ?>" class="widefat">
                         <span class="description"><?php _e(
@@ -103,7 +103,7 @@ class Admin {
 
                     <p>
                         <label for="redirect_to"><?php _e("To URL", "blocks-wp"); ?></label>
-                        <input type="text" name="redirect_to" id="redirect_to" value="<?php echo esc_attr(
+                        <input type="text" name="redirect_to" id="redirect_to" placeholder="/another-sample-page" value="<?php echo esc_attr(
                         	$redirect->getTo(),
                         ); ?>" class="widefat">
                             <span class="description"><?php _e(
