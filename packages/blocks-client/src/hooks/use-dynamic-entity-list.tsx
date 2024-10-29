@@ -40,7 +40,7 @@ export function useDynamicEntityList<T = {}, P = {}>(
 		page = 1,
 		lazy = true,
 		customData = {},
-		cache = "force-cache",
+		cache = "no-store",
 		updateKey,
 	}: UseDynamicEntityListOptions = {},
 ) {

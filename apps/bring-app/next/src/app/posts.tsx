@@ -9,7 +9,6 @@ export default async function Posts() {
 		env.NEXT_PUBLIC_WP_BASE_URL ?? "",
 		"post",
 		"post",
-		{cache: "no-store"},
 	);
 
 	return (

@@ -5,7 +5,7 @@
 	"workspaces": [
 		"next"
 	],
-	"packageManager": "yarn@4.4.0",
+	"packageManager": "yarn@4.5.1",
 	"scripts": {
 		"after:install": "node ./scripts/after-install.mjs",
 		"build": "conc yarn:build:next yarn:build:editor",
@@ -22,7 +22,7 @@
 		"format:check": "prettier --check .",
 		"prepare": "husky",
 		"services:down": "docker compose down",
-		"services:up": "docker compose up -d",
+		"services:up": "docker compose up",
 		"storybook": "cd ./next && yarn watch:storybook",
 		"upgrade": "tsx scripts/upgrade.ts",
 		"upgrade:bring": "tsx scripts/upgrade.ts bring",
