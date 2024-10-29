@@ -185,6 +185,6 @@ class Redirect {
 	 */
 	public function incrementHits(): void {
 		$this->hits = $this->hits + 1;
-		update_post_meta($this->id, "hits", $this->hits + 1);
+		update_post_meta($this->id, "hits", $this->hits);
 	}
 }

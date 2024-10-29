@@ -6,10 +6,8 @@ namespace Bring\BlocksWP\Client;
 
 use WP_REST_Response;
 use WP_REST_Request;
-use WP_Error;
 
 use Bring\BlocksWP\Redirects\Redirect;
-use Bring\BlocksWP\Redirects\RedirectNotFoundException;
 
 // No direct access
 defined("ABSPATH") or die("Hey, do not do this 😱");
@@ -82,8 +80,8 @@ class Api {
 		}
 
 		$redirect = Redirect::getRedirectByFromPermalink($permalink);
-		$redirect->incrementHits();
 		if ($redirect) {
+			$redirect->incrementHits();
 			return new WP_REST_Response(
 				[
 					"responseCode" => $redirect->getStatusCode(),
