@@ -30,7 +30,7 @@ export type UseDynamicEntityListOptions = {
  * @param options - The options for fetching the entity list.
  * @returns - An object containing the entity list and a ref for the intersection observer.
  */
-export function useDynamicEntityList<T = {}, P = {}>(
+export function useDynamicEntityList<T = object, P = object>(
 	wpURL: string,
 	entitySlug: string | null | undefined,
 	entityType: EntityType | null | undefined,
@@ -40,7 +40,7 @@ export function useDynamicEntityList<T = {}, P = {}>(
 		page = 1,
 		lazy = true,
 		customData = {},
-		cache = "force-cache",
+		cache = "no-store",
 		updateKey,
 	}: UseDynamicEntityListOptions = {},
 ) {

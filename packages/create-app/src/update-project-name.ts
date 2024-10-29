@@ -1,6 +1,6 @@
 import fsExtra from "fs-extra";
-import kebabCase from "lodash.kebabcase";
 import path from "path";
+import {kebabCase} from "./utils";
 
 export function updateProjectName(directory: string, projectName: string) {
 	const packageJsonPath = path.join(directory, "package.json");
@@ -9,70 +9,34 @@ export function updateProjectName(directory: string, projectName: string) {
 	const composerJson = fsExtra.readJsonSync(composerJsonPath);
 
 	packageJson.name = kebabCase(projectName);
-	composerJson.name = `${kebabCase(projectName)}/theme`;
+	composerJson.name = `${kebabCase(projectName)}/plugin`;
 
 	fsExtra.writeJsonSync(packageJsonPath, packageJson, {spaces: 2});
 	fsExtra.writeJsonSync(composerJsonPath, composerJson, {spaces: 2});
 
-	updateProjectThemeName(directory, projectName);
+	// Update wordpress plugin name
+	updatePluginName(directory, projectName);
 }
 
-function updateProjectThemeName(directory: string, projectName: string) {
-	const initialProjectTheme = "Project Theme";
-	const initialProjectThemeSlug = "project-theme";
+function updatePluginName(directory: string, projectName: string) {
+	// Define the initial and updated plugin names
+	const initialPluginName = "Plugin Name:       Bring App";
+	const updatedPluginName = `Plugin Name:       Bring App | ${projectName}`;
 
-	const projectTheme = projectName;
-	const projectThemeSlug = kebabCase(projectName);
+	// Construct the plugin file path
+	const pluginPath = path.join(directory, "plugins/bring-app/bring-app.php");
 
-	// Update theme name in style.css
-	const themeCssPath = path.join(directory, `themes/${initialProjectThemeSlug}/style.css`);
-	const themeCss = fsExtra.readFileSync(themeCssPath, {
-		encoding: "utf-8",
-	});
+	try {
+		// Read the plugin file content
+		const pluginFileContent = fsExtra.readFileSync(pluginPath, {encoding: "utf-8"});
 
-	fsExtra.writeFileSync(
-		themeCssPath,
-		themeCss
-			.replaceAll(initialProjectTheme, projectTheme)
-			.replaceAll(initialProjectThemeSlug, projectThemeSlug),
-	);
+		// Replace the initial plugin name with the updated one
+		const updatedContent = pluginFileContent.replace(initialPluginName, updatedPluginName);
 
-	// Rename theme directory
-	fsExtra.renameSync(
-		path.join(directory, `themes/${initialProjectThemeSlug}`),
-		path.join(directory, `themes/${projectThemeSlug}`),
-	);
-
-	// Update theme name in next/package.json
-	const nextPackageJsonPath = path.join(directory, "next/package.json");
-	const nextPackageJson = fsExtra.readFileSync(nextPackageJsonPath, {
-		encoding: "utf-8",
-	});
-
-	fsExtra.writeFileSync(
-		nextPackageJsonPath,
-		nextPackageJson.replaceAll(initialProjectThemeSlug, projectThemeSlug),
-	);
-
-	// Update theme name in compose.yml
-	const dockerComposePath = path.join(directory, "compose.yml");
-	const dockerCompose = fsExtra.readFileSync(dockerComposePath, {
-		encoding: "utf-8",
-	});
-
-	fsExtra.writeFileSync(
-		dockerComposePath,
-		dockerCompose.replaceAll(initialProjectThemeSlug, projectThemeSlug),
-	);
-
-	// Update theme name in deploy.sh
-	const deployShPath = path.join(directory, "deploy.sh");
-	const deploySh = fsExtra.readFileSync(deployShPath, {
-		encoding: "utf-8",
-	});
-
-	fsExtra.writeFileSync(
-		deployShPath,
-		deploySh.replaceAll(initialProjectThemeSlug, projectThemeSlug),
-	);
+		// Write the updated content back to the file
+		fsExtra.writeFileSync(pluginPath, updatedContent);
+	} catch (error) {
+		// Handle any errors during file read/write operations
+		console.error(`Failed to update plugin name in ${pluginPath}:`, error);
+	}
 }

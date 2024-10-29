@@ -1,5 +1,17 @@
 # @bring/create-app
 
+## 0.3.0
+
+### Minor Changes
+
+-   502f5bd: Move the Bring App functionality into a plugin.
+
+## 0.2.0
+
+### Minor Changes
+
+-   1a1954b: Remove lodash kebabcase dependency to fix numeric value handling in project names
+
 ## 0.1.17
 
 ### Patch Changes

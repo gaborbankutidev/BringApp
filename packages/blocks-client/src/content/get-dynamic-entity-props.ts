@@ -7,7 +7,7 @@ import type {DynamicEntityProps, EntityType} from "../types";
  * @property cache - The cache mode for the request.
  */
 export type GetDynamicEntityPropsOptions = {
-	customData?: {[key: string]: any};
+	customData?: {[key: string]: unknown};
 	cache?: "force-cache" | "no-store";
 };
 
@@ -25,11 +25,11 @@ export type GetDynamicEntityPropsParams<P> = P;
  * @param options - The options for retrieving the dynamic entity properties.
  * @returns A promise that resolves to the dynamic entity properties.
  */
-async function getDynamicEntityProps<T = {}, P = {}>(
+async function getDynamicEntityProps<T = object, P = object>(
 	wpURL: string,
 	entityId: number,
 	entityType: EntityType,
-	{customData = {}, cache = "force-cache"}: GetDynamicEntityPropsOptions = {},
+	{customData = {}, cache = "no-store"}: GetDynamicEntityPropsOptions = {},
 ) {
 	const params = new URLSearchParams({
 		entityId: entityId.toString(),
