@@ -129,10 +129,10 @@ class Bring_App_Public {
 	/**
 	 * Add excerpt to dynamic post list
 	 * @since    1.0.0
-	 * @param array<array{'entityId':int,'excerpt':string}> $items
-	 * @param string $entity_slug
-	 * @param array<array<mixed>> $custom_data
-	 * @return array<array{'entityId':int,'excerpt':string}>
+	 * @param 	 array<array{'entityId':int,'excerpt':string}>		$items
+	 * @param 	 string												$entity_slug
+	 * @param 	 array<array<mixed>>								$custom_data
+	 * @return 	 array<array{'entityId':int,'excerpt':string}>
 	 */
 	public function Bring_App_add_excerpt_to_dynamic_post_list(
 		array $items,
