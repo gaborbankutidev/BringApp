@@ -55,8 +55,9 @@ class Bring_App_Admin {
 	 * Register the stylesheets for the admin area.
 	 *
 	 * @since    1.0.0
+	 * @return void
 	 */
-	public function enqueue_styles() {
+	public function enqueue_styles(): void {
 		/**
 		 * This function is provided for demonstration purposes only.
 		 *
@@ -82,8 +83,9 @@ class Bring_App_Admin {
 	 * Register the JavaScript for the admin area.
 	 *
 	 * @since    1.0.0
+	 * @return void
 	 */
-	public function enqueue_scripts() {
+	public function enqueue_scripts(): void {
 		/**
 		 * This function is provided for demonstration purposes only.
 		 *
@@ -105,12 +107,18 @@ class Bring_App_Admin {
 		);
 	}
 
-	public function disable_themes_setup() {
+	/**
+	 * Disable Themes Setup
+	 *
+	 * @since    1.0.0
+	 * @return void
+	 */
+	public function disable_themes_setup(): void {
 		// 1. Hide the Themes Menu
 		remove_submenu_page("themes.php", "themes.php");
 
 		// 2. Disable Theme Switching
-		function lock_theme($theme) {
+		function lock_theme(string $theme): string {
 			return BRING_APP_THEME;
 		}
 
@@ -122,28 +130,30 @@ class Bring_App_Admin {
 		add_filter("pre_option_template", "lock_theme");
 
 		// 3. Restrict Access to Theme Editor, Customizer, and Themes Page via direct URL
-		function disable_theme_editor_access() {
-			global $pagenow;
-			$restricted_pages = [
-				"theme-editor.php",
-				"customize.php",
-				"themes.php",
-				"theme-install.php",
-			];
+		add_action(
+			"admin_init",
+			function (): void {
+				global $pagenow;
+				$restricted_pages = [
+					"theme-editor.php",
+					"customize.php",
+					"themes.php",
+					"theme-install.php",
+				];
 
-			if (in_array($pagenow, $restricted_pages)) {
-				wp_safe_redirect(admin_url());
-				exit();
-			}
-		}
-		add_action("admin_init", "disable_theme_editor_access", 1);
+				if (in_array($pagenow, $restricted_pages)) {
+					wp_safe_redirect(admin_url());
+					exit();
+				}
+			},
+			1,
+		);
 
 		// 4. Hide Theme Update Notifications
-		function hide_theme_updates() {
+		add_action("admin_menu", function (): void {
 			remove_action("admin_notices", "update_nag", 3);
 			add_filter("pre_site_transient_update_themes", "__return_null");
-		}
-		add_action("admin_menu", "hide_theme_updates");
+		});
 
 		// 5. Disable Theme Installation
 		remove_submenu_page("themes.php", "theme-install.php");

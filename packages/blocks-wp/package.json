@@ -3,6 +3,6 @@
 	"version": "2.1.1",
 	"private": true,
 	"scripts": {
-		"lint": "vendor/bin/phpstan analyse"
+		"lint": "composer lint"
 	}
 }

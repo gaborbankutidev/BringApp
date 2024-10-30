@@ -9,7 +9,7 @@
 		}
 	},
 	"scripts": {
-		"lint": "plugins/bring-app/vendor/bin/phpstan analyse"
+		"lint": "plugins/bring-app/vendor/bin/phpstan analyse --memory-limit=1G"
 	},
 	"authors": [
 		{

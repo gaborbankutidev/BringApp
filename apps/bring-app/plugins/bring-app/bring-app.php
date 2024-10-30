@@ -52,6 +52,11 @@ define("BRING_APP_VERSION", "1.0.0");
 define("BRING_APP_THEME", "bring-app-theme");
 
 /**
+ * Define enforced permalink structure
+ */
+define("BRING_APP_PERMALINK", "/%postname%/");
+
+/**
  * Disable file editing
  */
 define("DISALLOW_FILE_EDIT", true);
@@ -59,8 +64,9 @@ define("DISALLOW_FILE_EDIT", true);
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-bring-app-activator.php
+ * @return void
  */
-function activate_bring_app() {
+function activate_bring_app(): void {
 	require_once plugin_dir_path(__FILE__) .
 		"includes/class-bring-app-activator.php";
 	Bring_App_Activator::activate();
@@ -69,8 +75,9 @@ function activate_bring_app() {
 /**
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-bring-app-deactivator.php
+ * @return void
  */
-function deactivate_bring_app() {
+function deactivate_bring_app(): void {
 	require_once plugin_dir_path(__FILE__) .
 		"includes/class-bring-app-deactivator.php";
 	Bring_App_Deactivator::deactivate();
@@ -93,8 +100,9 @@ require plugin_dir_path(__FILE__) . "includes/class-bring-app.php";
  * not affect the page life cycle.
  *
  * @since    1.0.0
+ * @return void
  */
-function run_bring_app() {
+function run_bring_app(): void {
 	$plugin = new Bring_App();
 	$plugin->run();
 }

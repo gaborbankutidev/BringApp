@@ -27,26 +27,39 @@ class Bring_App_Activator {
 	 * Long Description.
 	 *
 	 * @since    1.0.0
+	 * @return void
 	 */
-	public static function activate() {
+	public static function activate(): void {
 		self::set_permalink_structure();
 		self::set_bring_theme();
 		self::remove_theme_capabilities();
 	}
 
-	/* Set permalink structure */
-	private static function set_permalink_structure() {
-		update_option("permalink_structure", "/%postname%/");
+	/**
+	 * Set permalink structure
+	 * @since    1.0.0
+	 * @return void
+	 */
+	private static function set_permalink_structure(): void {
+		update_option("permalink_structure", BRING_APP_PERMALINK);
 	}
 
-	/* Set Bring App Theme on plugin activation */
-	private static function set_bring_theme() {
+	/**
+	 * Set Bring App Theme on plugin activation
+	 * @since    1.0.0
+	 * @return void
+	 */
+	private static function set_bring_theme(): void {
 		update_option("template", BRING_APP_THEME);
 		update_option("stylesheet", BRING_APP_THEME);
 	}
 
-	/* Function to remove theme-related capabilities on plugin activation */
-	private static function remove_theme_capabilities() {
+	/**
+	 * Function to remove theme-related capabilities on plugin activation
+	 * @since    1.0.0
+	 * @return void
+	 */
+	private static function remove_theme_capabilities(): void {
 		global $wp_roles;
 		if (!isset($wp_roles)) {
 			$wp_roles = new WP_Roles();
@@ -54,6 +67,10 @@ class Bring_App_Activator {
 
 		foreach ($wp_roles->roles as $role_name => $role_info) {
 			$role = get_role($role_name);
+			if (!$role) {
+				continue;
+			}
+
 			$role->remove_cap("switch_themes");
 			$role->remove_cap("edit_theme_options");
 		}
