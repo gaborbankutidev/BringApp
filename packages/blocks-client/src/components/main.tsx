@@ -2,12 +2,12 @@ import React from "react";
 import {createBringElement, getEntity, getSiteProps} from "../content";
 import {FCC} from "../types";
 
-function makeMain<EP = {}, SP = {}, M = {}, MI = {}, CTX = {}>(
+function makeMain<EP = object, SP = object, M = object, MI = object, CTX = object>(
 	wpURL: string,
 	dataToken: string,
 	onRedirect: (redirectTo: string, responseCode: number) => void,
 	onNotFound: () => void,
-	componentMap: Map<string, FCC<any, EP, SP, M, MI, CTX>>,
+	componentMap: Map<string, FCC<unknown, EP, SP, M, MI, CTX>>,
 ) {
 	const Main = async ({slug = "", context}: {slug?: string | string[]; context?: CTX}) => {
 		const siteProps = await getSiteProps<SP, M, MI>(wpURL);

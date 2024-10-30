@@ -10,7 +10,7 @@ import type {SiteProps} from "../types";
  * @param wpURL - The URL of the WordPress site.
  * @returns A promise that resolves to the site properties.
  */
-async function getSiteProps<SP = {}, M = {}, MI = {}>(wpURL: string) {
+async function getSiteProps<SP = object, M = object, MI = object>(wpURL: string) {
 	try {
 		const response = await fetch(`${wpURL}/wp-json/bring/dynamic/site`, {
 			method: "GET",

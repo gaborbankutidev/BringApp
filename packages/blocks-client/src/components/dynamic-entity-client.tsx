@@ -11,7 +11,7 @@ import Debug from "./debug";
  * @property entityProps - The dynamic entity properties.
  * @property params - The parameters for retrieving the dynamic entity properties.
  */
-export type DynamicEntityPropsClientRenderProps<T = {}, P = {}> = {
+export type DynamicEntityPropsClientRenderProps<T = object, P = object> = {
 	entityProps: DynamicEntityProps<T>;
 	params?: GetDynamicEntityPropsParams<P>;
 	ref?: (node?: Element | null | undefined) => void;
@@ -26,7 +26,7 @@ export type EntityProps<T, P> = {
 
 function makeDynamicEntityClient(wpURL: string) {
 	// prettier-ignore
-	const DynamicEntityClient = <T={}, P = {}>({
+	const DynamicEntityClient = <T=object, P = object>({
 		entityId = 0,
 		entityType = "post",
 		options = {},
