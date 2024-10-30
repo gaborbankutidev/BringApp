@@ -108,16 +108,6 @@ class Bring_App_Admin {
 	}
 
 	/**
-	 * Lock Theme
-	 * @since    1.0.0
-	 * @param string $theme
-	 * @return string
-	 */
-	private static function lock_theme(string $theme): string {
-		return BRING_APP_THEME;
-	}
-
-	/**
 	 * Disable Themes Setup
 	 *
 	 * @since    1.0.0
@@ -128,12 +118,16 @@ class Bring_App_Admin {
 		remove_submenu_page("themes.php", "themes.php");
 
 		// 2. Disable Theme Switching
-		add_filter("template", self::lock_theme(...));
-		add_filter("stylesheet", self::lock_theme(...));
-		add_filter("option_stylesheet", self::lock_theme(...));
-		add_filter("option_template", self::lock_theme(...));
-		add_filter("pre_option_stylesheet", self::lock_theme(...));
-		add_filter("pre_option_template", self::lock_theme(...));
+		function lock_theme(string $theme): string {
+			return BRING_APP_THEME;
+		}
+
+		add_filter("template", "lock_theme");
+		add_filter("stylesheet", "lock_theme");
+		add_filter("option_stylesheet", "lock_theme");
+		add_filter("option_template", "lock_theme");
+		add_filter("pre_option_stylesheet", "lock_theme");
+		add_filter("pre_option_template", "lock_theme");
 
 		// 3. Restrict Access to Theme Editor, Customizer, and Themes Page via direct URL
 		add_action(
