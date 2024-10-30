@@ -41,7 +41,7 @@ class Bring_App_Activator {
 	 * @return void
 	 */
 	private static function set_permalink_structure(): void {
-		update_option("permalink_structure", "/%postname%/");
+		update_option("permalink_structure", BRING_APP_PERMALINK);
 	}
 
 	/**

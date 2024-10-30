@@ -15,12 +15,6 @@ class Settings {
 	 */
 
 	/**
-	 * The required permalink structure for the theme.
-	 * @var string
-	 */
-	private static string $required_permalink_structure = "/%postname%/";
-
-	/**
 	 * Initialize the settings.
 	 * @return void
 	 */
@@ -58,7 +52,7 @@ class Settings {
 		$old_value,
 	): string {
 		// Check if the new value is different from the desired permalink structure
-		if ($new_value !== self::$required_permalink_structure) {
+		if ($new_value !== BRING_APP_PERMALINK) {
 			// Set a flag to display an error notice
 			add_option("permalink_change_prevented", true);
 
@@ -79,9 +73,9 @@ class Settings {
 		$current_permalink_structure = get_option("permalink_structure");
 
 		// Check if the current permalink structure matches the desired one
-		if ($current_permalink_structure !== self::$required_permalink_structure) {
+		if ($current_permalink_structure !== BRING_APP_PERMALINK) {
 			// Update the permalink structure to the desired one
-			update_option("permalink_structure", self::$required_permalink_structure);
+			update_option("permalink_structure", BRING_APP_PERMALINK);
 
 			// Flush rewrite rules to apply the new permalink settings
 			flush_rewrite_rules();
@@ -100,7 +94,7 @@ class Settings {
 	 */
 	public static function permalink_change_prevented_notice(): void {
 		if (get_option("permalink_change_prevented")) {
-			echo '<div class="notice notice-error"><p>Changing the permalink structure is not allowed. The permalink structure must be set to "Post Name" for this theme to function properly.</p></div>';
+			echo '<div class="notice notice-error"><p>Changing the permalink structure is not allowed. The permalink structure must be set to "Post name" for the Bring App to function properly.</p></div>';
 
 			// Delete the option to reset for future attempts
 			delete_option("permalink_change_prevented");
@@ -112,6 +106,6 @@ class Settings {
 	 * @return void
 	 */
 	public static function custom_permalink_change_notice(): void {
-		echo '<div class="notice notice-info"><p>The permalink structure has been automatically set to "Post Name" to ensure theme compatibility.</p></div>';
+		echo '<div class="notice notice-info"><p>The permalink structure has been automatically set to "Post name" to ensure Bring App compatibility.</p></div>';
 	}
 }
