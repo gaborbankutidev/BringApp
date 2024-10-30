@@ -13,7 +13,7 @@ export type GetDynamicEntityListOptions = {
 	limit?: number;
 	offset?: number;
 	page?: number;
-	customData?: {[key: string]: any};
+	customData?: {[key: string]: unknown};
 	cache?: "force-cache" | "no-store";
 };
 
@@ -34,7 +34,7 @@ export type GetDynamicEntityListParams<P> = {count: number} & P;
  * @param options - The options for retrieving the dynamic entity list.
  * @returns A promise that resolves to the dynamic entity list.
  */
-async function getDynamicEntityList<T = {}, P = {}>(
+async function getDynamicEntityList<T = object, P = object>(
 	wpURL: string,
 	entitySlug: string,
 	entityType: EntityType,
