@@ -1,5 +1,11 @@
 # @bring/blocks-client
 
+## 2.2.0
+
+### Patch Changes
+
+-   b714bad: Fix typescript errors
+
 ## 2.1.1
 
 ### Patch Changes
