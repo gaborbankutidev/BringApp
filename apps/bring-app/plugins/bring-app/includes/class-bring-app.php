@@ -295,7 +295,7 @@ class Bring_App {
 				"contact-form",
 			])
 			// Ignore paths
-			->ignorePaths(["rest-api/docs"]);
+			->ignorePaths(["rest-api/docs", "rest-api/schema"]);
 
 		// init bring
 		BringBlocks::init();
