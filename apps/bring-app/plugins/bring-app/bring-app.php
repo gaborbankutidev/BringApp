@@ -40,9 +40,11 @@ define("BRING_APP_VERSION", "1.0.0");
 /**
  * Define Plugin Path and URL constants
  */
-!defined("BRING_APP_PLUGIN_PATH") && define("BRING_APP_PLUGIN_PATH", plugin_dir_path(__FILE__));
+!defined("BRING_APP_PLUGIN_PATH") &&
+	define("BRING_APP_PLUGIN_PATH", plugin_dir_path(__FILE__));
 
-!defined("BRING_APP_PLUGIN_URL") && define("BRING_APP_PLUGIN_URL", plugin_dir_url(__FILE__));
+!defined("BRING_APP_PLUGIN_URL") &&
+	define("BRING_APP_PLUGIN_URL", plugin_dir_url(__FILE__));
 
 /**
  * Define enforced theme
@@ -60,7 +62,8 @@ define("DISALLOW_FILE_EDIT", true);
  * @return void
  */
 function activate_bring_app(): void {
-	require_once plugin_dir_path(__FILE__) . "includes/class-bring-app-activator.php";
+	require_once plugin_dir_path(__FILE__) .
+		"includes/class-bring-app-activator.php";
 	Bring_App_Activator::activate();
 }
 
@@ -70,7 +73,8 @@ function activate_bring_app(): void {
  * @return void
  */
 function deactivate_bring_app(): void {
-	require_once plugin_dir_path(__FILE__) . "includes/class-bring-app-deactivator.php";
+	require_once plugin_dir_path(__FILE__) .
+		"includes/class-bring-app-deactivator.php";
 	Bring_App_Deactivator::deactivate();
 }
 
