@@ -120,28 +120,24 @@ class Bring_App {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path(dirname(__FILE__)) .
-			"includes/class-bring-app-loader.php";
+		require_once plugin_dir_path(dirname(__FILE__)) . "includes/class-bring-app-loader.php";
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path(dirname(__FILE__)) .
-			"includes/class-bring-app-i18n.php";
+		require_once plugin_dir_path(dirname(__FILE__)) . "includes/class-bring-app-i18n.php";
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path(dirname(__FILE__)) .
-			"admin/class-bring-app-admin.php";
+		require_once plugin_dir_path(dirname(__FILE__)) . "admin/class-bring-app-admin.php";
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path(dirname(__FILE__)) .
-			"public/class-bring-app-public.php";
+		require_once plugin_dir_path(dirname(__FILE__)) . "public/class-bring-app-public.php";
 
 		$this->loader = new Bring_App_Loader();
 	}
@@ -159,11 +155,7 @@ class Bring_App {
 	private function set_locale(): void {
 		$plugin_i18n = new Bring_App_i18n();
 
-		$this->loader->add_action(
-			"plugins_loaded",
-			$plugin_i18n,
-			"load_plugin_textdomain",
-		);
+		$this->loader->add_action("plugins_loaded", $plugin_i18n, "load_plugin_textdomain");
 	}
 
 	/**
@@ -175,30 +167,15 @@ class Bring_App {
 	 * @return void
 	 */
 	private function define_admin_hooks(): void {
-		$plugin_admin = new Bring_App_Admin(
-			$this->get_plugin_name(),
-			$this->get_version(),
-		);
+		$plugin_admin = new Bring_App_Admin($this->get_plugin_name(), $this->get_version());
 
-		$this->loader->add_action(
-			"admin_enqueue_scripts",
-			$plugin_admin,
-			"enqueue_styles",
-		);
-		$this->loader->add_action(
-			"admin_enqueue_scripts",
-			$plugin_admin,
-			"enqueue_scripts",
-		);
+		$this->loader->add_action("admin_enqueue_scripts", $plugin_admin, "enqueue_styles");
+		$this->loader->add_action("admin_enqueue_scripts", $plugin_admin, "enqueue_scripts");
 
 		/* Custom functionality actions and filters added below */
 
 		/* Disable the themes setup */
-		$this->loader->add_action(
-			"admin_init",
-			$plugin_admin,
-			"disable_themes_setup",
-		);
+		$this->loader->add_action("admin_init", $plugin_admin, "disable_themes_setup");
 	}
 
 	/**
@@ -210,30 +187,15 @@ class Bring_App {
 	 * @return void
 	 */
 	private function define_public_hooks(): void {
-		$plugin_public = new Bring_App_Public(
-			$this->get_plugin_name(),
-			$this->get_version(),
-		);
+		$plugin_public = new Bring_App_Public($this->get_plugin_name(), $this->get_version());
 
-		$this->loader->add_action(
-			"wp_enqueue_scripts",
-			$plugin_public,
-			"enqueue_styles",
-		);
-		$this->loader->add_action(
-			"wp_enqueue_scripts",
-			$plugin_public,
-			"enqueue_scripts",
-		);
+		$this->loader->add_action("wp_enqueue_scripts", $plugin_public, "enqueue_styles");
+		$this->loader->add_action("wp_enqueue_scripts", $plugin_public, "enqueue_scripts");
 
 		/* Custom functionality actions and filters added below */
 
 		/* This is only to test your WordPress installation, you can remove it after you make sure everything is working */
-		$this->loader->add_action(
-			"rest_api_init",
-			$plugin_public,
-			"Bring_App_Health_Check",
-		);
+		$this->loader->add_action("rest_api_init", $plugin_public, "Bring_App_Health_Check");
 
 		$this->loader->add_filter(
 			"bring_dynamic_post_list",
@@ -319,6 +281,11 @@ class Bring_App {
 			->entityProps([])
 			// Further features
 			->forms(["contact"])
+			->sitemap([
+				"posts" => ["page", "post"],
+				"taxonomies" => false,
+				"authors" => false,
+			])
 			// Register blocks
 			->blocks([
 				// layout
