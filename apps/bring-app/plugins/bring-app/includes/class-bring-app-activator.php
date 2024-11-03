@@ -30,18 +30,8 @@ class Bring_App_Activator {
 	 * @return void
 	 */
 	public static function activate(): void {
-		self::set_permalink_structure();
 		self::set_bring_theme();
 		self::remove_theme_capabilities();
-	}
-
-	/**
-	 * Set permalink structure
-	 * @since    1.0.0
-	 * @return void
-	 */
-	private static function set_permalink_structure(): void {
-		update_option("permalink_structure", BRING_APP_PERMALINK);
 	}
 
 	/**
