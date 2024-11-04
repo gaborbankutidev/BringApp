@@ -29,8 +29,35 @@ class JWTAuth {
 			version_compare(JWT_AUTH_PLUGIN_VERSION, "3.0.3", "<=") &&
 			class_exists("JWTAuth\Auth")
 		) {
+			// Run config hooks
+			self::config();
+
+			// Initialize logout endpoint
 			add_action("rest_api_init", [self::class, "register_routes"]);
 		}
+	}
+
+	/**
+	 * Define plugin config
+	 */
+	public static function config() {
+		/**
+		 * Change the refresh token's expiration time.
+		 *
+		 * @param int $expire The default expiration timestamp.
+		 * @param int $issued_at The current time.
+		 *
+		 * @return int The custom refresh token expiration timestamp.
+		 */
+		add_filter(
+			"jwt_auth_refresh_expire",
+			function ($expire, $issued_at) {
+				// Set the refresh token expiration to 1 day
+				return time() + DAY_IN_SECONDS;
+			},
+			10,
+			2,
+		);
 	}
 
 	/**
