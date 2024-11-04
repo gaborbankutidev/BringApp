@@ -6,7 +6,13 @@ namespace BringApp\Extend\JWTAuth;
 
 class JWTAuth {
 	/**
-	 * Initializes the class by conditionally setting up the REST route.
+	 * The minimum and maximum allowed versions of the JWTAuth plugin.
+	 */
+	const MIN_ALLOWED_VERSION = "3.0.0";
+	const MAX_ALLOWED_VERSION = "3.1.0";
+
+	/**
+	 * Initializes the class after the plugins have finished loading.
 	 */
 	public static function init() {
 		// Delay the route registration until all plugins are loaded
@@ -14,7 +20,7 @@ class JWTAuth {
 	}
 
 	/**
-	 * Conditionally registers the logout REST route if requirements are met.
+	 * Conditionally initialize the config and logout REST route if requirements are met.
 	 */
 	public static function conditional_init() {
 		// Ensure the plugin admin functions are available for checking active status
@@ -26,10 +32,19 @@ class JWTAuth {
 		if (
 			is_plugin_active("jwt-auth/jwt-auth.php") &&
 			defined("JWT_AUTH_PLUGIN_VERSION") &&
-			version_compare(JWT_AUTH_PLUGIN_VERSION, "3.0.3", "<=") &&
+			version_compare(
+				JWT_AUTH_PLUGIN_VERSION,
+				self::MIN_ALLOWED_VERSION,
+				">=",
+			) &&
+			version_compare(
+				JWT_AUTH_PLUGIN_VERSION,
+				self::MAX_ALLOWED_VERSION,
+				"<=",
+			) &&
 			class_exists("JWTAuth\Auth")
 		) {
-			// Run config hooks
+			// Init config hooks
 			self::config();
 
 			// Initialize logout endpoint
