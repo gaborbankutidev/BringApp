@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BringApp\Extend;
+namespace BringApp\Extend\JWTAuth;
 
 class JWTAuth {
 	/**
@@ -10,13 +10,13 @@ class JWTAuth {
 	 */
 	public static function init() {
 		// Delay the route registration until all plugins are loaded
-		add_action("plugins_loaded", [self::class, "conditional_setup"]);
+		add_action("plugins_loaded", [self::class, "conditional_init"]);
 	}
 
 	/**
 	 * Conditionally registers the logout REST route if requirements are met.
 	 */
-	public static function conditional_setup() {
+	public static function conditional_init() {
 		// Ensure the plugin admin functions are available for checking active status
 		if (!function_exists("is_plugin_active")) {
 			require_once ABSPATH . "wp-admin/includes/plugin.php";
@@ -24,10 +24,10 @@ class JWTAuth {
 
 		// Check if the JWTAuth plugin and class are available and active
 		if (
+			is_plugin_active("jwt-auth/jwt-auth.php") &&
 			defined("JWT_AUTH_PLUGIN_VERSION") &&
 			version_compare(JWT_AUTH_PLUGIN_VERSION, "3.0.3", "<=") &&
-			class_exists("JWTAuth\Auth") &&
-			is_plugin_active("jwt-auth/jwt-auth.php")
+			class_exists("JWTAuth\Auth")
 		) {
 			add_action("rest_api_init", [self::class, "register_routes"]);
 		}

@@ -10,7 +10,7 @@ use BringApp\Env\Env;
 use BringApp\Forms\Forms;
 use BringApp\General\General;
 use BringApp\Post\Post;
-use BringApp\Extend\JWTAuth;
+use BringApp\Extend\Extend;
 
 /**
  * The file that defines the core plugin class
@@ -296,9 +296,6 @@ class Bring_App {
 		$dotenv = Dotenv::createImmutable(dirname(__DIR__));
 		$dotenv->safeLoad();
 
-		// Extend JWTAuth Plugin if active
-		JWTAuth::init();
-
 		// config bring
 		Config::init([
 			"DATA_TOKEN" => Env::DATA_TOKEN(),
@@ -352,5 +349,8 @@ class Bring_App {
 		Forms::init();
 		General::init();
 		Post::init();
+
+		// init plugin extensions
+		Extend::init();
 	}
 }
