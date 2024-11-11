@@ -64,7 +64,7 @@ export async function GET(request: Request) {
 
 	const wpSitemapXml = await getWpSitemapXml(request.url);
 
-	if (wpSitemapXml.err) {
+	if (wpSitemapXml.isErr) {
 		return NextResponse.redirect(new URL("/", request.url));
 	}
 
