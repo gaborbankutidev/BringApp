@@ -5,13 +5,12 @@ use Dotenv\Dotenv;
 use Bring\BlocksWP\BringBlocks;
 use Bring\BlocksWP\Config;
 
-use BringApp\Settings\Settings;
 use BringApp\Enqueue\Enqueue;
 use BringApp\Env\Env;
 use BringApp\Forms\Forms;
 use BringApp\General\General;
 use BringApp\Post\Post;
-use BringApp\Plugins\Plugins;
+use BringApp\Extend\Extend;
 
 /**
  * The file that defines the core plugin class
@@ -297,9 +296,6 @@ class Bring_App {
 		$dotenv = Dotenv::createImmutable(dirname(__DIR__));
 		$dotenv->safeLoad();
 
-		// initialize wordpress settings
-		Settings::init();
-
 		// config bring
 		Config::init([
 			"DATA_TOKEN" => Env::DATA_TOKEN(),
@@ -319,6 +315,11 @@ class Bring_App {
 			->entityProps([])
 			// Further features
 			->forms(["contact"])
+			->sitemap([
+				"posts" => ["page", "post"],
+				"taxonomies" => false,
+				"authors" => false,
+			])
 			// Register blocks
 			->blocks([
 				// layout
@@ -338,7 +339,7 @@ class Bring_App {
 				"contact-form",
 			])
 			// Ignore paths
-			->ignorePaths(["rest-api/docs"]);
+			->ignorePaths(["rest-api/docs", "rest-api/schema"]);
 
 		// init bring
 		BringBlocks::init();
@@ -348,5 +349,8 @@ class Bring_App {
 		Forms::init();
 		General::init();
 		Post::init();
+
+		// init plugin extensions
+		Extend::init();
 	}
 }

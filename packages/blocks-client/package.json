@@ -1,7 +1,7 @@
 {
 	"name": "@bring/blocks-client",
-	"version": "2.2.0",
 	"type": "module",
+	"version": "2.5.0",
 	"description": "Client package for bring-blocks",
 	"author": "Bring Team Ltd.",
 	"license": "GPL-2.0-or-later",
