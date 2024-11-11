@@ -1,6 +1,6 @@
 {
 	"$schema": "https://json.schemastore.org/tsconfig",
-	"extends": "@bring/typescript-config/base.json",
+	"extends": "@bring/config/base.json",
 	"compilerOptions": {
 		"lib": ["es2021"],
 		"outDir": "dist",

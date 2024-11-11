@@ -1,12 +1,12 @@
-import React, {type FC, type ReactNode} from "react";
-import type {BringNode} from "../types";
+import React, { type FC, type ReactNode } from "react"
+import type { BringNode } from "../types"
 
 /**
  * Represents the props of the error component.
  * @property name - The name of the component that encountered the error.
  */
 interface ErrorComponentInterface {
-	name: string;
+	name: string
 }
 
 /**
@@ -15,7 +15,7 @@ interface ErrorComponentInterface {
  * @param name - The name of the component that encountered the error.
  * @returns The React element representing the error component.
  */
-const Error: FC<ErrorComponentInterface> = ({name}) => <div>Error while rendering {name}</div>;
+const Error: FC<ErrorComponentInterface> = ({ name }) => <div>Error while rendering {name}</div>
 
 /**
  * Creates a React element tree based on the provided BringNodes.
@@ -38,21 +38,21 @@ export default function createBringElement(
 	siteProps: any = {},
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	context: any = {},
-	PostContent: ReactNode = null,
+	PostContent: ReactNode = null
 ) {
 	return nodes.map((node) => {
 		// check if component is PostContent and return PostContent ReactNode
 		if (node.component === "bring/post-content") {
-			return PostContent;
+			return PostContent
 		}
 
 		// get component
-		const Component = componentMap.get(node.component);
+		const Component = componentMap.get(node.component)
 
 		// check if component is a function
 		if (Component === undefined) {
-			console.log('Component is not a function, inserting "Error" component instead...');
-			return <Error name={node.component} key={node.key} />;
+			console.log('Component is not a function, inserting "Error" component instead...')
+			return <Error name={node.component} key={node.key} />
 		}
 
 		// render children
@@ -63,9 +63,9 @@ export default function createBringElement(
 					entityProps,
 					siteProps,
 					context,
-					PostContent,
+					PostContent
 				)
-			: [];
+			: []
 
 		// create element
 		return (
@@ -78,6 +78,6 @@ export default function createBringElement(
 			>
 				{children}
 			</Component>
-		);
-	});
+		)
+	})
 }

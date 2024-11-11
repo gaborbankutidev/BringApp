@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import {UseSendFormOptions, useSendForm} from "./use-send-form";
+import { UseSendFormOptions, useSendForm } from "./use-send-form"
 
 /**
  * Custom hook for sending form data to a WordPress endpoint.

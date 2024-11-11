@@ -1,7 +1,7 @@
-import React from "react";
-import type {BlockConfig} from "../..";
-import {EditorCard} from "../../components";
-import {postContent} from "./post-content";
+import React from "react"
+import type { BlockConfig } from "../.."
+import { EditorCard } from "../../components"
+import { postContent } from "./post-content"
 
 export const postContentConfig: BlockConfig = {
 	...postContent,
@@ -13,9 +13,9 @@ export const postContentConfig: BlockConfig = {
 			<h1>Example Post Content</h1>
 			<h2>The post content will be rendered here.</h2>
 			<p>
-				You can use this component to render the content of a post. The content will be
-				rendered where this component is used in the layout.
+				You can use this component to render the content of a post. The content will be rendered
+				where this component is used in the layout.
 			</p>
 		</EditorCard>
 	),
-};
+}

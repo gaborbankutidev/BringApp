@@ -1,13 +1,13 @@
-import {registerBlockType} from "@wordpress/blocks";
-import {BringStylesDefaultValue} from "../styles/utils";
-import type {Obj} from "../types";
-import {objectAttributeSource, stringAttributeSource} from "./attributes";
-import {makeEdit} from "./make-edit";
-import {makeSave} from "./make-save";
-import type {BlockConfig} from "./types";
+import { registerBlockType } from "@wordpress/blocks"
+import { BringStylesDefaultValue } from "../styles/utils"
+import type { Obj } from "../types"
+import { objectAttributeSource, stringAttributeSource } from "./attributes"
+import { makeEdit } from "./make-edit"
+import { makeSave } from "./make-save"
+import type { BlockConfig } from "./types"
 
 export function registerBringBlock<Props extends Obj>(config: BlockConfig<Props>) {
-	const title = config.title ? config.title : config.componentName;
+	const title = config.title ? config.title : config.componentName
 
 	// @ts-expect-error: Expect error here because Wordpress's `registerBlockType` types are so complicated TS can't infer the correct types
 	registerBlockType(`bring/${title.toLowerCase()}`, {
@@ -28,5 +28,5 @@ export function registerBringBlock<Props extends Obj>(config: BlockConfig<Props>
 		},
 		edit: makeEdit<Props>(config),
 		save: makeSave(),
-	});
+	})
 }

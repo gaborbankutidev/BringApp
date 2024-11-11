@@ -6,10 +6,10 @@ export {
 	numberAttributeSource,
 	objectAttributeSource,
 	stringAttributeSource,
-} from "./blocks";
-export type {BlockConfig, BlockControl, BlockEdit} from "./blocks";
+} from "./blocks"
+export type { BlockConfig, BlockControl, BlockEdit } from "./blocks"
 
-export {Debug, EditorCard} from "./components";
+export { Debug, EditorCard } from "./components"
 
 export {
 	// primitive
@@ -33,13 +33,13 @@ export {
 	// util
 	makeOptions,
 	optionsToNumberOptions,
-} from "./controls";
+} from "./controls"
 
-export {useDynamicEntityOptions} from "./hooks";
+export { useDynamicEntityOptions } from "./hooks"
 
-export {makeBringStylesClassNames, makeBringStylesControl} from "./styles";
+export { makeBringStylesClassNames, makeBringStylesControl } from "./styles"
 
-export {Editor} from "./editor";
+export { Editor } from "./editor"
 
 export type {
 	Defined,
@@ -57,6 +57,6 @@ export type {
 	Obj,
 	OptionList,
 	SelectControlOptions,
-} from "./types";
+} from "./types"
 
-export {defaultImageValue} from "./utils";
+export { defaultImageValue } from "./utils"

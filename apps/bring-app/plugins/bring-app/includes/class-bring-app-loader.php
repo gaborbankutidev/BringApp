@@ -113,8 +113,7 @@ class Bring_App_Loader {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @param    array<int, array{hook: string, component: object, callback: string|callable, priority: int, accepted_args: int}>
-	 * 								  $hooks			The collection of hooks that is being registered (that is, actions or filters).
+	 * @param    array<int, array{hook: string, component: object, callback: string|callable, priority: int, accepted_args: int}> $hooks The collection of hooks that is being registered (that is, actions or filters).
 	 * @param    string               $hook             The name of the WordPress filter that is being registered.
 	 * @param    object               $component        A reference to the instance of the object on which the filter is defined.
 	 * @param    string|callable      $callback         The name of the function definition on the $component.

@@ -4,5 +4,16 @@
 	"private": true,
 	"scripts": {
 		"lint": "composer lint"
+	},
+	"devDependencies": {
+		"eslint": "^9.14.0"
+	},
+	"lint-staged": {
+		"*.{ts,tsx,js,jsx,json,css,md,yml,yaml,php}": [
+			"prettier --write"
+		],
+		"*.php": [
+			"composer lint --fix"
+		]
 	}
 }

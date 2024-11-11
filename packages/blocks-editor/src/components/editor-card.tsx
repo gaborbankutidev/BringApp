@@ -1,5 +1,5 @@
-import type {FC, ReactNode} from "react";
-import React, {useState} from "react";
+import type { FC, ReactNode } from "react"
+import React, { useState } from "react"
 
 const editorColors = {
 	blue: "#38bdf8",
@@ -7,20 +7,20 @@ const editorColors = {
 	lime: "#a3e635",
 	orange: "#fb923c",
 	grey: "#9ca3af",
-} as const;
+} as const
 
-type EditorColorType = keyof typeof editorColors;
+type EditorColorType = keyof typeof editorColors
 
 type EditorCardType = {
-	children: ReactNode | ReactNode[];
-	color: EditorColorType;
-	name: string;
-	isSelected?: boolean;
-	showActions?: boolean;
-};
+	children: ReactNode | ReactNode[]
+	color: EditorColorType
+	name: string
+	isSelected?: boolean
+	showActions?: boolean
+}
 
-export const EditorCard: FC<EditorCardType> = ({color, name, children, showActions = true}) => {
-	const [showContent, setShowContent] = useState(true);
+export const EditorCard: FC<EditorCardType> = ({ color, name, children, showActions = true }) => {
+	const [showContent, setShowContent] = useState(true)
 
 	return (
 		<div
@@ -50,19 +50,19 @@ export const EditorCard: FC<EditorCardType> = ({color, name, children, showActio
 				{showActions && (
 					<button
 						onClick={() => {
-							setShowContent(!showContent);
+							setShowContent(!showContent)
 						}}
-						style={{marginLeft: "4px"}}
+						style={{ marginLeft: "4px" }}
 					>
 						{showContent ? "- Hide" : "- Show"}
 					</button>
 				)}
 			</div>
-			<div style={{display: showContent ? "block" : "none"}}>{children}</div>
+			<div style={{ display: showContent ? "block" : "none" }}>{children}</div>
 			<div
 				style={
 					showContent
-						? {display: "none"}
+						? { display: "none" }
 						: {
 								textAlign: "center",
 								padding: "16px",
@@ -74,5 +74,5 @@ export const EditorCard: FC<EditorCardType> = ({color, name, children, showActio
 				{name}
 			</div>
 		</div>
-	);
-};
+	)
+}

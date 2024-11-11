@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import {useState} from "react";
+import { useState } from "react"
 
 /**
  * Possible states of the form submission.
@@ -79,7 +79,7 @@ export const useSendForm = <SuccessT, ErrorT, PayloadT>(
 		} finally {
 			options?.onSettled?.(data, error, payload);
 		}
-	};
+	}
 
 	/**
 	 * Function to reset the form state

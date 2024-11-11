@@ -1,16 +1,16 @@
-import {InspectorControls} from "@wordpress/block-editor";
-import {PanelBody} from "@wordpress/components";
-import type {FC} from "react";
-import React from "react";
-import {ResponsiveCheckboxControl, ResponsiveRangeControl} from "../controls";
-import {objectKeys} from "../utils";
-import type {BringStylesConfig, Sides} from "./types";
-import {sideLabels, spacingLabels} from "./utils";
+import { InspectorControls } from "@wordpress/block-editor"
+import { PanelBody } from "@wordpress/components"
+import type { FC } from "react"
+import React from "react"
+import { ResponsiveCheckboxControl, ResponsiveRangeControl } from "../controls"
+import { objectKeys } from "../utils"
+import type { BringStylesConfig, Sides } from "./types"
+import { sideLabels, spacingLabels } from "./utils"
 
 export function makeBringStylesControl(bringStylesConfig: BringStylesConfig) {
-	const m = bringStylesConfig.spacing?.m;
-	const p = bringStylesConfig.spacing?.p;
-	const v = bringStylesConfig.visibility;
+	const m = bringStylesConfig.spacing?.m
+	const p = bringStylesConfig.spacing?.p
+	const v = bringStylesConfig.visibility
 
 	return (
 		<InspectorControls key="bring-styles">
@@ -33,10 +33,10 @@ export function makeBringStylesControl(bringStylesConfig: BringStylesConfig) {
 				</PanelBody>
 			)}
 		</InspectorControls>
-	);
+	)
 }
 
-const SidesControl: FC<{type: "m" | "p"; sides: Sides}> = ({type, sides}) => (
+const SidesControl: FC<{ type: "m" | "p"; sides: Sides }> = ({ type, sides }) => (
 	<>
 		{objectKeys(sides).map((side) => (
 			<ResponsiveRangeControl<Record<string, any>>
@@ -46,4 +46,4 @@ const SidesControl: FC<{type: "m" | "p"; sides: Sides}> = ({type, sides}) => (
 			/>
 		))}
 	</>
-);
+)

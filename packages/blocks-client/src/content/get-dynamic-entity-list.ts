@@ -1,4 +1,4 @@
-import type {DynamicEntityList, EntityType} from "../types";
+import type { DynamicEntityList, EntityType } from "../types"
 
 /**
  * Represents the options for retrieving a dynamic entity list.
@@ -10,19 +10,19 @@ import type {DynamicEntityList, EntityType} from "../types";
  * @property cache - The cache mode for the request.
  */
 export type GetDynamicEntityListOptions = {
-	limit?: number;
-	offset?: number;
-	page?: number;
-	customData?: {[key: string]: unknown};
-	cache?: "force-cache" | "no-store";
-};
+	limit?: number
+	offset?: number
+	page?: number
+	customData?: { [key: string]: unknown }
+	cache?: "force-cache" | "no-store"
+}
 
 /**
  * Represents the parameters for retrieving a dynamic entity list.
  * @template P - Additional properties type
  * @property count - The number of entities in the list.
  */
-export type GetDynamicEntityListParams<P> = {count: number} & P;
+export type GetDynamicEntityListParams<P> = { count: number } & P
 
 /**
  * Retrieves a dynamic entity list from a WordPress site.
@@ -44,7 +44,7 @@ async function getDynamicEntityList<T = object, P = object>(
 		page = 1,
 		customData = {},
 		cache = "no-store",
-	}: GetDynamicEntityListOptions = {},
+	}: GetDynamicEntityListOptions = {}
 ) {
 	const params = new URLSearchParams({
 		entitySlug,
@@ -53,7 +53,7 @@ async function getDynamicEntityList<T = object, P = object>(
 		offset: offset.toString(),
 		page: page.toString(),
 		customData: JSON.stringify(customData),
-	});
+	})
 
 	try {
 		const response = await fetch(`${wpURL}/wp-json/bring/dynamic/list?${params.toString()}`, {
@@ -62,27 +62,27 @@ async function getDynamicEntityList<T = object, P = object>(
 				"Content-Type": "application/json",
 			},
 			cache,
-		});
+		})
 
-		const responseRaw = await response.json();
+		const responseRaw = await response.json()
 		const responseData = responseRaw.data as {
-			entityList: DynamicEntityList<T>;
-			params: GetDynamicEntityListParams<P>;
-		} | null;
+			entityList: DynamicEntityList<T>
+			params: GetDynamicEntityListParams<P>
+		} | null
 
 		return (
 			responseData ?? {
 				entityList: null,
-				params: {count: 0} as GetDynamicEntityListParams<P>,
+				params: { count: 0 } as GetDynamicEntityListParams<P>,
 			}
-		);
+		)
 	} catch (error) {
-		console.error(error);
+		console.error(error)
 		return {
 			entityList: null,
-			params: {count: 0} as GetDynamicEntityListParams<P>,
-		};
+			params: { count: 0 } as GetDynamicEntityListParams<P>,
+		}
 	}
 }
 
-export default getDynamicEntityList;
+export default getDynamicEntityList
