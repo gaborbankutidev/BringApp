@@ -96,7 +96,7 @@ class PluginThemeUpdater {
 	}
 
 	updateNext() {
-		const nextPath = path.join(CWD, "next");
+		const nextPath = path.join(CWD, "next-app");
 
 		execSync(`yarn up "*"`, {
 			stdio: "inherit",
@@ -111,7 +111,7 @@ class PluginThemeUpdater {
 	}
 
 	updateBringNext() {
-		const nextPath = path.join(CWD, "next");
+		const nextPath = path.join(CWD, "next-app");
 
 		execSync(`yarn up @bring/blocks-client @bring/blocks-editor`, {
 			stdio: "inherit",

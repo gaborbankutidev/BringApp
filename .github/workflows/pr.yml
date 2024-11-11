@@ -10,6 +10,18 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
+    syncpack:
+        runs-on: ubuntu-latest
+        name: syncpack
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 16
+            - uses: JamieMason/syncpack-github-action@0.2.3
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     checks_and_build:
         name: Checks and Build
         if: |
@@ -38,7 +50,7 @@ jobs:
               run: yarn install --immutable
 
             - name: Setup app env
-              run: echo "SKIP_ENV_VALIDATION=true" >> ./apps/bring-app/next/.env
+              run: echo "SKIP_ENV_VALIDATION=true" >> ./apps/bring-app/next-app/.env
 
             - name: Run changeset check
               run: yarn changeset status --since origin/main

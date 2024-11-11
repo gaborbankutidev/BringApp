@@ -1,3 +1,2 @@
 npx lint-staged
-cd ./next && yarn types
-
+cd ./next-app && yarn types

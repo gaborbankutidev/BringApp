@@ -19,7 +19,7 @@ The template contains the following structure:
 
 ```txt
 .
-├── next
+├── next-app
 │   └─── src
 │       ├── app
 │       ├── bring
@@ -37,8 +37,8 @@ The template contains the following structure:
 └── ...
 ```
 
-The bring/blocks-wp package is used in the plugins/bring-app subfolder.  
-The @bring/blocks-client package is used in the next sub-folder.  
+The bring/blocks-wp package is used in the plugins/bring-app subfolder.
+The @bring/blocks-client package is used in the next-app sub-folder.
 The @bring/blocks-editor package is used in the editor config and components subfolder for creating blocks.
 
 ## Packages

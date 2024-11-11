@@ -5,7 +5,7 @@ Monorepo containing the Bring App project template and its supporting packages.
 ## Setup
 
 -   Install all dependencies in all workspaces with `yarn`
--   Create the necessary .env files in the _bring-app_, _/next_ and _/plugins/bring-app_ folders
+-   Create the necessary .env files in the _bring-app_, _/next-app_ and _/plugins/bring-app_ folders
 -   Start the backend services in docker with `yarn services:up`
 -   Build the plugin and start the development with `yarn dev`
 -   Activate the Bring App plugin
@@ -13,11 +13,11 @@ Monorepo containing the Bring App project template and its supporting packages.
 
 ## Bring App Folders
 
--   `plugins/bring-app`  
+-   `plugins/bring-app`
     The Bring App plugin for WordPress containing the core functionality and project specific customizations
--   `themes/bring-app-theme`  
+-   `themes/bring-app-theme`
     Minimal theme for the headless WordPress Bring App architecture
--   `next/`  
+-   `next-app/`
     For the frontend that mirrors the routing of WordPress
 -   `wordpress/`
     The wordpress folder for local development
@@ -40,6 +40,8 @@ Monorepo containing the Bring App project template and its supporting packages.
 
 -   `yarn workspace <workspace-name> add <package-name>` : Add new package to one workspace
 -   `yarn workspace <workspace-name> remove <package-name>` : Remove package from one workspace
+-   `yarn workspace <workspace-name> run <script-name>` : Run a script in a specific workspace
+-   `yarn syncpack <syncpack-command>` : Run [syncpack](https://jamiemason.github.io/syncpack/) command to sync package versions, type `yarn syncpack --help` for more info
 
 ## Starting a new project
 

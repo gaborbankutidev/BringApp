@@ -24,7 +24,7 @@ const config = {
 	trailingCommaPHP: true,
 	braceStyle: "1tbs",
 
-	tailwindConfig: "./next/tailwind.config.ts",
+	tailwindConfig: "./next-app/tailwind.config.ts",
 	tailwindFunctions: ["twJoin", "twMerge"],
 };
 
