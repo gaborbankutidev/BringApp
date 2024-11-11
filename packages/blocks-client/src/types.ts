@@ -141,6 +141,7 @@ export type DynamicEntityList<T = object> = ({
 	description: string | null;
 	slug: string | null;
 	url: string | null;
+	editUrl: string | null;
 } & T)[];
 
 /**
@@ -166,6 +167,7 @@ export type DynamicEntityProps<T = object> = {
 	description: string | null;
 	slug: string | null;
 	url: string | null;
+	editUrl: string | null;
 } & T;
 
 /**
@@ -212,8 +214,9 @@ export type EntityProps<EP = object> = {
 	entityType: EntityType | null;
 	entitySlug: string | null;
 	entityId: number;
-	url: string | null;
 	slug: string | null;
+	url: string | null;
+	editUrl: string | null;
 
 	name: string | null;
 	excerpt: string | null;

@@ -1,5 +1,23 @@
 # @bring/blocks-wp
 
+## 2.5.0
+
+### Minor Changes
+
+-   79380f1: Add edit url to entity props for users with sufficient permissions
+
+## 2.4.0
+
+### Minor Changes
+
+-   d1d8842: Add sitemap generation
+
+## 2.3.0
+
+### Minor Changes
+
+-   1c0348e: Enforce WordPress permalink setting to "/%postname%/"
+
 ## 2.2.0
 
 ### Minor Changes

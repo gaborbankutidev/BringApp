@@ -52,11 +52,6 @@ define("BRING_APP_VERSION", "1.0.0");
 define("BRING_APP_THEME", "bring-app-theme");
 
 /**
- * Define enforced permalink structure
- */
-define("BRING_APP_PERMALINK", "/%postname%/");
-
-/**
  * Disable file editing
  */
 define("DISALLOW_FILE_EDIT", true);
