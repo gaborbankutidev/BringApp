@@ -1,4 +1,4 @@
-const bringLibConfig = require("@bring/eslint-config/lib.js");
+const bringLibConfig = require("@bring/config/lib.js");
 
 module.exports = [
 	...bringLibConfig,

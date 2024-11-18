@@ -1,4 +1,4 @@
-import bringLibConfig from "@bring/eslint-config/lib.js";
+import bringLibConfig from "@bring/config/lib.js";
 
 export default [
 	...bringLibConfig,

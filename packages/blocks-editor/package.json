@@ -76,7 +76,7 @@
 		"tailwind-merge": "2.5.4"
 	},
 	"devDependencies": {
-		"@bring/typescript-config": "workspace:*",
+		"@bring/config": "workspace:*",
 		"@types/lodash.clonedeep": "^4.5.9",
 		"@types/lodash.get": "^4.4.9",
 		"@types/lodash.set": "^4.3.9",

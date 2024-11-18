@@ -15,11 +15,7 @@ const config = {
 	versionGroups: [
 		{
 			label: "Use workspace protocol when developing local packages",
-			dependencies: [
-				"@bring/blocks-client",
-				"@bring/blocks-editor",
-				"@bring/typescript-config",
-			],
+			dependencies: ["@bring/blocks-client", "@bring/blocks-editor", "@bring/config"],
 			dependencyTypes: ["dev", "prod"],
 			pinVersion: "workspace:*",
 		},

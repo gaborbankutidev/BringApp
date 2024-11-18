@@ -2982,7 +2982,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bring/blocks-client@workspace:packages/blocks-client"
   dependencies:
-    "@bring/typescript-config": "workspace:*"
+    "@bring/config": "workspace:*"
     "@types/react": "npm:^18.3.12"
     "@types/react-dom": "npm:^18.3.1"
     eslint: "npm:^9.14.0"
@@ -2998,7 +2998,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bring/blocks-editor@workspace:packages/blocks-editor"
   dependencies:
-    "@bring/typescript-config": "workspace:*"
+    "@bring/config": "workspace:*"
     "@types/lodash.clonedeep": "npm:^4.5.9"
     "@types/lodash.get": "npm:^4.4.9"
     "@types/lodash.set": "npm:^4.3.9"
@@ -3056,6 +3056,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@bring/config@workspace:*, @bring/config@workspace:packages/config":
+  version: 0.0.0-use.local
+  resolution: "@bring/config@workspace:packages/config"
+  dependencies:
+    "@vercel/style-guide": "npm:latest"
+    eslint: "npm:^9.14.0"
+    eslint-config-turbo: "npm:latest"
+  languageName: unknown
+  linkType: soft
+
 "@bring/create-app@workspace:packages/create-app":
   version: 0.0.0-use.local
   resolution: "@bring/create-app@workspace:packages/create-app"
@@ -3068,23 +3078,6 @@ __metadata:
     typescript: "npm:^5.6.3"
   bin:
     create-app: ./dist/index.js
-  languageName: unknown
-  linkType: soft
-
-"@bring/eslint-config@workspace:*, @bring/eslint-config@workspace:packages/eslint-config":
-  version: 0.0.0-use.local
-  resolution: "@bring/eslint-config@workspace:packages/eslint-config"
-  dependencies:
-    "@vercel/style-guide": "npm:latest"
-    eslint-config-turbo: "npm:latest"
-  languageName: unknown
-  linkType: soft
-
-"@bring/typescript-config@workspace:*, @bring/typescript-config@workspace:packages/typescript-config":
-  version: 0.0.0-use.local
-  resolution: "@bring/typescript-config@workspace:packages/typescript-config"
-  dependencies:
-    eslint: "npm:^9.14.0"
   languageName: unknown
   linkType: soft
 
@@ -11240,7 +11233,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "bringapp@workspace:."
   dependencies:
-    "@bring/eslint-config": "workspace:*"
+    "@bring/config": "workspace:*"
     "@changesets/cli": "npm:2.27.9"
     "@prettier/plugin-php": "npm:^0.22.2"
     "@types/fs-extra": "npm:^11.0.4"

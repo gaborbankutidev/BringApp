@@ -10,8 +10,8 @@
 		"packages/@bring/blocks-editor",
 		"packages/@bring/blocks-wp",
 		"packages/@bring/create-app",
-		"packages/@bring/typescript-config",
-		"packages/@bring/eslint-config",
+		"packages/@bring/config",
+		"packages/@bring/config",
 		"apps/bring-app/next-app",
 		"apps/bring-app/",
 		"apps/*"
@@ -47,7 +47,7 @@
 		"@changesets/cli": "2.27.9"
 	},
 	"devDependencies": {
-		"@bring/eslint-config": "workspace:*",
+		"@bring/config": "workspace:*",
 		"@prettier/plugin-php": "^0.22.2",
 		"@types/fs-extra": "^11.0.4",
 		"eslint": "^9.14.0",
