@@ -1,6 +1,5 @@
 yarn changeset status --since-main
 npx lint-staged --concurrent false
 yarn types
-yarn syncpack format
 yarn syncpack lint-semver-ranges
 yarn syncpack list-mismatches
