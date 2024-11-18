@@ -14,24 +14,6 @@ permissions:
     pull-requests: write
 
 jobs:
-    syncpack:
-        runs-on: ubuntu-latest
-        name: syncpack
-        steps:
-            - name: Setup node
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 20
-                  cache: "yarn"
-                  check-latest: true
-
-            - name: Install Yarn
-              run: npm install -g yarn@4.5.1
-
-            - uses: JamieMason/syncpack-github-action@0.2.3
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
     checks_and_build:
         name: Checks and Build
         if: |
