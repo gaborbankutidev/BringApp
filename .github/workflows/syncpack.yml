@@ -1,0 +1,25 @@
+on:
+    pull_request:
+        branches:
+            - main
+jobs:
+    syncpack:
+        runs-on: ubuntu-latest
+        name: syncpack
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 20
+
+            # more info : https://github.com/JamieMason/syncpack-github-action
+            - uses: JamieMason/syncpack-github-action@0.2.3
+              env:
+                  # If any options are set to 'fix' then
+                  # env.GITHUB_TOKEN is needed to push to PRs
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  format-mismatches: "ignore"
+                  lockfile-mismatches: "ignore"
+                  package-manager: "yarn"
+                  semver-range-mismatches: "lint"
+                  version-mismatches: "lint"
