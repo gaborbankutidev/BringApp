@@ -43,6 +43,9 @@ jobs:
             - name: Run changeset check
               run: yarn changeset status --since origin/main
 
+            - name: Build packages
+              run: yarn build:pkg
+
             - name: Run typecheck
               run: yarn types
 
