@@ -64,7 +64,7 @@
 	"scripts": {
 		"build": "tsup",
 		"dev": "tsup --watch",
-		"lint": "eslint --ignore-pattern dist/ .",
+		"lint": "eslint --ignore-pattern node_modules/ --ignore-pattern dist/ .",
 		"test": "echo TODO: add tests",
 		"types": "tsc"
 	},
