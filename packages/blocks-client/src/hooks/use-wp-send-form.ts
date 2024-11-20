@@ -8,32 +8,35 @@ import {UseSendFormOptions, useSendForm} from "./use-send-form";
  * @param wpURL - The URL of the WordPress site.
  * @returns A function that can be used to send form data and the state of the form submission.
  *
- * @template PayloadT - The type of the form data payload.
+ * @template SuccessT - The type of the success response.
+ * @template ErrorT - The type of the error response.
+ * @template FormDataPayloadT - The type of the form data payload.
  */
-export const makeUseWPSendForm = (wpURL?: string | undefined) => {
+export const makeUseWPSendForm = (wpURL?: string) => {
 	const defaultFormUrl = `${wpURL ?? ""}/wp-json/bring/form/submit`;
 
-	return <PayloadT>(
+	return <SuccessT, ErrorT, FormDataPayloadT>(
 		formName: string,
 		options?: UseSendFormOptions<
-			{success: true; message: string},
-			{success: false; message: string},
-			{formName: string; formData: PayloadT}
+			SuccessT,
+			ErrorT,
+			{formName: string; formData: FormDataPayloadT}
 		> & {
 			formUrl?: string;
 		},
 	) => {
-		const useSendFormResult = useSendForm<
-			{success: true; message: string},
-			{success: false; message: string},
-			{formName: string; formData: PayloadT}
-		>(options?.formUrl ?? defaultFormUrl, options);
-		const send = async (formData: PayloadT) => {
-			useSendFormResult.send({formName, formData});
-		};
+		const formUrl = options?.formUrl ?? defaultFormUrl;
+
+		// Destructure the `useSendForm` result to separate `sendAsync` from other properties
+		const {sendAsync, ...rest} = useSendForm<
+			SuccessT,
+			ErrorT,
+			{formName: string; formData: FormDataPayloadT}
+		>(formUrl, options);
+
 		return {
-			send,
-			state: useSendFormResult.state,
+			send: (formData: FormDataPayloadT) => sendAsync({formName, formData}),
+			...rest,
 		};
 	};
 };

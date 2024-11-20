@@ -20,9 +20,9 @@ import type {EntityType} from "./types";
  * @returns The initialized client object.
  */
 export function initClient<
-	SP = {}, // SiteProps
-	M = {}, // Menu
-	MI = {}, // MenuItem
+	SP = unknown, // SiteProps
+	M = unknown, // Menu
+	MI = unknown, // MenuItem
 >(wpURL: string = "") {
 	const client = {
 		/**
@@ -39,7 +39,7 @@ export function initClient<
 		 * @param options - The options for retrieving the entity props.
 		 * @returns The dynamic entity props.
 		 */
-		useDynamicEntityProps: <T = {},>(
+		useDynamicEntityProps: <T = unknown,>(
 			entityId: number,
 			entityType: EntityType,
 			options: UseDynamicEntityPropsOptions = {},
@@ -53,7 +53,7 @@ export function initClient<
 		 * @param options - The options for retrieving the entity list.
 		 * @returns The dynamic entity list.
 		 */
-		useDynamicEntityList: <T = {},>(
+		useDynamicEntityList: <T = unknown,>(
 			entitySlug: string,
 			entityType: EntityType,
 			options: UseDynamicEntityListOptions = {},
