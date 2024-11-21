@@ -17,22 +17,19 @@ export const makeUseWPSendForm = (wpURL?: string) => {
 
 	return <SuccessT, ErrorT, FormDataPayloadT>(
 		formName: string,
-		options?: UseSendFormOptions<
+		options?: {formUrl?: string} & UseSendFormOptions<
 			SuccessT,
 			ErrorT,
 			{formName: string; formData: FormDataPayloadT}
-		> & {
-			formUrl?: string;
-		},
+		>,
 	) => {
-		const formUrl = options?.formUrl ?? defaultFormUrl;
+		const {formUrl = defaultFormUrl, ...sendFormOptions} = options || {};
 
-		// Destructure the `useSendForm` result to separate `sendAsync` from other properties
 		const {sendAsync, ...rest} = useSendForm<
 			SuccessT,
 			ErrorT,
 			{formName: string; formData: FormDataPayloadT}
-		>(formUrl, options);
+		>(formUrl, sendFormOptions);
 
 		return {
 			send: (formData: FormDataPayloadT) => sendAsync({formName, formData}),
