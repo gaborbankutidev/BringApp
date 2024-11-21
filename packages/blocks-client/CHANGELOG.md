@@ -1,5 +1,11 @@
 # @bring/blocks-client
 
+## 2.6.0
+
+### Minor Changes
+
+-   8d5707b: Refactor and enhance useWPSendForm hook
+
 ## 2.5.0
 
 ### Minor Changes
