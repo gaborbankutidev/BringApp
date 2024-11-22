@@ -8,7 +8,6 @@ export const env = createEnv({
 	 */
 	server: {
 		NODE_ENV: z.enum(["development", "test", "production"]),
-		DATA_TOKEN: z.string().min(8),
 	},
 
 	/**
@@ -20,9 +19,7 @@ export const env = createEnv({
 		NEXT_PUBLIC_WP_BASE_URL: z.string(),
 
 		NEXT_PUBLIC_SENTRY_DSN: z.string().min(1).optional(),
-		NEXT_PUBLIC_SENTRY_ENV: z
-			.enum(["development", "staging", "production"])
-			.optional(),
+		NEXT_PUBLIC_SENTRY_ENV: z.enum(["development", "staging", "production"]).optional(),
 	},
 
 	/**
@@ -32,7 +29,6 @@ export const env = createEnv({
 	runtimeEnv: {
 		// server
 		NODE_ENV: process.env.NODE_ENV,
-		DATA_TOKEN: process.env.DATA_TOKEN,
 		// client
 		NEXT_PUBLIC_WP_BASE_URL: process.env.NEXT_PUBLIC_WP_BASE_URL,
 		NEXT_PUBLIC_SENTRY_DSN: process.env.NEXT_PUBLIC_SENTRY_DSN,

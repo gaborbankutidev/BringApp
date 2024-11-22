@@ -13,16 +13,18 @@ class JWTAuth {
 
 	/**
 	 * Initializes the class after the plugins have finished loading.
+	 * @return void
 	 */
 	public static function init() {
 		// Delay the route registration until all plugins are loaded
-		add_action("plugins_loaded", [self::class, "conditional_init"]);
+		add_action("plugins_loaded", [self::class, "conditionalInit"]);
 	}
 
 	/**
 	 * Conditionally initialize the config and logout REST route if requirements are met.
+	 * @return void
 	 */
-	public static function conditional_init() {
+	public static function conditionalInit() {
 		// Ensure the plugin admin functions are available for checking active status
 		if (!function_exists("is_plugin_active")) {
 			require_once ABSPATH . "wp-admin/includes/plugin.php";
@@ -32,28 +34,21 @@ class JWTAuth {
 		if (
 			is_plugin_active("jwt-auth/jwt-auth.php") &&
 			defined("JWT_AUTH_PLUGIN_VERSION") &&
-			version_compare(
-				JWT_AUTH_PLUGIN_VERSION,
-				self::MIN_ALLOWED_VERSION,
-				">=",
-			) &&
-			version_compare(
-				JWT_AUTH_PLUGIN_VERSION,
-				self::MAX_ALLOWED_VERSION,
-				"<=",
-			) &&
+			version_compare(JWT_AUTH_PLUGIN_VERSION, self::MIN_ALLOWED_VERSION, ">=") &&
+			version_compare(JWT_AUTH_PLUGIN_VERSION, self::MAX_ALLOWED_VERSION, "<=") &&
 			class_exists("JWTAuth\Auth")
 		) {
 			// Init config hooks
 			self::config();
 
 			// Initialize logout endpoint
-			add_action("rest_api_init", [self::class, "register_routes"]);
+			add_action("rest_api_init", [self::class, "registerRoutes"]);
 		}
 	}
 
 	/**
 	 * Define plugin config
+	 * @return void
 	 */
 	public static function config() {
 		/**
@@ -77,13 +72,14 @@ class JWTAuth {
 
 	/**
 	 * Registers the /logout route under the jwt-auth/v1 namespace.
+	 * @return void
 	 */
-	public static function register_routes() {
+	public static function registerRoutes() {
 		register_rest_route("jwt-auth/v1", "/logout", [
 			"methods" => "POST",
-			"callback" => [self::class, "handle_logout"],
+			"callback" => [self::class, "handleLogout"],
 			"permission_callback" => function ($request) {
-				return self::verify_token_or_refresh($request);
+				return self::verifyTokenOrRefresh($request);
 			},
 		]);
 	}
@@ -93,7 +89,7 @@ class JWTAuth {
 	 *
 	 * @return bool|WP_Error True if either token is valid, otherwise WP_Error.
 	 */
-	public static function verify_token_or_refresh(\WP_REST_Request $request) {
+	public static function verifyTokenOrRefresh(\WP_REST_Request $request) {
 		$auth_instance = new \JWTAuth\Auth();
 
 		// Attempt to validate the JWT token
@@ -112,10 +108,7 @@ class JWTAuth {
 			$device = $request->get_param("device") ?: "";
 
 			// Validate the refresh token using the provided device information
-			$user_id = $auth_instance->validate_refresh_token(
-				$_COOKIE["refresh_token"],
-				$device,
-			);
+			$user_id = $auth_instance->validate_refresh_token($_COOKIE["refresh_token"], $device);
 
 			if (!is_wp_error($user_id) && get_user_by("id", $user_id)) {
 				return true; // Valid refresh token and user exists
@@ -125,9 +118,7 @@ class JWTAuth {
 		// If neither token is valid or no user is associated, return an error
 		return new \WP_Error(
 			"jwt_auth_not_authenticated",
-			__(
-				"You are not logged in. Logout is only available for authenticated users.",
-			),
+			__("You are not logged in. Logout is only available for authenticated users."),
 			["status" => 403],
 		);
 	}
@@ -137,7 +128,7 @@ class JWTAuth {
 	 *
 	 * @return \WP_REST_Response Logout response.
 	 */
-	public static function handle_logout(\WP_REST_Request $request) {
+	public static function handleLogout(\WP_REST_Request $request) {
 		// Check if the refresh_token cookie is set
 		if (isset($_COOKIE["refresh_token"])) {
 			// Get the device information from the request parameter
@@ -147,23 +138,12 @@ class JWTAuth {
 			$parts = explode(".", $_COOKIE["refresh_token"]);
 			if (count($parts) === 2) {
 				$user_id = intval($parts[0]);
-				$user_refresh_tokens = get_user_meta(
-					$user_id,
-					"jwt_auth_refresh_tokens",
-					true,
-				);
+				$user_refresh_tokens = get_user_meta($user_id, "jwt_auth_refresh_tokens", true);
 
 				// Remove the refresh token associated with the specified device
-				if (
-					is_array($user_refresh_tokens) &&
-					isset($user_refresh_tokens[$device])
-				) {
+				if (is_array($user_refresh_tokens) && isset($user_refresh_tokens[$device])) {
 					unset($user_refresh_tokens[$device]);
-					update_user_meta(
-						$user_id,
-						"jwt_auth_refresh_tokens",
-						$user_refresh_tokens,
-					);
+					update_user_meta($user_id, "jwt_auth_refresh_tokens", $user_refresh_tokens);
 				}
 
 				// Delete the specific `jwt_auth_device` entry for this device

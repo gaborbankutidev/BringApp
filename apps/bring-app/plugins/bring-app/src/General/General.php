@@ -14,6 +14,7 @@ class General {
 	 * @return void
 	 */
 	public static function init() {
+		HealthCheck::init();
 		// Options::init();
 	}
 }

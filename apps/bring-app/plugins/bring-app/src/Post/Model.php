@@ -35,7 +35,7 @@ class Model {
 				"key" => "bring_post_fields",
 				"title" => "Post",
 				"fields" => [
-					// ... post fields
+					// Add post fields here
 				],
 				"location" => [
 					[

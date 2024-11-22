@@ -9,6 +9,7 @@ use BringApp\Extend\JWTAuth\JWTAuth;
 class Extend {
 	/**
 	 * Initialize plugin extensions
+	 * @return void
 	 */
 	public static function init() {
 		JWTAuth::init();

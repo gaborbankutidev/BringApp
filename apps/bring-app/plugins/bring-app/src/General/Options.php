@@ -34,7 +34,7 @@ class Options {
 				"key" => "group_options",
 				"title" => "Options",
 				"fields" => [
-					// option fields
+					// Add option fields here
 				],
 				"location" => [
 					[
