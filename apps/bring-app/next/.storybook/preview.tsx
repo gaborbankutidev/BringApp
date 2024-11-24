@@ -10,6 +10,8 @@ const preview: Preview = {
 			},
 		},
 	},
+	/* 
+	TODO Add decorators - providers, default styles, etc.
 	decorators: [
 		(Story) => (
 			<div
@@ -22,7 +24,7 @@ const preview: Preview = {
 				<Story />
 			</div>
 		),
-	],
+	], */
 };
 
 export default preview;

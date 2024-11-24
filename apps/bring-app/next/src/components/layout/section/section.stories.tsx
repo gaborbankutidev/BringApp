@@ -13,7 +13,7 @@ type Story = StoryObj<typeof meta>;
 
 export const BackgroundColor: Story = {
 	args: {
-		backgroundClassName: "bg-base-100",
+		backgroundClassName: "bg-purple-600",
 		children: (
 			<div className="flex min-h-[400px] items-center justify-center">
 				This is the section with light background color
@@ -28,7 +28,7 @@ export const BackgroundImage: Story = {
 		<Section
 			className="p-4"
 			backgroundImage={{
-				src: "https://eld.hu/wp-content/uploads/eld-fooldal-hatter-1.jpg",
+				src: "https://picsum.photos/1200/900",
 				alt: "background image",
 			}}
 		>
@@ -44,10 +44,10 @@ export const BackgroundImageOverlay: Story = {
 		<Section
 			className="p-4"
 			backgroundImage={{
-				src: "https://eld.hu/wp-content/uploads/eld-fooldal-hatter-1.jpg",
+				src: "https://picsum.photos/1200/900",
 				alt: "background image",
 			}}
-			backgroundClassName="bg-blue-600 opacity-50"
+			backgroundClassName="bg-purple-600"
 		>
 			<div className="flex min-h-[400px] items-center justify-center text-white">
 				This is the section with light gold background color

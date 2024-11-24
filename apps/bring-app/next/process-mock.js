@@ -1,3 +1,4 @@
+// Mock process.env for WordPress editor
 const process = {
 	env: {
 		NODE_ENV: "development",

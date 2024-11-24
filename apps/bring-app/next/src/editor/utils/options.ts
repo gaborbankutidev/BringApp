@@ -1,4 +1,4 @@
-import {colorList} from "@/styles";
+import {colorList} from "@/styles/colors";
 import {makeOptions} from "@bring/blocks-editor";
 import {
 	alignList,

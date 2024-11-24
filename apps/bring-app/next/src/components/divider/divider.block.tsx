@@ -1,68 +1,37 @@
-import {divider, type DividerProps} from "@/components/divider";
-import {colorOptions} from "@/editor/utils/options";
-import {
-	booleanAttributeSource,
-	numberAttributeSource,
-	stringAttributeSource,
-	type BlockConfig,
-} from "@bring/blocks-editor";
+import type {BP} from "@/bring";
+import {cn} from "@/lib/utils";
+import type {ColorType} from "@/styles/colors";
 
-const dividerConfig: BlockConfig<DividerProps> = {
-	...divider,
-	title: "Divider",
-	description: "Divider helps to apply up white space between blocks.",
-	attributes: {
-		withLine: booleanAttributeSource(),
-		lineColor: stringAttributeSource(),
-		height: numberAttributeSource(),
-	},
-	previewAttributes: {
-		withLine: true,
-		height: 200,
-	},
-	Controls: [
-		{
-			panel: "Divider settings",
-			controls: [
-				{
-					type: "range",
-					label: "Height (in px)",
-					path: "height",
-					min: 0,
-					max: 1200,
-					defaultValue: 40,
-				},
-
-				{type: "checkbox", label: "With line", path: "withLine"},
-				{
-					type: "select",
-					label: "Line color",
-					path: "lineColor",
-					options: colorOptions,
-					defaultValue: "primary",
-					show: "withLine",
-				},
-			],
-			initialOpen: true,
-		},
-	],
-	styles: {
-		spacing: {
-			m: {
-				t: {},
-				b: {},
-				l: {},
-				r: {},
-			},
-			p: {
-				t: {},
-				b: {},
-				l: {},
-				r: {},
-			},
-		},
-		visibility: {"": "flex", md: "flex", lg: "flex"},
-	},
+export type DividerBlockProps = {
+	withLine?: boolean;
+	lineColor?: ColorType;
+	height?: number;
 };
 
-export default dividerConfig;
+/**
+ * Divider helps to apply up white space between blocks in the editor.
+ */
+const DividerBlock = ({
+	withLine = false,
+	lineColor = "border",
+	height = 40,
+
+	bringStylesClassNames,
+	className,
+	id,
+}: BP<DividerBlockProps>) => {
+	const classNames = cn("flex items-center", bringStylesClassNames?.classNames, className);
+
+	return (
+		<div className={classNames} style={{minHeight: `${height}px`}} id={id}>
+			{withLine && <div className={`w-full border-b border-${lineColor}`} />}
+		</div>
+	);
+};
+
+export const divider = {
+	Component: DividerBlock,
+	componentName: "bring/divider",
+} as const;
+
+export default DividerBlock;

@@ -1,6 +1,6 @@
 "use client";
 
-import {twMerge} from "@/utils";
+import {cn} from "@/lib/utils";
 import FSLightbox from "fslightbox-react";
 import NextImage, {type ImageProps as NextImageProps} from "next/image";
 import Link, {type LinkProps} from "next/link";
@@ -15,13 +15,8 @@ export type ImageContentProps = {
 };
 
 const imageBaseStyle = "rounded w-full";
-const ImageContent = ({
-	image,
-	link,
-	lightbox,
-	className,
-	id,
-}: ImageContentProps) => {
+
+const ImageContent = ({image, link, lightbox, className, id}: ImageContentProps) => {
 	const [lightboxController, setLightboxController] = useState({
 		toggler: false,
 		slide: 1,
@@ -33,7 +28,7 @@ const ImageContent = ({
 		<Link {...link} className={className} id={id}>
 			<NextImage
 				{...imageProps}
-				className={twMerge(imageBaseStyle, className)}
+				className={cn(imageBaseStyle, className)}
 				onClick={onClick}
 				quality={100}
 			/>
@@ -42,7 +37,7 @@ const ImageContent = ({
 		<>
 			<NextImage
 				{...imageProps}
-				className={twMerge(
+				className={cn(
 					imageBaseStyle,
 					lightbox && "cursor-pointer",
 					imageClassName,

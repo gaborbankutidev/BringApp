@@ -1,6 +1,6 @@
-import {column, type ColumnBlockProps} from "@/components/layout/column";
 import type {BlockEdit} from "@bring/blocks-editor";
 import {EditorCard} from "@bring/blocks-editor";
+import {column, type ColumnBlockProps} from "./column.block";
 
 export const ColumnEdit: BlockEdit<ColumnBlockProps> = ({
 	children,

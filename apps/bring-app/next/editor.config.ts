@@ -1,17 +1,20 @@
+import {asdConfig} from "@/components/asd";
 // layout
-import column from "@/components/layout/column/column.block";
-import group from "@/components/layout/group/group.block";
-import row from "@/components/layout/row/row.block";
-import section from "@/components/layout/section/section.block";
-import split from "@/components/layout/split/split.block";
+import column from "@/components/layout/column/column.wp";
+import group from "@/components/layout/group/group.wp";
+import row from "@/components/layout/row/row.wp";
+import section from "@/components/layout/section/section.wp";
+import split from "@/components/layout/split/split.wp";
 
 // components
-import divider from "@/components/divider/divider.block";
-import embed from "@/components/embed/embed.block";
-import heading from "@/components/heading/heading.block";
-import image from "@/components/image/image.block";
-import markdown from "@/components/markdown/markdown.block";
-import button from "@/components/ui/button/button.block";
+
+import divider from "@/components/divider/divider.wp";
+import embed from "@/components/embed/embed.wp";
+import heading from "@/components/heading/heading.wp";
+import image from "@/components/image/image.wp";
+import markdown from "@/components/markdown/markdown.wp";
+import button from "@/components/ui/button/button.wp";
+
 import {env} from "@/env.mjs";
 import {Editor} from "@bring/blocks-editor";
 
@@ -29,6 +32,7 @@ const blockList = [
 	heading,
 	image,
 	markdown,
+	asdConfig,
 ];
 
 Editor.init(env.NEXT_PUBLIC_WP_BASE_URL, blockList);

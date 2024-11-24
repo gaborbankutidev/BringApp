@@ -2,8 +2,11 @@
 
 import {env} from "@/env.mjs";
 import {initClient} from "@bring/blocks-client/init-client";
-import type {EP} from "./types";
+import type {Menu, MenuItem, SiteProps} from "./types";
 
-export const {useDynamicEntityProps, useWPSendForm} = initClient<EP>(
+/**
+ * Initialize Bring App server functions by extending with types and setting the base URL.
+ */
+export const {useDynamicEntityProps, useWPSendForm} = initClient<SiteProps, Menu, MenuItem>(
 	env.NEXT_PUBLIC_WP_BASE_URL,
 );
