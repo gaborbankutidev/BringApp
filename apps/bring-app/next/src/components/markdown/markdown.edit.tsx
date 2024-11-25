@@ -1,7 +1,3 @@
-import {
-	MarkdownBlock as Markdown,
-	type MarkdownBlockProps as MarkdownProps,
-} from "@/components/markdown";
 import type {BlockEdit} from "@bring/blocks-editor";
 import {BlockControls} from "@wordpress/block-editor";
 import {ToolbarButton, ToolbarGroup} from "@wordpress/components";
@@ -24,11 +20,9 @@ import {
 } from "easymde";
 import {useCallback, useMemo, useState} from "react";
 import SimpleMDEReact from "react-simplemde-editor";
+import {MarkdownBlock, type MarkdownBlockProps} from "./markdown.block";
 
-const MarkdownEdit: BlockEdit<MarkdownProps> = ({
-	attributes,
-	setAttributes,
-}) => {
+const MarkdownEdit: BlockEdit<MarkdownBlockProps> = ({attributes, setAttributes}) => {
 	const {content, source = "manual", ...props} = attributes;
 
 	const [isPreview, setPreview] = useState(false);
@@ -54,7 +48,7 @@ const MarkdownEdit: BlockEdit<MarkdownProps> = ({
 	}, []);
 
 	return source !== "manual" ? (
-		<Markdown {...props} content={`${source} will be here...`} />
+		<MarkdownBlock {...props} content={`${source} will be here...`} />
 	) : isPreview ? (
 		<>
 			<BlockControls controls={undefined}>
@@ -71,7 +65,7 @@ const MarkdownEdit: BlockEdit<MarkdownProps> = ({
 					/>
 				</ToolbarGroup>
 			</BlockControls>
-			<Markdown {...props} content={content ?? ""} />
+			<MarkdownBlock {...props} content={content ?? ""} />
 		</>
 	) : (
 		<>

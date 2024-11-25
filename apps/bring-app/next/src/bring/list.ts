@@ -12,7 +12,7 @@ import {image} from "@/components/image";
 import {markdown} from "@/components/markdown";
 import {button} from "@/components/ui/button";
 
-export const componentList = [
+export const blockList = [
 	// layout
 	column,
 	group,

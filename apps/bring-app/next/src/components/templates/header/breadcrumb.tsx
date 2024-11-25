@@ -13,7 +13,7 @@ const Breadcrumb = () => {
 		<>
 			{path !== "/" && !isSubPage && (
 				<Link
-					className="absolute top-4 left-10 z-10 text-gray-300 hover:text-purple-600 transition-all duration-300 flex justify-center items-center gap-2"
+					className="text-gray-300 hover:text-purple-600 transition-all duration-300 flex justify-center items-center gap-2"
 					href="/"
 				>
 					<BiArrowBack />
@@ -23,7 +23,7 @@ const Breadcrumb = () => {
 
 			{isSubPage && (
 				<span
-					className="cursor-pointer absolute top-4 left-10 z-10 text-gray-300 hover:text-purple-600 transition-all duration-300 flex justify-center items-center gap-2"
+					className="cursor-pointer text-gray-300 hover:text-purple-600 transition-all duration-300 flex justify-center items-center gap-2"
 					onClick={() => router.back()}
 				>
 					<BiArrowBack />

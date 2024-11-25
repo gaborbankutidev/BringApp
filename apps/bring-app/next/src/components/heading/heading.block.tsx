@@ -1,93 +1,53 @@
-import {
-	heading,
-	type HeadingBlockProps as HeadingProps,
-} from "@/components/heading";
-import {
-	colorOptions,
-	textAlignOptions,
-	textSourceOptions,
-} from "@/editor/utils/options";
-import {
-	numberAttributeSource,
-	stringAttributeSource,
-	type BlockConfig,
-} from "@bring/blocks-editor";
+import type {BP} from "@/bring";
+import type {TextAlignType, TextSourceType} from "@/editor/utils/lists";
+import type {ColorType} from "@/styles/colors";
+import clsx from "clsx";
+import Heading, {type HeadingLevel} from "./heading";
 
-const headingConfig: BlockConfig<HeadingProps> = {
-	...heading,
-	title: "Heading",
-	description: "Heading block",
-	icon: "heading",
-	attributes: {
-		source: stringAttributeSource("manual"),
-		title: stringAttributeSource("Title"),
-		level: numberAttributeSource(),
-		align: stringAttributeSource(),
-		color: stringAttributeSource(),
-	},
-	Controls: [
-		{
-			controls: [
-				{
-					type: "select",
-					label: "Source",
-					path: "source",
-					options: textSourceOptions,
-					setDefault: false,
-				},
-			],
-		},
-		{
-			panel: "Heading settings",
-			controls: [
-				{
-					type: "textarea",
-					label: "Title",
-					path: "title",
-					show: ({source = "manual"}) => source === "manual",
-				},
-				{
-					type: "range",
-					label: "Level",
-					path: "level",
-					min: 1,
-					max: 6,
-					defaultValue: 2,
-				},
-				{
-					type: "select",
-					label: "Align",
-					path: "align",
-					options: textAlignOptions,
-					defaultValue: "left",
-				},
-				{
-					type: "select",
-					label: "Color",
-					path: "color",
-					options: colorOptions,
-					defaultValue: "primary",
-				},
-			],
-		},
-	],
-	styles: {
-		spacing: {
-			m: {
-				t: {},
-				b: {},
-				l: {},
-				r: {},
-			},
-			p: {
-				t: {},
-				b: {},
-				l: {},
-				r: {},
-			},
-		},
-		visibility: {"": "block", md: "block", lg: "block"},
-	},
+export type HeadingBlockProps = {
+	source?: TextSourceType;
+	title: string;
+	level?: HeadingLevel;
+	align?: TextAlignType;
+	color?: ColorType;
 };
 
-export default headingConfig;
+const HeadingBlock = ({
+	source = "manual",
+	title,
+	level = 2,
+	align,
+	color,
+
+	entityProps,
+	bringStylesClassNames,
+	className,
+	id,
+}: BP<HeadingBlockProps>) => {
+	const classNames = clsx(
+		align && `text-${align}`,
+		color && `text-${color}`,
+		bringStylesClassNames?.classNames,
+		className,
+	);
+
+	let headingTitle: string | null = title;
+	if (source !== "manual") {
+		if (!entityProps) return null;
+
+		headingTitle = entityProps[source];
+	}
+
+	return headingTitle !== null ? (
+		<Heading level={level} className={classNames} id={id}>
+			{headingTitle}
+		</Heading>
+	) : null;
+};
+
+export const heading = {
+	Component: HeadingBlock,
+	componentName: "bring/heading",
+} as const;
+
+export default HeadingBlock;

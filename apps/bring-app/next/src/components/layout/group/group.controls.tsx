@@ -1,10 +1,9 @@
 import {ResponsiveRangeControl, type BlockControl} from "@bring/blocks-editor";
+import type {GroupBlockProps} from "./group.block";
 
-import type {GroupProps} from "@/components/layout/group";
-
-const GroupControls: BlockControl<GroupProps> = () => (
+const GroupControls: BlockControl<GroupBlockProps> = () => (
 	<>
-		<ResponsiveRangeControl<GroupProps>
+		<ResponsiveRangeControl<GroupBlockProps>
 			label="Gap"
 			path="gap"
 			min={0}

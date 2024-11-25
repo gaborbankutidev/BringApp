@@ -1,52 +1,59 @@
-import {
-	section,
-	type SectionBlockProps as SectionProps,
-} from "@/components/layout/section";
-import {colorOptions} from "@/editor/utils/options";
-import {
-	booleanAttributeSource,
-	imageAttributeSource,
-	stringAttributeSource,
-	type BlockConfig,
-} from "@bring/blocks-editor";
-import {SectionEdit} from "./section.edit";
+import type {BP} from "@/bring";
+import {cn} from "@/lib/utils";
+import type {ColorType} from "@/styles/colors";
+import type {ImageType} from "@bring/blocks-client";
+import type {ReactNode} from "react";
+import Section from "./section";
 
-const sectionConfig: BlockConfig<SectionProps> = {
-	...section,
-	title: "Section",
-	icon: "align-center",
-	allowedBlocks: ["bring/row"],
-	attributes: {
-		backgroundColor: stringAttributeSource(),
-		backgroundImage: imageAttributeSource(),
-		dark: booleanAttributeSource(),
-	},
-	Edit: SectionEdit,
-	Controls: [
-		{
-			panel: "Section settings",
-			controls: [
-				{
-					type: "select",
-					label: "Background color",
-					path: "backgroundColor",
-					options: colorOptions,
-				},
-				{type: "image", label: "Background image", path: "backgroundImage"},
-				{type: "toggle", label: "Dark", path: "dark"},
-			],
-			initialOpen: true,
-		},
-	],
-	styles: {
-		spacing: {
-			p: {
-				t: {"": 8},
-				b: {"": 8},
-			},
-		},
-		visibility: {"": "block", md: "block", lg: "block"},
-	},
+export type SectionBlockProps = {
+	children: ReactNode;
+
+	backgroundColor?: ColorType;
+	backgroundImage?: ImageType;
+	dark?: boolean;
+
+	backgroundImageClassName?: string;
+	backgroundClassName?: string;
+	containerClassName?: string;
 };
 
-export default sectionConfig;
+const SectionBlock = ({
+	children,
+
+	backgroundColor = "transparent",
+	backgroundImage,
+	dark = false,
+
+	bringStylesClassNames,
+	className,
+	backgroundImageClassName,
+	backgroundClassName,
+	containerClassName,
+	id,
+}: BP<SectionBlockProps>) => (
+	<Section
+		backgroundImage={
+			backgroundImage?.src
+				? {
+						src: backgroundImage.src,
+						alt: backgroundImage.alt ?? "Background image",
+					}
+				: undefined
+		}
+		dark={dark}
+		className={cn(bringStylesClassNames?.classNames, className)}
+		backgroundImageClassName={backgroundImageClassName}
+		backgroundClassName={cn(`bg-${backgroundColor}`, backgroundClassName)}
+		containerClassName={containerClassName}
+		id={id}
+	>
+		{children}
+	</Section>
+);
+
+export const section = {
+	Component: SectionBlock,
+	componentName: "bring/section",
+} as const;
+
+export default Section;

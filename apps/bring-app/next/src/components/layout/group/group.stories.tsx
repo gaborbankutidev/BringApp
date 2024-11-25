@@ -1,23 +1,23 @@
 import type {Meta, StoryObj} from "@storybook/react";
-import Group from "./group";
+import GroupBlock from "./group.block";
 
 const meta = {
 	title: "Layout/Group",
-	component: Group,
+	component: GroupBlock,
 	tags: ["autodocs"],
-} satisfies Meta<typeof Group>;
+} satisfies Meta<typeof GroupBlock>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
 	args: {
-		backgroundColor: "grey-200",
+		backgroundColor: "gray-200",
 		children: (
 			<>
-				<div className="bg-blue-400 p-4 text-white">Content 1</div>
-				<div className="bg-blue-400 p-4 text-white">Content 2</div>
-				<div className="bg-blue-400 p-4 text-white">Content 3</div>
+				<div className="bg-purple-400 p-4 text-white">Content 1</div>
+				<div className="bg-purple-400 p-4 text-white">Content 2</div>
+				<div className="bg-purple-400 p-4 text-white">Content 3</div>
 			</>
 		),
 	},

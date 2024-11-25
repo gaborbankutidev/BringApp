@@ -1,8 +1,8 @@
-import {default as Split, type SplitProps} from "@/components/layout/split";
 import type {BlockEdit} from "@bring/blocks-editor";
 import {EditorCard} from "@bring/blocks-editor";
+import SplitBlock, {type SplitBlockProps} from "./split.block";
 
-export const SplitEdit: BlockEdit<SplitProps> = ({
+export const SplitEdit: BlockEdit<SplitBlockProps> = ({
 	children,
 	attributes,
 	isSelected = false,
@@ -10,7 +10,7 @@ export const SplitEdit: BlockEdit<SplitProps> = ({
 	const {columnCount, ...props} = attributes;
 	return (
 		<EditorCard color="lime" isSelected={isSelected} name="Split">
-			<Split {...props} columnCount={{"": 1}}>
+			<SplitBlock {...props} columnCount={{"": 1}}>
 				<div
 					className={`editor-row-content editor-row-content-${
 						columnCount?.lg ?? columnCount?.md ?? columnCount?.[""] ?? 1
@@ -18,7 +18,7 @@ export const SplitEdit: BlockEdit<SplitProps> = ({
 				>
 					{children}
 				</div>
-			</Split>
+			</SplitBlock>
 		</EditorCard>
 	);
 };
