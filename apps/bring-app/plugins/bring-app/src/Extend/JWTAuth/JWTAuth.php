@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace BringApp\Extend\JWTAuth;
 
+use WP_Error;
+use WP_REST_Request;
+use WP_REST_Response;
+
+// No direct access
+defined("ABSPATH") or die("Hey, do not do this 😱");
+
 class JWTAuth {
 	/**
 	 * The minimum and maximum allowed versions of the JWTAuth plugin.
@@ -87,9 +94,10 @@ class JWTAuth {
 	/**
 	 * Verifies the JWT token or the refresh token for the logout request.
 	 *
+	 * @param WP_REST_Request<array<mixed,mixed>> $request The REST request object.
 	 * @return bool|WP_Error True if either token is valid, otherwise WP_Error.
 	 */
-	public static function verifyTokenOrRefresh(\WP_REST_Request $request) {
+	public static function verifyTokenOrRefresh(WP_REST_Request $request) {
 		$auth_instance = new \JWTAuth\Auth();
 
 		// Attempt to validate the JWT token
@@ -104,7 +112,10 @@ class JWTAuth {
 
 		// If JWT is invalid, attempt to validate the refresh token with device payload
 		if (isset($_COOKIE["refresh_token"])) {
-			// Retrieve the device information from the request parameter if JWT is absent
+			/**
+			 * Retrieve the device information from the request parameter if JWT is absent
+			 * @var string $device
+			 */
 			$device = $request->get_param("device") ?: "";
 
 			// Validate the refresh token using the provided device information
@@ -116,7 +127,7 @@ class JWTAuth {
 		}
 
 		// If neither token is valid or no user is associated, return an error
-		return new \WP_Error(
+		return new WP_Error(
 			"jwt_auth_not_authenticated",
 			__("You are not logged in. Logout is only available for authenticated users."),
 			["status" => 403],
@@ -126,12 +137,16 @@ class JWTAuth {
 	/**
 	 * Logs out the user by unsetting the refresh token cookie and removing the refresh token from the user (device)
 	 *
-	 * @return \WP_REST_Response Logout response.
+	 * @param WP_REST_Request<array<mixed,mixed>> $request The REST request object.
+	 * @return WP_REST_Response Logout response.
 	 */
-	public static function handleLogout(\WP_REST_Request $request) {
+	public static function handleLogout(WP_REST_Request $request) {
 		// Check if the refresh_token cookie is set
 		if (isset($_COOKIE["refresh_token"])) {
-			// Get the device information from the request parameter
+			/**
+			 * Get the device information from the request parameter
+			 * @var string $device
+			 */
 			$device = $request->get_param("device") ?: "";
 
 			// Extract the user ID from the refresh token (user_id.token format)
@@ -159,13 +174,15 @@ class JWTAuth {
 				"refresh_token",
 				"",
 				time() - 3600,
+				// @phpstan-ignore-next-line
 				COOKIEPATH,
+				// @phpstan-ignore-next-line
 				COOKIE_DOMAIN,
 				is_ssl(),
 				true,
 			);
 		}
 
-		return new \WP_REST_Response(["message" => "Logged out successfully"], 200);
+		return new WP_REST_Response(["message" => "Logged out successfully"], 200);
 	}
 }

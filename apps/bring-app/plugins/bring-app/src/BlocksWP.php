@@ -40,6 +40,13 @@ class BlocksWP {
 	 * @return void
 	 */
 	public static function init() {
+		if (!defined("BRING_APP_PLUGIN_PATH") || !defined("BRING_APP_PLUGIN_URL")) {
+			wp_die(
+				"The required url and path constants are not defined: BRING_APP_PLUGIN_PATH & BRING_APP_PLUGIN_URL. Please check your bring-app.php plugin file.",
+				"Error",
+			);
+		}
+
 		// Config BlocksWP
 		Config::init([
 			"JWT_SECRET_KEY" => Env::JWT_SECRET_KEY(),
@@ -59,7 +66,7 @@ class BlocksWP {
 			->layoutTaxonomies()
 			->nonEditorFront()
 			->nonEditorPosts([
-				// "page" => ["blog", "contact"], // add the slug hardcoded pages
+				"page" => ["docs", "readme"], // add the slug hardcoded pages
 			])
 			// Add entity props
 			->entityProps([])

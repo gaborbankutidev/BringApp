@@ -91,7 +91,8 @@ class Admin {
 			__("Menus", "text-domain"), // Menu title
 			"edit_theme_options", // Capability
 			"nav-menus.php", // Menu slug
-			"", // Callback function
+			/** @phpstan-ignore-next-line */
+			"", // Callback function - defined as a callable but empty string is allowed if not used
 			"dashicons-menu", // Icon
 			58, // Position
 		);
