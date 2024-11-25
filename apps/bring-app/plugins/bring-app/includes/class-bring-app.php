@@ -299,7 +299,6 @@ class Bring_App {
 				"markdown",
 				"post-content",
 				"contact-form",
-				"asd",
 			])
 			// Ignore paths
 			->ignorePaths(["rest-api/docs", "rest-api/schema"]);

@@ -1,3 +1,4 @@
+import Column from "@/components/layout/column";
 import Row from "@/components/layout/row";
 import Section from "@/components/layout/section";
 import Markdown from "@/components/markdown";
@@ -14,9 +15,9 @@ const Home = async () => {
 	const errorNotice = wpHealthCheckNotices.find(({status}) => status === wpStatus);
 
 	return (
-		<>
-			<Section>
-				<Row className="block" size="split">
+		<Section dark>
+			<Row size="split">
+				<Column>
 					<p className="uppercase tracking-wide text-14 md:text-16 xl:text-20 text-white">
 						Welcome to your journey with
 					</p>
@@ -24,7 +25,7 @@ const Home = async () => {
 						<span className="text-purple-600">Bring</span>{" "}
 						<span className="text-white">App</span>
 					</h1>
-					<p className="text-gray-200 mb-6">
+					<p className="mb-6">
 						BringApp is a framework designed to help developers build NextJs
 						applications using WordPress as a headless CMS and site builder. It provides
 						a set of tools and components to help you get started quickly and build your
@@ -57,18 +58,19 @@ const Home = async () => {
 					</div>
 
 					{errorNotice && (
-						<div className="bg-gray-700/80 min-h-[180px] flex items-center border px-4 py-8 rounded-lg border-red-600">
+						<div className="bg-gray-800/80 min-h-[180px] flex items-center border px-4 py-8 rounded-lg border-red-600">
 							<div>
 								<h3 className="text-24s mb-4 text-red-600">{errorNotice.title}</h3>
 								<Markdown className="text-red-600">{errorNotice.notice}</Markdown>
 							</div>
 						</div>
 					)}
-
+				</Column>
+				<Column className="overflow-hidden">
 					<Posts />
-				</Row>
-			</Section>
-		</>
+				</Column>
+			</Row>
+		</Section>
 	);
 };
 

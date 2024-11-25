@@ -1,4 +1,5 @@
 import {getEntity} from "@/bring/render";
+import Column from "@/components/layout/column";
 import Row from "@/components/layout/row";
 import Section from "@/components/layout/section";
 import {env} from "@/env.mjs";
@@ -14,15 +15,15 @@ async function PostLayout({slug, children}: PostLayoutProps) {
 	if (!entity) return null; // TODO: handle this as an Internal Server Error
 
 	return (
-		<>
-			<Section>
-				<Row className="block text-gray-200" size="split">
+		<Section dark>
+			<Row size="split">
+				<Column>
 					<div className="flex gap-4 items-center">
 						<p className="uppercase tracking-wide text-14 md:text-16 xl:text-20 text-purple-600">
 							Example WordPress Post
 						</p>
 					</div>
-					<h1 className="tracking-tight font-bold text-[48px] xl:text-[72px] xl:leading-[72px] mb-8">
+					<h1 className="tracking-tight font-bold text-[48px] xl:text-[72px] xl:leading-[72px] mb-8 text-white">
 						{entity.props.name}
 					</h1>
 					<div className="flex w-fit items-center gap-2 py-2 px-4 bg-gray-800/60 rounded-2xl mb-4">
@@ -48,13 +49,11 @@ async function PostLayout({slug, children}: PostLayoutProps) {
 					<p className="text-14 text-purple-600 mb-2 mt-4">
 						Post content built with Wordpress
 					</p>
-					<div className="border px-4 py-8 rounded-lg text-foreground">{children}</div>
-				</Row>
-			</Section>
-		</>
+					<div className="border px-4 py-8 rounded-lg">{children}</div>
+				</Column>
+			</Row>
+		</Section>
 	);
-
-	return <></>;
 }
 
 export default PostLayout;

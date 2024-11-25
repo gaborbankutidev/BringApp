@@ -1,5 +1,5 @@
 import {cn} from "@/lib/utils";
-//import Markdown from "../markdown";
+import Markdown from "../markdown";
 
 export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -13,8 +13,7 @@ const Heading = ({children, level = 2, className, ...props}: HeadingProps) => {
 
 	return (
 		<H className={cn("text-primary", className)} {...props}>
-			{/* <Markdown content={children} inline /> */}
-			{children}
+			<Markdown content={children} inline />
 		</H>
 	);
 };

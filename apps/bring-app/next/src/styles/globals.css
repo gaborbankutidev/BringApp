@@ -32,16 +32,16 @@
 		--purple-600: 271 81% 56%;
 		--purple-800: 273 67% 39%;
 		/* Gray colors */
-		--gray-50: 210, 20%, 98%;
-		--gray-100: 220, 14%, 96%;
-		--gray-200: 220, 13%, 91%;
-		--gray-300: 216, 12%, 84%;
-		--gray-400: 218, 11%, 65%;
-		--gray-500: 220, 9%, 46%;
-		--gray-600: 215, 14%, 34%;
-		--gray-700: 217, 19%, 27%;
-		--gray-800: 215, 28%, 17%;
-		--gray-900: 221, 39%, 11%;
+		--gray-50: 210 20% 98%;
+		--gray-100: 220 14% 96%;
+		--gray-200: 220 13% 91%;
+		--gray-300: 216 12% 84%;
+		--gray-400: 218 11% 65%;
+		--gray-500: 220 9% 46%;
+		--gray-600: 215 14% 34%;
+		--gray-700: 217 19% 27%;
+		--gray-800: 215 28% 17%;
+		--gray-900: 221 39% 11%;
 		/* Basic colors */
 		--white: 0 0% 100%;
 		--black: 0 0% 0%;
@@ -123,15 +123,18 @@
 		@apply light;
 	}
 
+	/* Apply based defaults */
+	html,
+	.dark,
+	.light {
+		@apply text-foreground;
+	}
+
 	/*  Layout & General
 	========================================================================== */
 	html {
 		font-family: "Montserrat", "Helvetica", "open-sans";
 		@apply text-16;
-	}
-
-	body {
-		@apply bg-background text-foreground;
 	}
 
 	#bringContent {
@@ -176,7 +179,7 @@
 	.h1 h4,
 	.h1 h5,
 	.h1 h6 {
-		@apply text-28s font-bold uppercase tracking-[.14em];
+		@apply text-28s font-bold uppercase tracking-tight;
 	}
 
 	h2,

@@ -1,4 +1,3 @@
-import {asdConfig} from "@/components/asd";
 // layout
 import column from "@/components/layout/column/column.wp";
 import group from "@/components/layout/group/group.wp";
@@ -7,7 +6,6 @@ import section from "@/components/layout/section/section.wp";
 import split from "@/components/layout/split/split.wp";
 
 // components
-
 import divider from "@/components/divider/divider.wp";
 import embed from "@/components/embed/embed.wp";
 import heading from "@/components/heading/heading.wp";
@@ -32,7 +30,6 @@ const blockList = [
 	heading,
 	image,
 	markdown,
-	asdConfig,
 ];
 
 Editor.init(env.NEXT_PUBLIC_WP_BASE_URL, blockList);

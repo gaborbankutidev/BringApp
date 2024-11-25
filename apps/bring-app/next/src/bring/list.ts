@@ -5,7 +5,6 @@ import {row} from "@/components/layout/row";
 import {section} from "@/components/layout/section";
 import {split} from "@/components/layout/split";
 // components
-import {asd} from "@/components/asd";
 import {divider} from "@/components/divider";
 import {embed} from "@/components/embed";
 import {heading} from "@/components/heading";
@@ -27,5 +26,4 @@ export const blockList = [
 	heading,
 	image,
 	markdown,
-	asd,
 ];

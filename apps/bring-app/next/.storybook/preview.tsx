@@ -10,19 +10,12 @@ const preview: Preview = {
 			},
 		},
 	},
-	/* 
-	TODO Add decorators - providers, default styles, etc.
+	/* Add decorators - providers, default styles, etc.
 	decorators: [
 		(Story) => (
-			<div
-				style={{
-					backgroundColor: "rgb(17 24 39)",
-					padding: "1em",
-					borderRadius: "4px",
-				}}
-			>
+			<Providers>
 				<Story />
-			</div>
+			</Providers>
 		),
 	], */
 };
