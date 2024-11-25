@@ -70,7 +70,10 @@ class Admin {
 		$customize_url = add_query_arg(
 			"return",
 			urlencode(
-				remove_query_arg(wp_removable_query_args(), wp_unslash($_SERVER["REQUEST_URI"])),
+				remove_query_arg(
+					wp_removable_query_args(),
+					wp_unslash($_SERVER["REQUEST_URI"]),
+				),
 			),
 			"customize.php",
 		);
