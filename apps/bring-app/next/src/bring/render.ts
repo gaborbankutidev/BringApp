@@ -6,7 +6,6 @@ import type {EP} from "./types";
 
 export const {getEntity, Main, Layout, Footer} = initRender<EP>(
 	env.NEXT_PUBLIC_WP_BASE_URL,
-	env.DATA_TOKEN,
 	(redirectTo) => {
 		redirect(redirectTo);
 	},

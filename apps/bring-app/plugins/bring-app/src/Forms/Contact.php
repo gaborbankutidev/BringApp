@@ -20,6 +20,9 @@ class Contact {
 	/**
 	 * Add form fields
 	 *
+	 * This is a basic contact form with name, email, message & consent fields. You can extend, remove or add other forms as needed.
+	 * Do not forget to add form names to the BringWP config.
+	 *
 	 * @return void
 	 */
 	private static function formFields() {
