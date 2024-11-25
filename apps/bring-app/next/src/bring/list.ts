@@ -10,6 +10,7 @@ import {embed} from "@/components/embed";
 import {heading} from "@/components/heading";
 import {image} from "@/components/image";
 import {markdown} from "@/components/markdown";
+import {paragraph} from "@/components/paragraph";
 import {button} from "@/components/ui/button";
 
 export const componentList = [
@@ -26,4 +27,5 @@ export const componentList = [
 	heading,
 	image,
 	markdown,
+	paragraph,
 ];

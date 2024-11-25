@@ -11,6 +11,7 @@ import embed from "@/components/embed/embed.block";
 import heading from "@/components/heading/heading.block";
 import image from "@/components/image/image.block";
 import markdown from "@/components/markdown/markdown.block";
+import paragraph from "@/components/paragraph/paragraph.block";
 import button from "@/components/ui/button/button.block";
 import {env} from "@/env.mjs";
 import {Editor} from "@bring/blocks-editor";
@@ -29,6 +30,7 @@ const blockList = [
 	heading,
 	image,
 	markdown,
+	paragraph,
 ];
 
 Editor.init(env.NEXT_PUBLIC_WP_BASE_URL, blockList);
