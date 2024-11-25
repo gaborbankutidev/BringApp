@@ -19,7 +19,6 @@ export const {getEntity, Main, Layout, Footer} = initRender<
 	Context
 >(
 	env.NEXT_PUBLIC_WP_BASE_URL,
-	env.DATA_TOKEN,
 	(redirectTo) => {
 		redirect(redirectTo);
 	},
