@@ -41,8 +41,16 @@ class JWTAuth {
 		if (
 			is_plugin_active("jwt-auth/jwt-auth.php") &&
 			defined("JWT_AUTH_PLUGIN_VERSION") &&
-			version_compare(JWT_AUTH_PLUGIN_VERSION, self::MIN_ALLOWED_VERSION, ">=") &&
-			version_compare(JWT_AUTH_PLUGIN_VERSION, self::MAX_ALLOWED_VERSION, "<=") &&
+			version_compare(
+				JWT_AUTH_PLUGIN_VERSION,
+				self::MIN_ALLOWED_VERSION,
+				">=",
+			) &&
+			version_compare(
+				JWT_AUTH_PLUGIN_VERSION,
+				self::MAX_ALLOWED_VERSION,
+				"<=",
+			) &&
 			class_exists("JWTAuth\Auth")
 		) {
 			// Init config hooks
@@ -119,7 +127,10 @@ class JWTAuth {
 			$device = $request->get_param("device") ?: "";
 
 			// Validate the refresh token using the provided device information
-			$user_id = $auth_instance->validate_refresh_token($_COOKIE["refresh_token"], $device);
+			$user_id = $auth_instance->validate_refresh_token(
+				$_COOKIE["refresh_token"],
+				$device,
+			);
 
 			if (!is_wp_error($user_id) && get_user_by("id", $user_id)) {
 				return true; // Valid refresh token and user exists
@@ -129,7 +140,9 @@ class JWTAuth {
 		// If neither token is valid or no user is associated, return an error
 		return new WP_Error(
 			"jwt_auth_not_authenticated",
-			__("You are not logged in. Logout is only available for authenticated users."),
+			__(
+				"You are not logged in. Logout is only available for authenticated users.",
+			),
 			["status" => 403],
 		);
 	}
@@ -153,12 +166,23 @@ class JWTAuth {
 			$parts = explode(".", $_COOKIE["refresh_token"]);
 			if (count($parts) === 2) {
 				$user_id = intval($parts[0]);
-				$user_refresh_tokens = get_user_meta($user_id, "jwt_auth_refresh_tokens", true);
+				$user_refresh_tokens = get_user_meta(
+					$user_id,
+					"jwt_auth_refresh_tokens",
+					true,
+				);
 
 				// Remove the refresh token associated with the specified device
-				if (is_array($user_refresh_tokens) && isset($user_refresh_tokens[$device])) {
+				if (
+					is_array($user_refresh_tokens) &&
+					isset($user_refresh_tokens[$device])
+				) {
 					unset($user_refresh_tokens[$device]);
-					update_user_meta($user_id, "jwt_auth_refresh_tokens", $user_refresh_tokens);
+					update_user_meta(
+						$user_id,
+						"jwt_auth_refresh_tokens",
+						$user_refresh_tokens,
+					);
 				}
 
 				// Delete the specific `jwt_auth_device` entry for this device

@@ -39,6 +39,9 @@ class Enqueue {
 	 */
 	private static function editor() {
 		// Enqueue EasyMDE for markdown editor
-		wp_enqueue_style("easy-mde-theme-styles", "https://unpkg.com/easymde/dist/easymde.min.css");
+		wp_enqueue_style(
+			"easy-mde-theme-styles",
+			"https://unpkg.com/easymde/dist/easymde.min.css",
+		);
 	}
 }

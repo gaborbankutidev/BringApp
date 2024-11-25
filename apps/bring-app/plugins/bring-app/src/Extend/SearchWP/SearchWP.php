@@ -45,7 +45,12 @@ class SearchWP {
 
 		// Index empty categories
 		self::$shouldIndexEmptyCategories &&
-			add_filter('searchwp\source\taxonomy\db_where', self::indexEmptyCategories(...), 10, 2);
+			add_filter(
+				'searchwp\source\taxonomy\db_where',
+				self::indexEmptyCategories(...),
+				10,
+				2,
+			);
 	}
 
 	/**
