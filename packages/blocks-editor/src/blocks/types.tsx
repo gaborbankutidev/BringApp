@@ -1,18 +1,16 @@
 import type {BlockIcon} from "@wordpress/blocks";
 import type {FC, ReactNode} from "react";
-import {FCC} from "../client-types";
+import {FCB} from "../client-types";
 import type {ControlConfigType} from "../controls/types";
-import {BringStyles, BringStylesConfig} from "../styles/types";
-import type {NestedKeyOf, Obj, ValidComponentName} from "../types";
+import {BlockStyles, BlockStylesConfig} from "../styles/types";
+import type {NestedKeyOf, Obj, ValidBlockName} from "../types";
 
 export type ClientAttributes<Props> = Omit<Props, "children">;
 
 export type EditorAttributes = {
-	key: string;
-	parentKey: string;
 	className?: string;
 	id?: string;
-	bringStyles?: BringStyles;
+	blockStyles?: BlockStyles;
 };
 
 export type Attributes<Props> = ClientAttributes<Props> & EditorAttributes;
@@ -65,14 +63,14 @@ export type BlockConfig<Props extends Obj = {}> = {
 	title?: string;
 	description?: string;
 	icon?: BlockIcon;
-	componentName: ValidComponentName;
+	blockName: ValidBlockName;
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	Component: FCC<Props, any, any, any, any, any>;
+	Block: FCB<Props, any, any, any, any, any>;
 	attributes?: BlockAttributesConfig<Props>;
 	previewAttributes?: ClientAttributes<Props>;
 	allowedBlocks?: string[];
 	Controls?: BlockControlsConfig<Props>;
 	Edit?: BlockEdit<Props>;
-	styles?: BringStylesConfig;
+	blockStyles?: BlockStylesConfig;
 };

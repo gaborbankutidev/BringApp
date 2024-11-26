@@ -1,13 +1,7 @@
-import {registerBlockType} from "@wordpress/blocks";
 import {dispatch, select, subscribe} from "@wordpress/data";
-import {BlockConfig, objectAttributeSource, stringAttributeSource} from "./blocks";
-import {makeEdit} from "./blocks/make-edit";
-import {makeSave} from "./blocks/make-save";
+import {BlockConfig, registerBringBlock} from "./blocks";
 import {postContentConfig} from "./components/post-content";
-import {makeBringStylesClassNames} from "./styles";
-import {BringStyles} from "./styles/types";
-import {BringStylesDefaultValue} from "./styles/utils";
-import {BringNode, Obj, WpBlock} from "./types";
+import {BringNode, WpBlock} from "./types";
 
 declare global {
 	// Interface is needed to augment global `Window`
@@ -43,7 +37,6 @@ declare global {
  * @method subscribeToSaveEvent - method to subscribe to the save event
  * @method update - method to send the content to the backend
  * @method parseBlocks - method to parse the blocks to a format that can be sent to the backend
- * @method registerBlock - method to register a block
  * @method registerBlocks - method to register all blocks
  */
 export class Editor {
@@ -81,7 +74,7 @@ export class Editor {
 	 */
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public static init(wpBaseURL: string, blockList: BlockConfig<any>[]) {
-		console.log("🚀 Lanunching Bring Editor...");
+		console.log("🚀 Launching Bring Editor...");
 		if (!Editor.instance) {
 			Editor.instance = new Editor(wpBaseURL, blockList);
 		} else {
@@ -181,30 +174,18 @@ export class Editor {
 	private parseBlocks(blocks: WpBlock[]) {
 		const nodes: BringNode[] = [];
 		for (const block of blocks) {
-			const {bringStyles} = block.attributes;
-			const blockConfig = this.blockList.find((b) => b.componentName === block.name);
+			const blockConfig = this.blockList.find((b) => b.blockName === block.name);
 			if (!blockConfig) {
 				console.error(
 					`🚀 Block '${block.name}' not found in the block list and will not be saved!`,
 				);
 				continue;
 			}
-			const bringStylesClassNames = blockConfig.styles
-				? makeBringStylesClassNames(blockConfig.styles, bringStyles as BringStyles)
-				: {};
-
-			// remove attributes that are not needed to be saved
-			delete block.attributes.key;
-			delete block.attributes.parentKey;
-			delete block.attributes.bringStyles;
 
 			const node: BringNode = {
 				key: block.clientId,
-				component: block.name,
-				props: {
-					bringStylesClassNames,
-					...block.attributes,
-				},
+				blockName: block.name,
+				attributes: block.attributes,
 				children: [],
 			};
 
@@ -217,43 +198,13 @@ export class Editor {
 	}
 
 	/**
-	 * Method to register a block.
-	 * @param config - the configuration of the block
-	 * @returns void
-	 */
-	private registerBlock<Props extends Obj>(config: BlockConfig<Props>) {
-		const title = config.title ? config.title : config.componentName;
-
-		// @ts-expect-error: Expect error here because Wordpress's `registerBlockType` types are so complicated TS can't infer the correct types
-		registerBlockType(config.componentName, {
-			title,
-			description: config.description ?? `${title} block by Bring`,
-			category: "widgets", // TODO custom category
-			icon: config.icon ?? "block-default",
-			supports: {
-				html: false,
-			},
-			attributes: {
-				...config.attributes,
-				id: stringAttributeSource(),
-				bringStyles: objectAttributeSource(BringStylesDefaultValue),
-			},
-			example: config.previewAttributes && {
-				attributes: config.previewAttributes,
-			},
-			edit: makeEdit<Props>(config),
-			save: makeSave(),
-		});
-	}
-
-	/**
 	 * Method to register all the blocks.
 	 * @returns void
 	 */
 	private registerBlocks() {
 		this.blockList.push(postContentConfig);
 		this.blockList.map((blockConfig) => {
-			this.registerBlock(blockConfig);
+			registerBringBlock(blockConfig);
 		});
 	}
 }

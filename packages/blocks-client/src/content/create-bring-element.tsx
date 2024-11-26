@@ -21,7 +21,7 @@ const Error: FC<ErrorComponentInterface> = ({name}) => <div>Error while renderin
  * Creates a React element tree based on the provided BringNodes.
  *
  * @param nodes - An array of BringNodes representing the elements to be rendered.
- * @param componentMap - A map of component names to React components.
+ * @param blockMap - A map of block names to React components.
  * @param entityProps - Props to be passed to the entity components.
  * @param siteProps - Props to be passed to the site components.
  * @param context - Additional context to be passed to the components.
@@ -31,7 +31,7 @@ const Error: FC<ErrorComponentInterface> = ({name}) => <div>Error while renderin
 export default function createBringElement(
 	nodes: BringNode[],
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	componentMap: Map<string, FC<any>>,
+	blockMap: Map<string, FC<any>>,
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	entityProps: any = {},
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -41,25 +41,25 @@ export default function createBringElement(
 	PostContent: ReactNode = null,
 ) {
 	return nodes.map((node) => {
-		// check if component is PostContent and return PostContent ReactNode
-		if (node.component === "bring/post-content") {
+		// check if block is PostContent and return PostContent ReactNode
+		if (node.blockName === "bring/post-content") {
 			return PostContent;
 		}
 
 		// get component
-		const Component = componentMap.get(node.component);
+		const Block = blockMap.get(node.blockName);
 
 		// check if component is a function
-		if (Component === undefined) {
-			console.log('Component is not a function, inserting "Error" component instead...');
-			return <Error name={node.component} key={node.key} />;
+		if (Block === undefined) {
+			console.log('Block is not a function, inserting "Error" component instead...');
+			return <Error name={node.blockName} key={node.key} />;
 		}
 
 		// render children
 		const children = node.children?.length
 			? createBringElement(
 					node.children,
-					componentMap,
+					blockMap,
 					entityProps,
 					siteProps,
 					context,
@@ -69,15 +69,16 @@ export default function createBringElement(
 
 		// create element
 		return (
-			<Component
-				{...node.props}
+			<Block
+				// {...node.props}
 				key={node.key}
+				attributes={node.attributes}
 				entityProps={entityProps}
 				siteProps={siteProps}
 				context={context}
 			>
 				{children}
-			</Component>
+			</Block>
 		);
 	});
 }

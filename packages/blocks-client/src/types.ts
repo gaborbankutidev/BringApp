@@ -1,5 +1,5 @@
 import type {FC} from "react";
-import {BringStylesClassNames} from "./styles";
+// import {BringStylesClassNames} from "./styles";
 
 /**
  * Represents a generic object with string keys and unknown values.
@@ -21,10 +21,11 @@ export type Defined<T> = Exclude<T, undefined>;
  * @template CTX - Context type
  */
 export type BP<P = object, EP = object, SP = object, M = object, MI = object, CTX = object> = P & {
-	bringStylesClassNames?: BringStylesClassNames | undefined;
+	/* bringStylesClassNames?: BringStylesClassNames | undefined;
 	className?: string | undefined;
-	id?: string | undefined;
+	id?: string | undefined; */
 
+	attributes: P & {className?: string | undefined; id?: string | undefined};
 	entityProps?: EntityProps<EP>;
 	siteProps?: SiteProps<SP, M, MI>;
 	context?: CTX;
@@ -39,7 +40,7 @@ export type BP<P = object, EP = object, SP = object, M = object, MI = object, CT
  * @template MI - Menu Item type
  * @template CTX - Context type
  */
-export type FCC<P = object, EP = object, SP = object, M = object, MI = object, CTX = object> = FC<
+export type FCB<P = object, EP = object, SP = object, M = object, MI = object, CTX = object> = FC<
 	BP<P, EP, SP, M, MI, CTX>
 >;
 
@@ -251,28 +252,28 @@ export type Entity<EP = object> = {
  */
 export type BringNode = {
 	key: string;
-	component: string;
-	props: Obj;
+	blockName: string;
+	attributes: Obj;
 	children?: BringNode[];
 };
 
-export type ComponentName = `${Lowercase<string>}/${Lowercase<string>}`;
+export type BlockName = `${Lowercase<string>}/${Lowercase<string>}`;
 
-export type ComponentListItem<
+export type BlockListItem<
 	EP = object, // EntityProps
 	SP = object, // SiteProps
 	M = object, // Menu
 	MI = object, // MenuItem
 	CTX = object, // Context
 > = {
-	componentName: ComponentName;
+	blockName: BlockName;
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	Component: FCC<any, EP, SP, M, MI, CTX>;
+	Block: FCB<any, EP, SP, M, MI, CTX>;
 };
-export type ComponentList<
+export type BlockList<
 	EP = object, // EntityProps
 	SP = object, // SiteProps
 	M = object, // Menu
 	MI = object, // MenuItem
 	CTX = object, // Context
-> = ComponentListItem<EP, SP, M, MI, CTX>[];
+> = BlockListItem<EP, SP, M, MI, CTX>[];

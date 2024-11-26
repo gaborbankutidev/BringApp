@@ -1,12 +1,12 @@
 import React, {type ReactNode} from "react";
 import {createBringElement, getEntity, getSiteProps} from "../content";
-import type {FCC} from "../types";
+import type {FCB} from "../types";
 
 function makeLayout<EP = {}, SP = {}, M = {}, MI = {}, CTX = {}>(
 	wpURL: string,
 	onRedirect: (redirectTo: string, responseCode: number) => void,
 	onNotFound: () => void,
-	componentMap: Map<string, FCC<any, EP, SP, M, MI, CTX>>,
+	blockMap: Map<string, FCB<any, EP, SP, M, MI, CTX>>,
 ) {
 	const Layout = async ({
 		slug = "",
@@ -29,7 +29,7 @@ function makeLayout<EP = {}, SP = {}, M = {}, MI = {}, CTX = {}>(
 				{entity.content.layout
 					? createBringElement(
 							entity.content.layout,
-							componentMap,
+							blockMap,
 							entity.props,
 							siteProps,
 							context,

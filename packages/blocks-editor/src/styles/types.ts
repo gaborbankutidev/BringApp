@@ -40,7 +40,7 @@ export type Sides = {
 
 // ===========
 
-export type BringStylesConfig = {
+export type BlockStylesConfig = {
 	spacing?: {
 		m?: Sides;
 		p?: Sides;
@@ -48,7 +48,7 @@ export type BringStylesConfig = {
 	visibility?: ResponsiveDisplayValueConfig;
 };
 
-export type BringStyles = {
+export type BlockStyles = {
 	spacing?: {
 		m?: Sides;
 		p?: Sides;

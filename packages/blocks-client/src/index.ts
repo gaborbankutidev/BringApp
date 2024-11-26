@@ -50,7 +50,7 @@ export type {
 	EntityContent,
 	EntityProps,
 	EntityType,
-	FCC,
+	FCB,
 	GridNumType,
 	ImageType,
 	MediaType,

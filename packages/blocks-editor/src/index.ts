@@ -37,7 +37,7 @@ export {
 
 export {useDynamicEntityOptions} from "./hooks";
 
-export {makeBringStylesClassNames, makeBringStylesControl} from "./styles";
+export {makeBlockStylesClassNames, makeBlockStylesControl} from "./styles";
 
 export {Editor} from "./editor";
 
@@ -45,8 +45,7 @@ export type {
 	Defined,
 	// lists
 	DynamicEntityOptions,
-	FCB, // ?
-	ImageType, // ?
+	ImageType,
 	MediaType,
 	MenuType,
 	NestedKeyOf,

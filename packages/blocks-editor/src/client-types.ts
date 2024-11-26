@@ -1,4 +1,5 @@
 import {FC} from "react";
+import {BlockStyles} from "./styles/types";
 import {ImageType} from "./types";
 
 export type BringStylesClassNames = {
@@ -44,15 +45,15 @@ export type EntityProps<EP = {}> = {
 } & EP;
 
 export type BP<P = {}, EP = {}, SP = {}, M = {}, MI = {}, CTX = {}> = P & {
-	bringStylesClassNames?: BringStylesClassNames | undefined;
-	className?: string | undefined;
-	id?: string | undefined;
+	//bringStylesClassNames?: BringStylesClassNames | undefined;
+
+	attributes: P & {className?: string; id?: string; blockStyles?: BlockStyles};
 	entityProps?: EntityProps<EP>;
 	siteProps?: SiteProps<SP, M, MI>;
 	context?: CTX;
 };
 
-export type FCC<P = {}, EP = {}, SP = {}, M = {}, MI = {}, CTX = {}> = FC<
+export type FCB<P = {}, EP = {}, SP = {}, M = {}, MI = {}, CTX = {}> = FC<
 	BP<P, EP, SP, M, MI, CTX>
 >;
 

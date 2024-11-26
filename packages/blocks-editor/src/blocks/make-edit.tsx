@@ -4,7 +4,7 @@ import {twJoin} from "tailwind-merge";
 import {EditorCard} from "../components";
 import {TextControl} from "../controls";
 import {ControlContextProvider} from "../controls/context";
-import {makeBringStylesClassNames, makeBringStylesControl} from "../styles";
+import {makeBlockStylesClassNames, makeBlockStylesControl} from "../styles";
 import type {Obj} from "../types";
 import {makeControls} from "./make-controls";
 import type {Attributes, BlockConfig} from "./types";
@@ -19,27 +19,14 @@ type EditType<Props> = {
 export function makeEdit<Props extends Obj>(config: BlockConfig<Props>) {
 	// eslint-disable-next-line react/display-name
 	return ({attributes, setAttributes, clientId, isSelected}: EditType<Props>) => {
-		const {key, parentKey, className, id, bringStyles, ...props} = attributes;
-
-		// set key on load
-		if (key !== clientId) {
-			setAttributes({key: clientId} as Partial<Attributes<Props>>);
-		}
-
-		// set parentKey on load
-		const editorParentKeys = window.wp.data
-			.select("core/block-editor")
-			.getBlockParents(clientId);
-		const editorParentKey = editorParentKeys.length
-			? editorParentKeys[editorParentKeys.length - 1]
-			: "";
-		if (parentKey !== editorParentKey) {
-			setAttributes({parentKey: editorParentKey} as Partial<Attributes<Props>>);
-		}
+		const {className, blockStyles, ...props} = attributes;
 
 		// calculate bring styles class names
-		const joinedClassName = config.styles
-			? twJoin(makeBringStylesClassNames(config.styles, bringStyles).classNames, className)
+		const joinedClassName = config.blockStyles
+			? twJoin(
+					makeBlockStylesClassNames(config.blockStyles, blockStyles).classNames,
+					className,
+				)
 			: className;
 
 		return (
@@ -55,7 +42,7 @@ export function makeEdit<Props extends Obj>(config: BlockConfig<Props>) {
 					/>
 				</InspectorAdvancedControls>
 				{config.Controls && makeControls<Props>(attributes, setAttributes, config.Controls)}
-				{config.styles && makeBringStylesControl(config.styles)}
+				{config.blockStyles && makeBlockStylesControl(config.blockStyles)}
 
 				{config.Edit ? (
 					<config.Edit
@@ -70,12 +57,12 @@ export function makeEdit<Props extends Obj>(config: BlockConfig<Props>) {
 					<EditorCard
 						color="grey"
 						isSelected={isSelected ?? false}
-						name={config.title ?? config.componentName}
+						name={config.title ?? config.blockName}
 					>
 						{/* eslint-disable-next-line @typescript-eslint/no-explicit-any*/}
-						<config.Component className={joinedClassName} id={id} {...(props as any)}>
+						<config.Block attributes={{className: joinedClassName, ...props}}>
 							<InnerBlocks allowedBlocks={config.allowedBlocks} />
-						</config.Component>
+						</config.Block>
 					</EditorCard>
 				)}
 			</ControlContextProvider>

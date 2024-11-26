@@ -1,13 +1,5 @@
-import type {FC} from "react";
-import type {BringStyles} from "./styles/types";
-
 export type Obj = Record<string, unknown>;
 export type Defined<T> = Exclude<T, undefined>;
-
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export type FCB<Props = {}> = FC<
-	Props & {className?: string; id?: string; bringStyles?: BringStyles}
->;
 
 export type GridNumType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
@@ -65,9 +57,9 @@ export type NumberSelectControlOptions<T extends number = number> = {
 
 export type BringNode = {
 	key: string;
-	component: string;
+	blockName: string;
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	props: {[key: string]: any};
+	attributes: {[key: string]: any};
 	children?: BringNode[];
 };
 
@@ -108,7 +100,6 @@ export type NestedTypedKeyOf<ObjectType extends Obj, T> = NestedTypedKeyOfOnRequ
 	T
 >;
 
-type ValidComponentNamePart = `${Lowercase<string> | "-"}${Lowercase<string> | "-" | ""}`;
-type ValidComponentNameWithSlash = `${ValidComponentNamePart}/${ValidComponentNamePart}`;
-export type ValidComponentName =
-	`${Lowercase<string>}${ValidComponentNameWithSlash}${Lowercase<string>}`;
+type ValidBlockNamePart = `${Lowercase<string> | "-"}${Lowercase<string> | "-" | ""}`;
+type ValidBlockNameWithSlash = `${ValidBlockNamePart}/${ValidBlockNamePart}`;
+export type ValidBlockName = `${Lowercase<string>}${ValidBlockNameWithSlash}${Lowercase<string>}`;

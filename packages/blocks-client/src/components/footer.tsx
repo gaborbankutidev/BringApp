@@ -1,12 +1,12 @@
 import React from "react";
 import {createBringElement, getEntity, getSiteProps} from "../content";
-import type {FCC} from "../types";
+import type {FCB} from "../types";
 
 function makeFooter<EP = {}, SP = {}, M = {}, MI = {}, CTX = {}>(
 	wpURL: string,
 	onRedirect: (redirectTo: string, responseCode: number) => void,
 	onNotFound: () => void,
-	componentMap: Map<string, FCC<any, EP, SP, M, MI, CTX>>,
+	blockMap: Map<string, FCB<any, EP, SP, M, MI, CTX>>,
 ) {
 	const Footer = async ({slug = "", context}: {slug?: string | string[]; context?: CTX}) => {
 		const siteProps = await getSiteProps<SP, M, MI>(wpURL);
@@ -20,7 +20,7 @@ function makeFooter<EP = {}, SP = {}, M = {}, MI = {}, CTX = {}>(
 			<footer>
 				{createBringElement(
 					entity.content.footer,
-					componentMap,
+					blockMap,
 					entity.props,
 					siteProps,
 					context,

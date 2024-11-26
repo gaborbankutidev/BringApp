@@ -4,16 +4,16 @@ import type {FC} from "react";
 import React from "react";
 import {ResponsiveCheckboxControl, ResponsiveRangeControl} from "../controls";
 import {objectKeys} from "../utils";
-import type {BringStylesConfig, Sides} from "./types";
+import type {BlockStylesConfig, Sides} from "./types";
 import {sideLabels, spacingLabels} from "./utils";
 
-export function makeBringStylesControl(bringStylesConfig: BringStylesConfig) {
-	const m = bringStylesConfig.spacing?.m;
-	const p = bringStylesConfig.spacing?.p;
-	const v = bringStylesConfig.visibility;
+export function makeBlockStylesControl(blockStylesConfig: BlockStylesConfig) {
+	const m = blockStylesConfig.spacing?.m;
+	const p = blockStylesConfig.spacing?.p;
+	const v = blockStylesConfig.visibility;
 
 	return (
-		<InspectorControls key="bring-styles">
+		<InspectorControls key="block-styles">
 			{m && (
 				<PanelBody title="Margin" initialOpen={false}>
 					<SidesControl type="m" sides={m} />
