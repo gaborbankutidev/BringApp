@@ -72,7 +72,7 @@
 			"prettier --write"
 		],
 		"*.{js,mjs,cjs,ts,jsx,tsx}": [
-			"eslint --fix"
+			"yarn lint"
 		]
 	}
 }
