@@ -34,7 +34,7 @@
 		"install:composer:app": "cd apps/bring-app && composer install && composer dump-autoload",
 		"install:composer:pkg": "cd packages/blocks-wp && composer install && composer dump-autoload",
 		"lint": "turbo run lint lint:root",
-		"lint:root": "eslint --ignore-pattern node_modules/ --ignore-pattern packages/ --ignore-pattern apps/ --ignore-pattern .yarn/ .",
+		"lint:root": "eslint",
 		"prepare": "husky",
 		"release": "turbo run build lint test && changeset version && changeset publish",
 		"services:down": "docker compose -f ./apps/bring-app/compose.yml down",

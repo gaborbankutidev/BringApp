@@ -43,17 +43,17 @@ jobs:
             - name: Run changeset check
               run: yarn changeset status --since origin/main
 
-            - name: Build packages
-              run: yarn build:pkg
+            - name: Run syncpack lint
+              run: yarn syncpack lint
+
+            - name: Run build
+              run: yarn build
 
             - name: Run typecheck
               run: yarn types
 
             - name: Run lint
               run: yarn lint
-
-            - name: Run build
-              run: yarn build
 
             - name: Run tests
               run: yarn test

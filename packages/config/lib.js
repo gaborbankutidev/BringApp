@@ -13,11 +13,12 @@ const config = [
 				typescript: {project},
 			},
 		},
-		ignores: ["dist"],
 		rules: {
 			"import/no-default-export": "off",
-			// Add any additional rules here
 		},
+	},
+	{
+		ignores: ["**/*/node_modules/", ".yarn/", "**/*/build/", "dist/"],
 	},
 ];
 

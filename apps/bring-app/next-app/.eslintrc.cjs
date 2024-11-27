@@ -2,7 +2,7 @@
 const config = {
 	parser: "@typescript-eslint/parser",
 	parserOptions: {
-		project: true,
+		project: "./tsconfig.json",
 	},
 	// @ts-ignore
 	plugins: ["@typescript-eslint"],
@@ -17,6 +17,7 @@ const config = {
 		// Feel free to reconfigure them to your own preference.
 		"@typescript-eslint/array-type": "off",
 		"@typescript-eslint/consistent-type-definitions": "off",
+		"@typescript-eslint/dot-notation": "off",
 
 		"@typescript-eslint/consistent-type-imports": [
 			"warn",
@@ -35,7 +36,11 @@ const config = {
 		// To allow @ts-ignore without a warning or error
 		"@typescript-eslint/ban-ts-comment": "off",
 	},
-	ignorePatterns: ["process-mock.js", "webpack.editor.config.js"],
+	ignorePatterns: [
+		"process-mock.js",
+		"webpack.editor.config.js",
+		"node_modules/",
+	],
 };
 
 module.exports = config;

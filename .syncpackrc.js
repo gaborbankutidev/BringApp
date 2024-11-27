@@ -3,9 +3,10 @@
 /** @type {import("syncpack").RcFile} */
 const config = {
 	dependencyTypes: ["prod", "dev"],
+	lintFormatting: false,
 	semverGroups: [
 		{
-			label: "use exact version numbers in production",
+			label: "Use exact version numbers in production",
 			packages: ["**"],
 			dependencyTypes: ["prod"],
 			dependencies: ["**"],
