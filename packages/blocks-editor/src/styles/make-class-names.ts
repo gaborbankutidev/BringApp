@@ -1,16 +1,23 @@
-import {BringStylesClassNames, ResponsiveValue} from "../client-types";
+import {ResponsiveValue} from "../client-types";
 import {objectKeys} from "../utils";
-import type {BlockStyles, BlockStylesConfig, Sides} from "./types";
+import type {BlockStyles, BlockStylesClassNames, BlockStylesConfig, Sides} from "./types";
 import {screenSizes} from "./utils";
 
+/**
+ * Makes block styles class names from the config and values set in the editor.
+ * @param className
+ * @param blockStylesConfig
+ * @param blockStyles
+ * @returns The objects with the class names strings
+ */
 export const makeBlockStylesClassNames = (
-	blockStylesConfig: BlockStylesConfig,
+	className = "",
+	blockStylesConfig?: BlockStylesConfig,
 	blockStyles?: BlockStyles,
-): BringStylesClassNames => {
+): BlockStylesClassNames => {
 	const marginClassNames: string[] = [];
 	const paddingClassNames: string[] = [];
 	const visibilityClassNames: string[] = [];
-	const classNames: string[] = [];
 
 	const addClassName = (
 		spacing: "m" | "p",
@@ -25,7 +32,6 @@ export const makeBlockStylesClassNames = (
 		const s = size ? `${size}:${spacing}${side}-${value}` : `${spacing}${side}-${value}`;
 
 		spacing === "m" ? marginClassNames.push(s) : paddingClassNames.push(s);
-		classNames.push(s);
 	};
 
 	// margin
@@ -70,7 +76,6 @@ export const makeBlockStylesClassNames = (
 			const v = (size ? `${size}:` : "") + (vV && vV[size] ? "hidden" : vC[size]);
 
 			visibilityClassNames.push(v);
-			classNames.push(v);
 		});
 
 	return {
@@ -79,6 +84,6 @@ export const makeBlockStylesClassNames = (
 			p: paddingClassNames.join(" "),
 		},
 		visibility: visibilityClassNames.join(" "),
-		classNames: classNames.join(" "),
+		className,
 	};
 };

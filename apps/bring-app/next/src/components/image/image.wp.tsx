@@ -67,23 +67,6 @@ const imageConfig: BlockConfig<ImageBlockProps> = {
 			show: (attributes) => attributes.contentSource === "manual",
 		},
 	],
-	styles: {
-		spacing: {
-			p: {
-				t: {},
-				b: {},
-				l: {},
-				r: {},
-			},
-			m: {
-				t: {},
-				b: {},
-				l: {},
-				r: {},
-			},
-		},
-		visibility: {"": "block", md: "block", lg: "block"},
-	},
 };
 
 export default imageConfig;

@@ -4,7 +4,6 @@ import get from "lodash.get";
 import set from "lodash.set";
 import type {FC} from "react";
 import React from "react";
-import type {Obj} from "../../types";
 import {useControlContext} from "../context";
 import type {ControlByPath, ControlByValue, ControlType} from "../types";
 import {isPathControl} from "../utils";
@@ -16,7 +15,7 @@ import {isPathControl} from "../utils";
  *
  * @param props - The props for the TextControl component.
  */
-export const TextControl = <pT extends Obj = {}>(props: ControlType<string, pT>) =>
+export const TextControl = <pT extends object = object>(props: ControlType<string, pT>) =>
 	isPathControl(props) ? <TextControlByPath {...props} /> : <TextControlByValue {...props} />;
 
 /**
@@ -29,7 +28,7 @@ export const TextControl = <pT extends Obj = {}>(props: ControlType<string, pT>)
  * @param props - The rest of the props for the TextControlByPath component.
  * @returns The rendered TextControlByPath component.
  */
-function TextControlByPath<pT extends Obj>({
+function TextControlByPath<pT extends object>({
 	path,
 	updateHandling,
 	...props

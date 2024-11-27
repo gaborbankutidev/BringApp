@@ -5,7 +5,7 @@ import set from "lodash.set";
 import type {FC} from "react";
 import React from "react";
 import {ImageControl, TextControl} from "..";
-import type {ImageType, Obj} from "../../types";
+import type {ImageType} from "../../types";
 import {defaultImageValue} from "../../utils";
 import {useControlContext} from "../context";
 import type {ArrayControlType, ControlByValue} from "../types";
@@ -35,7 +35,7 @@ export const TextArrayControl = makeArrayControl<string>({
  * @returns A function that creates an array control component.
  */
 export function makeArrayControl<vT>(args: {control: FC<ControlByValue<vT>>; defaultItem: vT}) {
-	return function <pT extends Obj>(props: ArrayControlType<vT, pT>) {
+	return function <pT extends object>(props: ArrayControlType<vT, pT>) {
 		if (props.updateHandling === "by-value") {
 			const {value, setValue, defaultItem = args.defaultItem, show = true} = props;
 			return show ? (

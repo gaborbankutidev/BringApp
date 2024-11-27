@@ -12,7 +12,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
 	args: {
-		className: "gray-200",
+		attributes: {className: "gray-200"},
 		children: (
 			<>
 				<div className="bg-purple-400 p-4 text-white">Content 1</div>

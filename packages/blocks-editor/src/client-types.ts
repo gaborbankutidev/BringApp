@@ -1,17 +1,8 @@
-import {FC} from "react";
-import {BlockStyles} from "./styles/types";
-import {ImageType} from "./types";
+import {FC, ReactNode} from "react";
+import type {BlockStyles, BlockStylesClassNames, BlockStylesConfig} from "./styles";
+import type {ImageType} from "./types";
 
-export type BringStylesClassNames = {
-	spacing?: {
-		m?: string;
-		p?: string;
-	};
-	visibility?: string;
-	classNames?: string;
-};
-
-export type MenuItemType<T = {}> = {
+export type MenuItemType<T = object> = {
 	name: string;
 	url?: string;
 	target: string;
@@ -19,19 +10,19 @@ export type MenuItemType<T = {}> = {
 	children?: MenuItemType<T>[];
 } & T;
 
-export type MenuType<T = {}, iT = {}> = {
+export type MenuType<T = object, iT = object> = {
 	id: number;
 	name: string;
 	items: MenuItemType<iT>[];
 } & T;
 
-export type SiteProps<SP = {}, M = {}, MI = {}> = {
+export type SiteProps<SP = object, M = object, MI = object> = {
 	menus: MenuType<M, MI>[];
 } & SP;
 
 export type EntityType = "post" | "taxonomy" | "author";
 
-export type EntityProps<EP = {}> = {
+export type EntityProps<EP = object> = {
 	entityType: EntityType | null;
 	entitySlug: string | null;
 	entityId: number;
@@ -44,16 +35,18 @@ export type EntityProps<EP = {}> = {
 	image?: ImageType | null;
 } & EP;
 
-export type BP<P = {}, EP = {}, SP = {}, M = {}, MI = {}, CTX = {}> = P & {
-	//bringStylesClassNames?: BringStylesClassNames | undefined;
-
-	attributes: P & {className?: string; id?: string; blockStyles?: BlockStyles};
+export type BP<P = object, EP = object, SP = object, M = object, MI = object, CTX = object> = P & {
+	attributes: P & {className?: string; id?: string};
 	entityProps?: EntityProps<EP>;
 	siteProps?: SiteProps<SP, M, MI>;
 	context?: CTX;
+	blockStyles: BlockStyles;
+	blockStylesConfig?: BlockStylesConfig;
+	blockStylesClassNames: BlockStylesClassNames;
+	children?: ReactNode;
 };
 
-export type FCB<P = {}, EP = {}, SP = {}, M = {}, MI = {}, CTX = {}> = FC<
+export type FCB<P = object, EP = object, SP = object, M = object, MI = object, CTX = object> = FC<
 	BP<P, EP, SP, M, MI, CTX>
 >;
 

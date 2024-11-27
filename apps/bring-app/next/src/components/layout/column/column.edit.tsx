@@ -26,7 +26,7 @@ export const ColumnEdit: BlockEdit<ColumnBlockProps> = ({
 
 	return (
 		<EditorCard color="orange" isSelected={isSelected} name="Column">
-			<column.Component {...props}>{children}</column.Component>
+			<column.Block {...props}>{children}</column.Block>
 		</EditorCard>
 	);
 };

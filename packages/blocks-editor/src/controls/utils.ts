@@ -1,7 +1,6 @@
 import type {
 	NumberOptionList,
 	NumberSelectControlOptions,
-	Obj,
 	OptionList,
 	SelectControlOptions,
 } from "../types";
@@ -13,7 +12,7 @@ import type {ControlByPath, ControlType} from "./types";
  * @param props - The control properties.
  * @returns True if the control is a path control, false otherwise.
  */
-export function isPathControl<vT, pT extends Obj = {}>(
+export function isPathControl<vT, pT extends object = object>(
 	props: ControlType<vT, pT>,
 ): props is ControlByPath<pT, vT> {
 	return props.updateHandling !== "by-value";

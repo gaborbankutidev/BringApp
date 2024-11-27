@@ -12,7 +12,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
 	args: {
-		backgroundColor: "gray-200",
+		attributes: {backgroundColor: "gray-200"},
 		children: (
 			<>
 				<div className="bg-purple-400 p-4 text-white">Content 1</div>

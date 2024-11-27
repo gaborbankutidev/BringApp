@@ -1,5 +1,7 @@
+import {clsx} from "clsx";
 import React, {type FC, type ReactNode} from "react";
-import type {BringNode} from "../types";
+import {makeBlockStylesClassNames} from "../styles/make-class-names";
+import type {BlockList, BringNode, EntityProps, SiteProps} from "../types";
 
 /**
  * Represents the props of the error component.
@@ -21,23 +23,25 @@ const Error: FC<ErrorComponentInterface> = ({name}) => <div>Error while renderin
  * Creates a React element tree based on the provided BringNodes.
  *
  * @param nodes - An array of BringNodes representing the elements to be rendered.
- * @param blockMap - A map of block names to React components.
+ * @param blockList - List of Block configs.
  * @param entityProps - Props to be passed to the entity components.
  * @param siteProps - Props to be passed to the site components.
  * @param context - Additional context to be passed to the components.
  * @param PostContent - The ReactNode representing the PostContent component.
  * @returns An array of React elements representing the rendered components.
  */
-export default function createBringElement(
+export default function createBringElement<
+	EP = object,
+	SP = object,
+	M = object,
+	MI = object,
+	CTX = object,
+>(
 	nodes: BringNode[],
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	blockMap: Map<string, FC<any>>,
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	entityProps: any = {},
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	siteProps: any = {},
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	context: any = {},
+	blockList: BlockList<EP, SP, M, MI, CTX>,
+	entityProps: EntityProps<EP>,
+	siteProps: SiteProps<SP, M, MI>,
+	context: CTX,
 	PostContent: ReactNode = null,
 ) {
 	return nodes.map((node) => {
@@ -46,8 +50,9 @@ export default function createBringElement(
 			return PostContent;
 		}
 
-		// get component
-		const Block = blockMap.get(node.blockName);
+		// Find block
+		const {Block, blockStylesConfig} =
+			blockList.find((blockListItem) => blockListItem.blockName === node.blockName) ?? {};
 
 		// check if component is a function
 		if (Block === undefined) {
@@ -57,9 +62,9 @@ export default function createBringElement(
 
 		// render children
 		const children = node.children?.length
-			? createBringElement(
+			? createBringElement<EP, SP, M, MI, CTX>(
 					node.children,
-					blockMap,
+					blockList,
 					entityProps,
 					siteProps,
 					context,
@@ -68,14 +73,31 @@ export default function createBringElement(
 			: [];
 
 		// create element
+		const {className, blockStyles, ...attributes} = node.attributes;
+		const blockStylesClassNames = makeBlockStylesClassNames(
+			className,
+			blockStylesConfig,
+			blockStyles,
+		);
+
 		return (
 			<Block
-				// {...node.props}
 				key={node.key}
-				attributes={node.attributes}
+				attributes={{
+					className: clsx(
+						blockStylesClassNames.spacing?.m,
+						blockStylesClassNames.spacing?.p,
+						blockStylesClassNames.visibility,
+						blockStylesClassNames.className,
+					),
+					...attributes,
+				}}
 				entityProps={entityProps}
 				siteProps={siteProps}
 				context={context}
+				blockStyles={blockStyles}
+				blockStylesConfig={blockStylesConfig}
+				blockStylesClassNames={blockStylesClassNames}
 			>
 				{children}
 			</Block>

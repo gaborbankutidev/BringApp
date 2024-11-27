@@ -28,7 +28,7 @@ export function makeBlockStylesControl(blockStylesConfig: BlockStylesConfig) {
 				<PanelBody title="Visibility" initialOpen={false}>
 					<ResponsiveCheckboxControl<Record<string, any>>
 						label="Visibility"
-						path="bringStyles.visibility"
+						path="blockStyles.visibility"
 					/>
 				</PanelBody>
 			)}
@@ -41,7 +41,7 @@ const SidesControl: FC<{type: "m" | "p"; sides: Sides}> = ({type, sides}) => (
 		{objectKeys(sides).map((side) => (
 			<ResponsiveRangeControl<Record<string, any>>
 				label={`${spacingLabels[type]} ${sideLabels[side]}`}
-				path={`bringStyles.spacing.${type}.${side}`}
+				path={`blockStyles.spacing.${type}.${side}`}
 				defaultValue={sides[side]}
 			/>
 		))}

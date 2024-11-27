@@ -1,11 +1,10 @@
 import {InnerBlocks, InspectorAdvancedControls} from "@wordpress/block-editor";
+import {clsx} from "clsx";
 import React from "react";
-import {twJoin} from "tailwind-merge";
 import {EditorCard} from "../components";
 import {TextControl} from "../controls";
 import {ControlContextProvider} from "../controls/context";
 import {makeBlockStylesClassNames, makeBlockStylesControl} from "../styles";
-import type {Obj} from "../types";
 import {makeControls} from "./make-controls";
 import type {Attributes, BlockConfig} from "./types";
 
@@ -16,18 +15,17 @@ type EditType<Props> = {
 	clientId: string;
 };
 
-export function makeEdit<Props extends Obj>(config: BlockConfig<Props>) {
+export function makeEdit<Props extends object>(config: BlockConfig<Props>) {
 	// eslint-disable-next-line react/display-name
 	return ({attributes, setAttributes, clientId, isSelected}: EditType<Props>) => {
 		const {className, blockStyles, ...props} = attributes;
 
-		// calculate bring styles class names
-		const joinedClassName = config.blockStyles
-			? twJoin(
-					makeBlockStylesClassNames(config.blockStyles, blockStyles).classNames,
-					className,
-				)
-			: className;
+		// calculate block styles class names
+		const blockStylesClassNames = makeBlockStylesClassNames(
+			className,
+			config.blockStylesConfig,
+			blockStyles,
+		);
 
 		return (
 			<ControlContextProvider attributes={attributes} setAttributes={setAttributes}>
@@ -42,7 +40,7 @@ export function makeEdit<Props extends Obj>(config: BlockConfig<Props>) {
 					/>
 				</InspectorAdvancedControls>
 				{config.Controls && makeControls<Props>(attributes, setAttributes, config.Controls)}
-				{config.blockStyles && makeBlockStylesControl(config.blockStyles)}
+				{config.blockStylesConfig && makeBlockStylesControl(config.blockStylesConfig)}
 
 				{config.Edit ? (
 					<config.Edit
@@ -60,7 +58,12 @@ export function makeEdit<Props extends Obj>(config: BlockConfig<Props>) {
 						name={config.title ?? config.blockName}
 					>
 						{/* eslint-disable-next-line @typescript-eslint/no-explicit-any*/}
-						<config.Block attributes={{className: joinedClassName, ...props}}>
+						<config.Block
+							attributes={{className: clsx(blockStylesClassNames), ...props}}
+							blockStyles={blockStyles}
+							blockStylesConfig={config.blockStylesConfig}
+							blockStylesClassNames={blockStylesClassNames}
+						>
 							<InnerBlocks allowedBlocks={config.allowedBlocks} />
 						</config.Block>
 					</EditorCard>

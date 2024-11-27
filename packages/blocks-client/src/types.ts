@@ -1,10 +1,5 @@
-import type {FC} from "react";
-// import {BringStylesClassNames} from "./styles";
-
-/**
- * Represents a generic object with string keys and unknown values.
- */
-export type Obj = Record<string, unknown>;
+import type {FC, ReactNode} from "react";
+import {BlockStyles, BlockStylesClassNames, BlockStylesConfig} from "./styles";
 
 /**
  * Represents a type that excludes the `undefined` type from the given type `T`.
@@ -12,7 +7,22 @@ export type Obj = Record<string, unknown>;
 export type Defined<T> = Exclude<T, undefined>;
 
 /**
- * Represents a generic type that combines properties from multiple types.
+ * Attributes of Block Props
+ *
+ * className: the joined and rendered block styles class names with the className string set in the ClassName control
+ */
+export type ClientAttributes<T> = T & {className?: string; id?: string};
+
+/**
+ * Attributes of BlockNode coming from the editor.
+ *
+ * className: String set in the ClassName control.
+ * blockStyles: Block styles object set in the block styles controls
+ */
+export type EditorAttributes<T> = T & {className?: string; id?: string; blockStyles: BlockStyles};
+
+/**
+ * Block Props - The generic types of a block.
  * @template P - Props type
  * @template EP - Entity Props type
  * @template SP - Site Props type
@@ -21,18 +31,18 @@ export type Defined<T> = Exclude<T, undefined>;
  * @template CTX - Context type
  */
 export type BP<P = object, EP = object, SP = object, M = object, MI = object, CTX = object> = P & {
-	/* bringStylesClassNames?: BringStylesClassNames | undefined;
-	className?: string | undefined;
-	id?: string | undefined; */
-
-	attributes: P & {className?: string | undefined; id?: string | undefined};
+	attributes: ClientAttributes<P>;
 	entityProps?: EntityProps<EP>;
 	siteProps?: SiteProps<SP, M, MI>;
 	context?: CTX;
+	blockStyles?: BlockStyles;
+	blockStylesConfig?: BlockStylesConfig;
+	blockStylesClassNames?: BlockStylesClassNames;
+	children?: ReactNode;
 };
 
 /**
- * Represents a functional component that accepts generic props.
+ * Functional component that accepts Block Props.
  * @template P - Props type
  * @template EP - Entity Props type
  * @template SP - Site Props type
@@ -247,18 +257,28 @@ export type Entity<EP = object> = {
  * Represents a node in the BringBlocks component tree, which has a key, component name, props, and optional children.
  * @property key - The node key.
  * @property component - The node component name.
- * @property props - The node props.
+ * @property attributes - The node attributes.
  * @property children - The node children.
  */
 export type BringNode = {
 	key: string;
 	blockName: string;
-	attributes: Obj;
+	attributes: EditorAttributes<unknown>;
 	children?: BringNode[];
 };
 
+/**
+ * Represents the name of a block.
+ * - Must consist only of lowercase characters.
+ * - Formatted as `category/name`, with the category and name separated by a slash.
+ * Example: `bring/heading`.
+ */
 export type BlockName = `${Lowercase<string>}/${Lowercase<string>}`;
 
+/**
+ * A Block List Item is a configuration object for a block.
+ * Used to create blocks in the editor and render the content on the client.
+ */
 export type BlockListItem<
 	EP = object, // EntityProps
 	SP = object, // SiteProps
@@ -267,9 +287,14 @@ export type BlockListItem<
 	CTX = object, // Context
 > = {
 	blockName: BlockName;
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	Block: FCB<any, EP, SP, M, MI, CTX>;
+	Block: FCB<unknown, EP, SP, M, MI, CTX>;
+	blockStylesConfig?: BlockStylesConfig;
 };
+
+/**
+ * An array of Block List Items.
+ * Used to initialize client render functions and set up the editor.
+ */
 export type BlockList<
 	EP = object, // EntityProps
 	SP = object, // SiteProps

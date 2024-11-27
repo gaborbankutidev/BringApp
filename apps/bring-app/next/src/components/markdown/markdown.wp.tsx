@@ -56,23 +56,6 @@ const markdownConfig: BlockConfig<MarkdownBlockProps> = {
 			})),
 		},
 	],
-	styles: {
-		spacing: {
-			p: {
-				t: {},
-				b: {},
-				l: {},
-				r: {},
-			},
-			m: {
-				t: {},
-				b: {},
-				l: {},
-				r: {},
-			},
-		},
-		visibility: {"": "block", md: "block", lg: "block"},
-	},
 };
 
 export default markdownConfig;

@@ -6,7 +6,7 @@ const GroupEdit: BlockEdit<GroupBlockProps> = ({children, attributes, isSelected
 
 	return (
 		<EditorCard color="lime" name="Group" isSelected={isSelected}>
-			<group.Component {...props}>{children}</group.Component>
+			<group.Block {...props}>{children}</group.Block>
 		</EditorCard>
 	);
 };

@@ -60,23 +60,6 @@ const headingConfig: BlockConfig<HeadingBlockProps> = {
 			],
 		},
 	],
-	styles: {
-		spacing: {
-			m: {
-				t: {},
-				b: {},
-				l: {},
-				r: {},
-			},
-			p: {
-				t: {},
-				b: {},
-				l: {},
-				r: {},
-			},
-		},
-		visibility: {"": "block", md: "block", lg: "block"},
-	},
 };
 
 export default headingConfig;

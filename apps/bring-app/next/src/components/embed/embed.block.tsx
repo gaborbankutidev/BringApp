@@ -8,17 +8,34 @@ export type EmbedBlockProps = {
 /**
  * Embed block helps to embed content in iframe such as Google Maps or Youtube videos in the editor.
  */
-const EmbedBlock = ({url, height = 400, className, id}: BP<EmbedBlockProps>) => {
+const EmbedBlock = ({attributes: {url, height = 400, ...props}}: BP<EmbedBlockProps>) => {
 	return url ? (
-		<div className={className} style={{minHeight: `${height}px`}} id={id}>
+		<div style={{minHeight: `${height}px`}} {...props}>
 			<iframe src={url} className="h-full w-full"></iframe>
 		</div>
 	) : null;
 };
 
 export const embed = {
-	Component: EmbedBlock,
-	componentName: "bring/embed",
+	Block: EmbedBlock,
+	blockName: "bring/embed",
+	blockStylesConfig: {
+		spacing: {
+			m: {
+				t: {},
+				b: {},
+				l: {},
+				r: {},
+			},
+			p: {
+				t: {},
+				b: {},
+				l: {},
+				r: {},
+			},
+		},
+		visibility: {"": "block", md: "block", lg: "block"},
+	},
 } as const;
 
 export default EmbedBlock;

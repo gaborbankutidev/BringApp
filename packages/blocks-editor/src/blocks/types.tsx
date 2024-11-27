@@ -3,7 +3,7 @@ import type {FC, ReactNode} from "react";
 import {FCB} from "../client-types";
 import type {ControlConfigType} from "../controls/types";
 import {BlockStyles, BlockStylesConfig} from "../styles/types";
-import type {NestedKeyOf, Obj, ValidBlockName} from "../types";
+import type {NestedKeyOf, ValidBlockName} from "../types";
 
 export type ClientAttributes<Props> = Omit<Props, "children">;
 
@@ -22,8 +22,7 @@ type BlockAttributesConfig<Props> = {
 	[k in keyof ClientAttributes<Props>]: AttributeSource<ClientAttributes<Props>[k]>;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export type BlockControlsConfig<Props extends Obj = {}> =
+export type BlockControlsConfig<Props extends object = object> =
 	| (
 			| {
 					panel?: "Advanced" | string;
@@ -58,8 +57,7 @@ export type BlockSave<Props> = FC<{
 
 // ===========
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export type BlockConfig<Props extends Obj = {}> = {
+export type BlockConfig<Props extends object = object> = {
 	title?: string;
 	description?: string;
 	icon?: BlockIcon;
@@ -72,5 +70,5 @@ export type BlockConfig<Props extends Obj = {}> = {
 	allowedBlocks?: string[];
 	Controls?: BlockControlsConfig<Props>;
 	Edit?: BlockEdit<Props>;
-	blockStyles?: BlockStylesConfig;
+	blockStylesConfig?: BlockStylesConfig;
 };

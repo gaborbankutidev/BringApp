@@ -1,6 +1,5 @@
 import {registerBlockType} from "@wordpress/blocks";
 import {blockStylesDefaultValue} from "../styles/utils";
-import type {Obj} from "../types";
 import {objectAttributeSource, stringAttributeSource} from "./attributes";
 import {makeEdit} from "./make-edit";
 import {makeSave} from "./make-save";
@@ -11,11 +10,11 @@ import type {BlockConfig} from "./types";
  * @param config - the configuration of the block
  * @returns void
  */
-export function registerBringBlock<Props extends Obj>(config: BlockConfig<Props>) {
+export function registerBringBlock<Props extends object>(config: BlockConfig<Props>) {
 	const title = config.title ? config.title : config.blockName;
 
 	// @ts-expect-error: Expect error here because Wordpress's `registerBlockType` types are so complicated TS can't infer the correct types
-	registerBlockType(config.componentName, {
+	registerBlockType(config.blockName, {
 		title,
 		description: config.description ?? `${title} block by Bring`,
 		category: "widgets", // todo custom category

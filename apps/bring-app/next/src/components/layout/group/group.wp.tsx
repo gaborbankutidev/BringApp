@@ -50,23 +50,6 @@ const groupConfig: BlockConfig<GroupBlockProps> = {
 			initialOpen: true,
 		},
 	],
-	styles: {
-		spacing: {
-			m: {
-				t: {},
-				b: {},
-				l: {},
-				r: {},
-			},
-			p: {
-				t: {},
-				b: {},
-				l: {},
-				r: {},
-			},
-		},
-		visibility: {"": "flex", md: "flex", lg: "flex"},
-	},
 };
 
 export default groupConfig;

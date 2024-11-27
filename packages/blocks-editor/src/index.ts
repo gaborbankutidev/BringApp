@@ -53,7 +53,6 @@ export type {
 	NumberOptionList,
 	NumberSelectControlOptions,
 	// utils
-	Obj,
 	OptionList,
 	SelectControlOptions,
 } from "./types";

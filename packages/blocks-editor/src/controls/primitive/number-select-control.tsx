@@ -3,7 +3,6 @@ import cloneDeep from "lodash.clonedeep";
 import get from "lodash.get";
 import set from "lodash.set";
 import React, {FC} from "react";
-import type {Obj} from "../../types";
 import {useControlContext} from "../context";
 import type {ControlByPath, ControlByValue, ControlType} from "../types";
 import {isPathControl} from "../utils";
@@ -23,7 +22,7 @@ type _NumberSelectControl = {
  * @param props - The props for the NumberSelectControl component.
  * @returns The rendered NumberSelectControl component.
  */
-export const NumberSelectControl = <pT extends Obj = {}>(
+export const NumberSelectControl = <pT extends object = object>(
 	props: ControlType<number, pT> & _NumberSelectControl,
 ) =>
 	isPathControl(props) ? (
@@ -37,7 +36,7 @@ export const NumberSelectControl = <pT extends Obj = {}>(
  * @param props - The props for the NumberSelectControlByPath component.
  * @returns The rendered NumberSelectControlByPath component.
  */
-function NumberSelectControlByPath<pT extends Obj>({
+function NumberSelectControlByPath<pT extends object>({
 	path,
 	updateHandling,
 	...props

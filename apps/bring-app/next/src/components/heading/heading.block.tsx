@@ -13,23 +13,10 @@ export type HeadingBlockProps = {
 };
 
 const HeadingBlock = ({
-	source = "manual",
-	title,
-	level = 2,
-	align,
-	color,
-
+	attributes: {source = "manual", title, align, color, className, ...props},
 	entityProps,
-	bringStylesClassNames,
-	className,
-	id,
 }: BP<HeadingBlockProps>) => {
-	const classNames = clsx(
-		align && `text-${align}`,
-		color && `text-${color}`,
-		bringStylesClassNames?.classNames,
-		className,
-	);
+	const classNames = clsx(align && `text-${align}`, color && `text-${color}`, className);
 
 	let headingTitle: string | null = title;
 	if (source !== "manual") {
@@ -39,15 +26,32 @@ const HeadingBlock = ({
 	}
 
 	return headingTitle !== null ? (
-		<Heading level={level} className={classNames} id={id}>
+		<Heading className={classNames} {...props}>
 			{headingTitle}
 		</Heading>
 	) : null;
 };
 
 export const heading = {
-	Component: HeadingBlock,
-	componentName: "bring/heading",
+	Block: HeadingBlock,
+	blockName: "bring/heading",
+	blockStyles: {
+		spacing: {
+			m: {
+				t: {},
+				b: {},
+				l: {},
+				r: {},
+			},
+			p: {
+				t: {},
+				b: {},
+				l: {},
+				r: {},
+			},
+		},
+		visibility: {"": "block", md: "block", lg: "block"},
+	},
 } as const;
 
 export default HeadingBlock;

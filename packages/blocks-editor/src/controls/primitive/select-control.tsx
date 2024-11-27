@@ -4,7 +4,6 @@ import get from "lodash.get";
 import set from "lodash.set";
 import type {FC} from "react";
 import React from "react";
-import type {Obj} from "../../types";
 import {useControlContext} from "../context";
 import type {ControlByPath, ControlByValue, ControlType} from "../types";
 import {isPathControl} from "../utils";
@@ -26,7 +25,7 @@ type _SelectControl = {
  *
  * @param props - The props for the SelectControl component.
  */
-export const SelectControl = <pT extends Obj = {}>(
+export const SelectControl = <pT extends object = object>(
 	props: ControlType<string, pT> & _SelectControl,
 ) =>
 	isPathControl(props) ? <SelectControlByPath {...props} /> : <SelectControlByValue {...props} />;
@@ -38,7 +37,7 @@ export const SelectControl = <pT extends Obj = {}>(
  *
  * @param props - The props for the SelectControlByPath component.
  */
-function SelectControlByPath<pT extends Obj>({
+function SelectControlByPath<pT extends object>({
 	path,
 	updateHandling,
 	...props

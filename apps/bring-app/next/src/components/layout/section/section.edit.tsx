@@ -9,7 +9,7 @@ export const SectionEdit: BlockEdit<SectionBlockProps> = ({
 }) => {
 	return (
 		<EditorCard color="blue" isSelected={isSelected} name="Section">
-			<section.Component {...props}>{children}</section.Component>
+			<section.Block {...props}>{children}</section.Block>
 		</EditorCard>
 	);
 };

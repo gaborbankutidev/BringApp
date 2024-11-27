@@ -6,7 +6,7 @@ export const RowEdit: BlockEdit<RowBlockProps> = ({children, attributes, isSelec
 	const {columnCount, ...props} = attributes;
 	return (
 		<EditorCard color="green" isSelected={isSelected} name="Row">
-			<row.Component {...props}>
+			<row.Block {...props}>
 				<div
 					className={`editor-row-content editor-row-content-${
 						columnCount?.lg ?? columnCount?.md ?? columnCount?.[""] ?? 1
@@ -14,7 +14,7 @@ export const RowEdit: BlockEdit<RowBlockProps> = ({children, attributes, isSelec
 				>
 					{children}
 				</div>
-			</row.Component>
+			</row.Block>
 		</EditorCard>
 	);
 };

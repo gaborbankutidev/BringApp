@@ -40,23 +40,6 @@ const rowConfig: BlockConfig<RowBlockProps> = {
 			],
 		},
 	],
-	styles: {
-		spacing: {
-			m: {
-				t: {"": 0},
-				b: {"": 0},
-				l: {},
-				r: {},
-			},
-			p: {
-				t: {"": 6},
-				b: {"": 6},
-				l: {},
-				r: {},
-			},
-		},
-		visibility: {"": "grid", md: "grid", lg: "grid"},
-	},
 };
 
 export default rowConfig;

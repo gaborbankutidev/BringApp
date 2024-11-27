@@ -56,6 +56,15 @@ export type BlockStyles = {
 	visibility?: ResponsiveValue<boolean>;
 };
 
+export type BlockStylesClassNames = {
+	spacing?: {
+		m?: string;
+		p?: string;
+	};
+	visibility?: string;
+	className?: string;
+};
+
 // ===========
 
 type ResponsiveLabel = {

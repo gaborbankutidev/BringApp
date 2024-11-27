@@ -9,7 +9,7 @@ import type {
 } from "../types";
 import Debug from "./debug";
 
-export type DynamicEntityListClientRenderProps<T = {}, P = {}> = {
+export type DynamicEntityListClientRenderProps<T = object, P = object> = {
 	entityList: DynamicEntityListType<T>;
 	params?: GetDynamicEntityListParams<P>;
 	ref?: (node?: Element | null | undefined) => void;

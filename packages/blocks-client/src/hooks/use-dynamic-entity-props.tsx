@@ -30,7 +30,7 @@ export type UseDynamicEntityPropsOptions = {
  * @param options - The options for fetching the entity props.
  * @returns - The entity props and a ref for lazy loading.
  */
-export function useDynamicEntityProps<T = {}, P = {}>(
+export function useDynamicEntityProps<T = object, P = object>(
 	wpURL: string,
 	entityId: number | null | undefined,
 	entityType: EntityType | null | undefined,

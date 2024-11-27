@@ -4,7 +4,6 @@ import get from "lodash.get";
 import set from "lodash.set";
 import type {FC} from "react";
 import React from "react";
-import type {Obj} from "../../types";
 import {useControlContext} from "../context";
 import type {ControlByPath, ControlByValue, ControlType} from "../types";
 import {isPathControl} from "../utils";
@@ -24,7 +23,7 @@ type _ComboboxControl = {
  * @param props - The props for the ComboboxControl component.
  * @returns A React component representing a combobox control.
  */
-export const ComboboxControl = <pT extends Obj = {}>(
+export const ComboboxControl = <pT extends object = object>(
 	props: ControlType<string, pT> & _ComboboxControl,
 ) =>
 	isPathControl(props) ? (
@@ -38,7 +37,7 @@ export const ComboboxControl = <pT extends Obj = {}>(
  * @param props - The props for the ComboboxControlByPath component.
  * @returns A React component representing a combobox control by path.
  */
-function ComboboxControlByPath<pT extends Obj>({
+function ComboboxControlByPath<pT extends object>({
 	path,
 	updateHandling,
 	...props

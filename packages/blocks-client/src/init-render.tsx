@@ -18,7 +18,7 @@ import type {BlockList, BringNode, EntityProps, SiteProps} from "./types";
  * @param wpURL - The WordPress URL.
  * @param onRedirect - Callback function for redirecting.
  * @param onNotFound - Callback function for handling not found pages.
- * @param componentList - List of components.
+ * @param blockList - List of Block configs.
  * @returns Object containing various functions and components for rendering BringBlocks.
  */
 export function initRender<
@@ -31,13 +31,8 @@ export function initRender<
 	wpURL: string = "",
 	onRedirect: (redirectTo: string, responseCode: number) => void,
 	onNotFound: () => void,
-	blockList: BlockList<EP, SP, M, MI>,
+	blockList: BlockList<EP, SP, M, MI, CTX>,
 ) {
-	// Create component map
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const blockMap = new Map<string, any>();
-	blockList.forEach(({Block, blockName}) => blockMap.set(blockName, Block));
-
 	return {
 		/**
 		 * Creates a BringElement component.
@@ -55,7 +50,15 @@ export function initRender<
 			siteProps: SiteProps<SP, M, MI>,
 			context: CTX = {} as CTX,
 			PostContent: ReactNode = null,
-		) => createBringElement(nodes, blockMap, entityProps, siteProps, context, PostContent),
+		) =>
+			createBringElement<EP, SP, M, MI, CTX>(
+				nodes,
+				blockList,
+				entityProps,
+				siteProps,
+				context,
+				PostContent,
+			),
 
 		/**
 		 * Retrieves an entity from the WordPress API.
@@ -71,27 +74,27 @@ export function initRender<
 		 * @param props - The properties of the Header component.
 		 * @returns The rendered Header component.
 		 */
-		Header: makeHeader<EP, SP, M, MI, CTX>(wpURL, onRedirect, onNotFound, blockMap),
+		Header: makeHeader<EP, SP, M, MI, CTX>(wpURL, onRedirect, onNotFound, blockList),
 
 		/**
 		 * The Footer component.
 		 * @param props - The properties of the Footer component.
 		 * @returns The rendered Footer component.
 		 */
-		Footer: makeFooter<EP, SP, M, MI, CTX>(wpURL, onRedirect, onNotFound, blockMap),
+		Footer: makeFooter<EP, SP, M, MI, CTX>(wpURL, onRedirect, onNotFound, blockList),
 
 		/**
 		 * The Main component.
 		 * @param props - The properties of the Main component.
 		 * @returns The rendered Main component.
 		 */
-		Main: makeMain<EP, SP, M, MI, CTX>(wpURL, onRedirect, onNotFound, blockMap),
+		Main: makeMain<EP, SP, M, MI, CTX>(wpURL, onRedirect, onNotFound, blockList),
 
 		/**
 		 * The Layout component.
 		 * @param props - The properties of the Layout component.
 		 * @returns The rendered Layout component.
 		 */
-		Layout: makeLayout<EP, SP, M, MI, CTX>(wpURL, onRedirect, onNotFound, blockMap),
+		Layout: makeLayout<EP, SP, M, MI, CTX>(wpURL, onRedirect, onNotFound, blockList),
 	};
 }

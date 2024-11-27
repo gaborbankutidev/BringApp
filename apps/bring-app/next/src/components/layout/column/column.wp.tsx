@@ -51,23 +51,6 @@ export const columnConfig: BlockConfig<ColumnBlockProps> = {
 			initialOpen: true,
 		},
 	],
-	styles: {
-		spacing: {
-			m: {
-				t: {"": 0},
-				b: {"": 0},
-				l: {},
-				r: {},
-			},
-			p: {
-				t: {"": 0},
-				b: {"": 0},
-				l: {},
-				r: {},
-			},
-		},
-		visibility: {"": "flex", md: "flex", lg: "flex"},
-	},
 };
 
 export default columnConfig;

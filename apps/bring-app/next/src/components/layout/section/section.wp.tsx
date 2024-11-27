@@ -46,15 +46,6 @@ const sectionConfig: BlockConfig<SectionBlockProps> = {
 			],
 		},
 	],
-	styles: {
-		spacing: {
-			p: {
-				t: {"": 8},
-				b: {"": 8},
-			},
-		},
-		visibility: {"": "block", md: "block", lg: "block"},
-	},
 };
 
 export default sectionConfig;

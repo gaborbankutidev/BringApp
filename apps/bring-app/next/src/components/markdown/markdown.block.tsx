@@ -13,23 +13,10 @@ export type MarkdownBlockProps = {
 };
 
 export const MarkdownBlock = ({
-	source = "manual",
-	content = "",
-	align,
-	color,
-
-	bringStylesClassNames,
-	elementsClassName,
-	className,
+	attributes: {source = "manual", content = "", align, color, className, ...props},
 	entityProps,
 }: BP<MarkdownBlockProps>) => {
-	console.log(source);
-	const classNames = clsx(
-		align && `text-${align}`,
-		color && `text-${color}`,
-		bringStylesClassNames?.classNames,
-		className,
-	);
+	const classNames = clsx(align && `text-${align}`, color && `text-${color}`, className);
 
 	if (source !== "manual") {
 		if (!entityProps) {
@@ -38,17 +25,34 @@ export const MarkdownBlock = ({
 
 		const dynamicContent = entityProps[source];
 
-		return dynamicContent ? <Markdown content={dynamicContent} className={classNames} /> : null;
+		return dynamicContent ? (
+			<Markdown content={dynamicContent} className={classNames} {...props} />
+		) : null;
 	}
 
-	return (
-		<Markdown content={content} className={classNames} elementsClassName={elementsClassName} />
-	);
+	return <Markdown content={content} className={classNames} {...props} />;
 };
 
 export const markdown = {
-	Component: MarkdownBlock,
-	componentName: "bring/markdown",
+	Block: MarkdownBlock,
+	blockName: "bring/markdown",
+	blockStylesConfig: {
+		spacing: {
+			p: {
+				t: {},
+				b: {},
+				l: {},
+				r: {},
+			},
+			m: {
+				t: {},
+				b: {},
+				l: {},
+				r: {},
+			},
+		},
+		visibility: {"": "block", md: "block", lg: "block"},
+	},
 } as const;
 
 export default Markdown;

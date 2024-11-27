@@ -1,21 +1,13 @@
 import type {BP} from "@/bring";
 import {type AlignType, type DirectionType, type JustifyType} from "@/editor/utils/lists";
-import {cn} from "@/lib/utils";
 import type {ColorType} from "@/styles/colors";
 import type {ResponsiveValue} from "@bring/blocks-client/styles";
 import {makeResponsiveClassNames} from "@bring/blocks-client/styles";
 import type {GridNumType} from "@bring/blocks-client/types";
-import type {ReactNode} from "react";
+import clsx from "clsx";
 import Column from "./column";
 
-export type ColumnProps = {
-	children?: ReactNode;
-	className?: string;
-} & React.HTMLProps<HTMLDivElement>;
-
 export type ColumnBlockProps = {
-	children: ReactNode;
-
 	colSpan?: ResponsiveValue<GridNumType>;
 	rowSpan?: ResponsiveValue;
 	gap?: ResponsiveValue;
@@ -28,23 +20,20 @@ export type ColumnBlockProps = {
 };
 
 const ColumnBlock = ({
+	attributes: {
+		colSpan = {},
+		rowSpan = {},
+		gap = {},
+		direction = "vertical",
+		justify,
+		align,
+		backgroundColor,
+		className,
+		...props
+	},
 	children,
-
-	colSpan = {},
-	rowSpan = {},
-	gap = {},
-
-	direction = "vertical",
-	justify,
-	align,
-
-	backgroundColor,
-
-	bringStylesClassNames,
-	className,
-	id,
 }: BP<ColumnBlockProps>) => {
-	const classNames = cn(
+	const classNames = clsx(
 		makeResponsiveClassNames("col-span", colSpan, {"": 1}),
 		makeResponsiveClassNames("row-span", rowSpan),
 		makeResponsiveClassNames("gap", gap, {"": 4}),
@@ -53,20 +42,36 @@ const ColumnBlock = ({
 		direction === "vertical" && "flex-col",
 		justify && `justify-${justify}`,
 		align && `items-${align}`,
-		bringStylesClassNames?.classNames,
 		className,
 	);
 
 	return (
-		<Column className={classNames} id={id}>
+		<Column className={classNames} {...props}>
 			{children}
 		</Column>
 	);
 };
 
 export const column = {
-	Component: ColumnBlock,
-	componentName: "bring/column",
+	Block: ColumnBlock,
+	blockName: "bring/column",
+	blockStylesConfig: {
+		spacing: {
+			m: {
+				t: {"": 0},
+				b: {"": 0},
+				l: {},
+				r: {},
+			},
+			p: {
+				t: {"": 0},
+				b: {"": 0},
+				l: {},
+				r: {},
+			},
+		},
+		visibility: {"": "flex", md: "flex", lg: "flex"},
+	},
 } as const;
 
 export default Column;
