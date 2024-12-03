@@ -1,4 +1,5 @@
-import {ResponsiveRangeControl, type BlockControl} from "@bring/blocks-editor";
+import {BlockControl} from "@bring/blocks-editor/blocks";
+import {ResponsiveRangeControl} from "@bring/blocks-editor/controls";
 import type {ColumnBlockProps} from "./column.block";
 
 export const ColumnControls: BlockControl<ColumnBlockProps> = () => (

@@ -1,8 +1,9 @@
+import {InnerBlocks} from "@wordpress/block-editor";
 import {registerBlockType} from "@wordpress/blocks";
+import React from "react";
 import {blockStylesDefaultValue} from "../styles/utils";
 import {objectAttributeSource, stringAttributeSource} from "./attributes";
 import {makeEdit} from "./make-edit";
-import {makeSave} from "./make-save";
 import type {BlockConfig} from "./types";
 
 /**
@@ -10,7 +11,7 @@ import type {BlockConfig} from "./types";
  * @param config - the configuration of the block
  * @returns void
  */
-export function registerBringBlock<Props extends object>(config: BlockConfig<Props>) {
+export function registerBringBlock(config: BlockConfig) {
 	const title = config.title ? config.title : config.blockName;
 
 	// @ts-expect-error: Expect error here because Wordpress's `registerBlockType` types are so complicated TS can't infer the correct types
@@ -30,7 +31,7 @@ export function registerBringBlock<Props extends object>(config: BlockConfig<Pro
 		example: config.previewAttributes && {
 			attributes: config.previewAttributes,
 		},
-		edit: makeEdit<Props>(config),
-		save: makeSave(),
+		edit: makeEdit(config),
+		save: () => <InnerBlocks.Content />,
 	});
 }

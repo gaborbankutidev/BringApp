@@ -2,10 +2,10 @@ import {sourceOptions} from "@/editor/utils/options";
 import {
 	booleanAttributeSource,
 	imageAttributeSource,
-	makeOptions,
 	stringAttributeSource,
 	type BlockConfig,
-} from "@bring/blocks-editor";
+} from "@bring/blocks-editor/blocks";
+import {makeOptions} from "@bring/blocks-editor/controls";
 import {image, sizes, type ImageBlockProps} from "./image.block";
 
 const sizeList = Object.keys(sizes);

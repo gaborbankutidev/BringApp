@@ -14,7 +14,7 @@ import markdown from "@/components/markdown/markdown.wp";
 import button from "@/components/ui/button/button.wp";
 
 import {env} from "@/env.mjs";
-import {Editor} from "@bring/blocks-editor/editor";
+import Editor from "@bring/blocks-editor";
 
 const blockList = [
 	// layout

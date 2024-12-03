@@ -4,7 +4,7 @@ import {
 	numberAttributeSource,
 	stringAttributeSource,
 	type BlockConfig,
-} from "@bring/blocks-editor";
+} from "@bring/blocks-editor/blocks";
 import {divider, type DividerBlockProps} from "./divider.block";
 
 const dividerConfig: BlockConfig<DividerBlockProps> = {

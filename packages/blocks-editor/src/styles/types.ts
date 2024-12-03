@@ -1,4 +1,3 @@
-import {ResponsiveValue} from "../client-types";
 import {DashIcon} from "./dashicon.types";
 
 type DisplayValue =
@@ -27,6 +26,12 @@ type ResponsiveDisplayValueConfig = {
 	"": DisplayValue;
 	md: DisplayValue;
 	lg: DisplayValue;
+};
+
+export type ResponsiveValue<T = number> = {
+	""?: T;
+	md?: T;
+	lg?: T;
 };
 
 // ===========

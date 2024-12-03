@@ -1,6 +1,6 @@
-import {ResponsiveValue} from "../client-types";
 import {objectKeys} from "../utils";
 import type {BlockStyles, BlockStylesClassNames, BlockStylesConfig, Sides} from "./types";
+import {ResponsiveValue} from "./types";
 import {screenSizes} from "./utils";
 
 /**

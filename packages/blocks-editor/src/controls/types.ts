@@ -1,6 +1,20 @@
 import type {FC} from "react";
-import {ResponsiveValue} from "../client-types";
+import {ResponsiveValue} from "../styles/types";
 import type {ImageType, MediaType, NestedKeyOf, NestedTypedKeyOf} from "../types";
+
+export type OptionList<T extends string = string> = ([T, string] | T)[];
+export type SelectControlOptions<T extends string = string> = {
+	label: string;
+	value: T | "";
+}[];
+
+export type NumberOptionList<T extends number = number> = ([T, string] | T)[];
+export type NumberSelectControlOptions<T extends number = number> = {
+	label: string;
+	value: T | 0;
+}[];
+
+// ===========
 
 type _ControlType<dVT> = {
 	label: string;

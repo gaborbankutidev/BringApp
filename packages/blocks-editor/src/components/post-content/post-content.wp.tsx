@@ -1,6 +1,6 @@
 import React from "react";
 import {EditorCard} from "..";
-import type {BlockConfig} from "../..";
+import type {BlockConfig} from "../../blocks";
 import {postContent} from "./post-content.block";
 
 export const postContentConfig: BlockConfig = {
@@ -8,8 +8,8 @@ export const postContentConfig: BlockConfig = {
 	title: "Post Content",
 	description: "Post content will be rendered were this component is used in the layout.",
 	icon: "admin-page",
-	Edit: () => (
-		<EditorCard color="grey" name="PostContent">
+	Edit: ({isSelected}) => (
+		<EditorCard name="PostContent" isSelected={isSelected}>
 			<h1>Example Post Content</h1>
 			<h2>The post content will be rendered here.</h2>
 			<p>

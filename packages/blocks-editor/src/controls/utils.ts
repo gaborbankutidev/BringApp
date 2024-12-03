@@ -1,11 +1,12 @@
+import {capitalize} from "../utils";
 import type {
+	ControlByPath,
+	ControlType,
 	NumberOptionList,
 	NumberSelectControlOptions,
 	OptionList,
 	SelectControlOptions,
-} from "../types";
-import {capitalize} from "../utils";
-import type {ControlByPath, ControlType} from "./types";
+} from "./types";
 
 /**
  * Checks if a control is a path control.

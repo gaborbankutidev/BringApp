@@ -35,7 +35,7 @@ const HeadingBlock = ({
 export const heading = {
 	Block: HeadingBlock,
 	blockName: "bring/heading",
-	blockStyles: {
+	blockStylesConfig: {
 		spacing: {
 			m: {
 				t: {},

@@ -1,5 +1,9 @@
 import {alignOptions, colorOptions, directionOptions, justifyOptions} from "@/editor/utils/options";
-import {objectAttributeSource, stringAttributeSource, type BlockConfig} from "@bring/blocks-editor";
+import {
+	objectAttributeSource,
+	stringAttributeSource,
+	type BlockConfig,
+} from "@bring/blocks-editor/blocks";
 import {column, type ColumnBlockProps} from "./column.block";
 import {ColumnControls} from "./column.controls";
 import {ColumnEdit} from "./column.edit";

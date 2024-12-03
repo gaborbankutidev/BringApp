@@ -1,14 +1,14 @@
-import type {BlockEdit} from "@bring/blocks-editor";
-import {EditorCard} from "@bring/blocks-editor";
-import {column, type ColumnBlockProps} from "./column.block";
+import type {BlockEdit} from "@bring/blocks-editor/blocks";
+import {EditorCard} from "@bring/blocks-editor/components";
+import {type ColumnBlockProps} from "./column.block";
 
 export const ColumnEdit: BlockEdit<ColumnBlockProps> = ({
-	children,
-	attributes,
+	blockProps: {attributes, ...restOfBlockProps},
+	Block,
 	isSelected = false,
 	clientId,
 }) => {
-	const {colSpan, rowSpan, ...props} = attributes;
+	const {colSpan, rowSpan, ...restOfAttributes} = attributes;
 
 	// set block wrapper colspan & rowspan
 	const block = clientId ? document.getElementById("block-" + clientId) : null;
@@ -26,7 +26,7 @@ export const ColumnEdit: BlockEdit<ColumnBlockProps> = ({
 
 	return (
 		<EditorCard color="orange" isSelected={isSelected} name="Column">
-			<column.Block {...props}>{children}</column.Block>
+			<Block attributes={restOfAttributes} {...restOfBlockProps} />
 		</EditorCard>
 	);
 };

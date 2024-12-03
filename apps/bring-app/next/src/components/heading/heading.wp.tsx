@@ -1,5 +1,9 @@
 import {colorOptions, textAlignOptions, textSourceOptions} from "@/editor/utils/options";
-import {numberAttributeSource, stringAttributeSource, type BlockConfig} from "@bring/blocks-editor";
+import {
+	numberAttributeSource,
+	stringAttributeSource,
+	type BlockConfig,
+} from "@bring/blocks-editor/blocks";
 import {heading, type HeadingBlockProps} from "./heading.block";
 
 const headingConfig: BlockConfig<HeadingBlockProps> = {

@@ -4,7 +4,7 @@ import {
 	imageAttributeSource,
 	stringAttributeSource,
 	type BlockConfig,
-} from "@bring/blocks-editor";
+} from "@bring/blocks-editor/blocks";
 import {section, type SectionBlockProps} from "./section.block";
 import {SectionEdit} from "./section.edit";
 

@@ -37,51 +37,19 @@ export type MediaType = {
  */
 export type ImageType = MediaType;
 
-export type MenuItemType = {
-	url?: string;
-	name: string;
-	target: string;
-	children?: MenuItemType[];
-};
-
-export type MenuType = {
-	id: number;
-	name: string;
-	items: MenuItemType[];
-};
-
-// ===========
-
-export type EntityType = "post" | "taxonomy" | "author";
-
-export type DynamicEntityOptions = [number, string][] | null;
-
-export type OptionList<T extends string = string> = ([T, string] | T)[];
-export type SelectControlOptions<T extends string = string> = {
-	label: string;
-	value: T | "";
-}[];
-
-export type NumberOptionList<T extends number = number> = ([T, string] | T)[];
-export type NumberSelectControlOptions<T extends number = number> = {
-	label: string;
-	value: T | 0;
-}[];
-
 // ===========
 
 export type BringNode = {
 	key: string;
 	blockName: string;
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	attributes: object; // {[key: string]: any};
+	attributes: object;
 	children?: BringNode[];
 };
 
 export type WpBlock = {
 	clientId: string;
 	name: string;
-	attributes: object; // Record<string, unknown>;
+	attributes: object;
 	innerBlocks: WpBlock[];
 };
 
@@ -115,6 +83,4 @@ export type NestedTypedKeyOf<ObjectType extends object, T> = NestedTypedKeyOfOnR
 	T
 >;
 
-type ValidBlockNamePart = `${Lowercase<string> | "-"}${Lowercase<string> | "-" | ""}`;
-type ValidBlockNameWithSlash = `${ValidBlockNamePart}/${ValidBlockNamePart}`;
-export type ValidBlockName = `${Lowercase<string>}${ValidBlockNameWithSlash}${Lowercase<string>}`;
+// ===========

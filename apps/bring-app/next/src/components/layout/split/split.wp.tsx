@@ -1,5 +1,5 @@
-import type {BlockConfig} from "@bring/blocks-editor";
-import {objectAttributeSource} from "@bring/blocks-editor";
+import type {BlockConfig} from "@bring/blocks-editor/blocks";
+import {objectAttributeSource} from "@bring/blocks-editor/blocks";
 import {split, type SplitBlockProps} from "./split.block";
 import {SplitControls} from "./split.controls";
 import {SplitEdit} from "./split.edit";

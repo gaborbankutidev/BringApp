@@ -1,5 +1,6 @@
-import type {BlockConfig} from "@bring/blocks-editor";
-import {makeOptions, objectAttributeSource, stringAttributeSource} from "@bring/blocks-editor";
+import type {BlockConfig} from "@bring/blocks-editor/blocks";
+import {objectAttributeSource, stringAttributeSource} from "@bring/blocks-editor/blocks";
+import {makeOptions} from "@bring/blocks-editor/controls";
 import {sizes} from "./row";
 import {row, type RowBlockProps} from "./row.block";
 import {RowControls} from "./row.controls";

@@ -1,5 +1,9 @@
 import {alignOptions, colorOptions, textSourceOptions} from "@/editor/utils/options";
-import {objectAttributeSource, stringAttributeSource, type BlockConfig} from "@bring/blocks-editor";
+import {
+	objectAttributeSource,
+	stringAttributeSource,
+	type BlockConfig,
+} from "@bring/blocks-editor/blocks";
 import {markdownElements} from "./markdown";
 import {markdown, type MarkdownBlockProps} from "./markdown.block";
 import MarkdownEdit from "./markdown.edit";

@@ -4,11 +4,9 @@ import type {ResponsiveValue} from "@bring/blocks-client/styles";
 import {makeResponsiveClassNames} from "@bring/blocks-client/styles";
 import {type GridNumType} from "@bring/blocks-client/types";
 import clsx from "clsx";
-import {type ReactNode} from "react";
 import Row, {sizes} from "./row";
 
 export type RowBlockProps = {
-	children: ReactNode;
 	columnCount?: ResponsiveValue<GridNumType>;
 	gap?: ResponsiveValue;
 	backgroundColor?: ColorType;

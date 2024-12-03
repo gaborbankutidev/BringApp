@@ -7,14 +7,6 @@ declare global {
 	// Interface is needed to augment global `Window`
 	interface Window {
 		jwt: {token: string}; // FIXME move this to a cookie
-		// Magical bug by WP so declared here :)
-		wp: {
-			data: {
-				select: (storeNameOrDescriptor: string) => {
-					getBlockParents: (arg0: string) => string[];
-				};
-			};
-		};
 	}
 }
 
@@ -38,6 +30,7 @@ declare global {
  * @method update - method to send the content to the backend
  * @method parseBlocks - method to parse the blocks to a format that can be sent to the backend
  * @method registerBlocks - method to register all blocks
+ *
  */
 export class Editor {
 	private static instance: Editor;
@@ -67,13 +60,15 @@ export class Editor {
 
 	/**
 	 * Static method to initialize the singleton instance of the Editor class.
+	 *
 	 * @param wpBaseURL - the base URL of the WordPress site
 	 * @param jwtToken - the JWT token to authenticate the user
 	 * @param blockList - the list of block configurations
+	 *
 	 * @returns the instance of the Editor class
 	 */
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	public static init(wpBaseURL: string, blockList: BlockConfig<any>[]) {
+	public static init(wpBaseURL: string, blockList: BlockConfig[]) {
 		console.log("🚀 Launching Bring Editor...");
 		if (!Editor.instance) {
 			Editor.instance = new Editor(wpBaseURL, blockList);

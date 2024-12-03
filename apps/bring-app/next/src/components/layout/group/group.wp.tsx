@@ -1,5 +1,9 @@
 import {alignOptions, colorOptions, directionOptions, justifyOptions} from "@/editor/utils/options";
-import {objectAttributeSource, stringAttributeSource, type BlockConfig} from "@bring/blocks-editor";
+import {
+	objectAttributeSource,
+	stringAttributeSource,
+	type BlockConfig,
+} from "@bring/blocks-editor/blocks";
 import {group, type GroupBlockProps} from "./group.block";
 import GroupControls from "./group.controls";
 import GroupEdit from "./group.edit";
