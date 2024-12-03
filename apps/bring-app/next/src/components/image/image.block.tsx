@@ -1,8 +1,8 @@
 import type {BP} from "@/bring";
 import type {SourceType} from "@/editor/utils/lists";
+import {cn} from "@/lib/utils";
 import type {ImageType} from "@bring/blocks-client/types";
 import {defaultImageValue} from "@bring/blocks-client/utils";
-import clsx from "clsx";
 import Image from "./image";
 
 export const sizes = {
@@ -41,7 +41,7 @@ const ImageBlock = ({
 	const img = contentSource === "dynamic" ? entityProps?.image : image;
 	if (!img?.src) return null;
 
-	const classNames = clsx(cover && "h-full object-cover", className);
+	const classNames = cn(cover && "h-full object-cover", className);
 
 	return (
 		<Image // eslint-disable-line jsx-a11y/alt-text

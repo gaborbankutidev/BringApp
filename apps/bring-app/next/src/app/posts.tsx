@@ -1,7 +1,7 @@
 import {env} from "@/env.mjs";
+import {cn} from "@/lib/utils";
 import {getDynamicEntityList} from "@bring/blocks-client/content";
 import Link from "next/link";
-import {twJoin} from "tailwind-merge";
 import Slider from "./slider";
 
 export default async function Posts() {
@@ -18,7 +18,7 @@ export default async function Posts() {
 					<Link
 						href={entity.url ?? "#"}
 						key={`post-${entity.entityId}`}
-						className={twJoin(
+						className={cn(
 							"bg-gray-800/60 min-h-[180px] min-w-[280px] border border-gray-500/60 px-4 py-8 rounded-lg md:w-1/2 cursor-pointer hover:bg-gray-700/60 transition-all duration-300",
 						)}
 					>

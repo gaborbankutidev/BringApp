@@ -1,10 +1,10 @@
 import type {BP} from "@/bring";
 import {type AlignType, type DirectionType, type JustifyType} from "@/editor/utils/lists";
+import {cn} from "@/lib/utils";
 import type {ColorType} from "@/styles/colors";
 import type {ResponsiveValue} from "@bring/blocks-client/styles";
 import {makeResponsiveClassNames} from "@bring/blocks-client/styles";
 import type {GridNumType} from "@bring/blocks-client/types";
-import clsx from "clsx";
 import Column from "./column";
 
 export type ColumnBlockProps = {
@@ -33,7 +33,7 @@ const ColumnBlock = ({
 	},
 	children,
 }: BP<ColumnBlockProps>) => {
-	const classNames = clsx(
+	const classNames = cn(
 		makeResponsiveClassNames("col-span", colSpan, {"": 1}),
 		makeResponsiveClassNames("row-span", rowSpan),
 		makeResponsiveClassNames("gap", gap, {"": 4}),

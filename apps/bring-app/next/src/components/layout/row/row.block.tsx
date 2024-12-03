@@ -1,9 +1,9 @@
 import type {BP} from "@/bring";
+import {cn} from "@/lib/utils";
 import type {ColorType} from "@/styles/colors";
 import type {ResponsiveValue} from "@bring/blocks-client/styles";
 import {makeResponsiveClassNames} from "@bring/blocks-client/styles";
 import {type GridNumType} from "@bring/blocks-client/types";
-import clsx from "clsx";
 import Row, {sizes} from "./row";
 
 export type RowBlockProps = {
@@ -17,7 +17,7 @@ const RowBlock = ({
 	attributes: {columnCount = {}, gap = {}, backgroundColor, className, ...props},
 	children,
 }: BP<RowBlockProps>) => {
-	const classNames = clsx(
+	const classNames = cn(
 		makeResponsiveClassNames("grid-cols", columnCount, {"": 1}),
 		makeResponsiveClassNames("gap", gap, {"": 8}),
 		"px-0",

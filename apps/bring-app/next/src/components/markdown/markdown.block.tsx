@@ -1,7 +1,7 @@
 import type {BP} from "@/bring";
 import type {TextAlignType, TextSourceType} from "@/editor/utils/lists";
+import {cn} from "@/lib/utils";
 import type {ColorType} from "@/styles/colors";
-import clsx from "clsx";
 import Markdown, {type MarkdownElements} from "./markdown";
 
 export type MarkdownBlockProps = {
@@ -16,7 +16,7 @@ export const MarkdownBlock = ({
 	attributes: {source = "manual", content = "", align, color, className, ...props},
 	entityProps,
 }: BP<MarkdownBlockProps>) => {
-	const classNames = clsx(align && `text-${align}`, color && `text-${color}`, className);
+	const classNames = cn(align && `text-${align}`, color && `text-${color}`, className);
 
 	if (source !== "manual") {
 		if (!entityProps) {

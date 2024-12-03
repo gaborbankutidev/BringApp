@@ -3,8 +3,8 @@ import Row from "@/components/layout/row";
 import Section from "@/components/layout/section";
 import Markdown from "@/components/markdown";
 import {env} from "@/env.mjs";
+import {cn} from "@/lib/utils";
 import Link from "next/link";
-import {twJoin} from "tailwind-merge";
 import {getWpStatus, type WpStatus} from "./get-wp-status";
 import Posts from "./posts";
 
@@ -43,7 +43,7 @@ const Home = async () => {
 							target="_blank"
 							rel="noopener noreferrer"
 							href={errorNotice?.href ? errorNotice.href : wpAdminUrl}
-							className={twJoin(
+							className={cn(
 								"text-white text-center md:text-18 outline outline-purple-600 hover:text-white hover:outline-white -outline-offset-2 rounded-full py-2 px-8 transition-all duration-300",
 								(wpStatus === "error" || wpStatus === "unavailable") &&
 									"pointer-events-none opacity-40",
