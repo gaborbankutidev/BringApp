@@ -2945,6 +2945,7 @@ __metadata:
     "@bring/typescript-config": "npm:*"
     "@types/react": "npm:^18.3.12"
     "@types/react-dom": "npm:^18.3.1"
+    clsx: "npm:2.1.1"
     react-intersection-observer: "npm:^9.13.1"
     typescript: "npm:^5.6.3"
   peerDependencies:
@@ -2970,10 +2971,10 @@ __metadata:
     "@wordpress/blocks": "npm:^12.35.0"
     "@wordpress/components": "npm:^27.6.0"
     "@wordpress/data": "npm:^9.28.0"
+    clsx: "npm:2.1.1"
     lodash.clonedeep: "npm:^4.5.0"
     lodash.get: "npm:^4.4.2"
     lodash.set: "npm:^4.3.2"
-    tailwind-merge: "npm:^2.5.4"
     typescript: "npm:^5.6.3"
   peerDependencies:
     "@wordpress/block-editor": ^12.22.0
@@ -11092,7 +11093,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:^2.1.1":
+"clsx@npm:2.1.1, clsx@npm:^2.1.1":
   version: 2.1.1
   resolution: "clsx@npm:2.1.1"
   checksum: 10c0/c4c8eb865f8c82baab07e71bfa8897c73454881c4f99d6bc81585aecd7c441746c1399d08363dc096c550cceaf97bd4ce1e8854e1771e9998d9f94c4fe075839
