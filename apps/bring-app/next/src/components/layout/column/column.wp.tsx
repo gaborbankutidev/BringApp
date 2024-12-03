@@ -1,5 +1,9 @@
 import {alignOptions, colorOptions, directionOptions, justifyOptions} from "@/editor/utils/options";
-import {objectAttributeSource, stringAttributeSource, type BlockConfig} from "@bring/blocks-editor";
+import {
+	objectAttributeSource,
+	stringAttributeSource,
+	type BlockConfig,
+} from "@bring/blocks-editor/blocks";
 import {column, type ColumnBlockProps} from "./column.block";
 import {ColumnControls} from "./column.controls";
 import {ColumnEdit} from "./column.edit";
@@ -51,23 +55,6 @@ export const columnConfig: BlockConfig<ColumnBlockProps> = {
 			initialOpen: true,
 		},
 	],
-	styles: {
-		spacing: {
-			m: {
-				t: {"": 0},
-				b: {"": 0},
-				l: {},
-				r: {},
-			},
-			p: {
-				t: {"": 0},
-				b: {"": 0},
-				l: {},
-				r: {},
-			},
-		},
-		visibility: {"": "flex", md: "flex", lg: "flex"},
-	},
 };
 
 export default columnConfig;

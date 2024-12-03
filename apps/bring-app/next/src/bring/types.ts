@@ -1,4 +1,4 @@
-import type {BP as _BP} from "@bring/blocks-client";
+import type {BP as _BP} from "@bring/blocks-client/types";
 
 /**
  * Extend the global entity props type.

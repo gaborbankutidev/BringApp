@@ -1,4 +1,3 @@
-import {ResponsiveValue} from "../client-types";
 import {DashIcon} from "./dashicon.types";
 
 type DisplayValue =
@@ -29,6 +28,12 @@ type ResponsiveDisplayValueConfig = {
 	lg: DisplayValue;
 };
 
+export type ResponsiveValue<T = number> = {
+	""?: T;
+	md?: T;
+	lg?: T;
+};
+
 // ===========
 
 export type Sides = {
@@ -40,7 +45,7 @@ export type Sides = {
 
 // ===========
 
-export type BringStylesConfig = {
+export type BlockStylesConfig = {
 	spacing?: {
 		m?: Sides;
 		p?: Sides;
@@ -48,12 +53,21 @@ export type BringStylesConfig = {
 	visibility?: ResponsiveDisplayValueConfig;
 };
 
-export type BringStyles = {
+export type BlockStyles = {
 	spacing?: {
 		m?: Sides;
 		p?: Sides;
 	};
 	visibility?: ResponsiveValue<boolean>;
+};
+
+export type BlockStylesClassNames = {
+	spacing?: {
+		m?: string;
+		p?: string;
+	};
+	visibility?: string;
+	className?: string;
 };
 
 // ===========

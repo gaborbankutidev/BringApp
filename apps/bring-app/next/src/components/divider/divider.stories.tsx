@@ -13,7 +13,6 @@ type Story = StoryObj<typeof meta>;
 
 export const WithLine: Story = {
 	args: {
-		height: 40,
-		withLine: true,
+		attributes: {height: 40, withLine: true},
 	},
 };

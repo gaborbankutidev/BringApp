@@ -1,4 +1,8 @@
-import {numberAttributeSource, stringAttributeSource, type BlockConfig} from "@bring/blocks-editor";
+import {
+	numberAttributeSource,
+	stringAttributeSource,
+	type BlockConfig,
+} from "@bring/blocks-editor/blocks";
 import {embed, type EmbedBlockProps} from "./embed.block";
 
 const embedConfig: BlockConfig<EmbedBlockProps> = {
@@ -24,23 +28,6 @@ const embedConfig: BlockConfig<EmbedBlockProps> = {
 			initialOpen: true,
 		},
 	],
-	styles: {
-		spacing: {
-			m: {
-				t: {},
-				b: {},
-				l: {},
-				r: {},
-			},
-			p: {
-				t: {},
-				b: {},
-				l: {},
-				r: {},
-			},
-		},
-		visibility: {"": "block", md: "block", lg: "block"},
-	},
 };
 
 export default embedConfig;

@@ -44,11 +44,6 @@
 			"types": "./dist/index.d.ts",
 			"import": "./dist/index.esm.js",
 			"require": "./dist/index.cjs.js"
-		},
-		"./editor": {
-			"types": "./dist/index.d.ts",
-			"import": "./dist/index.esm.js",
-			"require": "./dist/index.cjs.js"
 		}
 	},
 	"files": [
@@ -69,10 +64,10 @@
 		"@wordpress/data": "^9.24.0"
 	},
 	"dependencies": {
+		"clsx": "2.1.1",
 		"lodash.clonedeep": "^4.5.0",
 		"lodash.get": "^4.4.2",
-		"lodash.set": "^4.3.2",
-		"tailwind-merge": "^2.5.4"
+		"lodash.set": "^4.3.2"
 	},
 	"devDependencies": {
 		"@bring/typescript-config": "*",

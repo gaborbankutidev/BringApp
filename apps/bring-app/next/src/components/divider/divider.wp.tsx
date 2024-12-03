@@ -4,7 +4,7 @@ import {
 	numberAttributeSource,
 	stringAttributeSource,
 	type BlockConfig,
-} from "@bring/blocks-editor";
+} from "@bring/blocks-editor/blocks";
 import {divider, type DividerBlockProps} from "./divider.block";
 
 const dividerConfig: BlockConfig<DividerBlockProps> = {
@@ -46,23 +46,6 @@ const dividerConfig: BlockConfig<DividerBlockProps> = {
 			initialOpen: true,
 		},
 	],
-	styles: {
-		spacing: {
-			m: {
-				t: {},
-				b: {},
-				l: {},
-				r: {},
-			},
-			p: {
-				t: {},
-				b: {},
-				l: {},
-				r: {},
-			},
-		},
-		visibility: {"": "flex", md: "flex", lg: "flex"},
-	},
 };
 
 export default dividerConfig;

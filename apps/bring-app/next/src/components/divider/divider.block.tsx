@@ -12,26 +12,37 @@ export type DividerBlockProps = {
  * Divider helps to apply up white space between blocks in the editor.
  */
 const DividerBlock = ({
-	withLine = false,
-	lineColor = "border",
-	height = 40,
-
-	bringStylesClassNames,
-	className,
-	id,
+	attributes: {height = 40, lineColor, withLine = false, className, ...props},
 }: BP<DividerBlockProps>) => {
-	const classNames = cn("flex items-center", bringStylesClassNames?.classNames, className);
+	const classNames = cn("flex items-center", className);
 
 	return (
-		<div className={classNames} style={{minHeight: `${height}px`}} id={id}>
+		<div className={classNames} style={{minHeight: `${height}px`}} {...props}>
 			{withLine && <div className={`w-full border-b border-${lineColor}`} />}
 		</div>
 	);
 };
 
 export const divider = {
-	Component: DividerBlock,
-	componentName: "bring/divider",
+	Block: DividerBlock,
+	blockName: "bring/divider",
+	blockStylesConfig: {
+		spacing: {
+			m: {
+				t: {},
+				b: {},
+				l: {},
+				r: {},
+			},
+			p: {
+				t: {},
+				b: {},
+				l: {},
+				r: {},
+			},
+		},
+		visibility: {"": "flex", md: "flex", lg: "flex"},
+	},
 } as const;
 
 export default DividerBlock;

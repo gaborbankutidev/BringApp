@@ -1,8 +1,8 @@
 import type {BP} from "@/bring";
 import type {SourceType} from "@/editor/utils/lists";
+import {cn} from "@/lib/utils";
 import type {ImageType} from "@bring/blocks-client/types";
 import {defaultImageValue} from "@bring/blocks-client/utils";
-import clsx from "clsx";
 import Image from "./image";
 
 export const sizes = {
@@ -25,31 +25,25 @@ export type ImageBlockProps = {
 };
 
 const ImageBlock = ({
-	contentSource = "manual",
-	image = defaultImageValue,
-	size = "900",
-	caption,
-	source,
-	link = "",
-	newTab = false,
-	lightbox = false,
-	cover = false,
-
+	attributes: {
+		contentSource = "manual",
+		image = defaultImageValue,
+		size = "900",
+		link = "",
+		newTab = false,
+		lightbox = false,
+		cover = false,
+		className,
+		...props
+	},
 	entityProps,
-	className,
-	bringStylesClassNames,
-	id,
 }: BP<ImageBlockProps>) => {
 	const img = contentSource === "dynamic" ? entityProps?.image : image;
 	if (!img?.src) return null;
 
-	const classNames = clsx(
-		cover && "h-full object-cover",
-		bringStylesClassNames?.classNames,
-		className,
-	);
+	const classNames = cn(cover && "h-full object-cover", className);
 
-	return lightbox ? (
+	return (
 		<Image // eslint-disable-line jsx-a11y/alt-text
 			image={{
 				src: img.src,
@@ -57,35 +51,37 @@ const ImageBlock = ({
 				width: sizes[size].width,
 				height: sizes[size].height,
 			}}
-			lightbox
-			caption={caption}
-			source={source}
-			className={classNames}
-			id={id}
-		/>
-	) : (
-		<Image // eslint-disable-line jsx-a11y/alt-text
-			image={{
-				src: img.src,
-				alt: img.alt ?? "",
-				width: sizes[size].width,
-				height: sizes[size].height,
-			}}
-			caption={caption}
-			source={source}
 			link={
 				// @ts-ignore
-				link ? {href: link, target: newTab ? "_blank" : "_self"} : undefined
+				link && !lightbox ? {href: link, target: newTab ? "_blank" : "_self"} : undefined
 			}
+			lightbox={lightbox}
 			className={classNames}
-			id={id}
+			{...props}
 		/>
 	);
 };
 
 export const image = {
-	Component: ImageBlock,
-	componentName: "bring/image",
+	Block: ImageBlock,
+	blockName: "bring/image",
+	blockStylesConfig: {
+		spacing: {
+			p: {
+				t: {},
+				b: {},
+				l: {},
+				r: {},
+			},
+			m: {
+				t: {},
+				b: {},
+				l: {},
+				r: {},
+			},
+		},
+		visibility: {"": "block", md: "block", lg: "block"},
+	},
 } as const;
 
 export default Image;

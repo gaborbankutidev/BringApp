@@ -5,10 +5,8 @@ import set from "lodash.set";
 import type {FC} from "react";
 import React, {useState} from "react";
 import {CheckboxControl} from "..";
-import {ResponsiveValue} from "../../client-types";
-import type {ResponsiveLabels} from "../../styles/types";
+import type {ResponsiveLabels, ResponsiveValue} from "../../styles/types";
 import {screenSizes} from "../../styles/utils";
-import type {Obj} from "../../types";
 import {objectKeys} from "../../utils";
 import {useControlContext} from "../context";
 import type {ControlByPath, ControlByValue, ControlType} from "../types";
@@ -22,7 +20,7 @@ import {isPathControl} from "../utils";
  * @param props - The props for the ResponsiveCheckboxControl component.
  * @returns The rendered ResponsiveCheckboxControl component.
  */
-export const ResponsiveCheckboxControl = <pT extends Obj = {}>(
+export const ResponsiveCheckboxControl = <pT extends object = {}>(
 	props: ControlType<ResponsiveValue<boolean>, pT>,
 ) =>
 	isPathControl(props) ? (
@@ -41,7 +39,7 @@ export const ResponsiveCheckboxControl = <pT extends Obj = {}>(
  * @param props - The rest of the props for the ResponsiveCheckboxControlByPath component.
  * @returns The rendered ResponsiveCheckboxControlByPath component.
  */
-function ResponsiveCheckboxControlByPath<pT extends Obj>({
+function ResponsiveCheckboxControlByPath<pT extends object>({
 	path,
 	updateHandling,
 	...props

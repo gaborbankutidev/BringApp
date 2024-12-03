@@ -1,12 +1,12 @@
 import React, {type ReactNode} from "react";
 import {createBringElement, getEntity, getSiteProps} from "../content";
-import type {FCC} from "../types";
+import type {BlockList} from "../types";
 
-function makeLayout<EP = {}, SP = {}, M = {}, MI = {}, CTX = {}>(
+function makeLayout<EP = object, SP = object, M = object, MI = object, CTX = object>(
 	wpURL: string,
 	onRedirect: (redirectTo: string, responseCode: number) => void,
 	onNotFound: () => void,
-	componentMap: Map<string, FCC<any, EP, SP, M, MI, CTX>>,
+	blockList: BlockList<EP, SP, M, MI, CTX>,
 ) {
 	const Layout = async ({
 		slug = "",
@@ -20,19 +20,19 @@ function makeLayout<EP = {}, SP = {}, M = {}, MI = {}, CTX = {}>(
 		const siteProps = await getSiteProps<SP, M, MI>(wpURL);
 		const entity = await getEntity<EP>(wpURL, onRedirect, onNotFound, slug);
 
-		if (!entity) {
+		if (!entity || !siteProps) {
 			return null;
 		}
 
 		return (
 			<main>
 				{entity.content.layout
-					? createBringElement(
+					? createBringElement<EP, SP, M, MI, CTX>(
 							entity.content.layout,
-							componentMap,
+							blockList,
 							entity.props,
 							siteProps,
-							context,
+							context ?? ({} as CTX),
 							children,
 						)
 					: children}

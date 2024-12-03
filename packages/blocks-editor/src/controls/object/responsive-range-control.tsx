@@ -5,10 +5,8 @@ import set from "lodash.set";
 import type {FC} from "react";
 import React, {useState} from "react";
 import {RangeControl} from "..";
-import {ResponsiveValue} from "../../client-types";
-import type {ResponsiveLabels} from "../../styles/types";
+import type {ResponsiveLabels, ResponsiveValue} from "../../styles/types";
 import {screenSizes} from "../../styles/utils";
-import type {Obj} from "../../types";
 import {objectKeys} from "../../utils";
 import {useControlContext} from "../context";
 import type {ControlByPath, ControlByValue, ControlType} from "../types";
@@ -27,7 +25,7 @@ type _NumberControl = {min?: number; max?: number};
  * @param props - The props for the ResponsiveRangeControl component.
  * @returns The rendered ResponsiveRangeControl component.
  */
-export const ResponsiveRangeControl = <pT extends Obj = {}>(
+export const ResponsiveRangeControl = <pT extends object = object>(
 	props: ControlType<ResponsiveValue, pT> & _NumberControl,
 ) =>
 	isPathControl(props) ? (
@@ -45,7 +43,7 @@ export const ResponsiveRangeControl = <pT extends Obj = {}>(
  * @param updateHandling - The update handling strategy.
  * @returns The rendered ResponsiveRangeControlByPath component.
  */
-function ResponsiveRangeControlByPath<pT extends Obj>({
+function ResponsiveRangeControlByPath<pT extends object>({
 	path,
 	updateHandling,
 	...props

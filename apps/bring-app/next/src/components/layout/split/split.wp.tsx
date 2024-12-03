@@ -1,5 +1,5 @@
-import type {BlockConfig} from "@bring/blocks-editor";
-import {objectAttributeSource} from "@bring/blocks-editor";
+import type {BlockConfig} from "@bring/blocks-editor/blocks";
+import {objectAttributeSource} from "@bring/blocks-editor/blocks";
 import {split, type SplitBlockProps} from "./split.block";
 import {SplitControls} from "./split.controls";
 import {SplitEdit} from "./split.edit";
@@ -14,23 +14,6 @@ const splitConfig: BlockConfig<SplitBlockProps> = {
 	},
 	Edit: SplitEdit,
 	Controls: [{panel: "Split settings", controls: [SplitControls], initialOpen: true}],
-	styles: {
-		spacing: {
-			m: {
-				t: {},
-				b: {},
-				l: {},
-				r: {},
-			},
-			p: {
-				t: {},
-				b: {},
-				l: {},
-				r: {},
-			},
-		},
-		visibility: {"": "grid", md: "grid", lg: "grid"},
-	},
 };
 
 export default splitConfig;

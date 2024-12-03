@@ -4,7 +4,6 @@ import get from "lodash.get";
 import set from "lodash.set";
 import type {FC} from "react";
 import React from "react";
-import type {Obj} from "../../types";
 import {useControlContext} from "../context";
 import type {ControlByPath, ControlByValue, ControlType} from "../types";
 import {isPathControl} from "../utils";
@@ -22,7 +21,7 @@ type _TextareaControl = {rows?: number};
  * @param props - The props for the TextareaControl component.
  * @returns The rendered TextareaControl component.
  */
-export const TextareaControl = <pT extends Obj = {}>(
+export const TextareaControl = <pT extends object = object>(
 	props: ControlType<string, pT> & _TextareaControl,
 ) =>
 	isPathControl(props) ? (
@@ -39,7 +38,7 @@ export const TextareaControl = <pT extends Obj = {}>(
  * @param path - The path to the value in the attributes object.
  * @returns The rendered TextareaControlByPath component.
  */
-function TextareaControlByPath<pT extends Obj>({
+function TextareaControlByPath<pT extends object>({
 	path,
 	updateHandling,
 	...props

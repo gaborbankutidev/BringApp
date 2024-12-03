@@ -2,12 +2,9 @@ import type {BP} from "@/bring";
 import {cn} from "@/lib/utils";
 import type {ColorType} from "@/styles/colors";
 import type {ImageType} from "@bring/blocks-client";
-import type {ReactNode} from "react";
 import Section from "./section";
 
 export type SectionBlockProps = {
-	children: ReactNode;
-
 	backgroundColor?: ColorType;
 	backgroundImage?: ImageType;
 	dark?: boolean;
@@ -18,18 +15,8 @@ export type SectionBlockProps = {
 };
 
 const SectionBlock = ({
+	attributes: {backgroundColor = "transparent", backgroundImage, backgroundClassName, ...props},
 	children,
-
-	backgroundColor = "transparent",
-	backgroundImage,
-	dark = false,
-
-	bringStylesClassNames,
-	className,
-	backgroundImageClassName,
-	backgroundClassName,
-	containerClassName,
-	id,
 }: BP<SectionBlockProps>) => (
 	<Section
 		backgroundImage={
@@ -40,20 +27,25 @@ const SectionBlock = ({
 					}
 				: undefined
 		}
-		dark={dark}
-		className={cn(bringStylesClassNames?.classNames, className)}
-		backgroundImageClassName={backgroundImageClassName}
 		backgroundClassName={cn(`bg-${backgroundColor}`, backgroundClassName)}
-		containerClassName={containerClassName}
-		id={id}
+		{...props}
 	>
 		{children}
 	</Section>
 );
 
 export const section = {
-	Component: SectionBlock,
-	componentName: "bring/section",
+	Block: SectionBlock,
+	blockName: "bring/section",
+	blockStylesConfig: {
+		spacing: {
+			p: {
+				t: {"": 8},
+				b: {"": 8},
+			},
+		},
+		visibility: {"": "block", md: "block", lg: "block"},
+	},
 } as const;
 
 export default Section;

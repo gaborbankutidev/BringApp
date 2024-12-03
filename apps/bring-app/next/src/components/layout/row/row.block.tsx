@@ -4,11 +4,9 @@ import type {ColorType} from "@/styles/colors";
 import type {ResponsiveValue} from "@bring/blocks-client/styles";
 import {makeResponsiveClassNames} from "@bring/blocks-client/styles";
 import {type GridNumType} from "@bring/blocks-client/types";
-import {type ReactNode} from "react";
 import Row, {sizes} from "./row";
 
 export type RowBlockProps = {
-	children: ReactNode;
 	columnCount?: ResponsiveValue<GridNumType>;
 	gap?: ResponsiveValue;
 	backgroundColor?: ColorType;
@@ -16,31 +14,44 @@ export type RowBlockProps = {
 };
 
 const RowBlock = ({
+	attributes: {columnCount = {}, gap = {}, backgroundColor, className, ...props},
 	children,
-	columnCount = {},
-	gap = {},
-	backgroundColor,
-	size = "1520",
-	bringStylesClassNames,
-	className,
-	id,
 }: BP<RowBlockProps>) => {
 	const classNames = cn(
 		makeResponsiveClassNames("grid-cols", columnCount, {"": 1}),
 		makeResponsiveClassNames("gap", gap, {"": 8}),
 		"px-0",
-		bringStylesClassNames?.classNames,
 		backgroundColor && `bg-${backgroundColor}`,
 		className,
 	);
 
 	return (
-		<Row size={size} className={classNames} id={id}>
+		<Row className={classNames} {...props}>
 			{children}
 		</Row>
 	);
 };
 
-export const row = {Component: RowBlock, componentName: "bring/row"} as const;
+export const row = {
+	Block: RowBlock,
+	blockName: "bring/row",
+	blockStylesConfig: {
+		spacing: {
+			m: {
+				t: {"": 0},
+				b: {"": 0},
+				l: {},
+				r: {},
+			},
+			p: {
+				t: {"": 6},
+				b: {"": 6},
+				l: {},
+				r: {},
+			},
+		},
+		visibility: {"": "grid", md: "grid", lg: "grid"},
+	},
+} as const;
 
 export default Row;

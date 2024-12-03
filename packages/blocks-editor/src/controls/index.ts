@@ -15,3 +15,10 @@ export {ResponsiveCheckboxControl} from "./object/responsive-checkbox-control";
 export {ResponsiveRangeControl} from "./object/responsive-range-control";
 
 export {makeNumberOptions, makeOptions, optionsToNumberOptions} from "./utils";
+
+export type {
+	NumberOptionList,
+	NumberSelectControlOptions,
+	OptionList,
+	SelectControlOptions,
+} from "./types";

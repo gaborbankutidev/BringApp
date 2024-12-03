@@ -29,7 +29,7 @@ const Image = ({
 	if (!caption && !source) return <ImageContent {...imageProps} className={className} id={id} />;
 
 	return (
-		<figure {...props}>
+		<figure {...props} id={id} className={className}>
 			<ImageContent {...imageProps} />
 
 			{caption && (

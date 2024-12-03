@@ -1,5 +1,5 @@
-import type {BlockControl} from "@bring/blocks-editor";
-import {ResponsiveRangeControl} from "@bring/blocks-editor";
+import type {BlockControl} from "@bring/blocks-editor/blocks";
+import {ResponsiveRangeControl} from "@bring/blocks-editor/controls";
 import type {RowBlockProps} from "./row.block";
 
 export const RowControls: BlockControl<RowBlockProps> = () => (

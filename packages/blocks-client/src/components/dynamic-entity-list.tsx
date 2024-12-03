@@ -12,7 +12,7 @@ import type {
 } from "../types";
 import Debug from "./debug";
 
-export type DynamicEntityListRenderProps<T = {}, P = {}> = {
+export type DynamicEntityListRenderProps<T = object, P = object> = {
 	entityList: DynamicEntityListType<T>;
 	params?: GetDynamicEntityListParams<P>;
 	Item?: ({entityProps}: {entityProps: DynamicEntityPropsType<T>}) => ReactNode;

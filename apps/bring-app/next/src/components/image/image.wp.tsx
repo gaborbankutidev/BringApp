@@ -2,10 +2,10 @@ import {sourceOptions} from "@/editor/utils/options";
 import {
 	booleanAttributeSource,
 	imageAttributeSource,
-	makeOptions,
 	stringAttributeSource,
 	type BlockConfig,
-} from "@bring/blocks-editor";
+} from "@bring/blocks-editor/blocks";
+import {makeOptions} from "@bring/blocks-editor/controls";
 import {image, sizes, type ImageBlockProps} from "./image.block";
 
 const sizeList = Object.keys(sizes);
@@ -67,23 +67,6 @@ const imageConfig: BlockConfig<ImageBlockProps> = {
 			show: (attributes) => attributes.contentSource === "manual",
 		},
 	],
-	styles: {
-		spacing: {
-			p: {
-				t: {},
-				b: {},
-				l: {},
-				r: {},
-			},
-			m: {
-				t: {},
-				b: {},
-				l: {},
-				r: {},
-			},
-		},
-		visibility: {"": "block", md: "block", lg: "block"},
-	},
 };
 
 export default imageConfig;

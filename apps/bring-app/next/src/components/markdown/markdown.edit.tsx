@@ -1,4 +1,5 @@
-import type {BlockEdit} from "@bring/blocks-editor";
+import type {BlockEdit} from "@bring/blocks-editor/blocks";
+import {EditorCard} from "@bring/blocks-editor/components";
 import {BlockControls} from "@wordpress/block-editor";
 import {ToolbarButton, ToolbarGroup} from "@wordpress/components";
 import type SimpleMDE from "easymde";
@@ -20,12 +21,17 @@ import {
 } from "easymde";
 import {useCallback, useMemo, useState} from "react";
 import SimpleMDEReact from "react-simplemde-editor";
-import {MarkdownBlock, type MarkdownBlockProps} from "./markdown.block";
+import {type MarkdownBlockProps} from "./markdown.block";
 
-const MarkdownEdit: BlockEdit<MarkdownBlockProps> = ({attributes, setAttributes}) => {
-	const {content, source = "manual", ...props} = attributes;
+const MarkdownEdit: BlockEdit<MarkdownBlockProps> = ({
+	blockProps: {attributes, ...restOfBlockProps},
+	Block,
+	setAttributes,
+	isSelected,
+}) => {
+	const {content, source = "manual", ...restOfAttributes} = attributes;
 
-	const [isPreview, setPreview] = useState(false);
+	const [isPreview, setPreview] = useState(true);
 
 	const onChange = useCallback((newValue: string) => {
 		setAttributes({content: newValue});
@@ -48,9 +54,11 @@ const MarkdownEdit: BlockEdit<MarkdownBlockProps> = ({attributes, setAttributes}
 	}, []);
 
 	return source !== "manual" ? (
-		<MarkdownBlock {...props} content={`${source} will be here...`} />
+		<EditorCard isSelected={isSelected} name="Markdown">
+			<Block attributes={{content, source, ...restOfAttributes}} {...restOfBlockProps} />
+		</EditorCard>
 	) : isPreview ? (
-		<>
+		<EditorCard isSelected={isSelected} name="Markdown">
 			<BlockControls controls={undefined}>
 				<ToolbarGroup>
 					<ToolbarButton
@@ -65,10 +73,10 @@ const MarkdownEdit: BlockEdit<MarkdownBlockProps> = ({attributes, setAttributes}
 					/>
 				</ToolbarGroup>
 			</BlockControls>
-			<MarkdownBlock {...props} content={content ?? ""} />
-		</>
+			<Block attributes={{content, ...restOfAttributes}} {...restOfBlockProps} />
+		</EditorCard>
 	) : (
-		<>
+		<EditorCard isSelected={isSelected} name="Markdown">
 			<BlockControls controls={undefined}>
 				<ToolbarGroup>
 					<ToolbarButton
@@ -237,7 +245,7 @@ const MarkdownEdit: BlockEdit<MarkdownBlockProps> = ({attributes, setAttributes}
 				getMdeInstance={getMdeInstanceCallback}
 				options={options}
 			/>
-		</>
+		</EditorCard>
 	);
 };
 

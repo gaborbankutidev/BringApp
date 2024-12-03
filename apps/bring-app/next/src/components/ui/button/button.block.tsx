@@ -1,5 +1,4 @@
 import {BP} from "@/bring";
-import clsx from "clsx";
 import Button from "./button";
 
 export type ButtonBlockProps = {
@@ -11,34 +10,29 @@ export type ButtonBlockProps = {
 };
 
 export const ButtonBlock = ({
-	text = "",
-	href = "#",
-	newTab = false,
-	size = "md",
-	variant = "primary",
-	bringStylesClassNames,
-	className = "",
-	id,
+	attributes: {text, newTab = false, ...props},
 }: BP<ButtonBlockProps>) => {
-	const classNames = clsx(bringStylesClassNames?.classNames, className);
 	return (
-		<Button
-			as="Link"
-			variant={variant}
-			href={href}
-			target={newTab ? "_blank" : "_self"}
-			size={size}
-			className={classNames}
-			id={id}
-		>
+		<Button as="Link" target={newTab ? "_blank" : "_self"} {...props}>
 			{text}
 		</Button>
 	);
 };
 
 export const button = {
-	Component: ButtonBlock,
-	componentName: "bring/button",
+	Block: ButtonBlock,
+	blockName: "bring/button",
+	blockStylesConfig: {
+		spacing: {
+			m: {
+				t: {},
+				b: {},
+				l: {},
+				r: {},
+			},
+		},
+		visibility: {"": "inline-flex", md: "inline-flex", lg: "inline-flex"},
+	},
 } as const;
 
 export default Button;

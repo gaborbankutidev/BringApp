@@ -1,5 +1,5 @@
 import {colorList} from "@/styles/colors";
-import {makeOptions} from "@bring/blocks-editor";
+import {makeOptions} from "@bring/blocks-editor/controls";
 import {
 	alignList,
 	directionList,

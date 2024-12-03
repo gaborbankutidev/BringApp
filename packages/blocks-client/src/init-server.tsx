@@ -18,9 +18,9 @@ import type {EntityType} from "./types";
  * @returns An object containing functions to retrieve dynamic entity props, dynamic entity list, and site props.
  */
 export function initServer<
-	SP = {}, // SiteProps
-	M = {}, // Menu
-	MI = {}, // MenuItem
+	SP = object, // SiteProps
+	M = object, // Menu
+	MI = object, // MenuItem
 >(wpURL: string = "") {
 	return {
 		/**
@@ -32,7 +32,7 @@ export function initServer<
 		 * @param options - The options for retrieving the entity props.
 		 * @returns A promise that resolves to the entity props.
 		 */
-		getDynamicEntityProps: <T = {}, P = {}>(
+		getDynamicEntityProps: <T = object, P = object>(
 			entityId: number,
 			entityType: EntityType,
 			options: GetDynamicEntityPropsOptions = {},
@@ -47,7 +47,7 @@ export function initServer<
 		 * @param options - The options for retrieving the entity list.
 		 * @returns A promise that resolves to the entity list.
 		 */
-		getDynamicEntityList: <T = {}, P = {}>(
+		getDynamicEntityList: <T = object, P = object>(
 			entitySlug: string,
 			entityType: EntityType,
 			options: GetDynamicEntityListOptions = {},

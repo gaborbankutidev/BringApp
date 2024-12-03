@@ -1,4 +1,5 @@
-import {ResponsiveRangeControl, type BlockControl} from "@bring/blocks-editor";
+import {type BlockControl} from "@bring/blocks-editor/blocks";
+import {ResponsiveRangeControl} from "@bring/blocks-editor/controls";
 import type {GroupBlockProps} from "./group.block";
 
 const GroupControls: BlockControl<GroupBlockProps> = () => (

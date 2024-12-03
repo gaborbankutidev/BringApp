@@ -4,7 +4,7 @@ import {
 	imageAttributeSource,
 	stringAttributeSource,
 	type BlockConfig,
-} from "@bring/blocks-editor";
+} from "@bring/blocks-editor/blocks";
 import {section, type SectionBlockProps} from "./section.block";
 import {SectionEdit} from "./section.edit";
 
@@ -46,15 +46,6 @@ const sectionConfig: BlockConfig<SectionBlockProps> = {
 			],
 		},
 	],
-	styles: {
-		spacing: {
-			p: {
-				t: {"": 8},
-				b: {"": 8},
-			},
-		},
-		visibility: {"": "block", md: "block", lg: "block"},
-	},
 };
 
 export default sectionConfig;

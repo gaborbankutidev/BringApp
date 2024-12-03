@@ -1,9 +1,9 @@
 import {
 	booleanAttributeSource,
-	makeOptions,
 	stringAttributeSource,
 	type BlockConfig,
-} from "@bring/blocks-editor";
+} from "@bring/blocks-editor/blocks";
+import {makeOptions} from "@bring/blocks-editor/controls";
 import {button, type ButtonBlockProps} from "./button.block";
 
 const buttonConfig: BlockConfig<ButtonBlockProps> = {
