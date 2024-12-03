@@ -68,7 +68,7 @@ export class Editor {
 	 * @returns the instance of the Editor class
 	 */
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	public static init(wpBaseURL: string, blockList: BlockConfig[]) {
+	public static init(wpBaseURL: string, blockList: BlockConfig<any>[]) {
 		console.log("🚀 Launching Bring Editor...");
 		if (!Editor.instance) {
 			Editor.instance = new Editor(wpBaseURL, blockList);
