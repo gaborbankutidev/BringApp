@@ -287,7 +287,8 @@ export type BlockListItem<
 	CTX = object, // Context
 > = {
 	blockName: BlockName;
-	Block: FCB<unknown, EP, SP, M, MI, CTX>;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	Block: FCB<any, EP, SP, M, MI, CTX>;
 	blockStylesConfig?: BlockStylesConfig;
 };
 
