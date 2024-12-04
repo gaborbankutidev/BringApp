@@ -10,6 +10,11 @@ export const RowControls: BlockControl<RowBlockProps> = () => (
 			min={1}
 			max={12}
 		/>
-		<ResponsiveRangeControl<RowBlockProps> label="Gap" path="gap" min={0} max={64} />
+		<ResponsiveRangeControl<RowBlockProps>
+			label="Gap"
+			path="gap"
+			min={0}
+			max={64}
+		/>
 	</>
 );

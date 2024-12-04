@@ -13,10 +13,21 @@ export type MarkdownBlockProps = {
 };
 
 export const MarkdownBlock = ({
-	attributes: {source = "manual", content = "", align, color, className, ...props},
+	attributes: {
+		source = "manual",
+		content = "",
+		align,
+		color,
+		className,
+		...props
+	},
 	entityProps,
 }: BP<MarkdownBlockProps>) => {
-	const classNames = cn(align && `text-${align}`, color && `text-${color}`, className);
+	const classNames = cn(
+		align && `text-${align}`,
+		color && `text-${color}`,
+		className,
+	);
 
 	if (source !== "manual") {
 		if (!entityProps) {

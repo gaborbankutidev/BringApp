@@ -15,7 +15,12 @@ export type SectionBlockProps = {
 };
 
 const SectionBlock = ({
-	attributes: {backgroundColor = "transparent", backgroundImage, backgroundClassName, ...props},
+	attributes: {
+		backgroundColor = "transparent",
+		backgroundImage,
+		backgroundClassName,
+		...props
+	},
 	children,
 }: BP<SectionBlockProps>) => (
 	<Section

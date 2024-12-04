@@ -1,4 +1,8 @@
-import {alignOptions, colorOptions, textSourceOptions} from "@/editor/utils/options";
+import {
+	alignOptions,
+	colorOptions,
+	textSourceOptions,
+} from "@/editor/utils/options";
 import {
 	objectAttributeSource,
 	stringAttributeSource,

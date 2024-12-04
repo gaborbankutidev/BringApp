@@ -16,7 +16,11 @@ const HeadingBlock = ({
 	attributes: {source = "manual", title, align, color, className, ...props},
 	entityProps,
 }: BP<HeadingBlockProps>) => {
-	const classNames = cn(align && `text-${align}`, color && `text-${color}`, className);
+	const classNames = cn(
+		align && `text-${align}`,
+		color && `text-${color}`,
+		className,
+	);
 
 	let headingTitle: string | null = title;
 	if (source !== "manual") {

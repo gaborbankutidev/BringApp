@@ -26,7 +26,8 @@ const Image = ({
 }: ImageProps) => {
 	const imageProps = {image, link, lightbox};
 
-	if (!caption && !source) return <ImageContent {...imageProps} className={className} id={id} />;
+	if (!caption && !source)
+		return <ImageContent {...imageProps} className={className} id={id} />;
 
 	return (
 		<figure {...props} id={id} className={className}>

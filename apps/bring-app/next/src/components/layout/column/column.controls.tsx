@@ -16,6 +16,11 @@ export const ColumnControls: BlockControl<ColumnBlockProps> = () => (
 			min={0}
 			max={64}
 		/>
-		<ResponsiveRangeControl<ColumnBlockProps> label="Gap" path="gap" min={0} max={64} />
+		<ResponsiveRangeControl<ColumnBlockProps>
+			label="Gap"
+			path="gap"
+			min={0}
+			max={64}
+		/>
 	</>
 );

@@ -8,7 +8,9 @@ export type EmbedBlockProps = {
 /**
  * Embed block helps to embed content in iframe such as Google Maps or Youtube videos in the editor.
  */
-const EmbedBlock = ({attributes: {url, height = 400, ...props}}: BP<EmbedBlockProps>) => {
+const EmbedBlock = ({
+	attributes: {url, height = 400, ...props},
+}: BP<EmbedBlockProps>) => {
 	return url ? (
 		<div style={{minHeight: `${height}px`}} {...props}>
 			<iframe src={url} className="h-full w-full"></iframe>

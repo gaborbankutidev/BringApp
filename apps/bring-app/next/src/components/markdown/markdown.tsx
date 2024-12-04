@@ -65,7 +65,9 @@ const parseAlt = (alt: string | undefined) => {
 	value.caption = alt.includes("--caption:") ? (parts[1] ?? "") : "";
 
 	if (alt.includes("--source:")) {
-		value.source = alt.includes("--caption:") ? (parts[2] ?? "") : (parts[1] ?? "");
+		value.source = alt.includes("--caption:")
+			? (parts[2] ?? "")
+			: (parts[1] ?? "");
 	}
 
 	return value;
@@ -144,7 +146,9 @@ const getComponents = (
 			<code className={elementsClassName.code}>{children}</code>
 		),
 		blockquote: ({children}: {children: ReactNode}) => (
-			<blockquote className={elementsClassName.blockquote}>{children}</blockquote>
+			<blockquote className={elementsClassName.blockquote}>
+				{children}
+			</blockquote>
 		),
 		hr: () => <hr className={elementsClassName.hr} />,
 		br: () => <br className={elementsClassName.br} />,
@@ -153,7 +157,9 @@ const getComponents = (
 
 const Markdown = ({
 	inline = false,
-	allowedElements = inline ? [...markdownInlineElements] : [...markdownElements],
+	allowedElements = inline
+		? [...markdownInlineElements]
+		: [...markdownElements],
 	className,
 	elementsClassName = {},
 	...props

@@ -24,6 +24,6 @@ module.exports = {
 	trailingCommaPHP: true,
 	braceStyle: "1tbs",
 
-	tailwindConfig: "./next/tailwind.config.ts",
+	tailwindConfig: "./apps/bring-app/next/tailwind.config.ts",
 	tailwindFunctions: ["twJoin", "twMerge"],
 };

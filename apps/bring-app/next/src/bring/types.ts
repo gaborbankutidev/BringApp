@@ -51,4 +51,11 @@ export type Context = {
 /**
  * Initialize BlockProps type by extending with EntityProps, SiteProps, Menu, MenuItem, Context types.
  */
-export type BP<Props> = _BP<Props, EntityProps, SiteProps, Menu, MenuItem, Context>;
+export type BP<Props> = _BP<
+	Props,
+	EntityProps,
+	SiteProps,
+	Menu,
+	MenuItem,
+	Context
+>;
