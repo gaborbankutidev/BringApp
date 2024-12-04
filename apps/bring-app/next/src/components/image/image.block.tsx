@@ -52,9 +52,9 @@ const ImageBlock = ({
 				height: sizes[size].height,
 			}}
 			link={
-				// @ts-ignore
 				link && !lightbox
-					? {href: link, target: newTab ? "_blank" : "_self"}
+					? // @ts-ignore
+						{href: link, target: newTab ? "_blank" : "_self"}
 					: undefined
 			}
 			lightbox={lightbox}
