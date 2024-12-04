@@ -18,7 +18,7 @@ const config = [
 		},
 	},
 	{
-		ignores: ["**/*/node_modules/", ".yarn/", "**/*/build/", "dist/"],
+		ignores: ["**/node_modules/", "**/.yarn/", "**/build/", "**/dist/", "**/wordpress/"],
 	},
 ];
 
