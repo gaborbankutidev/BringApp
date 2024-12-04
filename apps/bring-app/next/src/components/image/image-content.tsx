@@ -16,7 +16,13 @@ export type ImageContentProps = {
 
 const imageBaseStyle = "rounded w-full";
 
-const ImageContent = ({image, link, lightbox, className, id}: ImageContentProps) => {
+const ImageContent = ({
+	image,
+	link,
+	lightbox,
+	className,
+	id,
+}: ImageContentProps) => {
 	const [lightboxController, setLightboxController] = useState({
 		toggler: false,
 		slide: 1,

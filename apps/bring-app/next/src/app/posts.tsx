@@ -22,7 +22,9 @@ export default async function Posts() {
 							"bg-gray-800/60 min-h-[180px] min-w-[280px] border border-gray-500/60 px-4 py-8 rounded-lg md:w-1/2 cursor-pointer hover:bg-gray-700/60 transition-all duration-300",
 						)}
 					>
-						<p className="text-14 text-purple-600 mb-2">Example WordPress Post</p>
+						<p className="text-14 text-purple-600 mb-2">
+							Example WordPress Post
+						</p>
 						<h3 className="text-24s mb-4">{entity.name}</h3>
 						<p>{entity.excerpt}</p>
 					</Link>

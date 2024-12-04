@@ -3,7 +3,8 @@ import {extendTailwindMerge} from "tailwind-merge";
 
 // Extend twMerge
 type AdditionalClassGroupIds = "heading";
-const fontSizeClassGroupCheck = (classPart: string) => /^[1-9][0-9]*[a-z]*$/.test(classPart);
+const fontSizeClassGroupCheck = (classPart: string) =>
+	/^[1-9][0-9]*[a-z]*$/.test(classPart);
 
 const twMerge = extendTailwindMerge<AdditionalClassGroupIds>({
 	extend: {

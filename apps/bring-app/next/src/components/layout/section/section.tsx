@@ -32,7 +32,11 @@ const Section = ({
 }: SectionProps) => {
 	const sCn = cn(baseStye, dark ? "dark" : "light", className);
 	const bgImageCn = cn(bgImageBaseStyle, backgroundImageClassName);
-	const bgCn = cn(bgBaseStyle, backgroundImage && "opacity-80", backgroundClassName);
+	const bgCn = cn(
+		bgBaseStyle,
+		backgroundImage && "opacity-80",
+		backgroundClassName,
+	);
 	const containerCn = cn(containerBaseStyle, containerClassName);
 
 	return (

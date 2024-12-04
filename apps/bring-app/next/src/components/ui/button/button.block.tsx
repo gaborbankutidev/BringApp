@@ -5,7 +5,13 @@ export type ButtonBlockProps = {
 	text: string;
 	href?: string;
 	newTab?: boolean;
-	variant?: "primary" | "destructive" | "outline" | "secondary" | "ghost" | "link";
+	variant?:
+		| "primary"
+		| "destructive"
+		| "outline"
+		| "secondary"
+		| "ghost"
+		| "link";
 	size?: "sm" | "md" | "lg" | "icon";
 };
 

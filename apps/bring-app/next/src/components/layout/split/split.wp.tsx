@@ -13,7 +13,9 @@ const splitConfig: BlockConfig<SplitBlockProps> = {
 		gap: objectAttributeSource(),
 	},
 	Edit: SplitEdit,
-	Controls: [{panel: "Split settings", controls: [SplitControls], initialOpen: true}],
+	Controls: [
+		{panel: "Split settings", controls: [SplitControls], initialOpen: true},
+	],
 };
 
 export default splitConfig;

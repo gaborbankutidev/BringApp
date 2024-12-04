@@ -1,5 +1,9 @@
 import type {BP} from "@/bring";
-import {type AlignType, type DirectionType, type JustifyType} from "@/editor/utils/lists";
+import {
+	type AlignType,
+	type DirectionType,
+	type JustifyType,
+} from "@/editor/utils/lists";
 import {cn} from "@/lib/utils";
 import type {ColorType} from "@/styles/colors";
 import type {ResponsiveValue} from "@bring/blocks-client/styles";

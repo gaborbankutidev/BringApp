@@ -14,7 +14,13 @@ export type RowBlockProps = {
 };
 
 const RowBlock = ({
-	attributes: {columnCount = {}, gap = {}, backgroundColor, className, ...props},
+	attributes: {
+		columnCount = {},
+		gap = {},
+		backgroundColor,
+		className,
+		...props
+	},
 	children,
 }: BP<RowBlockProps>) => {
 	const classNames = cn(

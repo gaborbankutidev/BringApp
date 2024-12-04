@@ -12,7 +12,9 @@ const wpAdminUrl = `${env.NEXT_PUBLIC_WP_BASE_URL}/wp-admin/`;
 
 const Home = async () => {
 	const wpStatus = await getWpStatus();
-	const errorNotice = wpHealthCheckNotices.find(({status}) => status === wpStatus);
+	const errorNotice = wpHealthCheckNotices.find(
+		({status}) => status === wpStatus,
+	);
 
 	return (
 		<Section dark>
@@ -27,9 +29,9 @@ const Home = async () => {
 					</h1>
 					<p className="mb-6">
 						BringApp is a framework designed to help developers build NextJs
-						applications using WordPress as a headless CMS and site builder. It provides
-						a set of tools and components to help you get started quickly and build your
-						app with ease.
+						applications using WordPress as a headless CMS and site builder. It
+						provides a set of tools and components to help you get started
+						quickly and build your app with ease.
 					</p>
 					<div className="flex xl:flex-row flex-col gap-4 md:mb-24 mb-8">
 						<Link
@@ -60,8 +62,12 @@ const Home = async () => {
 					{errorNotice && (
 						<div className="bg-gray-800/80 min-h-[180px] flex items-center border px-4 py-8 rounded-lg border-red-600">
 							<div>
-								<h3 className="text-24s mb-4 text-red-600">{errorNotice.title}</h3>
-								<Markdown className="text-red-600">{errorNotice.notice}</Markdown>
+								<h3 className="text-24s mb-4 text-red-600">
+									{errorNotice.title}
+								</h3>
+								<Markdown className="text-red-600">
+									{errorNotice.notice}
+								</Markdown>
 							</div>
 						</div>
 					)}

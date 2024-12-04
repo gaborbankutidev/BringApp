@@ -40,8 +40,16 @@ const sectionConfig: BlockConfig<SectionBlockProps> = {
 		{
 			panel: "Advanced",
 			controls: [
-				{type: "text", label: "Background Image Classes", path: "backgroundImageClassName"},
-				{type: "text", label: "Background Classes", path: "backgroundClassName"},
+				{
+					type: "text",
+					label: "Background Image Classes",
+					path: "backgroundImageClassName",
+				},
+				{
+					type: "text",
+					label: "Background Classes",
+					path: "backgroundClassName",
+				},
 				{type: "text", label: "Container Classes", path: "containerClassName"},
 			],
 		},

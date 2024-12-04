@@ -27,8 +27,8 @@ export default function Docs() {
 							<h3 className="text-24s mb-4">Project setup</h3>
 
 							<p>
-								Follow the steps to create a new project using BringApp and start
-								building your app.
+								Follow the steps to create a new project using BringApp and
+								start building your app.
 							</p>
 						</a>
 
@@ -38,12 +38,14 @@ export default function Docs() {
 							rel="noopener noreferrer"
 							className="transition-all duration-300 bg-gray-800/60 border border-gray-500/60 px-4 py-8 rounded-lg lg:w-1/2 hover:bg-gray-700/60 cursor-pointer"
 						>
-							<p className="text-14 text-purple-600 mb-2">Get to know your tools</p>
+							<p className="text-14 text-purple-600 mb-2">
+								Get to know your tools
+							</p>
 							<h3 className="text-24s mb-4">API documentation</h3>
 
 							<p>
-								Dive deeper into the usage of the dependency packages maintained for
-								the Bring App.
+								Dive deeper into the usage of the dependency packages maintained
+								for the Bring App.
 							</p>
 						</a>
 					</div>

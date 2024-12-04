@@ -53,7 +53,11 @@ const ButtonButton = React.forwardRef<HTMLButtonElement, AsButton>(
 	({className, variant, size, asChild = false, ...props}: AsButton, ref) => {
 		const Comp = asChild ? Slot : "button";
 		return (
-			<Comp className={cn(buttonVariants({variant, size, className}))} ref={ref} {...props} />
+			<Comp
+				className={cn(buttonVariants({variant, size, className}))}
+				ref={ref}
+				{...props}
+			/>
 		);
 	},
 );
@@ -63,20 +67,32 @@ const Link = React.forwardRef<HTMLAnchorElement, AsLink>(
 	({className, variant, size, asChild = false, ...props}: AsLink, ref) => {
 		const Comp = asChild ? Slot : "a";
 		return (
-			<Comp className={cn(buttonVariants({variant, size, className}))} ref={ref} {...props} />
+			<Comp
+				className={cn(buttonVariants({variant, size, className}))}
+				ref={ref}
+				{...props}
+			/>
 		);
 	},
 );
 Link.displayName = "Link";
 
-const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
-	({as, ...props}: ButtonProps, ref) => {
-		if (as === "Link") {
-			return <Link {...(props as AsLink)} ref={ref as React.Ref<HTMLAnchorElement>} />;
-		}
-		return <ButtonButton {...(props as AsButton)} ref={ref as React.Ref<HTMLButtonElement>} />;
-	},
-);
+const Button = React.forwardRef<
+	HTMLButtonElement | HTMLAnchorElement,
+	ButtonProps
+>(({as, ...props}: ButtonProps, ref) => {
+	if (as === "Link") {
+		return (
+			<Link {...(props as AsLink)} ref={ref as React.Ref<HTMLAnchorElement>} />
+		);
+	}
+	return (
+		<ButtonButton
+			{...(props as AsButton)}
+			ref={ref as React.Ref<HTMLButtonElement>}
+		/>
+	);
+});
 Button.displayName = "Button";
 
 export default Button;

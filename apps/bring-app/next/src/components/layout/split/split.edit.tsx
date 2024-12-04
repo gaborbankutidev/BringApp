@@ -10,7 +10,10 @@ export const SplitEdit: BlockEdit<SplitBlockProps> = ({
 	const {columnCount, ...restOfAttributes} = attributes;
 	return (
 		<EditorCard color="lime" isSelected={isSelected} name="Split">
-			<Block attributes={{columnCount: {"": 1}, ...restOfAttributes}} {...restOfBlockProps}>
+			<Block
+				attributes={{columnCount: {"": 1}, ...restOfAttributes}}
+				{...restOfBlockProps}
+			>
 				<div
 					className={`editor-row-content editor-row-content-${
 						columnCount?.lg ?? columnCount?.md ?? columnCount?.[""] ?? 1

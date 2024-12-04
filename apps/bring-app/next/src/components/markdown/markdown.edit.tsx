@@ -55,7 +55,10 @@ const MarkdownEdit: BlockEdit<MarkdownBlockProps> = ({
 
 	return source !== "manual" ? (
 		<EditorCard isSelected={isSelected} name="Markdown">
-			<Block attributes={{content, source, ...restOfAttributes}} {...restOfBlockProps} />
+			<Block
+				attributes={{content, source, ...restOfAttributes}}
+				{...restOfBlockProps}
+			/>
 		</EditorCard>
 	) : isPreview ? (
 		<EditorCard isSelected={isSelected} name="Markdown">
@@ -73,7 +76,10 @@ const MarkdownEdit: BlockEdit<MarkdownBlockProps> = ({
 					/>
 				</ToolbarGroup>
 			</BlockControls>
-			<Block attributes={{content, ...restOfAttributes}} {...restOfBlockProps} />
+			<Block
+				attributes={{content, ...restOfAttributes}}
+				{...restOfBlockProps}
+			/>
 		</EditorCard>
 	) : (
 		<EditorCard isSelected={isSelected} name="Markdown">
