@@ -11,7 +11,6 @@
 		"packages/@bring/blocks-wp",
 		"packages/@bring/create-app",
 		"packages/@bring/config",
-		"packages/@bring/config",
 		"apps/bring-app/next-app",
 		"apps/bring-app/",
 		"apps/*"
@@ -73,7 +72,7 @@
 		"*.{ts,tsx,js,jsx,json,css,md,yml,yaml,php}": [
 			"prettier --write"
 		],
-		"*.{ts,tsx,js,jsx,}": [
+		"*.{ts,tsx,js,jsx}": [
 			"yarn eslint --config ./eslint.config.cjs --fix"
 		]
 	}
