@@ -1,7 +1,7 @@
 {
 	"name": "@bring/blocks-client",
-	"type": "module",
 	"version": "2.8.0",
+	"type": "module",
 	"description": "Client package for bring-blocks",
 	"author": "Bring Team Ltd.",
 	"license": "GPL-2.0-or-later",
@@ -74,7 +74,7 @@
 	},
 	"dependencies": {
 		"clsx": "2.1.1",
-		"react-intersection-observer": "^9.13.1"
+		"react-intersection-observer": "9.13.1"
 	},
 	"devDependencies": {
 		"@bring/config": "workspace:*",

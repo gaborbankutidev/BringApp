@@ -22,25 +22,25 @@
 		"@bring/blocks-editor": "workspace:*",
 		"@hookform/resolvers": "3.9.1",
 		"@radix-ui/react-slot": "1.1.0",
-		"@sentry/nextjs": "8.40.0",
+		"@sentry/nextjs": "8.42.0",
 		"@t3-oss/env-nextjs": "0.11.1",
-		"@wordpress/block-editor": "14.7.0",
-		"@wordpress/blocks": "14.1.0",
-		"@wordpress/components": "28.12.0",
-		"@wordpress/data": "10.12.0",
+		"@wordpress/block-editor": "14.8.0",
+		"@wordpress/blocks": "14.2.0",
+		"@wordpress/components": "28.13.0",
+		"@wordpress/data": "10.13.0",
 		"class-variance-authority": "0.7.1",
 		"clsx": "2.1.1",
 		"date-fns": "4.1.0",
 		"easymde": "2.18.0",
-		"framer-motion": "11.11.17",
+		"framer-motion": "11.13.1",
 		"fslightbox-react": "1.7.6",
-		"html-react-parser": "5.1.18",
-		"lucide-react": "0.461.0",
+		"html-react-parser": "5.1.19",
+		"lucide-react": "0.466.0",
 		"next": "15.0.3",
 		"react": "19.0.0-rc-fb9a90fa48-20240614",
 		"react-dom": "19.0.0-rc-fb9a90fa48-20240614",
 		"react-hook-form": "7.53.2",
-		"react-icons": "5.3.0",
+		"react-icons": "5.4.0",
 		"react-markdown": "9.0.1",
 		"react-simplemde-editor": "5.2.0",
 		"remark-supersub": "1.0.0",
@@ -66,12 +66,12 @@
 		"@tailwindcss/typography": "^0.5.15",
 		"@types/eslint__eslintrc": "^2.1.2",
 		"@types/fslightbox-react": "^1.7.8",
-		"@types/node": "22.10.0",
+		"@types/node": "22.10.1",
 		"@types/react": "^18.3.12",
 		"@types/react-dom": "^18.3.1",
 		"@types/wordpress__block-editor": "^11.5.15",
 		"@types/wordpress__blocks": "^12.5.14",
-		"@wordpress/scripts": "30.5.1",
+		"@wordpress/scripts": "30.6.0",
 		"autoprefixer": "^10.4.20",
 		"concurrently": "9.1.0",
 		"cross-env": "^7.0.3",
@@ -93,8 +93,8 @@
 		"*.{ts,tsx,js,jsx,json,css,md,yml,yaml,php}": [
 			"prettier --write"
 		],
-		"*.{ts,tsx,js,jsx,}": [
-			"yarn  eslint --config ./eslint.config.mjs --fix"
+		"*.{ts,tsx,js,jsx}": [
+			"yarn eslint --config ./eslint.config.mjs --fix"
 		]
 	}
 }
