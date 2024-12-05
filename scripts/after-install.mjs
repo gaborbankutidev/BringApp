@@ -1,10 +1,10 @@
-import {execSync} from "child_process";
+import { execSync } from "child_process"
 
-execSync("yarn prepare");
+execSync("yarn prepare")
 
 if (process.env.SKIP_COMPOSER_INSTALL) {
-	process.exit(0);
+	process.exit(0)
 }
 
-execSync("yarn install:composer:pkg", {stdio: "inherit"});
-execSync("yarn install:composer:app", {stdio: "inherit"});
+execSync("yarn install:composer:pkg", { stdio: "inherit" })
+execSync("yarn install:composer:app", { stdio: "inherit" })

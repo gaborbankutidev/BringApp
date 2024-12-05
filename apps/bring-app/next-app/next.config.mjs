@@ -1,8 +1,8 @@
-import {withSentryConfig} from "@sentry/nextjs";
+import { withSentryConfig } from "@sentry/nextjs"
 
-await import("./src/env.mjs");
+await import("./src/env.mjs")
 
-const sentryProject = "template";
+const sentryProject = "template"
 
 // Have a really good reason to touch the part below
 
@@ -44,7 +44,7 @@ const nextConfig = {
 			},
 		],
 	},
-};
+}
 
 const sentryWebpackPluginOptions = {
 	hideSourceMaps: true,
@@ -56,6 +56,6 @@ const sentryWebpackPluginOptions = {
 
 	silent: true,
 	automaticVercelMonitors: true,
-};
+}
 
-export default withSentryConfig(nextConfig, sentryWebpackPluginOptions);
+export default withSentryConfig(nextConfig, sentryWebpackPluginOptions)

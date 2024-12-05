@@ -10,7 +10,7 @@
 	},
 	"lint-staged": {
 		"*.{ts,tsx,js,jsx,json,css,md,yml,yaml,php}": [
-			"prettier --write"
+			"npx prettier --write ."
 		],
 		"*.php": [
 			"composer lint --fix"
