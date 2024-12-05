@@ -1735,6 +1735,7 @@ __metadata:
     "@bring/config": "workspace:*"
     "@types/react": "npm:^18.3.12"
     "@types/react-dom": "npm:^18.3.1"
+    clsx: "npm:2.1.1"
     eslint: "npm:^9.14.0"
     react-intersection-observer: "npm:9.13.1"
     typescript: "npm:^5.6.3"
@@ -1761,11 +1762,11 @@ __metadata:
     "@wordpress/blocks": "npm:14.1.0"
     "@wordpress/components": "npm:28.12.0"
     "@wordpress/data": "npm:10.12.0"
+    clsx: "npm:2.1.1"
     eslint: "npm:^9.14.0"
     lodash.clonedeep: "npm:4.5.0"
     lodash.get: "npm:4.4.2"
     lodash.set: "npm:4.3.2"
-    tailwind-merge: "npm:2.5.5"
     typescript: "npm:^5.6.3"
   peerDependencies:
     "@wordpress/block-editor": 14.6.0
