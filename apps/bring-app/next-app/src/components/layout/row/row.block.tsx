@@ -1,45 +1,48 @@
-import { row, rowSizes as sizes, type RowBlockProps as RowProps } from "@/components/layout/row"
-import type { BlockConfig } from "@bring/blocks-editor"
-import { makeOptions, objectAttributeSource, stringAttributeSource } from "@bring/blocks-editor"
-import { RowControls } from "./row.controls"
-import { RowEdit } from "./row.edit"
 
-import { colorOptions } from "@/editor/utils/options"
-import { objectKeys } from "@bring/blocks-client"
+import type {BP} from "@/bring";
+import {cn} from "@/lib/utils";
+import type {ColorType} from "@/styles/colors";
+import type {ResponsiveValue} from "@bring/blocks-client/styles";
+import {makeResponsiveClassNames} from "@bring/blocks-client/styles";
+import {type GridNumType} from "@bring/blocks-client/types";
+import Row, {sizes} from "./row";
 
-const rowConfig: BlockConfig<RowProps> = {
-	...row,
-	title: "Row",
-	icon: "align-center",
-	allowedBlocks: ["bring/column"],
+export type RowBlockProps = {
+	columnCount?: ResponsiveValue<GridNumType>;
+	gap?: ResponsiveValue;
+	backgroundColor?: ColorType;
+	size?: keyof typeof sizes;
+};
+
+const RowBlock = ({
 	attributes: {
-		columnCount: objectAttributeSource(),
-		gap: objectAttributeSource(),
-		backgroundColor: stringAttributeSource(),
-		size: stringAttributeSource(),
+		columnCount = {},
+		gap = {},
+		backgroundColor,
+		className,
+		...props
 	},
-	Edit: RowEdit,
-	Controls: [
-		{ panel: "Grid settings", controls: [RowControls], initialOpen: true },
-		{
-			panel: "Row settings",
-			controls: [
-				{
-					type: "select",
-					label: "Size",
-					path: "size",
-					options: makeOptions(objectKeys(sizes)),
-				},
-				{
-					type: "select",
-					label: "Background color",
-					path: "backgroundColor",
-					options: colorOptions,
-				},
-			],
-		},
-	],
-	styles: {
+	children,
+}: BP<RowBlockProps>) => {
+	const classNames = cn(
+		makeResponsiveClassNames("grid-cols", columnCount, {"": 1}),
+		makeResponsiveClassNames("gap", gap, {"": 8}),
+		"px-0",
+		backgroundColor && `bg-${backgroundColor}`,
+		className,
+	);
+
+	return (
+		<Row className={classNames} {...props}>
+			{children}
+		</Row>
+	);
+};
+
+export const row = {
+	Block: RowBlock,
+	blockName: "bring/row",
+	blockStylesConfig: {
 		spacing: {
 			m: {
 				t: { "": 0 },
@@ -56,6 +59,6 @@ const rowConfig: BlockConfig<RowProps> = {
 		},
 		visibility: { "": "grid", md: "grid", lg: "grid" },
 	},
-}
+} as const;
 
-export default rowConfig
+export default Row;

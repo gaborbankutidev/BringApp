@@ -1,18 +1,17 @@
-import { Button, Icon } from "@wordpress/components"
-import cloneDeep from "lodash.clonedeep"
-import get from "lodash.get"
-import set from "lodash.set"
-import type { FC } from "react"
-import React, { useState } from "react"
-import { CheckboxControl } from ".."
-import { ResponsiveValue } from "../../client-types"
-import type { ResponsiveLabels } from "../../styles/types"
-import { screenSizes } from "../../styles/utils"
-import type { Obj } from "../../types"
-import { objectKeys } from "../../utils"
-import { useControlContext } from "../context"
-import type { ControlByPath, ControlByValue, ControlType } from "../types"
-import { isPathControl } from "../utils"
+
+import {Button, Icon} from "@wordpress/components";
+import cloneDeep from "lodash.clonedeep";
+import get from "lodash.get";
+import set from "lodash.set";
+import type {FC} from "react";
+import React, {useState} from "react";
+import {CheckboxControl} from "..";
+import type {ResponsiveLabels, ResponsiveValue} from "../../styles/types";
+import {screenSizes} from "../../styles/utils";
+import {objectKeys} from "../../utils";
+import {useControlContext} from "../context";
+import type {ControlByPath, ControlByValue, ControlType} from "../types";
+import {isPathControl} from "../utils";
 
 /**
  * A control component that renders a responsive checkbox control.
@@ -22,8 +21,8 @@ import { isPathControl } from "../utils"
  * @param props - The props for the ResponsiveCheckboxControl component.
  * @returns The rendered ResponsiveCheckboxControl component.
  */
-export const ResponsiveCheckboxControl = <pT extends Obj = {}>(
-	props: ControlType<ResponsiveValue<boolean>, pT>
+export const ResponsiveCheckboxControl = <pT extends object = {}>(
+	props: ControlType<ResponsiveValue<boolean>, pT>,
 ) =>
 	isPathControl(props) ? (
 		<ResponsiveCheckboxControlByPath {...props} />
@@ -41,7 +40,7 @@ export const ResponsiveCheckboxControl = <pT extends Obj = {}>(
  * @param props - The rest of the props for the ResponsiveCheckboxControlByPath component.
  * @returns The rendered ResponsiveCheckboxControlByPath component.
  */
-function ResponsiveCheckboxControlByPath<pT extends Obj>({
+function ResponsiveCheckboxControlByPath<pT extends object>({
 	path,
 	updateHandling,
 	...props

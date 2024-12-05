@@ -1,17 +1,18 @@
-import type { SplitProps } from "@/components/layout/split"
-import type { BlockControl } from "@bring/blocks-editor"
-import { ResponsiveRangeControl } from "@bring/blocks-editor"
 
-export const SplitControls: BlockControl<SplitProps> = () => (
+import type {BlockControl} from "@bring/blocks-editor/blocks";
+import {ResponsiveRangeControl} from "@bring/blocks-editor/controls";
+import type {SplitBlockProps} from "./split.block";
+
+export const SplitControls: BlockControl<SplitBlockProps> = () => (
 	<>
-		<ResponsiveRangeControl<SplitProps>
+		<ResponsiveRangeControl<SplitBlockProps>
 			label="Column count"
 			path="columnCount"
 			min={1}
 			max={12}
 			defaultValue={{ "": 1 }}
 		/>
-		<ResponsiveRangeControl<SplitProps>
+		<ResponsiveRangeControl<SplitBlockProps>
 			label="Gap"
 			path="gap"
 			min={0}

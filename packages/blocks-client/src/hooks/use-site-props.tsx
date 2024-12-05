@@ -13,8 +13,8 @@ import type { SiteProps } from "../types"
  * @param wpURL - WordPress URL.
  * @returns Site props or null if not available.
  */
-export function useSiteProps<SP = {}, M = {}, MI = {}>(wpURL: string) {
-	const [siteProps, setSiteProps] = useState<SiteProps<SP, M, MI> | null>(null)
+export function useSiteProps<SP = object, M = object, MI = object>(wpURL: string) {
+	const [siteProps, setSiteProps] = useState<SiteProps<SP, M, MI> | null>(null);
 
 	// query site props
 	useEffect(() => {

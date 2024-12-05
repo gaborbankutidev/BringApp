@@ -1,6 +1,7 @@
-import { BringStyles, ResponsiveLabels } from "./types"
 
-export const BringStylesDefaultValue: BringStyles = {
+import {BlockStyles, ResponsiveLabels} from "./types";
+
+export const blockStylesDefaultValue: BlockStyles = {
 	spacing: {
 		m: {
 			t: {},

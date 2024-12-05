@@ -1,47 +1,45 @@
-import { button, type ButtonBlockProps } from "@/components/ui/button"
-import {
-	booleanAttributeSource,
-	makeOptions,
-	stringAttributeSource,
-	type BlockConfig,
-} from "@bring/blocks-editor"
 
-const buttonConfig: BlockConfig<ButtonBlockProps> = {
-	...button,
-	title: "Button",
-	description: "A simple button",
-	attributes: {
-		text: stringAttributeSource("Click here"),
-		href: stringAttributeSource("#"),
-		variant: stringAttributeSource(),
-		size: stringAttributeSource(),
-		newTab: booleanAttributeSource(),
-	},
-	Controls: [
-		{
-			panel: "Settings",
-			controls: [
-				{ type: "text", label: "Text", path: "text", setDefault: false },
-				{ type: "text", label: "Url", path: "href", setDefault: false },
-				{ type: "toggle", label: "New tab", path: "newTab" },
-				{
-					type: "select",
-					label: "Variant",
-					path: "variant",
-					options: makeOptions(["primary", "destructive", "outline", "secondary", "ghost", "link"]),
-					defaultValue: "primary",
-				},
-				{
-					type: "select",
-					label: "Size",
-					path: "size",
-					options: makeOptions(["sm", "md", "lg", "icon"]),
-					defaultValue: "md",
-				},
-			],
-			initialOpen: true,
+import {BP} from "@/bring";
+import Button from "./button";
+
+export type ButtonBlockProps = {
+	text: string;
+	href?: string;
+	newTab?: boolean;
+	variant?:
+		| "primary"
+		| "destructive"
+		| "outline"
+		| "secondary"
+		| "ghost"
+		| "link";
+	size?: "sm" | "md" | "lg" | "icon";
+};
+
+export const ButtonBlock = ({
+	attributes: {text, newTab = false, ...props},
+}: BP<ButtonBlockProps>) => {
+	return (
+		<Button as="Link" target={newTab ? "_blank" : "_self"} {...props}>
+			{text}
+		</Button>
+	);
+};
+
+export const button = {
+	Block: ButtonBlock,
+	blockName: "bring/button",
+	blockStylesConfig: {
+		spacing: {
+			m: {
+				t: {},
+				b: {},
+				l: {},
+				r: {},
+			},
 		},
-	],
-}
+		visibility: {"": "inline-flex", md: "inline-flex", lg: "inline-flex"},
+	},
+} as const;
 
-export default buttonConfig
+export default Button;

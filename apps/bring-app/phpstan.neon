@@ -4,13 +4,10 @@ includes:
 parameters:
 	level: 9
 	paths:
-		- plugins/bring-app/src
-		- plugins/bring-app/includes
-		- plugins/bring-app/admin
-		- plugins/bring-app/public
 		- plugins/bring-app/index.php
 		- plugins/bring-app/bring-app.php
 		- plugins/bring-app/uninstall.php
+		- plugins/bring-app/src
 	bootstrapFiles:
 		- plugins/bring-app/vendor/php-stubs/acf-pro-stubs/acf-pro-stubs.php
 	ignoreErrors:

@@ -1,52 +1,32 @@
-import { divider, type DividerProps } from "@/components/divider"
-import { colorOptions } from "@/editor/utils/options"
-import {
-	booleanAttributeSource,
-	numberAttributeSource,
-	stringAttributeSource,
-	type BlockConfig,
-} from "@bring/blocks-editor"
+import type {BP} from "@/bring";
+import {cn} from "@/lib/utils";
+import type {ColorType} from "@/styles/colors";
 
-const dividerConfig: BlockConfig<DividerProps> = {
-	...divider,
-	title: "Divider",
-	description: "Divider helps to apply up white space between blocks.",
-	attributes: {
-		withLine: booleanAttributeSource(),
-		lineColor: stringAttributeSource(),
-		height: numberAttributeSource(),
-	},
-	previewAttributes: {
-		withLine: true,
-		height: 200,
-	},
-	Controls: [
-		{
-			panel: "Divider settings",
-			controls: [
-				{
-					type: "range",
-					label: "Height (in px)",
-					path: "height",
-					min: 0,
-					max: 1200,
-					defaultValue: 40,
-				},
+export type DividerBlockProps = {
+	withLine?: boolean;
+	lineColor?: ColorType;
+	height?: number;
+};
 
-				{ type: "checkbox", label: "With line", path: "withLine" },
-				{
-					type: "select",
-					label: "Line color",
-					path: "lineColor",
-					options: colorOptions,
-					defaultValue: "primary",
-					show: "withLine",
-				},
-			],
-			initialOpen: true,
-		},
-	],
-	styles: {
+/**
+ * Divider helps to apply up white space between blocks in the editor.
+ */
+const DividerBlock = ({
+	attributes: {height = 40, lineColor, withLine = false, className, ...props},
+}: BP<DividerBlockProps>) => {
+	const classNames = cn("flex items-center", className);
+
+	return (
+		<div className={classNames} style={{minHeight: `${height}px`}} {...props}>
+			{withLine && <div className={`w-full border-b border-${lineColor}`} />}
+		</div>
+	);
+};
+
+export const divider = {
+	Block: DividerBlock,
+	blockName: "bring/divider",
+	blockStylesConfig: {
 		spacing: {
 			m: {
 				t: {},
@@ -63,6 +43,6 @@ const dividerConfig: BlockConfig<DividerProps> = {
 		},
 		visibility: { "": "flex", md: "flex", lg: "flex" },
 	},
-}
+} as const;
 
-export default dividerConfig
+export default DividerBlock;

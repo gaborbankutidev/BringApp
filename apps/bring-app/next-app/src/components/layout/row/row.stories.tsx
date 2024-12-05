@@ -12,8 +12,8 @@ type Story = StoryObj<typeof meta>
 
 export const Screen720: Story = {
 	render: () => (
-		<div className="bg-grey-200 py-4">
-			<Row size="720" className="bg-grey-300">
+		<div className="bg-gray-200 py-4">
+			<Row size="720" className="bg-gray-300">
 				This is the row
 			</Row>
 		</div>
@@ -22,8 +22,8 @@ export const Screen720: Story = {
 
 export const Screen1040: Story = {
 	render: () => (
-		<div className="bg-grey-200 py-4">
-			<Row size="1040" className="bg-grey-300">
+		<div className="bg-gray-200 py-4">
+			<Row size="1040" className="bg-gray-300">
 				This is the row
 			</Row>
 		</div>
@@ -32,8 +32,8 @@ export const Screen1040: Story = {
 
 export const Screen1200: Story = {
 	render: () => (
-		<div className="bg-grey-200 py-4">
-			<Row size="1200" className="bg-grey-300">
+		<div className="bg-gray-200 py-4">
+			<Row size="1200" className="bg-gray-300">
 				This is the row
 			</Row>
 		</div>
@@ -42,8 +42,8 @@ export const Screen1200: Story = {
 
 export const ScreenWide: Story = {
 	render: () => (
-		<div className="bg-grey-200 py-4">
-			<Row size="wide" className="bg-grey-300">
+		<div className="bg-gray-200 py-4">
+			<Row size="wide" className="bg-gray-300">
 				This is the row
 			</Row>
 		</div>
@@ -52,8 +52,8 @@ export const ScreenWide: Story = {
 
 export const ScreenFull: Story = {
 	render: () => (
-		<div className="bg-grey-200 py-4">
-			<Row size="full" className="bg-grey-300">
+		<div className="bg-gray-200 py-4">
+			<Row size="full" className="bg-gray-300">
 				This is the row
 			</Row>
 		</div>

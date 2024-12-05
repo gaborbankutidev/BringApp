@@ -26,7 +26,6 @@ export {
 	useSendForm,
 	useSiteProps,
 	useWindowDimensions,
-	type FormState,
 	type UseDynamicEntityListOptions,
 	type UseDynamicEntityPropsOptions,
 } from "./hooks"
@@ -37,8 +36,8 @@ export { initRender } from "./init-render"
 export { initServer } from "./init-server"
 
 // Styles
-export { makeResponsiveClassNames } from "./styles"
-export type { BringStylesClassNames, ResponsiveValue } from "./styles"
+export {makeResponsiveClassNames} from "./styles";
+export type {BlockStylesClassNames, ResponsiveValue} from "./styles";
 
 // Types
 export type {
@@ -51,14 +50,13 @@ export type {
 	EntityContent,
 	EntityProps,
 	EntityType,
-	FCC,
+	FCB,
 	GridNumType,
 	ImageType,
 	MediaType,
 	MenuItemType,
 	MenuLocationType,
 	MenuType,
-	Obj,
 	SiteProps,
 } from "./types"
 

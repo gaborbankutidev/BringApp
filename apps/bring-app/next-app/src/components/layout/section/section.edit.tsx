@@ -1,15 +1,16 @@
-import { section, type SectionBlockProps as SectionProps } from "@/components/layout/section"
-import type { BlockEdit } from "@bring/blocks-editor"
-import { EditorCard } from "@bring/blocks-editor"
 
-export const SectionEdit: BlockEdit<SectionProps> = ({
-	children,
+import type {BlockEdit} from "@bring/blocks-editor/blocks";
+import {EditorCard} from "@bring/blocks-editor/components";
+import {type SectionBlockProps} from "./section.block";
+
+export const SectionEdit: BlockEdit<SectionBlockProps> = ({
+	blockProps,
+	Block,
 	isSelected = false,
-	...props
 }) => {
 	return (
 		<EditorCard color="blue" isSelected={isSelected} name="Section">
-			<section.Component {...props}>{children}</section.Component>
+			<Block {...blockProps} />
 		</EditorCard>
 	)
 }

@@ -1,1 +1,2 @@
-export * from "./post-content.block"
+
+export * from "./post-content.wp";

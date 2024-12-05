@@ -1,41 +1,49 @@
-import { section, type SectionBlockProps as SectionProps } from "@/components/layout/section"
-import { colorOptions } from "@/editor/utils/options"
-import {
-	booleanAttributeSource,
-	imageAttributeSource,
-	stringAttributeSource,
-	type BlockConfig,
-} from "@bring/blocks-editor"
-import { SectionEdit } from "./section.edit"
 
-const sectionConfig: BlockConfig<SectionProps> = {
-	...section,
-	title: "Section",
-	icon: "align-center",
-	allowedBlocks: ["bring/row"],
+import type {BP} from "@/bring";
+import {cn} from "@/lib/utils";
+import type {ColorType} from "@/styles/colors";
+import type {ImageType} from "@bring/blocks-client";
+import Section from "./section";
+
+export type SectionBlockProps = {
+	backgroundColor?: ColorType;
+	backgroundImage?: ImageType;
+	dark?: boolean;
+
+	backgroundImageClassName?: string;
+	backgroundClassName?: string;
+	containerClassName?: string;
+};
+
+const SectionBlock = ({
 	attributes: {
-		backgroundColor: stringAttributeSource(),
-		backgroundImage: imageAttributeSource(),
-		dark: booleanAttributeSource(),
+		backgroundColor = "transparent",
+		backgroundImage,
+		backgroundClassName,
+		...props
 	},
-	Edit: SectionEdit,
-	Controls: [
-		{
-			panel: "Section settings",
-			controls: [
-				{
-					type: "select",
-					label: "Background color",
-					path: "backgroundColor",
-					options: colorOptions,
-				},
-				{ type: "image", label: "Background image", path: "backgroundImage" },
-				{ type: "toggle", label: "Dark", path: "dark" },
-			],
-			initialOpen: true,
-		},
-	],
-	styles: {
+	children,
+}: BP<SectionBlockProps>) => (
+	<Section
+		backgroundImage={
+			backgroundImage?.src
+				? {
+						src: backgroundImage.src,
+						alt: backgroundImage.alt ?? "Background image",
+					}
+				: undefined
+		}
+		backgroundClassName={cn(`bg-${backgroundColor}`, backgroundClassName)}
+		{...props}
+	>
+		{children}
+	</Section>
+);
+
+export const section = {
+	Block: SectionBlock,
+	blockName: "bring/section",
+	blockStylesConfig: {
 		spacing: {
 			p: {
 				t: { "": 8 },
@@ -44,6 +52,6 @@ const sectionConfig: BlockConfig<SectionProps> = {
 		},
 		visibility: { "": "block", md: "block", lg: "block" },
 	},
-}
+} as const;
 
-export default sectionConfig
+export default Section;

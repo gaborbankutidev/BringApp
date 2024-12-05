@@ -54,7 +54,6 @@ type GetEntityResponseType<EP> =
 /**
  * Fetches an entity from the specified URL.
  * @param wpURL - The WordPress URL.
- * @param dataToken - The data token.
  * @param onRedirect - Callback function to handle redirect responses.
  * @param onNotFound - Callback function to handle not found responses.
  * @param slug - The slug of the entity to fetch.
@@ -62,7 +61,6 @@ type GetEntityResponseType<EP> =
  */
 async function getEntity<EP = object>(
 	wpURL: string,
-	dataToken: string,
 	onRedirect: (redirectTo: string, responseCode: number) => void,
 	onNotFound: () => void,
 	slug: string | string[] = ""

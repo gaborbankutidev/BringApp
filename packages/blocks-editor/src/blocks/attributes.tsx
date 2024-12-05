@@ -1,5 +1,6 @@
-import type { ImageType, MediaType, Obj } from "../types"
-import { defaultImageValue, defaultMediaValue } from "../utils"
+
+import type {ImageType, MediaType} from "../types";
+import {defaultImageValue, defaultMediaValue} from "../utils";
 
 const attributeSource = <V,>(type: string, initialValue?: V) =>
 	({ type, default: initialValue }) as const
@@ -20,8 +21,10 @@ export const stringAttributeSource = <T extends string>(initialValue?: T) =>
 export const arrayAttributeSource = <V,>(initialValue: V[] = []) =>
 	attributeSource("array", initialValue)
 
-export const objectAttributeSource = <V extends Obj>(initialValue?: V) =>
-	attributeSource("object", initialValue)
+
+export const objectAttributeSource = <V extends object>(initialValue?: V) =>
+	attributeSource("object", initialValue);
+
 
 export const imageAttributeSource = () => objectAttributeSource<ImageType>(defaultImageValue)
 

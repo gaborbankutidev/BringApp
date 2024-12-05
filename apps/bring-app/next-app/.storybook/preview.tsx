@@ -10,19 +10,14 @@ const preview: Preview = {
 			},
 		},
 	},
+	/* Add decorators - providers, default styles, etc.
 	decorators: [
 		(Story) => (
-			<div
-				style={{
-					backgroundColor: "rgb(17 24 39)",
-					padding: "1em",
-					borderRadius: "4px",
-				}}
-			>
+			<Providers>
 				<Story />
-			</div>
+			</Providers>
 		),
-	],
-}
+	], */
+};
 
 export default preview

@@ -1,14 +1,13 @@
 <?php
 
-/**
- * Fired during plugin activation
- *
- * @link       https://bring.app
- * @since      1.0.0
- *
- * @package    Bring_App
- * @subpackage Bring_App/includes
- */
+declare(strict_types=1);
+
+namespace BringApp\Core;
+
+use WP_Roles;
+
+// No direct access
+defined("ABSPATH") or die("Hey, do not do this 😱");
 
 /**
  * Fired during plugin activation.
@@ -16,22 +15,17 @@
  * This class defines all code necessary to run during the plugin's activation.
  *
  * @since      1.0.0
- * @package    Bring_App
- * @subpackage Bring_App/includes
- * @author     Bring Team Ltd. <gabor.bankuti@bring.team>
+ * @package    BringApp
  */
-class Bring_App_Activator {
+class Activator {
 	/**
-	 * Short Description. (use period)
-	 *
-	 * Long Description.
-	 *
+	 * Runs on plugin activation
 	 * @since    1.0.0
 	 * @return void
 	 */
-	public static function activate(): void {
-		self::set_bring_theme();
-		self::remove_theme_capabilities();
+	public static function activate() {
+		self::setBringTheme();
+		self::removeThemeCapabilities();
 	}
 
 	/**
@@ -39,7 +33,7 @@ class Bring_App_Activator {
 	 * @since    1.0.0
 	 * @return void
 	 */
-	private static function set_bring_theme(): void {
+	private static function setBringTheme(): void {
 		update_option("template", BRING_APP_THEME);
 		update_option("stylesheet", BRING_APP_THEME);
 	}
@@ -49,7 +43,7 @@ class Bring_App_Activator {
 	 * @since    1.0.0
 	 * @return void
 	 */
-	private static function remove_theme_capabilities(): void {
+	private static function removeThemeCapabilities(): void {
 		global $wp_roles;
 		if (!isset($wp_roles)) {
 			$wp_roles = new WP_Roles();
@@ -62,7 +56,8 @@ class Bring_App_Activator {
 			}
 
 			$role->remove_cap("switch_themes");
-			$role->remove_cap("edit_theme_options");
+			$role->remove_cap("customize");
+			$role->remove_cap("manage_block_templates");
 		}
 	}
 }

@@ -8,7 +8,6 @@ export default defineConfig({
 		"src/controls/index.ts",
 		"src/hooks/index.ts",
 		"src/styles/index.ts",
-		"src/editor.ts",
 		"src/types.ts",
 		"src/utils.ts",
 	],

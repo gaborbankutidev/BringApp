@@ -20,6 +20,9 @@ class GeneralAdminMail {
 	/**
 	 * Add form submission mails
 	 *
+	 * This is a basic form submission mail that is sent to the admin email address.
+	 * You can extend, remove or add other forms or emails as needed.
+	 *
 	 * @return void
 	 */
 	private static function formAdminMails() {

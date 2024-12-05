@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace BringApp\Extend\JWTAuth;
 
+use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
-use WP_Error;
+
+// No direct access
+defined("ABSPATH") or die("Hey, do not do this 😱");
 
 class JWTAuth {
 	/**
@@ -17,16 +20,18 @@ class JWTAuth {
 
 	/**
 	 * Initializes the class after the plugins have finished loading.
+	 * @return void
 	 */
 	public static function init(): void {
 		// Delay the route registration until all plugins are loaded
-		add_action("plugins_loaded", [self::class, "conditional_init"]);
+		add_action("plugins_loaded", [self::class, "conditionalInit"]);
 	}
 
 	/**
 	 * Conditionally initialize the config and logout REST route if requirements are met.
+	 * @return void
 	 */
-	public static function conditional_init(): void {
+	public static function conditionalInit() {
 		// Ensure the plugin admin functions are available for checking active status
 		if (!function_exists("is_plugin_active")) {
 			require_once ABSPATH . "wp-admin/includes/plugin.php";
@@ -44,12 +49,13 @@ class JWTAuth {
 			self::config();
 
 			// Initialize logout endpoint
-			add_action("rest_api_init", [self::class, "register_routes"]);
+			add_action("rest_api_init", [self::class, "registerRoutes"]);
 		}
 	}
 
 	/**
 	 * Define plugin config
+	 * @return void
 	 */
 	public static function config(): void {
 		/**
@@ -73,6 +79,7 @@ class JWTAuth {
 
 	/**
 	 * Registers the /logout route under the jwt-auth/v1 namespace.
+	 * @return void
 	 */
 	public static function register_routes(): void {
 		register_rest_route("jwt-auth/v1", "/logout", [
@@ -86,6 +93,7 @@ class JWTAuth {
 	 * Verifies the JWT token or the refresh token for the logout request.
 	 * @param WP_REST_Request $request The REST request object.
 	 *
+	 * @param WP_REST_Request<array<mixed,mixed>> $request The REST request object.
 	 * @return bool|WP_Error True if either token is valid, otherwise WP_Error.
 	 */
 	public static function verify_token_or_refresh(WP_REST_Request $request) {
@@ -103,7 +111,10 @@ class JWTAuth {
 
 		// If JWT is invalid, attempt to validate the refresh token with device payload
 		if (isset($_COOKIE["refresh_token"])) {
-			// Retrieve the device information from the request parameter if JWT is absent
+			/**
+			 * Retrieve the device information from the request parameter if JWT is absent
+			 * @var string $device
+			 */
 			$device = $request->get_param("device") ?: "";
 
 			// Validate the refresh token using the provided device information
@@ -115,7 +126,7 @@ class JWTAuth {
 		}
 
 		// If neither token is valid or no user is associated, return an error
-		return new \WP_Error(
+		return new WP_Error(
 			"jwt_auth_not_authenticated",
 			__("You are not logged in. Logout is only available for authenticated users."),
 			["status" => 403],
@@ -125,12 +136,17 @@ class JWTAuth {
 	/**
 	 * Logs out the user by unsetting the refresh token cookie and removing the refresh token from the user (device)
 	 *
+	 * @param WP_REST_Request<array<mixed,mixed>> $request The REST request object.
+*
 	 * @return WP_REST_Response Logout response.
 	 */
-	public static function handle_logout(\WP_REST_Request $request) {
+	public static function handleLogout(WP_REST_Request $request) {
 		// Check if the refresh_token cookie is set
 		if (isset($_COOKIE["refresh_token"])) {
-			// Get the device information from the request parameter
+			/**
+			 * Get the device information from the request parameter
+			 * @var string $device
+			 */
 			$device = $request->get_param("device") ?: "";
 
 			// Extract the user ID from the refresh token (user_id.token format)
@@ -154,9 +170,20 @@ class JWTAuth {
 
 			// Unset the refresh token cookie from the user's browser
 			unset($_COOKIE["refresh_token"]);
-			setcookie("refresh_token", "", time() - 3600, COOKIEPATH, COOKIE_DOMAIN, is_ssl(), true);
+
+			setcookie(
+				"refresh_token",
+				"",
+				time() - 3600,
+				// @phpstan-ignore-next-line
+				COOKIEPATH,
+				// @phpstan-ignore-next-line
+				COOKIE_DOMAIN,
+				is_ssl(),
+				true,
+			);
 		}
 
-		return new \WP_REST_Response(["message" => "Logged out successfully"], 200);
+		return new WP_REST_Response(["message" => "Logged out successfully"], 200);
 	}
 }

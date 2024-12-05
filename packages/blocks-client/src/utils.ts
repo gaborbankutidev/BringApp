@@ -6,7 +6,7 @@
  */
 export const defaultImageValue = {
 	id: null,
-	src: "https://wp-template.bringblocks.com/wp-content/uploads/screenshot.jpg",
+	src: "https://picsum.photos/1200/900",
 	alt: "Bring Theme Placeholder Image",
 }
 

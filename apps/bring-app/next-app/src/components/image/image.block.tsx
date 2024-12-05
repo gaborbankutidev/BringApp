@@ -1,73 +1,74 @@
-import { image, imageSizes, type ImageBlockProps } from "@/components/image"
-import { sourceOptions } from "@/editor/utils/options"
-import {
-	booleanAttributeSource,
-	imageAttributeSource,
-	makeOptions,
-	stringAttributeSource,
-	type BlockConfig,
-} from "@bring/blocks-editor"
 
-const sizeList = Object.keys(imageSizes)
-const sizeOptions = makeOptions([...sizeList])
+import type {BP} from "@/bring";
+import type {SourceType} from "@/editor/utils/lists";
+import {cn} from "@/lib/utils";
+import type {ImageType} from "@bring/blocks-client/types";
+import {defaultImageValue} from "@bring/blocks-client/utils";
+import Image from "./image";
 
-const imageConfig: BlockConfig<ImageBlockProps> = {
-	...image,
-	title: "Image",
-	icon: "format-image",
+export const sizes = {
+	"900": {width: 900, height: 600},
+	"1200": {width: 1200, height: 800},
+	"1800": {width: 1800, height: 1200},
+	"2400": {width: 2400, height: 1600},
+} as const;
+
+export type ImageBlockProps = {
+	contentSource: SourceType;
+	image: ImageType;
+	size?: keyof typeof sizes;
+	caption?: string;
+	source?: string;
+	link?: string;
+	newTab?: boolean;
+	lightbox?: boolean;
+	cover?: boolean;
+};
+
+const ImageBlock = ({
 	attributes: {
-		contentSource: stringAttributeSource("manual"),
-		image: imageAttributeSource(),
-		size: stringAttributeSource(),
-		caption: stringAttributeSource(),
-		source: stringAttributeSource(),
-		link: stringAttributeSource(),
-		newTab: booleanAttributeSource(),
-		lightbox: booleanAttributeSource(),
+		contentSource = "manual",
+		image = defaultImageValue,
+		size = "900",
+		link = "",
+		newTab = false,
+		lightbox = false,
+		cover = false,
+		className,
+		...props
 	},
-	Controls: [
-		{
-			controls: [
-				{
-					type: "select",
-					label: "Content source",
-					path: "contentSource",
-					options: sourceOptions,
-					setDefault: false,
-				},
-			],
-		},
-		{
-			panel: "Image settings",
-			controls: [
-				{ type: "image", label: "Image", path: "image" },
-				{
-					type: "select",
-					label: "Size",
-					path: "size",
-					options: sizeOptions,
-					defaultValue: "900",
-				},
-				{ type: "text", label: "Caption", path: "caption" },
-				{ type: "text", label: "Source", path: "source" },
-				{ type: "toggle", label: "Open in lightbox", path: "lightbox" },
-				{
-					type: "text",
-					label: "Url",
-					path: "link",
-					show: (attributes) => !attributes.lightbox,
-				},
-				{
-					type: "toggle",
-					label: "New tab",
-					path: "newTab",
-					show: (attributes) => !attributes.lightbox && !!attributes.link,
-				},
-			],
-			show: (attributes) => attributes.contentSource === "manual",
-		},
-	],
-	styles: {
+	entityProps,
+}: BP<ImageBlockProps>) => {
+	const img = contentSource === "dynamic" ? entityProps?.image : image;
+	if (!img?.src) return null;
+
+	const classNames = cn(cover && "h-full object-cover", className);
+
+	return (
+		<Image // eslint-disable-line jsx-a11y/alt-text
+			image={{
+				src: img.src,
+				alt: img.alt ?? "",
+				width: sizes[size].width,
+				height: sizes[size].height,
+			}}
+			link={
+				link && !lightbox
+					? // @ts-ignore
+						{href: link, target: newTab ? "_blank" : "_self"}
+					: undefined
+			}
+			lightbox={lightbox}
+			className={classNames}
+			{...props}
+		/>
+	);
+};
+
+export const image = {
+	Block: ImageBlock,
+	blockName: "bring/image",
+	blockStylesConfig: {
 		spacing: {
 			p: {
 				t: {},
@@ -84,6 +85,6 @@ const imageConfig: BlockConfig<ImageBlockProps> = {
 		},
 		visibility: { "": "block", md: "block", lg: "block" },
 	},
-}
+} as const;
 
-export default imageConfig
+export default Image;

@@ -1,10 +1,4 @@
-import Button from "./button"
 
-export default Button
-export {
-	ButtonBlock,
-	button,
-	buttonVariants,
-	type ButtonBlockProps,
-	type ButtonProps,
-} from "./button"
+import Button from "./button";
+export default Button;
+export {button} from "./button.block";

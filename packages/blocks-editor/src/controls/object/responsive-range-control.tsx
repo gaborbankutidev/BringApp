@@ -1,18 +1,17 @@
-import { Button, Icon } from "@wordpress/components"
-import cloneDeep from "lodash.clonedeep"
-import get from "lodash.get"
-import set from "lodash.set"
-import type { FC } from "react"
-import React, { useState } from "react"
-import { RangeControl } from ".."
-import { ResponsiveValue } from "../../client-types"
-import type { ResponsiveLabels } from "../../styles/types"
-import { screenSizes } from "../../styles/utils"
-import type { Obj } from "../../types"
-import { objectKeys } from "../../utils"
-import { useControlContext } from "../context"
-import type { ControlByPath, ControlByValue, ControlType } from "../types"
-import { isPathControl } from "../utils"
+
+import {Button, Icon} from "@wordpress/components";
+import cloneDeep from "lodash.clonedeep";
+import get from "lodash.get";
+import set from "lodash.set";
+import type {FC} from "react";
+import React, {useState} from "react";
+import {RangeControl} from "..";
+import type {ResponsiveLabels, ResponsiveValue} from "../../styles/types";
+import {screenSizes} from "../../styles/utils";
+import {objectKeys} from "../../utils";
+import {useControlContext} from "../context";
+import type {ControlByPath, ControlByValue, ControlType} from "../types";
+import {isPathControl} from "../utils";
 
 /**
  * Props for the ResponsiveRangeControl component.
@@ -27,8 +26,8 @@ type _NumberControl = { min?: number; max?: number }
  * @param props - The props for the ResponsiveRangeControl component.
  * @returns The rendered ResponsiveRangeControl component.
  */
-export const ResponsiveRangeControl = <pT extends Obj = {}>(
-	props: ControlType<ResponsiveValue, pT> & _NumberControl
+export const ResponsiveRangeControl = <pT extends object = object>(
+	props: ControlType<ResponsiveValue, pT> & _NumberControl,
 ) =>
 	isPathControl(props) ? (
 		<ResponsiveRangeControlByPath {...props} />
@@ -45,7 +44,7 @@ export const ResponsiveRangeControl = <pT extends Obj = {}>(
  * @param updateHandling - The update handling strategy.
  * @returns The rendered ResponsiveRangeControlByPath component.
  */
-function ResponsiveRangeControlByPath<pT extends Obj>({
+function ResponsiveRangeControlByPath<pT extends object>({
 	path,
 	updateHandling,
 	...props

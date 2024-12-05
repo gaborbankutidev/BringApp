@@ -1,34 +1,27 @@
-import { embed, type EmbedProps } from "@/components/embed"
-import {
-	numberAttributeSource,
-	stringAttributeSource,
-	type BlockConfig,
-} from "@bring/blocks-editor"
+import type {BP} from "@/bring";
 
-const embedConfig: BlockConfig<EmbedProps> = {
-	...embed,
-	title: "Embed",
-	description: "Embeds a video or other content from a url.",
-	attributes: {
-		url: stringAttributeSource(),
-		height: numberAttributeSource(),
-	},
-	Controls: [
-		{
-			panel: "Embed settings",
-			controls: [
-				{ type: "textarea", label: "Url", path: "url" },
-				{
-					type: "range",
-					label: "Height (in pixels)",
-					path: "height",
-					defaultValue: 400,
-				},
-			],
-			initialOpen: true,
-		},
-	],
-	styles: {
+export type EmbedBlockProps = {
+	url?: string;
+	height?: number;
+};
+
+/**
+ * Embed block helps to embed content in iframe such as Google Maps or Youtube videos in the editor.
+ */
+const EmbedBlock = ({
+	attributes: {url, height = 400, ...props},
+}: BP<EmbedBlockProps>) => {
+	return url ? (
+		<div style={{minHeight: `${height}px`}} {...props}>
+			<iframe src={url} className="h-full w-full"></iframe>
+		</div>
+	) : null;
+};
+
+export const embed = {
+	Block: EmbedBlock,
+	blockName: "bring/embed",
+	blockStylesConfig: {
 		spacing: {
 			m: {
 				t: {},
@@ -45,6 +38,6 @@ const embedConfig: BlockConfig<EmbedProps> = {
 		},
 		visibility: { "": "block", md: "block", lg: "block" },
 	},
-}
+} as const;
 
-export default embedConfig
+export default EmbedBlock;

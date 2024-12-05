@@ -1,23 +1,24 @@
-import type { Meta, StoryObj } from "@storybook/react"
-import Split from "./split"
+
+import type {Meta, StoryObj} from "@storybook/react";
+import SplitBlock from "./split.block";
 
 const meta = {
 	title: "Layout/Split",
-	component: Split,
+	component: SplitBlock,
 	tags: ["autodocs"],
-} satisfies Meta<typeof Split>
+} satisfies Meta<typeof SplitBlock>;
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
 	args: {
-		className: "grey-200",
+		attributes: {className: "gray-200"},
 		children: (
 			<>
-				<div className="bg-blue-400 p-4 text-white">Content 1</div>
-				<div className="bg-blue-400 p-4 text-white">Content 2</div>
-				<div className="bg-blue-400 p-4 text-white">Content 3</div>
+				<div className="bg-purple-400 p-4 text-white">Content 1</div>
+				<div className="bg-purple-400 p-4 text-white">Content 2</div>
+				<div className="bg-purple-400 p-4 text-white">Content 3</div>
 			</>
 		),
 	},

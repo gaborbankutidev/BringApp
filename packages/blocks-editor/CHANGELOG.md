@@ -1,5 +1,15 @@
 # @bring/blocks-editor
 
+## 2.8.0
+
+### Minor Changes
+
+-   7188ea0: Refactor BlockProps and EditorProps
+
+## 2.7.0
+
+## 2.6.0
+
 ## 2.5.0
 
 ## 2.4.0

@@ -7,10 +7,10 @@ import {
 import type { DynamicEntityProps, EntityType } from "../types"
 import Debug from "./debug"
 
-export type DynamicEntityPropsRenderProps<T = {}, P = {}> = {
-	entityProps: DynamicEntityProps<T>
-	params?: GetDynamicEntityPropsParams<P>
-}
+export type DynamicEntityPropsRenderProps<T = object, P = object> = {
+	entityProps: DynamicEntityProps<T>;
+	params?: GetDynamicEntityPropsParams<P>;
+};
 
 export type EntityProps<T, P> = {
 	entityId?: number
@@ -20,7 +20,7 @@ export type EntityProps<T, P> = {
 }
 
 function makeDynamicEntity(wpURL: string) {
-	const DynamicEntity = async <T = {}, P = {}>({
+	const DynamicEntity = async <T = object, P = object>({
 		entityId = 0,
 		entityType = "post",
 		options = {},

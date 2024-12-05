@@ -1,65 +1,54 @@
-import { group, type GroupProps } from "@/components/layout/group"
-import {
-	alignOptions,
-	colorOptions,
-	directionOptions,
-	justifyOptions,
-} from "@/editor/utils/options"
-import {
-	objectAttributeSource,
-	stringAttributeSource,
-	type BlockConfig,
-} from "@bring/blocks-editor"
-import GroupControls from "./group.controls"
-import GroupEdit from "./group.edit"
 
-const groupConfig: BlockConfig<GroupProps> = {
-	...group,
-	title: "Group",
-	description: "A group of blocks, can be vertical or horizontal.",
-	icon: "align-center",
+import {cn} from "@/lib/utils";
+import type {ColorType} from "@/styles/colors";
+import type {ResponsiveValue} from "@bring/blocks-client/styles";
+import {makeResponsiveClassNames} from "@bring/blocks-client/styles";
+import {type BP} from "@bring/blocks-client/types";
+
+export type GroupBlockProps = {
+	direction?: "vertical" | "horizontal";
+	gap?: ResponsiveValue;
+	justify?: "start" | "center" | "end" | "between";
+	align?: "start" | "center" | "end";
+	backgroundColor?: ColorType;
+};
+
+/**
+ * The group block is only used in the builder and this is technically a variant of the ColumnBlock.
+ * It is used to group elements together and apply a gap between them.
+ */
+const GroupBlock = ({
 	attributes: {
-		gap: objectAttributeSource(),
-		direction: stringAttributeSource(),
-		justify: stringAttributeSource(),
-		align: stringAttributeSource(),
-		backgroundColor: stringAttributeSource(),
+		direction = "vertical",
+		gap = {},
+		justify,
+		align,
+		backgroundColor,
+		className,
+		...props
 	},
-	Edit: GroupEdit,
-	Controls: [
-		{
-			panel: "Settings",
-			controls: [
-				GroupControls,
-				{
-					type: "select",
-					path: "direction",
-					label: "Direction",
-					options: directionOptions,
-				},
-				{
-					type: "select",
-					path: "justify",
-					label: "Justify",
-					options: justifyOptions,
-				},
-				{
-					type: "select",
-					path: "align",
-					label: "Align",
-					options: alignOptions,
-				},
-				{
-					type: "select",
-					path: "backgroundColor",
-					label: "Background color",
-					options: colorOptions,
-				},
-			],
-			initialOpen: true,
-		},
-	],
-	styles: {
+	children,
+}: BP<GroupBlockProps>) => {
+	const classNames = cn(
+		makeResponsiveClassNames("gap", gap, {"": 4}),
+		backgroundColor && `bg-${backgroundColor}`,
+		direction === "vertical" ? "flex flex-col" : "flex flex-row",
+		justify && `justify-${justify}`,
+		align && `items-${align}`,
+		className,
+	);
+
+	return (
+		<div className={classNames} {...props}>
+			{children}
+		</div>
+	);
+};
+
+export const group = {
+	Block: GroupBlock,
+	blockName: "bring/group",
+	blockStylesConfig: {
 		spacing: {
 			m: {
 				t: {},
@@ -76,6 +65,7 @@ const groupConfig: BlockConfig<GroupProps> = {
 		},
 		visibility: { "": "flex", md: "flex", lg: "flex" },
 	},
-}
 
-export default groupConfig
+} as const;
+
+export default GroupBlock;

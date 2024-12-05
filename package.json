@@ -16,7 +16,7 @@
 		"apps/bring-app/",
 		"apps/*"
 	],
-	"packageManager": "yarn@4.5.1",
+	"packageManager": "yarn@4.5.3",
 	"scripts": {
 		"after:install": "node ./scripts/after-install.mjs",
 		"all": "turbo types test lint build",
@@ -39,6 +39,7 @@
 		"release": "turbo run build lint test && changeset version && changeset publish",
 		"services:down": "docker compose -f ./apps/bring-app/compose.yml down",
 		"services:up": "docker compose -f ./apps/bring-app/compose.yml up",
+		"storybook": "cd apps/bring-app && yarn watch:storybook",
 		"test": "turbo test",
 		"types": "turbo types",
 		"watch:wp": "tsx scripts/watcher.ts"

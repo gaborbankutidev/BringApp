@@ -1,13 +1,13 @@
-import { ToggleControl as WPToggleControl } from "@wordpress/components"
-import cloneDeep from "lodash.clonedeep"
-import get from "lodash.get"
-import set from "lodash.set"
-import type { FC } from "react"
-import React from "react"
-import type { Obj } from "../../types"
-import { useControlContext } from "../context"
-import type { ControlByPath, ControlByValue, ControlType } from "../types"
-import { isPathControl } from "../utils"
+
+import {ToggleControl as WPToggleControl} from "@wordpress/components";
+import cloneDeep from "lodash.clonedeep";
+import get from "lodash.get";
+import set from "lodash.set";
+import type {FC} from "react";
+import React from "react";
+import {useControlContext} from "../context";
+import type {ControlByPath, ControlByValue, ControlType} from "../types";
+import {isPathControl} from "../utils";
 
 /**
  * A control component that renders a toggle input.
@@ -17,8 +17,8 @@ import { isPathControl } from "../utils"
  * @param props - The props for the ToggleControl component.
  * @returns The rendered ToggleControl component.
  */
-export const ToggleControl = <pT extends Obj = {}>(props: ControlType<boolean, pT>) =>
-	isPathControl(props) ? <ToggleControlByPath {...props} /> : <ToggleControlByValue {...props} />
+export const ToggleControl = <pT extends object = object>(props: ControlType<boolean, pT>) =>
+	isPathControl(props) ? <ToggleControlByPath {...props} /> : <ToggleControlByValue {...props} />;
 
 /**
  * A control component that renders a toggle input based on a path.
@@ -30,7 +30,7 @@ export const ToggleControl = <pT extends Obj = {}>(props: ControlType<boolean, p
  * @param props - The rest of the props for the ToggleControlByPath component.
  * @returns The rendered ToggleControlByPath component.
  */
-function ToggleControlByPath<pT extends Obj>({
+function ToggleControlByPath<pT extends object>({
 	path,
 	updateHandling,
 	...props
