@@ -1,19 +1,19 @@
-"use client";
+"use client"
 
-import Link from "next/link";
-import {usePathname, useRouter} from "next/navigation";
-import {BiArrowBack} from "react-icons/bi";
+import Link from "next/link"
+import { usePathname, useRouter } from "next/navigation"
+import { BiArrowBack } from "react-icons/bi"
 
 const Breadcrumb = () => {
-	const router = useRouter();
-	const path = usePathname();
-	const isSubPage = path.includes("/docs/");
+	const router = useRouter()
+	const path = usePathname()
+	const isSubPage = path.includes("/docs/")
 
 	return (
 		<>
 			{path !== "/" && !isSubPage && (
 				<Link
-					className="absolute top-4 left-10 z-10 text-gray-300 hover:text-purple-600 transition-all duration-300 flex justify-center items-center gap-2"
+					className="absolute left-10 top-4 z-10 flex items-center justify-center gap-2 text-gray-300 transition-all duration-300 hover:text-purple-600"
 					href="/"
 				>
 					<BiArrowBack />
@@ -23,7 +23,7 @@ const Breadcrumb = () => {
 
 			{isSubPage && (
 				<span
-					className="cursor-pointer absolute top-4 left-10 z-10 text-gray-300 hover:text-purple-600 transition-all duration-300 flex justify-center items-center gap-2"
+					className="absolute left-10 top-4 z-10 flex cursor-pointer items-center justify-center gap-2 text-gray-300 transition-all duration-300 hover:text-purple-600"
 					onClick={() => router.back()}
 				>
 					<BiArrowBack />
@@ -31,7 +31,7 @@ const Breadcrumb = () => {
 				</span>
 			)}
 		</>
-	);
-};
+	)
+}
 
-export default Breadcrumb;
+export default Breadcrumb

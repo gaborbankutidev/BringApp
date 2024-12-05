@@ -1,14 +1,14 @@
-import type {Meta, StoryObj} from "@storybook/react";
-import Group from "./group";
+import type { Meta, StoryObj } from "@storybook/react"
+import Group from "./group"
 
 const meta = {
 	title: "Layout/Group",
 	component: Group,
 	tags: ["autodocs"],
-} satisfies Meta<typeof Group>;
+} satisfies Meta<typeof Group>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
 	args: {
@@ -21,4 +21,4 @@ export const Primary: Story = {
 			</>
 		),
 	},
-};
+}

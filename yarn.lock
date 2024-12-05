@@ -1778,6 +1778,8 @@ __metadata:
 "@bring/blocks-wp@workspace:packages/blocks-wp":
   version: 0.0.0-use.local
   resolution: "@bring/blocks-wp@workspace:packages/blocks-wp"
+  dependencies:
+    eslint: "npm:^9.14.0"
   languageName: unknown
   linkType: soft
 
@@ -1823,6 +1825,7 @@ __metadata:
     "@inquirer/prompts": "npm:7.0.1"
     "@types/fs-extra": "npm:^11.0.4"
     concurrently: "npm:9.1.0"
+    eslint: "npm:^9.14.0"
     fs-extra: "npm:11.2.0"
     tsx: "npm:^4.19.2"
     typescript: "npm:^5.6.3"
@@ -6479,6 +6482,15 @@ __metadata:
     "@types/estree": "npm:*"
     "@types/json-schema": "npm:*"
   checksum: 10c0/69ba24fee600d1e4c5abe0df086c1a4d798abf13792d8cfab912d76817fe1a894359a1518557d21237fbaf6eda93c5ab9309143dee4c59ef54336d1b3570420e
+  languageName: node
+  linkType: hard
+
+"@types/eslint__eslintrc@npm:^2.1.2":
+  version: 2.1.2
+  resolution: "@types/eslint__eslintrc@npm:2.1.2"
+  dependencies:
+    "@types/eslint": "npm:*"
+  checksum: 10c0/ccbeb74886fbbee1b016ed9c920ad932cb0b970c42eec4cea27e04c2640d5a92c20e44d4610de73551c4c8f658963a769ddc9fd75eac72edf33f035129600637
   languageName: node
   linkType: hard
 
@@ -18863,6 +18875,7 @@ __metadata:
     "@bring/blocks-client": "workspace:*"
     "@bring/blocks-editor": "workspace:*"
     "@chromatic-com/storybook": "npm:3.2.2"
+    "@eslint/eslintrc": "npm:^3.2.0"
     "@hookform/resolvers": "npm:3.9.1"
     "@radix-ui/react-slot": "npm:1.1.0"
     "@sentry/nextjs": "npm:8.40.0"
@@ -18877,6 +18890,7 @@ __metadata:
     "@t3-oss/env-nextjs": "npm:0.11.1"
     "@tailwindcss/forms": "npm:^0.5.9"
     "@tailwindcss/typography": "npm:^0.5.15"
+    "@types/eslint__eslintrc": "npm:^2.1.2"
     "@types/fslightbox-react": "npm:^1.7.8"
     "@types/node": "npm:22.10.0"
     "@types/react": "npm:^18.3.12"
@@ -18906,6 +18920,7 @@ __metadata:
     lucide-react: "npm:0.461.0"
     next: "npm:15.0.3"
     postcss: "npm:^8.4.47"
+    prettier-plugin-tailwindcss: "npm:0.6.9"
     prop-types: "npm:^15.8.1"
     react: "npm:19.0.0-rc-fb9a90fa48-20240614"
     react-dom: "npm:19.0.0-rc-fb9a90fa48-20240614"

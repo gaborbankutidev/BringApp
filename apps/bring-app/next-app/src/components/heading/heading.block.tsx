@@ -1,17 +1,10 @@
-import {
-	heading,
-	type HeadingBlockProps as HeadingProps,
-} from "@/components/heading";
-import {
-	colorOptions,
-	textAlignOptions,
-	textSourceOptions,
-} from "@/editor/utils/options";
+import { heading, type HeadingBlockProps as HeadingProps } from "@/components/heading"
+import { colorOptions, textAlignOptions, textSourceOptions } from "@/editor/utils/options"
 import {
 	numberAttributeSource,
 	stringAttributeSource,
 	type BlockConfig,
-} from "@bring/blocks-editor";
+} from "@bring/blocks-editor"
 
 const headingConfig: BlockConfig<HeadingProps> = {
 	...heading,
@@ -44,7 +37,7 @@ const headingConfig: BlockConfig<HeadingProps> = {
 					type: "textarea",
 					label: "Title",
 					path: "title",
-					show: ({source = "manual"}) => source === "manual",
+					show: ({ source = "manual" }) => source === "manual",
 				},
 				{
 					type: "range",
@@ -86,8 +79,8 @@ const headingConfig: BlockConfig<HeadingProps> = {
 				r: {},
 			},
 		},
-		visibility: {"": "block", md: "block", lg: "block"},
+		visibility: { "": "block", md: "block", lg: "block" },
 	},
-};
+}
 
-export default headingConfig;
+export default headingConfig

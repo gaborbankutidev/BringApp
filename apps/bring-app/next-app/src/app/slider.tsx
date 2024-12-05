@@ -1,40 +1,38 @@
-"use client";
+"use client"
 
-import {type ReactNode, useState} from "react";
-import {BiChevronLeft, BiChevronRight} from "react-icons/bi";
+import { type ReactNode, useState } from "react"
+import { BiChevronLeft, BiChevronRight } from "react-icons/bi"
 
 export default function Slider({
 	children,
 	numberOfSlides,
 }: {
-	children: ReactNode;
-	numberOfSlides: number;
+	children: ReactNode
+	numberOfSlides: number
 }) {
-	const [currentSlide, setCurrentSlide] = useState(0);
+	const [currentSlide, setCurrentSlide] = useState(0)
 
 	const nextSlide = () => {
-		setCurrentSlide((currentSlide + 1) % (numberOfSlides - 1));
-	};
+		setCurrentSlide((currentSlide + 1) % (numberOfSlides - 1))
+	}
 
 	const previousSlide = () => {
 		setCurrentSlide(
-			currentSlide <= 0
-				? Math.max(numberOfSlides - 2, 0)
-				: Math.max(currentSlide - 1, 0),
-		);
-	};
+			currentSlide <= 0 ? Math.max(numberOfSlides - 2, 0) : Math.max(currentSlide - 1, 0)
+		)
+	}
 
 	return (
-		<div className="relative w-full h-full overflow-hidden">
+		<div className="relative h-full w-full overflow-hidden">
 			{currentSlide !== 0 && (
-				<div className="bg-gradient-to-r from-gray-950 to-transparent absolute top-0 left-0 h-full w-4 z-10" />
+				<div className="absolute left-0 top-0 z-10 h-full w-4 bg-gradient-to-r from-gray-950 to-transparent" />
 			)}
 			{numberOfSlides > 2 && (
-				<div className="bg-gradient-to-l from-gray-950 to-transparent absolute top-0 right-0 h-full w-4 z-10" />
+				<div className="absolute right-0 top-0 z-10 h-full w-4 bg-gradient-to-l from-gray-950 to-transparent" />
 			)}
 
 			<div
-				className="flex gap-4 transition-all duration-300 mb-4"
+				className="mb-4 flex gap-4 transition-all duration-300"
 				style={{
 					transform: `translateX(-${currentSlide * 50}%)`,
 				}}
@@ -47,17 +45,17 @@ export default function Slider({
 					<button onClick={previousSlide}>
 						<BiChevronLeft
 							size={32}
-							className="text-gray-200 hover:text-purple-600 transition-all duration-300"
+							className="text-gray-200 transition-all duration-300 hover:text-purple-600"
 						/>
 					</button>
 					<button onClick={nextSlide}>
 						<BiChevronRight
 							size={32}
-							className="text-gray-200 hover:text-purple-600 transition-all duration-300"
+							className="text-gray-200 transition-all duration-300 hover:text-purple-600"
 						/>
 					</button>
 				</>
 			)}
 		</div>
-	);
+	)
 }

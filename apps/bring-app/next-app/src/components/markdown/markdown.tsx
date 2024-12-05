@@ -1,24 +1,17 @@
-import type {BP} from "@/bring";
-import Image from "@/components/image";
-import type {TextAlignType, TextSourceType} from "@/editor/utils/lists";
-import type {ColorType} from "@/styles";
-import {twJoin, twMerge} from "@/utils";
-import Link from "next/link";
-import type {FC, ReactElement, ReactNode} from "react";
-import {useMemo} from "react";
-import ReactMarkdown from "react-markdown";
-import supersub from "remark-supersub";
+import type { BP } from "@/bring"
+import Image from "@/components/image"
+import type { TextAlignType, TextSourceType } from "@/editor/utils/lists"
+import type { ColorType } from "@/styles"
+import { twJoin, twMerge } from "@/utils"
+import Link from "next/link"
+import type { FC, ReactElement, ReactNode } from "react"
+import { useMemo } from "react"
+import ReactMarkdown from "react-markdown"
+import supersub from "remark-supersub"
 
-const markdownInlineElements = [
-	"p",
-	"a",
-	"em",
-	"strong",
-	"sup",
-	"sub",
-] as const;
+const markdownInlineElements = ["p", "a", "em", "strong", "sup", "sub"] as const
 
-type MarkdownInlineElements = (typeof markdownInlineElements)[number];
+type MarkdownInlineElements = (typeof markdownInlineElements)[number]
 
 export const markdownElements = [
 	...markdownInlineElements,
@@ -36,53 +29,51 @@ export const markdownElements = [
 	"blockquote",
 	"hr",
 	"br",
-] as const;
+] as const
 
-export type MarkdownElements = (typeof markdownElements)[number];
+export type MarkdownElements = (typeof markdownElements)[number]
 
 type MarkdownProps = (
 	| {
-			content: string;
+			content: string
 	  }
 	| {
-			children: string;
+			children: string
 	  }
 ) &
 	(
 		| {
-				inline: true;
-				allowedElements?: MarkdownInlineElements[];
+				inline: true
+				allowedElements?: MarkdownInlineElements[]
 		  }
 		| {
-				inline?: false;
-				allowedElements?: MarkdownElements[];
+				inline?: false
+				allowedElements?: MarkdownElements[]
 		  }
 	) & {
-		elementsClassName?: Partial<Record<MarkdownElements, string>>;
-		className?: string;
-	};
+		elementsClassName?: Partial<Record<MarkdownElements, string>>
+		className?: string
+	}
 
 const parseAlt = (alt: string | undefined) => {
 	const value = {
 		alt: "",
 		caption: "",
 		source: "",
-	};
-	if (!alt) return value;
+	}
+	if (!alt) return value
 
-	const parts = alt.split(/--caption:|--source:/);
+	const parts = alt.split(/--caption:|--source:/)
 
-	value.alt = parts[0] ?? "";
-	value.caption = alt.includes("--caption:") ? (parts[1] ?? "") : "";
+	value.alt = parts[0] ?? ""
+	value.caption = alt.includes("--caption:") ? (parts[1] ?? "") : ""
 
 	if (alt.includes("--source:")) {
-		value.source = alt.includes("--caption:")
-			? (parts[2] ?? "")
-			: (parts[1] ?? "");
+		value.source = alt.includes("--caption:") ? (parts[2] ?? "") : (parts[1] ?? "")
 	}
 
-	return value;
-};
+	return value
+}
 
 const Markdown: FC<MarkdownProps> = ({
 	inline = false,
@@ -91,30 +82,26 @@ const Markdown: FC<MarkdownProps> = ({
 	elementsClassName = {},
 	...props
 }) => {
-	const content = "content" in props ? props.content : props.children;
+	const content = "content" in props ? props.content : props.children
 
 	const components = useMemo(
 		() => ({
 			// p
-			p: ({children}: {children: ReactElement<{src?: string}>}) => {
-				const isImg = !!children?.props?.src;
+			p: ({ children }: { children: ReactElement<{ src?: string }> }) => {
+				const isImg = !!children?.props?.src
 
 				return inline || isImg ? (
 					<>{children}</>
 				) : (
 					<p className={twMerge(elementsClassName.p)}>{children}</p>
-				);
+				)
 			},
 			// inline
-			a: ({children, ...props}: {children: ReactNode}) =>
+			a: ({ children, ...props }: { children: ReactNode }) =>
 				"href" in props ? (
 					"title" in props ? (
 						props.title === "--newTab" ? (
-							<Link
-								href={props.href as string}
-								target="_blank"
-								className={elementsClassName.a}
-							>
+							<Link href={props.href as string} target="_blank" className={elementsClassName.a}>
 								{children}
 							</Link>
 						) : (
@@ -134,40 +121,40 @@ const Markdown: FC<MarkdownProps> = ({
 				) : (
 					<Link href="">{children}</Link>
 				),
-			em: ({children}: {children: ReactNode}) => (
+			em: ({ children }: { children: ReactNode }) => (
 				<em className={elementsClassName.em}>{children}</em>
 			),
-			strong: ({children}: {children: ReactNode}) => (
+			strong: ({ children }: { children: ReactNode }) => (
 				<strong className={elementsClassName.strong}>{children}</strong>
 			),
-			sup: ({children}: {children: ReactNode}) => (
+			sup: ({ children }: { children: ReactNode }) => (
 				<sup className={elementsClassName.sup}>{children}</sup>
 			),
-			sub: ({children}: {children: ReactNode}) => (
+			sub: ({ children }: { children: ReactNode }) => (
 				<sub className={elementsClassName.sub}>{children}</sub>
 			),
 			// block
-			h1: ({children}: {children: ReactNode}) => (
+			h1: ({ children }: { children: ReactNode }) => (
 				<h1 className={elementsClassName.h1}>{children}</h1>
 			),
-			h2: ({children}: {children: ReactNode}) => (
+			h2: ({ children }: { children: ReactNode }) => (
 				<h2 className={elementsClassName.h2}>{children}</h2>
 			),
-			h3: ({children}: {children: ReactNode}) => (
+			h3: ({ children }: { children: ReactNode }) => (
 				<h3 className={elementsClassName.h3}>{children}</h3>
 			),
-			h4: ({children}: {children: ReactNode}) => (
+			h4: ({ children }: { children: ReactNode }) => (
 				<h4 className={elementsClassName.h4}>{children}</h4>
 			),
-			h5: ({children}: {children: ReactNode}) => (
+			h5: ({ children }: { children: ReactNode }) => (
 				<h5 className={elementsClassName.h5}>{children}</h5>
 			),
-			h6: ({children}: {children: ReactNode}) => (
+			h6: ({ children }: { children: ReactNode }) => (
 				<h6 className={elementsClassName.h6}>{children}</h6>
 			),
-			img: (props: {src: string; alt: string}) => {
-				if (!("src" in props)) return null;
-				const {alt: parsedAlt, caption, source} = parseAlt(props.alt);
+			img: (props: { src: string; alt: string }) => {
+				if (!("src" in props)) return null
+				const { alt: parsedAlt, caption, source } = parseAlt(props.alt)
 
 				return (
 					// eslint-disable-next-line jsx-a11y/alt-text
@@ -183,24 +170,22 @@ const Markdown: FC<MarkdownProps> = ({
 						source={source}
 						lightbox
 					/>
-				);
+				)
 			},
-			ul: ({children}: {children: ReactNode}) => (
+			ul: ({ children }: { children: ReactNode }) => (
 				<ul className={elementsClassName.ul}>{children}</ul>
 			),
-			ol: ({children}: {children: ReactNode}) => (
+			ol: ({ children }: { children: ReactNode }) => (
 				<ol className={elementsClassName.ol}>{children}</ol>
 			),
-			li: ({children}: {children: ReactNode}) => (
+			li: ({ children }: { children: ReactNode }) => (
 				<li className={elementsClassName.li}>{children}</li>
 			),
-			code: ({children}: {children: ReactNode}) => (
+			code: ({ children }: { children: ReactNode }) => (
 				<code className={elementsClassName.code}>{children}</code>
 			),
-			blockquote: ({children}: {children: ReactNode}) => (
-				<blockquote className={elementsClassName.blockquote}>
-					{children}
-				</blockquote>
+			blockquote: ({ children }: { children: ReactNode }) => (
+				<blockquote className={elementsClassName.blockquote}>{children}</blockquote>
 			),
 			hr: () => <hr className={elementsClassName.hr} />,
 			br: () => <br className={elementsClassName.br} />,
@@ -227,8 +212,8 @@ const Markdown: FC<MarkdownProps> = ({
 			elementsClassName.sub,
 			elementsClassName.sup,
 			elementsClassName.ul,
-		],
-	);
+		]
+	)
 
 	return inline ? (
 		<ReactMarkdown
@@ -249,16 +234,16 @@ const Markdown: FC<MarkdownProps> = ({
 		>
 			{content}
 		</ReactMarkdown>
-	);
-};
+	)
+}
 
 export type MarkdownBlockProps = {
-	source?: TextSourceType;
-	content?: string;
-	elementsClassName: Partial<Record<MarkdownElements, string>>;
-	align?: TextAlignType;
-	color?: ColorType;
-};
+	source?: TextSourceType
+	content?: string
+	elementsClassName: Partial<Record<MarkdownElements, string>>
+	align?: TextAlignType
+	color?: ColorType
+}
 
 export const MarkdownBlock = ({
 	source = "manual",
@@ -275,32 +260,24 @@ export const MarkdownBlock = ({
 		align && `text-${align}`,
 		color && `text-${color}`,
 		bringStylesClassNames?.classNames,
-		className,
-	);
+		className
+	)
 
 	if (source !== "manual") {
 		if (!entityProps) {
-			return null;
+			return null
 		}
 
-		const dynamicContent = entityProps[source];
-		return dynamicContent ? (
-			<Markdown content={dynamicContent} className={classNames} />
-		) : null;
+		const dynamicContent = entityProps[source]
+		return dynamicContent ? <Markdown content={dynamicContent} className={classNames} /> : null
 	}
 
-	return (
-		<Markdown
-			content={content}
-			className={classNames}
-			elementsClassName={elementsClassName}
-		/>
-	);
-};
+	return <Markdown content={content} className={classNames} elementsClassName={elementsClassName} />
+}
 
 export const markdown = {
 	Component: MarkdownBlock,
 	componentName: "bring/markdown",
-} as const;
+} as const
 
-export default Markdown;
+export default Markdown

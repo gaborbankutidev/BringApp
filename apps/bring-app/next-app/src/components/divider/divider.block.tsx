@@ -1,11 +1,11 @@
-import {divider, type DividerProps} from "@/components/divider";
-import {colorOptions} from "@/editor/utils/options";
+import { divider, type DividerProps } from "@/components/divider"
+import { colorOptions } from "@/editor/utils/options"
 import {
 	booleanAttributeSource,
 	numberAttributeSource,
 	stringAttributeSource,
 	type BlockConfig,
-} from "@bring/blocks-editor";
+} from "@bring/blocks-editor"
 
 const dividerConfig: BlockConfig<DividerProps> = {
 	...divider,
@@ -33,7 +33,7 @@ const dividerConfig: BlockConfig<DividerProps> = {
 					defaultValue: 40,
 				},
 
-				{type: "checkbox", label: "With line", path: "withLine"},
+				{ type: "checkbox", label: "With line", path: "withLine" },
 				{
 					type: "select",
 					label: "Line color",
@@ -61,8 +61,8 @@ const dividerConfig: BlockConfig<DividerProps> = {
 				r: {},
 			},
 		},
-		visibility: {"": "flex", md: "flex", lg: "flex"},
+		visibility: { "": "flex", md: "flex", lg: "flex" },
 	},
-};
+}
 
-export default dividerConfig;
+export default dividerConfig

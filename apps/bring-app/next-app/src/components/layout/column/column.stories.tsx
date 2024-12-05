@@ -1,14 +1,14 @@
-import type {Meta, StoryObj} from "@storybook/react";
-import Column from "./column";
+import type { Meta, StoryObj } from "@storybook/react"
+import Column from "./column"
 
 const meta = {
 	title: "Layout/Column",
 	component: Column,
 	tags: ["autodocs"],
-} satisfies Meta<typeof Column>;
+} satisfies Meta<typeof Column>
 
-export default meta;
-type Story = StoryObj<typeof Column>;
+export default meta
+type Story = StoryObj<typeof Column>
 
 export const ColorBackground: Story = {
 	render: () => (
@@ -19,4 +19,4 @@ export const ColorBackground: Story = {
 			</Column>
 		</div>
 	),
-};
+}

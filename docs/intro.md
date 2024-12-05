@@ -6,10 +6,10 @@ The Bring App is a comprehensive full-stack solution designed for modern web dev
 
 Key Features:
 
--   Seamless Content Management: Effortlessly manage and edit layouts, pages, and posts using the WordPress block editor.
--   Custom UI Components: Develop unique UI components in React and Tailwind CSS, and seamlessly integrate them as blocks within the WordPress block editor.
--   Optimal Performance: Ensure your site operates smoothly and efficiently with Next.js’s powerful rendering capabilities.
--   Flexible and Customizable: Leverage the strengths of both WordPress and Next.js to create a highly customizable and feature-rich end product.
+- Seamless Content Management: Effortlessly manage and edit layouts, pages, and posts using the WordPress block editor.
+- Custom UI Components: Develop unique UI components in React and Tailwind CSS, and seamlessly integrate them as blocks within the WordPress block editor.
+- Optimal Performance: Ensure your site operates smoothly and efficiently with Next.js’s powerful rendering capabilities.
+- Flexible and Customizable: Leverage the strengths of both WordPress and Next.js to create a highly customizable and feature-rich end product.
 
 The Bring App empowers developers to harness the best of both WordPress and Next.js, offering endless possibilities for creating dynamic, high-performance websites with ease.
 

@@ -1,13 +1,13 @@
-import {TextControl as WPTextControl} from "@wordpress/components";
-import cloneDeep from "lodash.clonedeep";
-import get from "lodash.get";
-import set from "lodash.set";
-import type {FC} from "react";
-import React from "react";
-import type {Obj} from "../../types";
-import {useControlContext} from "../context";
-import type {ControlByPath, ControlByValue, ControlType} from "../types";
-import {isPathControl} from "../utils";
+import { TextControl as WPTextControl } from "@wordpress/components"
+import cloneDeep from "lodash.clonedeep"
+import get from "lodash.get"
+import set from "lodash.set"
+import type { FC } from "react"
+import React from "react"
+import type { Obj } from "../../types"
+import { useControlContext } from "../context"
+import type { ControlByPath, ControlByValue, ControlType } from "../types"
+import { isPathControl } from "../utils"
 
 /**
  * A control component that renders a text input.
@@ -17,7 +17,7 @@ import {isPathControl} from "../utils";
  * @param props - The props for the TextControl component.
  */
 export const TextControl = <pT extends Obj = {}>(props: ControlType<string, pT>) =>
-	isPathControl(props) ? <TextControlByPath {...props} /> : <TextControlByValue {...props} />;
+	isPathControl(props) ? <TextControlByPath {...props} /> : <TextControlByValue {...props} />
 
 /**
  * A control component that renders a text input based on a path.
@@ -34,21 +34,21 @@ function TextControlByPath<pT extends Obj>({
 	updateHandling,
 	...props
 }: ControlByPath<pT, string>): JSX.Element {
-	const {attributes, setAttributes} = useControlContext();
-	const value = get(attributes, path);
+	const { attributes, setAttributes } = useControlContext()
+	const value = get(attributes, path)
 
 	return (
 		<TextControlByValue
 			updateHandling="by-value"
 			value={value}
 			setValue={(newValue) => {
-				const newAttributes = cloneDeep(attributes);
-				set(newAttributes, path, newValue);
-				setAttributes(newAttributes);
+				const newAttributes = cloneDeep(attributes)
+				set(newAttributes, path, newValue)
+				setAttributes(newAttributes)
 			}}
 			{...props}
 		/>
-	);
+	)
 }
 
 /**
@@ -80,7 +80,7 @@ const TextControlByValue: FC<ControlByValue<string>> = ({
 				value !== undefined && (
 					<button
 						onClick={() => {
-							setValue(undefined);
+							setValue(undefined)
 						}}
 					>
 						Set to default
@@ -89,4 +89,4 @@ const TextControlByValue: FC<ControlByValue<string>> = ({
 			}
 			type="text"
 		/>
-	) : null;
+	) : null

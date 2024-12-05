@@ -1,23 +1,24 @@
-const config = {
+module.exports = {
 	plugins: [
 		"@prettier/plugin-php",
 		"prettier-plugin-tailwindcss",
 		"prettier-plugin-organize-imports",
 		"prettier-plugin-pkg",
+		"prettier-plugin-tailwindcss",
 	],
 	arrowParens: "always",
-	bracketSpacing: false,
+	bracketSameLine: false,
+	bracketSpacing: true,
 	endOfLine: "lf",
 	htmlWhitespaceSensitivity: "css",
-	bracketSameLine: false,
 	jsxSingleQuote: false,
-	printWidth: 80,
+	printWidth: 100,
 	proseWrap: "preserve",
 	quoteProps: "as-needed",
-	semi: true,
+	semi: false,
 	singleQuote: false,
 	tabWidth: 2,
-	trailingComma: "all",
+	trailingComma: "es5",
 	useTabs: true,
 
 	phpVersion: "8.2",
@@ -26,6 +27,4 @@ const config = {
 
 	tailwindConfig: "./next-app/tailwind.config.ts",
 	tailwindFunctions: ["twJoin", "twMerge"],
-};
-
-module.exports = config;
+}

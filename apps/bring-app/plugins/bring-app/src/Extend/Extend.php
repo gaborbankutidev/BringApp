@@ -10,7 +10,7 @@ class Extend {
 	/**
 	 * Initialize plugin extensions
 	 */
-	public static function init() {
+	public static function init(): void {
 		JWTAuth::init();
 	}
 }

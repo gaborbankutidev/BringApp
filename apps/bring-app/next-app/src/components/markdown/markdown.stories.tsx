@@ -1,6 +1,6 @@
-import type {Meta, StoryObj} from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react"
 
-import Markdown from "./markdown";
+import Markdown from "./markdown"
 
 const contentSample = `# Heading 1
 ## Heading 2
@@ -37,32 +37,32 @@ A line break here
 and a line:
 
 ---
-`;
+`
 
 const inlineContentSample = `Hello world! 
 This is **bold** and this is *italic* and this a ${"`"}code item ${"`"} ^sup^
 and this is a [link](https://thebringteam.com) 
 and this is a [link](https://thebringteam.com "--newTab") that opens on a new tab!
-`;
+`
 
 const meta = {
 	title: "Components/Markdown",
 	component: Markdown,
 	tags: ["autodocs"],
-} satisfies Meta<typeof Markdown>;
+} satisfies Meta<typeof Markdown>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Full: Story = {
 	args: {
 		content: contentSample,
 		className: "md",
 	},
-};
+}
 
 export const Line: Story = {
 	args: {
 		content: inlineContentSample,
 	},
-};
+}

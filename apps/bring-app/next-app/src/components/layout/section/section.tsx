@@ -1,24 +1,24 @@
-import type {BP} from "@/bring";
-import type {ColorType} from "@/styles";
-import {twJoin, twMerge} from "@/utils";
-import type {ImageType} from "@bring/blocks-client";
-import Image, {type ImageProps} from "next/image";
-import type {ReactNode} from "react";
+import type { BP } from "@/bring"
+import type { ColorType } from "@/styles"
+import { twJoin, twMerge } from "@/utils"
+import type { ImageType } from "@bring/blocks-client"
+import Image, { type ImageProps } from "next/image"
+import type { ReactNode } from "react"
 
 type SectionProps = {
-	backgroundImage?: Pick<ImageProps, "src" | "alt">;
-	dark?: boolean;
-	className?: string;
-	backgroundImageClassName?: string;
-	backgroundClassName?: string;
-	containerClassName?: string;
-} & React.HTMLProps<HTMLDivElement>;
+	backgroundImage?: Pick<ImageProps, "src" | "alt">
+	dark?: boolean
+	className?: string
+	backgroundImageClassName?: string
+	backgroundClassName?: string
+	containerClassName?: string
+} & React.HTMLProps<HTMLDivElement>
 
-const baseStye = "relative bg-no-repeat bg-cover overflow-hidden bg-center";
+const baseStye = "relative bg-no-repeat bg-cover overflow-hidden bg-center"
 const bgImageBaseStyle =
-	"absolute w-full h-full top-0 left-0 bg-no-repeat bg-cover bg-center bg-fixed";
-const bgBaseStyle = "absolute w-full h-full top-0 left-0";
-const containerBaseStyle = "relative";
+	"absolute w-full h-full top-0 left-0 bg-no-repeat bg-cover bg-center bg-fixed"
+const bgBaseStyle = "absolute w-full h-full top-0 left-0"
+const containerBaseStyle = "relative"
 
 const Section = ({
 	children,
@@ -31,31 +31,23 @@ const Section = ({
 	containerClassName,
 	...props
 }: SectionProps) => {
-	const cn = twMerge(baseStye, className);
+	const cn = twMerge(baseStye, className)
 
-	const bgImageCn = twMerge(bgImageBaseStyle, backgroundImageClassName);
+	const bgImageCn = twMerge(bgImageBaseStyle, backgroundImageClassName)
 
-	const bgCn = twMerge(
-		bgBaseStyle,
-		backgroundImage && "opacity-80",
-		backgroundClassName,
-	);
+	const bgCn = twMerge(bgBaseStyle, backgroundImage && "opacity-80", backgroundClassName)
 
-	const containerCn = twMerge(containerBaseStyle, containerClassName);
+	const containerCn = twMerge(containerBaseStyle, containerClassName)
 
 	return (
-		<section
-			className={cn}
-			{...props}
-			data-theme={dark ? "eld-dark" : "eld-light"}
-		>
+		<section className={cn} {...props} data-theme={dark ? "eld-dark" : "eld-light"}>
 			{backgroundImage && (
 				<div className={bgImageCn}>
 					<Image
 						src={backgroundImage?.src}
 						alt={backgroundImage?.alt}
 						fill
-						style={{objectFit: "cover"}}
+						style={{ objectFit: "cover" }}
 						priority
 					/>
 				</div>
@@ -63,20 +55,20 @@ const Section = ({
 			<div className={bgCn} />
 			<div className={containerCn}>{children}</div>
 		</section>
-	);
-};
+	)
+}
 
 export type SectionBlockProps = {
-	children: ReactNode;
+	children: ReactNode
 
-	backgroundColor?: ColorType;
-	backgroundImage?: ImageType;
-	dark?: boolean;
+	backgroundColor?: ColorType
+	backgroundImage?: ImageType
+	dark?: boolean
 
-	backgroundImageClassName?: string;
-	backgroundClassName?: string;
-	containerClassName?: string;
-};
+	backgroundImageClassName?: string
+	backgroundClassName?: string
+	containerClassName?: string
+}
 
 const SectionBlock = ({
 	children,
@@ -110,11 +102,11 @@ const SectionBlock = ({
 	>
 		{children}
 	</Section>
-);
+)
 
 export const section = {
 	Component: SectionBlock,
 	componentName: "bring/section",
-} as const;
+} as const
 
-export default Section;
+export default Section

@@ -1,9 +1,7 @@
-"use client";
+"use client"
 
-import {env} from "@/env.mjs";
-import {initClient} from "@bring/blocks-client/init-client";
-import type {EP} from "./types";
+import { env } from "@/env.mjs"
+import { initClient } from "@bring/blocks-client/init-client"
+import type { EP } from "./types"
 
-export const {useDynamicEntityProps, useWPSendForm} = initClient<EP>(
-	env.NEXT_PUBLIC_WP_BASE_URL,
-);
+export const { useDynamicEntityProps, useWPSendForm } = initClient<EP>(env.NEXT_PUBLIC_WP_BASE_URL)

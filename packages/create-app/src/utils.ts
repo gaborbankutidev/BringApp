@@ -13,5 +13,5 @@ export const kebabCase = (str: string): string => {
 			.trim()
 			.replace(/\s+/g, "-")
 			.toLowerCase()
-	);
-};
+	)
+}

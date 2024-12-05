@@ -53,6 +53,7 @@
 	},
 	"devDependencies": {
 		"@chromatic-com/storybook": "3.2.2",
+		"@eslint/eslintrc": "^3.2.0",
 		"@storybook/addon-essentials": "^8.4.2",
 		"@storybook/addon-interactions": "^8.4.2",
 		"@storybook/addon-links": "^8.4.2",
@@ -63,6 +64,7 @@
 		"@storybook/test": "^8.4.2",
 		"@tailwindcss/forms": "^0.5.9",
 		"@tailwindcss/typography": "^0.5.15",
+		"@types/eslint__eslintrc": "^2.1.2",
 		"@types/fslightbox-react": "^1.7.8",
 		"@types/node": "22.10.0",
 		"@types/react": "^18.3.12",
@@ -79,6 +81,7 @@
 		"eslint-plugin-storybook": "^0.11.0",
 		"globals": "^15.12.0",
 		"postcss": "^8.4.47",
+		"prettier-plugin-tailwindcss": "0.6.9",
 		"prop-types": "^15.8.1",
 		"storybook": "^8.4.2",
 		"tailwindcss": "^3.4.14",
@@ -90,8 +93,8 @@
 		"*.{ts,tsx,js,jsx,json,css,md,yml,yaml,php}": [
 			"prettier --write"
 		],
-		"*.{js,mjs,cjs,ts,jsx,tsx}": [
-			"yarn cross-env DATA_TOKEN=aaaaaaaa NEXT_PUBLIC_WP_BASE_URL=aaa lint"
+		"*.{ts,tsx,js,jsx,}": [
+			"yarn  eslint --config ./eslint.config.mjs --fix"
 		]
 	}
 }

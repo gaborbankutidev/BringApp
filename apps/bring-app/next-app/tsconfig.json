@@ -20,10 +20,10 @@
 		"paths": {
 			"@/*": ["./src/*"]
 		},
-		"plugins": [{"name": "next"}]
+		"plugins": [{ "name": "next" }]
 	},
 	"include": [
-		".eslintrc.cjs",
+		".eslintrc.*js",
 		"next-env.d.ts",
 		"**/*.ts",
 		"**/*.tsx",

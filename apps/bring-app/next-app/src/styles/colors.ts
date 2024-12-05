@@ -28,7 +28,7 @@ export const colorsByName = {
 	black: "#000000",
 	transparent: "transparent",
 	red: "#D70F0F",
-};
+}
 
 /**
  * Use the named colors to create dynamic color scheme for different purposes
@@ -61,20 +61,20 @@ export const colorsByPurpose = {
 		"base-100": colorsByName["blue-900"],
 		"base-300": colorsByName["blue-600"],
 	},
-};
+}
 
 export const colorsLight = {
 	...colorsByName,
 	...colorsByPurpose.light,
-};
+}
 export const colorsDark = {
 	...colorsByName,
 	...colorsByPurpose.light,
-};
+}
 
-export const colorList = Object.keys(colorsByName);
+export const colorList = Object.keys(colorsByName)
 
-export type ColorType = keyof typeof colorsLight;
+export type ColorType = keyof typeof colorsLight
 
-const colors = {common: colorsByName, ...colorsByPurpose};
-export default colors;
+const colors = { common: colorsByName, ...colorsByPurpose }
+export default colors

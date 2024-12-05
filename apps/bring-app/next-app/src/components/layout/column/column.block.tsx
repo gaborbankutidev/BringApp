@@ -1,17 +1,17 @@
-import {column, type ColumnBlockProps} from "@/components/layout/column";
+import { column, type ColumnBlockProps } from "@/components/layout/column"
 import {
 	alignOptions,
 	colorOptions,
 	directionOptions,
 	justifyOptions,
-} from "@/editor/utils/options";
+} from "@/editor/utils/options"
 import {
 	objectAttributeSource,
 	stringAttributeSource,
 	type BlockConfig,
-} from "@bring/blocks-editor";
-import {ColumnControls} from "./column.controls";
-import {ColumnEdit} from "./column.edit";
+} from "@bring/blocks-editor"
+import { ColumnControls } from "./column.controls"
+import { ColumnEdit } from "./column.edit"
 
 export const columnConfig: BlockConfig<ColumnBlockProps> = {
 	...column,
@@ -28,7 +28,7 @@ export const columnConfig: BlockConfig<ColumnBlockProps> = {
 	},
 	Edit: ColumnEdit,
 	Controls: [
-		{panel: "Grid settings", controls: [ColumnControls], initialOpen: true},
+		{ panel: "Grid settings", controls: [ColumnControls], initialOpen: true },
 		{
 			panel: "Column setting",
 			controls: [
@@ -63,20 +63,20 @@ export const columnConfig: BlockConfig<ColumnBlockProps> = {
 	styles: {
 		spacing: {
 			m: {
-				t: {"": 0},
-				b: {"": 0},
+				t: { "": 0 },
+				b: { "": 0 },
 				l: {},
 				r: {},
 			},
 			p: {
-				t: {"": 0},
-				b: {"": 0},
+				t: { "": 0 },
+				b: { "": 0 },
 				l: {},
 				r: {},
 			},
 		},
-		visibility: {"": "flex", md: "flex", lg: "flex"},
+		visibility: { "": "flex", md: "flex", lg: "flex" },
 	},
-};
+}
 
-export default columnConfig;
+export default columnConfig

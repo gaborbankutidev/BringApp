@@ -1,5 +1,5 @@
-import {env} from "@/env.mjs";
-import * as Sentry from "@sentry/nextjs";
+import { env } from "@/env.mjs"
+import * as Sentry from "@sentry/nextjs"
 
 Sentry.init({
 	enabled: env.NODE_ENV === "production",
@@ -7,4 +7,4 @@ Sentry.init({
 	environment: env.NEXT_PUBLIC_SENTRY_ENV ?? "development",
 	tracesSampleRate: 1.0,
 	debug: false,
-});
+})

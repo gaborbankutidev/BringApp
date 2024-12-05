@@ -1,20 +1,20 @@
-import type {ColorType} from "@/styles";
-import {twMerge} from "@/utils";
-import type {ResponsiveValue} from "@bring/blocks-client/styles";
-import {makeResponsiveClassNames} from "@bring/blocks-client/styles";
-import {type BP} from "@bring/blocks-client/types";
-import type {ReactNode} from "react";
+import type { ColorType } from "@/styles"
+import { twMerge } from "@/utils"
+import type { ResponsiveValue } from "@bring/blocks-client/styles"
+import { makeResponsiveClassNames } from "@bring/blocks-client/styles"
+import { type BP } from "@bring/blocks-client/types"
+import type { ReactNode } from "react"
 
 export type GroupProps = {
-	children: ReactNode;
+	children: ReactNode
 
-	direction?: "vertical" | "horizontal";
-	gap?: ResponsiveValue;
-	justify?: "start" | "center" | "end" | "between";
-	align?: "start" | "center" | "end";
+	direction?: "vertical" | "horizontal"
+	gap?: ResponsiveValue
+	justify?: "start" | "center" | "end" | "between"
+	align?: "start" | "center" | "end"
 
-	backgroundColor?: ColorType;
-};
+	backgroundColor?: ColorType
+}
 
 const Group = ({
 	children,
@@ -30,25 +30,25 @@ const Group = ({
 	id,
 }: BP<GroupProps>) => {
 	const classNames = twMerge(
-		makeResponsiveClassNames("gap", gap, {"": 4}),
+		makeResponsiveClassNames("gap", gap, { "": 4 }),
 		backgroundColor && `bg-${backgroundColor}`,
 		direction === "vertical" ? "flex flex-col" : "flex flex-row",
 		justify && `justify-${justify}`,
 		align && `items-${align}`,
 		bringStylesClassNames?.classNames,
-		className,
-	);
+		className
+	)
 
 	return (
 		<div className={classNames} id={id}>
 			{children}
 		</div>
-	);
-};
+	)
+}
 
 export const group = {
 	Component: Group,
 	componentName: "bring/group",
-} as const;
+} as const
 
-export default Group;
+export default Group

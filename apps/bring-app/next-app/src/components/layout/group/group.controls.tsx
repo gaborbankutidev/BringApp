@@ -1,6 +1,6 @@
-import {ResponsiveRangeControl, type BlockControl} from "@bring/blocks-editor";
+import { ResponsiveRangeControl, type BlockControl } from "@bring/blocks-editor"
 
-import type {GroupProps} from "@/components/layout/group";
+import type { GroupProps } from "@/components/layout/group"
 
 const GroupControls: BlockControl<GroupProps> = () => (
 	<>
@@ -9,9 +9,9 @@ const GroupControls: BlockControl<GroupProps> = () => (
 			path="gap"
 			min={0}
 			max={64}
-			defaultValue={{"": 4}}
+			defaultValue={{ "": 4 }}
 		/>
 	</>
-);
+)
 
-export default GroupControls;
+export default GroupControls

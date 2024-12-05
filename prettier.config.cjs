@@ -4,20 +4,21 @@ module.exports = {
 		"prettier-plugin-tailwindcss",
 		"prettier-plugin-organize-imports",
 		"prettier-plugin-pkg",
+		"prettier-plugin-tailwindcss",
 	],
 	arrowParens: "always",
 	bracketSameLine: false,
-	bracketSpacing: false,
+	bracketSpacing: true,
 	endOfLine: "lf",
 	htmlWhitespaceSensitivity: "css",
 	jsxSingleQuote: false,
 	printWidth: 100,
 	proseWrap: "preserve",
 	quoteProps: "as-needed",
-	semi: true,
+	semi: false,
 	singleQuote: false,
-	tabWidth: 4,
-	trailingComma: "all",
+	tabWidth: 2,
+	trailingComma: "es5",
 	useTabs: true,
 
 	phpVersion: "8.2",
@@ -26,4 +27,4 @@ module.exports = {
 
 	tailwindConfig: "./apps/bring-app/next-app/tailwind.config.ts",
 	tailwindFunctions: ["twJoin", "twMerge"],
-};
+}

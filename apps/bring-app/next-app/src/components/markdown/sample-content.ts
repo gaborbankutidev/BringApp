@@ -33,4 +33,4 @@ A line break here
 and a line:
 
 ---
-`;
+`

@@ -1,23 +1,23 @@
-import {ComboboxControl as WPComboboxControl} from "@wordpress/components";
-import cloneDeep from "lodash.clonedeep";
-import get from "lodash.get";
-import set from "lodash.set";
-import type {FC} from "react";
-import React from "react";
-import type {Obj} from "../../types";
-import {useControlContext} from "../context";
-import type {ControlByPath, ControlByValue, ControlType} from "../types";
-import {isPathControl} from "../utils";
+import { ComboboxControl as WPComboboxControl } from "@wordpress/components"
+import cloneDeep from "lodash.clonedeep"
+import get from "lodash.get"
+import set from "lodash.set"
+import type { FC } from "react"
+import React from "react"
+import type { Obj } from "../../types"
+import { useControlContext } from "../context"
+import type { ControlByPath, ControlByValue, ControlType } from "../types"
+import { isPathControl } from "../utils"
 
 /**
  * Represents a combobox control component.
  */
 type _ComboboxControl = {
 	options: {
-		label: string;
-		value: string;
-	}[];
-};
+		label: string
+		value: string
+	}[]
+}
 
 /**
  * ComboboxControl component.
@@ -25,13 +25,13 @@ type _ComboboxControl = {
  * @returns A React component representing a combobox control.
  */
 export const ComboboxControl = <pT extends Obj = {}>(
-	props: ControlType<string, pT> & _ComboboxControl,
+	props: ControlType<string, pT> & _ComboboxControl
 ) =>
 	isPathControl(props) ? (
 		<ComboboxControlByPath {...props} />
 	) : (
 		<ComboboxControlByValue {...props} />
-	);
+	)
 
 /**
  * ComboboxControlByPath component.
@@ -43,21 +43,21 @@ function ComboboxControlByPath<pT extends Obj>({
 	updateHandling,
 	...props
 }: ControlByPath<pT, string> & _ComboboxControl): JSX.Element {
-	const {attributes, setAttributes} = useControlContext();
-	const value = get(attributes, path);
+	const { attributes, setAttributes } = useControlContext()
+	const value = get(attributes, path)
 
 	return (
 		<ComboboxControl
 			updateHandling="by-value"
 			value={value}
 			setValue={(newValue) => {
-				const newAttributes = cloneDeep(attributes);
-				set(newAttributes, path, newValue);
-				setAttributes(newAttributes);
+				const newAttributes = cloneDeep(attributes)
+				set(newAttributes, path, newValue)
+				setAttributes(newAttributes)
 			}}
 			{...props}
 		/>
-	);
+	)
 }
 
 /**
@@ -78,7 +78,7 @@ const ComboboxControlByValue: FC<ControlByValue<string> & _ComboboxControl> = ({
 		<WPComboboxControl
 			label={`${label} ${value === undefined ? " - Default" : ""}`}
 			onChange={(newValue) => {
-				newValue ? setValue(newValue) : setValue(undefined);
+				newValue ? setValue(newValue) : setValue(undefined)
 			}}
 			value={value ?? defaultValue}
 			help={
@@ -86,7 +86,7 @@ const ComboboxControlByValue: FC<ControlByValue<string> & _ComboboxControl> = ({
 				value !== undefined && (
 					<button
 						onClick={() => {
-							setValue(undefined);
+							setValue(undefined)
 						}}
 					>
 						Set to default
@@ -95,4 +95,4 @@ const ComboboxControlByValue: FC<ControlByValue<string> & _ComboboxControl> = ({
 			}
 			options={options}
 		/>
-	) : null;
+	) : null

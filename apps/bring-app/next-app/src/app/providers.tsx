@@ -1,7 +1,7 @@
 // import providers here
 
-const Providers = ({children}: {children: React.ReactNode}) => {
-	return <>{children}</>;
-};
+const Providers = ({ children }: { children: React.ReactNode }) => {
+	return <>{children}</>
+}
 
-export default Providers;
+export default Providers

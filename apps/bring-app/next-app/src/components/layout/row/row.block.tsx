@@ -1,19 +1,11 @@
-import {
-	row,
-	rowSizes as sizes,
-	type RowBlockProps as RowProps,
-} from "@/components/layout/row";
-import type {BlockConfig} from "@bring/blocks-editor";
-import {
-	makeOptions,
-	objectAttributeSource,
-	stringAttributeSource,
-} from "@bring/blocks-editor";
-import {RowControls} from "./row.controls";
-import {RowEdit} from "./row.edit";
+import { row, rowSizes as sizes, type RowBlockProps as RowProps } from "@/components/layout/row"
+import type { BlockConfig } from "@bring/blocks-editor"
+import { makeOptions, objectAttributeSource, stringAttributeSource } from "@bring/blocks-editor"
+import { RowControls } from "./row.controls"
+import { RowEdit } from "./row.edit"
 
-import {colorOptions} from "@/editor/utils/options";
-import {objectKeys} from "@bring/blocks-client";
+import { colorOptions } from "@/editor/utils/options"
+import { objectKeys } from "@bring/blocks-client"
 
 const rowConfig: BlockConfig<RowProps> = {
 	...row,
@@ -28,7 +20,7 @@ const rowConfig: BlockConfig<RowProps> = {
 	},
 	Edit: RowEdit,
 	Controls: [
-		{panel: "Grid settings", controls: [RowControls], initialOpen: true},
+		{ panel: "Grid settings", controls: [RowControls], initialOpen: true },
 		{
 			panel: "Row settings",
 			controls: [
@@ -50,20 +42,20 @@ const rowConfig: BlockConfig<RowProps> = {
 	styles: {
 		spacing: {
 			m: {
-				t: {"": 0},
-				b: {"": 0},
+				t: { "": 0 },
+				b: { "": 0 },
 				l: {},
 				r: {},
 			},
 			p: {
-				t: {"": 6},
-				b: {"": 6},
+				t: { "": 6 },
+				b: { "": 6 },
 				l: {},
 				r: {},
 			},
 		},
-		visibility: {"": "grid", md: "grid", lg: "grid"},
+		visibility: { "": "grid", md: "grid", lg: "grid" },
 	},
-};
+}
 
-export default rowConfig;
+export default rowConfig

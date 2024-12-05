@@ -1,15 +1,12 @@
-import {
-	section,
-	type SectionBlockProps as SectionProps,
-} from "@/components/layout/section";
-import {colorOptions} from "@/editor/utils/options";
+import { section, type SectionBlockProps as SectionProps } from "@/components/layout/section"
+import { colorOptions } from "@/editor/utils/options"
 import {
 	booleanAttributeSource,
 	imageAttributeSource,
 	stringAttributeSource,
 	type BlockConfig,
-} from "@bring/blocks-editor";
-import {SectionEdit} from "./section.edit";
+} from "@bring/blocks-editor"
+import { SectionEdit } from "./section.edit"
 
 const sectionConfig: BlockConfig<SectionProps> = {
 	...section,
@@ -32,8 +29,8 @@ const sectionConfig: BlockConfig<SectionProps> = {
 					path: "backgroundColor",
 					options: colorOptions,
 				},
-				{type: "image", label: "Background image", path: "backgroundImage"},
-				{type: "toggle", label: "Dark", path: "dark"},
+				{ type: "image", label: "Background image", path: "backgroundImage" },
+				{ type: "toggle", label: "Dark", path: "dark" },
 			],
 			initialOpen: true,
 		},
@@ -41,12 +38,12 @@ const sectionConfig: BlockConfig<SectionProps> = {
 	styles: {
 		spacing: {
 			p: {
-				t: {"": 8},
-				b: {"": 8},
+				t: { "": 8 },
+				b: { "": 8 },
 			},
 		},
-		visibility: {"": "block", md: "block", lg: "block"},
+		visibility: { "": "block", md: "block", lg: "block" },
 	},
-};
+}
 
-export default sectionConfig;
+export default sectionConfig

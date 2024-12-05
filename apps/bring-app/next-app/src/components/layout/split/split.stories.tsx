@@ -1,14 +1,14 @@
-import type {Meta, StoryObj} from "@storybook/react";
-import Split from "./split";
+import type { Meta, StoryObj } from "@storybook/react"
+import Split from "./split"
 
 const meta = {
 	title: "Layout/Split",
 	component: Split,
 	tags: ["autodocs"],
-} satisfies Meta<typeof Split>;
+} satisfies Meta<typeof Split>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
 	args: {
@@ -21,4 +21,4 @@ export const Default: Story = {
 			</>
 		),
 	},
-};
+}

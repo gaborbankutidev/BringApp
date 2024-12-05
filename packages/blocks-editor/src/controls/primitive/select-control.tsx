@@ -1,23 +1,23 @@
-import {SelectControl as WPSelectControl} from "@wordpress/components";
-import cloneDeep from "lodash.clonedeep";
-import get from "lodash.get";
-import set from "lodash.set";
-import type {FC} from "react";
-import React from "react";
-import type {Obj} from "../../types";
-import {useControlContext} from "../context";
-import type {ControlByPath, ControlByValue, ControlType} from "../types";
-import {isPathControl} from "../utils";
+import { SelectControl as WPSelectControl } from "@wordpress/components"
+import cloneDeep from "lodash.clonedeep"
+import get from "lodash.get"
+import set from "lodash.set"
+import type { FC } from "react"
+import React from "react"
+import type { Obj } from "../../types"
+import { useControlContext } from "../context"
+import type { ControlByPath, ControlByValue, ControlType } from "../types"
+import { isPathControl } from "../utils"
 
 /**
  * Props for the SelectControl component.
  */
 type _SelectControl = {
 	options: {
-		label: string;
-		value: string;
-	}[];
-};
+		label: string
+		value: string
+	}[]
+}
 
 /**
  * A control component that renders a select dropdown.
@@ -27,9 +27,9 @@ type _SelectControl = {
  * @param props - The props for the SelectControl component.
  */
 export const SelectControl = <pT extends Obj = {}>(
-	props: ControlType<string, pT> & _SelectControl,
+	props: ControlType<string, pT> & _SelectControl
 ) =>
-	isPathControl(props) ? <SelectControlByPath {...props} /> : <SelectControlByValue {...props} />;
+	isPathControl(props) ? <SelectControlByPath {...props} /> : <SelectControlByValue {...props} />
 
 /**
  * A control component that renders a select dropdown based on a path.
@@ -43,21 +43,21 @@ function SelectControlByPath<pT extends Obj>({
 	updateHandling,
 	...props
 }: ControlByPath<pT, string> & _SelectControl): JSX.Element {
-	const {attributes, setAttributes} = useControlContext();
-	const value = get(attributes, path);
+	const { attributes, setAttributes } = useControlContext()
+	const value = get(attributes, path)
 
 	return (
 		<SelectControlByValue
 			updateHandling="by-value"
 			value={value}
 			setValue={(newValue) => {
-				const newAttributes = cloneDeep(attributes);
-				set(newAttributes, path, newValue);
-				setAttributes(newAttributes);
+				const newAttributes = cloneDeep(attributes)
+				set(newAttributes, path, newValue)
+				setAttributes(newAttributes)
 			}}
 			{...props}
 		/>
-	);
+	)
 }
 
 /**
@@ -83,7 +83,7 @@ const SelectControlByValue: FC<ControlByValue<string> & _SelectControl> = ({
 				value !== undefined && (
 					<button
 						onClick={() => {
-							setValue(undefined);
+							setValue(undefined)
 						}}
 					>
 						Set to default
@@ -92,4 +92,4 @@ const SelectControlByValue: FC<ControlByValue<string> & _SelectControl> = ({
 			}
 			options={options}
 		/>
-	) : null;
+	) : null

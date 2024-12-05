@@ -1,17 +1,17 @@
-import {group, type GroupProps} from "@/components/layout/group";
+import { group, type GroupProps } from "@/components/layout/group"
 import {
 	alignOptions,
 	colorOptions,
 	directionOptions,
 	justifyOptions,
-} from "@/editor/utils/options";
+} from "@/editor/utils/options"
 import {
 	objectAttributeSource,
 	stringAttributeSource,
 	type BlockConfig,
-} from "@bring/blocks-editor";
-import GroupControls from "./group.controls";
-import GroupEdit from "./group.edit";
+} from "@bring/blocks-editor"
+import GroupControls from "./group.controls"
+import GroupEdit from "./group.edit"
 
 const groupConfig: BlockConfig<GroupProps> = {
 	...group,
@@ -74,8 +74,8 @@ const groupConfig: BlockConfig<GroupProps> = {
 				r: {},
 			},
 		},
-		visibility: {"": "flex", md: "flex", lg: "flex"},
+		visibility: { "": "flex", md: "flex", lg: "flex" },
 	},
-};
+}
 
-export default groupConfig;
+export default groupConfig

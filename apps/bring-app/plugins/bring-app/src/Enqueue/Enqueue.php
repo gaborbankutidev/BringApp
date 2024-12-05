@@ -40,9 +40,6 @@ class Enqueue {
 	private static function editor() {
 		// $theme_version = wp_get_theme()->get("Version");
 
-		wp_enqueue_style(
-			"easy-mde-theme-styles",
-			"https://unpkg.com/easymde/dist/easymde.min.css",
-		);
+		wp_enqueue_style("easy-mde-theme-styles", "https://unpkg.com/easymde/dist/easymde.min.css");
 	}
 }

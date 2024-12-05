@@ -26,21 +26,17 @@ const config = {
 				fixStyle: "inline-type-imports",
 			},
 		],
-		"@typescript-eslint/no-unused-vars": ["warn", {argsIgnorePattern: "^_"}],
+		"@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
 		"@typescript-eslint/no-misused-promises": [
 			2,
 			{
-				checksVoidReturn: {attributes: false},
+				checksVoidReturn: { attributes: false },
 			},
 		],
 		// To allow @ts-ignore without a warning or error
 		"@typescript-eslint/ban-ts-comment": "off",
 	},
-	ignorePatterns: [
-		"process-mock.js",
-		"webpack.editor.config.js",
-		"node_modules/",
-	],
-};
+	ignorePatterns: ["process-mock.js", "webpack.editor.config.js", "node_modules/", ".eslintrc.cjs"],
+}
 
-module.exports = config;
+module.exports = config

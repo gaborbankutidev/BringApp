@@ -1,9 +1,9 @@
-import {embed, type EmbedProps} from "@/components/embed";
+import { embed, type EmbedProps } from "@/components/embed"
 import {
 	numberAttributeSource,
 	stringAttributeSource,
 	type BlockConfig,
-} from "@bring/blocks-editor";
+} from "@bring/blocks-editor"
 
 const embedConfig: BlockConfig<EmbedProps> = {
 	...embed,
@@ -17,7 +17,7 @@ const embedConfig: BlockConfig<EmbedProps> = {
 		{
 			panel: "Embed settings",
 			controls: [
-				{type: "textarea", label: "Url", path: "url"},
+				{ type: "textarea", label: "Url", path: "url" },
 				{
 					type: "range",
 					label: "Height (in pixels)",
@@ -43,8 +43,8 @@ const embedConfig: BlockConfig<EmbedProps> = {
 				r: {},
 			},
 		},
-		visibility: {"": "block", md: "block", lg: "block"},
+		visibility: { "": "block", md: "block", lg: "block" },
 	},
-};
+}
 
-export default embedConfig;
+export default embedConfig

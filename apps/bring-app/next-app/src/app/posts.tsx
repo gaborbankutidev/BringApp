@@ -1,15 +1,15 @@
-import {env} from "@/env.mjs";
-import {getDynamicEntityList} from "@bring/blocks-client/content";
-import Link from "next/link";
-import {twJoin} from "tailwind-merge";
-import Slider from "./slider";
+import { env } from "@/env.mjs"
+import { getDynamicEntityList } from "@bring/blocks-client/content"
+import Link from "next/link"
+import { twJoin } from "tailwind-merge"
+import Slider from "./slider"
 
 export default async function Posts() {
-	const {entityList} = await getDynamicEntityList(
+	const { entityList } = await getDynamicEntityList(
 		env.NEXT_PUBLIC_WP_BASE_URL ?? "",
 		"post",
-		"post",
-	);
+		"post"
+	)
 
 	return (
 		<div>
@@ -19,17 +19,15 @@ export default async function Posts() {
 						href={entity.url ?? "#"}
 						key={`post-${entity.entityId}`}
 						className={twJoin(
-							"bg-gray-800/60 min-h-[180px] min-w-[280px] border border-gray-500/60 px-4 py-8 rounded-lg md:w-1/2 cursor-pointer hover:bg-gray-700/60 transition-all duration-300",
+							"min-h-[180px] min-w-[280px] cursor-pointer rounded-lg border border-gray-500/60 bg-gray-800/60 px-4 py-8 transition-all duration-300 hover:bg-gray-700/60 md:w-1/2"
 						)}
 					>
-						<p className="text-14 text-purple-600 mb-2">
-							Example WordPress Post
-						</p>
+						<p className="mb-2 text-14 text-purple-600">Example WordPress Post</p>
 						<h3 className="text-24s mb-4">{entity.name}</h3>
 						<p>{entity.excerpt}</p>
 					</Link>
 				))}
 			</Slider>
 		</div>
-	);
+	)
 }

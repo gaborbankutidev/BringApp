@@ -1,4 +1,4 @@
-import type {Entity} from "../types";
+import type { Entity } from "../types"
 
 /**
  * Represents a successful response with an entity.
@@ -7,9 +7,9 @@ import type {Entity} from "../types";
  * @property entity - The entity.
  */
 type SuccessResponse<EP> = {
-	responseCode: 200;
-	entity: Entity<EP>;
-};
+	responseCode: 200
+	entity: Entity<EP>
+}
 
 /**
  * Represents a redirect response.
@@ -18,10 +18,10 @@ type SuccessResponse<EP> = {
  * @property entity - The entity.
  */
 type RedirectResponse = {
-	responseCode: 301 | 302 | 307 | 308;
-	redirectTo: string;
-	entity: null;
-};
+	responseCode: 301 | 302 | 307 | 308
+	redirectTo: string
+	entity: null
+}
 
 /**
  * Represents an error response.
@@ -29,17 +29,17 @@ type RedirectResponse = {
  * @property entity - The entity.
  */
 type ErrorResponse = {
-	responseCode: 400;
-	entity: null;
-};
+	responseCode: 400
+	entity: null
+}
 
 /**
  * Represents a not found response.
  * @property responseCode - The response code.
  */
 type NotFoundResponse = {
-	responseCode: 404;
-};
+	responseCode: 404
+}
 
 /**
  * Represents the possible response types for the `getEntity` function.
@@ -49,7 +49,7 @@ type GetEntityResponseType<EP> =
 	| SuccessResponse<EP>
 	| RedirectResponse
 	| ErrorResponse
-	| NotFoundResponse;
+	| NotFoundResponse
 
 /**
  * Fetches an entity from the specified URL.
@@ -65,24 +65,24 @@ async function getEntity<EP = object>(
 	dataToken: string,
 	onRedirect: (redirectTo: string, responseCode: number) => void,
 	onNotFound: () => void,
-	slug: string | string[] = "",
+	slug: string | string[] = ""
 ): Promise<Entity<EP> | null> {
-	const joinedSlug = typeof slug === "string" ? slug : slug.join("/");
+	const joinedSlug = typeof slug === "string" ? slug : slug.join("/")
 
 	// fetch entity
-	let responseData = null;
+	let responseData = null
 	try {
 		const response = await fetch(`${wpURL}/wp-json/bring/entity/${joinedSlug}`, {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
 			},
-		});
+		})
 
-		responseData = (await response.json()) as GetEntityResponseType<EP>; // TODO: parse with zod
+		responseData = (await response.json()) as GetEntityResponseType<EP> // TODO: parse with zod
 	} catch (error) {
-		console.error(error);
-		return null;
+		console.error(error)
+		return null
 	}
 
 	// handle redirect
@@ -92,26 +92,26 @@ async function getEntity<EP = object>(
 		responseData.responseCode == 307 ||
 		responseData.responseCode == 308
 	) {
-		onRedirect(responseData.redirectTo, responseData.responseCode);
-		return null;
+		onRedirect(responseData.redirectTo, responseData.responseCode)
+		return null
 	}
 
 	// handle not found
 	if (responseData.responseCode == 404) {
-		onNotFound();
-		return null;
+		onNotFound()
+		return null
 	}
 
 	// handle error
 	if (responseData.responseCode != 200) {
 		console.error(
-			`Error while fetching entity at ${joinedSlug}, response code: ${responseData.responseCode}`,
-		);
-		return null;
+			`Error while fetching entity at ${joinedSlug}, response code: ${responseData.responseCode}`
+		)
+		return null
 	}
 
 	// return entity
-	return responseData.entity;
+	return responseData.entity
 }
 
-export default getEntity;
+export default getEntity

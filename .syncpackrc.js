@@ -21,6 +21,6 @@ const config = {
 			pinVersion: "workspace:*",
 		},
 	],
-};
+}
 
-module.exports = config;
+module.exports = config
