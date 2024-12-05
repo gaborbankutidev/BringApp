@@ -1,16 +1,12 @@
-
-import {dispatch, select, subscribe} from "@wordpress/data";
-import {BlockConfig, objectAttributeSource, registerBringBlock, stringAttributeSource} from "./blocks";
-import {postContentConfig} from "./components/post-content";
-import {BringNode, Obj, WpBlock} from "./types";
-import { makeEdit } from "./blocks/make-edit";
-import { makeSave } from "./blocks/make-save";
-import { blockStylesDefaultValue } from "./styles/utils";
+import { dispatch, select, subscribe } from "@wordpress/data"
+import { BlockConfig, registerBringBlock } from "./blocks"
+import { postContentConfig } from "./components/post-content"
+import { BringNode, WpBlock } from "./types"
 
 declare global {
 	// Interface is needed to augment global `Window`
 	interface Window {
-		jwt: {token: string}; // FIXME move this to a cookie
+		jwt: { token: string } // FIXME move this to a cookie
 	}
 }
 
@@ -73,7 +69,7 @@ export class Editor {
 	 */
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public static init(wpBaseURL: string, blockList: BlockConfig<any>[]) {
-		console.log("🚀 Launching Bring Editor...");
+		console.log("🚀 Launching Bring Editor...")
 		if (!Editor.instance) {
 			Editor.instance = new Editor(wpBaseURL, blockList)
 		} else {
@@ -173,7 +169,7 @@ export class Editor {
 	private parseBlocks(blocks: WpBlock[]) {
 		const nodes: BringNode[] = []
 		for (const block of blocks) {
-			const blockConfig = this.blockList.find((b) => b.blockName === block.name);
+			const blockConfig = this.blockList.find((b) => b.blockName === block.name)
 			if (!blockConfig) {
 				console.error(`🚀 Block '${block.name}' not found in the block list and will not be saved!`)
 				continue
@@ -195,45 +191,13 @@ export class Editor {
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Method to register a block.
-	 * @param config - the configuration of the block
-	 * @returns void
-	 */
-	private registerBlock<Props extends Obj = {}>(config: BlockConfig<Props>) {
-		const title = config.title ? config.title : config.blockName
-
-		// @ts-expect-error: Expect error here because Wordpress's `registerBlockType` types are so complicated TS can't infer the correct types
-		registerBlockType(config.componentName, {
-			title,
-			description: config.description ?? `${title} block by Bring`,
-			category: "widgets", // TODO custom category
-			icon: config.icon ?? "block-default",
-			supports: {
-				html: false,
-			},
-			attributes: {
-				...config.attributes,
-				id: stringAttributeSource(),
-				bringStyles: objectAttributeSource(blockStylesDefaultValue),
-			},
-			example: config.previewAttributes && {
-				attributes: config.previewAttributes,
-			},
-			edit: makeEdit(config),
-			save: makeSave(),
-		})
-	}
-
-	/**
-=======
 	 * Method to register all the blocks.
 	 * @returns void
 	 */
 	private registerBlocks() {
 		this.blockList.push(postContentConfig)
 		this.blockList.map((blockConfig) => {
-			registerBringBlock(blockConfig);
-		});
+			registerBringBlock(blockConfig)
+		})
 	}
 }

@@ -13,7 +13,7 @@ import image from "@/components/image/image.block"
 import markdown from "@/components/markdown/markdown.block"
 import button from "@/components/ui/button/button.block"
 import { env } from "@/env.mjs"
-import { Editor } from "@bring/blocks-editor"
+import  Editor  from "@bring/blocks-editor"
 
 const blockList = [
 	// layout
