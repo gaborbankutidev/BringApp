@@ -36,7 +36,7 @@ export const embed = {
 				r: {},
 			},
 		},
-		visibility: { "": "block", md: "block", lg: "block" },
+		visibility: {"": "block", md: "block", lg: "block"},
 	},
 } as const;
 

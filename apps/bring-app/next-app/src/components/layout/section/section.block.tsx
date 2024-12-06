@@ -1,4 +1,3 @@
-
 import type {BP} from "@/bring";
 import {cn} from "@/lib/utils";
 import type {ColorType} from "@/styles/colors";
@@ -46,11 +45,11 @@ export const section = {
 	blockStylesConfig: {
 		spacing: {
 			p: {
-				t: { "": 8 },
-				b: { "": 8 },
+				t: {"": 8},
+				b: {"": 8},
 			},
 		},
-		visibility: { "": "block", md: "block", lg: "block" },
+		visibility: {"": "block", md: "block", lg: "block"},
 	},
 } as const;
 

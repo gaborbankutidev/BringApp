@@ -41,7 +41,7 @@ export const divider = {
 				r: {},
 			},
 		},
-		visibility: { "": "flex", md: "flex", lg: "flex" },
+		visibility: {"": "flex", md: "flex", lg: "flex"},
 	},
 } as const;
 

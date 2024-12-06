@@ -1,14 +1,17 @@
-import { group, type GroupProps } from "@/components/layout/group"
-import { EditorCard, type BlockEdit } from "@bring/blocks-editor"
+import {type BlockEdit} from "@bring/blocks-editor/blocks";
+import {EditorCard} from "@bring/blocks-editor/components";
+import {type GroupBlockProps} from "./group.block";
 
-const GroupEdit: BlockEdit<GroupProps> = ({ children, attributes, isSelected = false }) => {
-	const { ...props } = attributes
-
+const GroupEdit: BlockEdit<GroupBlockProps> = ({
+	blockProps,
+	Block,
+	isSelected = false,
+}) => {
 	return (
-		<EditorCard color="lime" name="Group" isSelected={isSelected}>
-			<group.Component {...props}>{children}</group.Component>
+		<EditorCard color="amber" name="Group" isSelected={isSelected}>
+			<Block {...blockProps} />
 		</EditorCard>
-	)
-}
+	);
+};
 
-export default GroupEdit
+export default GroupEdit;

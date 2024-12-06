@@ -1,15 +1,15 @@
-import type { Meta, StoryObj } from "@storybook/react"
+import type {Meta, StoryObj} from "@storybook/react";
 
-import Image from "./image"
+import Image from "./image";
 
 const meta = {
 	title: "Components/Image",
 	component: Image,
 	tags: ["autodocs"],
-} satisfies Meta<typeof Image>
+} satisfies Meta<typeof Image>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Basic: Story = {
 	args: {
@@ -20,7 +20,7 @@ export const Basic: Story = {
 			height: 400,
 		},
 	},
-}
+};
 
 export const BasicWithLightbox: Story = {
 	args: {
@@ -32,7 +32,7 @@ export const BasicWithLightbox: Story = {
 		},
 		lightbox: true,
 	},
-}
+};
 
 export const WithLink: Story = {
 	args: {
@@ -46,7 +46,7 @@ export const WithLink: Story = {
 			href: "https://eld.hu",
 		},
 	},
-}
+};
 
 export const WithCaption: Story = {
 	args: {
@@ -58,7 +58,7 @@ export const WithCaption: Story = {
 		},
 		caption: "This is a caption",
 	},
-}
+};
 
 export const WithSource: Story = {
 	args: {
@@ -70,7 +70,7 @@ export const WithSource: Story = {
 		},
 		source: "This is a source",
 	},
-}
+};
 
 export const WithCaptionAndSource: Story = {
 	args: {
@@ -83,4 +83,4 @@ export const WithCaptionAndSource: Story = {
 		caption: "This is a caption",
 		source: "This is a source",
 	},
-}
+};

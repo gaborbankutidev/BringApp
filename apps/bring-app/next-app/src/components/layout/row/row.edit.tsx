@@ -1,12 +1,16 @@
-import { row, type RowBlockProps as RowProps } from "@/components/layout/row"
-import type { BlockEdit } from "@bring/blocks-editor"
-import { EditorCard } from "@bring/blocks-editor"
+import type {BlockEdit} from "@bring/blocks-editor/blocks";
+import {EditorCard} from "@bring/blocks-editor/components";
+import {type RowBlockProps} from "./row.block";
 
-export const RowEdit: BlockEdit<RowProps> = ({ children, attributes, isSelected = false }) => {
-	const { columnCount, ...props } = attributes
+export const RowEdit: BlockEdit<RowBlockProps> = ({
+	blockProps: {attributes, children, ...restOfBlockProps},
+	Block,
+	isSelected = false,
+}) => {
+	const {columnCount, ...restOfAttributes} = attributes;
 	return (
 		<EditorCard color="green" isSelected={isSelected} name="Row">
-			<row.Component {...props}>
+			<Block attributes={restOfAttributes} {...restOfBlockProps}>
 				<div
 					className={`editor-row-content editor-row-content-${
 						columnCount?.lg ?? columnCount?.md ?? columnCount?.[""] ?? 1
@@ -14,7 +18,7 @@ export const RowEdit: BlockEdit<RowProps> = ({ children, attributes, isSelected 
 				>
 					{children}
 				</div>
-			</row.Component>
+			</Block>
 		</EditorCard>
-	)
-}
+	);
+};

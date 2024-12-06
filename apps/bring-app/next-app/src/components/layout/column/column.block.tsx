@@ -1,4 +1,3 @@
-
 import type {BP} from "@/bring";
 import {
 	type AlignType,
@@ -63,19 +62,19 @@ export const column = {
 	blockStylesConfig: {
 		spacing: {
 			m: {
-				t: { "": 0 },
-				b: { "": 0 },
+				t: {"": 0},
+				b: {"": 0},
 				l: {},
 				r: {},
 			},
 			p: {
-				t: { "": 0 },
-				b: { "": 0 },
+				t: {"": 0},
+				b: {"": 0},
 				l: {},
 				r: {},
 			},
 		},
-		visibility: { "": "flex", md: "flex", lg: "flex" },
+		visibility: {"": "flex", md: "flex", lg: "flex"},
 	},
 } as const;
 

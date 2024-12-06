@@ -1,4 +1,3 @@
-
 import type {BP} from "@/bring";
 import type {TextAlignType, TextSourceType} from "@/editor/utils/lists";
 import {cn} from "@/lib/utils";
@@ -55,9 +54,8 @@ export const heading = {
 				r: {},
 			},
 		},
-		visibility: { "": "block", md: "block", lg: "block" },
+		visibility: {"": "block", md: "block", lg: "block"},
 	},
-
 } as const;
 
 export default HeadingBlock;

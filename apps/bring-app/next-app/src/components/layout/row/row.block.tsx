@@ -1,4 +1,3 @@
-
 import type {BP} from "@/bring";
 import {cn} from "@/lib/utils";
 import type {ColorType} from "@/styles/colors";
@@ -45,19 +44,19 @@ export const row = {
 	blockStylesConfig: {
 		spacing: {
 			m: {
-				t: { "": 0 },
-				b: { "": 0 },
+				t: {"": 0},
+				b: {"": 0},
 				l: {},
 				r: {},
 			},
 			p: {
-				t: { "": 6 },
-				b: { "": 6 },
+				t: {"": 6},
+				b: {"": 6},
 				l: {},
 				r: {},
 			},
 		},
-		visibility: { "": "grid", md: "grid", lg: "grid" },
+		visibility: {"": "grid", md: "grid", lg: "grid"},
 	},
 } as const;
 

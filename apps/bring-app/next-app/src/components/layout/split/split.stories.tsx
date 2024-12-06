@@ -1,4 +1,3 @@
-
 import type {Meta, StoryObj} from "@storybook/react";
 import SplitBlock from "./split.block";
 
@@ -8,8 +7,8 @@ const meta = {
 	tags: ["autodocs"],
 } satisfies Meta<typeof SplitBlock>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
 	args: {
@@ -22,4 +21,4 @@ export const Default: Story = {
 			</>
 		),
 	},
-}
+};

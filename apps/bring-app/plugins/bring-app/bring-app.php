@@ -45,9 +45,11 @@ define("BRING_APP_VERSION", "1.0.0");
 /**
  * Define Plugin Path and URL constants
  */
-!defined("BRING_APP_PLUGIN_PATH") && define("BRING_APP_PLUGIN_PATH", plugin_dir_path(__FILE__));
+!defined("BRING_APP_PLUGIN_PATH") &&
+	define("BRING_APP_PLUGIN_PATH", plugin_dir_path(__FILE__));
 
-!defined("BRING_APP_PLUGIN_URL") && define("BRING_APP_PLUGIN_URL", plugin_dir_url(__FILE__));
+!defined("BRING_APP_PLUGIN_URL") &&
+	define("BRING_APP_PLUGIN_URL", plugin_dir_url(__FILE__));
 
 /**
  * Define enforced theme
@@ -59,23 +61,9 @@ define("BRING_APP_THEME", "bring-app-theme");
  */
 define("DISALLOW_FILE_EDIT", true);
 
-if (!defined("COOKIEPATH")) {
-	define("COOKIEPATH", "");
-}
-
-if (!defined("COOKIE_DOMAIN")) {
-	define("COOKIE_DOMAIN", "");
-}
-
 /**
  * Autoload Composer dependencies
  */
-<<<<<<< HEAD
-function activate_bring_app(): void {
-	require_once plugin_dir_path(__FILE__) . "includes/class-bring-app-activator.php";
-	Bring_App_Activator::activate();
-}
-=======
 require_once "vendor/autoload.php";
 
 /**
@@ -88,22 +76,11 @@ $dotenv->safeLoad();
  * The code that runs during plugin activation.
  */
 register_activation_hook(__FILE__, Activator::activate(...));
->>>>>>> main
 
 /**
  * The code that runs during plugin deactivation.
  */
-<<<<<<< HEAD
-function deactivate_bring_app(): void {
-	require_once plugin_dir_path(__FILE__) . "includes/class-bring-app-deactivator.php";
-	Bring_App_Deactivator::deactivate();
-}
-
-register_activation_hook(__FILE__, "activate_bring_app");
-register_deactivation_hook(__FILE__, "deactivate_bring_app");
-=======
 register_deactivation_hook(__FILE__, Deactivator::deactivate(...));
->>>>>>> main
 
 /**
  * Initialize the plugin

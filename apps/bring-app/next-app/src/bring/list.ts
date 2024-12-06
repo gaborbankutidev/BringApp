@@ -1,16 +1,16 @@
 // layout
-import { column } from "@/components/layout/column"
-import { group } from "@/components/layout/group"
-import { row } from "@/components/layout/row"
-import { section } from "@/components/layout/section"
-import { split } from "@/components/layout/split"
+import {column} from "@/components/layout/column";
+import {group} from "@/components/layout/group";
+import {row} from "@/components/layout/row";
+import {section} from "@/components/layout/section";
+import {split} from "@/components/layout/split";
 // components
-import { divider } from "@/components/divider"
-import { embed } from "@/components/embed"
-import { heading } from "@/components/heading"
-import { image } from "@/components/image"
-import { markdown } from "@/components/markdown"
-import { button } from "@/components/ui/button"
+import {divider} from "@/components/divider";
+import {embed} from "@/components/embed";
+import {heading} from "@/components/heading";
+import {image} from "@/components/image";
+import {markdown} from "@/components/markdown";
+import {button} from "@/components/ui/button";
 
 export const blockList = [
 	// layout
@@ -26,4 +26,4 @@ export const blockList = [
 	heading,
 	image,
 	markdown,
-]
+];

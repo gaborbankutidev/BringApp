@@ -1,4 +1,3 @@
-
 import type {BP} from "@/bring";
 import type {SourceType} from "@/editor/utils/lists";
 import {cn} from "@/lib/utils";
@@ -83,7 +82,7 @@ export const image = {
 				r: {},
 			},
 		},
-		visibility: { "": "block", md: "block", lg: "block" },
+		visibility: {"": "block", md: "block", lg: "block"},
 	},
 } as const;
 

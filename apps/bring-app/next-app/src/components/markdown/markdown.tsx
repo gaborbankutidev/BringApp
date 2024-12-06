@@ -1,4 +1,3 @@
-
 import Image from "@/components/image";
 import {cn} from "@/lib/utils";
 import {useMemo, type ReactElement, type ReactNode} from "react";
@@ -26,51 +25,53 @@ export const markdownElements = [
 	"blockquote",
 	"hr",
 	"br",
-] as const
+] as const;
 
-export type MarkdownElements = (typeof markdownElements)[number]
+export type MarkdownElements = (typeof markdownElements)[number];
 
 type MarkdownProps = (
 	| {
-			content: string
+			content: string;
 	  }
 	| {
-			children: string
+			children: string;
 	  }
 ) &
 	(
 		| {
-				inline: true
-				allowedElements?: MarkdownInlineElements[]
+				inline: true;
+				allowedElements?: MarkdownInlineElements[];
 		  }
 		| {
-				inline?: false
-				allowedElements?: MarkdownElements[]
+				inline?: false;
+				allowedElements?: MarkdownElements[];
 		  }
 	) & {
-		elementsClassName?: Partial<Record<MarkdownElements, string>>
-		className?: string
-	}
+		elementsClassName?: {[key in MarkdownElements]?: string};
+		className?: string;
+	};
 
 const parseAlt = (alt: string | undefined) => {
 	const value = {
 		alt: "",
 		caption: "",
 		source: "",
-	}
-	if (!alt) return value
+	};
+	if (!alt) return value;
 
-	const parts = alt.split(/--caption:|--source:/)
+	const parts = alt.split(/--caption:|--source:/);
 
-	value.alt = parts[0] ?? ""
-	value.caption = alt.includes("--caption:") ? (parts[1] ?? "") : ""
+	value.alt = parts[0] ?? "";
+	value.caption = alt.includes("--caption:") ? (parts[1] ?? "") : "";
 
 	if (alt.includes("--source:")) {
-		value.source = alt.includes("--caption:") ? (parts[2] ?? "") : (parts[1] ?? "")
+		value.source = alt.includes("--caption:")
+			? (parts[2] ?? "")
+			: (parts[1] ?? "");
 	}
 
-	return value
-}
+	return value;
+};
 
 const getComponents = (
 	elementsClassName: {
@@ -189,8 +190,8 @@ const Markdown = ({
 			elementsClassName.sub,
 			elementsClassName.sup,
 			elementsClassName.ul,
-		]
-	)
+		],
+	);
 
 	return inline ? (
 		<ReactMarkdown
@@ -211,7 +212,7 @@ const Markdown = ({
 		>
 			{content}
 		</ReactMarkdown>
-	)
-}
+	);
+};
 
 export default Markdown;

@@ -1,21 +1,20 @@
-
 import {cn} from "@/lib/utils";
 import Image, {type ImageProps} from "next/image";
 
 type SectionProps = {
-	backgroundImage?: Pick<ImageProps, "src" | "alt">
-	dark?: boolean
-	className?: string
-	backgroundImageClassName?: string
-	backgroundClassName?: string
-	containerClassName?: string
-} & React.HTMLProps<HTMLDivElement>
+	backgroundImage?: Pick<ImageProps, "src" | "alt">;
+	dark?: boolean;
+	className?: string;
+	backgroundImageClassName?: string;
+	backgroundClassName?: string;
+	containerClassName?: string;
+} & React.HTMLProps<HTMLDivElement>;
 
-const baseStye = "relative bg-no-repeat bg-cover overflow-hidden bg-center"
+const baseStye = "relative bg-no-repeat bg-cover overflow-hidden bg-center";
 const bgImageBaseStyle =
-	"absolute w-full h-full top-0 left-0 bg-no-repeat bg-cover bg-center bg-fixed"
-const bgBaseStyle = "absolute w-full h-full top-0 left-0"
-const containerBaseStyle = "relative"
+	"absolute w-full h-full top-0 left-0 bg-no-repeat bg-cover bg-center bg-fixed";
+const bgBaseStyle = "absolute w-full h-full top-0 left-0";
+const containerBaseStyle = "relative";
 
 /**
  * Section is the top level building block of pages.
@@ -48,7 +47,7 @@ const Section = ({
 						src={backgroundImage?.src}
 						alt={backgroundImage?.alt}
 						fill
-						style={{ objectFit: "cover" }}
+						style={{objectFit: "cover"}}
 						priority
 					/>
 				</div>
@@ -56,7 +55,7 @@ const Section = ({
 			<div className={bgCn} />
 			<div className={containerCn}>{children}</div>
 		</section>
-	)
-}
+	);
+};
 
 export default Section;

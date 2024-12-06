@@ -1,14 +1,14 @@
-import type { Meta, StoryObj } from "@storybook/react"
-import Row from "./row"
+import type {Meta, StoryObj} from "@storybook/react";
+import Row from "./row";
 
 const meta = {
 	title: "Layout/Row",
 	component: Row,
 	tags: ["autodocs"],
-} satisfies Meta<typeof Row>
+} satisfies Meta<typeof Row>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Screen720: Story = {
 	render: () => (
@@ -18,7 +18,7 @@ export const Screen720: Story = {
 			</Row>
 		</div>
 	),
-}
+};
 
 export const Screen1040: Story = {
 	render: () => (
@@ -28,7 +28,7 @@ export const Screen1040: Story = {
 			</Row>
 		</div>
 	),
-}
+};
 
 export const Screen1200: Story = {
 	render: () => (
@@ -38,7 +38,7 @@ export const Screen1200: Story = {
 			</Row>
 		</div>
 	),
-}
+};
 
 export const ScreenWide: Story = {
 	render: () => (
@@ -48,7 +48,7 @@ export const ScreenWide: Story = {
 			</Row>
 		</div>
 	),
-}
+};
 
 export const ScreenFull: Story = {
 	render: () => (
@@ -58,4 +58,4 @@ export const ScreenFull: Story = {
 			</Row>
 		</div>
 	),
-}
+};

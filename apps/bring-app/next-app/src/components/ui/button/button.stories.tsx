@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react"
+import type {Meta, StoryObj} from "@storybook/react";
 
-import Button from "./button"
+import Button from "./button";
 
 const meta = {
 	title: "Components/Ui/Button",
@@ -9,22 +9,29 @@ const meta = {
 	// Added argTypes manually as Storybook can't infer types from union types correctly
 	argTypes: {
 		variant: {
-			control: { type: "select" },
-			options: ["primary", "destructive", "outline", "secondary", "ghost", "link"],
+			control: {type: "select"},
+			options: [
+				"primary",
+				"destructive",
+				"outline",
+				"secondary",
+				"ghost",
+				"link",
+			],
 		},
 		size: {
-			control: { type: "radio" },
+			control: {type: "radio"},
 			options: ["sm", "md", "lg", "icon"],
 		},
 		as: {
-			control: { type: "radio" },
+			control: {type: "radio"},
 			options: ["button", "Link"],
 		},
 	},
-} satisfies Meta<typeof Button>
+} satisfies Meta<typeof Button>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
 	args: {
@@ -33,7 +40,7 @@ export const Primary: Story = {
 		variant: "primary",
 		as: "button",
 	},
-}
+};
 
 export const Destructive: Story = {
 	args: {
@@ -42,7 +49,7 @@ export const Destructive: Story = {
 		size: "md",
 		as: "button",
 	},
-}
+};
 
 export const Outline: Story = {
 	args: {
@@ -51,7 +58,7 @@ export const Outline: Story = {
 		size: "md",
 		as: "button",
 	},
-}
+};
 
 export const Secondary: Story = {
 	args: {
@@ -60,7 +67,7 @@ export const Secondary: Story = {
 		size: "md",
 		as: "button",
 	},
-}
+};
 
 export const Ghost: Story = {
 	args: {
@@ -69,7 +76,7 @@ export const Ghost: Story = {
 		size: "md",
 		as: "button",
 	},
-}
+};
 
 export const Link: Story = {
 	args: {
@@ -78,4 +85,4 @@ export const Link: Story = {
 		size: "md",
 		as: "button",
 	},
-}
+};

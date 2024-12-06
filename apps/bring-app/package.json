@@ -18,7 +18,7 @@
 		"build:tailwind": "cd ./next-app && yarn build:tailwind",
 		"checks": "conc yarn:format:check yarn:checks:next",
 		"checks:next": "cd ./next-app && yarn checks",
-		"dev": "conc yarn:watch:next-app yarn:watch:tailwind yarn:watch:blocks",
+		"dev": "conc yarn:watch:next yarn:watch:tailwind yarn:watch:blocks",
 		"format": "prettier --write .",
 		"format:check": "prettier --check .",
 		"lint": "conc yarn:lint:app yarn:lint:plugin",

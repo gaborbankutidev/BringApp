@@ -1,4 +1,3 @@
-
 import forms from "@tailwindcss/forms";
 import typography from "@tailwindcss/typography";
 import {type Config} from "tailwindcss";
@@ -20,4 +19,4 @@ export default {
 	},
 	safelist: generateSafelist(),
 	plugins: [forms, typography, animate],
-} satisfies Config
+} satisfies Config;

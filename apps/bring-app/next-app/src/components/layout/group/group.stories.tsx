@@ -1,4 +1,3 @@
-
 import type {Meta, StoryObj} from "@storybook/react";
 import GroupBlock from "./group.block";
 
@@ -6,12 +5,10 @@ const meta = {
 	title: "Layout/Group",
 	component: GroupBlock,
 	tags: ["autodocs"],
-
 } satisfies Meta<typeof GroupBlock>;
 
-
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
 	args: {
@@ -24,4 +21,4 @@ export const Primary: Story = {
 			</>
 		),
 	},
-}
+};

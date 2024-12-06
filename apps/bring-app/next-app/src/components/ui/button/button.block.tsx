@@ -1,4 +1,3 @@
-
 import {BP} from "@/bring";
 import Button from "./button";
 

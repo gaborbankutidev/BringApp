@@ -1,4 +1,3 @@
-
 import {cn} from "@/lib/utils";
 import type {ColorType} from "@/styles/colors";
 import type {ResponsiveValue} from "@bring/blocks-client/styles";
@@ -63,9 +62,8 @@ export const group = {
 				r: {},
 			},
 		},
-		visibility: { "": "flex", md: "flex", lg: "flex" },
+		visibility: {"": "flex", md: "flex", lg: "flex"},
 	},
-
 } as const;
 
 export default GroupBlock;
