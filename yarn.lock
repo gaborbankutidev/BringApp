@@ -18816,7 +18816,6 @@ __metadata:
     lucide-react: "npm:0.466.0"
     next: "npm:15.0.3"
     postcss: "npm:^8.4.47"
-    prettier-plugin-tailwindcss: "npm:0.6.9"
     prop-types: "npm:^15.8.1"
     react: "npm:19.0.0-rc-fb9a90fa48-20240614"
     react-dom: "npm:19.0.0-rc-fb9a90fa48-20240614"

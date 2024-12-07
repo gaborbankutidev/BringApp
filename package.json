@@ -70,10 +70,10 @@
 	},
 	"lint-staged": {
 		"*.{ts,tsx,js,jsx,json,css,md,yml,yaml,php}": [
-			"prettier --write"
+			"yarn format"
 		],
 		"*.{ts,tsx,js,jsx}": [
-			"yarn eslint --config ./eslint.config.cjs --fix"
+			"yarn lint:root"
 		]
 	}
 }

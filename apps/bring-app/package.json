@@ -58,10 +58,13 @@
 	},
 	"lint-staged": {
 		"*.{ts,tsx,js,jsx,json,css,md,yml,yaml,php}": [
-			"prettier --write"
+			"yarn format"
 		],
-		"*.{js,mjs,cjs,ts,jsx,tsx}": [
-			"yarn lint:app"
+		"**/next-app/**/.{js,mjs,cjs,ts,jsx,tsx}": [
+			"yarn eslint --config ./next-app/.eslintrc.cjs --fix"
+		],
+		"**(!next-app)/**.{js,mjs,cjs,ts,jsx,tsx}": [
+			"yarn eslint --config ./eslint.config.cjs"
 		],
 		"*.php": [
 			"yarn lint:plugin"
