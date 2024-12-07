@@ -3,6 +3,7 @@
 	"version": "2.8.0",
 	"private": true,
 	"scripts": {
+		"composer": "composer",
 		"lint": "composer lint"
 	}
 }
