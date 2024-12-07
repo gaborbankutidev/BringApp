@@ -1,56 +1,59 @@
 name: CI - Pull Request
 
 on:
-    pull_request:
-        branches:
-            - main
+  pull_request:
+    branches:
+      - main
 
 concurrency:
-    group: ci-pr-${{ github.event.pull_request.number }}
-    cancel-in-progress: true
+  group: ci-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 
 jobs:
-    checks_and_build:
-        name: Checks and Build
-        if: |
-            !(
-              contains(github.event.pull_request.title, '[Deploy Bot]') &&
-              github.event.pull_request.user.login == 'github-actions[bot]'
-            )
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout files
-              uses: actions/checkout@v4
-              with:
-                  ref: ${{github.event.pull_request.head.sha}}
-                  fetch-depth: 0
+  checks_and_build:
+    name: Checks and Build
+    if: |
+      !(
+        contains(github.event.pull_request.title, '[Deploy Bot]') &&
+        github.event.pull_request.user.login == 'github-actions[bot]'
+      )
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout files
+        uses: actions/checkout@v4
+        with:
+          ref: ${{github.event.pull_request.head.sha}}
+          fetch-depth: 0
 
-            - name: Enable Corepack
-              run: corepack enable
+      - name: Enable Corepack
+        run: corepack enable
 
-            - name: Setup node
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 20
-                  cache: "yarn"
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "yarn"
 
-            - name: Install dependencies
-              run: yarn install --immutable
+      - name: Install dependencies
+        run: yarn install --immutable
 
-            - name: Setup app env
-              run: echo "SKIP_ENV_VALIDATION=true" >> ./apps/bring-app/next/.env
+      - name: Setup app env
+        run: echo "SKIP_ENV_VALIDATION=true" >> ./apps/bring-app/next-app/.env
 
-            - name: Run changeset check
-              run: yarn changeset status --since origin/main
+      - name: Run changeset check
+        run: yarn changeset status --since origin/main
 
-            - name: Run typecheck
-              run: yarn types
+      - name: Run syncpack lint
+        run: yarn syncpack lint
 
-            - name: Run lint
-              run: yarn lint
+      - name: Run build
+        run: yarn build
 
-            - name: Run build
-              run: yarn build
+      - name: Run typecheck
+        run: yarn types
 
-            - name: Run tests
-              run: yarn test
+      - name: Run lint
+        run: yarn lint
+
+      - name: Run tests
+        run: yarn test

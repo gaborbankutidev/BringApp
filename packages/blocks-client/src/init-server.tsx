@@ -1,12 +1,12 @@
-import {makeDynamicEntity, makeDynamicEntityList} from "./components";
+import { makeDynamicEntity, makeDynamicEntityList } from "./components"
 import {
 	getDynamicEntityList,
 	getDynamicEntityProps,
 	getSiteProps,
 	type GetDynamicEntityListOptions,
 	type GetDynamicEntityPropsOptions,
-} from "./content";
-import type {EntityType} from "./types";
+} from "./content"
+import type { EntityType } from "./types"
 
 /**
  *  Initializes Bring Blocks functions that should be run on the server.
@@ -35,7 +35,7 @@ export function initServer<
 		getDynamicEntityProps: <T = object, P = object>(
 			entityId: number,
 			entityType: EntityType,
-			options: GetDynamicEntityPropsOptions = {},
+			options: GetDynamicEntityPropsOptions = {}
 		) => getDynamicEntityProps<T, P>(wpURL, entityId, entityType, options),
 
 		/**
@@ -50,7 +50,7 @@ export function initServer<
 		getDynamicEntityList: <T = object, P = object>(
 			entitySlug: string,
 			entityType: EntityType,
-			options: GetDynamicEntityListOptions = {},
+			options: GetDynamicEntityListOptions = {}
 		) => getDynamicEntityList<T, P>(wpURL, entitySlug, entityType, options),
 
 		/**
@@ -76,5 +76,5 @@ export function initServer<
 		 * @returns The rendered dynamic entity list.
 		 */
 		DynamicEntityList: makeDynamicEntityList(wpURL),
-	};
+	}
 }

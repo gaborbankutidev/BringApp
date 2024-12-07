@@ -1,6 +1,6 @@
 {
 	"$schema": "https://json.schemastore.org/tsconfig",
-	"extends": "@bring/typescript-config/react-library.json",
+	"extends": "@bring/config/react-library.json",
 	"compilerOptions": {
 		"outDir": "dist"
 	},

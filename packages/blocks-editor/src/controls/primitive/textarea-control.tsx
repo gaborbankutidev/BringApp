@@ -1,17 +1,17 @@
-import {TextareaControl as WPTextareaControl} from "@wordpress/components";
-import cloneDeep from "lodash.clonedeep";
-import get from "lodash.get";
-import set from "lodash.set";
-import type {FC} from "react";
-import React from "react";
-import {useControlContext} from "../context";
-import type {ControlByPath, ControlByValue, ControlType} from "../types";
-import {isPathControl} from "../utils";
+import { TextareaControl as WPTextareaControl } from "@wordpress/components"
+import cloneDeep from "lodash.clonedeep"
+import get from "lodash.get"
+import set from "lodash.set"
+import type { FC } from "react"
+import React from "react"
+import { useControlContext } from "../context"
+import type { ControlByPath, ControlByValue, ControlType } from "../types"
+import { isPathControl } from "../utils"
 
 /**
  * Props for the TextareaControl component.
  */
-type _TextareaControl = {rows?: number};
+type _TextareaControl = { rows?: number }
 
 /**
  * A control component that renders a textarea input.
@@ -22,13 +22,13 @@ type _TextareaControl = {rows?: number};
  * @returns The rendered TextareaControl component.
  */
 export const TextareaControl = <pT extends object = object>(
-	props: ControlType<string, pT> & _TextareaControl,
+	props: ControlType<string, pT> & _TextareaControl
 ) =>
 	isPathControl(props) ? (
 		<TextareaControlByPath {...props} />
 	) : (
 		<TextareaControlByValue {...props} />
-	);
+	)
 
 /**
  * A control component that renders a textarea input based on a path.
@@ -43,21 +43,21 @@ function TextareaControlByPath<pT extends object>({
 	updateHandling,
 	...props
 }: ControlByPath<pT, string> & _TextareaControl): JSX.Element {
-	const {attributes, setAttributes} = useControlContext();
-	const value = get(attributes, path);
+	const { attributes, setAttributes } = useControlContext()
+	const value = get(attributes, path)
 
 	return (
 		<TextareaControlByValue
 			updateHandling="by-value"
 			value={value}
 			setValue={(newValue) => {
-				const newAttributes = cloneDeep(attributes);
-				set(newAttributes, path, newValue);
-				setAttributes(newAttributes);
+				const newAttributes = cloneDeep(attributes)
+				set(newAttributes, path, newValue)
+				setAttributes(newAttributes)
 			}}
 			{...props}
 		/>
-	);
+	)
 }
 
 /**
@@ -81,8 +81,8 @@ const TextareaControlByValue: FC<ControlByValue<string> & _TextareaControl> = ({
 	show = true,
 	rows = 4,
 }) => {
-	const contentRows = value ? value.split(/\r\n|\r|\n/).length : rows;
-	const textareaRows = contentRows > rows - 1 ? contentRows + 1 : rows;
+	const contentRows = value ? value.split(/\r\n|\r|\n/).length : rows
+	const textareaRows = contentRows > rows - 1 ? contentRows + 1 : rows
 
 	return show ? (
 		<WPTextareaControl
@@ -94,7 +94,7 @@ const TextareaControlByValue: FC<ControlByValue<string> & _TextareaControl> = ({
 				value !== undefined && (
 					<button
 						onClick={() => {
-							setValue(undefined);
+							setValue(undefined)
 						}}
 					>
 						Set to default
@@ -103,5 +103,5 @@ const TextareaControlByValue: FC<ControlByValue<string> & _TextareaControl> = ({
 			}
 			rows={textareaRows}
 		/>
-	) : null;
-};
+	) : null
+}

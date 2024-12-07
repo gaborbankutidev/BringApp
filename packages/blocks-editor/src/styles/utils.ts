@@ -1,4 +1,4 @@
-import {BlockStyles, ResponsiveLabels} from "./types";
+import { BlockStyles, ResponsiveLabels } from "./types"
 
 export const blockStylesDefaultValue: BlockStyles = {
 	spacing: {
@@ -16,19 +16,19 @@ export const blockStylesDefaultValue: BlockStyles = {
 		},
 	},
 	visibility: {},
-};
+}
 
 export const sideLabels = {
 	t: "top",
 	b: "bottom",
 	l: "left",
 	r: "right",
-};
+}
 
 export const spacingLabels = {
 	m: "Margin",
 	p: "Padding",
-};
+}
 
 export const screenSizes: ResponsiveLabels = {
 	"": {
@@ -43,4 +43,4 @@ export const screenSizes: ResponsiveLabels = {
 		label: "Desktop",
 		icon: "laptop",
 	},
-};
+}

@@ -1,3 +1,4 @@
+yarn syncpack lint
+yarn types
 yarn changeset status --since-main
 npx lint-staged --concurrent false
-yarn types

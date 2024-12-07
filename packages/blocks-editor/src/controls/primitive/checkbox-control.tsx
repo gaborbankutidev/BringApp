@@ -1,12 +1,12 @@
-import {CheckboxControl as WPCheckboxControl} from "@wordpress/components";
-import cloneDeep from "lodash.clonedeep";
-import get from "lodash.get";
-import set from "lodash.set";
-import type {FC} from "react";
-import React from "react";
-import {useControlContext} from "../context";
-import type {ControlByPath, ControlByValue, ControlType} from "../types";
-import {isPathControl} from "../utils";
+import { CheckboxControl as WPCheckboxControl } from "@wordpress/components"
+import cloneDeep from "lodash.clonedeep"
+import get from "lodash.get"
+import set from "lodash.set"
+import type { FC } from "react"
+import React from "react"
+import { useControlContext } from "../context"
+import type { ControlByPath, ControlByValue, ControlType } from "../types"
+import { isPathControl } from "../utils"
 
 /**
  * CheckboxControl component.
@@ -19,7 +19,7 @@ export const CheckboxControl = <pT extends object = object>(props: ControlType<b
 		<CheckboxControlByPath {...props} />
 	) : (
 		<CheckboxControlByValue {...props} />
-	);
+	)
 
 /**
  * CheckboxControlByPath component.
@@ -34,21 +34,21 @@ function CheckboxControlByPath<pT extends object>({
 	updateHandling,
 	...props
 }: ControlByPath<pT, boolean>): JSX.Element {
-	const {attributes, setAttributes} = useControlContext();
-	const value = get(attributes, path);
+	const { attributes, setAttributes } = useControlContext()
+	const value = get(attributes, path)
 
 	return (
 		<CheckboxControlByValue
 			updateHandling="by-value"
 			value={value}
 			setValue={(newValue) => {
-				const newAttributes = cloneDeep(attributes);
-				set(newAttributes, path, newValue);
-				setAttributes(newAttributes);
+				const newAttributes = cloneDeep(attributes)
+				set(newAttributes, path, newValue)
+				setAttributes(newAttributes)
 			}}
 			{...props}
 		/>
-	);
+	)
 }
 
 /**
@@ -80,7 +80,7 @@ const CheckboxControlByValue: FC<ControlByValue<boolean>> = ({
 				value !== undefined && (
 					<button
 						onClick={() => {
-							setValue(undefined);
+							setValue(undefined)
 						}}
 					>
 						Set to default
@@ -88,4 +88,4 @@ const CheckboxControlByValue: FC<ControlByValue<boolean>> = ({
 				)
 			}
 		/>
-	) : null;
+	) : null

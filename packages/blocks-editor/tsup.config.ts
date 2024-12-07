@@ -1,4 +1,4 @@
-import {defineConfig} from "tsup";
+import { defineConfig } from "tsup"
 
 export default defineConfig({
 	entry: [
@@ -23,9 +23,9 @@ export default defineConfig({
 	minify: false,
 	dts: true,
 	clean: true,
-	outExtension({format}) {
+	outExtension({ format }) {
 		return {
 			js: `.${format}.js`,
-		};
+		}
 	},
-});
+})

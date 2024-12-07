@@ -1,6 +1,6 @@
-import {execSync} from "child_process";
+import { execSync } from "child_process"
 
 if (process.env.SKIP_COMPOSER_INSTALL) {
-	process.exit(0);
+	process.exit(0)
 }
-execSync("composer install", {stdio: "inherit"});
+execSync("composer install", { stdio: "inherit" })

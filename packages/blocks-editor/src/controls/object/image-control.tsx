@@ -1,7 +1,7 @@
-import React from "react";
-import type {ImageType} from "../../types";
-import type {ControlType} from "../types";
-import {MediaControl} from "./media-control";
+import React from "react"
+import type { ImageType } from "../../types"
+import type { ControlType } from "../types"
+import { MediaControl } from "./media-control"
 
 /**
  *	A control component that renders an image input.
@@ -21,4 +21,4 @@ export const ImageControl = <pT extends object = object>(props: ControlType<Imag
 		allowedTypes={["image"]}
 		{...props}
 	/>
-);
+)

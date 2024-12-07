@@ -1,27 +1,28 @@
-import React, {type ReactNode} from "react";
-import {createBringElement, getEntity, getSiteProps} from "../content";
-import type {BlockList} from "../types";
+import React, { type ReactNode } from "react"
+import { createBringElement, getEntity, getSiteProps } from "../content"
+import type { BlockList } from "../types"
 
 function makeLayout<EP = object, SP = object, M = object, MI = object, CTX = object>(
 	wpURL: string,
 	onRedirect: (redirectTo: string, responseCode: number) => void,
 	onNotFound: () => void,
-	blockList: BlockList<EP, SP, M, MI, CTX>,
+
+	blockList: BlockList<EP, SP, M, MI, CTX>
 ) {
 	const Layout = async ({
 		slug = "",
 		context,
 		children,
 	}: {
-		slug?: string | string[];
-		context?: CTX;
-		children?: ReactNode;
+		slug?: string | string[]
+		context?: CTX
+		children?: ReactNode
 	}) => {
-		const siteProps = await getSiteProps<SP, M, MI>(wpURL);
-		const entity = await getEntity<EP>(wpURL, onRedirect, onNotFound, slug);
+		const siteProps = await getSiteProps<SP, M, MI>(wpURL)
+		const entity = await getEntity<EP>(wpURL, onRedirect, onNotFound, slug)
 
 		if (!entity || !siteProps) {
-			return null;
+			return null
 		}
 
 		return (
@@ -33,14 +34,14 @@ function makeLayout<EP = object, SP = object, M = object, MI = object, CTX = obj
 							entity.props,
 							siteProps,
 							context ?? ({} as CTX),
-							children,
+							children
 						)
 					: children}
 			</main>
-		);
-	};
+		)
+	}
 
-	return Layout;
+	return Layout
 }
 
-export default makeLayout;
+export default makeLayout

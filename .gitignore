@@ -63,3 +63,6 @@ apps/bring-app/wordpress
 
 # temp
 .temp
+
+# zed
+.zed

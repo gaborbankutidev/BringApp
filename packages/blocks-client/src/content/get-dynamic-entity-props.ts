@@ -1,4 +1,4 @@
-import type {DynamicEntityProps, EntityType} from "../types";
+import type { DynamicEntityProps, EntityType } from "../types"
 
 /**
  * Represents the options for retrieving dynamic entity properties.
@@ -7,15 +7,15 @@ import type {DynamicEntityProps, EntityType} from "../types";
  * @property cache - The cache mode for the request.
  */
 export type GetDynamicEntityPropsOptions = {
-	customData?: {[key: string]: unknown};
-	cache?: "force-cache" | "no-store";
-};
+	customData?: { [key: string]: unknown }
+	cache?: "force-cache" | "no-store"
+}
 
 /**
  * Represents the dynamic entity properties.
  * @template T - Additional properties type
  */
-export type GetDynamicEntityPropsParams<P> = P;
+export type GetDynamicEntityPropsParams<P> = P
 
 /**
  * Retrieves dynamic entity properties from a WordPress site.
@@ -29,13 +29,13 @@ async function getDynamicEntityProps<T = object, P = object>(
 	wpURL: string,
 	entityId: number,
 	entityType: EntityType,
-	{customData = {}, cache = "no-store"}: GetDynamicEntityPropsOptions = {},
+	{ customData = {}, cache = "no-store" }: GetDynamicEntityPropsOptions = {}
 ) {
 	const params = new URLSearchParams({
 		entityId: entityId.toString(),
 		entityType,
 		customData: JSON.stringify(customData),
-	});
+	})
 
 	try {
 		const response = await fetch(`${wpURL}/wp-json/bring/dynamic/props?${params.toString()}`, {
@@ -44,19 +44,19 @@ async function getDynamicEntityProps<T = object, P = object>(
 				"Content-Type": "application/json",
 			},
 			cache,
-		});
+		})
 
-		const responseRaw = await response.json();
+		const responseRaw = await response.json()
 		const responseData = responseRaw.data as {
-			entityProps: DynamicEntityProps<T>;
-			params: GetDynamicEntityPropsParams<P>;
-		} | null;
+			entityProps: DynamicEntityProps<T>
+			params: GetDynamicEntityPropsParams<P>
+		} | null
 
-		return responseData ?? {entityProps: null, params: {} as P};
+		return responseData ?? { entityProps: null, params: {} as P }
 	} catch (error) {
-		console.error(error);
-		return {entityProps: null, params: {} as P};
+		console.error(error)
+		return { entityProps: null, params: {} as P }
 	}
 }
 
-export default getDynamicEntityProps;
+export default getDynamicEntityProps

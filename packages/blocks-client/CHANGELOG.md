@@ -4,25 +4,25 @@
 
 ### Minor Changes
 
--   7188ea0: Refactor BlockProps and EditorProps
+- 7188ea0: Refactor BlockProps and EditorProps
 
 ## 2.7.0
 
 ### Minor Changes
 
--   4c4cb02: Bring App plugin is refactored to PSR-4. DATA_TOKEN is removed. SearchWP is added to Extend.
+- 4c4cb02: Bring App plugin is refactored to PSR-4. DATA_TOKEN is removed. SearchWP is added to Extend.
 
 ## 2.6.0
 
 ### Minor Changes
 
--   8d5707b: Refactor and enhance useWPSendForm hook
+- 8d5707b: Refactor and enhance useWPSendForm hook
 
 ## 2.5.0
 
 ### Minor Changes
 
--   79380f1: Add edit url to entity props for users with sufficient permissions
+- 79380f1: Add edit url to entity props for users with sufficient permissions
 
 ## 2.4.0
 
@@ -32,19 +32,19 @@
 
 ### Patch Changes
 
--   b714bad: Fix typescript errors
+- b714bad: Fix typescript errors
 
 ## 2.1.1
 
 ### Patch Changes
 
--   f1c4ca2: Update dependencies
+- f1c4ca2: Update dependencies
 
 ## 2.1.0
 
 ### Minor Changes
 
--   3b61fb2: Disable caching by default, remove obsolete revalidate endpoint
+- 3b61fb2: Disable caching by default, remove obsolete revalidate endpoint
 
 ## 2.0.1
 
@@ -58,12 +58,12 @@
 
 ### Patch Changes
 
--   90ae9d4: Clean up tsconfig.json
+- 90ae9d4: Clean up tsconfig.json
 
 ## 0.3.1
 
 ### Patch Changes
 
--   739e826: Update dependencies
+- 739e826: Update dependencies
 
 ## 0.3.0
