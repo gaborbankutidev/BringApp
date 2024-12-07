@@ -31,6 +31,16 @@ class Admin {
 		add_filter("option_template", self::lockTheme(...));
 		add_filter("pre_option_stylesheet", self::lockTheme(...));
 		add_filter("pre_option_template", self::lockTheme(...));
+
+		add_action("admin_notices", Plugins::notices(...));
+		add_action("admin_init", Plugins::preventRequiredPluginDeactivation(...));
+
+		add_filter(
+			"plugin_action_links",
+			Plugins::removeDeactivateButtonFromRequiredPlugins(...),
+			10,
+			2,
+		);
 	}
 
 	/**
@@ -69,12 +79,7 @@ class Admin {
 
 		$customize_url = add_query_arg(
 			"return",
-			urlencode(
-				remove_query_arg(
-					wp_removable_query_args(),
-					wp_unslash($_SERVER["REQUEST_URI"]),
-				),
-			),
+			urlencode(remove_query_arg(wp_removable_query_args(), wp_unslash($_SERVER["REQUEST_URI"]))),
 			"customize.php",
 		);
 		remove_submenu_page("themes.php", $customize_url);
