@@ -1,6 +1,5 @@
-
-import type {FC, ReactNode} from "react";
-import {BlockStyles, BlockStylesClassNames, BlockStylesConfig} from "./styles";
+import type { FC, ReactNode } from "react"
+import { BlockStyles, BlockStylesClassNames, BlockStylesConfig } from "./styles"
 
 /**
  * Represents a type that excludes the `undefined` type from the given type `T`.
@@ -12,7 +11,7 @@ export type Defined<T> = Exclude<T, undefined>
  *
  * className: the joined and rendered block styles class names with the className string set in the ClassName control
  */
-export type ClientAttributes<T> = T & {className?: string; id?: string};
+export type ClientAttributes<T> = T & { className?: string; id?: string }
 
 /**
  * Attributes of BlockNode coming from the editor.
@@ -20,7 +19,7 @@ export type ClientAttributes<T> = T & {className?: string; id?: string};
  * className: String set in the ClassName control.
  * blockStyles: Block styles object set in the block styles controls
  */
-export type EditorAttributes<T> = T & {className?: string; id?: string; blockStyles: BlockStyles};
+export type EditorAttributes<T> = T & { className?: string; id?: string; blockStyles: BlockStyles }
 
 /**
  * Block Props - The generic types of a block.
@@ -32,16 +31,15 @@ export type EditorAttributes<T> = T & {className?: string; id?: string; blockSty
  * @template CTX - Context type
  */
 export type BP<P = object, EP = object, SP = object, M = object, MI = object, CTX = object> = P & {
-
-	attributes: ClientAttributes<P>;
-	entityProps?: EntityProps<EP>;
-	siteProps?: SiteProps<SP, M, MI>;
-	context?: CTX;
-	blockStyles?: BlockStyles;
-	blockStylesConfig?: BlockStylesConfig;
-	blockStylesClassNames?: BlockStylesClassNames;
-	children?: ReactNode;
-};
+	attributes: ClientAttributes<P>
+	entityProps?: EntityProps<EP>
+	siteProps?: SiteProps<SP, M, MI>
+	context?: CTX
+	blockStyles?: BlockStyles
+	blockStylesConfig?: BlockStylesConfig
+	blockStylesClassNames?: BlockStylesClassNames
+	children?: ReactNode
+}
 
 /**
  * Functional component that accepts Block Props.
@@ -263,11 +261,11 @@ export type Entity<EP = object> = {
  * @property children - The node children.
  */
 export type BringNode = {
-	key: string;
-	blockName: string;
-	attributes: EditorAttributes<unknown>;
-	children?: BringNode[];
-};
+	key: string
+	blockName: string
+	attributes: EditorAttributes<unknown>
+	children?: BringNode[]
+}
 
 /**
  * Represents the name of a block.
@@ -275,7 +273,7 @@ export type BringNode = {
  * - Formatted as `category/name`, with the category and name separated by a slash.
  * Example: `bring/heading`.
  */
-export type BlockName = `${Lowercase<string>}/${Lowercase<string>}`;
+export type BlockName = `${Lowercase<string>}/${Lowercase<string>}`
 
 /**
  * A Block List Item is a configuration object for a block.
@@ -288,11 +286,11 @@ export type BlockListItem<
 	MI = object, // MenuItem
 	CTX = object, // Context
 > = {
-	blockName: BlockName;
+	blockName: BlockName
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	Block: FCB<any, EP, SP, M, MI, CTX>;
-	blockStylesConfig?: BlockStylesConfig;
-};
+	Block: FCB<any, EP, SP, M, MI, CTX>
+	blockStylesConfig?: BlockStylesConfig
+}
 
 /**
  * An array of Block List Items.
@@ -304,6 +302,6 @@ export type BlockList<
 	M = object, // Menu
 	MI = object, // MenuItem
 	CTX = object, // Context
-> = BlockListItem<EP, SP, M, MI, CTX>[];
+> = BlockListItem<EP, SP, M, MI, CTX>[]
 
 export type Obj = Record<string, unknown>

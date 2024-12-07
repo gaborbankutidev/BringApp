@@ -2,9 +2,9 @@ import {
 	booleanAttributeSource,
 	stringAttributeSource,
 	type BlockConfig,
-} from "@bring/blocks-editor/blocks";
-import {makeOptions} from "@bring/blocks-editor/controls";
-import {button, type ButtonBlockProps} from "./button.block";
+} from "@bring/blocks-editor/blocks"
+import { makeOptions } from "@bring/blocks-editor/controls"
+import { button, type ButtonBlockProps } from "./button.block"
 
 const buttonConfig: BlockConfig<ButtonBlockProps> = {
 	...button,
@@ -21,21 +21,14 @@ const buttonConfig: BlockConfig<ButtonBlockProps> = {
 		{
 			panel: "Settings",
 			controls: [
-				{type: "text", label: "Text", path: "text", setDefault: false},
-				{type: "text", label: "Url", path: "href", setDefault: false},
-				{type: "toggle", label: "New tab", path: "newTab"},
+				{ type: "text", label: "Text", path: "text", setDefault: false },
+				{ type: "text", label: "Url", path: "href", setDefault: false },
+				{ type: "toggle", label: "New tab", path: "newTab" },
 				{
 					type: "select",
 					label: "Variant",
 					path: "variant",
-					options: makeOptions([
-						"primary",
-						"destructive",
-						"outline",
-						"secondary",
-						"ghost",
-						"link",
-					]),
+					options: makeOptions(["primary", "destructive", "outline", "secondary", "ghost", "link"]),
 					defaultValue: "primary",
 				},
 				{
@@ -49,6 +42,6 @@ const buttonConfig: BlockConfig<ButtonBlockProps> = {
 			initialOpen: true,
 		},
 	],
-};
+}
 
-export default buttonConfig;
+export default buttonConfig

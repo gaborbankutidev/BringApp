@@ -1,33 +1,33 @@
-import {cn} from "@/lib/utils";
-import type {ResponsiveValue} from "@bring/blocks-client/styles";
-import {makeResponsiveClassNames} from "@bring/blocks-client/styles";
-import {type BP, type GridNumType} from "@bring/blocks-client/types";
+import { cn } from "@/lib/utils"
+import type { ResponsiveValue } from "@bring/blocks-client/styles"
+import { makeResponsiveClassNames } from "@bring/blocks-client/styles"
+import { type BP, type GridNumType } from "@bring/blocks-client/types"
 
 export type SplitBlockProps = {
-	columnCount?: ResponsiveValue<GridNumType>;
-	gap?: ResponsiveValue;
-};
+	columnCount?: ResponsiveValue<GridNumType>
+	gap?: ResponsiveValue
+}
 
 /**
  * The split block is only used in the builder to split the content by creating a grid layout.
  */
 const SplitBlock = ({
-	attributes: {columnCount = {}, gap = {}, className, ...props},
+	attributes: { columnCount = {}, gap = {}, className, ...props },
 	children,
 }: BP<SplitBlockProps>) => {
 	const classNames = cn(
 		"grid px-0",
-		makeResponsiveClassNames("grid-cols", columnCount, {"": 2}),
-		makeResponsiveClassNames("gap", gap, {"": 8}),
-		className,
-	);
+		makeResponsiveClassNames("grid-cols", columnCount, { "": 2 }),
+		makeResponsiveClassNames("gap", gap, { "": 8 }),
+		className
+	)
 
 	return (
 		<div className={classNames} {...props}>
 			{children}
 		</div>
-	);
-};
+	)
+}
 
 export const split = {
 	Block: SplitBlock,
@@ -47,8 +47,8 @@ export const split = {
 				r: {},
 			},
 		},
-		visibility: {"": "grid", md: "grid", lg: "grid"},
+		visibility: { "": "grid", md: "grid", lg: "grid" },
 	},
-} as const;
+} as const
 
-export default SplitBlock;
+export default SplitBlock

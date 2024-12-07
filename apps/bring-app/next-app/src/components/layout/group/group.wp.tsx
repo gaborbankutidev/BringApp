@@ -3,15 +3,15 @@ import {
 	colorOptions,
 	directionOptions,
 	justifyOptions,
-} from "@/editor/utils/options";
+} from "@/editor/utils/options"
 import {
 	objectAttributeSource,
 	stringAttributeSource,
 	type BlockConfig,
-} from "@bring/blocks-editor/blocks";
-import {group, type GroupBlockProps} from "./group.block";
-import GroupControls from "./group.controls";
-import GroupEdit from "./group.edit";
+} from "@bring/blocks-editor/blocks"
+import { group, type GroupBlockProps } from "./group.block"
+import GroupControls from "./group.controls"
+import GroupEdit from "./group.edit"
 
 const groupConfig: BlockConfig<GroupBlockProps> = {
 	...group,
@@ -59,6 +59,6 @@ const groupConfig: BlockConfig<GroupBlockProps> = {
 			initialOpen: true,
 		},
 	],
-};
+}
 
-export default groupConfig;
+export default groupConfig

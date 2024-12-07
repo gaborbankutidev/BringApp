@@ -1,15 +1,15 @@
-import type {Meta, StoryObj} from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react"
 
-import Section from "./section";
+import Section from "./section"
 
 const meta = {
 	title: "Layout/Section",
 	component: Section,
 	tags: ["autodocs"],
-} satisfies Meta<typeof Section>;
+} satisfies Meta<typeof Section>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const BackgroundColor: Story = {
 	args: {
@@ -21,7 +21,7 @@ export const BackgroundColor: Story = {
 		),
 		dark: false,
 	},
-};
+}
 
 export const BackgroundImage: Story = {
 	render: () => (
@@ -37,7 +37,7 @@ export const BackgroundImage: Story = {
 			</div>
 		</Section>
 	),
-};
+}
 
 export const BackgroundImageOverlay: Story = {
 	render: () => (
@@ -54,4 +54,4 @@ export const BackgroundImageOverlay: Story = {
 			</div>
 		</Section>
 	),
-};
+}

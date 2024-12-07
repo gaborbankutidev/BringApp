@@ -36,8 +36,8 @@ export { initRender } from "./init-render"
 export { initServer } from "./init-server"
 
 // Styles
-export {makeResponsiveClassNames} from "./styles";
-export type {BlockStylesClassNames, ResponsiveValue} from "./styles";
+export { makeResponsiveClassNames } from "./styles"
+export type { BlockStylesClassNames, ResponsiveValue } from "./styles"
 
 // Types
 export type {

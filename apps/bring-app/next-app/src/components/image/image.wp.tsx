@@ -1,15 +1,15 @@
-import {sourceOptions} from "@/editor/utils/options";
+import { sourceOptions } from "@/editor/utils/options"
 import {
 	booleanAttributeSource,
 	imageAttributeSource,
 	stringAttributeSource,
 	type BlockConfig,
-} from "@bring/blocks-editor/blocks";
-import {makeOptions} from "@bring/blocks-editor/controls";
-import {image, sizes, type ImageBlockProps} from "./image.block";
+} from "@bring/blocks-editor/blocks"
+import { makeOptions } from "@bring/blocks-editor/controls"
+import { image, sizes, type ImageBlockProps } from "./image.block"
 
-const sizeList = Object.keys(sizes);
-const sizeOptions = makeOptions([...sizeList]);
+const sizeList = Object.keys(sizes)
+const sizeOptions = makeOptions([...sizeList])
 
 const imageConfig: BlockConfig<ImageBlockProps> = {
 	...image,
@@ -40,7 +40,7 @@ const imageConfig: BlockConfig<ImageBlockProps> = {
 		{
 			panel: "Image settings",
 			controls: [
-				{type: "image", label: "Image", path: "image"},
+				{ type: "image", label: "Image", path: "image" },
 				{
 					type: "select",
 					label: "Size",
@@ -48,9 +48,9 @@ const imageConfig: BlockConfig<ImageBlockProps> = {
 					options: sizeOptions,
 					defaultValue: "900",
 				},
-				{type: "text", label: "Caption", path: "caption"},
-				{type: "text", label: "Source", path: "source"},
-				{type: "toggle", label: "Open in lightbox", path: "lightbox"},
+				{ type: "text", label: "Caption", path: "caption" },
+				{ type: "text", label: "Source", path: "source" },
+				{ type: "toggle", label: "Open in lightbox", path: "lightbox" },
 				{
 					type: "text",
 					label: "Url",
@@ -67,6 +67,6 @@ const imageConfig: BlockConfig<ImageBlockProps> = {
 			show: (attributes) => attributes.contentSource === "manual",
 		},
 	],
-};
+}
 
-export default imageConfig;
+export default imageConfig

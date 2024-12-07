@@ -1,34 +1,28 @@
-"use client";
+"use client"
 
-import {cn} from "@/lib/utils";
-import FSLightbox from "fslightbox-react";
-import NextImage, {type ImageProps as NextImageProps} from "next/image";
-import Link, {type LinkProps} from "next/link";
-import {useState} from "react";
+import { cn } from "@/lib/utils"
+import FSLightbox from "fslightbox-react"
+import NextImage, { type ImageProps as NextImageProps } from "next/image"
+import Link, { type LinkProps } from "next/link"
+import { useState } from "react"
 
 export type ImageContentProps = {
-	image: NextImageProps;
-	link?: LinkProps;
-	lightbox?: boolean;
-	className?: string;
-	id?: string;
-};
+	image: NextImageProps
+	link?: LinkProps
+	lightbox?: boolean
+	className?: string
+	id?: string
+}
 
-const imageBaseStyle = "rounded w-full";
+const imageBaseStyle = "rounded w-full"
 
-const ImageContent = ({
-	image,
-	link,
-	lightbox,
-	className,
-	id,
-}: ImageContentProps) => {
+const ImageContent = ({ image, link, lightbox, className, id }: ImageContentProps) => {
 	const [lightboxController, setLightboxController] = useState({
 		toggler: false,
 		slide: 1,
-	});
+	})
 
-	const {onClick, className: imageClassName, ...imageProps} = image;
+	const { onClick, className: imageClassName, ...imageProps } = image
 
 	return link ? (
 		<Link {...link} className={className} id={id}>
@@ -43,20 +37,18 @@ const ImageContent = ({
 		<>
 			<NextImage
 				{...imageProps}
-				className={cn(
-					imageBaseStyle,
-					lightbox && "cursor-pointer",
-					imageClassName,
-					className,
-				)}
+				className={cn(imageBaseStyle, lightbox && "cursor-pointer", imageClassName, className)}
 				id={id}
 				onClick={(e) => {
-					onClick && onClick(e);
-					lightbox &&
+					if (onClick) {
+						onClick(e)
+					}
+					if (lightbox) {
 						setLightboxController({
 							toggler: !lightboxController.toggler,
 							slide: 1,
-						});
+						})
+					}
 				}}
 				quality={100}
 			/>
@@ -69,7 +61,7 @@ const ImageContent = ({
 				/>
 			)}
 		</>
-	);
-};
+	)
+}
 
-export default ImageContent;
+export default ImageContent

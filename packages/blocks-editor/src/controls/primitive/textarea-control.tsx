@@ -1,13 +1,12 @@
-
-import {TextareaControl as WPTextareaControl} from "@wordpress/components";
-import cloneDeep from "lodash.clonedeep";
-import get from "lodash.get";
-import set from "lodash.set";
-import type {FC} from "react";
-import React from "react";
-import {useControlContext} from "../context";
-import type {ControlByPath, ControlByValue, ControlType} from "../types";
-import {isPathControl} from "../utils";
+import { TextareaControl as WPTextareaControl } from "@wordpress/components"
+import cloneDeep from "lodash.clonedeep"
+import get from "lodash.get"
+import set from "lodash.set"
+import type { FC } from "react"
+import React from "react"
+import { useControlContext } from "../context"
+import type { ControlByPath, ControlByValue, ControlType } from "../types"
+import { isPathControl } from "../utils"
 
 /**
  * Props for the TextareaControl component.
@@ -23,7 +22,7 @@ type _TextareaControl = { rows?: number }
  * @returns The rendered TextareaControl component.
  */
 export const TextareaControl = <pT extends object = object>(
-	props: ControlType<string, pT> & _TextareaControl,
+	props: ControlType<string, pT> & _TextareaControl
 ) =>
 	isPathControl(props) ? (
 		<TextareaControlByPath {...props} />

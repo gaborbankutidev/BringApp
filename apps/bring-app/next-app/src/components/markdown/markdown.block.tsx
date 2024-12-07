@@ -1,48 +1,37 @@
-import type {BP} from "@/bring";
-import type {TextAlignType, TextSourceType} from "@/editor/utils/lists";
-import {cn} from "@/lib/utils";
-import type {ColorType} from "@/styles/colors";
-import Markdown, {type MarkdownElements} from "./markdown";
+import type { BP } from "@/bring"
+import type { TextAlignType, TextSourceType } from "@/editor/utils/lists"
+import { cn } from "@/lib/utils"
+import type { ColorType } from "@/styles/colors"
+import Markdown, { type MarkdownElements } from "./markdown"
 
 export type MarkdownBlockProps = {
-	source?: TextSourceType;
-	content?: string;
-	elementsClassName: {[key in MarkdownElements]?: string};
-	align?: TextAlignType;
-	color?: ColorType;
-};
+	source?: TextSourceType
+	content?: string
+	elementsClassName: Partial<Record<MarkdownElements, string>>
+	align?: TextAlignType
+	color?: ColorType
+}
 
 export const MarkdownBlock = ({
-	attributes: {
-		source = "manual",
-		content = "",
-		align,
-		color,
-		className,
-		...props
-	},
+	attributes: { source = "manual", content = "", align, color, className, ...props },
 	entityProps,
 }: BP<MarkdownBlockProps>) => {
-	const classNames = cn(
-		align && `text-${align}`,
-		color && `text-${color}`,
-		className,
-	);
+	const classNames = cn(align && `text-${align}`, color && `text-${color}`, className)
 
 	if (source !== "manual") {
 		if (!entityProps) {
-			return null;
+			return null
 		}
 
-		const dynamicContent = entityProps[source];
+		const dynamicContent = entityProps[source]
 
 		return dynamicContent ? (
 			<Markdown content={dynamicContent} className={classNames} {...props} />
-		) : null;
+		) : null
 	}
 
-	return <Markdown content={content} className={classNames} {...props} />;
-};
+	return <Markdown content={content} className={classNames} {...props} />
+}
 
 export const markdown = {
 	Block: MarkdownBlock,
@@ -62,8 +51,8 @@ export const markdown = {
 				r: {},
 			},
 		},
-		visibility: {"": "block", md: "block", lg: "block"},
+		visibility: { "": "block", md: "block", lg: "block" },
 	},
-} as const;
+} as const
 
-export default Markdown;
+export default Markdown

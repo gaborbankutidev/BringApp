@@ -1,12 +1,11 @@
-
-import {SelectControl as WPSelectControl} from "@wordpress/components";
-import cloneDeep from "lodash.clonedeep";
-import get from "lodash.get";
-import set from "lodash.set";
-import React, {FC} from "react";
-import {useControlContext} from "../context";
-import type {ControlByPath, ControlByValue, ControlType} from "../types";
-import {isPathControl} from "../utils";
+import { SelectControl as WPSelectControl } from "@wordpress/components"
+import cloneDeep from "lodash.clonedeep"
+import get from "lodash.get"
+import set from "lodash.set"
+import React, { FC } from "react"
+import { useControlContext } from "../context"
+import type { ControlByPath, ControlByValue, ControlType } from "../types"
+import { isPathControl } from "../utils"
 
 /**
  * Represents the options for the NumberSelectControl component.
@@ -24,7 +23,7 @@ type _NumberSelectControl = {
  * @returns The rendered NumberSelectControl component.
  */
 export const NumberSelectControl = <pT extends object = object>(
-	props: ControlType<number, pT> & _NumberSelectControl,
+	props: ControlType<number, pT> & _NumberSelectControl
 ) =>
 	isPathControl(props) ? (
 		<NumberSelectControlByPath {...props} />

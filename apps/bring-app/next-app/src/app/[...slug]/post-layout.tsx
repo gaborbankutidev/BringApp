@@ -1,39 +1,39 @@
-import {getEntity} from "@/bring/render";
-import Column from "@/components/layout/column";
-import Row from "@/components/layout/row";
-import Section from "@/components/layout/section";
-import {env} from "@/env.mjs";
-import {BiBulb} from "react-icons/bi";
+import { getEntity } from "@/bring/render"
+import Column from "@/components/layout/column"
+import Row from "@/components/layout/row"
+import Section from "@/components/layout/section"
+import { env } from "@/env.mjs"
+import { BiBulb } from "react-icons/bi"
 
 type PostLayoutProps = {
-	slug: string | string[];
-	children?: React.ReactNode;
-};
+	slug: string | string[]
+	children?: React.ReactNode
+}
 
-async function PostLayout({slug, children}: PostLayoutProps) {
-	const entity = await getEntity(slug);
-	if (!entity) return null; // TODO: handle this as an Internal Server Error
+async function PostLayout({ slug, children }: PostLayoutProps) {
+	const entity = await getEntity(slug)
+	if (!entity) return null // TODO: handle this as an Internal Server Error
 
 	return (
 		<Section dark>
 			<Row size="split">
 				<Column>
-					<div className="flex gap-4 items-center">
-						<p className="uppercase tracking-wide text-14 md:text-16 xl:text-20 text-purple-600">
+					<div className="flex items-center gap-4">
+						<p className="text-14 uppercase tracking-wide text-purple-600 md:text-16 xl:text-20">
 							Example WordPress Post
 						</p>
 					</div>
-					<h1 className="tracking-tight font-bold text-[48px] xl:text-[72px] xl:leading-[72px] mb-8 text-white">
+					<h1 className="mb-8 text-[48px] font-bold tracking-tight text-white xl:text-[72px] xl:leading-[72px]">
 						{entity.props.name}
 					</h1>
-					<div className="flex w-fit items-center gap-2 py-2 px-4 bg-gray-800/60 rounded-2xl mb-4">
+					<div className="mb-4 flex w-fit items-center gap-2 rounded-2xl bg-gray-800/60 px-4 py-2">
 						<BiBulb size={24} className="text-purple-400" />
 						<p>
 							You can edit this layout in{" "}
 							<code>apps/bring-app/next/src/app/[...slug]/post-layout.tsx</code>
 						</p>
 					</div>
-					<div className="flex w-fit items-center gap-2 py-2 px-4 bg-gray-800/60 rounded-2xl mb-4">
+					<div className="mb-4 flex w-fit items-center gap-2 rounded-2xl bg-gray-800/60 px-4 py-2">
 						<BiBulb size={24} className="text-purple-400" />
 						<p>
 							You can edit the content of this post in the{" "}
@@ -46,14 +46,12 @@ async function PostLayout({slug, children}: PostLayoutProps) {
 							</a>
 						</p>
 					</div>
-					<p className="text-14 text-purple-600 mb-2 mt-4">
-						Post content built with Wordpress
-					</p>
-					<div className="border px-4 py-8 rounded-lg">{children}</div>
+					<p className="mb-2 mt-4 text-14 text-purple-600">Post content built with Wordpress</p>
+					<div className="rounded-lg border px-4 py-8">{children}</div>
 				</Column>
 			</Row>
 		</Section>
-	);
+	)
 }
 
-export default PostLayout;
+export default PostLayout

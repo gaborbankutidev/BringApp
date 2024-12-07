@@ -1,1 +1,1 @@
-export {group} from "./group.block";
+export { group } from "./group.block"

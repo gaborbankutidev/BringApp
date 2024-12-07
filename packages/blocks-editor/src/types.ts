@@ -1,13 +1,12 @@
-
 /**
  * Represents a type that excludes the `undefined` type from the given type `T`.
  */
-export type Defined<T> = Exclude<T, undefined>;
+export type Defined<T> = Exclude<T, undefined>
 
 /**
  * Represents a numeric type that can have values from 1 to 12.
  */
-export type GridNumType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+export type GridNumType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
 
 /**
  * Represents a media type with optional properties.
@@ -36,23 +35,23 @@ export type MediaType = {
 /**
  * Represents an image type, which is a subtype of MediaType.
  */
-export type ImageType = MediaType;
+export type ImageType = MediaType
 
 // ===========
 
 export type BringNode = {
-	key: string;
-	blockName: string;
-	attributes: object;
-	children?: BringNode[];
-};
+	key: string
+	blockName: string
+	attributes: object
+	children?: BringNode[]
+}
 
 export type WpBlock = {
-	clientId: string;
-	name: string;
-	attributes: object;
-	innerBlocks: WpBlock[];
-};
+	clientId: string
+	name: string
+	attributes: object
+	innerBlocks: WpBlock[]
+}
 
 // ===========
 
@@ -63,15 +62,14 @@ export type NestedKeyOf<ObjectType extends object> = {
 }[keyof ObjectType & (string | number)]
 
 type DeepRequired<T extends object> = {
-	[P in keyof T]-?: T[P] extends object ? DeepRequired<T[P]> : T[P];
-};
+	[P in keyof T]-?: T[P] extends object ? DeepRequired<T[P]> : T[P]
+}
 
 type NestedTypedKeyOfOnRequired<ObjectType extends object, T> = {
 	[Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends T
 		? `${Key}`
 		: ObjectType[Key] extends object
-			? `${Key}.${NestedTypedKeyOfOnRequired<ObjectType[Key], T> extends infer U extends
-					string
+			? `${Key}.${NestedTypedKeyOfOnRequired<ObjectType[Key], T> extends infer U extends string
 					? U
 					: never}`
 			: never

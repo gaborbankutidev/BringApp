@@ -1,5 +1,4 @@
-
-import {DashIcon} from "./dashicon.types";
+import { DashIcon } from "./dashicon.types"
 
 type DisplayValue =
 	| "block"
@@ -30,10 +29,10 @@ type ResponsiveDisplayValueConfig = {
 }
 
 export type ResponsiveValue<T = number> = {
-	""?: T;
-	md?: T;
-	lg?: T;
-};
+	""?: T
+	md?: T
+	lg?: T
+}
 
 // ===========
 
@@ -64,12 +63,12 @@ export type BlockStyles = {
 
 export type BlockStylesClassNames = {
 	spacing?: {
-		m?: string;
-		p?: string;
-	};
-	visibility?: string;
-	className?: string;
-};
+		m?: string
+		p?: string
+	}
+	visibility?: string
+	className?: string
+}
 
 // ===========
 

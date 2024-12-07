@@ -8,9 +8,9 @@ import type { DynamicEntityProps, EntityType } from "../types"
 import Debug from "./debug"
 
 export type DynamicEntityPropsRenderProps<T = object, P = object> = {
-	entityProps: DynamicEntityProps<T>;
-	params?: GetDynamicEntityPropsParams<P>;
-};
+	entityProps: DynamicEntityProps<T>
+	params?: GetDynamicEntityPropsParams<P>
+}
 
 export type EntityProps<T, P> = {
 	entityId?: number

@@ -1,1 +1,1 @@
-export {embed} from "./embed.block";
+export { embed } from "./embed.block"

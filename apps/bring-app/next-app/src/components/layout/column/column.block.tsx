@@ -1,27 +1,23 @@
-import type {BP} from "@/bring";
-import {
-	type AlignType,
-	type DirectionType,
-	type JustifyType,
-} from "@/editor/utils/lists";
-import {cn} from "@/lib/utils";
-import type {ColorType} from "@/styles/colors";
-import type {ResponsiveValue} from "@bring/blocks-client/styles";
-import {makeResponsiveClassNames} from "@bring/blocks-client/styles";
-import type {GridNumType} from "@bring/blocks-client/types";
-import Column from "./column";
+import type { BP } from "@/bring"
+import { type AlignType, type DirectionType, type JustifyType } from "@/editor/utils/lists"
+import { cn } from "@/lib/utils"
+import type { ColorType } from "@/styles/colors"
+import type { ResponsiveValue } from "@bring/blocks-client/styles"
+import { makeResponsiveClassNames } from "@bring/blocks-client/styles"
+import type { GridNumType } from "@bring/blocks-client/types"
+import Column from "./column"
 
 export type ColumnBlockProps = {
-	colSpan?: ResponsiveValue<GridNumType>;
-	rowSpan?: ResponsiveValue;
-	gap?: ResponsiveValue;
+	colSpan?: ResponsiveValue<GridNumType>
+	rowSpan?: ResponsiveValue
+	gap?: ResponsiveValue
 
-	direction?: DirectionType;
-	justify?: JustifyType;
-	align?: AlignType;
+	direction?: DirectionType
+	justify?: JustifyType
+	align?: AlignType
 
-	backgroundColor?: ColorType;
-};
+	backgroundColor?: ColorType
+}
 
 const ColumnBlock = ({
 	attributes: {
@@ -38,23 +34,23 @@ const ColumnBlock = ({
 	children,
 }: BP<ColumnBlockProps>) => {
 	const classNames = cn(
-		makeResponsiveClassNames("col-span", colSpan, {"": 1}),
+		makeResponsiveClassNames("col-span", colSpan, { "": 1 }),
 		makeResponsiveClassNames("row-span", rowSpan),
-		makeResponsiveClassNames("gap", gap, {"": 4}),
+		makeResponsiveClassNames("gap", gap, { "": 4 }),
 		"mx-0 px-0",
 		backgroundColor && `bg-${backgroundColor}`,
 		direction === "vertical" && "flex-col",
 		justify && `justify-${justify}`,
 		align && `items-${align}`,
-		className,
-	);
+		className
+	)
 
 	return (
 		<Column className={classNames} {...props}>
 			{children}
 		</Column>
-	);
-};
+	)
+}
 
 export const column = {
 	Block: ColumnBlock,
@@ -62,20 +58,20 @@ export const column = {
 	blockStylesConfig: {
 		spacing: {
 			m: {
-				t: {"": 0},
-				b: {"": 0},
+				t: { "": 0 },
+				b: { "": 0 },
 				l: {},
 				r: {},
 			},
 			p: {
-				t: {"": 0},
-				b: {"": 0},
+				t: { "": 0 },
+				b: { "": 0 },
 				l: {},
 				r: {},
 			},
 		},
-		visibility: {"": "flex", md: "flex", lg: "flex"},
+		visibility: { "": "flex", md: "flex", lg: "flex" },
 	},
-} as const;
+} as const
 
-export default Column;
+export default Column

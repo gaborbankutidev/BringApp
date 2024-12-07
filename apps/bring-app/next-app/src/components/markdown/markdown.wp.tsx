@@ -1,17 +1,13 @@
-import {
-	alignOptions,
-	colorOptions,
-	textSourceOptions,
-} from "@/editor/utils/options";
+import { alignOptions, colorOptions, textSourceOptions } from "@/editor/utils/options"
 import {
 	objectAttributeSource,
 	stringAttributeSource,
 	type BlockConfig,
-} from "@bring/blocks-editor/blocks";
-import {markdownElements} from "./markdown";
-import {markdown, type MarkdownBlockProps} from "./markdown.block";
-import MarkdownEdit from "./markdown.edit";
-import {contentSample} from "./sample-content";
+} from "@bring/blocks-editor/blocks"
+import { markdownElements } from "./markdown"
+import { markdown, type MarkdownBlockProps } from "./markdown.block"
+import MarkdownEdit from "./markdown.edit"
+import { contentSample } from "./sample-content"
 
 const markdownConfig: BlockConfig<MarkdownBlockProps> = {
 	...markdown,
@@ -64,6 +60,6 @@ const markdownConfig: BlockConfig<MarkdownBlockProps> = {
 			})),
 		},
 	],
-};
+}
 
-export default markdownConfig;
+export default markdownConfig

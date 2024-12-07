@@ -1,8 +1,7 @@
-
-import {clsx} from "clsx";
-import React, {type FC, type ReactNode} from "react";
-import {makeBlockStylesClassNames} from "../styles/make-class-names";
-import type {BlockList, BringNode, EntityProps, SiteProps} from "../types";
+import { clsx } from "clsx"
+import React, { type FC, type ReactNode } from "react"
+import { makeBlockStylesClassNames } from "../styles/make-class-names"
+import type { BlockList, BringNode, EntityProps, SiteProps } from "../types"
 
 /**
  * Represents the props of the error component.
@@ -43,22 +42,22 @@ export default function createBringElement<
 	entityProps: EntityProps<EP>,
 	siteProps: SiteProps<SP, M, MI>,
 	context: CTX,
-	PostContent: ReactNode = null,
+	PostContent: ReactNode = null
 ) {
 	return nodes.map((node) => {
 		// check if block is PostContent and return PostContent ReactNode
 		if (node.blockName === "bring/post-content") {
-			return PostContent;
+			return PostContent
 		}
 
 		// Find block
-		const {Block, blockStylesConfig} =
-			blockList.find((blockListItem) => blockListItem.blockName === node.blockName) ?? {};
+		const { Block, blockStylesConfig } =
+			blockList.find((blockListItem) => blockListItem.blockName === node.blockName) ?? {}
 
 		// check if component is a function
 		if (Block === undefined) {
-			console.log('Block is not a function, inserting "Error" component instead...');
-			return <Error name={node.blockName} key={node.key} />;
+			console.log('Block is not a function, inserting "Error" component instead...')
+			return <Error name={node.blockName} key={node.key} />
 		}
 
 		// render children
@@ -74,12 +73,12 @@ export default function createBringElement<
 			: []
 
 		// create element
-		const {className, blockStyles, ...attributes} = node.attributes;
+		const { className, blockStyles, ...attributes } = node.attributes
 		const blockStylesClassNames = makeBlockStylesClassNames(
 			className,
 			blockStylesConfig,
-			blockStyles,
-		);
+			blockStyles
+		)
 
 		return (
 			<Block
@@ -89,7 +88,7 @@ export default function createBringElement<
 						blockStylesClassNames.spacing?.m,
 						blockStylesClassNames.spacing?.p,
 						blockStylesClassNames.visibility,
-						blockStylesClassNames.className,
+						blockStylesClassNames.className
 					),
 					...attributes,
 				}}
@@ -102,6 +101,6 @@ export default function createBringElement<
 			>
 				{children}
 			</Block>
-		);
-	});
+		)
+	})
 }

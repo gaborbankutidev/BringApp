@@ -1,12 +1,12 @@
-import {colorOptions} from "@/editor/utils/options";
+import { colorOptions } from "@/editor/utils/options"
 import {
 	booleanAttributeSource,
 	imageAttributeSource,
 	stringAttributeSource,
 	type BlockConfig,
-} from "@bring/blocks-editor/blocks";
-import {section, type SectionBlockProps} from "./section.block";
-import {SectionEdit} from "./section.edit";
+} from "@bring/blocks-editor/blocks"
+import { section, type SectionBlockProps } from "./section.block"
+import { SectionEdit } from "./section.edit"
 
 const sectionConfig: BlockConfig<SectionBlockProps> = {
 	...section,
@@ -32,8 +32,8 @@ const sectionConfig: BlockConfig<SectionBlockProps> = {
 					path: "backgroundColor",
 					options: colorOptions,
 				},
-				{type: "image", label: "Background image", path: "backgroundImage"},
-				{type: "toggle", label: "Dark", path: "dark"},
+				{ type: "image", label: "Background image", path: "backgroundImage" },
+				{ type: "toggle", label: "Dark", path: "dark" },
 			],
 			initialOpen: true,
 		},
@@ -50,10 +50,10 @@ const sectionConfig: BlockConfig<SectionBlockProps> = {
 					label: "Background Classes",
 					path: "backgroundClassName",
 				},
-				{type: "text", label: "Container Classes", path: "containerClassName"},
+				{ type: "text", label: "Container Classes", path: "containerClassName" },
 			],
 		},
 	],
-};
+}
 
-export default sectionConfig;
+export default sectionConfig

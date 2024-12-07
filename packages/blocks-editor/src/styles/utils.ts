@@ -1,5 +1,4 @@
-
-import {BlockStyles, ResponsiveLabels} from "./types";
+import { BlockStyles, ResponsiveLabels } from "./types"
 
 export const blockStylesDefaultValue: BlockStyles = {
 	spacing: {

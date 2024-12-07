@@ -1,17 +1,16 @@
-
-import {Button, Icon} from "@wordpress/components";
-import cloneDeep from "lodash.clonedeep";
-import get from "lodash.get";
-import set from "lodash.set";
-import type {FC} from "react";
-import React, {useState} from "react";
-import {RangeControl} from "..";
-import type {ResponsiveLabels, ResponsiveValue} from "../../styles/types";
-import {screenSizes} from "../../styles/utils";
-import {objectKeys} from "../../utils";
-import {useControlContext} from "../context";
-import type {ControlByPath, ControlByValue, ControlType} from "../types";
-import {isPathControl} from "../utils";
+import { Button, Icon } from "@wordpress/components"
+import cloneDeep from "lodash.clonedeep"
+import get from "lodash.get"
+import set from "lodash.set"
+import type { FC } from "react"
+import React, { useState } from "react"
+import { RangeControl } from ".."
+import type { ResponsiveLabels, ResponsiveValue } from "../../styles/types"
+import { screenSizes } from "../../styles/utils"
+import { objectKeys } from "../../utils"
+import { useControlContext } from "../context"
+import type { ControlByPath, ControlByValue, ControlType } from "../types"
+import { isPathControl } from "../utils"
 
 /**
  * Props for the ResponsiveRangeControl component.
@@ -27,7 +26,7 @@ type _NumberControl = { min?: number; max?: number }
  * @returns The rendered ResponsiveRangeControl component.
  */
 export const ResponsiveRangeControl = <pT extends object = object>(
-	props: ControlType<ResponsiveValue, pT> & _NumberControl,
+	props: ControlType<ResponsiveValue, pT> & _NumberControl
 ) =>
 	isPathControl(props) ? (
 		<ResponsiveRangeControlByPath {...props} />

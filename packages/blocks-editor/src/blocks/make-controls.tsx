@@ -1,9 +1,8 @@
-
-import {InspectorAdvancedControls, InspectorControls} from "@wordpress/block-editor";
-import {PanelBody} from "@wordpress/components";
-import get from "lodash.get";
-import React from "react";
-import type {BlockControlsConfig, EditorAttributes} from "./types";
+import { InspectorAdvancedControls, InspectorControls } from "@wordpress/block-editor"
+import { PanelBody } from "@wordpress/components"
+import get from "lodash.get"
+import React from "react"
+import type { BlockControlsConfig, EditorAttributes } from "./types"
 
 import {
 	CheckboxControl,
@@ -23,11 +22,10 @@ import {
 	ToggleControl,
 } from "../controls"
 
-
 export function makeControls(
 	attributes: EditorAttributes,
 	setAttributes: (attributes: Partial<EditorAttributes>) => void,
-	Controls: BlockControlsConfig,
+	Controls: BlockControlsConfig
 ) {
 	return (
 		<InspectorControls key="bring-controls">

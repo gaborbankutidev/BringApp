@@ -5,7 +5,7 @@ const config = {
 		project: "./tsconfig.json",
 	},
 	// @ts-ignore
-	plugins: ["@typescript-eslint"],
+	plugins: ["@typescript-eslint", "eslint-plugin-react-hooks"],
 	extends: [
 		"next/core-web-vitals",
 		"plugin:@typescript-eslint/recommended-type-checked",

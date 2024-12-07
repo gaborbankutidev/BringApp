@@ -4,19 +4,19 @@
 
 ### Minor Changes
 
--   7188ea0: Refactor BlockProps and EditorProps
+- 7188ea0: Refactor BlockProps and EditorProps
 
 ## 2.7.0
 
 ### Minor Changes
 
--   4c4cb02: Bring App plugin is refactored to PSR-4. DATA_TOKEN is removed. SearchWP is added to Extend.
+- 4c4cb02: Bring App plugin is refactored to PSR-4. DATA_TOKEN is removed. SearchWP is added to Extend.
 
 ## 2.6.0
 
 ### Minor Changes
 
--   8d5707b: Refactor and enhance useWPSendForm hook
+- 8d5707b: Refactor and enhance useWPSendForm hook
 
 ## 2.5.0
 

@@ -1,17 +1,17 @@
-"use client"; // Error components must be Client Components
+"use client" // Error components must be Client Components
 
-import {useEffect} from "react";
+import { useEffect } from "react"
 
 type ErrorProps = {
-	error: Error & {digest?: string};
-	reset: () => void;
-};
+	error: Error & { digest?: string }
+	reset: () => void
+}
 
-function Error({error, reset}: ErrorProps) {
+function Error({ error, reset }: ErrorProps) {
 	useEffect(() => {
 		// Log the error to an error reporting service
-		console.error(error);
-	}, [error]);
+		console.error(error)
+	}, [error])
 
 	return (
 		<div className="border-brick p-4">
@@ -25,7 +25,7 @@ function Error({error, reset}: ErrorProps) {
 				Try again
 			</button>
 		</div>
-	);
+	)
 }
 
-export default Error;
+export default Error

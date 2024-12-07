@@ -33,10 +33,10 @@ A line break here
 and a line:
 
 ---
-`;
+`
 
 export const inlineContentSample = `Hello world! 
 This is **bold** and this is *italic* and this a ${"`"}code item ${"`"} ^sup^
 and this is a [link](https://bring.team) 
 and this is a [link](https://bring.team "--newTab") that opens on a new tab!
-`;
+`

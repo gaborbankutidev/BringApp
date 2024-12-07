@@ -4,4 +4,4 @@
 // 	// return NextResponse.json({ data: "Testing Sentry Error..." });
 // }
 
-export {};
+export {}

@@ -1,26 +1,21 @@
-import type {BP} from "@/bring";
-import {cn} from "@/lib/utils";
-import type {ColorType} from "@/styles/colors";
-import type {ImageType} from "@bring/blocks-client";
-import Section from "./section";
+import type { BP } from "@/bring"
+import { cn } from "@/lib/utils"
+import type { ColorType } from "@/styles/colors"
+import type { ImageType } from "@bring/blocks-client"
+import Section from "./section"
 
 export type SectionBlockProps = {
-	backgroundColor?: ColorType;
-	backgroundImage?: ImageType;
-	dark?: boolean;
+	backgroundColor?: ColorType
+	backgroundImage?: ImageType
+	dark?: boolean
 
-	backgroundImageClassName?: string;
-	backgroundClassName?: string;
-	containerClassName?: string;
-};
+	backgroundImageClassName?: string
+	backgroundClassName?: string
+	containerClassName?: string
+}
 
 const SectionBlock = ({
-	attributes: {
-		backgroundColor = "transparent",
-		backgroundImage,
-		backgroundClassName,
-		...props
-	},
+	attributes: { backgroundColor = "transparent", backgroundImage, backgroundClassName, ...props },
 	children,
 }: BP<SectionBlockProps>) => (
 	<Section
@@ -37,7 +32,7 @@ const SectionBlock = ({
 	>
 		{children}
 	</Section>
-);
+)
 
 export const section = {
 	Block: SectionBlock,
@@ -45,12 +40,12 @@ export const section = {
 	blockStylesConfig: {
 		spacing: {
 			p: {
-				t: {"": 8},
-				b: {"": 8},
+				t: { "": 8 },
+				b: { "": 8 },
 			},
 		},
-		visibility: {"": "block", md: "block", lg: "block"},
+		visibility: { "": "block", md: "block", lg: "block" },
 	},
-} as const;
+} as const
 
-export default Section;
+export default Section

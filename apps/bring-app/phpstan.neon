@@ -10,5 +10,3 @@ parameters:
 		- plugins/bring-app/src
 	bootstrapFiles:
 		- plugins/bring-app/vendor/php-stubs/acf-pro-stubs/acf-pro-stubs.php
-	ignoreErrors:
-	    - '#Method .*::.*\(\) has parameter \$request with generic class WP_REST_Request but does not specify its types: T#'

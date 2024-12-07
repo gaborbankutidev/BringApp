@@ -1,8 +1,8 @@
-import type {BlockEdit} from "@bring/blocks-editor/blocks";
-import {EditorCard} from "@bring/blocks-editor/components";
-import {BlockControls} from "@wordpress/block-editor";
-import {ToolbarButton, ToolbarGroup} from "@wordpress/components";
-import type SimpleMDE from "easymde";
+import type { BlockEdit } from "@bring/blocks-editor/blocks"
+import { EditorCard } from "@bring/blocks-editor/components"
+import { BlockControls } from "@wordpress/block-editor"
+import { ToolbarButton, ToolbarGroup } from "@wordpress/components"
+import type SimpleMDE from "easymde"
 import {
 	drawHorizontalRule,
 	drawImage,
@@ -18,47 +18,44 @@ import {
 	toggleUnorderedList,
 	undo,
 	type Options,
-} from "easymde";
-import {useCallback, useMemo, useState} from "react";
-import SimpleMDEReact from "react-simplemde-editor";
-import {type MarkdownBlockProps} from "./markdown.block";
+} from "easymde"
+import { useCallback, useMemo, useState } from "react"
+import SimpleMDEReact from "react-simplemde-editor"
+import { type MarkdownBlockProps } from "./markdown.block"
 
 const MarkdownEdit: BlockEdit<MarkdownBlockProps> = ({
-	blockProps: {attributes, ...restOfBlockProps},
+	blockProps: { attributes, ...restOfBlockProps },
 	Block,
 	setAttributes,
 	isSelected,
 }) => {
-	const {content, source = "manual", ...restOfAttributes} = attributes;
+	const { content, source = "manual", ...restOfAttributes } = attributes
 
-	const [isPreview, setPreview] = useState(true);
+	const [isPreview, setPreview] = useState(true)
 
 	const onChange = useCallback((newValue: string) => {
-		setAttributes({content: newValue});
+		setAttributes({ content: newValue })
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [])
 
 	// MDE instance
-	const [simpleMdeInstance, setMdeInstance] = useState<SimpleMDE | null>(null);
+	const [simpleMdeInstance, setMdeInstance] = useState<SimpleMDE | null>(null)
 
 	const getMdeInstanceCallback = useCallback((simpleMde: SimpleMDE) => {
-		setMdeInstance(simpleMde);
-	}, []);
+		setMdeInstance(simpleMde)
+	}, [])
 
 	// MDE options
 	const options: Options = useMemo(() => {
 		return {
 			toolbar: false,
 			spellChecker: false,
-		};
-	}, []);
+		}
+	}, [])
 
 	return source !== "manual" ? (
 		<EditorCard isSelected={isSelected} name="Markdown">
-			<Block
-				attributes={{content, source, ...restOfAttributes}}
-				{...restOfBlockProps}
-			/>
+			<Block attributes={{ content, source, ...restOfAttributes }} {...restOfBlockProps} />
 		</EditorCard>
 	) : isPreview ? (
 		<EditorCard isSelected={isSelected} name="Markdown">
@@ -67,7 +64,7 @@ const MarkdownEdit: BlockEdit<MarkdownBlockProps> = ({
 					<ToolbarButton
 						icon="edit"
 						onClick={() => {
-							setPreview(false);
+							setPreview(false)
 						}}
 						onPointerOverCapture={undefined}
 						onPointerOutCapture={undefined}
@@ -76,10 +73,7 @@ const MarkdownEdit: BlockEdit<MarkdownBlockProps> = ({
 					/>
 				</ToolbarGroup>
 			</BlockControls>
-			<Block
-				attributes={{content, ...restOfAttributes}}
-				{...restOfBlockProps}
-			/>
+			<Block attributes={{ content, ...restOfAttributes }} {...restOfBlockProps} />
 		</EditorCard>
 	) : (
 		<EditorCard isSelected={isSelected} name="Markdown">
@@ -88,7 +82,9 @@ const MarkdownEdit: BlockEdit<MarkdownBlockProps> = ({
 					<ToolbarButton
 						icon="undo"
 						onClick={() => {
-							simpleMdeInstance && undo(simpleMdeInstance);
+							if (simpleMdeInstance) {
+								undo(simpleMdeInstance)
+							}
 						}}
 						onPointerOverCapture={undefined}
 						onPointerOutCapture={undefined}
@@ -98,7 +94,9 @@ const MarkdownEdit: BlockEdit<MarkdownBlockProps> = ({
 					<ToolbarButton
 						icon="redo"
 						onClick={() => {
-							simpleMdeInstance && redo(simpleMdeInstance);
+							if (simpleMdeInstance) {
+								redo(simpleMdeInstance)
+							}
 						}}
 						onPointerOverCapture={undefined}
 						onPointerOutCapture={undefined}
@@ -109,7 +107,7 @@ const MarkdownEdit: BlockEdit<MarkdownBlockProps> = ({
 					<ToolbarButton
 						icon="visibility"
 						onClick={() => {
-							setPreview(true);
+							setPreview(true)
 						}}
 						onPointerOverCapture={undefined}
 						onPointerOutCapture={undefined}
@@ -121,7 +119,9 @@ const MarkdownEdit: BlockEdit<MarkdownBlockProps> = ({
 					<ToolbarButton
 						icon="heading"
 						onClick={() => {
-							simpleMdeInstance && toggleHeadingSmaller(simpleMdeInstance);
+							if (simpleMdeInstance) {
+								toggleHeadingSmaller(simpleMdeInstance)
+							}
 						}}
 						onPointerOverCapture={undefined}
 						onPointerOutCapture={undefined}
@@ -132,7 +132,9 @@ const MarkdownEdit: BlockEdit<MarkdownBlockProps> = ({
 					<ToolbarButton
 						icon="editor-bold"
 						onClick={() => {
-							simpleMdeInstance && toggleBold(simpleMdeInstance);
+							if (simpleMdeInstance) {
+								toggleBold(simpleMdeInstance)
+							}
 						}}
 						onPointerOverCapture={undefined}
 						onPointerOutCapture={undefined}
@@ -142,7 +144,9 @@ const MarkdownEdit: BlockEdit<MarkdownBlockProps> = ({
 					<ToolbarButton
 						icon="editor-italic"
 						onClick={() => {
-							simpleMdeInstance && toggleItalic(simpleMdeInstance);
+							if (simpleMdeInstance) {
+								toggleItalic(simpleMdeInstance)
+							}
 						}}
 						onPointerOverCapture={undefined}
 						onPointerOutCapture={undefined}
@@ -152,7 +156,9 @@ const MarkdownEdit: BlockEdit<MarkdownBlockProps> = ({
 					<ToolbarButton
 						icon="editor-strikethrough"
 						onClick={() => {
-							simpleMdeInstance && toggleStrikethrough(simpleMdeInstance);
+							if (simpleMdeInstance) {
+								toggleStrikethrough(simpleMdeInstance)
+							}
 						}}
 						onPointerOverCapture={undefined}
 						onPointerOutCapture={undefined}
@@ -162,7 +168,9 @@ const MarkdownEdit: BlockEdit<MarkdownBlockProps> = ({
 					<ToolbarButton
 						icon="admin-links"
 						onClick={() => {
-							simpleMdeInstance && drawLink(simpleMdeInstance);
+							if (simpleMdeInstance) {
+								drawLink(simpleMdeInstance)
+							}
 						}}
 						onPointerOverCapture={undefined}
 						onPointerOutCapture={undefined}
@@ -173,7 +181,9 @@ const MarkdownEdit: BlockEdit<MarkdownBlockProps> = ({
 					<ToolbarButton
 						icon="editor-ul"
 						onClick={() => {
-							simpleMdeInstance && toggleUnorderedList(simpleMdeInstance);
+							if (simpleMdeInstance) {
+								toggleUnorderedList(simpleMdeInstance)
+							}
 						}}
 						onPointerOverCapture={undefined}
 						onPointerOutCapture={undefined}
@@ -183,7 +193,9 @@ const MarkdownEdit: BlockEdit<MarkdownBlockProps> = ({
 					<ToolbarButton
 						icon="editor-ol-rtl"
 						onClick={() => {
-							simpleMdeInstance && toggleOrderedList(simpleMdeInstance);
+							if (simpleMdeInstance) {
+								toggleOrderedList(simpleMdeInstance)
+							}
 						}}
 						onPointerOverCapture={undefined}
 						onPointerOutCapture={undefined}
@@ -194,7 +206,9 @@ const MarkdownEdit: BlockEdit<MarkdownBlockProps> = ({
 					<ToolbarButton
 						icon="minus"
 						onClick={() => {
-							simpleMdeInstance && drawHorizontalRule(simpleMdeInstance);
+							if (simpleMdeInstance) {
+								drawHorizontalRule(simpleMdeInstance)
+							}
 						}}
 						onPointerOverCapture={undefined}
 						onPointerOutCapture={undefined}
@@ -204,7 +218,9 @@ const MarkdownEdit: BlockEdit<MarkdownBlockProps> = ({
 					<ToolbarButton
 						icon="format-image"
 						onClick={() => {
-							simpleMdeInstance && drawImage(simpleMdeInstance);
+							if (simpleMdeInstance) {
+								drawImage(simpleMdeInstance)
+							}
 						}}
 						onPointerOverCapture={undefined}
 						onPointerOutCapture={undefined}
@@ -214,7 +230,9 @@ const MarkdownEdit: BlockEdit<MarkdownBlockProps> = ({
 					<ToolbarButton
 						icon="editor-quote"
 						onClick={() => {
-							simpleMdeInstance && toggleBlockquote(simpleMdeInstance);
+							if (simpleMdeInstance) {
+								toggleBlockquote(simpleMdeInstance)
+							}
 						}}
 						onPointerOverCapture={undefined}
 						onPointerOutCapture={undefined}
@@ -224,7 +242,9 @@ const MarkdownEdit: BlockEdit<MarkdownBlockProps> = ({
 					<ToolbarButton
 						icon="editor-code"
 						onClick={() => {
-							simpleMdeInstance && toggleCodeBlock(simpleMdeInstance);
+							if (simpleMdeInstance) {
+								toggleCodeBlock(simpleMdeInstance)
+							}
 						}}
 						onPointerOverCapture={undefined}
 						onPointerOutCapture={undefined}
@@ -236,7 +256,7 @@ const MarkdownEdit: BlockEdit<MarkdownBlockProps> = ({
 					<ToolbarButton
 						icon="trash"
 						onClick={() => {
-							onChange("");
+							onChange("")
 						}}
 						onPointerOverCapture={undefined}
 						onPointerOutCapture={undefined}
@@ -252,7 +272,7 @@ const MarkdownEdit: BlockEdit<MarkdownBlockProps> = ({
 				options={options}
 			/>
 		</EditorCard>
-	);
-};
+	)
+}
 
-export default MarkdownEdit;
+export default MarkdownEdit

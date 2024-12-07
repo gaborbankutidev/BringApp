@@ -1,10 +1,9 @@
+import { useEffect, useState } from "react"
+import type { NumberSelectControlOptions } from "../controls/types"
 
-import {useEffect, useState} from "react";
-import type {NumberSelectControlOptions} from "../controls/types";
+type EntityType = "post" | "taxonomy" | "author"
 
-type EntityType = "post" | "taxonomy" | "author";
-
-type DynamicEntityOptions = [number, string][] | null;
+type DynamicEntityOptions = [number, string][] | null
 
 type Options = {
 	entitySlug?: string

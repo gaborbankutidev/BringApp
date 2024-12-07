@@ -1,17 +1,16 @@
-
-import {InspectorControls} from "@wordpress/block-editor";
-import {PanelBody} from "@wordpress/components";
-import type {FC} from "react";
-import React from "react";
-import {ResponsiveCheckboxControl, ResponsiveRangeControl} from "../controls";
-import {objectKeys} from "../utils";
-import type {BlockStylesConfig, Sides} from "./types";
-import {sideLabels, spacingLabels} from "./utils";
+import { InspectorControls } from "@wordpress/block-editor"
+import { PanelBody } from "@wordpress/components"
+import type { FC } from "react"
+import React from "react"
+import { ResponsiveCheckboxControl, ResponsiveRangeControl } from "../controls"
+import { objectKeys } from "../utils"
+import type { BlockStylesConfig, Sides } from "./types"
+import { sideLabels, spacingLabels } from "./utils"
 
 export function makeBlockStylesControl(blockStylesConfig: BlockStylesConfig) {
-	const m = blockStylesConfig.spacing?.m;
-	const p = blockStylesConfig.spacing?.p;
-	const v = blockStylesConfig.visibility;
+	const m = blockStylesConfig.spacing?.m
+	const p = blockStylesConfig.spacing?.p
+	const v = blockStylesConfig.visibility
 
 	return (
 		<InspectorControls key="block-styles">

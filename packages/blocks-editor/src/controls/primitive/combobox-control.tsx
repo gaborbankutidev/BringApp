@@ -1,13 +1,12 @@
-
-import {ComboboxControl as WPComboboxControl} from "@wordpress/components";
-import cloneDeep from "lodash.clonedeep";
-import get from "lodash.get";
-import set from "lodash.set";
-import type {FC} from "react";
-import React from "react";
-import {useControlContext} from "../context";
-import type {ControlByPath, ControlByValue, ControlType} from "../types";
-import {isPathControl} from "../utils";
+import { ComboboxControl as WPComboboxControl } from "@wordpress/components"
+import cloneDeep from "lodash.clonedeep"
+import get from "lodash.get"
+import set from "lodash.set"
+import type { FC } from "react"
+import React from "react"
+import { useControlContext } from "../context"
+import type { ControlByPath, ControlByValue, ControlType } from "../types"
+import { isPathControl } from "../utils"
 
 /**
  * Represents a combobox control component.
@@ -25,7 +24,7 @@ type _ComboboxControl = {
  * @returns A React component representing a combobox control.
  */
 export const ComboboxControl = <pT extends object = object>(
-	props: ControlType<string, pT> & _ComboboxControl,
+	props: ControlType<string, pT> & _ComboboxControl
 ) =>
 	isPathControl(props) ? (
 		<ComboboxControlByPath {...props} />

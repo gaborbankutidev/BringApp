@@ -1,1 +1,1 @@
-export {split} from "./split.block";
+export { split } from "./split.block"

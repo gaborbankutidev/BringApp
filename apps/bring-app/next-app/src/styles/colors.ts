@@ -46,8 +46,8 @@ export const colors = {
 	destructive: "hsl(var(--destructive))",
 	"destructive-foreground": "hsl(var(--destructive-foreground))",
 	ring: "hsl(var(--ring))",
-} as const;
+} as const
 
-export const colorList = Object.keys(colors);
+export const colorList = Object.keys(colors)
 
-export type ColorType = keyof typeof colors;
+export type ColorType = keyof typeof colors

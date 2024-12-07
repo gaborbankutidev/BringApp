@@ -6,7 +6,7 @@ export {
 	type UseDynamicEntityPropsOptions,
 } from "./use-dynamic-entity-props"
 
-export {useSendForm} from "./use-send-form";
+export { useSendForm } from "./use-send-form"
 
 export { useElementDimensions } from "./use-element-dimensions"
 export { useWindowDimensions } from "./use-window-dimensions"

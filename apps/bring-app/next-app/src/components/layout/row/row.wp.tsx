@@ -1,16 +1,13 @@
-import type {BlockConfig} from "@bring/blocks-editor/blocks";
-import {
-	objectAttributeSource,
-	stringAttributeSource,
-} from "@bring/blocks-editor/blocks";
-import {makeOptions} from "@bring/blocks-editor/controls";
-import {sizes} from "./row";
-import {row, type RowBlockProps} from "./row.block";
-import {RowControls} from "./row.controls";
-import {RowEdit} from "./row.edit";
+import type { BlockConfig } from "@bring/blocks-editor/blocks"
+import { objectAttributeSource, stringAttributeSource } from "@bring/blocks-editor/blocks"
+import { makeOptions } from "@bring/blocks-editor/controls"
+import { sizes } from "./row"
+import { row, type RowBlockProps } from "./row.block"
+import { RowControls } from "./row.controls"
+import { RowEdit } from "./row.edit"
 
-import {colorOptions} from "@/editor/utils/options";
-import {objectKeys} from "@bring/blocks-client";
+import { colorOptions } from "@/editor/utils/options"
+import { objectKeys } from "@bring/blocks-client"
 
 const rowConfig: BlockConfig<RowBlockProps> = {
 	...row,
@@ -25,7 +22,7 @@ const rowConfig: BlockConfig<RowBlockProps> = {
 	},
 	Edit: RowEdit,
 	Controls: [
-		{panel: "Grid settings", controls: [RowControls], initialOpen: true},
+		{ panel: "Grid settings", controls: [RowControls], initialOpen: true },
 		{
 			panel: "Row settings",
 			controls: [
@@ -44,6 +41,6 @@ const rowConfig: BlockConfig<RowBlockProps> = {
 			],
 		},
 	],
-};
+}
 
-export default rowConfig;
+export default rowConfig

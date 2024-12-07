@@ -22,7 +22,7 @@
 		"format": "prettier --write .",
 		"format:check": "prettier --check .",
 		"lint": "conc yarn:lint:app yarn:lint:plugin",
-		"lint:app": "yarn eslint",
+		"lint:app": "yarn eslint --config ./next-app/.eslintrc.cjs",
 		"lint:plugin": "composer lint",
 		"prepare": "husky",
 		"services:down": "docker compose down",

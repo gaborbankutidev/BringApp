@@ -1,8 +1,8 @@
-import {cn} from "@/lib/utils";
+import { cn } from "@/lib/utils"
 
 export type RowProps = {
-	size?: keyof typeof sizes;
-} & Omit<React.HTMLProps<HTMLDivElement>, "size">;
+	size?: keyof typeof sizes
+} & Omit<React.HTMLProps<HTMLDivElement>, "size">
 
 export const sizes = {
 	"720": "mx-4 md:mx-8 max-w-[720px] min-[784px]:mx-auto",
@@ -12,20 +12,20 @@ export const sizes = {
 	wide: "mx-4 md:mx-8 lg:mx-10", // Without mac width
 	full: "mx-0", // Without max width and margin
 	split: "mx-4 md:ml-8 md:mr-0 lg:ml-10 md:max-w-[66%] lg:max-w-[50%]",
-} as const;
+} as const
 
 /**
  * The row component is responsible for the container inside a Section component.
  * Sets the margin and max with of the content and provides a grid layout for the Columns.
  */
-const Row = ({children, size = "1520", className, ...props}: RowProps) => {
-	const classNames = cn("grid gap-8 px-0", sizes[size], className);
+const Row = ({ children, size = "1520", className, ...props }: RowProps) => {
+	const classNames = cn("grid gap-8 px-0", sizes[size], className)
 
 	return (
 		<div className={classNames} {...props}>
 			{children}
 		</div>
-	);
-};
+	)
+}
 
-export default Row;
+export default Row

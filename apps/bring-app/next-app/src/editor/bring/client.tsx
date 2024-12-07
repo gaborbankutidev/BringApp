@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import {initClient} from "@bring/blocks-client/init-client";
+import { initClient } from "@bring/blocks-client/init-client"
 
 export const {
 	useDynamicEntityProps,
@@ -8,4 +8,4 @@ export const {
 	useWPSendForm,
 	DynamicEntity,
 	DynamicEntityList,
-} = initClient("");
+} = initClient("")

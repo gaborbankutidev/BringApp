@@ -1,17 +1,16 @@
-
-import {Button, Icon} from "@wordpress/components";
-import cloneDeep from "lodash.clonedeep";
-import get from "lodash.get";
-import set from "lodash.set";
-import type {FC} from "react";
-import React, {useState} from "react";
-import {CheckboxControl} from "..";
-import type {ResponsiveLabels, ResponsiveValue} from "../../styles/types";
-import {screenSizes} from "../../styles/utils";
-import {objectKeys} from "../../utils";
-import {useControlContext} from "../context";
-import type {ControlByPath, ControlByValue, ControlType} from "../types";
-import {isPathControl} from "../utils";
+import { Button, Icon } from "@wordpress/components"
+import cloneDeep from "lodash.clonedeep"
+import get from "lodash.get"
+import set from "lodash.set"
+import type { FC } from "react"
+import React, { useState } from "react"
+import { CheckboxControl } from ".."
+import type { ResponsiveLabels, ResponsiveValue } from "../../styles/types"
+import { screenSizes } from "../../styles/utils"
+import { objectKeys } from "../../utils"
+import { useControlContext } from "../context"
+import type { ControlByPath, ControlByValue, ControlType } from "../types"
+import { isPathControl } from "../utils"
 
 /**
  * A control component that renders a responsive checkbox control.
@@ -22,7 +21,7 @@ import {isPathControl} from "../utils";
  * @returns The rendered ResponsiveCheckboxControl component.
  */
 export const ResponsiveCheckboxControl = <pT extends object = {}>(
-	props: ControlType<ResponsiveValue<boolean>, pT>,
+	props: ControlType<ResponsiveValue<boolean>, pT>
 ) =>
 	isPathControl(props) ? (
 		<ResponsiveCheckboxControlByPath {...props} />

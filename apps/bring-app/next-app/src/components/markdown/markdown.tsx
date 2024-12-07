@@ -1,13 +1,13 @@
-import Image from "@/components/image";
-import {cn} from "@/lib/utils";
-import {useMemo, type ReactElement, type ReactNode} from "react";
-import ReactMarkdown from "react-markdown";
-import supersub from "remark-supersub";
+import Image from "@/components/image"
+import { cn } from "@/lib/utils"
+import { useMemo, type ReactElement, type ReactNode } from "react"
+import ReactMarkdown from "react-markdown"
+import supersub from "remark-supersub"
 import {
 	getInlineComponents,
 	markdownInlineElements,
 	type MarkdownInlineElements,
-} from "./markdown-inline";
+} from "./markdown-inline"
 
 export const markdownElements = [
 	...markdownInlineElements,
@@ -25,97 +25,93 @@ export const markdownElements = [
 	"blockquote",
 	"hr",
 	"br",
-] as const;
+] as const
 
-export type MarkdownElements = (typeof markdownElements)[number];
+export type MarkdownElements = (typeof markdownElements)[number]
 
 type MarkdownProps = (
 	| {
-			content: string;
+			content: string
 	  }
 	| {
-			children: string;
+			children: string
 	  }
 ) &
 	(
 		| {
-				inline: true;
-				allowedElements?: MarkdownInlineElements[];
+				inline: true
+				allowedElements?: MarkdownInlineElements[]
 		  }
 		| {
-				inline?: false;
-				allowedElements?: MarkdownElements[];
+				inline?: false
+				allowedElements?: MarkdownElements[]
 		  }
 	) & {
-		elementsClassName?: {[key in MarkdownElements]?: string};
-		className?: string;
-	};
+		elementsClassName?: Partial<Record<MarkdownElements, string>>
+		className?: string
+	}
 
 const parseAlt = (alt: string | undefined) => {
 	const value = {
 		alt: "",
 		caption: "",
 		source: "",
-	};
-	if (!alt) return value;
+	}
+	if (!alt) return value
 
-	const parts = alt.split(/--caption:|--source:/);
+	const parts = alt.split(/--caption:|--source:/)
 
-	value.alt = parts[0] ?? "";
-	value.caption = alt.includes("--caption:") ? (parts[1] ?? "") : "";
+	value.alt = parts[0] ?? ""
+	value.caption = alt.includes("--caption:") ? (parts[1] ?? "") : ""
 
 	if (alt.includes("--source:")) {
-		value.source = alt.includes("--caption:")
-			? (parts[2] ?? "")
-			: (parts[1] ?? "");
+		value.source = alt.includes("--caption:") ? (parts[2] ?? "") : (parts[1] ?? "")
 	}
 
-	return value;
-};
+	return value
+}
 
 const getComponents = (
-	elementsClassName: {
-		[key in MarkdownElements]?: string;
-	},
-	inline = false,
+	elementsClassName: Partial<Record<MarkdownElements, string>>,
+	inline = false
 ) => {
-	const {p, ...inlineComponents} = getInlineComponents(elementsClassName); // eslint-disable-line @typescript-eslint/no-unused-vars
+	const { p, ...inlineComponents } = getInlineComponents(elementsClassName) // eslint-disable-line @typescript-eslint/no-unused-vars
 
 	return {
 		// p
-		p: ({children}: {children: ReactElement<{src?: string}>}) => {
-			const isImg = !!children?.props?.src as boolean;
+		p: ({ children }: { children: ReactElement<{ src?: string }> }) => {
+			const isImg = !!children?.props?.src
 
 			return inline || isImg ? (
 				<>{children}</>
 			) : (
 				<p className={cn(elementsClassName.p)}>{children}</p>
-			);
+			)
 		},
 		// inline
 		...inlineComponents,
 		// block
-		h1: ({children}: {children: ReactNode}) => (
+		h1: ({ children }: { children: ReactNode }) => (
 			<h1 className={elementsClassName.h1}>{children}</h1>
 		),
-		h2: ({children}: {children: ReactNode}) => (
+		h2: ({ children }: { children: ReactNode }) => (
 			<h2 className={elementsClassName.h2}>{children}</h2>
 		),
-		h3: ({children}: {children: ReactNode}) => (
+		h3: ({ children }: { children: ReactNode }) => (
 			<h3 className={elementsClassName.h3}>{children}</h3>
 		),
-		h4: ({children}: {children: ReactNode}) => (
+		h4: ({ children }: { children: ReactNode }) => (
 			<h4 className={elementsClassName.h4}>{children}</h4>
 		),
-		h5: ({children}: {children: ReactNode}) => (
+		h5: ({ children }: { children: ReactNode }) => (
 			<h5 className={elementsClassName.h5}>{children}</h5>
 		),
-		h6: ({children}: {children: ReactNode}) => (
+		h6: ({ children }: { children: ReactNode }) => (
 			<h6 className={elementsClassName.h6}>{children}</h6>
 		),
-		img: (props: {src: string; alt: string}) => {
-			if (!("src" in props)) return null;
-			const {alt: parsedAlt, caption, source} = parseAlt(props.alt);
+		img: (props: { src: string; alt: string }) => {
+			if (!("src" in props)) return null
+			const { alt: parsedAlt, caption, source } = parseAlt(props.alt)
 
 			return (
 				// eslint-disable-next-line jsx-a11y/alt-text
@@ -131,67 +127,41 @@ const getComponents = (
 					source={source}
 					lightbox
 				/>
-			);
+			)
 		},
-		ul: ({children}: {children: ReactNode}) => (
+		ul: ({ children }: { children: ReactNode }) => (
 			<ul className={elementsClassName.ul}>{children}</ul>
 		),
-		ol: ({children}: {children: ReactNode}) => (
+		ol: ({ children }: { children: ReactNode }) => (
 			<ol className={elementsClassName.ol}>{children}</ol>
 		),
-		li: ({children}: {children: ReactNode}) => (
+		li: ({ children }: { children: ReactNode }) => (
 			<li className={elementsClassName.li}>{children}</li>
 		),
-		code: ({children}: {children: ReactNode}) => (
+		code: ({ children }: { children: ReactNode }) => (
 			<code className={elementsClassName.code}>{children}</code>
 		),
-		blockquote: ({children}: {children: ReactNode}) => (
-			<blockquote className={elementsClassName.blockquote}>
-				{children}
-			</blockquote>
+		blockquote: ({ children }: { children: ReactNode }) => (
+			<blockquote className={elementsClassName.blockquote}>{children}</blockquote>
 		),
 		hr: () => <hr className={elementsClassName.hr} />,
 		br: () => <br className={elementsClassName.br} />,
-	};
-};
+	}
+}
 
 const Markdown = ({
 	inline = false,
-	allowedElements = inline
-		? [...markdownInlineElements]
-		: [...markdownElements],
+	allowedElements = inline ? [...markdownInlineElements] : [...markdownElements],
 	className,
 	elementsClassName = {},
 	...props
 }: MarkdownProps) => {
-	const content = "content" in props ? props.content : props.children;
+	const content = "content" in props ? props.content : props.children
 
 	const components = useMemo(
 		() => getComponents(elementsClassName, inline),
-		[
-			inline,
-			elementsClassName.a,
-			elementsClassName.blockquote,
-			elementsClassName.br,
-			elementsClassName.code,
-			elementsClassName.em,
-			elementsClassName.h1,
-			elementsClassName.h2,
-			elementsClassName.h3,
-			elementsClassName.h4,
-			elementsClassName.h5,
-			elementsClassName.h6,
-			elementsClassName.hr,
-			elementsClassName.img,
-			elementsClassName.li,
-			elementsClassName.ol,
-			elementsClassName.p,
-			elementsClassName.strong,
-			elementsClassName.sub,
-			elementsClassName.sup,
-			elementsClassName.ul,
-		],
-	);
+		[elementsClassName, inline]
+	)
 
 	return inline ? (
 		<ReactMarkdown
@@ -212,7 +182,7 @@ const Markdown = ({
 		>
 			{content}
 		</ReactMarkdown>
-	);
-};
+	)
+}
 
-export default Markdown;
+export default Markdown

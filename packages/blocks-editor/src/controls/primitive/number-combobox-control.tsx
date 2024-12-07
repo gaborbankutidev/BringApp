@@ -1,13 +1,12 @@
-
-import {ComboboxControl as WPComboboxControl} from "@wordpress/components";
-import cloneDeep from "lodash.clonedeep";
-import get from "lodash.get";
-import set from "lodash.set";
-import type {FC} from "react";
-import React from "react";
-import {useControlContext} from "../context";
-import type {ControlByPath, ControlByValue, ControlType} from "../types";
-import {isPathControl} from "../utils";
+import { ComboboxControl as WPComboboxControl } from "@wordpress/components"
+import cloneDeep from "lodash.clonedeep"
+import get from "lodash.get"
+import set from "lodash.set"
+import type { FC } from "react"
+import React from "react"
+import { useControlContext } from "../context"
+import type { ControlByPath, ControlByValue, ControlType } from "../types"
+import { isPathControl } from "../utils"
 
 /**
  * Options for the NumberComboboxControl component.
@@ -25,7 +24,7 @@ type _NumberComboboxControl = {
  * @returns The rendered NumberComboboxControl component.
  */
 export const NumberComboboxControl = <pT extends object = object>(
-	props: ControlType<number, pT> & _NumberComboboxControl,
+	props: ControlType<number, pT> & _NumberComboboxControl
 ) =>
 	isPathControl(props) ? (
 		<NumberComboboxControlByPath {...props} />

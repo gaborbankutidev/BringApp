@@ -1,4 +1,4 @@
-import type {BP as _BP} from "@bring/blocks-client/types";
+import type { BP as _BP } from "@bring/blocks-client/types"
 
 /**
  * Extend the global entity props type.
@@ -9,8 +9,8 @@ import type {BP as _BP} from "@bring/blocks-client/types";
  * Extend the getEntity function return type with the types of the custom values added in WordPress.
  */
 export type EntityProps = {
-	// sample: string | null;
-};
+	sample: string | null
+}
 
 /**
  * Extend site props type.
@@ -20,8 +20,8 @@ export type EntityProps = {
  * Extend the getSiteProps function return type with the types of the custom values added in WordPress.
  */
 export type SiteProps = {
-	// sample: string | null;
-};
+	sample: string | null
+}
 
 /**
  * List of menus is a default Site prop.
@@ -29,8 +29,8 @@ export type SiteProps = {
  * Extend the Menu type with the types of the custom values added in WordPress.
  */
 export type Menu = {
-	// sample: string;
-};
+	sample: string
+}
 
 /**
  * Menus in SiteProps have an array of MenuItems.
@@ -38,24 +38,17 @@ export type Menu = {
  * Extend the MenuItem type with the types of the custom values added in WordPress.
  */
 export type MenuItem = {
-	// sample: string;
-};
+	sample: string
+}
 
 /**
  * Variables can be sent to the block with the Context type.
  */
 export type Context = {
-	// sample: string;
-};
+	sample: string
+}
 
 /**
  * Initialize BlockProps type by extending with EntityProps, SiteProps, Menu, MenuItem, Context types.
  */
-export type BP<Props> = _BP<
-	Props,
-	EntityProps,
-	SiteProps,
-	Menu,
-	MenuItem,
-	Context
->;
+export type BP<Props> = _BP<Props, EntityProps, SiteProps, Menu, MenuItem, Context>
