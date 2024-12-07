@@ -9,6 +9,7 @@
 	"packageManager": "yarn@4.5.1",
 	"scripts": {
 		"after:install": "node ./scripts/after-install.mjs",
+		"all": "conc yarn:checks yarn:lint yarn:build",
 		"build": "conc yarn:build:next yarn:build:editor",
 		"build:blocks": "cd ./next-app && yarn build:blocks",
 		"build:ci": "conc yarn:build:next:ci yarn:build:editor",
