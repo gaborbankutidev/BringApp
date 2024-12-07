@@ -8,10 +8,7 @@ import type { BP as _BP } from "@bring/blocks-client/types"
  * Entities can be queried by their slug with getEntity function.
  * Extend the getEntity function return type with the types of the custom values added in WordPress.
  */
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export type EntityProps = {
-	// sample: string | null
-}
+export type EntityProps = Record<string, string | null>
 
 /**
  * Extend site props type.
@@ -20,38 +17,26 @@ export type EntityProps = {
  * Custom values can be added in WordPress to SiteProps for example Social links, Opening hours etc.
  * Extend the getSiteProps function return type with the types of the custom values added in WordPress.
  */
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export type SiteProps = {
-	// sample: string | null
-}
+export type SiteProps = Record<string, string | null>
 
 /**
  * List of menus is a default Site prop.
  * Menus can be extended in WordPress with custom values.
  * Extend the Menu type with the types of the custom values added in WordPress.
  */
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export type Menu = {
-	// sample: string
-}
+export type Menu = Record<string, string>
 
 /**
  * Menus in SiteProps have an array of MenuItems.
  * Menu items can be extended in WordPress with custom values.
  * Extend the MenuItem type with the types of the custom values added in WordPress.
  */
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export type MenuItem = {
-	// sample: string
-}
+export type MenuItem = Record<string, string>
 
 /**
  * Variables can be sent to the block with the Context type.
  */
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export type Context = {
-	// sample: string
-}
+export type Context = Record<string, string>
 
 /**
  * Initialize BlockProps type by extending with EntityProps, SiteProps, Menu, MenuItem, Context types.
