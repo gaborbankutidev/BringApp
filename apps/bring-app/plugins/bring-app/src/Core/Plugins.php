@@ -38,7 +38,13 @@ class Plugins {
 			}
 
 			activate_plugin(WP_PLUGIN_DIR . "/" . $plugin);
+<<<<<<< HEAD
 			$activated_plugins[] = $plugin;
+=======
+			if (is_plugin_active($plugin)) {
+				$activated_plugins[] = $plugin;
+			}
+>>>>>>> c0609dc (Add plugins to composer.json, Install plugins with composer, Disable required plugin deactivation)
 		}
 		set_transient("bringapp_activated_plugins", $activated_plugins, 30);
 	}
@@ -51,7 +57,11 @@ class Plugins {
 	public static function notices(): void {
 		$activated_plugins = get_transient("bringapp_activated_plugins");
 
+<<<<<<< HEAD
 		if (!$activated_plugins || !is_array($activated_plugins)) {
+=======
+		if (!$activated_plugins) {
+>>>>>>> c0609dc (Add plugins to composer.json, Install plugins with composer, Disable required plugin deactivation)
 			return;
 		}
 
@@ -102,6 +112,7 @@ class Plugins {
 		}
 		return $actions;
 	}
+<<<<<<< HEAD
 
 	/**
 	 * Remove plugin installation capability from administrators
@@ -116,4 +127,6 @@ class Plugins {
 			$role->remove_cap("update_plugins");
 		}
 	}
+=======
+>>>>>>> c0609dc (Add plugins to composer.json, Install plugins with composer, Disable required plugin deactivation)
 }
