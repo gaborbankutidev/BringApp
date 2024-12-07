@@ -9,18 +9,18 @@
 	/**
 	 * Define colors with HSL values.
 	 *
-	 * Define theme colors by name in :root which can be used by their names like bg-blue. 
+	 * Define theme colors by name in :root which can be used by their names like bg-blue.
 	 * These colors won't change based on the theme.
 	 *
-	 * 
-	 * Then define colors by function of the default theme in :root which will change based on the theme. 
+	 *
+	 * Then define colors by function of the default theme in :root which will change based on the theme.
 	 * For example, text-primary will change based on the theme.
 	 * Then define the same colors by function for each theme.
 	 *
-	 * This approach provides a better building experience. 
+	 * This approach provides a better building experience.
 	 * Add a theme selector to the section block so blocks inside the section will fit to the theme by default.
-	 *	
-	 * Do not forget to add 
+	 *
+	 * Do not forget to add
 	 * - the defined CSS variables to tailwind config
 	 * - the color names to the color list so they can be used in the editor
 	 */
@@ -262,18 +262,22 @@
 	 *
 	 * Define markdown styles for the content to have default margins and paddings.
 	 * Use .md class for these default markdown classes for example for the markdown block.
-	 * 
+	 *
 	 * Probably you need a variation for markdown style for example in the blog content.
 	 * In this case, you can define a new class like .blog-md and/or .blog .md
 	 * These approaches provides a better building experience.
 	 */
+	.md {
+		@apply text-gray-300;
+	}
+
 	.md h1,
 	.md h2,
 	.md h3,
 	.md h4,
 	.md h5,
 	.md h6 {
-		@apply mb-2 mt-6 pb-2;
+		@apply mb-2 mt-6 pb-2 text-white;
 	}
 
 	.md p {
