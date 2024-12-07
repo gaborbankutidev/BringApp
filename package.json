@@ -33,7 +33,7 @@
 		"install:composer:app": "cd apps/bring-app && composer install && composer dump-autoload",
 		"install:composer:pkg": "cd packages/blocks-wp && composer install && composer dump-autoload",
 		"lint": "turbo run lint lint:root",
-		"lint:root": "eslint",
+		"lint:root": "eslint --config ./eslint.config.cjs --ignore-pattern apps/ packages/",
 		"prepare": "husky",
 		"release": "turbo run build lint test && changeset version && changeset publish",
 		"services:down": "docker compose -f ./apps/bring-app/compose.yml down",
