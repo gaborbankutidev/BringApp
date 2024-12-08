@@ -9,6 +9,7 @@ type BaseProps = {
 
 type FormProps = {} & BaseProps & React.FormHTMLAttributes<HTMLFormElement>;
 
+// Define the login form schema
 const loginSchema = z.object({
 	email: z.string().email("Invalid email address"),
 	password: z.string().min(6, "Password must be at least 6 characters"),
@@ -16,6 +17,7 @@ const loginSchema = z.object({
 
 type LoginFormInputs = z.infer<typeof loginSchema>;
 
+// Login form component
 const LoginForm = React.forwardRef<FormProps>((ref) => {
 	const {
 		register,
