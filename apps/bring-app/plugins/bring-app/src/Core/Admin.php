@@ -41,6 +41,7 @@ class Admin {
 			10,
 			2,
 		);
+		add_action("init", Plugins::removePluginInstallationCapability(...));
 	}
 
 	/**

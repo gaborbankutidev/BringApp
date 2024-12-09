@@ -10,12 +10,13 @@ host=$4
 echo "Enable maintenance mode"
 sshpass -p $password ssh -t -t -oStrictHostKeyChecking=no -p $port $user@$host wp maintenance-mode activate
 
-echo "Delete remote plugin & theme folder"
-sshpass -p $password ssh -t -t -oStrictHostKeyChecking=no -p $port $user@$host rm -rf public_html/wp-content/plugins
+echo "Delete remote plugins & theme folder"
+sshpass -p $password ssh -t -t -oStrictHostKeyChecking=no -p $port $user@$host rm -rf public_html/wp-content/plugins/bring-app
 sshpass -p $password ssh -t -t -oStrictHostKeyChecking=no -p $port $user@$host rm -rf public_html/wp-content/themes/bring-app-theme
 
-echo "Upload new plugin & theme folder"
-sshpass -p $password scp -v -oStrictHostKeyChecking=no -P $port -r ./plugins/. $user@$host:public_html/wp-content/plugins
+echo "Upload new plugins & theme folder"
+sshpass -p $password scp -v -oStrictHostKeyChecking=no -P $port -r ./wordpress/wp-content/plugins/. $user@$host:public_html/wp-content/plugins
+sshpass -p $password scp -v -oStrictHostKeyChecking=no -P $port -r ./plugins/bring-app/. $user@$host:public_html/wp-content/plugins/bring-app
 sshpass -p $password scp -v -oStrictHostKeyChecking=no -P $port -r ./themes/bring-app-theme/. $user@$host:public_html/wp-content/themes/bring-app-theme
 
 echo "Flush cache"

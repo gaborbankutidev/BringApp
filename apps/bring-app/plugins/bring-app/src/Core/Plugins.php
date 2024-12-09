@@ -19,7 +19,9 @@ class Plugins {
 	 * @var array<string> $required_plugins
 	 */
 	private static array $required_plugins = [
+		"bring-app/bring-app.php",
 		"advanced-custom-fields/acf.php",
+		"advanced-custom-fields-pro/acf.php",
 		"acf-quickedit-fields/index.php",
 		"jwt-auth/jwt-auth.php",
 	];
@@ -100,5 +102,18 @@ class Plugins {
 			unset($actions["deactivate"]);
 		}
 		return $actions;
+	}
+
+	/**
+	 * Remove plugin installation capability from administrators
+	 * @since    1.0.0
+	 * @return void
+	 */
+	public static function removePluginInstallationCapability() {
+		$role = get_role("administrator");
+		if ($role) {
+			$role->remove_cap("install_plugins");
+			$role->remove_cap("update_plugins");
+		}
 	}
 }
