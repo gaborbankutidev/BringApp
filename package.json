@@ -12,6 +12,7 @@
 		"packages/@bring/create-app",
 		"packages/@bring/config",
 		"apps/bring-app/next-app",
+		"apps/bring-app/plugin",
 		"apps/bring-app",
 		"apps/*"
 	],
@@ -22,6 +23,7 @@
 		"build": "turbo build",
 		"build:app": "turbo build --filter=@bring/bring-app",
 		"build:pkg": "turbo build --filter=@bring/blocks-client --filter=@bring/blocks-editor --filter=@bring/create-app",
+		"changeset": "changeset",
 		"dev": "turbo dev",
 		"dev:app": "turbo dev --filter=@bring/bring-app",
 		"dev:docs": "typedoc --watch --preserveWatchOutput",
@@ -34,6 +36,7 @@
 		"install:composer:pkg": "cd packages/blocks-wp && composer install && composer dump-autoload",
 		"lint": "turbo run lint lint:root",
 		"lint:root": "eslint --config ./eslint.config.cjs --ignore-pattern apps/ packages/",
+		"postChangeset": "tsx apps/bring-app/scripts/post-changeset.ts",
 		"prepare": "husky",
 		"release": "turbo run build lint test --filter=@bring/blocks-client --filter=@bring/blocks-editor --filter=@bring/blocks-wp --filter=@bring/create-app && changeset version && changeset publish",
 		"services:down": "docker compose -f ./apps/bring-app/compose.yml down",

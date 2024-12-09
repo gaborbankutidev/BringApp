@@ -3,6 +3,7 @@
 	"name": "bring-app/plugin",
 	"description": "Bring App Plugin Starter Template",
 	"type": "project",
+	"version": "1.2.0",
 	"authors": [
 		{
 			"name": "Bring Team Ltd.",

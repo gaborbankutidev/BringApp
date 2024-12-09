@@ -4,7 +4,8 @@
 	"license": "GPL-2.0-or-later",
 	"private": true,
 	"workspaces": [
-		"next-app"
+		"next-app",
+		"plugin"
 	],
 	"packageManager": "yarn@4.5.3",
 	"scripts": {
@@ -37,6 +38,7 @@
 		"watch:tailwind": "cd ./next-app && yarn watch:tailwind"
 	},
 	"dependencies": {
+		"@changesets/cli": "2.27.10",
 		"fs-extra": "11.2.0"
 	},
 	"devDependencies": {
