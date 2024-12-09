@@ -4,29 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "179dfcda27891fc3ec2f7042a2efc72d",
+    "content-hash": "d8e6b11eb06c353fd2d4724254d9ee4f",
     "packages": [
-        {
-            "name": "bring-app-plugins/advanced-custom-fields-pro",
-            "version": "5.9.4",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:arminbenard/advanced-custom-fields-pro.git",
-                "reference": "f608bd6ee240db5c1ad9f8c513b4185f60a4f4bd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/arminbenard/advanced-custom-fields-pro/zipball/f608bd6ee240db5c1ad9f8c513b4185f60a4f4bd",
-                "reference": "f608bd6ee240db5c1ad9f8c513b4185f60a4f4bd",
-                "shasum": ""
-            },
-            "type": "wordpress-plugin",
-            "support": {
-                "source": "https://github.com/arminbenard/advanced-custom-fields-pro/tree/5.9.4",
-                "issues": "https://github.com/arminbenard/advanced-custom-fields-pro/issues"
-            },
-            "time": "2024-12-09T10:21:27+00:00"
-        },
         {
             "name": "bring/blocks-wp",
             "version": "dev-add-plugins-to-config",

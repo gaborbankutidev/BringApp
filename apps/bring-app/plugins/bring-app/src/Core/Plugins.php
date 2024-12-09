@@ -21,7 +21,6 @@ class Plugins {
 	private static array $required_plugins = [
 		"bring-app/bring-app.php",
 		"advanced-custom-fields/acf.php",
-		"advanced-custom-fields-pro/acf.php",
 		"acf-quickedit-fields/index.php",
 		"jwt-auth/jwt-auth.php",
 	];
