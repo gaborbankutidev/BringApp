@@ -1,4 +1,4 @@
-import {DashIcon} from "./dashicon.types";
+import { DashIcon } from "./dashicon.types"
 
 type DisplayValue =
 	| "block"
@@ -20,65 +20,65 @@ type DisplayValue =
 	| "grid"
 	| "inline-grid"
 	| "contents"
-	| "list-item";
+	| "list-item"
 
 type ResponsiveDisplayValueConfig = {
-	"": DisplayValue;
-	md: DisplayValue;
-	lg: DisplayValue;
-};
+	"": DisplayValue
+	md: DisplayValue
+	lg: DisplayValue
+}
 
 export type ResponsiveValue<T = number> = {
-	""?: T;
-	md?: T;
-	lg?: T;
-};
+	""?: T
+	md?: T
+	lg?: T
+}
 
 // ===========
 
 export type Sides = {
-	t?: ResponsiveValue;
-	b?: ResponsiveValue;
-	l?: ResponsiveValue;
-	r?: ResponsiveValue;
-};
+	t?: ResponsiveValue
+	b?: ResponsiveValue
+	l?: ResponsiveValue
+	r?: ResponsiveValue
+}
 
 // ===========
 
 export type BlockStylesConfig = {
 	spacing?: {
-		m?: Sides;
-		p?: Sides;
-	};
-	visibility?: ResponsiveDisplayValueConfig;
-};
+		m?: Sides
+		p?: Sides
+	}
+	visibility?: ResponsiveDisplayValueConfig
+}
 
 export type BlockStyles = {
 	spacing?: {
-		m?: Sides;
-		p?: Sides;
-	};
-	visibility?: ResponsiveValue<boolean>;
-};
+		m?: Sides
+		p?: Sides
+	}
+	visibility?: ResponsiveValue<boolean>
+}
 
 export type BlockStylesClassNames = {
 	spacing?: {
-		m?: string;
-		p?: string;
-	};
-	visibility?: string;
-	className?: string;
-};
+		m?: string
+		p?: string
+	}
+	visibility?: string
+	className?: string
+}
 
 // ===========
 
 type ResponsiveLabel = {
-	label: string;
-	icon: DashIcon;
-};
+	label: string
+	icon: DashIcon
+}
 
 export type ResponsiveLabels = {
-	"": ResponsiveLabel;
-	md: ResponsiveLabel;
-	lg: ResponsiveLabel;
-};
+	"": ResponsiveLabel
+	md: ResponsiveLabel
+	lg: ResponsiveLabel
+}

@@ -1,1 +1,1 @@
-export {useDynamicEntityOptions} from "./use-dynamic-entity-options";
+export { useDynamicEntityOptions } from "./use-dynamic-entity-options"

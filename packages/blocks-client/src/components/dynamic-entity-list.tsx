@@ -1,36 +1,36 @@
-import React, {type ReactNode} from "react";
+import React, { type ReactNode } from "react"
 
 import {
 	getDynamicEntityList,
 	type GetDynamicEntityListOptions,
 	type GetDynamicEntityListParams,
-} from "../content";
+} from "../content"
 import type {
 	DynamicEntityList as DynamicEntityListType,
 	DynamicEntityProps as DynamicEntityPropsType,
 	EntityType,
-} from "../types";
-import Debug from "./debug";
+} from "../types"
+import Debug from "./debug"
 
 export type DynamicEntityListRenderProps<T = object, P = object> = {
-	entityList: DynamicEntityListType<T>;
-	params?: GetDynamicEntityListParams<P>;
-	Item?: ({entityProps}: {entityProps: DynamicEntityPropsType<T>}) => ReactNode;
-};
+	entityList: DynamicEntityListType<T>
+	params?: GetDynamicEntityListParams<P>
+	Item?: ({ entityProps }: { entityProps: DynamicEntityPropsType<T> }) => ReactNode
+}
 
 export type DynamicEntityListProps<T, P> = {
-	entitySlug?: string;
-	entityType?: EntityType;
-	options?: GetDynamicEntityListOptions;
-	Render?: (props: DynamicEntityListRenderProps<T, P>) => ReactNode;
-};
+	entitySlug?: string
+	entityType?: EntityType
+	options?: GetDynamicEntityListOptions
+	Render?: (props: DynamicEntityListRenderProps<T, P>) => ReactNode
+}
 
 function makeDynamicEntityList(wpURL: string) {
 	const DynamicEntityList = async <T = {}, P = {}>({
 		entitySlug = "post",
 		entityType = "post",
 		options = {},
-		Render = ({entityList = [], params}) => (
+		Render = ({ entityList = [], params }) => (
 			<div className="p-4">
 				<h2 className="mb-3">List with {params?.count} items.</h2>
 				<div className="grid grid-cols-3 gap-4">
@@ -43,20 +43,20 @@ function makeDynamicEntityList(wpURL: string) {
 			</div>
 		),
 	}: DynamicEntityListProps<T, P>) => {
-		const {entityList, params} = await getDynamicEntityList<T, P>(
+		const { entityList, params } = await getDynamicEntityList<T, P>(
 			wpURL,
 			entitySlug,
 			entityType,
-			options,
-		);
+			options
+		)
 		if (!entityList) {
-			return null;
+			return null
 		}
 
-		return <Render entityList={entityList} params={params} />;
-	};
+		return <Render entityList={entityList} params={params} />
+	}
 
-	return DynamicEntityList;
+	return DynamicEntityList
 }
 
-export default makeDynamicEntityList;
+export default makeDynamicEntityList

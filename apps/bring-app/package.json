@@ -1,37 +1,42 @@
 {
 	"name": "@bring/bring-app",
+	"version": "1.0.0",
 	"license": "GPL-2.0-or-later",
 	"private": true,
 	"workspaces": [
-		"next"
+		"next-app"
 	],
 	"packageManager": "yarn@4.5.1",
 	"scripts": {
 		"after:install": "node ./scripts/after-install.mjs",
+		"all": "conc yarn:checks yarn:lint yarn:build",
 		"build": "conc yarn:build:next yarn:build:editor",
-		"build:blocks": "cd ./next && yarn build:blocks",
+		"build:blocks": "cd ./next-app && yarn build:blocks",
 		"build:ci": "conc yarn:build:next:ci yarn:build:editor",
 		"build:editor": "conc yarn:build:blocks yarn:build:tailwind",
-		"build:next": "cd ./next && yarn build:next",
-		"build:next:ci": "cd ./next && yarn build:next:ci",
-		"build:tailwind": "cd ./next && yarn build:tailwind",
+		"build:next": "cd ./next-app && yarn build:next",
+		"build:next:ci": "cd ./next-app && yarn build:next:ci",
+		"build:tailwind": "cd ./next-app && yarn build:tailwind",
 		"checks": "conc yarn:format:check yarn:checks:next",
-		"checks:next": "cd ./next && yarn checks",
+		"checks:next": "cd ./next-app && yarn checks",
 		"dev": "conc yarn:watch:next yarn:watch:tailwind yarn:watch:blocks",
 		"format": "prettier --write .",
 		"format:check": "prettier --check .",
+		"lint": "conc yarn:lint:app yarn:lint:plugin",
+		"lint:app": "cd next-app && yarn lint",
+		"lint:plugin": "composer lint",
 		"prepare": "husky",
 		"services:down": "docker compose down",
 		"services:up": "docker compose up",
-		"storybook": "cd ./next && yarn watch:storybook",
+		"storybook": "cd ./next-app && yarn watch:storybook",
 		"upgrade": "tsx scripts/upgrade.ts",
 		"upgrade:bring": "tsx scripts/upgrade.ts bring",
-		"watch:blocks": "cd ./next && yarn watch:blocks",
-		"watch:next": "cd ./next && yarn watch:next",
-		"watch:tailwind": "cd ./next && yarn watch:tailwind"
+		"watch:blocks": "cd ./next-app && yarn watch:blocks",
+		"watch:next": "cd ./next-app && yarn watch:next",
+		"watch:tailwind": "cd ./next-app && yarn watch:tailwind"
 	},
 	"dependencies": {
-		"fs-extra": "^11.2.0"
+		"fs-extra": "11.2.0"
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.13.0",
@@ -39,25 +44,31 @@
 		"@prettier/plugin-php": "^0.22.2",
 		"@types/eslint": "^9.6.1",
 		"@types/fs-extra": "^11.0.4",
-		"concurrently": "^8.2.2",
-		"eslint": "^9.13.0",
+		"concurrently": "9.1.0",
+		"eslint": "^9.14.0",
 		"eslint-plugin-react": "^7.37.2",
-		"globals": "^15.11.0",
+		"globals": "^15.12.0",
 		"husky": "^9.1.6",
 		"lint-staged": "^15.2.10",
 		"prettier": "^3.3.3",
 		"prettier-plugin-organize-imports": "^4.1.0",
 		"prettier-plugin-pkg": "^0.18.1",
-		"prettier-plugin-tailwindcss": "0.5.14",
+		"prettier-plugin-tailwindcss": "0.6.9",
 		"tsx": "^4.19.2",
-		"typescript-eslint": "^8.12.2"
+		"typescript-eslint": "^8.13.0"
 	},
 	"lint-staged": {
 		"*.{ts,tsx,js,jsx,json,css,md,yml,yaml,php}": [
-			"prettier --write"
+			"yarn format"
 		],
-		"*.{js,mjs,cjs,ts,jsx,tsx}": [
-			"eslint --fix"
+		"**/next-app/**/.{js,mjs,cjs,ts,jsx,tsx}": [
+			"yarn eslint --config ./next-app/.eslintrc.cjs --fix"
+		],
+		"**(!next-app)/**.{js,mjs,cjs,ts,jsx,tsx}": [
+			"yarn eslint --config ./eslint.config.cjs"
+		],
+		"*.php": [
+			"yarn lint:plugin"
 		]
 	}
 }

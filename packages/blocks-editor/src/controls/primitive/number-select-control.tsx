@@ -1,21 +1,21 @@
-import {SelectControl as WPSelectControl} from "@wordpress/components";
-import cloneDeep from "lodash.clonedeep";
-import get from "lodash.get";
-import set from "lodash.set";
-import React, {FC} from "react";
-import {useControlContext} from "../context";
-import type {ControlByPath, ControlByValue, ControlType} from "../types";
-import {isPathControl} from "../utils";
+import { SelectControl as WPSelectControl } from "@wordpress/components"
+import cloneDeep from "lodash.clonedeep"
+import get from "lodash.get"
+import set from "lodash.set"
+import React, { FC } from "react"
+import { useControlContext } from "../context"
+import type { ControlByPath, ControlByValue, ControlType } from "../types"
+import { isPathControl } from "../utils"
 
 /**
  * Represents the options for the NumberSelectControl component.
  */
 type _NumberSelectControl = {
 	options: {
-		label: string;
-		value: number;
-	}[];
-};
+		label: string
+		value: number
+	}[]
+}
 
 /**
  * A control component for selecting a number value.
@@ -23,13 +23,13 @@ type _NumberSelectControl = {
  * @returns The rendered NumberSelectControl component.
  */
 export const NumberSelectControl = <pT extends object = object>(
-	props: ControlType<number, pT> & _NumberSelectControl,
+	props: ControlType<number, pT> & _NumberSelectControl
 ) =>
 	isPathControl(props) ? (
 		<NumberSelectControlByPath {...props} />
 	) : (
 		<NumberSelectControlByValue {...props} />
-	);
+	)
 
 /**
  * A control component for selecting a number value by path.
@@ -41,21 +41,21 @@ function NumberSelectControlByPath<pT extends object>({
 	updateHandling,
 	...props
 }: ControlByPath<pT, number> & _NumberSelectControl) {
-	const {attributes, setAttributes} = useControlContext();
-	const value = get(attributes, path);
+	const { attributes, setAttributes } = useControlContext()
+	const value = get(attributes, path)
 
 	return (
 		<NumberSelectControlByValue
 			updateHandling="by-value"
 			value={value}
 			setValue={(newValue) => {
-				const newAttributes = cloneDeep(attributes);
-				set(newAttributes, path, newValue);
-				setAttributes(newAttributes);
+				const newAttributes = cloneDeep(attributes)
+				set(newAttributes, path, newValue)
+				setAttributes(newAttributes)
 			}}
 			{...props}
 		/>
-	);
+	)
 }
 
 /**
@@ -75,12 +75,12 @@ const NumberSelectControlByValue: FC<ControlByValue<number> & _NumberSelectContr
 		<WPSelectControl
 			label={`${label} ${value === undefined ? " - Default" : ""}`}
 			onChange={(newValue) => {
-				const parsedNewValue = parseInt(newValue);
+				const parsedNewValue = parseInt(newValue)
 				if (isNaN(parsedNewValue)) {
-					alert("Value can not be set because it's a NaN");
-					return;
+					alert("Value can not be set because it's a NaN")
+					return
 				}
-				setValue(parsedNewValue);
+				setValue(parsedNewValue)
 			}}
 			value={value ? value.toString() : ""}
 			help={
@@ -88,13 +88,13 @@ const NumberSelectControlByValue: FC<ControlByValue<number> & _NumberSelectContr
 				value !== undefined && (
 					<button
 						onClick={() => {
-							setValue(undefined);
+							setValue(undefined)
 						}}
 					>
 						Set to default
 					</button>
 				)
 			}
-			options={options.map((opt) => ({...opt, value: opt.value.toString()}))}
+			options={options.map((opt) => ({ ...opt, value: opt.value.toString() }))}
 		/>
-	) : null;
+	) : null

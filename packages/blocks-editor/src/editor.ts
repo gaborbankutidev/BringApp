@@ -1,12 +1,12 @@
-import {dispatch, select, subscribe} from "@wordpress/data";
-import {BlockConfig, registerBringBlock} from "./blocks";
-import {postContentConfig} from "./components/post-content";
-import {BringNode, WpBlock} from "./types";
+import { dispatch, select, subscribe } from "@wordpress/data"
+import { BlockConfig, registerBringBlock } from "./blocks"
+import { postContentConfig } from "./components/post-content"
+import { BringNode, WpBlock } from "./types"
 
 declare global {
 	// Interface is needed to augment global `Window`
 	interface Window {
-		jwt: {token: string}; // FIXME move this to a cookie
+		jwt: { token: string } // FIXME move this to a cookie
 	}
 }
 
@@ -33,12 +33,12 @@ declare global {
  *
  */
 export class Editor {
-	private static instance: Editor;
+	private static instance: Editor
 
-	private wpBaseURL: string;
-	private jwtToken: string;
-	private isSaving: boolean;
-	private blockList: BlockConfig<any>[]; // eslint-disable-line @typescript-eslint/no-explicit-any
+	private wpBaseURL: string
+	private jwtToken: string
+	private isSaving: boolean
+	private blockList: BlockConfig<any>[] // eslint-disable-line @typescript-eslint/no-explicit-any
 
 	/**
 	 * Private constructor to initialize the Editor class.
@@ -48,14 +48,14 @@ export class Editor {
 	 */
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	private constructor(wpBaseURL: string, blockList: BlockConfig<any>[]) {
-		this.wpBaseURL = wpBaseURL;
-		this.jwtToken = window.jwt.token; // FIXME move this to a cookie
-		this.isSaving = false;
-		this.blockList = blockList;
+		this.wpBaseURL = wpBaseURL
+		this.jwtToken = window.jwt.token // FIXME move this to a cookie
+		this.isSaving = false
+		this.blockList = blockList
 
-		this.disableReusableBlocks();
-		this.registerBlocks();
-		this.subscribeToSaveEvent();
+		this.disableReusableBlocks()
+		this.registerBlocks()
+		this.subscribeToSaveEvent()
 	}
 
 	/**
@@ -69,16 +69,16 @@ export class Editor {
 	 */
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public static init(wpBaseURL: string, blockList: BlockConfig<any>[]) {
-		console.log("🚀 Launching Bring Editor...");
+		console.log("🚀 Launching Bring Editor...")
 		if (!Editor.instance) {
-			Editor.instance = new Editor(wpBaseURL, blockList);
+			Editor.instance = new Editor(wpBaseURL, blockList)
 		} else {
-			Editor.instance.blockList = blockList;
-			Editor.instance.jwtToken = window.jwt.token;
-			Editor.instance.wpBaseURL = wpBaseURL;
+			Editor.instance.blockList = blockList
+			Editor.instance.jwtToken = window.jwt.token
+			Editor.instance.wpBaseURL = wpBaseURL
 		}
-		console.log("🚀 Bring Editor Launched! Happy editing!");
-		return this.instance;
+		console.log("🚀 Bring Editor Launched! Happy editing!")
+		return this.instance
 	}
 
 	/**
@@ -89,11 +89,11 @@ export class Editor {
 		dispatch("core/block-editor").updateSettings({
 			// @ts-expect-error - this does in fact exist
 			__experimentalReusableBlocks: [],
-		});
+		})
 
 		subscribe(() => {
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			const settings = select("core/block-editor").getSettings() as any;
+			const settings = select("core/block-editor").getSettings() as any
 			if (
 				settings.__experimentalReusableBlocks &&
 				settings.__experimentalReusableBlocks.length > 0
@@ -101,9 +101,9 @@ export class Editor {
 				dispatch("core/block-editor").updateSettings({
 					// @ts-expect-error - this does in fact exist
 					__experimentalReusableBlocks: [],
-				});
+				})
 			}
-		});
+		})
 	}
 
 	/**
@@ -114,19 +114,19 @@ export class Editor {
 	private subscribeToSaveEvent() {
 		subscribe(() => {
 			try {
-				const isSavingPost = select("core/editor")?.isSavingPost() ?? false;
-				const isAutosavingPost = select("core/editor")?.isAutosavingPost() ?? false;
+				const isSavingPost = select("core/editor")?.isSavingPost() ?? false
+				const isAutosavingPost = select("core/editor")?.isAutosavingPost() ?? false
 
 				if (this.isSaving && !isSavingPost && !isAutosavingPost) {
-					this.update();
-					this.isSaving = false;
+					this.update()
+					this.isSaving = false
 				} else if (isSavingPost && !isAutosavingPost) {
-					this.isSaving = true;
+					this.isSaving = true
 				}
 			} catch (e) {
-				console.error(e);
+				console.error(e)
 			}
-		});
+		})
 	}
 
 	/**
@@ -135,8 +135,8 @@ export class Editor {
 	 * @returns void
 	 */
 	private update() {
-		const contentObject = this.parseBlocks(select("core/block-editor").getBlocks());
-		const entityId = select("core/editor").getCurrentPostId();
+		const contentObject = this.parseBlocks(select("core/block-editor").getBlocks())
+		const entityId = select("core/editor").getCurrentPostId()
 
 		fetch(`${this.wpBaseURL}/wp-json/bring/editor/save`, {
 			method: "POST",
@@ -151,14 +151,14 @@ export class Editor {
 		})
 			.then((res) => {
 				if (res.status !== 200) {
-					console.error("🚀 There was an issue while saving!", res);
+					console.error("🚀 There was an issue while saving!", res)
 				} else {
-					console.log("🚀 Content saved successfully!");
+					console.log("🚀 Content saved successfully!")
 				}
 			})
 			.catch((err) => {
-				console.error("🚀 There was an issue while saving!", err);
-			});
+				console.error("🚀 There was an issue while saving!", err)
+			})
 	}
 
 	/**
@@ -167,14 +167,12 @@ export class Editor {
 	 * @returns the parsed blocks
 	 */
 	private parseBlocks(blocks: WpBlock[]) {
-		const nodes: BringNode[] = [];
+		const nodes: BringNode[] = []
 		for (const block of blocks) {
-			const blockConfig = this.blockList.find((b) => b.blockName === block.name);
+			const blockConfig = this.blockList.find((b) => b.blockName === block.name)
 			if (!blockConfig) {
-				console.error(
-					`🚀 Block '${block.name}' not found in the block list and will not be saved!`,
-				);
-				continue;
+				console.error(`🚀 Block '${block.name}' not found in the block list and will not be saved!`)
+				continue
 			}
 
 			const node: BringNode = {
@@ -182,14 +180,14 @@ export class Editor {
 				blockName: block.name,
 				attributes: block.attributes,
 				children: [],
-			};
+			}
 
 			if (block.innerBlocks.length) {
-				node.children = this.parseBlocks(block.innerBlocks);
+				node.children = this.parseBlocks(block.innerBlocks)
 			}
-			nodes.push(node);
+			nodes.push(node)
 		}
-		return nodes;
+		return nodes
 	}
 
 	/**
@@ -197,9 +195,9 @@ export class Editor {
 	 * @returns void
 	 */
 	private registerBlocks() {
-		this.blockList.push(postContentConfig);
+		this.blockList.push(postContentConfig)
 		this.blockList.map((blockConfig) => {
-			registerBringBlock(blockConfig);
-		});
+			registerBringBlock(blockConfig)
+		})
 	}
 }

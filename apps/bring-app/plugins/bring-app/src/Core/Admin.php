@@ -69,12 +69,7 @@ class Admin {
 
 		$customize_url = add_query_arg(
 			"return",
-			urlencode(
-				remove_query_arg(
-					wp_removable_query_args(),
-					wp_unslash($_SERVER["REQUEST_URI"]),
-				),
-			),
+			urlencode(remove_query_arg(wp_removable_query_args(), wp_unslash($_SERVER["REQUEST_URI"]))),
 			"customize.php",
 		);
 		remove_submenu_page("themes.php", $customize_url);

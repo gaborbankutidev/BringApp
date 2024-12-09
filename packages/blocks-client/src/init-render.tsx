@@ -1,11 +1,11 @@
-import type {ReactNode} from "react";
-import makeFooter from "./components/footer";
-import makeHeader from "./components/header";
-import makeLayout from "./components/layout";
-import makeMain from "./components/main";
+import type { ReactNode } from "react"
+import makeFooter from "./components/footer"
+import makeHeader from "./components/header"
+import makeLayout from "./components/layout"
+import makeMain from "./components/main"
 
-import {createBringElement, getEntity} from "./content";
-import type {BlockList, BringNode, EntityProps, SiteProps} from "./types";
+import { createBringElement, getEntity } from "./content"
+import type { BlockList, BringNode, EntityProps, SiteProps } from "./types"
 
 /**
  * Initializes the rendering of BringBlocks components.
@@ -31,7 +31,7 @@ export function initRender<
 	wpURL: string = "",
 	onRedirect: (redirectTo: string, responseCode: number) => void,
 	onNotFound: () => void,
-	blockList: BlockList<EP, SP, M, MI, CTX>,
+	blockList: BlockList<EP, SP, M, MI, CTX>
 ) {
 	return {
 		/**
@@ -49,7 +49,7 @@ export function initRender<
 			entityProps: EntityProps<EP>,
 			siteProps: SiteProps<SP, M, MI>,
 			context: CTX = {} as CTX,
-			PostContent: ReactNode = null,
+			PostContent: ReactNode = null
 		) =>
 			createBringElement<EP, SP, M, MI, CTX>(
 				nodes,
@@ -57,7 +57,7 @@ export function initRender<
 				entityProps,
 				siteProps,
 				context,
-				PostContent,
+				PostContent
 			),
 
 		/**
@@ -66,8 +66,7 @@ export function initRender<
 		 * @param slug - The entity slug.
 		 * @returns The entity data.
 		 */
-		getEntity: (slug: string | string[] = "") =>
-			getEntity<EP>(wpURL, onRedirect, onNotFound, slug),
+		getEntity: (slug: string | string[] = "") => getEntity<EP>(wpURL, onRedirect, onNotFound, slug),
 
 		/**
 		 * The Header component.
@@ -96,5 +95,5 @@ export function initRender<
 		 * @returns The rendered Layout component.
 		 */
 		Layout: makeLayout<EP, SP, M, MI, CTX>(wpURL, onRedirect, onNotFound, blockList),
-	};
+	}
 }

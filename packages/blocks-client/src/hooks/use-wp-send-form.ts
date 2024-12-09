@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import {UseSendFormOptions, useSendForm} from "./use-send-form";
+import { UseSendFormOptions, useSendForm } from "./use-send-form"
 
 /**
  * Custom hook for sending form data to a WordPress endpoint.
@@ -13,27 +13,27 @@ import {UseSendFormOptions, useSendForm} from "./use-send-form";
  * @template FormDataPayloadT - The type of the form data payload.
  */
 export const makeUseWPSendForm = (wpURL?: string) => {
-	const defaultFormUrl = `${wpURL ?? ""}/wp-json/bring/form/submit`;
+	const defaultFormUrl = `${wpURL ?? ""}/wp-json/bring/form/submit`
 
 	return <SuccessT, ErrorT, FormDataPayloadT>(
 		formName: string,
-		options?: {formUrl?: string} & UseSendFormOptions<
+		options?: { formUrl?: string } & UseSendFormOptions<
 			SuccessT,
 			ErrorT,
-			{formName: string; formData: FormDataPayloadT}
-		>,
+			{ formName: string; formData: FormDataPayloadT }
+		>
 	) => {
-		const {formUrl = defaultFormUrl, ...sendFormOptions} = options || {};
+		const { formUrl = defaultFormUrl, ...sendFormOptions } = options || {}
 
-		const {sendAsync, ...rest} = useSendForm<
+		const { sendAsync, ...rest } = useSendForm<
 			SuccessT,
 			ErrorT,
-			{formName: string; formData: FormDataPayloadT}
-		>(formUrl, sendFormOptions);
+			{ formName: string; formData: FormDataPayloadT }
+		>(formUrl, sendFormOptions)
 
 		return {
-			send: (formData: FormDataPayloadT) => sendAsync({formName, formData}),
+			send: (formData: FormDataPayloadT) => sendAsync({ formName, formData }),
 			...rest,
-		};
-	};
-};
+		}
+	}
+}

@@ -1,3 +1,2 @@
-npx lint-staged
-cd ./next && yarn types
-
+npx lint-staged --concurrent false
+cd ./next-app && yarn types

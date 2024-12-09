@@ -1,5 +1,5 @@
-import type {FC, ReactNode} from "react";
-import React from "react";
+import type { FC, ReactNode } from "react"
+import React from "react"
 
 const editorColors = {
 	blue: "#38bdf8",
@@ -8,18 +8,18 @@ const editorColors = {
 	orange: "#fb923c",
 	amber: "#fbbf24",
 	grey: "#9ca3af",
-} as const;
+} as const
 
-type EditorColorType = keyof typeof editorColors;
+type EditorColorType = keyof typeof editorColors
 
 type EditorCardType = {
-	children: ReactNode | ReactNode[];
-	color?: EditorColorType;
-	name: string;
-	isSelected?: boolean;
-};
+	children: ReactNode | ReactNode[]
+	color?: EditorColorType
+	name: string
+	isSelected?: boolean
+}
 
-export const EditorCard: FC<EditorCardType> = ({color = "grey", name, children, isSelected}) => {
+export const EditorCard: FC<EditorCardType> = ({ color = "grey", name, children, isSelected }) => {
 	return (
 		<div
 			style={{
@@ -48,5 +48,5 @@ export const EditorCard: FC<EditorCardType> = ({color = "grey", name, children, 
 			</div>
 			<div>{children}</div>
 		</div>
-	);
-};
+	)
+}

@@ -1,1 +1,1 @@
-export * from "./post-content.wp";
+export * from "./post-content.wp"

@@ -8,11 +8,11 @@
 	"packages": [
 		{
 			"name": "bring/blocks-wp",
-			"version": "dev-main",
+			"version": "dev-add-eslint",
 			"dist": {
 				"type": "path",
 				"url": "../../packages/blocks-wp",
-				"reference": "a47206332b025e83e85e063ef8401ba4a7a2587e"
+				"reference": "daca24271e53208abb58558429fb5e89ed0dfe9d"
 			},
 			"require": {
 				"firebase/php-jwt": "^6.5"
@@ -30,13 +30,9 @@
 				}
 			},
 			"scripts": {
-				"lint": [
-					"vendor/bin/phpstan analyse"
-				]
+				"lint": ["vendor/bin/phpstan analyse --memory-limit=1G"]
 			},
-			"license": [
-				"GPL-2.0-or-later"
-			],
+			"license": ["GPL-2.0-or-later"],
 			"authors": [
 				{
 					"name": "Bring Team Ltd.",
@@ -51,16 +47,16 @@
 		},
 		{
 			"name": "firebase/php-jwt",
-			"version": "v6.10.1",
+			"version": "v6.10.2",
 			"source": {
 				"type": "git",
 				"url": "https://github.com/firebase/php-jwt.git",
-				"reference": "500501c2ce893c824c801da135d02661199f60c5"
+				"reference": "30c19ed0f3264cb660ea496895cfb6ef7ee3653b"
 			},
 			"dist": {
 				"type": "zip",
-				"url": "https://api.github.com/repos/firebase/php-jwt/zipball/500501c2ce893c824c801da135d02661199f60c5",
-				"reference": "500501c2ce893c824c801da135d02661199f60c5",
+				"url": "https://api.github.com/repos/firebase/php-jwt/zipball/30c19ed0f3264cb660ea496895cfb6ef7ee3653b",
+				"reference": "30c19ed0f3264cb660ea496895cfb6ef7ee3653b",
 				"shasum": ""
 			},
 			"require": {
@@ -85,9 +81,7 @@
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": [
-				"BSD-3-Clause"
-			],
+			"license": ["BSD-3-Clause"],
 			"authors": [
 				{
 					"name": "Neuman Vong",
@@ -102,15 +96,12 @@
 			],
 			"description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
 			"homepage": "https://github.com/firebase/php-jwt",
-			"keywords": [
-				"jwt",
-				"php"
-			],
+			"keywords": ["jwt", "php"],
 			"support": {
 				"issues": "https://github.com/firebase/php-jwt/issues",
-				"source": "https://github.com/firebase/php-jwt/tree/v6.10.1"
+				"source": "https://github.com/firebase/php-jwt/tree/v6.10.2"
 			},
-			"time": "2024-05-18T18:05:11+00:00"
+			"time": "2024-11-24T11:22:49+00:00"
 		},
 		{
 			"name": "graham-campbell/result-type",
@@ -140,9 +131,7 @@
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": [
-				"MIT"
-			],
+			"license": ["MIT"],
 			"authors": [
 				{
 					"name": "Graham Campbell",
@@ -151,13 +140,7 @@
 				}
 			],
 			"description": "An Implementation Of The Result Type",
-			"keywords": [
-				"Graham Campbell",
-				"GrahamCampbell",
-				"Result Type",
-				"Result-Type",
-				"result"
-			],
+			"keywords": ["Graham Campbell", "GrahamCampbell", "Result Type", "Result-Type", "result"],
 			"support": {
 				"issues": "https://github.com/GrahamCampbell/Result-Type/issues",
 				"source": "https://github.com/GrahamCampbell/Result-Type/tree/v1.1.3"
@@ -211,9 +194,7 @@
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": [
-				"Apache-2.0"
-			],
+			"license": ["Apache-2.0"],
 			"authors": [
 				{
 					"name": "Johannes M. Schmitt",
@@ -227,12 +208,7 @@
 				}
 			],
 			"description": "Option Type for PHP",
-			"keywords": [
-				"language",
-				"option",
-				"php",
-				"type"
-			],
+			"keywords": ["language", "option", "php", "type"],
 			"support": {
 				"issues": "https://github.com/schmittjoh/php-option/issues",
 				"source": "https://github.com/schmittjoh/php-option/tree/1.9.3"
@@ -280,17 +256,13 @@
 				}
 			},
 			"autoload": {
-				"files": [
-					"bootstrap.php"
-				],
+				"files": ["bootstrap.php"],
 				"psr-4": {
 					"Symfony\\Polyfill\\Ctype\\": ""
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": [
-				"MIT"
-			],
+			"license": ["MIT"],
 			"authors": [
 				{
 					"name": "Gert de Pagter",
@@ -303,12 +275,7 @@
 			],
 			"description": "Symfony polyfill for ctype functions",
 			"homepage": "https://symfony.com",
-			"keywords": [
-				"compatibility",
-				"ctype",
-				"polyfill",
-				"portable"
-			],
+			"keywords": ["compatibility", "ctype", "polyfill", "portable"],
 			"support": {
 				"source": "https://github.com/symfony/polyfill-ctype/tree/v1.31.0"
 			},
@@ -359,17 +326,13 @@
 				}
 			},
 			"autoload": {
-				"files": [
-					"bootstrap.php"
-				],
+				"files": ["bootstrap.php"],
 				"psr-4": {
 					"Symfony\\Polyfill\\Mbstring\\": ""
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": [
-				"MIT"
-			],
+			"license": ["MIT"],
 			"authors": [
 				{
 					"name": "Nicolas Grekas",
@@ -382,13 +345,7 @@
 			],
 			"description": "Symfony polyfill for the Mbstring extension",
 			"homepage": "https://symfony.com",
-			"keywords": [
-				"compatibility",
-				"mbstring",
-				"polyfill",
-				"portable",
-				"shim"
-			],
+			"keywords": ["compatibility", "mbstring", "polyfill", "portable", "shim"],
 			"support": {
 				"source": "https://github.com/symfony/polyfill-mbstring/tree/v1.31.0"
 			},
@@ -433,20 +390,14 @@
 				}
 			},
 			"autoload": {
-				"files": [
-					"bootstrap.php"
-				],
+				"files": ["bootstrap.php"],
 				"psr-4": {
 					"Symfony\\Polyfill\\Php80\\": ""
 				},
-				"classmap": [
-					"Resources/stubs"
-				]
+				"classmap": ["Resources/stubs"]
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": [
-				"MIT"
-			],
+			"license": ["MIT"],
 			"authors": [
 				{
 					"name": "Ion Bazan",
@@ -463,12 +414,7 @@
 			],
 			"description": "Symfony polyfill backporting some PHP 8.0+ features to lower PHP versions",
 			"homepage": "https://symfony.com",
-			"keywords": [
-				"compatibility",
-				"polyfill",
-				"portable",
-				"shim"
-			],
+			"keywords": ["compatibility", "polyfill", "portable", "shim"],
 			"support": {
 				"source": "https://github.com/symfony/polyfill-php80/tree/v1.31.0"
 			},
@@ -535,9 +481,7 @@
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": [
-				"BSD-3-Clause"
-			],
+			"license": ["BSD-3-Clause"],
 			"authors": [
 				{
 					"name": "Graham Campbell",
@@ -551,11 +495,7 @@
 				}
 			],
 			"description": "Loads environment variables from `.env` to `getenv()`, `$_ENV` and `$_SERVER` automagically.",
-			"keywords": [
-				"dotenv",
-				"env",
-				"environment"
-			],
+			"keywords": ["dotenv", "env", "environment"],
 			"support": {
 				"issues": "https://github.com/vlucas/phpdotenv/issues",
 				"source": "https://github.com/vlucas/phpdotenv/tree/v5.6.1"
@@ -576,16 +516,16 @@
 	"packages-dev": [
 		{
 			"name": "php-stubs/acf-pro-stubs",
-			"version": "v6.2.7",
+			"version": "v6.3.10",
 			"source": {
 				"type": "git",
 				"url": "https://github.com/php-stubs/acf-pro-stubs.git",
-				"reference": "ec36332a1211f8c0231ae8221994f38033232fa0"
+				"reference": "49a1766f214c8a8484b0b3c2de2a8188ce4fc354"
 			},
 			"dist": {
 				"type": "zip",
-				"url": "https://api.github.com/repos/php-stubs/acf-pro-stubs/zipball/ec36332a1211f8c0231ae8221994f38033232fa0",
-				"reference": "ec36332a1211f8c0231ae8221994f38033232fa0",
+				"url": "https://api.github.com/repos/php-stubs/acf-pro-stubs/zipball/49a1766f214c8a8484b0b3c2de2a8188ce4fc354",
+				"reference": "49a1766f214c8a8484b0b3c2de2a8188ce4fc354",
 				"shasum": ""
 			},
 			"require": {
@@ -601,36 +541,34 @@
 				"szepeviktor/phpstan-wordpress": "WordPress extensions for PHPStan"
 			},
 			"type": "library",
+			"extra": {
+				"installer-paths": {
+					"source/{$name}/": ["type:wordpress-plugin"]
+				}
+			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": [
-				"GPL-2.0-or-later"
-			],
+			"license": ["MIT"],
 			"description": "Advanced Custom Fields PRO stubs for static analysis.",
 			"homepage": "https://github.com/php-stubs/acf-pro-stubs",
-			"keywords": [
-				"PHPStan",
-				"acf",
-				"static analysis",
-				"wordpress"
-			],
+			"keywords": ["PHPStan", "acf", "static analysis", "wordpress"],
 			"support": {
 				"issues": "https://github.com/php-stubs/acf-pro-stubs/issues",
-				"source": "https://github.com/php-stubs/acf-pro-stubs/tree/v6.2.7"
+				"source": "https://github.com/php-stubs/acf-pro-stubs/tree/v6.3.10"
 			},
-			"time": "2024-03-11T09:22:20+00:00"
+			"time": "2024-11-06T12:26:27+00:00"
 		},
 		{
 			"name": "php-stubs/wordpress-stubs",
-			"version": "v6.6.2",
+			"version": "v6.7.1",
 			"source": {
 				"type": "git",
 				"url": "https://github.com/php-stubs/wordpress-stubs.git",
-				"reference": "f50fd7ed45894d036e4fef9ab7e5bbbaff6a30cc"
+				"reference": "83448e918bf06d1ed3d67ceb6a985fc266a02fd1"
 			},
 			"dist": {
 				"type": "zip",
-				"url": "https://api.github.com/repos/php-stubs/wordpress-stubs/zipball/f50fd7ed45894d036e4fef9ab7e5bbbaff6a30cc",
-				"reference": "f50fd7ed45894d036e4fef9ab7e5bbbaff6a30cc",
+				"url": "https://api.github.com/repos/php-stubs/wordpress-stubs/zipball/83448e918bf06d1ed3d67ceb6a985fc266a02fd1",
+				"reference": "83448e918bf06d1ed3d67ceb6a985fc266a02fd1",
 				"shasum": ""
 			},
 			"require-dev": {
@@ -639,9 +577,9 @@
 				"php": "^7.4 || ^8.0",
 				"php-stubs/generator": "^0.8.3",
 				"phpdocumentor/reflection-docblock": "^5.4.1",
-				"phpstan/phpstan": "^1.10.49",
+				"phpstan/phpstan": "^1.11",
 				"phpunit/phpunit": "^9.5",
-				"szepeviktor/phpcs-psr-12-neutron-hybrid-ruleset": "^1.0",
+				"szepeviktor/phpcs-psr-12-neutron-hybrid-ruleset": "^1.1.1",
 				"wp-coding-standards/wpcs": "3.1.0 as 2.3.0"
 			},
 			"suggest": {
@@ -651,34 +589,28 @@
 			},
 			"type": "library",
 			"notification-url": "https://packagist.org/downloads/",
-			"license": [
-				"MIT"
-			],
+			"license": ["MIT"],
 			"description": "WordPress function and class declaration stubs for static analysis.",
 			"homepage": "https://github.com/php-stubs/wordpress-stubs",
-			"keywords": [
-				"PHPStan",
-				"static analysis",
-				"wordpress"
-			],
+			"keywords": ["PHPStan", "static analysis", "wordpress"],
 			"support": {
 				"issues": "https://github.com/php-stubs/wordpress-stubs/issues",
-				"source": "https://github.com/php-stubs/wordpress-stubs/tree/v6.6.2"
+				"source": "https://github.com/php-stubs/wordpress-stubs/tree/v6.7.1"
 			},
-			"time": "2024-09-30T07:10:48+00:00"
+			"time": "2024-11-24T03:57:09+00:00"
 		},
 		{
 			"name": "phpstan/phpstan",
-			"version": "1.12.7",
+			"version": "1.12.12",
 			"source": {
 				"type": "git",
 				"url": "https://github.com/phpstan/phpstan.git",
-				"reference": "dc2b9976bd8b0f84ec9b0e50cc35378551de7af0"
+				"reference": "b5ae1b88f471d3fd4ba1aa0046234b5ca3776dd0"
 			},
 			"dist": {
 				"type": "zip",
-				"url": "https://api.github.com/repos/phpstan/phpstan/zipball/dc2b9976bd8b0f84ec9b0e50cc35378551de7af0",
-				"reference": "dc2b9976bd8b0f84ec9b0e50cc35378551de7af0",
+				"url": "https://api.github.com/repos/phpstan/phpstan/zipball/b5ae1b88f471d3fd4ba1aa0046234b5ca3776dd0",
+				"reference": "b5ae1b88f471d3fd4ba1aa0046234b5ca3776dd0",
 				"shasum": ""
 			},
 			"require": {
@@ -687,25 +619,15 @@
 			"conflict": {
 				"phpstan/phpstan-shim": "*"
 			},
-			"bin": [
-				"phpstan",
-				"phpstan.phar"
-			],
+			"bin": ["phpstan", "phpstan.phar"],
 			"type": "library",
 			"autoload": {
-				"files": [
-					"bootstrap.php"
-				]
+				"files": ["bootstrap.php"]
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": [
-				"MIT"
-			],
+			"license": ["MIT"],
 			"description": "PHPStan - PHP Static Analysis Tool",
-			"keywords": [
-				"dev",
-				"static analysis"
-			],
+			"keywords": ["dev", "static analysis"],
 			"support": {
 				"docs": "https://phpstan.org/user-guide/getting-started",
 				"forum": "https://github.com/phpstan/phpstan/discussions",
@@ -723,7 +645,7 @@
 					"type": "github"
 				}
 			],
-			"time": "2024-10-18T11:12:07+00:00"
+			"time": "2024-11-28T22:13:23+00:00"
 		},
 		{
 			"name": "symfony/polyfill-php73",
@@ -750,20 +672,14 @@
 				}
 			},
 			"autoload": {
-				"files": [
-					"bootstrap.php"
-				],
+				"files": ["bootstrap.php"],
 				"psr-4": {
 					"Symfony\\Polyfill\\Php73\\": ""
 				},
-				"classmap": [
-					"Resources/stubs"
-				]
+				"classmap": ["Resources/stubs"]
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": [
-				"MIT"
-			],
+			"license": ["MIT"],
 			"authors": [
 				{
 					"name": "Nicolas Grekas",
@@ -776,12 +692,7 @@
 			],
 			"description": "Symfony polyfill backporting some PHP 7.3+ features to lower PHP versions",
 			"homepage": "https://symfony.com",
-			"keywords": [
-				"compatibility",
-				"polyfill",
-				"portable",
-				"shim"
-			],
+			"keywords": ["compatibility", "polyfill", "portable", "shim"],
 			"support": {
 				"source": "https://github.com/symfony/polyfill-php73/tree/v1.31.0"
 			},
@@ -836,9 +747,7 @@
 			"type": "phpstan-extension",
 			"extra": {
 				"phpstan": {
-					"includes": [
-						"extension.neon"
-					]
+					"includes": ["extension.neon"]
 				}
 			},
 			"autoload": {
@@ -847,17 +756,9 @@
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": [
-				"MIT"
-			],
+			"license": ["MIT"],
 			"description": "WordPress extensions for PHPStan",
-			"keywords": [
-				"PHPStan",
-				"code analyse",
-				"code analysis",
-				"static analysis",
-				"wordpress"
-			],
+			"keywords": ["PHPStan", "code analyse", "code analysis", "static analysis", "wordpress"],
 			"support": {
 				"issues": "https://github.com/szepeviktor/phpstan-wordpress/issues",
 				"source": "https://github.com/szepeviktor/phpstan-wordpress/tree/v1.3.5"
@@ -872,7 +773,7 @@
 	},
 	"prefer-stable": false,
 	"prefer-lowest": false,
-	"platform": [],
-	"platform-dev": [],
+	"platform": {},
+	"platform-dev": {},
 	"plugin-api-version": "2.6.0"
 }

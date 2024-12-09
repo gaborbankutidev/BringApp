@@ -1,23 +1,23 @@
-import React, {type ReactNode} from "react";
+import React, { type ReactNode } from "react"
 import {
 	getDynamicEntityProps,
 	type GetDynamicEntityPropsOptions,
 	type GetDynamicEntityPropsParams,
-} from "../content";
-import type {DynamicEntityProps, EntityType} from "../types";
-import Debug from "./debug";
+} from "../content"
+import type { DynamicEntityProps, EntityType } from "../types"
+import Debug from "./debug"
 
 export type DynamicEntityPropsRenderProps<T = object, P = object> = {
-	entityProps: DynamicEntityProps<T>;
-	params?: GetDynamicEntityPropsParams<P>;
-};
+	entityProps: DynamicEntityProps<T>
+	params?: GetDynamicEntityPropsParams<P>
+}
 
 export type EntityProps<T, P> = {
-	entityId?: number;
-	entityType?: EntityType;
-	options?: GetDynamicEntityPropsOptions;
-	Render?: (props: DynamicEntityPropsRenderProps<T, P>) => ReactNode;
-};
+	entityId?: number
+	entityType?: EntityType
+	options?: GetDynamicEntityPropsOptions
+	Render?: (props: DynamicEntityPropsRenderProps<T, P>) => ReactNode
+}
 
 function makeDynamicEntity(wpURL: string) {
 	const DynamicEntity = async <T = object, P = object>({
@@ -30,20 +30,20 @@ function makeDynamicEntity(wpURL: string) {
 			</div>
 		),
 	}: EntityProps<T, P>) => {
-		const {entityProps, params} = await getDynamicEntityProps<T, P>(
+		const { entityProps, params } = await getDynamicEntityProps<T, P>(
 			wpURL,
 			entityId,
 			entityType,
-			options,
-		);
+			options
+		)
 		if (!entityProps) {
-			return null;
+			return null
 		}
 
-		return <Render entityProps={entityProps} params={params} />;
-	};
+		return <Render entityProps={entityProps} params={params} />
+	}
 
-	return DynamicEntity;
+	return DynamicEntity
 }
 
-export default makeDynamicEntity;
+export default makeDynamicEntity

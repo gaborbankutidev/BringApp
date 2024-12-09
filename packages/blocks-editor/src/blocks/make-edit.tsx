@@ -1,19 +1,19 @@
-import {InnerBlocks, InspectorAdvancedControls} from "@wordpress/block-editor";
-import clsx from "clsx";
-import React from "react";
-import {EditorCard} from "../components";
-import {TextControl} from "../controls";
-import {ControlContextProvider} from "../controls/context";
-import {makeBlockStylesClassNames, makeBlockStylesControl} from "../styles";
-import {makeControls} from "./make-controls";
-import type {BlockConfig, BlockEdit, EditorAttributes} from "./types";
+import { InnerBlocks, InspectorAdvancedControls } from "@wordpress/block-editor"
+import clsx from "clsx"
+import React from "react"
+import { EditorCard } from "../components"
+import { TextControl } from "../controls"
+import { ControlContextProvider } from "../controls/context"
+import { makeBlockStylesClassNames, makeBlockStylesControl } from "../styles"
+import { makeControls } from "./make-controls"
+import type { BlockConfig, BlockEdit, EditorAttributes } from "./types"
 
 type EditForRegisterType = {
-	attributes: EditorAttributes;
-	setAttributes: (attributes: Partial<EditorAttributes>) => void;
-	isSelected?: boolean;
-	clientId: string;
-};
+	attributes: EditorAttributes
+	setAttributes: (attributes: Partial<EditorAttributes>) => void
+	isSelected?: boolean
+	clientId: string
+}
 
 const sampleEntityProps = {
 	entityType: null,
@@ -31,7 +31,7 @@ const sampleEntityProps = {
 		src: "https://picsum.photos/1200/900",
 		alt: "Sample image",
 	},
-};
+}
 
 const sampleSiteProps = {
 	menus: [
@@ -58,13 +58,13 @@ const sampleSiteProps = {
 			menuId: 1,
 		},
 	],
-};
+}
 
-const DefaultEdit: BlockEdit = ({blockProps, blockTitle, Block, isSelected}) => (
+const DefaultEdit: BlockEdit = ({ blockProps, blockTitle, Block, isSelected }) => (
 	<EditorCard name={blockTitle} isSelected={isSelected}>
 		<Block {...blockProps} />
 	</EditorCard>
-);
+)
 
 export function makeEdit({
 	title: blockTitle,
@@ -81,21 +81,21 @@ export function makeEdit({
 		clientId,
 		isSelected,
 	}: EditForRegisterType) => {
-		const {className, blockStyles, ...restOfAttributes} = editorAttributes;
+		const { className, blockStyles, ...restOfAttributes } = editorAttributes
 		const blockStylesClassNames = makeBlockStylesClassNames(
 			className,
 			blockStylesConfig,
-			blockStyles,
-		);
+			blockStyles
+		)
 		const clientClassNames = clsx(
 			blockStylesClassNames.spacing?.m,
 			blockStylesClassNames.spacing?.p,
 			blockStyles.visibility?.[""] && "opacity-50",
 			blockStyles.visibility?.md && "opacity-50",
 			blockStyles.visibility?.lg && "opacity-50",
-			blockStylesClassNames.className,
-		);
-		const clientAttributes = {...restOfAttributes, className: clientClassNames};
+			blockStylesClassNames.className
+		)
+		const clientAttributes = { ...restOfAttributes, className: clientClassNames }
 
 		return (
 			<ControlContextProvider attributes={editorAttributes} setAttributes={setAttributes}>
@@ -106,7 +106,7 @@ export function makeEdit({
 						label="Id"
 						value={editorAttributes.id}
 						setValue={(newValue) => {
-							setAttributes({id: newValue} as Partial<EditorAttributes>);
+							setAttributes({ id: newValue } as Partial<EditorAttributes>)
 						}}
 					/>
 				</InspectorAdvancedControls>
@@ -135,8 +135,8 @@ export function makeEdit({
 					isSelected={isSelected ?? false}
 				/>
 			</ControlContextProvider>
-		);
-	};
+		)
+	}
 
-	return EditForRegister;
+	return EditForRegister
 }

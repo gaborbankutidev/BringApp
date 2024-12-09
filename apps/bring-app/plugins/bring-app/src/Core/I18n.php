@@ -33,10 +33,6 @@ class I18n {
 	 * @return void
 	 */
 	private static function loadPluginTextdomain() {
-		load_plugin_textdomain(
-			"bring-app",
-			false,
-			dirname(plugin_basename(__FILE__)) . "/languages/",
-		);
+		load_plugin_textdomain("bring-app", false, dirname(plugin_basename(__FILE__)) . "/languages/");
 	}
 }

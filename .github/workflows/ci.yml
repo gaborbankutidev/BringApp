@@ -1,227 +1,230 @@
 name: CI - Production
 
 on:
-    push:
-        branches:
-            - main
+  push:
+    branches:
+      - main
 
 concurrency:
-    group: ci-${{ github.ref }}
-    cancel-in-progress: false
+  group: ci-${{ github.ref }}
+  cancel-in-progress: false
 
 permissions:
-    contents: write
-    pull-requests: write
+  contents: write
+  pull-requests: write
 
 jobs:
-    checks_and_build:
-        name: Checks and Build
-        if: |
-            github.ref == 'refs/heads/main' && !(
-              github.event_name == 'push' &&
-              contains(github.event.head_commit.message, '[Deploy Bot]')
-            )
+  checks_and_build:
+    name: Checks and Build
+    if: |
+      github.ref == 'refs/heads/main' && !(
+        github.event_name == 'push' &&
+        contains(github.event.head_commit.message, '[Deploy Bot]')
+      )
 
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout files
-              uses: actions/checkout@v4
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout files
+        uses: actions/checkout@v4
 
-            - name: Enable Corepack
-              run: corepack enable
+      - name: Enable Corepack
+        run: corepack enable
 
-            - name: Setup node
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 20
-                  cache: "yarn"
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "yarn"
 
-            - name: Install dependencies
-              run: yarn install --immutable
+      - name: Install dependencies
+        run: yarn install --immutable
 
-            - name: Setup app env
-              run: echo "SKIP_ENV_VALIDATION=true" >> ./apps/bring-app/next/.env
+      - name: Setup app env
+        run: echo "SKIP_ENV_VALIDATION=true" >> ./apps/bring-app/next-app/.env
 
-            - name: Run changeset check
-              run: yarn changeset status --since origin/main
+      - name: Run changeset check
+        run: yarn changeset status --since origin/main
 
-            - name: Run typecheck
-              run: yarn types
+      - name: Run syncpack lint
+        run: yarn syncpack lint
 
-            - name: Run lint
-              run: yarn lint
+      - name: Run build
+        run: yarn build
 
-            - name: Run build
-              run: yarn build
+      - name: Run typecheck
+        run: yarn types
 
-            - name: Run tests
-              run: yarn test
+      - name: Run lint
+        run: yarn lint
 
-    release:
-        name: Release Packages
-        needs: checks_and_build
-        runs-on: ubuntu-latest
+      - name: Run tests
+        run: yarn test
+
+  release:
+    name: Release Packages
+    needs: checks_and_build
+    runs-on: ubuntu-latest
+    env:
+      BLOCKS_WP_REPOSITORY_URL: ${{ vars.BLOCKS_WP_REPOSITORY_URL }}
+
+    steps:
+      - name: Checkout files
+        uses: actions/checkout@v4
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "yarn"
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Setup app env
+        run: echo "SKIP_ENV_VALIDATION=true" >> ./apps/bring-app/next-app/.env
+
+      - name: Set up Git
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git config --global url."https://x-access-token:$ACCESS_TOKEN@github.com/".insteadOf "https://github.com/"
         env:
-            BLOCKS_WP_REPOSITORY_URL: ${{ vars.BLOCKS_WP_REPOSITORY_URL }}
+          ACCESS_TOKEN: ${{ secrets.DEPLOY_BOT_TOKEN }}
 
-        steps:
-            - name: Checkout files
-              uses: actions/checkout@v4
+      - name: Capture current commit hash
+        run: echo "CURRENT_COMMIT=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
-            - name: Enable Corepack
-              run: corepack enable
+      - name: Validate Composer JSON
+        run: composer validate --strict --working-dir=packages/blocks-wp
 
-            - name: Setup node
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 20
-                  cache: "yarn"
-
-            - name: Install dependencies
-              run: yarn install --immutable
-
-            - name: Setup app env
-              run: echo "SKIP_ENV_VALIDATION=true" >> ./apps/bring-app/next/.env
-
-            - name: Set up Git
-              run: |
-                  git config --global user.name 'github-actions[bot]'
-                  git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-                  git config --global url."https://x-access-token:$ACCESS_TOKEN@github.com/".insteadOf "https://github.com/"
-              env:
-                  ACCESS_TOKEN: ${{ secrets.DEPLOY_BOT_TOKEN }}
-
-            - name: Capture current commit hash
-              run: echo "CURRENT_COMMIT=$(git rev-parse HEAD)" >> $GITHUB_ENV
-
-            - name: Validate Composer JSON
-              run: composer validate --strict --working-dir=packages/blocks-wp
-
-            - name: Create .npmrc
-              run: |
-                  cat << EOF > "$HOME/.npmrc"
-                    //registry.npmjs.org/:_authToken=$NPM_TOKEN
-                  EOF
-              env:
-                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-            - name: Publish NPM Packages
-              run: yarn release
-
-            - name: Check BlocksWp repository version
-              run: |
-                  # Get latest version
-                  LATEST_TAG=$(git ls-remote --tags $BLOCKS_WP_REPOSITORY_URL | grep -o 'refs/tags/[^^]*' | sort -V | tail -n1 | sed 's/refs\/tags\///')
-
-                  # Compare package versions
-                  VERSION=$(jq -r .version packages/blocks-wp/package.json)
-                  if [ "$LATEST_TAG" != "$VERSION" ]; then
-                    echo "UPDATE_BLOCKS_WP_VERSION=$VERSION" >> $GITHUB_ENV
-                  else
-                    echo "UPDATE_BLOCKS_WP_VERSION=" >> $GITHUB_ENV
-                  fi
-
-            - name: Update BlocksWp repository
-              if: env.UPDATE_BLOCKS_WP_VERSION
-              run: |
-                  # Sync the blocks-wp package to the target repository
-                  git clone $BLOCKS_WP_REPOSITORY_URL blocks-wp-target
-                  rsync -av --delete --exclude='.git' packages/blocks-wp/ blocks-wp-target/
-
-                  # Add commit, tag and push changes
-                  (
-                    cd blocks-wp-target
-                    git add .
-                    git commit -m "[Deploy Bot] Package Update - $BLOCKS_WP_VERSION"
-                    git tag $BLOCKS_WP_VERSION
-                    git push origin main
-                    git push origin --tags
-                  )
-
-                  # Clean up
-                  rm -rf blocks-wp-target
-              env:
-                  BLOCKS_WP_VERSION: ${{ env.UPDATE_BLOCKS_WP_VERSION }}
-
-            - name: Notify Packagist
-              if: env.UPDATE_BLOCKS_WP_VERSION
-              run: |
-                  curl -XPOST -H'content-type:application/json' 'https://packagist.org/api/update-package?username=Bring&apiToken=$PACKAGIST_TOKEN' \
-                  -d'{"repository":{"url":"$BLOCKS_WP_REPOSITORY_URL"}}'
-              env:
-                  PACKAGIST_TOKEN: ${{ secrets.PACKAGIST_TOKEN }}
-
-            - name: Check for code updates
-              run: |
-                  if ! git diff-index --quiet HEAD; then
-                    echo "CODE_UPDATED=true" >> $GITHUB_ENV
-                  else
-                    echo "CODE_UPDATED=false" >> $GITHUB_ENV
-                  fi
-
-            - name: Format code
-              if: env.CODE_UPDATED == 'true'
-              run: yarn format
-
-            - name: Create pull request for Package Versioning
-              if: env.CODE_UPDATED == 'true'
-              run: |
-                  git checkout -b ci-deploy
-                  git add .
-                  git commit --no-verify -m "[Deploy Bot] Version Packages"
-                  git push origin ci-deploy
-
-                  PR_URL=$(gh pr create --title "[Deploy Bot] Version Packages" --body "Automated package versioning via GitHub Actions" --head ci-deploy --base main)
-                  echo "Created PR: $PR_URL"
-
-                  PR_NUMBER=$(gh pr list --head ci-deploy --json number --jq '.[0].number')
-                  echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
-              env:
-                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-            - name: Merge pull request & update tags
-              if: env.PR_NUMBER
-              run: |
-                  gh pr merge $PR_NUMBER --squash --admin
-
-                  # Get the new commit hash on main
-                  git checkout main
-                  git pull origin main
-                  NEW_COMMIT_HASH=$(git rev-parse HEAD)
-
-                  # Move tags from the current local commit to the new merge commit
-                  for tag in $(git tag --points-at $CURRENT_COMMIT); do
-                    git tag -d $tag
-                    git tag $tag $NEW_COMMIT_HASH
-                    git push origin $tag
-                  done
-
-                  # Clean up
-                  git push origin --delete ci-deploy
-              env:
-                  GH_TOKEN: ${{ secrets.DEPLOY_BOT_TOKEN }}
-                  PR_NUMBER: ${{ env.PR_NUMBER }}
-                  CURRENT_COMMIT: ${{ env.CURRENT_COMMIT }}
-
-    deploy_docs:
-        name: Deploy Docs
-        needs: release
-        runs-on: ubuntu-latest
+      - name: Create .npmrc
+        run: |
+          cat << EOF > "$HOME/.npmrc"
+            //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          EOF
         env:
-            VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-            VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-        steps:
-            - uses: actions/checkout@v4
+      - name: Publish NPM Packages
+        run: yarn release
 
-            - name: Install Vercel CLI
-              run: npm install --global vercel@latest
+      - name: Check BlocksWp repository version
+        run: |
+          # Get latest version
+          LATEST_TAG=$(git ls-remote --tags $BLOCKS_WP_REPOSITORY_URL | grep -o 'refs/tags/[^^]*' | sort -V | tail -n1 | sed 's/refs\/tags\///')
 
-            - name: Pull Vercel Environment Information
-              run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+          # Compare package versions
+          VERSION=$(jq -r .version packages/blocks-wp/package.json)
+          if [ "$LATEST_TAG" != "$VERSION" ]; then
+            echo "UPDATE_BLOCKS_WP_VERSION=$VERSION" >> $GITHUB_ENV
+          else
+            echo "UPDATE_BLOCKS_WP_VERSION=" >> $GITHUB_ENV
+          fi
 
-            - name: Build Project Artifacts
-              run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Update BlocksWp repository
+        if: env.UPDATE_BLOCKS_WP_VERSION
+        run: |
+          # Sync the blocks-wp package to the target repository
+          git clone $BLOCKS_WP_REPOSITORY_URL blocks-wp-target
+          rsync -av --delete --exclude='.git' packages/blocks-wp/ blocks-wp-target/
 
-            - name: Deploy Project Artifacts to Vercel
-              run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+          # Add commit, tag and push changes
+          (
+            cd blocks-wp-target
+            git add .
+            git commit -m "[Deploy Bot] Package Update - $BLOCKS_WP_VERSION"
+            git tag $BLOCKS_WP_VERSION
+            git push origin main
+            git push origin --tags
+          )
+
+          # Clean up
+          rm -rf blocks-wp-target
+        env:
+          BLOCKS_WP_VERSION: ${{ env.UPDATE_BLOCKS_WP_VERSION }}
+
+      - name: Notify Packagist
+        if: env.UPDATE_BLOCKS_WP_VERSION
+        run: |
+          curl -XPOST -H'content-type:application/json' 'https://packagist.org/api/update-package?username=Bring&apiToken=$PACKAGIST_TOKEN' \
+          -d'{"repository":{"url":"$BLOCKS_WP_REPOSITORY_URL"}}'
+        env:
+          PACKAGIST_TOKEN: ${{ secrets.PACKAGIST_TOKEN }}
+
+      - name: Check for code updates
+        run: |
+          if ! git diff-index --quiet HEAD; then
+            echo "CODE_UPDATED=true" >> $GITHUB_ENV
+          else
+            echo "CODE_UPDATED=false" >> $GITHUB_ENV
+          fi
+
+      - name: Format code
+        if: env.CODE_UPDATED == 'true'
+        run: yarn format
+
+      - name: Create pull request for Package Versioning
+        if: env.CODE_UPDATED == 'true'
+        run: |
+          git checkout -b ci-deploy
+          git add .
+          git commit --no-verify -m "[Deploy Bot] Version Packages"
+          git push origin ci-deploy
+
+          PR_URL=$(gh pr create --title "[Deploy Bot] Version Packages" --body "Automated package versioning via GitHub Actions" --head ci-deploy --base main)
+          echo "Created PR: $PR_URL"
+
+          PR_NUMBER=$(gh pr list --head ci-deploy --json number --jq '.[0].number')
+          echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Merge pull request & update tags
+        if: env.PR_NUMBER
+        run: |
+          gh pr merge $PR_NUMBER --squash --admin
+
+          # Get the new commit hash on main
+          git checkout main
+          git pull origin main
+          NEW_COMMIT_HASH=$(git rev-parse HEAD)
+
+          # Move tags from the current local commit to the new merge commit
+          for tag in $(git tag --points-at $CURRENT_COMMIT); do
+            git tag -d $tag
+            git tag $tag $NEW_COMMIT_HASH
+            git push origin $tag
+          done
+
+          # Clean up
+          git push origin --delete ci-deploy
+        env:
+          GH_TOKEN: ${{ secrets.DEPLOY_BOT_TOKEN }}
+          PR_NUMBER: ${{ env.PR_NUMBER }}
+          CURRENT_COMMIT: ${{ env.CURRENT_COMMIT }}
+
+  deploy_docs:
+    name: Deploy Docs
+    needs: release
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build Project Artifacts
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}

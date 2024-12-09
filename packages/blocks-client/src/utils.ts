@@ -8,7 +8,7 @@ export const defaultImageValue = {
 	id: null,
 	src: "https://picsum.photos/1200/900",
 	alt: "Bring Theme Placeholder Image",
-};
+}
 
 /**
  * Returns an array of keys from the given object.
@@ -16,8 +16,8 @@ export const defaultImageValue = {
  * @returns An array of keys from the object.
  */
 export const objectKeys = <Obj extends object>(obj?: Obj): (keyof Obj)[] => {
-	return obj ? (Object.keys(obj) as (keyof Obj)[]) : [];
-};
+	return obj ? (Object.keys(obj) as (keyof Obj)[]) : []
+}
 
 /**
  * Converts a relative URL to an absolute URL based on the base URL.
@@ -26,21 +26,21 @@ export const objectKeys = <Obj extends object>(obj?: Obj): (keyof Obj)[] => {
  * @returns The absolute URL.
  */
 export function toAbsoluteUrl(base: string, relative: string) {
-	const isAbsolute = /^[a-z][a-z\d+\-.]*:\/\//i.test(relative);
+	const isAbsolute = /^[a-z][a-z\d+\-.]*:\/\//i.test(relative)
 
 	if (isAbsolute) {
-		return relative; // Return as is if it's already absolute
+		return relative // Return as is if it's already absolute
 	}
 
 	// Ensure the base URL ends with a slash
 	if (!base.endsWith("/")) {
-		base += "/";
+		base += "/"
 	}
 
 	// Ensure the relative URL doesn't start with a slash to avoid double slashes
 	if (relative.startsWith("/")) {
-		relative = relative.substr(1);
+		relative = relative.substr(1)
 	}
 
-	return base + relative;
+	return base + relative
 }
