@@ -2,7 +2,7 @@
 
 /** @type {import("syncpack").RcFile} */
 const config = {
-	dependencyTypes: ["prod", "dev"],
+	dependencyTypes: ["prod", "dev", "peer"],
 	lintFormatting: false,
 	semverGroups: [
 		{

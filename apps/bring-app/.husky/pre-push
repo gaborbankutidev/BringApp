@@ -1,0 +1,2 @@
+cd ./next-app && yarn types
+yarn changeset status --since-main
