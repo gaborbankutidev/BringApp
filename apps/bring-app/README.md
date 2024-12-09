@@ -39,3 +39,42 @@ Bring App project starter template.
 ## Documentation
 
 For the API documentation of the Bring packages, visit our [Docs page](https://bring-app-docs.vercel.app/)
+
+## Managing WordPress plugins
+
+- Manage your plugins in `composer.json`
+- Install new plugins with `composer require wpackagist-plugin/plugin-name`
+- Remove plugins with `composer remove wpackagist-plugin/plugin-name`
+- Update plugins with `composer update wpackagist-plugin/plugin-name`
+- Run `composer update` to update all plugins
+- To make a plugin required, add it to the `$required_plugins` array in `apps/bring-app/plugins/bring-app/src/Core/Plugins.php`, it's important that you add the plugins entrypoint to the array, not its name
+
+### Adding plugins from private Github repositories
+
+- Add the repository to the `composer.json` file in the `repositories` array in this format
+
+  ```json
+  "repositories":
+  [
+    {
+   	"type": "vcs",
+   	"url": "git.url.to/repo.git"
+    }
+  ]
+  ```
+
+- Generate an access token for your repository in [Github Developer Settings](https://github.com/settings/tokens) and add it to the `.env` file in the root of the app like this
+
+  ```env
+  COMPOSER_AUTH='{"github-oauth": {"github.com": "your-token"}}'
+  ```
+
+- Run `yarn install`, this will generate an `auth.json` file in the root of the app with the token
+
+- After adding the repository, you can require with `composer require your-namespace/plugin-name` or add it to the `composer.json` file in the `require` array and run `composer install`
+
+  ```json
+  "require": {
+    "your-namespace/plugin-name": "version"
+  }
+  ```

@@ -26,6 +26,7 @@ class Activator {
 	public static function activate() {
 		self::setBringTheme();
 		self::removeThemeCapabilities();
+		Plugins::activateRequiredPlugins();
 	}
 
 	/**

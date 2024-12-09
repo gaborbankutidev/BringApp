@@ -31,6 +31,17 @@ class Admin {
 		add_filter("option_template", self::lockTheme(...));
 		add_filter("pre_option_stylesheet", self::lockTheme(...));
 		add_filter("pre_option_template", self::lockTheme(...));
+
+		add_action("admin_notices", Plugins::notices(...));
+		add_action("admin_init", Plugins::preventRequiredPluginDeactivation(...));
+
+		add_filter(
+			"plugin_action_links",
+			Plugins::removeDeactivateButtonFromRequiredPlugins(...),
+			10,
+			2,
+		);
+		add_action("init", Plugins::removePluginInstallationCapability(...));
 	}
 
 	/**
