@@ -71,7 +71,7 @@ For the API documentation of the Bring packages, visit our [Docs page](https://b
 
 - Run `yarn install`, this will generate an `auth.json` file in the root of the app with the token
 
-- After adding the repository, you can require the plugin as you would with any other plugin
+- After adding the repository, you can require with `composer require your-namespace/plugin-name` or add it to the `composer.json` file in the `require` array and run `composer install`
 
   ```json
   "require": {
