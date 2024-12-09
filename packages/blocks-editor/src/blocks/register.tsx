@@ -32,6 +32,7 @@ export function registerBringBlock(config: BlockConfig) {
 			attributes: config.previewAttributes,
 		},
 		edit: makeEdit(config),
+		// @ts-ignore
 		save: () => <InnerBlocks.Content />,
 	})
 }

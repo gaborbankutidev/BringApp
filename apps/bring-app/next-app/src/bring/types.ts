@@ -8,7 +8,7 @@ import type { BP as _BP } from "@bring/blocks-client/types"
  * Entities can be queried by their slug with getEntity function.
  * Extend the getEntity function return type with the types of the custom values added in WordPress.
  */
-export type EntityProps = Record<string, string | null>
+export type EntityProps = object
 
 /**
  * Extend site props type.
@@ -17,26 +17,26 @@ export type EntityProps = Record<string, string | null>
  * Custom values can be added in WordPress to SiteProps for example Social links, Opening hours etc.
  * Extend the getSiteProps function return type with the types of the custom values added in WordPress.
  */
-export type SiteProps = Record<string, string | null>
+export type SiteProps = object
 
 /**
  * List of menus is a default Site prop.
  * Menus can be extended in WordPress with custom values.
  * Extend the Menu type with the types of the custom values added in WordPress.
  */
-export type Menu = Record<string, string>
+export type Menu = object
 
 /**
  * Menus in SiteProps have an array of MenuItems.
  * Menu items can be extended in WordPress with custom values.
  * Extend the MenuItem type with the types of the custom values added in WordPress.
  */
-export type MenuItem = Record<string, string>
+export type MenuItem = object
 
 /**
  * Variables can be sent to the block with the Context type.
  */
-export type Context = Record<string, string>
+export type Context = object
 
 /**
  * Initialize BlockProps type by extending with EntityProps, SiteProps, Menu, MenuItem, Context types.

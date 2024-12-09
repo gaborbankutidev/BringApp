@@ -82,19 +82,3 @@ export type ResponsiveLabels = {
 	md: ResponsiveLabel
 	lg: ResponsiveLabel
 }
-
-export type BringStyles = {
-	spacing?: {
-		m?: Sides
-		p?: Sides
-	}
-	visibility?: ResponsiveValue<boolean>
-}
-
-export type BringStylesConfig = {
-	spacing?: {
-		m?: Sides
-		p?: Sides
-	}
-	visibility?: ResponsiveDisplayValueConfig
-}

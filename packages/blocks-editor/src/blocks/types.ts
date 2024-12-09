@@ -1,5 +1,5 @@
 import type { BlockIcon } from "@wordpress/blocks"
-import { FC, ReactNode } from "react"
+import type { FC, ReactNode } from "react"
 import { ControlConfigType } from "../controls/types"
 import { BlockStylesClassNames, BlockStylesConfig, type BlockStyles } from "../styles/types"
 import { ImageType, NestedKeyOf } from "../types"

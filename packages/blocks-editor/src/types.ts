@@ -79,11 +79,3 @@ export type NestedTypedKeyOf<ObjectType extends object, T> = NestedTypedKeyOfOnR
 	DeepRequired<ObjectType>,
 	T
 >
-
-// ===========
-export type Obj = Record<string, unknown>
-
-type ValidComponentNamePart = `${Lowercase<string> | "-"}${Lowercase<string> | "-" | ""}`
-type ValidComponentNameWithSlash = `${ValidComponentNamePart}/${ValidComponentNamePart}`
-export type ValidComponentName =
-	`${Lowercase<string>}${ValidComponentNameWithSlash}${Lowercase<string>}`

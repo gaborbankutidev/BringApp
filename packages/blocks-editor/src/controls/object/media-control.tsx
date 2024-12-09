@@ -75,6 +75,7 @@ function MediaControlByValue({
 	show = true,
 }: ControlByValue<MediaType> & MediaControlProps) {
 	return show ? (
+		// @ts-ignore
 		<MediaUploadCheck fallback={null}>
 			<MediaUpload
 				title={label ?? "Select media"}
