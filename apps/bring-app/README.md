@@ -53,15 +53,15 @@ For the API documentation of the Bring packages, visit our [Docs page](https://b
 
 - Add the repository to the `composer.json` file in the `repositories` array in this format
 
-```json
-"repositories":
-[
-  {
-  	"type": "vcs",
-  	"url": "git.url.to/repo.git"
-  }
-]
-```
+  ```json
+  "repositories":
+  [
+    {
+   	"type": "vcs",
+   	"url": "git.url.to/repo.git"
+    }
+  ]
+  ```
 
 - Generate an access token for your repository in [Github Developer Settings](https://github.com/settings/tokens) and add it to the `.env` file in the root of the app like this
 
@@ -73,8 +73,12 @@ For the API documentation of the Bring packages, visit our [Docs page](https://b
 
 - After adding the repository, you can require the plugin as you would with any other plugin
 
-```json
-"require": {
-  "your-namespace/plugin-name": "version"
-}
+  ```json
+  "require": {
+    "your-namespace/plugin-name": "version"
+  }
+  ```
+
+```
+
 ```
