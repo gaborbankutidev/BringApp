@@ -1805,6 +1805,8 @@ __metadata:
     concurrently: "npm:9.1.0"
     eslint: "npm:^9.14.0"
     fs-extra: "npm:11.2.0"
+    prettier: "npm:^3.4.2"
+    tsup: "npm:8.3.5"
     tsx: "npm:^4.19.2"
     typescript: "npm:^5.6.3"
   bin:
@@ -20754,7 +20756,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.3.3":
+"prettier@npm:^3.3.3, prettier@npm:^3.4.2":
   version: 3.4.2
   resolution: "prettier@npm:3.4.2"
   bin:
@@ -24253,7 +24255,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsup@npm:^8.3.5":
+"tsup@npm:8.3.5, tsup@npm:^8.3.5":
   version: 8.3.5
   resolution: "tsup@npm:8.3.5"
   dependencies:

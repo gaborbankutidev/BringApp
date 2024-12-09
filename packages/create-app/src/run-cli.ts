@@ -2,7 +2,7 @@ import { execSync } from "child_process"
 import fsExtra from "fs-extra"
 import type { CLIConfig } from "./config"
 import { GIT_URL } from "./constants"
-import { removeComposerRepositories } from "./remove-composer-repositories"
+import { removeBlocksWpRepository } from "./remove-blocks-wp-repository"
 import { updatePackageVersions } from "./update-package-versions"
 import { updateProjectName } from "./update-project-name"
 
@@ -67,7 +67,7 @@ export async function runCLI(config: CLIConfig) {
 
 	updateProjectName(config.projectSlug, config.projectName)
 
-	removeComposerRepositories(config.projectSlug)
+	removeBlocksWpRepository(config.projectSlug)
 
 	removeComposerLockFile(config.projectSlug)
 
