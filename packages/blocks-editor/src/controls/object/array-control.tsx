@@ -9,7 +9,6 @@ import type { ImageType } from "../../types"
 import { defaultImageValue } from "../../utils"
 import { useControlContext } from "../context"
 import type { ArrayControlType, ControlByValue } from "../types"
-
 /**
  * ImageArrayControl component.
  * @returns The rendered ImageArrayControl component.

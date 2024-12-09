@@ -69,8 +69,8 @@
 		"types": "tsc"
 	},
 	"peerDependencies": {
-		"react": "^18.3.1",
-		"react-dom": "^18.3.1"
+		"react": "^19.0.1",
+		"react-dom": "^19.0.1"
 	},
 	"dependencies": {
 		"clsx": "2.1.1",
@@ -78,8 +78,8 @@
 	},
 	"devDependencies": {
 		"@bring/config": "workspace:*",
-		"@types/react": "^18.3.12",
-		"@types/react-dom": "^18.3.1",
+		"@types/react": "^19.0.1",
+		"@types/react-dom": "^19.0.1",
 		"eslint": "^9.14.0",
 		"typescript": "^5.6.3"
 	},

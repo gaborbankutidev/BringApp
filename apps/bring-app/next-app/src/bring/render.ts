@@ -13,9 +13,9 @@ import type { Context, EntityProps, Menu, MenuItem, SiteProps } from "./types"
  */
 export const { getEntity, Main, Layout, Footer } = initRender<
 	EntityProps,
+	SiteProps,
 	Menu,
 	MenuItem,
-	SiteProps,
 	Context
 >(
 	env.NEXT_PUBLIC_WP_BASE_URL,

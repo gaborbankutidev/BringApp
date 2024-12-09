@@ -53,6 +53,7 @@ const ImageContent = ({ image, link, lightbox, className, id }: ImageContentProp
 				quality={100}
 			/>
 			{lightbox && (
+				// @ts-ignore
 				<FSLightbox
 					toggler={lightboxController.toggler}
 					sources={[imageProps.src as string]}

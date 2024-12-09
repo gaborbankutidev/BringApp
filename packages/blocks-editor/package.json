@@ -59,10 +59,10 @@
 		"types": "tsc"
 	},
 	"peerDependencies": {
-		"@wordpress/block-editor": "14.6.0",
-		"@wordpress/blocks": "14.0.0",
-		"@wordpress/components": "28.11.0",
-		"@wordpress/data": "10.11.0"
+		"@wordpress/block-editor": "14.8.0",
+		"@wordpress/blocks": "14.2.0",
+		"@wordpress/components": "28.13.0",
+		"@wordpress/data": "10.13.0"
 	},
 	"dependencies": {
 		"clsx": "2.1.1",
@@ -75,11 +75,10 @@
 		"@types/lodash.clonedeep": "^4.5.9",
 		"@types/lodash.get": "^4.4.9",
 		"@types/lodash.set": "^4.3.9",
-		"@types/react": "^18.3.12",
-		"@types/react-dom": "^18.3.1",
-		"@types/wordpress__block-editor": "^11.5.15",
-		"@types/wordpress__blocks": "^12.5.14",
-		"@types/wordpress__components": "^23.0.12",
+		"@types/react": "^19.0.1",
+		"@types/react-dom": "^19.0.1",
+		"@types/wordpress__block-editor": "^11.5.16",
+		"@types/wordpress__blocks": "^12.5.16",
 		"@wordpress/block-editor": "14.8.0",
 		"@wordpress/blocks": "14.2.0",
 		"@wordpress/components": "28.13.0",
