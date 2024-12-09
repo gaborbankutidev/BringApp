@@ -69,6 +69,8 @@ For the API documentation of the Bring packages, visit our [Docs page](https://b
   COMPOSER_AUTH='{"github-oauth": {"github.com": "your-token"}}'
   ```
 
+- Run `yarn install`, this will generate an `auth.json` file in the root of the app with the token
+
 - After adding the repository, you can require the plugin as you would with any other plugin
 
 ```json
