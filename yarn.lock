@@ -7081,21 +7081,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/wordpress__block-editor@npm:^11.5.15":
-  version: 11.5.15
-  resolution: "@types/wordpress__block-editor@npm:11.5.15"
-  dependencies:
-    "@types/react": "npm:*"
-    "@types/wordpress__blocks": "npm:*"
-    "@wordpress/components": "npm:^27.2.0"
-    "@wordpress/data": "npm:^9.13.0"
-    "@wordpress/element": "npm:^5.0.0"
-    "@wordpress/keycodes": "npm:^3.54.0"
-    react-autosize-textarea: "npm:^7.1.0"
-  checksum: 10c0/913078aef38361dc4e483516a08dfacbb46804b06c3cdca50d63bb7c0c58761e224ea2902a2d95cc1516996d8bb7a32604d0638b1849877b67d1d9dee708012f
-  languageName: node
-  linkType: hard
-
 "@types/wordpress__block-editor@npm:^11.5.16":
   version: 11.5.16
   resolution: "@types/wordpress__block-editor@npm:11.5.16"
@@ -7111,7 +7096,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/wordpress__blocks@npm:*, @types/wordpress__blocks@npm:^12.5.14":
+"@types/wordpress__blocks@npm:*":
   version: 12.5.15
   resolution: "@types/wordpress__blocks@npm:12.5.15"
   dependencies:
@@ -18803,8 +18788,8 @@ __metadata:
     "@types/node": "npm:22.10.1"
     "@types/react": "npm:^19.0.1"
     "@types/react-dom": "npm:^19.0.1"
-    "@types/wordpress__block-editor": "npm:^11.5.15"
-    "@types/wordpress__blocks": "npm:^12.5.14"
+    "@types/wordpress__block-editor": "npm:^11.5.16"
+    "@types/wordpress__blocks": "npm:^12.5.16"
     "@wordpress/block-editor": "npm:14.8.0"
     "@wordpress/blocks": "npm:14.2.0"
     "@wordpress/components": "npm:28.13.0"
