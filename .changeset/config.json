@@ -2,7 +2,10 @@
 	"$schema": "https://unpkg.com/@changesets/config@3.0.2/schema.json",
 	"changelog": "@changesets/cli/changelog",
 	"commit": false,
-	"fixed": [["@bring/blocks-client", "@bring/blocks-editor", "@bring/blocks-wp"]],
+	"fixed": [
+		["@bring/blocks-client", "@bring/blocks-editor", "@bring/blocks-wp"],
+		["@bring/bring-app", "next-app"]
+	],
 	"linked": [],
 	"access": "public",
 	"baseBranch": "main",
