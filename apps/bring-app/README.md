@@ -78,7 +78,3 @@ For the API documentation of the Bring packages, visit our [Docs page](https://b
     "your-namespace/plugin-name": "version"
   }
   ```
-
-```
-
-```
