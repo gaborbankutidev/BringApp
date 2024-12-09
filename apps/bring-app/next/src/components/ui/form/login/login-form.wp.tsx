@@ -4,7 +4,7 @@ import {
 } from "@bring/blocks-editor/blocks";
 import {loginForm, type LoginFormBlockProps} from "./login-form.block";
 
-const buttonConfig: BlockConfig<LoginFormBlockProps> = {
+const loginFormConfig: BlockConfig<LoginFormBlockProps> = {
 	...loginForm,
 	title: "LoginForm",
 	description: "A general login form",
@@ -21,4 +21,4 @@ const buttonConfig: BlockConfig<LoginFormBlockProps> = {
 	],
 };
 
-export default buttonConfig;
+export default loginFormConfig;

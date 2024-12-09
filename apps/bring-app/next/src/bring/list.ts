@@ -11,6 +11,8 @@ import {heading} from "@/components/heading";
 import {image} from "@/components/image";
 import {markdown} from "@/components/markdown";
 import {button} from "@/components/ui/button";
+// forms
+import loginForm from "@/components/ui/form/login/login-form";
 
 export const blockList = [
 	// layout
@@ -26,4 +28,5 @@ export const blockList = [
 	heading,
 	image,
 	markdown,
+	loginForm,
 ];

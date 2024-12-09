@@ -33,6 +33,7 @@ class BlocksWP {
 		"markdown",
 		"post-content",
 		"contact-form",
+		"login-form",
 	];
 
 	/**
