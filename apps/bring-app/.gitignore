@@ -52,5 +52,8 @@ wordpress
 # temp
 .temp
 
+# zed
+.zed
+
 # composer auth
 auth.json

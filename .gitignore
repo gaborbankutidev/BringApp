@@ -66,3 +66,6 @@ apps/bring-app/wordpress
 
 # zed
 .zed
+
+# composer auth
+auth.json
