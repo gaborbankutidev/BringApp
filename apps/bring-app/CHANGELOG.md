@@ -1,5 +1,11 @@
 # @bring/bring-app
 
+## 1.2.0
+
+### Minor Changes
+
+- 9b16fa5: Add WordPress plugin handling to app
+
 ## 1.1.1
 
 ### Patch Changes
