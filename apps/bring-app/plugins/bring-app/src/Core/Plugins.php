@@ -37,7 +37,7 @@ class Plugins {
 				continue;
 			}
 
-			activate_plugin(WP_PLUGIN_DIR . "/" . $plugin);
+			activate_plugin($plugin);
 			$activated_plugins[] = $plugin;
 		}
 		set_transient("bringapp_activated_plugins", $activated_plugins, 30);
