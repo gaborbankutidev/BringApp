@@ -1,5 +1,11 @@
 # @bring/bring-app
 
+## 1.3.0
+
+### Minor Changes
+
+- 8a95cd9: Fix bug while activating plugin
+
 ## 1.2.0
 
 ### Minor Changes
