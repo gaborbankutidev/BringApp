@@ -5,22 +5,18 @@ import path from "path"
 if (!process.env.SKIP_GENERATE_COMPOSER_AUTH) {
 	const composerAuth = process.env.COMPOSER_AUTH
 
-	if (!composerAuth) {
-		// Not necessarily an error
-		console.log("COMPOSER_AUTH is not defined in the .env file.")
-		process.exit(0)
-	}
+	if (composerAuth) {
+		try {
+			const authData = JSON.parse(composerAuth)
+			const authJsonPath = path.join(process.cwd(), "auth.json")
 
-	try {
-		const authData = JSON.parse(composerAuth)
-		const authJsonPath = path.join(process.cwd(), "auth.json")
+			fs.writeFileSync(authJsonPath, JSON.stringify(authData, null, 4))
 
-		fs.writeFileSync(authJsonPath, JSON.stringify(authData, null, 4))
-
-		console.log(`auth.json generated successfully at ${authJsonPath}`)
-	} catch (error) {
-		console.error("Failed to generate auth.json:", error.message)
-		process.exit(1)
+			console.log(`auth.json generated successfully at ${authJsonPath}`)
+		} catch (error) {
+			console.error("Failed to generate auth.json:", error.message)
+			process.exit(1)
+		}
 	}
 }
 

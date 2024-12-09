@@ -8,9 +8,7 @@ dotenv.config({ path: path.resolve(process.cwd(), "apps/bring-app/.env") })
 if (!process.env.SKIP_GENERATE_COMPOSER_AUTH) {
 	const composerAuth = process.env.COMPOSER_AUTH
 
-	if (!composerAuth) {
-		console.warning("COMPOSER_AUTH is not defined in the .env file.")
-	} else {
+	if (composerAuth) {
 		try {
 			const authData = JSON.parse(composerAuth)
 			const authJsonPath = path.join(process.cwd(), "apps/bring-app/auth.json")
