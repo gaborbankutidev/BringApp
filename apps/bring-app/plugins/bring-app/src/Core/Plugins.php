@@ -37,9 +37,7 @@ class Plugins {
 			}
 
 			activate_plugin(WP_PLUGIN_DIR . "/" . $plugin);
-			if (is_plugin_active($plugin)) {
-				$activated_plugins[] = $plugin;
-			}
+			$activated_plugins[] = $plugin;
 		}
 		set_transient("bringapp_activated_plugins", $activated_plugins, 30);
 	}
@@ -52,7 +50,7 @@ class Plugins {
 	public static function notices(): void {
 		$activated_plugins = get_transient("bringapp_activated_plugins");
 
-		if (!$activated_plugins) {
+		if (!$activated_plugins || !is_array($activated_plugins)) {
 			return;
 		}
 
