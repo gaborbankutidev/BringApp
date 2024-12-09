@@ -1,3 +1,3 @@
-const bringLibConfig = require("@bring/config/lib.js");
+const bringLibConfig = require("@bring/config/lib.js")
 
-module.exports = [...bringLibConfig];
+module.exports = [...bringLibConfig]
