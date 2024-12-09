@@ -3,8 +3,6 @@ import dotenv from "dotenv"
 import path from "path"
 import { generateComposerAuthJson } from "../apps/bring-app/scripts/after-install.mjs"
 
-import { generateComposerAuthJson } from "../apps/bring-app/scripts/generate-composer-auth-json.mjs"
-
 execSync("yarn prepare")
 
 dotenv.config({ path: path.resolve(process.cwd(), "apps/bring-app/.env") })
