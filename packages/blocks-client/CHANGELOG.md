@@ -1,5 +1,11 @@
 # @bring/blocks-client
 
+## 2.9.0
+
+### Minor Changes
+
+- 0e6433e: Add syncpack and eslint config
+
 ## 2.8.0
 
 ### Minor Changes
