@@ -46,14 +46,17 @@ jobs:
       - name: Run syncpack lint
         run: yarn syncpack lint
 
-      - name: Run build
-        run: yarn build
+      - name: Run build packages
+        run: yarn build:pkg
 
       - name: Run typecheck
         run: yarn types
 
       - name: Run lint
         run: yarn lint
+
+      - name: Run build
+        run: yarn build
 
       - name: Run tests
         run: yarn test
