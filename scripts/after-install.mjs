@@ -1,6 +1,7 @@
 import { execSync } from "child_process"
 import dotenv from "dotenv"
 import path from "path"
+import { generateComposerAuthJson } from "../apps/bring-app/scripts/after-install.mjs"
 
 import { generateComposerAuthJson } from "../apps/bring-app/scripts/generate-composer-auth-json.mjs"
 
