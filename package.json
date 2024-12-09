@@ -12,6 +12,7 @@
 		"packages/@bring/create-app",
 		"packages/@bring/config",
 		"apps/bring-app/next-app",
+		"apps/bring-app",
 		"apps/*"
 	],
 	"packageManager": "yarn@4.5.3",
