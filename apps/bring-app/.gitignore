@@ -51,3 +51,6 @@ wordpress
 
 # temp
 .temp
+
+# composer auth
+auth.json
