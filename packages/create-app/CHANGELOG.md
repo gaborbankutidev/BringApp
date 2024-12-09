@@ -1,5 +1,11 @@
 # @bring/create-app
 
+## 0.4.0
+
+### Minor Changes
+
+- 0e6433e: Add syncpack and eslint config
+
 ## 0.3.1
 
 ### Patch Changes
