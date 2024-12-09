@@ -21,7 +21,6 @@ class Plugins {
 	private static array $required_plugins = [
 		"bring-app/bring-app.php",
 		"advanced-custom-fields/acf.php",
-		"advanced-custom-fields-pro/acf.php",
 		"acf-quickedit-fields/index.php",
 		"jwt-auth/jwt-auth.php",
 	];
@@ -113,6 +112,7 @@ class Plugins {
 		$role = get_role("administrator");
 		if ($role) {
 			$role->remove_cap("install_plugins");
+			$role->remove_cap("delete_plugins");
 			$role->remove_cap("update_plugins");
 		}
 	}
