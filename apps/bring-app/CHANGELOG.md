@@ -1,5 +1,11 @@
 # @bring/bring-app
 
+## 1.4.1
+
+### Patch Changes
+
+- e0fb9c5: Preserve project plugin name when running upgrade script
+
 ## 1.4.0
 
 ### Minor Changes
