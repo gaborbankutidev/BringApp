@@ -1,5 +1,11 @@
 # @bring/bring-app
 
+## 1.4.0
+
+### Minor Changes
+
+- 2594c13: Bring app plugin is now only deactivatable with WORDPRESS_DEBUG turned on
+
 ## 1.3.0
 
 ### Minor Changes
