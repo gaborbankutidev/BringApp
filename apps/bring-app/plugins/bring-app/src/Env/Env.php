@@ -27,4 +27,11 @@ class Env {
 	public static function NEXT_BASE_URL() {
 		return Helpers::createStringEnvVariable("NEXT_BASE_URL");
 	}
+
+	/**
+	 * @return string
+	 */
+	public static function WORDPRESS_DEBUG() {
+		return Helpers::createStringEnvVariable("WORDPRESS_DEBUG");
+	}
 }
