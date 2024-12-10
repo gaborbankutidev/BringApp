@@ -12,7 +12,7 @@ import {image} from "@/components/image";
 import {markdown} from "@/components/markdown";
 import {button} from "@/components/ui/button";
 // forms
-import loginForm from "@/components/ui/form/login/login-form";
+import {loginForm} from "@/components/ui/form/login";
 
 export const blockList = [
 	// layout

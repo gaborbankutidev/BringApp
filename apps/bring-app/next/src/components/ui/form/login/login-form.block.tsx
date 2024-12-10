@@ -2,14 +2,27 @@ import {BP} from "@/bring";
 import LoginForm from "./login-form";
 
 export type LoginFormBlockProps = {
-	title: string;
+	title?: string;
+	buttonType?:
+		| "primary"
+		| "destructive"
+		| "outline"
+		| "secondary"
+		| "ghost"
+		| "link";
+	borderRadius?:
+		| "rounded-none"
+		| "rounded-sm"
+		| "rounded-md"
+		| "rounded-lg"
+		| "rounded-full";
 	redirectPath?: string;
 };
 
 export const LoginFormBlock = ({
-	attributes: {title, ...props},
+	attributes: {...props},
 }: BP<LoginFormBlockProps>) => {
-	return <LoginForm {...props}>{title}</LoginForm>;
+	return <LoginForm {...props} />;
 };
 
 export const loginForm = {
@@ -17,4 +30,4 @@ export const loginForm = {
 	blockName: "bring/login-form",
 } as const;
 
-export default LoginFormBlock;
+export default LoginForm;
