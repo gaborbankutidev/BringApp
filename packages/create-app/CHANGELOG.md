@@ -1,5 +1,11 @@
 # @bring/create-app
 
+## 0.5.0
+
+### Minor Changes
+
+- 6b0a746: Update create script to handle composer.json repositories field correctly
+
 ## 0.4.0
 
 ### Minor Changes
