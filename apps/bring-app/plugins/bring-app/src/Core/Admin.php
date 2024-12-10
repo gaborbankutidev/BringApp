@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace BringApp\Core;
 
+use BringApp\Env\Env;
+
 // No direct access
 defined("ABSPATH") or die("Hey, do not do this 😱");
 
@@ -34,6 +36,7 @@ class Admin {
 
 		add_action("admin_notices", Plugins::notices(...));
 		add_action("admin_init", Plugins::preventRequiredPluginDeactivation(...));
+		add_action("admin_init", self::preventBringAppDeactivation(...));
 
 		add_filter(
 			"plugin_action_links",
@@ -41,7 +44,44 @@ class Admin {
 			10,
 			2,
 		);
+		add_filter("plugin_action_links", self::removeDeactivateBringAppButton(...), 10, 2);
 		add_action("init", Plugins::removePluginInstallationCapability(...));
+	}
+
+	/**
+	 * Prevents deactivation of BringApp
+	 *
+	 * @return void
+	 */
+	private static function preventBringAppDeactivation() {
+		if (
+			isset($_GET["action"]) &&
+			$_GET["action"] === "deactivate" &&
+			isset($_GET["plugin"]) &&
+			$_GET["plugin"] === "bring-app/bring-app.php" &&
+			Env::WORDPRESS_DEBUG() !== "true"
+		) {
+			add_action("admin_notices", function () {
+				echo '<div class="notice notice-error"><p><strong>Bring App plugin</strong> cannot be deactivated.</p></div>';
+			});
+
+			wp_redirect(admin_url("plugins.php"));
+			exit();
+		}
+	}
+
+	/**
+	 * Remove deactivate button from required plugins
+	 * @param array<string> $actions
+	 * @param string $plugin_file
+	 * @return array<string>
+	 */
+	private static function removeDeactivateBringAppButton($actions, $plugin_file) {
+		if ($plugin_file === "bring-app/bring-app.php" && Env::WORDPRESS_DEBUG() !== "true") {
+			unset($actions["deactivate"]);
+		}
+
+		return $actions;
 	}
 
 	/**

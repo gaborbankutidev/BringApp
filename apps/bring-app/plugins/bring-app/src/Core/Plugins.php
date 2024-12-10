@@ -19,7 +19,6 @@ class Plugins {
 	 * @var array<string> $required_plugins
 	 */
 	private static array $required_plugins = [
-		"bring-app/bring-app.php",
 		"advanced-custom-fields/acf.php",
 		"acf-quickedit-fields/index.php",
 		"jwt-auth/jwt-auth.php",
@@ -81,7 +80,7 @@ class Plugins {
 				$_GET["plugin"] === $plugin
 			) {
 				add_action("admin_notices", function () {
-					echo '<div class="notice notice-error"><p><strong>BringApp plugin</strong> cannot be deactivated.</p></div>';
+					echo '<div class="notice notice-error"><p><strong>Plugin is required by BringApp plugin</strong> and cannot be deactivated.</p></div>';
 				});
 
 				wp_redirect(admin_url("plugins.php"));
