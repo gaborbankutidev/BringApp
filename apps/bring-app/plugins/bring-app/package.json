@@ -1,5 +1,5 @@
 {
-	"name": "plugin",
+	"name": "bring-app-plugin",
 	"version": "1.2.0",
 	"license": "GPL-2.0-or-later",
 	"private": true,

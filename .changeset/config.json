@@ -4,7 +4,7 @@
 	"commit": false,
 	"fixed": [
 		["@bring/blocks-client", "@bring/blocks-editor", "@bring/blocks-wp"],
-		["@bring/bring-app", "next-app", "plugin"]
+		["@bring/bring-app", "next-app", "bring-app-plugin"]
 	],
 	"linked": [],
 	"access": "public",

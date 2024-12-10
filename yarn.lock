@@ -1765,6 +1765,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bring/bring-app@workspace:apps/bring-app"
   dependencies:
+    "@changesets/cli": "npm:2.27.10"
     "@eslint/js": "npm:^9.13.0"
     "@inquirer/prompts": "npm:^7.0.1"
     "@prettier/plugin-php": "npm:^0.22.2"
@@ -10053,6 +10054,12 @@ __metadata:
   checksum: 10c0/7c6dfd30c338d2997ba77500539227b9d1f85e388a5f43220865201e407e076783d0881f2d297b9f80951b4c957fcf0b51c1d2d24227631643c3f7c284b0aa04
   languageName: node
   linkType: hard
+
+"bring-app-plugin@workspace:apps/bring-app/plugins/bring-app":
+  version: 0.0.0-use.local
+  resolution: "bring-app-plugin@workspace:apps/bring-app/plugins/bring-app"
+  languageName: unknown
+  linkType: soft
 
 "bringapp@workspace:.":
   version: 0.0.0-use.local
