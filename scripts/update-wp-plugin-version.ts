@@ -23,11 +23,14 @@ export const updateWpPluginVersion = (rootPath = "./") => {
 	fs.writeFileSync(`${rootPath}composer.json`, JSON.stringify(composerJson, null, 2))
 
 	const bringAppPhp = fs.readFileSync(`${rootPath}plugins/bring-app/bring-app.php`, "utf8")
-	let updatedBringAppPhp = bringAppPhp.replace(/Version: .*/, `Version:           ${newVersion}`)
-	updatedBringAppPhp = updatedBringAppPhp.replace(
-		/define\("BRING_APP_VERSION", ".*/,
-		`define("BRING_APP_VERSION", "${newVersion}");`
-	)
+	//let updatedBringAppPhp = bringAppPhp.replace(/Version: .*/, `Version:           ${newVersion}`)
+	//updatedBringAppPhp = updatedBringAppPhp.replace(
+	//	/define\("BRING_APP_VERSION", ".*/,
+	//	`define("BRING_APP_VERSION", "${newVersion}");`
+	//)
+	const updatedBringAppPhp = bringAppPhp
+		.replace(/^(\s*\* Version:\s*).+$/m, `$1${newVersion}`)
+		.replace(/^(\s*define\("BRING_APP_VERSION",\s*").+("\);)$/m, `$1${newVersion}$2`)
 
 	fs.writeFileSync(`${rootPath}plugins/bring-app/bring-app.php`, updatedBringAppPhp)
 
