@@ -23,7 +23,7 @@ use BringApp\Core\Deactivator;
  * Plugin Name:       Bring App
  * Plugin URI:        https://bring.team
  * Description:       Enables Bring App functionality, using WordPress as a headless CMS and allowing the usage of the block editor with custom pre-built components.
- * Version:           1.0.0
+ * Version:           1.2.0
  * Author:            Bring Team Ltd.
  * Author URI:        https://bring.team/
  * License:           GPL-2.0+
@@ -40,7 +40,7 @@ defined("ABSPATH") or die("Hey, do not do this 😱");
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define("BRING_APP_VERSION", "1.0.0");
+define("BRING_APP_VERSION", "1.2.0");
 
 /**
  * Define Plugin Path and URL constants

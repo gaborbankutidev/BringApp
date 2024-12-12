@@ -4,7 +4,8 @@
 	"license": "GPL-2.0-or-later",
 	"private": true,
 	"workspaces": [
-		"next-app"
+		"next-app",
+		"plugins/bring-app-plugin"
 	],
 	"packageManager": "yarn@4.5.3",
 	"scripts": {
