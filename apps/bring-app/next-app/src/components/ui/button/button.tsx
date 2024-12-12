@@ -32,25 +32,15 @@ export const buttonVariants = cva(
 	}
 )
 
-type BaseProps = VariantProps<typeof buttonVariants> & {
+export interface ButtonProps
+	extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+		VariantProps<typeof buttonVariants> {
 	asChild?: boolean
 	isLoading?: boolean
 	loadingMessage?: string
 }
 
-type AsLink = {
-	as: "Link"
-} & BaseProps &
-	React.AnchorHTMLAttributes<HTMLAnchorElement>
-
-type AsButton = {
-	as?: "button"
-} & BaseProps &
-	React.ButtonHTMLAttributes<HTMLButtonElement>
-
-export type ButtonProps = AsButton | AsLink
-
-const ButtonButton = React.forwardRef<HTMLButtonElement, AsButton>(
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 	(
 		{
 			className,
@@ -61,7 +51,7 @@ const ButtonButton = React.forwardRef<HTMLButtonElement, AsButton>(
 			loadingMessage = "Please wait",
 			children,
 			...props
-		}: AsButton,
+		},
 		ref
 	) => {
 		const Comp = asChild ? Slot : "button"
@@ -82,54 +72,6 @@ const ButtonButton = React.forwardRef<HTMLButtonElement, AsButton>(
 				)}
 			</Comp>
 		)
-	}
-)
-ButtonButton.displayName = "ButtonButton"
-
-const Link = React.forwardRef<HTMLAnchorElement, AsLink>(
-	(
-		{
-			className,
-			variant,
-			size,
-			asChild = false,
-			isLoading = false,
-			loadingMessage = "Please wait",
-			children,
-			...props
-		}: AsLink,
-		ref
-	) => {
-		const Comp = asChild ? Slot : "a"
-		return (
-			<Comp
-				className={cn(
-					buttonVariants({ variant, size, className }),
-					isLoading && "pointer-events-none opacity-50"
-				)}
-				ref={ref}
-				{...props}
-			>
-				{isLoading ? (
-					<>
-						<Loader2 className="animate-spin" />
-						{loadingMessage}
-					</>
-				) : (
-					children
-				)}
-			</Comp>
-		)
-	}
-)
-Link.displayName = "Link"
-
-const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
-	({ as, ...props }: ButtonProps, ref) => {
-		if (as === "Link") {
-			return <Link {...(props as AsLink)} ref={ref as React.Ref<HTMLAnchorElement>} />
-		}
-		return <ButtonButton {...(props as AsButton)} ref={ref as React.Ref<HTMLButtonElement>} />
 	}
 )
 Button.displayName = "Button"
