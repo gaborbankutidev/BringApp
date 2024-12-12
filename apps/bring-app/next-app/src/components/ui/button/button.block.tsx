@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 import { type BP } from "@/bring"
 import Button from "./button"
 
@@ -10,11 +12,13 @@ export type ButtonBlockProps = {
 }
 
 export const ButtonBlock = ({
-	attributes: { text, newTab = false, ...props },
+	attributes: { text, href = "#", newTab = false, ...props },
 }: BP<ButtonBlockProps>) => {
 	return (
-		<Button as="Link" target={newTab ? "_blank" : "_self"} {...props}>
-			{text}
+		<Button asChild {...props}>
+			<Link href={href} target={newTab ? "_blank" : "_self"}>
+				{text}
+			</Link>
 		</Button>
 	)
 }

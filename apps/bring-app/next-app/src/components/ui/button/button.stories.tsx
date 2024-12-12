@@ -16,10 +16,6 @@ const meta = {
 			control: { type: "radio" },
 			options: ["sm", "md", "lg", "icon"],
 		},
-		as: {
-			control: { type: "radio" },
-			options: ["button", "Link"],
-		},
 	},
 } satisfies Meta<typeof Button>
 
@@ -31,7 +27,20 @@ export const Primary: Story = {
 		children: "Primary",
 		size: "md",
 		variant: "primary",
-		as: "button",
+	},
+}
+
+export const Loading: Story = {
+	args: {
+		children: "Ready",
+		size: "md",
+		variant: "primary",
+		isLoading: true,
+	},
+	argTypes: {
+		loadingMessage: {
+			control: "text",
+		},
 	},
 }
 
@@ -40,7 +49,6 @@ export const Destructive: Story = {
 		variant: "destructive",
 		children: "Destructive",
 		size: "md",
-		as: "button",
 	},
 }
 
@@ -49,7 +57,6 @@ export const Outline: Story = {
 		variant: "outline",
 		children: "Outline",
 		size: "md",
-		as: "button",
 	},
 }
 
@@ -58,7 +65,6 @@ export const Secondary: Story = {
 		variant: "secondary",
 		children: "Secondary",
 		size: "md",
-		as: "button",
 	},
 }
 
@@ -67,15 +73,14 @@ export const Ghost: Story = {
 		variant: "ghost",
 		children: "Ghost",
 		size: "md",
-		as: "button",
 	},
 }
 
 export const Link: Story = {
 	args: {
 		variant: "link",
-		children: "Link",
 		size: "md",
-		as: "button",
+		asChild: true,
+		children: <a href="#">Link</a>,
 	},
 }

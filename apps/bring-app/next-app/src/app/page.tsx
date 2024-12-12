@@ -37,7 +37,7 @@ const Home = async () => {
 							Get Started
 						</Link>
 
-						<a
+						<Link
 							target="_blank"
 							rel="noopener noreferrer"
 							href={errorNotice?.href ? errorNotice.href : wpAdminUrl}
@@ -52,7 +52,7 @@ const Home = async () => {
 								: errorNotice
 									? errorNotice.cta
 									: "Unkown error"}
-						</a>
+						</Link>
 					</div>
 
 					{errorNotice && (

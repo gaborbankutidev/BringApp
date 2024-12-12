@@ -1,5 +1,6 @@
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
+import { Loader2 } from "lucide-react"
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
@@ -31,50 +32,46 @@ export const buttonVariants = cva(
 	}
 )
 
-type BaseProps = {
+export interface ButtonProps
+	extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+		VariantProps<typeof buttonVariants> {
 	asChild?: boolean
+	isLoading?: boolean
+	loadingMessage?: string
 }
 
-type AsLink = {
-	as: "Link"
-} & BaseProps &
-	VariantProps<typeof buttonVariants> &
-	React.AnchorHTMLAttributes<HTMLAnchorElement>
-
-type AsButton = {
-	as?: "button"
-} & BaseProps &
-	VariantProps<typeof buttonVariants> &
-	React.ButtonHTMLAttributes<HTMLButtonElement>
-
-export type ButtonProps = AsButton | AsLink
-
-const ButtonButton = React.forwardRef<HTMLButtonElement, AsButton>(
-	({ className, variant, size, asChild = false, ...props }: AsButton, ref) => {
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+	(
+		{
+			className,
+			variant,
+			size,
+			asChild = false,
+			isLoading = false,
+			loadingMessage = "Please wait",
+			children,
+			...props
+		},
+		ref
+	) => {
 		const Comp = asChild ? Slot : "button"
 		return (
-			<Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />
+			<Comp
+				className={cn(buttonVariants({ variant, size, className }))}
+				ref={ref}
+				disabled={isLoading || props.disabled}
+				{...props}
+			>
+				{isLoading ? (
+					<>
+						<Loader2 className="animate-spin" />
+						{loadingMessage}
+					</>
+				) : (
+					children
+				)}
+			</Comp>
 		)
-	}
-)
-ButtonButton.displayName = "ButtonButton"
-
-const Link = React.forwardRef<HTMLAnchorElement, AsLink>(
-	({ className, variant, size, asChild = false, ...props }: AsLink, ref) => {
-		const Comp = asChild ? Slot : "a"
-		return (
-			<Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />
-		)
-	}
-)
-Link.displayName = "Link"
-
-const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
-	({ as, ...props }: ButtonProps, ref) => {
-		if (as === "Link") {
-			return <Link {...(props as AsLink)} ref={ref as React.Ref<HTMLAnchorElement>} />
-		}
-		return <ButtonButton {...(props as AsButton)} ref={ref as React.Ref<HTMLButtonElement>} />
 	}
 )
 Button.displayName = "Button"
