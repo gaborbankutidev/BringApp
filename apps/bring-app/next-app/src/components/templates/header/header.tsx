@@ -8,7 +8,7 @@ import Breadcrumb from "./breadcrumb"
  * Or delete this file and replace Header in RootLayout with the Bring Header render component to build header in WordPress
  */
 const Header = () => (
-	<header className={cn("flex py-4", rowSizes["1520"])}>
+	<header className={cn("flex py-4", rowSizes["wide"])}>
 		<Breadcrumb />
 		<a
 			className="ml-auto cursor-pointer text-white transition-colors duration-300 hover:text-purple-600"

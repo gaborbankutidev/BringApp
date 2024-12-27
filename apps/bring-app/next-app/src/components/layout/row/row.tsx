@@ -9,7 +9,7 @@ export const sizes = {
 	"1040": "mx-4 md:mx-8 max-w-[1040px] min-[1080px]:mx-auto",
 	"1200": "mx-4 md:mx-8 lg:mx-10 max-w-[1200px] min-[1280px]:mx-auto",
 	"1520": "mx-4 md:mx-8 lg:mx-10 max-w-[1520px] min-[1600px]:mx-auto",
-	wide: "mx-4 md:mx-8 lg:mx-10", // Without mac width
+	wide: "mx-4 md:mx-8 lg:mx-10", // Without max width
 	full: "mx-0", // Without max width and margin
 	split: "mx-4 md:ml-8 md:mr-0 lg:ml-10 md:max-w-[66%] lg:max-w-[50%]",
 } as const
