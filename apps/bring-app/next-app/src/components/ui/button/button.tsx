@@ -49,6 +49,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 			asChild = false,
 			isLoading = false,
 			loadingMessage = "Please wait",
+			disabled,
 			children,
 			...props
 		},
@@ -59,7 +60,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 			<Comp
 				className={cn(buttonVariants({ variant, size, className }))}
 				ref={ref}
-				disabled={isLoading || props.disabled}
+				disabled={isLoading || disabled}
 				{...props}
 			>
 				{isLoading ? (
