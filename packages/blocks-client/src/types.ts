@@ -30,7 +30,7 @@ export type EditorAttributes<T> = T & { className?: string; id?: string; blockSt
  * @template MI - Menu Item type
  * @template CTX - Context type
  */
-export type BP<P = object, EP = object, SP = object, M = object, MI = object, CTX = object> = P & {
+export type BP<P = object, EP = object, SP = object, M = object, MI = object, CTX = object> = {
 	attributes: ClientAttributes<P>
 	entityProps?: EntityProps<EP>
 	siteProps?: SiteProps<SP, M, MI>
