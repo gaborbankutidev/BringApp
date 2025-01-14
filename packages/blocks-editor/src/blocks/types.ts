@@ -46,7 +46,7 @@ type EntityProps<EP = object> = {
 	image?: ImageType | null
 } & EP
 
-export type BP<P = object, EP = object, SP = object, M = object, MI = object, CTX = object> = P & {
+export type BP<P = object, EP = object, SP = object, M = object, MI = object, CTX = object> = {
 	attributes: P & { className?: string; id?: string }
 	entityProps?: EntityProps<EP>
 	siteProps?: SiteProps<SP, M, MI>
