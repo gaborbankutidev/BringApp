@@ -1,4 +1,5 @@
-import { makeDynamicEntity, makeDynamicEntityList } from "./components"
+import makeDynamicEntity from "./components/dynamic-entity"
+import makeDynamicEntityList from "./components/dynamic-entity-list"
 import {
 	getDynamicEntityList,
 	getDynamicEntityProps,
