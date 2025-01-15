@@ -1,5 +1,13 @@
 # next-app
 
+## 1.4.2
+
+### Patch Changes
+
+- Updated dependencies [e4207a8]
+  - @bring/blocks-client@2.10.0
+  - @bring/blocks-editor@2.10.0
+
 ## 1.4.1
 
 ## 1.4.0

@@ -1,5 +1,11 @@
 # @bring/blocks-client
 
+## 2.10.0
+
+### Minor Changes
+
+- e4207a8: Fix BP type by removing the P template types from the top level as it is part of the type of the attribe prop
+
 ## 2.9.0
 
 ### Minor Changes
