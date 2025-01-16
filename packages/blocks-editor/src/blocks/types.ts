@@ -119,7 +119,7 @@ export type BlockConfig<Props extends object = object> = {
 	description?: string
 	icon?: BlockIcon
 	blockName: BlockName
-	Block: FCB<Props>
+	Block: FCB<Props, any, any, any, any, any>
 	attributes?: BlockAttributesConfig<Props>
 	previewAttributes?: ClientAttributes<Props>
 	allowedBlocks?: string[]
