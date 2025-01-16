@@ -1,6 +1,6 @@
 {
 	"name": "@bring/blocks-editor",
-	"version": "2.11.0",
+	"version": "2.11.1",
 	"type": "module",
 	"description": "Editor package for bring-blocks",
 	"author": "Bring Team Ltd.",

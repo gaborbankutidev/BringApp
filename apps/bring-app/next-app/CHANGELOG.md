@@ -1,5 +1,14 @@
 # next-app
 
+## 1.5.1
+
+### Patch Changes
+
+- Updated dependencies [8dcb9b8]
+- Updated dependencies [4bbbf20]
+  - @bring/blocks-client@2.11.1
+  - @bring/blocks-editor@2.11.1
+
 ## 1.5.0
 
 ### Minor Changes

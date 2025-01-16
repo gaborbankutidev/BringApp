@@ -1,5 +1,11 @@
 # @bring/blocks-client
 
+## 2.11.1
+
+### Patch Changes
+
+- 8dcb9b8: Fix init server import path error
+
 ## 2.11.0
 
 ## 2.10.0
