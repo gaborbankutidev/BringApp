@@ -1,5 +1,11 @@
 # @bring/blocks-editor
 
+## 2.11.1
+
+### Patch Changes
+
+- 4bbbf20: Fix BlockConfig type
+
 ## 2.11.0
 
 ## 2.10.0
