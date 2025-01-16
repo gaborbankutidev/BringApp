@@ -1,5 +1,16 @@
 # next-app
 
+## 1.5.0
+
+### Minor Changes
+
+- 34c3820: Remove unused legacy code
+
+### Patch Changes
+
+- @bring/blocks-client@2.11.0
+- @bring/blocks-editor@2.11.0
+
 ## 1.4.2
 
 ### Patch Changes
