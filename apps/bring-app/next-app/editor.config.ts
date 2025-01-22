@@ -13,7 +13,6 @@ import image from "@/components/image/image.wp"
 import markdown from "@/components/markdown/markdown.wp"
 import button from "@/components/ui/button/button.wp"
 
-import { env } from "@/env.mjs"
 import Editor from "@bring/blocks-editor"
 
 const blockList = [
@@ -32,4 +31,4 @@ const blockList = [
 	markdown,
 ]
 
-Editor.init(env.NEXT_PUBLIC_WP_BASE_URL, blockList)
+Editor.init(blockList)

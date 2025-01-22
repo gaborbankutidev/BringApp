@@ -35,7 +35,6 @@ declare global {
 export class Editor {
 	private static instance: Editor
 
-	private wpBaseURL: string
 	private jwtToken: string
 	private isSaving: boolean
 	private blockList: BlockConfig<any>[] // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -47,8 +46,7 @@ export class Editor {
 	 * @param blockList - the list of block configurations
 	 */
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	private constructor(wpBaseURL: string, blockList: BlockConfig<any>[]) {
-		this.wpBaseURL = wpBaseURL
+	private constructor(blockList: BlockConfig<any>[]) {
 		this.jwtToken = window.jwt.token // FIXME move this to a cookie
 		this.isSaving = false
 		this.blockList = blockList
@@ -68,14 +66,13 @@ export class Editor {
 	 * @returns the instance of the Editor class
 	 */
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	public static init(wpBaseURL: string, blockList: BlockConfig<any>[]) {
+	public static init(blockList: BlockConfig<any>[]) {
 		console.log("🚀 Launching Bring Editor...")
 		if (!Editor.instance) {
-			Editor.instance = new Editor(wpBaseURL, blockList)
+			Editor.instance = new Editor(blockList)
 		} else {
 			Editor.instance.blockList = blockList
 			Editor.instance.jwtToken = window.jwt.token
-			Editor.instance.wpBaseURL = wpBaseURL
 		}
 		console.log("🚀 Bring Editor Launched! Happy editing!")
 		return this.instance
@@ -138,7 +135,7 @@ export class Editor {
 		const contentObject = this.parseBlocks(select("core/block-editor").getBlocks())
 		const entityId = select("core/editor").getCurrentPostId()
 
-		fetch(`${this.wpBaseURL}/wp-json/bring/editor/save`, {
+		fetch("/wp-json/bring/editor/save", {
 			method: "POST",
 			headers: {
 				Authorization: this.jwtToken,
