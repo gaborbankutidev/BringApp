@@ -1,5 +1,17 @@
 # next-app
 
+## 1.6.0
+
+### Minor Changes
+
+- 5d781df: Remove unused wp base url from editor init
+
+### Patch Changes
+
+- Updated dependencies [5d781df]
+  - @bring/blocks-editor@2.12.0
+  - @bring/blocks-client@2.12.0
+
 ## 1.5.1
 
 ### Patch Changes

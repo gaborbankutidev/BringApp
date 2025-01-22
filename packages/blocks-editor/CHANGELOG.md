@@ -1,5 +1,11 @@
 # @bring/blocks-editor
 
+## 2.12.0
+
+### Minor Changes
+
+- 5d781df: Remove unused wp base url from editor init
+
 ## 2.11.1
 
 ### Patch Changes
