@@ -1,15 +1,15 @@
-"use client";
+"use client"
 
-import {makeDynamicEntityClient, makeDynamicEntityListClient} from "./components";
+import { makeDynamicEntityClient, makeDynamicEntityListClient } from "./components"
 import {
 	useDynamicEntityList,
 	useDynamicEntityProps,
 	useSiteProps,
 	type UseDynamicEntityListOptions,
 	type UseDynamicEntityPropsOptions,
-} from "./hooks";
-import {makeUseWPSendForm} from "./hooks/use-wp-send-form";
-import type {EntityType} from "./types";
+} from "./hooks"
+import { makeUseWPSendForm } from "./hooks/use-wp-send-form"
+import type { EntityType } from "./types"
 
 /**
  * Initializes the client with the specified WordPress URL.
@@ -20,9 +20,9 @@ import type {EntityType} from "./types";
  * @returns The initialized client object.
  */
 export function initClient<
-	SP = unknown, // SiteProps
-	M = unknown, // Menu
-	MI = unknown, // MenuItem
+	SP = object, // SiteProps
+	M = object, // Menu
+	MI = object, // MenuItem
 >(wpURL: string = "") {
 	const client = {
 		/**
@@ -39,10 +39,10 @@ export function initClient<
 		 * @param options - The options for retrieving the entity props.
 		 * @returns The dynamic entity props.
 		 */
-		useDynamicEntityProps: <T = unknown,>(
+		useDynamicEntityProps: <T = object,>(
 			entityId: number,
 			entityType: EntityType,
-			options: UseDynamicEntityPropsOptions = {},
+			options: UseDynamicEntityPropsOptions = {}
 		) => useDynamicEntityProps<T>(wpURL, entityId, entityType, options),
 
 		/**
@@ -53,10 +53,10 @@ export function initClient<
 		 * @param options - The options for retrieving the entity list.
 		 * @returns The dynamic entity list.
 		 */
-		useDynamicEntityList: <T = unknown,>(
+		useDynamicEntityList: <T = object,>(
 			entitySlug: string,
 			entityType: EntityType,
-			options: UseDynamicEntityListOptions = {},
+			options: UseDynamicEntityListOptions = {}
 		) => useDynamicEntityList<T>(wpURL, entitySlug, entityType, options),
 
 		/**
@@ -81,7 +81,7 @@ export function initClient<
 		 * @returns The WP send form hook.
 		 */
 		useWPSendForm: makeUseWPSendForm(wpURL),
-	};
+	}
 
-	return client;
+	return client
 }

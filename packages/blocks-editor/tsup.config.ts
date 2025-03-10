@@ -1,4 +1,4 @@
-import {defineConfig} from "tsup";
+import { defineConfig } from "tsup"
 
 export default defineConfig({
 	entry: [
@@ -8,7 +8,6 @@ export default defineConfig({
 		"src/controls/index.ts",
 		"src/hooks/index.ts",
 		"src/styles/index.ts",
-		"src/editor.ts",
 		"src/types.ts",
 		"src/utils.ts",
 	],
@@ -24,9 +23,9 @@ export default defineConfig({
 	minify: false,
 	dts: true,
 	clean: true,
-	outExtension({format}) {
+	outExtension({ format }) {
 		return {
 			js: `.${format}.js`,
-		};
+		}
 	},
-});
+})

@@ -1,23 +1,21 @@
-import {Button, Icon} from "@wordpress/components";
-import cloneDeep from "lodash.clonedeep";
-import get from "lodash.get";
-import set from "lodash.set";
-import type {FC} from "react";
-import React, {useState} from "react";
-import {RangeControl} from "..";
-import {ResponsiveValue} from "../../client-types";
-import type {ResponsiveLabels} from "../../styles/types";
-import {screenSizes} from "../../styles/utils";
-import type {Obj} from "../../types";
-import {objectKeys} from "../../utils";
-import {useControlContext} from "../context";
-import type {ControlByPath, ControlByValue, ControlType} from "../types";
-import {isPathControl} from "../utils";
+import { Button, Icon } from "@wordpress/components"
+import cloneDeep from "lodash.clonedeep"
+import get from "lodash.get"
+import set from "lodash.set"
+import type { FC } from "react"
+import React, { useState } from "react"
+import { RangeControl } from ".."
+import type { ResponsiveLabels, ResponsiveValue } from "../../styles/types"
+import { screenSizes } from "../../styles/utils"
+import { objectKeys } from "../../utils"
+import { useControlContext } from "../context"
+import type { ControlByPath, ControlByValue, ControlType } from "../types"
+import { isPathControl } from "../utils"
 
 /**
  * Props for the ResponsiveRangeControl component.
  */
-type _NumberControl = {min?: number; max?: number};
+type _NumberControl = { min?: number; max?: number }
 
 /**
  * A control component that renders a responsive range control.
@@ -27,14 +25,14 @@ type _NumberControl = {min?: number; max?: number};
  * @param props - The props for the ResponsiveRangeControl component.
  * @returns The rendered ResponsiveRangeControl component.
  */
-export const ResponsiveRangeControl = <pT extends Obj = {}>(
-	props: ControlType<ResponsiveValue, pT> & _NumberControl,
+export const ResponsiveRangeControl = <pT extends object = object>(
+	props: ControlType<ResponsiveValue, pT> & _NumberControl
 ) =>
 	isPathControl(props) ? (
 		<ResponsiveRangeControlByPath {...props} />
 	) : (
 		<ResponsiveRangeControlByValue {...props} />
-	);
+	)
 
 /**
  * A control component that renders a responsive range control based on a path.
@@ -45,26 +43,26 @@ export const ResponsiveRangeControl = <pT extends Obj = {}>(
  * @param updateHandling - The update handling strategy.
  * @returns The rendered ResponsiveRangeControlByPath component.
  */
-function ResponsiveRangeControlByPath<pT extends Obj>({
+function ResponsiveRangeControlByPath<pT extends object>({
 	path,
 	updateHandling,
 	...props
 }: ControlByPath<pT, ResponsiveValue> & _NumberControl) {
-	const {attributes, setAttributes} = useControlContext();
-	const value = get(attributes, path);
+	const { attributes, setAttributes } = useControlContext()
+	const value = get(attributes, path)
 
 	return (
 		<ResponsiveRangeControlByValue
 			updateHandling="by-value"
 			value={value}
 			setValue={(newValue) => {
-				const newAttributes = cloneDeep(attributes);
-				set(newAttributes, path, newValue);
-				setAttributes(newAttributes);
+				const newAttributes = cloneDeep(attributes)
+				set(newAttributes, path, newValue)
+				setAttributes(newAttributes)
 			}}
 			{...props}
 		/>
-	);
+	)
 }
 
 /**
@@ -88,11 +86,11 @@ const ResponsiveRangeControlByValue: FC<ControlByValue<ResponsiveValue>> = ({
 	defaultValue,
 	...props
 }) => {
-	const [selectedSize, setSelectedSize] = useState<keyof ResponsiveLabels>("");
+	const [selectedSize, setSelectedSize] = useState<keyof ResponsiveLabels>("")
 
 	return show ? (
 		<>
-			<div style={{display: "flex", gap: "16px", marginBottom: "16px"}}>
+			<div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
 				{objectKeys(screenSizes).map((screenSize) => (
 					<Button
 						variant={selectedSize === screenSize ? "primary" : "secondary"}
@@ -111,13 +109,13 @@ const ResponsiveRangeControlByValue: FC<ControlByValue<ResponsiveValue>> = ({
 				label={`${label} - ${screenSizes[selectedSize].label}`}
 				value={value ? value[selectedSize] : 0}
 				setValue={(newValue) => {
-					const newObject = {...value};
-					newObject[selectedSize] = newValue;
-					setValue(newObject);
+					const newObject = { ...value }
+					newObject[selectedSize] = newValue
+					setValue(newObject)
 				}}
 				defaultValue={defaultValue ? (defaultValue[selectedSize] ?? 0) : 0}
 				{...props}
 			/>
 		</>
-	) : null;
-};
+	) : null
+}

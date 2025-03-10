@@ -1,37 +1,36 @@
-import {ComboboxControl as WPComboboxControl} from "@wordpress/components";
-import cloneDeep from "lodash.clonedeep";
-import get from "lodash.get";
-import set from "lodash.set";
-import type {FC} from "react";
-import React from "react";
-import type {Obj} from "../../types";
-import {useControlContext} from "../context";
-import type {ControlByPath, ControlByValue, ControlType} from "../types";
-import {isPathControl} from "../utils";
+import { ComboboxControl as WPComboboxControl } from "@wordpress/components"
+import cloneDeep from "lodash.clonedeep"
+import get from "lodash.get"
+import set from "lodash.set"
+import type { FC } from "react"
+import React from "react"
+import { useControlContext } from "../context"
+import type { ControlByPath, ControlByValue, ControlType } from "../types"
+import { isPathControl } from "../utils"
 
 /**
  * Options for the NumberComboboxControl component.
  */
 type _NumberComboboxControl = {
 	options: {
-		label: string;
-		value: number;
-	}[];
-};
+		label: string
+		value: number
+	}[]
+}
 
 /**
  * A control component that combines a number input with a combobox.
  * @param props - The control props.
  * @returns The rendered NumberComboboxControl component.
  */
-export const NumberComboboxControl = <pT extends Obj = {}>(
-	props: ControlType<number, pT> & _NumberComboboxControl,
+export const NumberComboboxControl = <pT extends object = object>(
+	props: ControlType<number, pT> & _NumberComboboxControl
 ) =>
 	isPathControl(props) ? (
 		<NumberComboboxControlByPath {...props} />
 	) : (
 		<NumberComboboxControlByValue {...props} />
-	);
+	)
 
 /**
  * A control component that combines a number input with a combobox, using a path to access the value in the attributes object.
@@ -40,26 +39,26 @@ export const NumberComboboxControl = <pT extends Obj = {}>(
  * @param props - The control props.
  * @returns The rendered NumberComboboxControlByPath component.
  */
-function NumberComboboxControlByPath<pT extends Obj>({
+function NumberComboboxControlByPath<pT extends object>({
 	path,
 	updateHandling,
 	...props
 }: ControlByPath<pT, number> & _NumberComboboxControl): JSX.Element {
-	const {attributes, setAttributes} = useControlContext();
-	const value = get(attributes, path);
+	const { attributes, setAttributes } = useControlContext()
+	const value = get(attributes, path)
 
 	return (
 		<NumberComboboxControl
 			updateHandling="by-value"
 			value={value}
 			setValue={(newValue) => {
-				const newAttributes = cloneDeep(attributes);
-				set(newAttributes, path, newValue);
-				setAttributes(newAttributes);
+				const newAttributes = cloneDeep(attributes)
+				set(newAttributes, path, newValue)
+				setAttributes(newAttributes)
 			}}
 			{...props}
 		/>
-	);
+	)
 }
 
 /**
@@ -86,17 +85,17 @@ const NumberComboboxControlByValue: FC<ControlByValue<number> & _NumberComboboxC
 			//onChange={setValue}
 			onChange={(newValue) => {
 				if (!newValue) {
-					setValue(undefined);
-					return;
+					setValue(undefined)
+					return
 				}
 
-				const parsedNewValue = parseInt(newValue);
+				const parsedNewValue = parseInt(newValue)
 				if (isNaN(parsedNewValue)) {
-					alert("Value can not be set because it's a NaN");
-					return;
+					alert("Value can not be set because it's a NaN")
+					return
 				}
 
-				setValue(parsedNewValue);
+				setValue(parsedNewValue)
 			}}
 			value={value ? value.toString() : ""}
 			help={
@@ -104,13 +103,13 @@ const NumberComboboxControlByValue: FC<ControlByValue<number> & _NumberComboboxC
 				value !== undefined && (
 					<button
 						onClick={() => {
-							setValue(undefined);
+							setValue(undefined)
 						}}
 					>
 						Set to default
 					</button>
 				)
 			}
-			options={options.map((opt) => ({...opt, value: opt.value.toString()}))}
+			options={options.map((opt) => ({ ...opt, value: opt.value.toString() }))}
 		/>
-	) : null;
+	) : null

@@ -1,6 +1,9 @@
-import {execSync} from "child_process";
+import { execSync } from "child_process"
 
-if (process.env.SKIP_COMPOSER_INSTALL) {
-	process.exit(0);
+import { generateComposerAuthJson } from "./generate-composer-auth-json.mjs"
+
+generateComposerAuthJson()
+
+if (!process.env.SKIP_COMPOSER_INSTALL) {
+	execSync("composer install", { stdio: "inherit" })
 }
-execSync("composer install", {stdio: "inherit"});

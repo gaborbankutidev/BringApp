@@ -35,7 +35,7 @@ jobs:
           path: /tmp/composer-cache
           key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
 
-      - name: Cache composer dependencies
+      - name: Install composer dependencies
         uses: php-actions/composer@v6
 
       - name: Enable Corepack
@@ -44,7 +44,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: "yarn"
 
       - name: Install dependencies

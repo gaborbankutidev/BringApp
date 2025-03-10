@@ -336,4 +336,4 @@ export type DashIcon =
 	| "xing"
 	| "yes"
 	| "yes-alt"
-	| "youtube";
+	| "youtube"

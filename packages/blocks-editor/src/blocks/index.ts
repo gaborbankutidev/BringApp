@@ -6,7 +6,7 @@ export {
 	numberAttributeSource,
 	objectAttributeSource,
 	stringAttributeSource,
-} from "./attributes";
+} from "./attributes"
 
-export {registerBringBlock} from "./register";
-export type {BlockConfig, BlockControl, BlockEdit} from "./types";
+export { registerBringBlock } from "./register"
+export type { BlockConfig, BlockControl, BlockEdit } from "./types"

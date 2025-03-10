@@ -1,16 +1,16 @@
-import {MediaUpload, MediaUploadCheck} from "@wordpress/block-editor";
-import {Button} from "@wordpress/components";
-import cloneDeep from "lodash.clonedeep";
-import get from "lodash.get";
-import set from "lodash.set";
-import React from "react";
-import type {MediaType, Obj} from "../../types";
-import {defaultMediaValue} from "../../utils";
-import {useControlContext} from "../context";
-import type {ControlByPath, ControlByValue, ControlType} from "../types";
-import {isPathControl} from "../utils";
+import { MediaUpload, MediaUploadCheck } from "@wordpress/block-editor"
+import { Button } from "@wordpress/components"
+import cloneDeep from "lodash.clonedeep"
+import get from "lodash.get"
+import set from "lodash.set"
+import React from "react"
+import type { MediaType } from "../../types"
+import { defaultMediaValue } from "../../utils"
+import { useControlContext } from "../context"
+import type { ControlByPath, ControlByValue, ControlType } from "../types"
+import { isPathControl } from "../utils"
 
-type MediaOption = string[];
+type MediaOption = string[]
 
 /**
  * Props for the MediaControl component.
@@ -18,9 +18,9 @@ type MediaOption = string[];
  * @property Preview - The preview component for the media.
  */
 type MediaControlProps = {
-	allowedTypes?: MediaOption;
-	Preview?: React.FC<MediaType>;
-};
+	allowedTypes?: MediaOption
+	Preview?: React.FC<MediaType>
+}
 
 /**
  * A control component that renders a media upload component.
@@ -30,10 +30,9 @@ type MediaControlProps = {
  * @param props - The props for the MediaControl component.
  * @returns The rendered MediaControl component.
  */
-export const MediaControl = <pT extends Obj = {}>(
-	props: ControlType<MediaType, pT> & MediaControlProps,
-) =>
-	isPathControl(props) ? <MediaControlByPath {...props} /> : <MediaControlByValue {...props} />;
+export const MediaControl = <pT extends object = object>(
+	props: ControlType<MediaType, pT> & MediaControlProps
+) => (isPathControl(props) ? <MediaControlByPath {...props} /> : <MediaControlByValue {...props} />)
 
 /**
  *  A control component that renders a media upload component based on a path.
@@ -45,26 +44,26 @@ export const MediaControl = <pT extends Obj = {}>(
  * @param props - The rest of the props for the MediaControlByPath component.
  * @returns The rendered MediaControlByPath component.
  */
-function MediaControlByPath<pT extends Obj>({
+function MediaControlByPath<pT extends object>({
 	path,
 	updateHandling,
 	...props
 }: ControlByPath<pT, MediaType> & MediaControlProps) {
-	const {attributes, setAttributes} = useControlContext();
-	const value = get(attributes, path);
+	const { attributes, setAttributes } = useControlContext()
+	const value = get(attributes, path)
 
 	return (
 		<MediaControlByValue
 			updateHandling="by-value"
 			value={value}
 			setValue={(newValue) => {
-				const newAttributes = cloneDeep(attributes);
-				set(newAttributes, path, newValue);
-				setAttributes(newAttributes);
+				const newAttributes = cloneDeep(attributes)
+				set(newAttributes, path, newValue)
+				setAttributes(newAttributes)
 			}}
 			{...props}
 		/>
-	);
+	)
 }
 
 function MediaControlByValue({
@@ -76,18 +75,19 @@ function MediaControlByValue({
 	show = true,
 }: ControlByValue<MediaType> & MediaControlProps) {
 	return show ? (
+		// @ts-ignore
 		<MediaUploadCheck fallback={null}>
 			<MediaUpload
 				title={label ?? "Select media"}
 				onSelect={(value) => {
-					const src = value.url;
-					const v = value as MediaType;
-					v.src = src;
-					setValue(v);
+					const src = value.url
+					const v = value as MediaType
+					v.src = src
+					setValue(v)
 				}}
 				allowedTypes={allowedTypes}
 				value={value?.id ?? undefined}
-				render={({open}) => (
+				render={({ open }) => (
 					<div
 						style={{
 							border: "1px solid #ddd",
@@ -125,7 +125,7 @@ function MediaControlByValue({
 								isDestructive
 								variant="primary"
 								onClick={() => {
-									setValue(defaultMediaValue);
+									setValue(defaultMediaValue)
 								}}
 							>
 								Delete media
@@ -135,5 +135,5 @@ function MediaControlByValue({
 				)}
 			/>
 		</MediaUploadCheck>
-	) : null;
+	) : null
 }

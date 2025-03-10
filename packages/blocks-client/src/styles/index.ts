@@ -1,2 +1,7 @@
-export {makeResponsiveClassNames} from "./make-class-names";
-export type {BringStylesClassNames, ResponsiveValue} from "./types";
+export { makeBlockStylesClassNames, makeResponsiveClassNames } from "./make-class-names"
+export type {
+	BlockStyles,
+	BlockStylesClassNames,
+	BlockStylesConfig,
+	ResponsiveValue,
+} from "./types"

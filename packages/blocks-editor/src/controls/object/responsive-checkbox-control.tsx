@@ -1,18 +1,16 @@
-import {Button, Icon} from "@wordpress/components";
-import cloneDeep from "lodash.clonedeep";
-import get from "lodash.get";
-import set from "lodash.set";
-import type {FC} from "react";
-import React, {useState} from "react";
-import {CheckboxControl} from "..";
-import {ResponsiveValue} from "../../client-types";
-import type {ResponsiveLabels} from "../../styles/types";
-import {screenSizes} from "../../styles/utils";
-import type {Obj} from "../../types";
-import {objectKeys} from "../../utils";
-import {useControlContext} from "../context";
-import type {ControlByPath, ControlByValue, ControlType} from "../types";
-import {isPathControl} from "../utils";
+import { Button, Icon } from "@wordpress/components"
+import cloneDeep from "lodash.clonedeep"
+import get from "lodash.get"
+import set from "lodash.set"
+import type { FC } from "react"
+import React, { useState } from "react"
+import { CheckboxControl } from ".."
+import type { ResponsiveLabels, ResponsiveValue } from "../../styles/types"
+import { screenSizes } from "../../styles/utils"
+import { objectKeys } from "../../utils"
+import { useControlContext } from "../context"
+import type { ControlByPath, ControlByValue, ControlType } from "../types"
+import { isPathControl } from "../utils"
 
 /**
  * A control component that renders a responsive checkbox control.
@@ -22,14 +20,14 @@ import {isPathControl} from "../utils";
  * @param props - The props for the ResponsiveCheckboxControl component.
  * @returns The rendered ResponsiveCheckboxControl component.
  */
-export const ResponsiveCheckboxControl = <pT extends Obj = {}>(
-	props: ControlType<ResponsiveValue<boolean>, pT>,
+export const ResponsiveCheckboxControl = <pT extends object = {}>(
+	props: ControlType<ResponsiveValue<boolean>, pT>
 ) =>
 	isPathControl(props) ? (
 		<ResponsiveCheckboxControlByPath {...props} />
 	) : (
 		<ResponsiveCheckboxControlByValue {...props} />
-	);
+	)
 
 /**
  * A control component that renders a responsive checkbox control based on a path.
@@ -41,26 +39,26 @@ export const ResponsiveCheckboxControl = <pT extends Obj = {}>(
  * @param props - The rest of the props for the ResponsiveCheckboxControlByPath component.
  * @returns The rendered ResponsiveCheckboxControlByPath component.
  */
-function ResponsiveCheckboxControlByPath<pT extends Obj>({
+function ResponsiveCheckboxControlByPath<pT extends object>({
 	path,
 	updateHandling,
 	...props
 }: ControlByPath<pT, ResponsiveValue<boolean>>) {
-	const {attributes, setAttributes} = useControlContext();
-	const value = get(attributes, path);
+	const { attributes, setAttributes } = useControlContext()
+	const value = get(attributes, path)
 
 	return (
 		<ResponsiveCheckboxControlByValue
 			updateHandling="by-value"
 			value={value}
 			setValue={(newValue) => {
-				const newAttributes = cloneDeep(attributes);
-				set(newAttributes, path, newValue);
-				setAttributes(newAttributes);
+				const newAttributes = cloneDeep(attributes)
+				set(newAttributes, path, newValue)
+				setAttributes(newAttributes)
 			}}
 			{...props}
 		/>
-	);
+	)
 }
 
 /**
@@ -85,11 +83,11 @@ const ResponsiveCheckboxControlByValue: FC<ControlByValue<ResponsiveValue<boolea
 	defaultValue,
 	...props
 }) => {
-	const [selectedSize, setSelectedSize] = useState<keyof ResponsiveLabels>("");
+	const [selectedSize, setSelectedSize] = useState<keyof ResponsiveLabels>("")
 
 	return show ? (
 		<>
-			<div style={{display: "flex", gap: "16px", marginBottom: "16px"}}>
+			<div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
 				{objectKeys(screenSizes).map((screenSize) => (
 					<Button
 						variant={selectedSize === screenSize ? "primary" : "secondary"}
@@ -112,13 +110,13 @@ const ResponsiveCheckboxControlByValue: FC<ControlByValue<ResponsiveValue<boolea
 				label={`${label} - ${screenSizes[selectedSize].label}`}
 				value={value[selectedSize] ?? false}
 				setValue={(newValue) => {
-					const newObject = {...value};
-					newObject[selectedSize] = newValue;
-					setValue(newObject);
+					const newObject = { ...value }
+					newObject[selectedSize] = newValue
+					setValue(newObject)
 				}}
 				defaultValue={defaultValue ? defaultValue[selectedSize] : false}
 				{...props}
 			/>
 		</>
-	) : null;
-};
+	) : null
+}

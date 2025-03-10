@@ -1,0 +1,11 @@
+{
+	"name": "@bring/config",
+	"version": "0.1.0",
+	"license": "MIT",
+	"private": true,
+	"devDependencies": {
+		"@vercel/style-guide": "latest",
+		"eslint": "^9.14.0",
+		"eslint-config-turbo": "latest"
+	}
+}

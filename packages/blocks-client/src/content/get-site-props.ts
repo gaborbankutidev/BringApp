@@ -1,4 +1,4 @@
-import type {SiteProps} from "../types";
+import type { SiteProps } from "../types"
 
 /**
  * Retrieves the site properties from the specified WordPress URL.
@@ -17,14 +17,14 @@ async function getSiteProps<SP = object, M = object, MI = object>(wpURL: string)
 			headers: {
 				"Content-Type": "application/json",
 			},
-		});
+		})
 
-		const responseData = await response.json();
-		return responseData.data as SiteProps<SP, M, MI>;
+		const responseData = await response.json()
+		return responseData.data as SiteProps<SP, M, MI>
 	} catch (error) {
-		console.error(error);
-		return null;
+		console.error(error)
+		return null
 	}
 }
 
-export default getSiteProps;
+export default getSiteProps

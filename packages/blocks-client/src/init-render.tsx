@@ -1,11 +1,11 @@
-import type {ReactNode} from "react";
-import makeFooter from "./components/footer";
-import makeHeader from "./components/header";
-import makeLayout from "./components/layout";
-import makeMain from "./components/main";
+import type { ReactNode } from "react"
+import makeFooter from "./components/footer"
+import makeHeader from "./components/header"
+import makeLayout from "./components/layout"
+import makeMain from "./components/main"
 
-import {createBringElement, getEntity} from "./content";
-import type {BringNode, ComponentList, EntityProps, SiteProps} from "./types";
+import { createBringElement, getEntity } from "./content"
+import type { BlockList, BringNode, EntityProps, SiteProps } from "./types"
 
 /**
  * Initializes the rendering of BringBlocks components.
@@ -18,7 +18,7 @@ import type {BringNode, ComponentList, EntityProps, SiteProps} from "./types";
  * @param wpURL - The WordPress URL.
  * @param onRedirect - Callback function for redirecting.
  * @param onNotFound - Callback function for handling not found pages.
- * @param componentList - List of components.
+ * @param blockList - List of Block configs.
  * @returns Object containing various functions and components for rendering BringBlocks.
  */
 export function initRender<
@@ -31,15 +31,8 @@ export function initRender<
 	wpURL: string = "",
 	onRedirect: (redirectTo: string, responseCode: number) => void,
 	onNotFound: () => void,
-	componentList: ComponentList<EP, SP, M, MI>,
+	blockList: BlockList<EP, SP, M, MI, CTX>
 ) {
-	// Create component map
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const componentMap = new Map<string, any>();
-	componentList.forEach(({Component, componentName}) =>
-		componentMap.set(componentName, Component),
-	);
-
 	return {
 		/**
 		 * Creates a BringElement component.
@@ -56,8 +49,16 @@ export function initRender<
 			entityProps: EntityProps<EP>,
 			siteProps: SiteProps<SP, M, MI>,
 			context: CTX = {} as CTX,
-			PostContent: ReactNode = null,
-		) => createBringElement(nodes, componentMap, entityProps, siteProps, context, PostContent),
+			PostContent: ReactNode = null
+		) =>
+			createBringElement<EP, SP, M, MI, CTX>(
+				nodes,
+				blockList,
+				entityProps,
+				siteProps,
+				context,
+				PostContent
+			),
 
 		/**
 		 * Retrieves an entity from the WordPress API.
@@ -65,35 +66,34 @@ export function initRender<
 		 * @param slug - The entity slug.
 		 * @returns The entity data.
 		 */
-		getEntity: (slug: string | string[] = "") =>
-			getEntity<EP>(wpURL, onRedirect, onNotFound, slug),
+		getEntity: (slug: string | string[] = "") => getEntity<EP>(wpURL, onRedirect, onNotFound, slug),
 
 		/**
 		 * The Header component.
 		 * @param props - The properties of the Header component.
 		 * @returns The rendered Header component.
 		 */
-		Header: makeHeader<EP, SP, M, MI, CTX>(wpURL, onRedirect, onNotFound, componentMap),
+		Header: makeHeader<EP, SP, M, MI, CTX>(wpURL, onRedirect, onNotFound, blockList),
 
 		/**
 		 * The Footer component.
 		 * @param props - The properties of the Footer component.
 		 * @returns The rendered Footer component.
 		 */
-		Footer: makeFooter<EP, SP, M, MI, CTX>(wpURL, onRedirect, onNotFound, componentMap),
+		Footer: makeFooter<EP, SP, M, MI, CTX>(wpURL, onRedirect, onNotFound, blockList),
 
 		/**
 		 * The Main component.
 		 * @param props - The properties of the Main component.
 		 * @returns The rendered Main component.
 		 */
-		Main: makeMain<EP, SP, M, MI, CTX>(wpURL, onRedirect, onNotFound, componentMap),
+		Main: makeMain<EP, SP, M, MI, CTX>(wpURL, onRedirect, onNotFound, blockList),
 
 		/**
 		 * The Layout component.
 		 * @param props - The properties of the Layout component.
 		 * @returns The rendered Layout component.
 		 */
-		Layout: makeLayout<EP, SP, M, MI, CTX>(wpURL, onRedirect, onNotFound, componentMap),
-	};
+		Layout: makeLayout<EP, SP, M, MI, CTX>(wpURL, onRedirect, onNotFound, blockList),
+	}
 }

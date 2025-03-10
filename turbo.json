@@ -1,6 +1,7 @@
 {
 	"$schema": "https://turbo.build/schema.json",
 	"tasks": {
+		"//#lint:root": {},
 		"build": {
 			"dependsOn": ["^build", "^types", "^lint"],
 			"inputs": ["$TURBO_DEFAULT$", ".env*"],

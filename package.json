@@ -2,16 +2,20 @@
 	"name": "bringapp",
 	"version": "0.0.0",
 	"description": "GPL-2.0-or-later",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/gaborbankutidev/BringApp.git"
-	},
+	"repository": "gaborbankutidev/BringApp.git",
 	"private": true,
 	"workspaces": [
 		"packages/*",
+		"packages/@bring/blocks-client",
+		"packages/@bring/blocks-editor",
+		"packages/@bring/blocks-wp",
+		"packages/@bring/create-app",
+		"packages/@bring/config",
+		"apps/bring-app/next-app",
+		"apps/bring-app",
 		"apps/*"
 	],
-	"packageManager": "yarn@4.5.1",
+	"packageManager": "yarn@4.5.3",
 	"scripts": {
 		"after:install": "node ./scripts/after-install.mjs",
 		"all": "turbo types test lint build",
@@ -28,9 +32,10 @@
 		"format:prettier": "prettier \"./**/*.{ts,tsx,js,jsx,json,css,md,yml,yaml,php}\"",
 		"install:composer:app": "cd apps/bring-app && composer install && composer dump-autoload",
 		"install:composer:pkg": "cd packages/blocks-wp && composer install && composer dump-autoload",
-		"lint": "turbo lint",
+		"lint": "turbo run lint lint:root",
+		"lint:root": "eslint --config ./eslint.config.cjs --ignore-pattern apps/ packages/",
 		"prepare": "husky",
-		"release": "turbo run build lint test && changeset version && changeset publish",
+		"release": "turbo run build lint test --filter=@bring/blocks-client --filter=@bring/blocks-editor --filter=@bring/blocks-wp --filter=@bring/create-app && changeset version && changeset publish",
 		"services:down": "docker compose -f ./apps/bring-app/compose.yml down",
 		"services:up": "docker compose -f ./apps/bring-app/compose.yml up",
 		"storybook": "cd apps/bring-app && yarn watch:storybook",
@@ -39,36 +44,36 @@
 		"watch:wp": "tsx scripts/watcher.ts"
 	},
 	"dependencies": {
-		"@changesets/cli": "^2.27.7"
+		"@changesets/cli": "2.27.10"
 	},
 	"devDependencies": {
-		"@eslint/js": "^9.13.0",
+		"@bring/config": "workspace:*",
 		"@prettier/plugin-php": "^0.22.2",
-		"@types/eslint": "^9.6.1",
 		"@types/fs-extra": "^11.0.4",
-		"eslint": "^9.13.0",
-		"eslint-plugin-react": "^7.37.2",
+		"cross-env": "^7.0.3",
+		"eslint": "^9.14.0",
 		"fs-extra": "^11.2.0",
-		"globals": "^15.11.0",
+		"globals": "^15.12.0",
 		"husky": "^9.1.6",
 		"lint-staged": "^15.2.10",
-		"prettier": "^3.3.3",
+		"prettier": "^3.4.2",
 		"prettier-plugin-organize-imports": "^4.1.0",
 		"prettier-plugin-pkg": "^0.18.1",
-		"prettier-plugin-tailwindcss": "0.5.14",
+		"prettier-plugin-tailwindcss": "0.6.9",
+		"syncpack": "^13.0.0",
 		"tsup": "^8.3.5",
 		"tsx": "^4.19.2",
 		"turbo": "^2.2.3",
-		"typedoc": "^0.26.10",
+		"typedoc": "0.27.4",
 		"typescript": "^5.6.3",
-		"typescript-eslint": "^8.12.2"
+		"typescript-eslint": "^8.13.0"
 	},
 	"lint-staged": {
 		"*.{ts,tsx,js,jsx,json,css,md,yml,yaml,php}": [
-			"prettier --write"
+			"yarn format"
 		],
-		"*.{js,mjs,cjs,ts,jsx,tsx}": [
-			"eslint --fix"
+		"*.{ts,tsx,js,jsx}": [
+			"yarn lint:root"
 		]
 	}
 }
