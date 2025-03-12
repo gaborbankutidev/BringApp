@@ -59,7 +59,7 @@ class RankMath {
 		 * @var string $current_route
 		 */
 		$current_route = $_SERVER["REQUEST_URI"];
-		if (!strpos($current_route, "wp-json/rankmath/v1/getHead")) {
+		if (strpos($current_route, "wp-json/rankmath/v1/getHead") === false) {
 			return;
 		}
 
