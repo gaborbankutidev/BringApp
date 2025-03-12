@@ -46,6 +46,11 @@
 			"import": "./dist/hooks/index.esm.js",
 			"require": "./dist/hooks/index.cjs.js"
 		},
+		"./rank-math": {
+			"types": "./dist/rank-math/index.d.ts",
+			"import": "./dist/rank-math/index.esm.js",
+			"require": "./dist/rank-math/index.cjs.js"
+		},
 		"./styles": {
 			"types": "./dist/styles/index.d.ts",
 			"import": "./dist/styles/index.esm.js",
@@ -74,6 +79,7 @@
 	},
 	"dependencies": {
 		"clsx": "2.1.1",
+		"html-react-parser": "5.2.0",
 		"react-intersection-observer": "9.16.0"
 	},
 	"devDependencies": {

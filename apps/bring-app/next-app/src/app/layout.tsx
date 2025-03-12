@@ -1,7 +1,9 @@
 import Footer from "@/components/templates/footer"
 import Header from "@/components/templates/header"
+import { env } from "@/env.mjs"
 import "@/styles/globals.css"
-import { getRankMathTitle } from "@/utils/rank-math"
+import { getRankMathTitle } from "@bring/blocks-client/rank-math"
+import { GoogleTagManager } from "@next/third-parties/google"
 import { Montserrat } from "next/font/google"
 import { headers } from "next/headers"
 import { type ReactNode } from "react"
@@ -15,9 +17,13 @@ const montserrat = Montserrat({
 })
 
 export async function generateMetadata() {
-	const slug = (await headers()).get("x-slug") ?? ""
+	const header = await headers()
+	const slug = header.get("x-slug") ?? ""
+	const wpURL = env.NEXT_PUBLIC_WP_BASE_URL
+	const nextURL = env.NEXT_PUBLIC_BASE_URL
+
 	return {
-		title: await getRankMathTitle(slug),
+		title: await getRankMathTitle(wpURL, nextURL, slug),
 	}
 }
 
@@ -29,12 +35,11 @@ const Bg = () => (
 	</>
 )
 
-export default async function RootLayout({ children }: { children: ReactNode }) {
-	const slug = (await headers()).get("x-slug") ?? ""
-
+export default function RootLayout({ children }: { children: ReactNode }) {
 	return (
 		<html lang="en">
-			<Head slug={slug} />
+			<Head />
+			{env.NEXT_PUBLIC_GTM && <GoogleTagManager gtmId={env.NEXT_PUBLIC_GTM} />}
 			<body className={montserrat.className}>
 				<div className="bringContent relative flex min-h-screen flex-col">
 					<Bg />
