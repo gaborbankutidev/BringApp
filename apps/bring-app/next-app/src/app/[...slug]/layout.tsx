@@ -2,6 +2,8 @@ import { Layout, getEntity } from "@/bring/render"
 import type { ReactNode } from "react"
 import PostLayout from "./post-layout"
 
+export const dynamic = "force-dynamic"
+
 type LayoutProps = {
 	params: Promise<{ slug: string | string[] }>
 	children: ReactNode
