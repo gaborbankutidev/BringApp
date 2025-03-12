@@ -1,9 +1,9 @@
 import Column from "@/components/layout/column"
 import Row from "@/components/layout/row"
 import Section from "@/components/layout/section"
+import Markdown from "@/components/markdown"
 import fs from "fs"
 import path from "path"
-import Markdown from "react-markdown"
 
 const Readme = () => {
 	const filePath = path.join(process.cwd(), "..", "readme.md")
