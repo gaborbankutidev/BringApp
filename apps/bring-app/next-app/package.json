@@ -65,7 +65,7 @@
 		"@storybook/test": "^8.6.4",
 		"@tailwindcss/forms": "^0.5.10",
 		"@tailwindcss/typography": "^0.5.16",
-		"@types/eslint__eslintrc": "^3.3.0",
+		"@types/eslint__eslintrc": "^2.1.2",
 		"@types/fslightbox-react": "^1.7.8",
 		"@types/node": "22.13.10",
 		"@types/react": "^19.0.10",
