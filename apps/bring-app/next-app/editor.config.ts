@@ -1,3 +1,6 @@
+// samples
+import basic from "@/components/samples/basic/basic.wp"
+
 // layout
 import column from "@/components/layout/column/column.wp"
 import group from "@/components/layout/group/group.wp"
@@ -16,6 +19,8 @@ import button from "@/components/ui/button/button.wp"
 import Editor from "@bring/blocks-editor"
 
 const blockList = [
+	// samples
+	basic,
 	// layout
 	column,
 	group,

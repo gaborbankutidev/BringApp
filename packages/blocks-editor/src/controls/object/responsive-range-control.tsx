@@ -96,7 +96,7 @@ const ResponsiveRangeControlByValue: FC<ControlByValue<ResponsiveValue>> = ({
 						variant={selectedSize === screenSize ? "primary" : "secondary"}
 						icon={<Icon icon={screenSizes[screenSize].icon} />}
 						onClick={() => setSelectedSize(screenSize)}
-						isSmall={true}
+						size='small'
 						className="responsive-screen-select-button"
 					>
 						{value[screenSize] !== undefined ? value[screenSize] : "-"}

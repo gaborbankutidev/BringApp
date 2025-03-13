@@ -18,6 +18,8 @@ class BlocksWP {
 	 * @var string[] $blocks
 	 */
 	private static $blocks = [
+		// samples
+		"basic",
 		// layout
 		"column",
 		"group",

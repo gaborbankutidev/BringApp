@@ -93,7 +93,7 @@ const ResponsiveCheckboxControlByValue: FC<ControlByValue<ResponsiveValue<boolea
 						variant={selectedSize === screenSize ? "primary" : "secondary"}
 						icon={<Icon icon={screenSizes[screenSize].icon} />}
 						onClick={() => setSelectedSize(screenSize)}
-						isSmall={true}
+						size='small'
 						style={{
 							paddingRight: "12px!important",
 							paddingLeft: "6px!important",

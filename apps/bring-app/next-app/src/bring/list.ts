@@ -1,3 +1,5 @@
+// sample
+import { basic } from "@/components/samples/basic"
 // layout
 import { column } from "@/components/layout/column"
 import { group } from "@/components/layout/group"
@@ -13,6 +15,8 @@ import { markdown } from "@/components/markdown"
 import { button } from "@/components/ui/button"
 
 export const blockList = [
+	// sample
+	basic,
 	// layout
 	column,
 	group,
