@@ -1746,10 +1746,10 @@ __metadata:
     lodash.set: "npm:4.3.2"
     typescript: "npm:^5.8.2"
   peerDependencies:
-    "@wordpress/block-editor": 14.14.0
-    "@wordpress/blocks": 14.8.0
-    "@wordpress/components": 29.5.0
-    "@wordpress/data": 10.19.0
+    "@wordpress/block-editor": 14.15.0
+    "@wordpress/blocks": 14.9.0
+    "@wordpress/components": 29.6.0
+    "@wordpress/data": 10.20.0
   languageName: unknown
   linkType: soft
 
