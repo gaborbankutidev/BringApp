@@ -60,7 +60,7 @@
 	},
 	"lint-staged": {
 		"*.{ts,tsx,js,jsx,json,css,md,yml,yaml,php}": [
-			"yarn format"
+			"prettier --write"
 		],
 		"**/next-app/**/.{js,mjs,cjs,ts,jsx,tsx}": [
 			"yarn eslint --config ./next-app/.eslintrc.cjs --fix"
