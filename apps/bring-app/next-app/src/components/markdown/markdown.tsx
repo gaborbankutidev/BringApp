@@ -173,15 +173,16 @@ const Markdown = ({
 			{content}
 		</ReactMarkdown>
 	) : (
-		<ReactMarkdown
-			remarkPlugins={[supersub]}
-			allowedElements={allowedElements as string[]}
-			//  @ts-ignore
-			components={components}
-			className={cn("md", className)}
-		>
-			{content}
-		</ReactMarkdown>
+		<div className={cn("md", className)}>
+			<ReactMarkdown
+				remarkPlugins={[supersub]}
+				allowedElements={allowedElements as string[]}
+				//  @ts-ignore
+				components={components}
+			>
+				{content}
+			</ReactMarkdown>
+		</div>
 	)
 }
 

@@ -37,30 +37,30 @@
 		"watch:tailwind": "cd ./next-app && yarn watch:tailwind"
 	},
 	"dependencies": {
-		"fs-extra": "11.2.0"
+		"fs-extra": "11.3.0"
 	},
 	"devDependencies": {
-		"@eslint/js": "^9.13.0",
-		"@inquirer/prompts": "^7.0.1",
-		"@prettier/plugin-php": "^0.22.2",
+		"@eslint/js": "^9.22.0",
+		"@inquirer/prompts": "^7.3.3",
+		"@prettier/plugin-php": "^0.22.4",
 		"@types/eslint": "^9.6.1",
 		"@types/fs-extra": "^11.0.4",
-		"concurrently": "9.1.0",
-		"eslint": "^9.14.0",
-		"eslint-plugin-react": "^7.37.2",
-		"globals": "^15.12.0",
-		"husky": "^9.1.6",
-		"lint-staged": "^15.2.10",
-		"prettier": "^3.4.2",
+		"concurrently": "9.1.2",
+		"eslint": "^9.22.0",
+		"eslint-plugin-react": "^7.37.4",
+		"globals": "^16.0.0",
+		"husky": "^9.1.7",
+		"lint-staged": "^15.5.0",
+		"prettier": "^3.5.3",
 		"prettier-plugin-organize-imports": "^4.1.0",
 		"prettier-plugin-pkg": "^0.18.1",
-		"prettier-plugin-tailwindcss": "0.6.9",
-		"tsx": "^4.19.2",
-		"typescript-eslint": "^8.13.0"
+		"prettier-plugin-tailwindcss": "0.6.11",
+		"tsx": "^4.19.3",
+		"typescript-eslint": "^8.26.1"
 	},
 	"lint-staged": {
 		"*.{ts,tsx,js,jsx,json,css,md,yml,yaml,php}": [
-			"yarn format"
+			"prettier --write"
 		],
 		"**/next-app/**/.{js,mjs,cjs,ts,jsx,tsx}": [
 			"yarn eslint --config ./next-app/.eslintrc.cjs --fix"

@@ -14,14 +14,12 @@ class Auth {
 	 *
 	 * @phpstan-ignore-next-line
 	 */
-	public function validate_token($b) {
-	}
+	public function validate_token($b) {}
 
 	/**
 	 * @param string $cookie
 	 * @param string $device
 	 * @phpstan-ignore-next-line
 	 */
-	public function validate_refresh_token($cookie, $device) {
-	}
+	public function validate_refresh_token($cookie, $device) {}
 }
