@@ -1,5 +1,11 @@
 # @bring/create-app
 
+## 0.6.0
+
+### Minor Changes
+
+- 8f2df6b: Update packages
+
 ## 0.5.0
 
 ### Minor Changes

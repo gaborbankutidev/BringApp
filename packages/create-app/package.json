@@ -1,6 +1,6 @@
 {
 	"name": "@bring/create-app",
-	"version": "0.5.0",
+	"version": "0.6.0",
 	"type": "module",
 	"description": "CLI package for initializing a new Bring App project",
 	"author": "Bring Team Ltd.",
@@ -30,7 +30,7 @@
 	},
 	"lint-staged": {
 		"*.{ts,tsx,js,jsx,json,css,md,yml,yaml,php}": [
-			"yarn format"
+			"prettier --write"
 		],
 		"*.{ts,tsx,js,jsx,}": [
 			"yarn eslint --config ./eslint.config.cjs --fix"

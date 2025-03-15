@@ -1,5 +1,17 @@
 # next-app
 
+## 1.7.0
+
+### Minor Changes
+
+- 8f2df6b: Update packages
+
+### Patch Changes
+
+- Updated dependencies [8f2df6b]
+  - @bring/blocks-client@2.13.0
+  - @bring/blocks-editor@2.13.0
+
 ## 1.6.0
 
 ### Minor Changes
