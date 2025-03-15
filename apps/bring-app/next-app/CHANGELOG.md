@@ -1,5 +1,17 @@
 # next-app
 
+## 1.8.0
+
+### Minor Changes
+
+- 5e1e9d4: Update RankMath & Add GTM to template, update Yarn version
+
+### Patch Changes
+
+- Updated dependencies [5e1e9d4]
+  - @bring/blocks-client@2.14.0
+  - @bring/blocks-editor@2.14.0
+
 ## 1.7.0
 
 ### Minor Changes
