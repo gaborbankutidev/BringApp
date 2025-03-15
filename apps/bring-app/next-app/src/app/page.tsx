@@ -8,6 +8,8 @@ import Link from "next/link"
 import { getWpStatus, type WpStatus } from "./get-wp-status"
 import Posts from "./posts"
 
+export const dynamic = "force-dynamic"
+
 const wpAdminUrl = `${env.NEXT_PUBLIC_WP_BASE_URL}/wp-admin/`
 
 const Home = async () => {

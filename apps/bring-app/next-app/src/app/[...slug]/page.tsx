@@ -1,5 +1,7 @@
 import { Main } from "@/bring/render"
 
+export const dynamic = "force-dynamic"
+
 type PageProps = {
 	params: Promise<{ slug: string | string[] }>
 }

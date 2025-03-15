@@ -1,26 +1,16 @@
 import { env } from "@/env.mjs"
-import { getRankMathHead } from "@/utils/rank-math"
-import parse from "html-react-parser"
+import { RankMathHead } from "@bring/blocks-client/rank-math"
+import { headers } from "next/headers"
 
-type HeadProps = {
-	slug?: string
-}
+export async function Head() {
+	const header = await headers()
+	const slug = header.get("x-slug") ?? ""
+	const wpURL = env.NEXT_PUBLIC_WP_BASE_URL
+	const nextURL = env.NEXT_PUBLIC_BASE_URL
 
-export async function Head({ slug = "" }: HeadProps) {
-	let html = ""
-
-	// Add RankMath head
-	html += await getRankMathHead(slug)
-
-	// Add Cookiebot head
-	if (env.NODE_ENV === "production") {
-		html += `` // Add Cookiebot code here
-	}
-
-	// Add Google Tag Manager head
-	if (env.NODE_ENV === "production") {
-		html += `` // Add Google Tag Manager code here
-	}
-
-	return <head>{parse(html)}</head>
+	return (
+		<head>
+			<RankMathHead wpURL={wpURL} nextURL={nextURL} slug={slug} />
+		</head>
+	)
 }

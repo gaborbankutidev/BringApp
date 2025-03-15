@@ -11,6 +11,7 @@ export default defineConfig({
 		"src/content/index.ts",
 		"src/components/index.ts",
 		"src/hooks/index.ts",
+		"src/rank-math/index.ts",
 		"src/styles/index.ts",
 	],
 	format: ["cjs", "esm"],

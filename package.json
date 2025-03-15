@@ -15,7 +15,7 @@
 		"apps/bring-app",
 		"apps/*"
 	],
-	"packageManager": "yarn@4.5.3",
+	"packageManager": "yarn@4.7.0",
 	"scripts": {
 		"after:install": "node ./scripts/after-install.mjs",
 		"all": "turbo types test lint build",
