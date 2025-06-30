@@ -15,6 +15,7 @@ import {
 	RangeControl,
 	ResponsiveCheckboxControl,
 	ResponsiveRangeControl,
+	ResponsiveSelectControl,
 	SelectControl,
 	TextArrayControl,
 	TextControl,
@@ -107,6 +108,12 @@ export function makeControls(
 							case "number-select":
 								return (
 									<NumberSelectControl {...(props as Parameters<typeof NumberSelectControl>[0])} />
+								)
+							case "responsive-select":
+								return (
+									<ResponsiveSelectControl
+										{...(props as Parameters<typeof ResponsiveSelectControl>[0])}
+									/>
 								)
 
 							case "media":

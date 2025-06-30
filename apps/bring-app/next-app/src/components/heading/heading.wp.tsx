@@ -1,6 +1,7 @@
 import { colorOptions, textAlignOptions, textSourceOptions } from "@/editor/utils/options"
 import {
 	numberAttributeSource,
+	objectAttributeSource,
 	stringAttributeSource,
 	type BlockConfig,
 } from "@bring/blocks-editor/blocks"
@@ -15,7 +16,7 @@ const headingConfig: BlockConfig<HeadingBlockProps> = {
 		source: stringAttributeSource("manual"),
 		title: stringAttributeSource("Title"),
 		level: numberAttributeSource(),
-		align: stringAttributeSource(),
+		align: objectAttributeSource({}),
 		color: stringAttributeSource(),
 	},
 	Controls: [
@@ -48,11 +49,11 @@ const headingConfig: BlockConfig<HeadingBlockProps> = {
 					defaultValue: 2,
 				},
 				{
-					type: "select",
+					type: "responsive-select",
 					label: "Align",
 					path: "align",
 					options: textAlignOptions,
-					defaultValue: "left",
+					defaultValue: { "": "left" },
 				},
 				{
 					type: "select",

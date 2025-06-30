@@ -13,30 +13,20 @@ const breakpoints = ["", "md:", "lg:"]
 const sides = ["t", "b", "l", "r"]
 
 // Prefixes for color classes
-const colorPrefixes = ["text-", "bg-", "border-", "hover:bg-", "hover:text-"]
+const colorPrefixes = ["bg-", "border-", "hover:bg-", "hover:text-"]
+
+// Prefixes for responsive color classes
+const responsiveColorPrefixes = ["text-"]
 
 // Prefixes for grid classes
 const gridPrefixes = ["col-span-", "row-span-", "grid-cols-"]
 
 // Class list that is added to the safelist
 const classNames = [
-	//flex items
-	"justify-start",
-	"justify-center",
-	"justify-end",
-	"justify-between",
-	"items-start",
-	"items-center",
-	"items-end",
 	// bg size
 	"bg-auto",
 	"bg-cover",
 	"bg-contain",
-	// text align
-	"text-left",
-	"text-right",
-	"text-center",
-	"text-justify",
 	// border
 	"border",
 	"border-t",
@@ -50,6 +40,28 @@ const classNames = [
 	"max-w-[800px]",
 ]
 
+// Class list that is responsively added to the safelist
+const responsiveClassNames = [
+	// display
+	"hidden",
+	"block",
+	"flex",
+	"grid",
+	//flex items
+	"justify-start",
+	"justify-center",
+	"justify-end",
+	"justify-between",
+	"items-start",
+	"items-center",
+	"items-end",
+	// text align
+	"text-left",
+	"text-right",
+	"text-center",
+	"text-justify",
+]
+
 export const generateSafelist = () => {
 	const safelist: string[] = []
 
@@ -57,6 +69,15 @@ export const generateSafelist = () => {
 	Object.keys(colors).forEach((color) => {
 		colorPrefixes.forEach((colorPrefix) => {
 			safelist.push(`${colorPrefix}${color}`)
+		})
+	})
+
+	// generate responsive color combinations
+	breakpoints.forEach((breakpoint) => {
+		Object.keys(colors).forEach((color) => {
+			responsiveColorPrefixes.forEach((colorPrefix) => {
+				safelist.push(`${breakpoint}${colorPrefix}${color}`)
+			})
 		})
 	})
 
@@ -85,14 +106,13 @@ export const generateSafelist = () => {
 		})
 	})
 
-	// responsive safelist items
-	breakpoints.forEach((breakpoint) => {
-		;["hidden", "block", "flex", "grid"].forEach((display) =>
-			safelist.push(`${breakpoint}${display}`)
-		)
-	})
-
+	// class names
 	safelist.push(...classNames)
+
+	// responsive class names
+	breakpoints.forEach((breakpoint) => {
+		responsiveClassNames.forEach((className) => safelist.push(`${breakpoint}${className}`))
+	})
 
 	return safelist
 }

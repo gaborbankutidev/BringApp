@@ -137,6 +137,16 @@ type NumberSelectControlConfigType<Props extends object = object> = {
 	defaultValue?: string
 } & _ControlConfigType<Props>
 
+type ResponsiveSelectControlConfigType<Props extends object = object> = {
+	type: "responsive-select"
+	path: NestedTypedKeyOf<Props, ResponsiveValue<string>>
+	options: {
+		label: string
+		value: string
+	}[]
+	defaultValue?: ResponsiveValue<string>
+} & _ControlConfigType<Props>
+
 type ComboboxControlConfigType<Props extends object = object> = {
 	type: "combobox"
 	path: NestedTypedKeyOf<Props, string>
@@ -188,6 +198,7 @@ export type ControlConfigType<Props extends object = object> =
 	| TextareaControlConfigType<Props>
 	| SelectControlConfigType<Props>
 	| NumberSelectControlConfigType<Props>
+	| ResponsiveSelectControlConfigType<Props>
 	| ComboboxControlConfigType<Props>
 	| NumberComboboxControlConfigType<Props>
 	| MediaControlConfigType<Props>

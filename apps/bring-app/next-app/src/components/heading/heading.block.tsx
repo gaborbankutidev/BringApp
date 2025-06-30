@@ -2,21 +2,26 @@ import type { BP } from "@/bring"
 import type { TextAlignType, TextSourceType } from "@/editor/utils/lists"
 import { cn } from "@/lib/utils"
 import type { ColorType } from "@/styles/colors"
+import { makeResponsiveClassNames, type ResponsiveValue } from "@bring/blocks-client/styles"
 import Heading, { type HeadingLevel } from "./heading"
 
 export type HeadingBlockProps = {
 	source?: TextSourceType
 	title: string
 	level?: HeadingLevel
-	align?: TextAlignType
+	align?: ResponsiveValue<TextAlignType>
 	color?: ColorType
 }
 
 const HeadingBlock = ({
-	attributes: { source = "manual", title, align, color, className, ...props },
+	attributes: { source = "manual", title, align = {}, color, className, ...props },
 	entityProps,
 }: BP<HeadingBlockProps>) => {
-	const classNames = cn(align && `text-${align}`, color && `text-${color}`, className)
+	const classNames = cn(
+		makeResponsiveClassNames("text", align),
+		color && `text-${color}`,
+		className
+	)
 
 	let headingTitle: string | null = title
 	if (source !== "manual") {

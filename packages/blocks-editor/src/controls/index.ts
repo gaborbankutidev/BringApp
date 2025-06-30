@@ -13,6 +13,7 @@ export { ImageControl } from "./object/image-control"
 export { MediaControl } from "./object/media-control"
 export { ResponsiveCheckboxControl } from "./object/responsive-checkbox-control"
 export { ResponsiveRangeControl } from "./object/responsive-range-control"
+export { ResponsiveSelectControl } from "./object/responsive-select-control"
 
 export { makeNumberOptions, makeOptions, optionsToNumberOptions } from "./utils"
 

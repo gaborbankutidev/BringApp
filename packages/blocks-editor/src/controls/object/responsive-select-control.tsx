@@ -4,7 +4,7 @@ import get from "lodash.get"
 import set from "lodash.set"
 import type { FC } from "react"
 import React, { useState } from "react"
-import { RangeControl } from ".."
+import { SelectControl } from ".."
 import type { ResponsiveLabels, ResponsiveValue } from "../../styles/types"
 import { screenSizes } from "../../styles/utils"
 import { objectKeys } from "../../utils"
@@ -13,29 +13,34 @@ import type { ControlByPath, ControlByValue, ControlType } from "../types"
 import { isPathControl } from "../utils"
 
 /**
- * Props for the ResponsiveRangeControl component.
+ * Props for the ResponsiveSelectControl component.
  */
-type _NumberControl = { min?: number; max?: number }
+type _SelectControl = {
+	options: {
+		label: string
+		value: string
+	}[]
+}
 
 /**
- * A control component that renders a responsive range control.
+ * A control component that renders a responsive select control.
  *
  * @template pT - The type of the attributes object.
  *
  * @param props - The props for the ResponsiveRangeControl component.
  * @returns The rendered ResponsiveRangeControl component.
  */
-export const ResponsiveRangeControl = <pT extends object = object>(
-	props: ControlType<ResponsiveValue, pT> & _NumberControl
+export const ResponsiveSelectControl = <pT extends object = object>(
+	props: ControlType<ResponsiveValue<string>, pT> & _SelectControl
 ) =>
 	isPathControl(props) ? (
-		<ResponsiveRangeControlByPath {...props} />
+		<ResponsiveSelectControlByPath {...props} />
 	) : (
-		<ResponsiveRangeControlByValue {...props} />
+		<ResponsiveSelectControlByValue {...props} />
 	)
 
 /**
- * A control component that renders a responsive range control based on a path.
+ * A control component that renders a responsive select control based on a path.
  *
  * @template pT - The type of the attributes object.
  *
@@ -43,16 +48,16 @@ export const ResponsiveRangeControl = <pT extends object = object>(
  * @param updateHandling - The update handling strategy.
  * @returns The rendered ResponsiveRangeControlByPath component.
  */
-function ResponsiveRangeControlByPath<pT extends object>({
+function ResponsiveSelectControlByPath<pT extends object>({
 	path,
 	updateHandling,
 	...props
-}: ControlByPath<pT, ResponsiveValue> & _NumberControl) {
+}: ControlByPath<pT, ResponsiveValue<string>> & _SelectControl) {
 	const { attributes, setAttributes } = useControlContext()
 	const value = get(attributes, path)
 
 	return (
-		<ResponsiveRangeControlByValue
+		<ResponsiveSelectControlByValue
 			updateHandling="by-value"
 			value={value}
 			setValue={(newValue) => {
@@ -66,26 +71,20 @@ function ResponsiveRangeControlByPath<pT extends object>({
 }
 
 /**
- * A control component that renders a responsive range control based on a value.
+ * A control component that renders a responsive select control based on a value.
  *
- * @param label - The label for the range input.
- * @param value - The value of the range input.
- * @param setValue - The function to set the value of the range input.
- * @param show - Whether to show the range input.
+ * @param label - The label for the select input.
+ * @param value - The value of the select input.
+ * @param setValue - The function to set the value of the select input.
+ * @param show - Whether to show the select input.
  * @param updateHandling - The update handling strategy.
- * @param defaultValue - The default value for the range input.
- * @param props - The rest of the props for the ResponsiveRangeControlByValue component.
- * @returns The rendered ResponsiveRangeControlByValue component.
+ * @param defaultValue - The default value for the select input.
+ * @param props - The rest of the props for the ResponsiveSelectControlByValue component.
+ * @returns The rendered ResponsiveSelectControlByValue component.
  */
-const ResponsiveRangeControlByValue: FC<ControlByValue<ResponsiveValue> & _NumberControl> = ({
-	label,
-	value = {},
-	setValue,
-	show = true,
-	updateHandling,
-	defaultValue,
-	...props
-}) => {
+const ResponsiveSelectControlByValue: FC<
+	ControlByValue<ResponsiveValue<string>> & _SelectControl
+> = ({ label, value = {}, setValue, show = true, updateHandling, defaultValue, ...props }) => {
 	const [selectedSize, setSelectedSize] = useState<keyof ResponsiveLabels>("")
 
 	return show ? (
@@ -104,16 +103,16 @@ const ResponsiveRangeControlByValue: FC<ControlByValue<ResponsiveValue> & _Numbe
 				))}
 			</div>
 
-			<RangeControl
+			<SelectControl
 				updateHandling="by-value"
 				label={`${label} - ${screenSizes[selectedSize].label}`}
-				value={value ? value[selectedSize] : 0}
+				value={value ? value[selectedSize] : undefined}
 				setValue={(newValue) => {
 					const newObject = { ...value }
 					newObject[selectedSize] = newValue
 					setValue(newObject)
 				}}
-				defaultValue={defaultValue ? (defaultValue[selectedSize] ?? 0) : 0}
+				defaultValue={defaultValue ? (defaultValue[selectedSize] ?? undefined) : undefined}
 				{...props}
 			/>
 		</>

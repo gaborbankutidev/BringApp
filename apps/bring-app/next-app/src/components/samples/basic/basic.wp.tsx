@@ -1,6 +1,6 @@
 import { colorOptions } from "@/editor/utils/options"
 import {
-	BlockConfig,
+	type BlockConfig,
 	booleanAttributeSource,
 	numberAttributeSource,
 	objectAttributeSource,
