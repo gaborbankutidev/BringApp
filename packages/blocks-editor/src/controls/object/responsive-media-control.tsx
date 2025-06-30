@@ -4,60 +4,63 @@ import get from "lodash.get"
 import set from "lodash.set"
 import type { FC } from "react"
 import React, { useState } from "react"
-import { SelectControl } from ".."
+import { MediaControl } from ".."
 import type { ResponsiveLabels, ResponsiveValue } from "../../styles/types"
 import { screenSizes } from "../../styles/utils"
+import type { MediaType } from "../../types"
 import { objectKeys } from "../../utils"
 import { useControlContext } from "../context"
 import type { ControlByPath, ControlByValue, ControlType } from "../types"
 import { isPathControl } from "../utils"
 
+type MediaOption = string[]
+
 /**
- * Props for the ResponsiveSelectControl component.
+ * Props for the MediaControl component.
+ * @property allowedTypes - The allowed media types.
+ * @property Preview - The preview component for the media.
  */
-type _SelectControl = {
-	options: {
-		label: string
-		value: string
-	}[]
+type MediaControlProps = {
+	allowedTypes?: MediaOption
+	Preview?: React.FC<MediaType>
 }
 
 /**
- * A control component that renders a responsive select control.
+ * A control component that renders a responsive media control.
  *
  * @template pT - The type of the attributes object.
  *
- * @param props - The props for the ResponsiveSelectControl component.
- * @returns The rendered ResponsiveSelectControl component.
+ * @param props - The props for the ResponsiveMediaControl component.
+ * @returns The rendered ResponsiveMediaControl component.
  */
-export const ResponsiveSelectControl = <pT extends object = object>(
-	props: ControlType<ResponsiveValue<string>, pT> & _SelectControl
+export const ResponsiveMediaControl = <pT extends object = object>(
+	props: ControlType<ResponsiveValue<MediaType>, pT> & MediaControlProps
 ) =>
 	isPathControl(props) ? (
-		<ResponsiveSelectControlByPath {...props} />
+		<ResponsiveMediaControlByPath {...props} />
 	) : (
-		<ResponsiveSelectControlByValue {...props} />
+		<ResponsiveMediaControlByValue {...props} />
 	)
 
 /**
- * A control component that renders a responsive select control based on a path.
+ * A control component that renders a responsive media control based on a path.
  *
  * @template pT - The type of the attributes object.
  *
  * @param path - The path to the value in the attributes object.
  * @param updateHandling - The update handling strategy.
- * @returns The rendered ResponsiveSelectControlByPath component.
+ * @returns The rendered ResponsiveMediaControlByPath component.
  */
-function ResponsiveSelectControlByPath<pT extends object>({
+function ResponsiveMediaControlByPath<pT extends object>({
 	path,
 	updateHandling,
 	...props
-}: ControlByPath<pT, ResponsiveValue<string>> & _SelectControl) {
+}: ControlByPath<pT, ResponsiveValue<MediaType>> & MediaControlProps) {
 	const { attributes, setAttributes } = useControlContext()
 	const value = get(attributes, path)
 
 	return (
-		<ResponsiveSelectControlByValue
+		<ResponsiveMediaControlByValue
 			updateHandling="by-value"
 			value={value}
 			setValue={(newValue) => {
@@ -71,19 +74,19 @@ function ResponsiveSelectControlByPath<pT extends object>({
 }
 
 /**
- * A control component that renders a responsive select control based on a value.
+ * A control component that renders a responsive media control based on a value.
  *
- * @param label - The label for the select input.
- * @param value - The value of the select input.
- * @param setValue - The function to set the value of the select input.
- * @param show - Whether to show the select input.
+ * @param label - The label for the media input.
+ * @param value - The value of the media input.
+ * @param setValue - The function to set the value of the media input.
+ * @param show - Whether to show the media input.
  * @param updateHandling - The update handling strategy.
- * @param defaultValue - The default value for the select input.
- * @param props - The rest of the props for the ResponsiveSelectControlByValue component.
- * @returns The rendered ResponsiveSelectControlByValue component.
+ * @param defaultValue - The default value for the media input.
+ * @param props - The rest of the props for the ResponsiveMediaControlByValue component.
+ * @returns The rendered ResponsiveMediaControlByValue component.
  */
-const ResponsiveSelectControlByValue: FC<
-	ControlByValue<ResponsiveValue<string>> & _SelectControl
+const ResponsiveMediaControlByValue: FC<
+	ControlByValue<ResponsiveValue<MediaType>> & MediaControlProps
 > = ({ label, value = {}, setValue, show = true, updateHandling, defaultValue, ...props }) => {
 	const [selectedSize, setSelectedSize] = useState<keyof ResponsiveLabels>("")
 
@@ -98,12 +101,12 @@ const ResponsiveSelectControlByValue: FC<
 						size="small"
 						className="responsive-screen-select-button"
 					>
-						{value[screenSize] !== undefined ? value[screenSize] : "-"}
+						{value[screenSize] !== undefined ? "✓" : "-"}
 					</Button>
 				))}
 			</div>
 
-			<SelectControl
+			<MediaControl
 				updateHandling="by-value"
 				label={`${label} - ${screenSizes[selectedSize].label}`}
 				value={value ? value[selectedSize] : undefined}

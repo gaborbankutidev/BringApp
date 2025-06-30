@@ -12,6 +12,8 @@ export { ImageArrayControl, TextArrayControl, makeArrayControl } from "./object/
 export { ImageControl } from "./object/image-control"
 export { MediaControl } from "./object/media-control"
 export { ResponsiveCheckboxControl } from "./object/responsive-checkbox-control"
+export { ResponsiveImageControl } from "./object/responsive-image-control"
+export { ResponsiveMediaControl } from "./object/responsive-media-control"
 export { ResponsiveRangeControl } from "./object/responsive-range-control"
 export { ResponsiveSelectControl } from "./object/responsive-select-control"
 

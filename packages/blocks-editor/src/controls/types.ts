@@ -169,13 +169,24 @@ type NumberComboboxControlConfigType<Props extends object = object> = {
 
 type MediaControlConfigType<Props extends object = object> = {
 	type: "media"
-	allowedTypes?: string[]
 	path: NestedTypedKeyOf<Props, MediaType>
+	allowedTypes?: string[]
+} & _ControlConfigType<Props>
+
+type ResponsiveMediaControlConfigType<Props extends object = object> = {
+	type: "responsive-media"
+	path: NestedTypedKeyOf<Props, ResponsiveValue<MediaType>>
+	allowedTypes?: string[]
 } & _ControlConfigType<Props>
 
 type ImageControlConfigType<Props extends object = object> = {
 	type: "image"
 	path: NestedTypedKeyOf<Props, ImageType>
+} & _ControlConfigType<Props>
+
+type ResponsiveImageControlConfigType<Props extends object = object> = {
+	type: "responsive-image"
+	path: NestedTypedKeyOf<Props, ResponsiveValue<ImageType>>
 } & _ControlConfigType<Props>
 
 type TextArrayControlConfigType<Props extends object = object> = {
@@ -202,6 +213,8 @@ export type ControlConfigType<Props extends object = object> =
 	| ComboboxControlConfigType<Props>
 	| NumberComboboxControlConfigType<Props>
 	| MediaControlConfigType<Props>
+	| ResponsiveMediaControlConfigType<Props>
 	| ImageControlConfigType<Props>
+	| ResponsiveImageControlConfigType<Props>
 	| TextArrayControlConfigType<Props>
 	| ImageArrayControlConfigType<Props>

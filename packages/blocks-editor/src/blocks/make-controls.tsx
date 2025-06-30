@@ -14,6 +14,8 @@ import {
 	NumberSelectControl,
 	RangeControl,
 	ResponsiveCheckboxControl,
+	ResponsiveImageControl,
+	ResponsiveMediaControl,
 	ResponsiveRangeControl,
 	ResponsiveSelectControl,
 	SelectControl,
@@ -118,9 +120,22 @@ export function makeControls(
 
 							case "media":
 								return <MediaControl {...(props as Parameters<typeof MediaControl>[0])} />
+							case "responsive-media":
+								return (
+									<ResponsiveMediaControl
+										{...(props as Parameters<typeof ResponsiveMediaControl>[0])}
+									/>
+								)
 
 							case "image":
 								return <ImageControl {...(props as Parameters<typeof ImageControl>[0])} />
+							case "responsive-image":
+								return (
+									<ResponsiveImageControl
+										{...(props as Parameters<typeof ResponsiveImageControl>[0])}
+									/>
+								)
+
 							case "image-array":
 								return <ImageArrayControl {...(props as Parameters<typeof ImageArrayControl>[0])} />
 							case "text-array":
