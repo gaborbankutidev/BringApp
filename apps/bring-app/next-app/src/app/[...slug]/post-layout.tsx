@@ -1,7 +1,7 @@
 import { getEntity } from "@/bring/render"
 import Column from "@/components/layout/column"
 import Row from "@/components/layout/row"
-import Section from "@/components/layout/section"
+import Section from "@/components/layout/section-old"
 import { env } from "@/env.mjs"
 import { BiBulb } from "react-icons/bi"
 

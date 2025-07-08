@@ -1,25 +1,28 @@
-import { colorOptions } from "@/editor/utils/options"
+import background from "@/components/background/background.wp"
+import { containerSizeList } from "@/styles/container"
 import {
 	booleanAttributeSource,
-	imageAttributeSource,
 	stringAttributeSource,
 	type BlockConfig,
 } from "@bring/blocks-editor/blocks"
+import { makeOptions } from "@bring/blocks-editor/controls"
 import { section, type SectionBlockProps } from "./section.block"
 import { SectionEdit } from "./section.edit"
+
+const { backgroundAttributes, backgroundControls } = background({
+	defaultBackgroundColor: "background",
+	withParallax: true,
+	withGradient: true,
+})
 
 const sectionConfig: BlockConfig<SectionBlockProps> = {
 	...section,
 	title: "Section",
 	icon: "align-center",
-	allowedBlocks: ["bring/row"],
 	attributes: {
-		backgroundColor: stringAttributeSource(),
-		backgroundImage: imageAttributeSource(),
+		containerSize: stringAttributeSource(),
 		dark: booleanAttributeSource(),
-		backgroundImageClassName: stringAttributeSource(),
-		backgroundClassName: stringAttributeSource(),
-		containerClassName: stringAttributeSource(),
+		...backgroundAttributes,
 	},
 	Edit: SectionEdit,
 	Controls: [
@@ -28,31 +31,20 @@ const sectionConfig: BlockConfig<SectionBlockProps> = {
 			controls: [
 				{
 					type: "select",
-					label: "Background color",
-					path: "backgroundColor",
-					options: colorOptions,
+					label: "Container Size",
+					path: "containerSize",
+					options: makeOptions(containerSizeList),
+					defaultValue: "1520",
 				},
-				{ type: "image", label: "Background image", path: "backgroundImage" },
-				{ type: "toggle", label: "Dark", path: "dark" },
+				{
+					type: "toggle",
+					label: "Dark",
+					path: "dark",
+				},
 			],
 			initialOpen: true,
 		},
-		{
-			panel: "Advanced",
-			controls: [
-				{
-					type: "text",
-					label: "Background Image Classes",
-					path: "backgroundImageClassName",
-				},
-				{
-					type: "text",
-					label: "Background Classes",
-					path: "backgroundClassName",
-				},
-				{ type: "text", label: "Container Classes", path: "containerClassName" },
-			],
-		},
+		...backgroundControls,
 	],
 }
 

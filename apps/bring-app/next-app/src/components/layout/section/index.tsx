@@ -1,3 +1,2 @@
-import Section from "./section"
-export default Section
+export { default } from "./section"
 export { section } from "./section.block"

@@ -1,56 +1,41 @@
+import Background, { type BackgroundComponentProps } from "@/components/background/background"
 import { cn } from "@/lib/utils"
-import Image, { type ImageProps } from "next/image"
+import { containerSizes, type ContainerSizeType } from "@/styles/container"
 
 type SectionProps = {
-	backgroundImage?: Pick<ImageProps, "src" | "alt">
 	dark?: boolean
+	containerSize?: ContainerSizeType
 	className?: string
-	backgroundImageClassName?: string
-	backgroundClassName?: string
-	containerClassName?: string
-} & React.HTMLProps<HTMLDivElement>
-
-const baseStye = "relative bg-no-repeat bg-cover overflow-hidden bg-center"
-const bgImageBaseStyle =
-	"absolute w-full h-full top-0 left-0 bg-no-repeat bg-cover bg-center bg-fixed"
-const bgBaseStyle = "absolute w-full h-full top-0 left-0"
-const containerBaseStyle = "relative"
+} & BackgroundComponentProps
 
 /**
  * Section is the top level building block of pages.
+ * It sets the container size and the dark mode.
+ *
+ * @param children - the content of the section
+ * @param dark - if true, the section will be in dark mode
+ * @param containerSize - the size of the container
+ * @param containerClassName - the class name of the container (use this to set flex, grid, etc.)
+ * @param className - the class name of the section html element
+ * @param props - the props of the section (BackgroundComponentProps + HTMLDivElement props)
  */
 const Section = ({
 	children,
-	backgroundImage,
 	dark = false,
-
-	className,
-	backgroundImageClassName,
-	backgroundClassName,
+	containerSize = "1520",
 	containerClassName,
+	className,
 	...props
 }: SectionProps) => {
-	const sCn = cn(baseStye, dark ? "dark" : "light", className)
-	const bgImageCn = cn(bgImageBaseStyle, backgroundImageClassName)
-	const bgCn = cn(bgBaseStyle, backgroundImage && "opacity-80", backgroundClassName)
-	const containerCn = cn(containerBaseStyle, containerClassName)
-
 	return (
-		<section className={sCn} {...props}>
-			{backgroundImage && (
-				<div className={bgImageCn}>
-					<Image
-						src={backgroundImage?.src}
-						alt={backgroundImage?.alt}
-						fill
-						style={{ objectFit: "cover" }}
-						priority
-					/>
-				</div>
-			)}
-			<div className={bgCn} />
-			<div className={containerCn}>{children}</div>
-		</section>
+		<Background
+			section
+			className={cn("relative", dark ? "dark" : "light", className)}
+			containerClassName={cn(containerSizes[containerSize], containerClassName)}
+			{...props}
+		>
+			{children}
+		</Background>
 	)
 }
 

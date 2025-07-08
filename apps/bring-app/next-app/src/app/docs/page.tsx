@@ -1,6 +1,6 @@
 import Column from "@/components/layout/column"
 import Row from "@/components/layout/row"
-import Section from "@/components/layout/section"
+import Section from "@/components/layout/section-old"
 import Link from "next/link"
 
 export default function Docs() {

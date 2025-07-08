@@ -4,7 +4,7 @@ import { basic } from "@/components/samples/basic"
 import { column } from "@/components/layout/column"
 import { group } from "@/components/layout/group"
 import { row } from "@/components/layout/row"
-import { section } from "@/components/layout/section"
+import { section } from "@/components/layout/section-old"
 import { split } from "@/components/layout/split"
 // components
 import { divider } from "@/components/divider"

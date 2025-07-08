@@ -47,14 +47,25 @@ const responsiveClassNames = [
 	"block",
 	"flex",
 	"grid",
-	//flex items
+	// flex direction
+	"flex-row",
+	"flex-col",
+	"flex-row-reverse",
+	"flex-col-reverse",
+	//flex justify
 	"justify-start",
 	"justify-center",
 	"justify-end",
 	"justify-between",
+	"justify-around",
+	"justify-evenly",
+	"justify-stretch",
+	//flex items
 	"items-start",
 	"items-center",
 	"items-end",
+	"items-baseline",
+	"items-stretch",
 	// text align
 	"text-left",
 	"text-right",

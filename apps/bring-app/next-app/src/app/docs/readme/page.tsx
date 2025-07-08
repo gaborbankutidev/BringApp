@@ -1,6 +1,6 @@
 import Column from "@/components/layout/column"
 import Row from "@/components/layout/row"
-import Section from "@/components/layout/section"
+import Section from "@/components/layout/section-old"
 import Markdown from "@/components/markdown"
 import fs from "fs"
 import path from "path"
