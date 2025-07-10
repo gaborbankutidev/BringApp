@@ -160,9 +160,9 @@ const Fonts = () => (
 				<div>
 					<h3 className="mb-3 text-18s font-semibold">Default Line Height (text-16)</h3>
 					<p className="text-16 text-gray-700">
-						This is the default body text with standard line height. It's perfect for most content
-						and provides good readability without being too spaced out. This is the recommended
-						choice for general body text and shorter content blocks.
+						This is the default body text with standard line height. It&apos;s perfect for most
+						content and provides good readability without being too spaced out. This is the
+						recommended choice for general body text and shorter content blocks.
 					</p>
 				</div>
 
@@ -170,18 +170,18 @@ const Fonts = () => (
 					<h3 className="mb-3 text-18s font-semibold">Large Line Height (text-16l)</h3>
 					<p className="text-16l text-gray-700">
 						This is body text with large line height, providing more breathing room between lines.
-						It's excellent for longer content blocks like blog posts, articles, or any text that
-						requires extended reading. The increased spacing helps reduce eye strain and improves
-						overall readability for dense content.
+						It&apos;s excellent for longer content blocks like blog posts, articles, or any text
+						that requires extended reading. The increased spacing helps reduce eye strain and
+						improves overall readability for dense content.
 					</p>
 				</div>
 
 				<div>
 					<h3 className="mb-3 text-18s font-semibold">Small Line Height (text-16s)</h3>
 					<p className="text-16s text-gray-700">
-						This is body text with small line height, creating tighter spacing between lines. It's
-						ideal for headers, labels, or content where you want to maximize space efficiency while
-						maintaining readability. Perfect for UI elements and compact layouts.
+						This is body text with small line height, creating tighter spacing between lines.
+						It&apos;s ideal for headers, labels, or content where you want to maximize space
+						efficiency while maintaining readability. Perfect for UI elements and compact layouts.
 					</p>
 				</div>
 			</div>

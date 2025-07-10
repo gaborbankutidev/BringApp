@@ -99,7 +99,9 @@ const ResponsiveRangeControlByValue: FC<ControlByValue<ResponsiveValue> & _Numbe
 						size="small"
 						className="responsive-screen-select-button"
 					>
-						{value[screenSize] !== undefined ? value[screenSize] : "-"}
+						{value[screenSize] !== undefined
+							? value[screenSize]
+							: (defaultValue?.[screenSize] ?? "-")}
 					</Button>
 				))}
 			</div>

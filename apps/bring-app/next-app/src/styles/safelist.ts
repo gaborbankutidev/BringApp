@@ -13,7 +13,7 @@ const breakpoints = ["", "md:", "lg:"]
 const sides = ["t", "b", "l", "r"]
 
 // Prefixes for color classes
-const colorPrefixes = ["bg-", "border-", "hover:bg-", "hover:text-"]
+const colorPrefixes = ["bg-", "border-", "from-", "hover:bg-", "hover:text-"]
 
 // Prefixes for responsive color classes
 const responsiveColorPrefixes = ["text-"]

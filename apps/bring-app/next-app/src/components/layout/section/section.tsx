@@ -21,6 +21,7 @@ type SectionProps = {
  */
 const Section = ({
 	children,
+	as = "section",
 	dark = false,
 	containerSize = "1520",
 	containerClassName,
@@ -29,7 +30,7 @@ const Section = ({
 }: SectionProps) => {
 	return (
 		<Background
-			section
+			as={as}
 			className={cn("relative", dark ? "dark" : "light", className)}
 			containerClassName={cn(containerSizes[containerSize], containerClassName)}
 			{...props}

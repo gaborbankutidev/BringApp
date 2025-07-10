@@ -328,6 +328,14 @@
 		opacity: 1 !important;
 	}
 
+	.block-editor .grid {
+		display: grid !important;
+	}
+
+	.block-editor .h-full {
+		height: 100% !important;
+	}
+
 	.purple-radial-gradient-lg {
 		background: radial-gradient(rgb(147 51 234) 50%, transparent 60%);
 	}

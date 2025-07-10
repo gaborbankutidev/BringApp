@@ -1,8 +1,9 @@
 import { colorOptions } from "@/editor/utils/options"
 import { type ColorType } from "@/styles/colors"
+import type { ImageType, ResponsiveValue } from "@bring/blocks-client"
 import {
 	booleanAttributeSource,
-	imageAttributeSource,
+	objectAttributeSource,
 	stringAttributeSource,
 	type BlockConfig,
 } from "@bring/blocks-editor/blocks"
@@ -32,10 +33,13 @@ const background = ({
 	withParallax = false,
 	withGradient = false,
 }: Options = {}) => {
+	const hasBackgroundImage = (backgroundImage?: ResponsiveValue<ImageType>) =>
+		!!backgroundImage?.[""]?.src || !!backgroundImage?.md?.src || !!backgroundImage?.lg?.src
+
 	// Attributes
 	const backgroundAttributes: BlockConfig<BackgroundBlockProps>["attributes"] = {
 		backgroundColor: stringAttributeSource(),
-		backgroundImage: imageAttributeSource(),
+		backgroundImage: objectAttributeSource({}),
 		backgroundImageClassName: stringAttributeSource(),
 		backgroundClassName: stringAttributeSource(),
 		containerClassName: stringAttributeSource(),
@@ -69,12 +73,16 @@ const background = ({
 						withGradient && (!!defaultBackgroundColor || !!backgroundColor),
 				},
 
-				{ type: "image", label: "Background image", path: "backgroundImage" },
+				{
+					type: "responsive-image",
+					label: "Background image",
+					path: "backgroundImage",
+				},
 				{
 					type: "toggle",
 					label: "Parallax",
 					path: "parallax",
-					show: ({ backgroundImage }) => withParallax && !!backgroundImage?.src,
+					show: ({ backgroundImage }) => withParallax && hasBackgroundImage(backgroundImage),
 				},
 			],
 			initialOpen: true,
@@ -86,7 +94,7 @@ const background = ({
 					type: "text",
 					label: "Background Image Classes",
 					path: "backgroundImageClassName",
-					show: ({ backgroundImage }) => !!backgroundImage?.src,
+					show: ({ backgroundImage }) => hasBackgroundImage(backgroundImage),
 				},
 				{
 					type: "text",

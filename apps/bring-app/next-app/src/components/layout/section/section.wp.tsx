@@ -10,7 +10,7 @@ import { section, type SectionBlockProps } from "./section.block"
 import { SectionEdit } from "./section.edit"
 
 const { backgroundAttributes, backgroundControls } = background({
-	defaultBackgroundColor: "background",
+	defaultBackgroundColor: "transparent",
 	withParallax: true,
 	withGradient: true,
 })

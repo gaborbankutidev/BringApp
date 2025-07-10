@@ -25,9 +25,9 @@ export function makeBlockStylesControl(blockStylesConfig: BlockStylesConfig) {
 				</PanelBody>
 			)}
 			{v && (
-				<PanelBody title="Visibility" initialOpen={false}>
+				<PanelBody title="Visibility (Hide)" initialOpen={false}>
 					<ResponsiveCheckboxControl<Record<string, any>>
-						label="Visibility"
+						label="Hide"
 						path="blockStyles.visibility"
 					/>
 				</PanelBody>

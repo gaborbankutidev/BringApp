@@ -1,12 +1,12 @@
 import { cn } from "@/lib/utils"
 import { type ColorType } from "@/styles/colors"
-import { type ImageType } from "@bring/blocks-client"
+import { type ImageType, type ResponsiveValue } from "@bring/blocks-client"
 import { Slot } from "@radix-ui/react-slot"
 import { type ReactNode } from "react"
 
 export type BackgroundBlockProps = {
 	backgroundColor?: ColorType
-	backgroundImage?: ImageType
+	backgroundImage?: ResponsiveValue<ImageType>
 	gradient?: boolean
 	parallax?: boolean
 
@@ -42,18 +42,31 @@ const Background = ({
 	children,
 	defaultBackgroundColor,
 	backgroundColor = defaultBackgroundColor,
-	backgroundImage,
+	backgroundImage = {},
 	gradient,
 	backgroundClassName,
 	...props
 }: ExtendedBackgroundBlockProps) => {
 	const extendedProps = {
-		backgroundImage: backgroundImage?.src
+		backgroundImage: backgroundImage[""]?.src
 			? {
-					src: backgroundImage.src,
-					alt: backgroundImage.alt ?? "Background image",
+					src: backgroundImage[""].src,
+					alt: backgroundImage[""].alt ?? "Background image",
 				}
 			: undefined,
+		backgroundImageMd: backgroundImage.md?.src
+			? {
+					src: backgroundImage.md.src,
+					alt: backgroundImage.md.alt ?? "Background image",
+				}
+			: undefined,
+		backgroundImageLg: backgroundImage.lg?.src
+			? {
+					src: backgroundImage.lg.src,
+					alt: backgroundImage.lg.alt ?? "Background image",
+				}
+			: undefined,
+
 		backgroundClassName: cn(
 			backgroundColor &&
 				(!gradient ? `bg-${backgroundColor}` : `bg-gradient-to-b from-${backgroundColor}`),

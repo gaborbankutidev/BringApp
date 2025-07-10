@@ -2,7 +2,10 @@ import { cn } from "@/lib/utils"
 import Image, { type ImageProps } from "next/image"
 
 export type BackgroundComponentProps = {
+	as?: "div" | "section" | "article" | "aside" | "main" | "header" | "footer" | "nav"
 	backgroundImage?: Pick<ImageProps, "src" | "alt">
+	backgroundImageMd?: Pick<ImageProps, "src" | "alt">
+	backgroundImageLg?: Pick<ImageProps, "src" | "alt">
 	parallax?: boolean
 	className?: string
 	backgroundImageClassName?: string
@@ -10,14 +13,15 @@ export type BackgroundComponentProps = {
 	containerClassName?: string
 } & React.HTMLProps<HTMLDivElement>
 
-type ExtendedBackgroundComponentProps = BackgroundComponentProps & { section?: boolean }
+const getBackgroundImage = (image: { src?: ImageProps["src"]; alt: string } | undefined) => {
+	if (!image) return undefined
 
-const getBackgroundImageSrc = (src?: ImageProps["src"]) => {
-	if (typeof src === "string") {
-		return src
-	} else if (typeof src === "object" && "src" in src) {
-		return src.src
+	if (typeof image.src === "string") {
+		return { src: image.src, alt: image.alt }
+	} else if (typeof image.src === "object" && "src" in image.src) {
+		return { src: image.src.src, alt: image.alt }
 	}
+
 	return undefined
 }
 
@@ -25,70 +29,125 @@ const getBackgroundImageSrc = (src?: ImageProps["src"]) => {
  * Background component
  *
  * This component is used to set a background image or color to a component.
- * It can be used as a section or a div.
+ * It can be used as a section or a div and supports responsive backgrounds.
  * Use this as wrapper for your components to set a background image or/and color.
- * Example: Section layout component
  *
- * @param section - if true, the component will be rendered as a section
+ * Responsive behavior:
+ * - Mobile (default): uses backgroundImage
+ * - Tablet (md): uses backgroundImageMd if provided, falls back to backgroundImage
+ * - Desktop (lg): uses backgroundImageLg if provided, falls back to backgroundImageMd or backgroundImage
+ *
+ * @param as - the semantic HTML element to render (default: "div", examples: "section", "footer", "header", "nav", "main", "article", "aside")
  * @param children - the content of the component
- * @param backgroundImage - the background image
+ * @param backgroundImage - the background image for mobile (default)
+ * @param backgroundImageMd - the background image for tablet (md breakpoint)
+ * @param backgroundImageLg - the background image for desktop (lg breakpoint)
  * @param parallax - if true, the background image will be fixed and will not scroll with the content
  * @param className - the class name of the component
  * @param backgroundImageClassName - the class name of the background image
- * @param backgroundClassName - the class name of the background
+ * @param backgroundClassName - the class name of the background color overlay element (if set, the background image will be set to 80% opacity)
  * @param containerClassName - the class name of the container
  * @param props - the props of the component (HTMLDivElement props)
  */
 const Background = ({
-	section,
+	as: Comp = "div",
 	children,
 	backgroundImage,
+	backgroundImageMd,
+	backgroundImageLg,
 	parallax = false,
-
 	className,
 	backgroundImageClassName,
 	backgroundClassName,
 	containerClassName,
 	...props
-}: ExtendedBackgroundComponentProps) => {
-	const Comp = section ? "section" : "div"
-
-	const backgroundSource = getBackgroundImageSrc(backgroundImage?.src)
-	const backgroundImageStyle =
-		backgroundSource && parallax
-			? {
-					backgroundImage: `url(${backgroundSource})`,
-				}
-			: {}
+}: BackgroundComponentProps) => {
+	const bgImage = getBackgroundImage(backgroundImage)
+	const bgImageMd = getBackgroundImage(backgroundImageMd)
+	const bgImageLg = getBackgroundImage(backgroundImageLg)
 
 	return (
-		<Comp className={cn("relative", !backgroundImage && backgroundClassName, className)} {...props}>
-			{/* Background image div */}
-			{backgroundImage && (
+		<Comp className={cn("relative", className)} {...props}>
+			{/* Mobile background image */}
+			{bgImage && (
 				<div
 					className={cn(
 						"absolute left-0 top-0 h-full w-full",
+						bgImageMd && "md:hidden",
+						bgImageLg && "lg:hidden",
 						parallax && "bg-cover bg-fixed bg-center bg-no-repeat",
 						backgroundImageClassName
 					)}
-					style={backgroundImageStyle}
+					style={parallax ? { backgroundImage: `url(${bgImage.src})` } : {}}
 				>
 					{!parallax && (
 						<Image
-							src={backgroundImage?.src}
-							alt={backgroundImage?.alt}
+							src={bgImage.src}
+							alt={bgImage.alt}
 							fill
-							style={{ objectFit: "cover" }}
+							className="h-full w-full object-cover"
 							priority
 						/>
 					)}
 				</div>
 			)}
 
-			{/* Background color div - only if background image is set */}
-			{backgroundImage && backgroundClassName && (
+			{/* Tablet background image */}
+			{bgImageMd && (
 				<div
-					className={cn("absolute left-0 top-0 h-full w-full", "opacity-80", backgroundClassName)}
+					className={cn(
+						"absolute left-0 top-0 hidden h-full w-full md:block",
+						bgImageLg && "lg:hidden",
+						parallax && "bg-cover bg-fixed bg-center bg-no-repeat",
+						backgroundImageClassName
+					)}
+					style={parallax ? { backgroundImage: `url(${bgImageMd.src})` } : {}}
+				>
+					{!parallax && (
+						<Image
+							src={bgImageMd.src}
+							alt={bgImageMd.alt}
+							fill
+							className="h-full w-full object-cover"
+							priority
+						/>
+					)}
+				</div>
+			)}
+
+			{/* Desktop background image */}
+			{bgImageLg && (
+				<div
+					className={cn(
+						"absolute left-0 top-0 hidden h-full w-full lg:block",
+						parallax && "bg-cover bg-fixed bg-center bg-no-repeat",
+						backgroundImageClassName
+					)}
+					style={parallax ? { backgroundImage: `url(${bgImageLg.src})` } : {}}
+				>
+					{!parallax && (
+						<Image
+							src={bgImageLg.src}
+							alt={bgImageLg.alt}
+							fill
+							className="h-full w-full object-cover"
+							priority
+						/>
+					)}
+				</div>
+			)}
+
+			{/* Background color overlay */}
+			{backgroundClassName && (
+				<div
+					className={cn(
+						"absolute left-0 top-0 h-full w-full",
+						// Set opacity to 80% if background image is set
+						bgImage && "opacity-80",
+						bgImageMd && "md:opacity-80",
+						bgImageLg && "lg:opacity-80",
+						backgroundClassName
+					)}
 				/>
 			)}
 

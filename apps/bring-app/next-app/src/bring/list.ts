@@ -1,11 +1,9 @@
 // sample
 import { basic } from "@/components/samples/basic"
 // layout
-import { column } from "@/components/layout/column"
-import { group } from "@/components/layout/group"
-import { row } from "@/components/layout/row"
-import { section } from "@/components/layout/section-old"
-import { split } from "@/components/layout/split"
+import { flex } from "@/components/layout/flex"
+import { grid } from "@/components/layout/grid"
+import { section } from "@/components/layout/section"
 // components
 import { divider } from "@/components/divider"
 import { embed } from "@/components/embed"
@@ -18,11 +16,9 @@ export const blockList = [
 	// sample
 	basic,
 	// layout
-	column,
-	group,
-	row,
 	section,
-	split,
+	flex,
+	grid,
 	// components
 	button,
 	divider,

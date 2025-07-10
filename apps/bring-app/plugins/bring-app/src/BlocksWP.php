@@ -21,11 +21,9 @@ class BlocksWP {
 		// samples
 		"basic",
 		// layout
-		"column",
-		"group",
-		"row",
 		"section",
-		"split",
+		"flex",
+		"grid",
 		// components
 		"button",
 		"divider",

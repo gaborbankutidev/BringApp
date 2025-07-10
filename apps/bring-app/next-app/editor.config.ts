@@ -2,11 +2,9 @@
 import basic from "@/components/samples/basic/basic.wp"
 
 // layout
-import column from "@/components/layout/column/column.wp"
-import group from "@/components/layout/group/group.wp"
-import row from "@/components/layout/row/row.wp"
-import section from "@/components/layout/section-old/section.wp"
-import split from "@/components/layout/split/split.wp"
+import flex from "@/components/layout/flex/flex.wp"
+import grid from "@/components/layout/grid/grid.wp"
+import section from "@/components/layout/section/section.wp"
 
 // components
 import divider from "@/components/divider/divider.wp"
@@ -22,11 +20,9 @@ const blockList = [
 	// samples
 	basic,
 	// layout
-	column,
-	group,
-	row,
+	flex,
+	grid,
 	section,
-	split,
 	// components
 	button,
 	divider,

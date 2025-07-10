@@ -101,7 +101,7 @@ const ResponsiveMediaControlByValue: FC<
 						size="small"
 						className="responsive-screen-select-button"
 					>
-						{value[screenSize] !== undefined ? "✓" : "-"}
+						{value[screenSize]?.src ? "✓" : "-"}
 					</Button>
 				))}
 			</div>
