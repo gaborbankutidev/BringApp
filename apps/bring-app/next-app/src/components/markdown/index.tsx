@@ -1,3 +1,2 @@
-import Markdown from "./markdown"
-export default Markdown
+export { default } from "./markdown"
 export { markdown } from "./markdown.block"

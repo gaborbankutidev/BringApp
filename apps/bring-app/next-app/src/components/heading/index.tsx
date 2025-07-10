@@ -1,3 +1,2 @@
-import Heading from "./heading"
-export default Heading
+export { default } from "./heading"
 export { heading } from "./heading.block"

@@ -11,7 +11,7 @@ export type EmbedBlockProps = {
 const EmbedBlock = ({ attributes: { url, height = 400, ...props } }: BP<EmbedBlockProps>) => {
 	return url ? (
 		<div style={{ minHeight: `${height}px` }} {...props}>
-			<iframe src={url} className="h-full w-full"></iframe>
+			<iframe src={url} className="w-full" style={{ minHeight: `${height}px` }}></iframe>
 		</div>
 	) : null
 }

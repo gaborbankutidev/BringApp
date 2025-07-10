@@ -7,12 +7,12 @@ import grid from "@/components/layout/grid/grid.wp"
 import section from "@/components/layout/section/section.wp"
 
 // components
+import button from "@/components/button/button.wp"
 import divider from "@/components/divider/divider.wp"
 import embed from "@/components/embed/embed.wp"
 import heading from "@/components/heading/heading.wp"
 import image from "@/components/image/image.wp"
 import markdown from "@/components/markdown/markdown.wp"
-import button from "@/components/ui/button/button.wp"
 
 import Editor from "@bring/blocks-editor"
 

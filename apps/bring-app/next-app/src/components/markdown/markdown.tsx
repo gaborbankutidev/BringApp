@@ -24,7 +24,6 @@ export const markdownElements = [
 	"code",
 	"blockquote",
 	"hr",
-	"br",
 ] as const
 
 export type MarkdownElements = (typeof markdownElements)[number]
@@ -119,8 +118,6 @@ const getComponents = (
 					image={{
 						src: props.src,
 						alt: parsedAlt,
-						width: 900,
-						height: 600,
 						className: elementsClassName.img,
 					}}
 					caption={caption}
@@ -145,7 +142,6 @@ const getComponents = (
 			<blockquote className={elementsClassName.blockquote}>{children}</blockquote>
 		),
 		hr: () => <hr className={elementsClassName.hr} />,
-		br: () => <br className={elementsClassName.br} />,
 	}
 }
 

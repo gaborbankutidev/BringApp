@@ -23,6 +23,8 @@ const embedConfig: BlockConfig<EmbedBlockProps> = {
 					label: "Height (in pixels)",
 					path: "height",
 					defaultValue: 400,
+					min: 0,
+					max: 800,
 				},
 			],
 			initialOpen: true,

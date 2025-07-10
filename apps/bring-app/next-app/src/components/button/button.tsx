@@ -5,25 +5,35 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+const variants = {
+	primary: "text-white bg-purple-600 hover:bg-purple-800",
+	destructive: "bg-red-600 text-white hover:bg-red-600/90",
+	outline:
+		"text-foreground outline outline-purple-600 hover:text-foreground hover:outline-foreground -outline-offset-2",
+	secondary: "text-white bg-gray-600 hover:bg-gray-800",
+	ghost: "hover:bg-purple-600 text-gray-300 hover:text-white",
+	link: "text-purple-600 underline-offset-4 hover:underline",
+} as const
+
+export const variantList = Object.keys(variants)
+export type VariantType = keyof typeof variants
+
+const sizes = {
+	sm: "py-1 px-4",
+	md: "py-2 px-8",
+	lg: "py-4 px-12",
+	icon: "h-10 w-10",
+} as const
+
+export const sizeList = Object.keys(sizes)
+export type SizeType = keyof typeof sizes
+
 export const buttonVariants = cva(
 	"inline-flex duration-300 font-medium cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-full text-18 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 text-center",
 	{
 		variants: {
-			variant: {
-				primary: "text-white bg-purple-600 hover:bg-purple-800",
-				destructive: "bg-red-600 text-white hover:bg-red-600/90",
-				outline:
-					"text-white outline outline-purple-600 hover:text-white hover:outline-white -outline-offset-2",
-				secondary: "text-white bg-gray-600 hover:bg-gray-800",
-				ghost: "hover:bg-purple-600 text-gray-300 hover:text-white",
-				link: "text-purple-600 underline-offset-4 hover:underline",
-			},
-			size: {
-				sm: "py-1 px-4",
-				md: "py-2 px-8",
-				lg: "py-4 px-12",
-				icon: "h-10 w-10",
-			},
+			variant: variants,
+			size: sizes,
 		},
 		defaultVariants: {
 			variant: "primary",

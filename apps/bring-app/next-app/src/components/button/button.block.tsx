@@ -1,17 +1,17 @@
 import Link from "next/link"
 
 import { type BP } from "@/bring"
-import Button from "./button"
+import Button, { type SizeType, type VariantType } from "./button"
 
 export type ButtonBlockProps = {
 	text: string
 	href?: string
 	newTab?: boolean
-	variant?: "primary" | "destructive" | "outline" | "secondary" | "ghost" | "link"
-	size?: "sm" | "md" | "lg" | "icon"
+	variant?: VariantType
+	size?: SizeType
 }
 
-export const ButtonBlock = ({
+const ButtonBlock = ({
 	attributes: { text, href = "#", newTab = false, ...props },
 }: BP<ButtonBlockProps>) => {
 	return (
@@ -39,4 +39,4 @@ export const button = {
 	},
 } as const
 
-export default Button
+export default ButtonBlock

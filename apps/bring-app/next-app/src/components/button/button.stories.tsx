@@ -1,20 +1,20 @@
 import type { Meta, StoryObj } from "@storybook/react"
 
-import Button from "./button"
+import Button, { sizeList, variantList } from "./button"
 
 const meta = {
-	title: "Components/Ui/Button",
+	title: "Components/Button",
 	component: Button,
 	tags: ["autodocs"],
 	// Added argTypes manually as Storybook can't infer types from union types correctly
 	argTypes: {
 		variant: {
 			control: { type: "select" },
-			options: ["primary", "destructive", "outline", "secondary", "ghost", "link"],
+			options: variantList,
 		},
 		size: {
 			control: { type: "radio" },
-			options: ["sm", "md", "lg", "icon"],
+			options: sizeList,
 		},
 	},
 } satisfies Meta<typeof Button>
@@ -27,6 +27,9 @@ export const Primary: Story = {
 		children: "Primary",
 		size: "md",
 		variant: "primary",
+		isLoading: false,
+		loadingMessage: "Please wait",
+		className: "",
 	},
 }
 
@@ -36,11 +39,8 @@ export const Loading: Story = {
 		size: "md",
 		variant: "primary",
 		isLoading: true,
-	},
-	argTypes: {
-		loadingMessage: {
-			control: "text",
-		},
+		loadingMessage: "Please wait",
+		className: "",
 	},
 }
 
@@ -49,6 +49,9 @@ export const Destructive: Story = {
 		variant: "destructive",
 		children: "Destructive",
 		size: "md",
+		isLoading: false,
+		loadingMessage: "Please wait",
+		className: "",
 	},
 }
 
@@ -57,6 +60,9 @@ export const Outline: Story = {
 		variant: "outline",
 		children: "Outline",
 		size: "md",
+		isLoading: false,
+		loadingMessage: "Please wait",
+		className: "",
 	},
 }
 
@@ -65,6 +71,9 @@ export const Secondary: Story = {
 		variant: "secondary",
 		children: "Secondary",
 		size: "md",
+		isLoading: false,
+		loadingMessage: "Please wait",
+		className: "",
 	},
 }
 
@@ -73,6 +82,9 @@ export const Ghost: Story = {
 		variant: "ghost",
 		children: "Ghost",
 		size: "md",
+		isLoading: false,
+		loadingMessage: "Please wait",
+		className: "",
 	},
 }
 

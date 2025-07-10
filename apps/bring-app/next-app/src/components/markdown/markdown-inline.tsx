@@ -4,7 +4,7 @@ import { useMemo } from "react"
 import ReactMarkdown from "react-markdown"
 import supersub from "remark-supersub"
 
-export const markdownInlineElements = ["p", "a", "em", "strong", "sup", "sub"] as const
+export const markdownInlineElements = ["p", "a", "em", "strong", "sup", "sub", "br"] as const
 
 export type MarkdownInlineElements = (typeof markdownInlineElements)[number]
 
@@ -64,6 +64,7 @@ export const getInlineComponents = (
 		sub: ({ children }: { children: ReactNode }) => (
 			<sub className={elementsClassName.sub}>{children}</sub>
 		),
+		br: () => <br className={elementsClassName.br} />,
 	}
 }
 

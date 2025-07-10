@@ -2,21 +2,26 @@ import type { BP } from "@/bring"
 import type { TextAlignType, TextSourceType } from "@/editor/utils/lists"
 import { cn } from "@/lib/utils"
 import type { ColorType } from "@/styles/colors"
+import { makeResponsiveClassNames, type ResponsiveValue } from "@bring/blocks-client/styles"
 import Markdown, { type MarkdownElements } from "./markdown"
 
 export type MarkdownBlockProps = {
 	source?: TextSourceType
 	content?: string
 	elementsClassName: Partial<Record<MarkdownElements, string>>
-	align?: TextAlignType
+	align?: ResponsiveValue<TextAlignType>
 	color?: ColorType
 }
 
 export const MarkdownBlock = ({
-	attributes: { source = "manual", content = "", align, color, className, ...props },
+	attributes: { source = "manual", content = "", align = {}, color, className, ...props },
 	entityProps,
 }: BP<MarkdownBlockProps>) => {
-	const classNames = cn(align && `text-${align}`, color && `text-${color}`, className)
+	const classNames = cn(
+		makeResponsiveClassNames("text", align),
+		color && `text-${color}`,
+		className
+	)
 
 	if (source !== "manual") {
 		if (!entityProps) {
@@ -55,4 +60,4 @@ export const markdown = {
 	},
 } as const
 
-export default Markdown
+export default MarkdownBlock
