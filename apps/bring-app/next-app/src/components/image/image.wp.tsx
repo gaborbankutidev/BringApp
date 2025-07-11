@@ -6,7 +6,7 @@ import {
 	stringAttributeSource,
 	type BlockConfig,
 } from "@bring/blocks-editor/blocks"
-import { image, type ImageBlockProps } from "./Image.block"
+import { image, type ImageBlockProps } from "./image.block"
 
 const imageConfig: BlockConfig<ImageBlockProps> = {
 	...image,

@@ -2,7 +2,7 @@ import type { BP } from "@/bring"
 import type { SourceType } from "@/editor/utils/lists"
 import type { ImageType } from "@bring/blocks-client/types"
 import { defaultImageValue } from "@bring/blocks-client/utils"
-import Image from "./Image"
+import Image from "./image"
 
 export type ImageBlockProps = {
 	contentSource?: SourceType

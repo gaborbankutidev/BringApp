@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react"
 
-import ImageBlock, { type ImageBlockProps } from "./Image.block"
+import ImageBlock, { type ImageBlockProps } from "./image.block"
 
 type ImageStoryType = Omit<ImageBlockProps, "contentSource" | "image" | "link"> & {
 	image: string
