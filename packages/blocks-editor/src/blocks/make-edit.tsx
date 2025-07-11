@@ -1,10 +1,6 @@
-import {
-	//InnerBlocks,
-	InspectorAdvancedControls,
-	useInnerBlocksProps,
-} from "@wordpress/block-editor"
+import { InspectorAdvancedControls, useInnerBlocksProps } from "@wordpress/block-editor"
 import clsx from "clsx"
-import React from "react"
+import React, { type ReactNode } from "react"
 import { EditorCard } from "../components"
 import { TextControl } from "../controls"
 import { ControlContextProvider } from "../controls/context"
@@ -86,7 +82,7 @@ export function makeEdit({
 		clientId,
 		isSelected,
 	}: EditForRegisterType) => {
-		const innerBlocksProps = useInnerBlocksProps({
+		const { children: innerBlocksChildren, ...innerBlocksProps } = useInnerBlocksProps({
 			className: editContainerClassName(editorAttributes),
 			allowedBlocks,
 		})
@@ -132,10 +128,7 @@ export function makeEdit({
 					blockTitle={blockTitle ?? blockName}
 					blockProps={{
 						attributes: clientAttributes,
-						// children: <InnerBlocks allowedBlocks={allowedBlocks} />,
-						//children: <InnerBlocks {...innerBlocksProps} />,
-						// @ts-expect-error
-						children: <div {...innerBlocksProps} />,
+						children: <div {...innerBlocksProps}>{innerBlocksChildren as ReactNode}</div>,
 						entityProps: sampleEntityProps,
 						siteProps: sampleSiteProps,
 						blockStyles: editorAttributes.blockStyles,

@@ -3,11 +3,11 @@ import type { Meta, StoryObj } from "@storybook/react"
 import ImageBlock, { type ImageBlockProps } from "./image.block"
 
 type ImageStoryType = Omit<ImageBlockProps, "contentSource" | "image" | "link"> & {
-	image: string
-	link: string
+	image?: string
+	link?: string
 }
 
-const ImageStory = ({ image, link, ...attributes }: ImageStoryType) => (
+const ImageStory = ({ image = "", link = "", ...attributes }: ImageStoryType) => (
 	<div className="relative overflow-hidden">
 		<ImageBlock
 			attributes={{
