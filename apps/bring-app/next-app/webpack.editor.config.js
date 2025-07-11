@@ -29,7 +29,7 @@ editorConfig.resolve.alias = {
 editorConfig.plugins = [
 	...editorConfig.plugins,
 	new webpack.ProvidePlugin({
-		process: path.resolve(__dirname, "process-mock.js"),
+		process: path.resolve(__dirname, "process.editor.js"),
 	}),
 ]
 

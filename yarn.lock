@@ -19647,7 +19647,9 @@ __metadata:
     globals: "npm:^16.0.0"
     lucide-react: "npm:0.482.0"
     next: "npm:15.2.2"
+    nextjs-toploader: "npm:3.8.16"
     postcss: "npm:^8.5.3"
+    postcss-prefix-selector: "npm:^2.1.1"
     prop-types: "npm:^15.8.1"
     react: "npm:19.0.0"
     react-dom: "npm:19.0.0"
@@ -19728,6 +19730,20 @@ __metadata:
   bin:
     next: dist/bin/next
   checksum: 10c0/ed303ae014fa8236afa556d178fe426a81aa2baebff912dfbfbb9178a955cbc7d528d27608b66d6d9fb5b33a415ad550cdd984d9b6dbc2a6ff7f2d991b760029
+  languageName: node
+  linkType: hard
+
+"nextjs-toploader@npm:3.8.16":
+  version: 3.8.16
+  resolution: "nextjs-toploader@npm:3.8.16"
+  dependencies:
+    nprogress: "npm:^0.2.0"
+    prop-types: "npm:^15.8.1"
+  peerDependencies:
+    next: ">= 6.0.0"
+    react: ">= 16.0.0"
+    react-dom: ">= 16.0.0"
+  checksum: 10c0/b705a81638dbf68d6c278b391ae00be1e59e823e7085ad3a4f638b804b007603d6bfe7c5d84e94770dd04cae3eb7101acf8df7bdcf0144bcc40f6a9f8a25e85b
   languageName: node
   linkType: hard
 
@@ -19994,6 +20010,13 @@ __metadata:
   dependencies:
     path-key: "npm:^4.0.0"
   checksum: 10c0/124df74820c40c2eb9a8612a254ea1d557ddfab1581c3e751f825e3e366d9f00b0d76a3c94ecd8398e7f3eee193018622677e95816e8491f0797b21e30b2deba
+  languageName: node
+  linkType: hard
+
+"nprogress@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "nprogress@npm:0.2.0"
+  checksum: 10c0/eab9a923a1ad1eed71a455ecfbc358442dd9bcd71b9fa3fa1c67eddf5159360b182c218f76fca320c97541a1b45e19ced04e6dcb044a662244c5419f8ae9e821
   languageName: node
   linkType: hard
 
@@ -21300,6 +21323,15 @@ __metadata:
   peerDependencies:
     postcss: ">4 <9"
   checksum: 10c0/e72d3fc000252ce22d000e7de5b74b718fe794a191e79598634ba73bbff3f1493a877d04e7fbf649b79f7d47428741324c5b157cf946bb63328d5e9883cea14c
+  languageName: node
+  linkType: hard
+
+"postcss-prefix-selector@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "postcss-prefix-selector@npm:2.1.1"
+  peerDependencies:
+    postcss: ^8.0.0
+  checksum: 10c0/2e01188c8c64ebe35153a5228bad15c0bf2d32613141954903d31f3ba1b1e066b7f44e5f8ad1c13c915c871c4a75f8084c98e3b74894a2fbf0bc0f941541878c
   languageName: node
   linkType: hard
 

@@ -23,19 +23,7 @@ const nextConfig = {
 				port: "",
 				pathname: "/**",
 			},
-			{
-				protocol: "https",
-				hostname: "wp-template.bringblocks.com",
-				port: "",
-				pathname: "/**",
-			},
 			// WP
-			{
-				protocol: "https",
-				hostname: "bringtemplatev2.gbdev",
-				port: "",
-				pathname: "/**",
-			},
 			{
 				protocol: "http",
 				hostname: "localhost",

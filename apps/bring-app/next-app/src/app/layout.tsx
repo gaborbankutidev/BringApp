@@ -6,6 +6,7 @@ import { getRankMathTitle } from "@bring/blocks-client/rank-math"
 import { GoogleTagManager } from "@next/third-parties/google"
 import { Montserrat } from "next/font/google"
 import { headers } from "next/headers"
+import NextTopLoader from "nextjs-toploader"
 import { type ReactNode } from "react"
 import { Head } from "./head"
 import Providers from "./providers"
@@ -43,7 +44,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 			<Head />
 			{env.NEXT_PUBLIC_GTM && <GoogleTagManager gtmId={env.NEXT_PUBLIC_GTM} />}
 			<body className={montserrat.className}>
-				<div className="bringContent relative flex min-h-screen flex-col">
+				<NextTopLoader color="#9333EA" showSpinner={false} />
+				<div className="bring-content relative flex min-h-screen flex-col">
 					<Bg />
 					<Providers>
 						<Header />

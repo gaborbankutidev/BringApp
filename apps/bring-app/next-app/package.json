@@ -7,7 +7,7 @@
 		"build:next": "next build",
 		"build:next:ci": "dotenv -e .env.test -- yarn build:next",
 		"build:storybook": "storybook build",
-		"build:tailwind": "tailwindcss -i ./src/styles/globals.css -o ../plugins/bring-app/build/tailwind.css --minify",
+		"build:tailwind": "tailwindcss --postcss ./postcss.editor.config.cjs -i ./src/styles/globals.css -o ../plugins/bring-app/build/tailwind.css --minify",
 		"checks": "conc yarn:types yarn:lint --success=all",
 		"format": "prettier --write .",
 		"lint": "next lint",
@@ -16,7 +16,7 @@
 		"watch:blocks": "wp-scripts start editor.config.ts --output-filename=../../plugins/bring-app/build/blocks.js --config webpack.editor.config.js",
 		"watch:next": "NODE_TLS_REJECT_UNAUTHORIZED=0 next dev --turbo",
 		"watch:storybook": "storybook dev -p 6006",
-		"watch:tailwind": "tailwindcss -i ./src/styles/globals.css -o ../plugins/bring-app/build/tailwind.css --watch"
+		"watch:tailwind": "tailwindcss --postcss ./postcss.editor.config.cjs -i ./src/styles/globals.css -o ../plugins/bring-app/build/tailwind.css --watch"
 	},
 	"dependencies": {
 		"@bring/blocks-client": "workspace:*",
@@ -38,6 +38,7 @@
 		"fslightbox-react": "1.8.0",
 		"lucide-react": "0.482.0",
 		"next": "15.2.2",
+		"nextjs-toploader": "3.8.16",
 		"react": "19.0.0",
 		"react-dom": "19.0.0",
 		"react-hook-form": "7.54.2",
@@ -82,6 +83,7 @@
 		"eslint-plugin-storybook": "^0.11.4",
 		"globals": "^16.0.0",
 		"postcss": "^8.5.3",
+		"postcss-prefix-selector": "^2.1.1",
 		"prop-types": "^15.8.1",
 		"storybook": "^8.6.6",
 		"tailwindcss": "^3.4.17",

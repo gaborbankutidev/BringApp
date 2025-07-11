@@ -4,6 +4,7 @@ import get from "lodash.get"
 import set from "lodash.set"
 import type { FC } from "react"
 import React from "react"
+import { SetToDefaultButton } from "../button"
 import { useControlContext } from "../context"
 import type { ControlByPath, ControlByValue, ControlType } from "../types"
 import { isPathControl } from "../utils"
@@ -81,13 +82,11 @@ const SelectControlByValue: FC<ControlByValue<string> & _SelectControl> = ({
 			help={
 				setDefault &&
 				value !== undefined && (
-					<button
+					<SetToDefaultButton
 						onClick={() => {
 							setValue(undefined)
 						}}
-					>
-						Set to default
-					</button>
+					/>
 				)
 			}
 			options={options}

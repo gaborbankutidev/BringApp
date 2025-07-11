@@ -104,6 +104,13 @@ function MediaControlByValue({
 								justifyContent: "center",
 								width: "100%",
 								padding: "12px",
+								borderBottom: "1px solid rgb(221, 221, 221)",
+								borderTop: "none",
+								borderLeft: "none",
+								borderRight: "none",
+								borderRadius: "0",
+								background: "none",
+								cursor: "pointer",
 							}}
 						>
 							{value?.id ? <Preview {...value} /> : "No media selected"}

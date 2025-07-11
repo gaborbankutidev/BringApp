@@ -29,6 +29,7 @@ export const EditorCard: FC<EditorCardType> = ({ color = "grey", name, children,
 				height: "100%",
 				minHeight: "28px",
 			}}
+			className="bring-editor"
 		>
 			<div
 				style={{
