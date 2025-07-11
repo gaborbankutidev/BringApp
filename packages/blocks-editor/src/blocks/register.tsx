@@ -34,5 +34,10 @@ export function registerBringBlock(config: BlockConfig) {
 		edit: makeEdit(config),
 		// @ts-ignore
 		save: () => <InnerBlocks.Content />,
+		getEditWrapperProps: (attributes) => {
+			return {
+				className: config.editWrapperClassName?.(attributes) ?? "",
+			}
+		},
 	})
 }

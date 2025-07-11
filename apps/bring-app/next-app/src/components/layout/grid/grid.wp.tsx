@@ -2,7 +2,7 @@ import background from "@/components/background/background.wp"
 import type { BlockConfig } from "@bring/blocks-editor/blocks"
 import { booleanAttributeSource, objectAttributeSource } from "@bring/blocks-editor/blocks"
 import { grid, type GridBlockProps } from "./grid.block"
-import { GridEdit } from "./grid.edit"
+import { GridEdit, gridEditContainerClassName } from "./grid.edit"
 
 const { backgroundAttributes, backgroundControls } = background({
 	defaultBackgroundColor: "transparent",
@@ -21,6 +21,7 @@ const gridConfig: BlockConfig<GridBlockProps> = {
 		...backgroundAttributes,
 	},
 	Edit: GridEdit,
+	editContainerClassName: gridEditContainerClassName,
 	Controls: [
 		{
 			panel: "Grid settings",

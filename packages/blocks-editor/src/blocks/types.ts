@@ -125,5 +125,7 @@ export type BlockConfig<Props extends object = object> = {
 	allowedBlocks?: string[]
 	Controls?: BlockControlsConfig<Props>
 	Edit?: BlockEdit<Props>
+	editWrapperClassName?: (attributes: EditorAttributes<Props>) => string
+	editContainerClassName?: (attributes: EditorAttributes<Props>) => string
 	blockStylesConfig?: BlockStylesConfig
 }

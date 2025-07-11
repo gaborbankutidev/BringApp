@@ -6,7 +6,7 @@ import {
 	type BlockConfig,
 } from "@bring/blocks-editor/blocks"
 import { flex, type FlexBlockProps } from "./flex.block"
-import { FlexEdit } from "./flex.edit"
+import { FlexEdit, flexEditContainerClassName, flexEditWrapperClassName } from "./flex.edit"
 
 const { backgroundAttributes, backgroundControls } = background({
 	defaultBackgroundColor: "transparent",
@@ -27,6 +27,8 @@ export const flexConfig: BlockConfig<FlexBlockProps> = {
 		...backgroundAttributes,
 	},
 	Edit: FlexEdit,
+	editWrapperClassName: flexEditWrapperClassName,
+	editContainerClassName: flexEditContainerClassName,
 	Controls: [
 		{
 			panel: "Grid settings",
