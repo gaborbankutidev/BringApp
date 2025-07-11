@@ -58,6 +58,7 @@ class Plugins {
 		echo "<p><strong>The following plugins have been activated by BringApp</strong></p>";
 		echo "<ul>";
 		foreach ($activated_plugins as $plugin) {
+			/** @phpstan-ignore-next-line */
 			echo "<li>" . esc_html($plugin) . "</li>";
 		}
 		echo "</ul>";

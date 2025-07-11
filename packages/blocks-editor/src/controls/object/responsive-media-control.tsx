@@ -95,6 +95,7 @@ const ResponsiveMediaControlByValue: FC<
 			<div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
 				{objectKeys(screenSizes).map((screenSize) => (
 					<Button
+						key={screenSize}
 						variant={selectedSize === screenSize ? "primary" : "secondary"}
 						icon={<Icon icon={screenSizes[screenSize].icon} />}
 						onClick={() => setSelectedSize(screenSize)}

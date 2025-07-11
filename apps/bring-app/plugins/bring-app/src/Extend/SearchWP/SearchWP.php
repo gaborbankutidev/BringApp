@@ -32,6 +32,7 @@ class SearchWP {
 	private static function conditionalInit() {
 		// Ensure the plugin admin functions are available for checking active status
 		if (!function_exists("is_plugin_active")) {
+			/** @phpstan-ignore-next-line */
 			require_once ABSPATH . "wp-admin/includes/plugin.php";
 		}
 

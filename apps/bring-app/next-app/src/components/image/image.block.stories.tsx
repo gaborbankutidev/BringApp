@@ -4,7 +4,7 @@ import ImageBlock, { type ImageBlockProps } from "./image.block"
 
 type ImageStoryType = Omit<ImageBlockProps, "contentSource" | "image" | "link"> & {
 	image: string
-	link?: string
+	link: string
 }
 
 const ImageStory = ({ image, link, ...attributes }: ImageStoryType) => (

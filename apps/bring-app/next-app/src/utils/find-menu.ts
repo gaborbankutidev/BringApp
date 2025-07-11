@@ -1,14 +1,23 @@
-import type { MenuLocationType, MenuType } from "@bring/blocks-client"
+import type { Menu, MenuItem } from "@/bring/types"
+import type { MenuItemType, MenuLocationType, MenuType } from "@bring/blocks-client"
 
+/**
+ * Find a menu by location key and return the menu items or an empty array if the menu is not found.
+ *
+ * @param menuLocations - The menu locations.
+ * @param menus - The menus.
+ * @param locationKey - The location key.
+ * @returns The menu items.
+ */
 export const findMenu = (
 	menuLocations: MenuLocationType[],
-	menus: MenuType[],
+	menus: MenuType<Menu, MenuItem>[],
 	locationKey: string
-) => {
+): MenuItemType<MenuItem>[] => {
 	// find menu location by key
-	if (!menuLocations) return
+	if (!menuLocations || !menus) return []
 
-	const menuLocation = menuLocations.find((menuLocation) => menuLocation.key === locationKey)
+	const menuLocation = menuLocations.find((location) => location.key === locationKey)
 
 	if (!menuLocation) return []
 

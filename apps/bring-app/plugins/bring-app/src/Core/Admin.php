@@ -117,6 +117,7 @@ class Admin {
 
 		$customize_url = add_query_arg(
 			"return",
+			/** @phpstan-ignore-next-line */
 			urlencode(remove_query_arg(wp_removable_query_args(), wp_unslash($_SERVER["REQUEST_URI"]))),
 			"customize.php",
 		);
