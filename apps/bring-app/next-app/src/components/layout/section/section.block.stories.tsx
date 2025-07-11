@@ -8,7 +8,10 @@ type SectionStoryType = Omit<SectionBlockProps, "backgroundImage"> & { backgroun
 
 const SectionStory = ({ backgroundImage, ...attributes }: SectionStoryType) => (
 	<SectionBlock
-		attributes={{ ...attributes, backgroundImage: { src: backgroundImage, alt: "", id: 0 } }}
+		attributes={{
+			...attributes,
+			backgroundImage: { "": { src: backgroundImage, alt: "", id: 0 } },
+		}}
 	>
 		<div className="flex min-h-[800px] items-center justify-center border border-foreground">
 			Content of the section block. Border is set to visualize the container size.

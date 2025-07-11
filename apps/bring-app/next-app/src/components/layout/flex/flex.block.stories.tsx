@@ -46,7 +46,7 @@ const FlexStory = ({
 				justify: { "": justify },
 				align: { "": align },
 				className: "p-8 min-h-[240px]",
-				backgroundImage: { src: backgroundImage, alt: "", id: 0 },
+				backgroundImage: { "": { src: backgroundImage, alt: "", id: 0 } },
 			}}
 		>
 			<div className="bg-blue-300/30 h-fit w-fit p-4">1. Content of the flex (group) block.</div>

@@ -24,7 +24,7 @@ const ColumnBlock = ({
 		colSpan = {},
 		rowSpan = {},
 		gap = {},
-		direction = "vertical",
+		direction = "col",
 		justify,
 		align,
 		backgroundColor,
@@ -39,7 +39,7 @@ const ColumnBlock = ({
 		makeResponsiveClassNames("gap", gap, { "": 4 }),
 		"mx-0 px-0",
 		backgroundColor && `bg-${backgroundColor}`,
-		direction === "vertical" && "flex-col",
+		direction === "col" && "flex-col",
 		justify && `justify-${justify}`,
 		align && `items-${align}`,
 		className

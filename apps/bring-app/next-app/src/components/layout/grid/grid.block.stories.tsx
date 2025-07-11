@@ -16,7 +16,7 @@ const GridStory = ({ columnCount = 2, gap = 8, backgroundImage, ...attributes }:
 			...attributes,
 			columnCount: { "": columnCount, lg: columnCount },
 			gap: { "": gap },
-			backgroundImage: { src: backgroundImage, alt: "", id: 0 },
+			backgroundImage: { "": { src: backgroundImage, alt: "", id: 0 } },
 		}}
 	>
 		<div className="bg-purple-400 p-4 text-foreground">Content 1</div>
