@@ -14,11 +14,11 @@ type MockRouter = {
 
 export const useRouter = (): MockRouter => {
 	return {
-		back: () => {},
-		forward: () => {},
-		prefetch: () => {},
-		push: () => {},
-		refresh: () => {},
-		replace: () => {},
+		back: () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
+		forward: () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
+		prefetch: () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
+		push: () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
+		refresh: () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
+		replace: () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
 	}
 }
