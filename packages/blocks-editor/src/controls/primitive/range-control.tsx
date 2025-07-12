@@ -9,7 +9,11 @@ import { useControlContext } from "../context"
 import type { ControlByPath, ControlByValue, ControlType } from "../types"
 import { isPathControl } from "../utils"
 
-type _NumberControl = { min?: number; max?: number }
+type _NumberControl = {
+	min?: number
+	max?: number
+	step?: number | ((value: number) => number)
+}
 
 /**
  * A custom range control component.
@@ -64,6 +68,7 @@ const RangeControlByValue: FC<ControlByValue<number> & _NumberControl> = ({
 	show = true,
 	min,
 	max,
+	step,
 }) =>
 	show ? (
 		<>
@@ -83,6 +88,7 @@ const RangeControlByValue: FC<ControlByValue<number> & _NumberControl> = ({
 				}
 				min={min}
 				max={max}
+				step={typeof step === "function" ? step(value ?? defaultValue ?? min ?? 0) : step}
 			/>
 		</>
 	) : null

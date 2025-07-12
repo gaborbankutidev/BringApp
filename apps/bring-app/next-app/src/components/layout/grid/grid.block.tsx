@@ -17,21 +17,21 @@ export type GridBlockProps = {
  * The Grid block is only used in the builder to split the content by creating a grid layout.
  */
 const GridBlock = ({
-	attributes: { columnCount = {}, gap = {}, dark, containerClassName, ...props },
+	attributes: { columnCount = {}, gap = {}, dark, containerClassName, className, ...props },
 	children,
 }: BP<GridBlockProps>) => {
+	const classNames = cn(dark === true && "dark", dark === false && "light", className)
+
 	const containerClassNames = cn(
 		"grid",
 		makeResponsiveClassNames("grid-cols", columnCount, { "": 1, lg: 2 }),
 		makeResponsiveClassNames("gap", gap, { "": 8 }),
-		dark === true && "dark",
-		dark === false && "light",
 		containerClassName
 	)
 
 	return (
 		<BackgroundBlock containerClassName={containerClassNames} {...props}>
-			<BackgroundComponent>{children}</BackgroundComponent>
+			<BackgroundComponent className={classNames}>{children}</BackgroundComponent>
 		</BackgroundBlock>
 	)
 }

@@ -1,6 +1,6 @@
 import Link from "next/link"
 
-import { type BP } from "@/bring"
+import { type BP } from "@/bring/types"
 import Button, { type SizeType, type VariantType } from "./button"
 
 export type ButtonBlockProps = {

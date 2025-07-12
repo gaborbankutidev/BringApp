@@ -13,7 +13,6 @@ type SectionProps = {
  * It sets the container size and the dark mode.
  *
  * @param children - the content of the section
- * @param dark - if true, the section will be in dark mode
  * @param containerSize - the size of the container
  * @param containerClassName - the class name of the container (use this to set flex, grid, etc.)
  * @param className - the class name of the section html element
@@ -22,7 +21,6 @@ type SectionProps = {
 const Section = ({
 	children,
 	as = "section",
-	dark = false,
 	containerSize = "1520",
 	containerClassName,
 	className,
@@ -31,7 +29,7 @@ const Section = ({
 	return (
 		<Background
 			as={as}
-			className={cn("relative", dark ? "dark" : "light", className)}
+			className={cn("relative", className)}
 			containerClassName={cn(containerSizes[containerSize], containerClassName)}
 			{...props}
 		>

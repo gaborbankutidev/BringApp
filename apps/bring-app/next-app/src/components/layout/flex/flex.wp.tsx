@@ -82,6 +82,7 @@ export const flexConfig: BlockConfig<FlexBlockProps> = {
 					path: "gap",
 					min: 0,
 					max: 64,
+					step: (value) => (value < 12 ? 1 : value < 16 ? 2 : 4),
 					defaultValue: { "": 4 },
 				},
 				{

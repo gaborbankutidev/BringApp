@@ -47,7 +47,15 @@ export const EditorCard: FC<EditorCardType> = ({ color = "grey", name, children,
 			>
 				<div>{name}</div>
 			</div>
-			<div>{children}</div>
+			<div
+				style={{
+					display: "flex",
+					flexDirection: "column",
+					height: "100%",
+				}}
+			>
+				{children}
+			</div>
 		</div>
 	)
 }

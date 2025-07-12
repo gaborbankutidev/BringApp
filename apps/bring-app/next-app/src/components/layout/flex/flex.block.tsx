@@ -1,4 +1,4 @@
-import type { BP } from "@/bring"
+import type { BP } from "@/bring/types"
 import BackgroundComponent from "@/components/background/background"
 import BackgroundBlock, {
 	type BackgroundBlockProps,

@@ -1,5 +1,5 @@
-import Footer from "@/components/templates/footer"
-import Header from "@/components/templates/header"
+import Footer from "@/components/layout/footer"
+import Header from "@/components/layout/header"
 import { env } from "@/env.mjs"
 import "@/styles/globals.css"
 import { getRankMathTitle } from "@bring/blocks-client/rank-math"
@@ -48,9 +48,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 				<div className="bring-content relative flex min-h-screen flex-col">
 					<Bg />
 					<Providers>
-						<Header />
+						<Header className="dark" />
 						<main className="flex-grow">{children}</main>
-						<Footer />
+						<Footer className="dark" />
 					</Providers>
 				</div>
 			</body>

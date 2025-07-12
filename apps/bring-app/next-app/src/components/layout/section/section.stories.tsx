@@ -37,7 +37,6 @@ export const BackgroundColor: Story = {
 		children: "This is the section with light background color",
 		backgroundImage: undefined,
 		parallax: false,
-		dark: false,
 
 		className: "",
 		backgroundImageClassName: "",

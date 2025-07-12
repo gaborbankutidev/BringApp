@@ -15,7 +15,11 @@ import { isPathControl } from "../utils"
 /**
  * Props for the ResponsiveRangeControl component.
  */
-type _NumberControl = { min?: number; max?: number }
+type _NumberControl = {
+	min?: number
+	max?: number
+	step?: number | ((value: number) => number)
+}
 
 /**
  * A control component that renders a responsive range control.

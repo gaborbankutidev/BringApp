@@ -15,6 +15,10 @@ class General {
 	 */
 	public static function init() {
 		HealthCheck::init();
-		// Options::init();
+		Options::init();
+		SiteProps::init();
+		Taxonomies::init();
+		Image::init();
+		Filter::init();
 	}
 }

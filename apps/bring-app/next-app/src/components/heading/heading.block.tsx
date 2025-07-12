@@ -1,4 +1,4 @@
-import type { BP } from "@/bring"
+import type { BP } from "@/bring/types"
 import type { TextAlignType, TextSourceType } from "@/editor/utils/lists"
 import { cn } from "@/lib/utils"
 import type { ColorType } from "@/styles/colors"

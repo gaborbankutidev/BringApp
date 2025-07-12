@@ -43,6 +43,9 @@ const SidesControl: FC<{ type: "m" | "p"; sides: Sides }> = ({ type, sides }) =>
 				label={`${spacingLabels[type]} ${sideLabels[side]}`}
 				path={`blockStyles.spacing.${type}.${side}`}
 				defaultValue={sides[side]}
+				min={0}
+				max={64}
+				step={(value) => (value < 12 ? 1 : value < 16 ? 2 : 4)}
 			/>
 		))}
 	</>

@@ -1,5 +1,6 @@
-import type { BP } from "@/bring"
+import type { BP } from "@/bring/types"
 import Background, { type BackgroundBlockProps } from "@/components/background/background.block"
+import { cn } from "@/lib/utils"
 import { type ContainerSizeType } from "@/styles/container"
 import Section from "./section"
 
@@ -8,9 +9,14 @@ export type SectionBlockProps = {
 	containerSize?: ContainerSizeType
 } & BackgroundBlockProps
 
-const SectionBlock = ({ attributes: props, children }: BP<SectionBlockProps>) => (
+const SectionBlock = ({
+	attributes: { className, dark, ...props },
+	children,
+}: BP<SectionBlockProps>) => (
 	<Background defaultBackgroundColor="background" {...props}>
-		<Section>{children}</Section>
+		<Section className={cn(dark === true && "dark", dark === false && "light", className)}>
+			{children}
+		</Section>
 	</Background>
 )
 

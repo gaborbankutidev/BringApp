@@ -1,4 +1,4 @@
-import type { BP } from "@/bring"
+import type { BP } from "@/bring/types"
 import type { SourceType } from "@/editor/utils/lists"
 import type { ImageType } from "@bring/blocks-client/types"
 import { defaultImageValue } from "@bring/blocks-client/utils"

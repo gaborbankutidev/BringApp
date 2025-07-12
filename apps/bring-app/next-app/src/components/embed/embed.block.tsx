@@ -1,4 +1,4 @@
-import type { BP } from "@/bring"
+import type { BP } from "@/bring/types"
 
 export type EmbedBlockProps = {
 	url?: string

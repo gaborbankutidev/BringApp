@@ -23,6 +23,8 @@ const gridPrefixes = ["col-span-", "row-span-", "grid-cols-"]
 
 // Class list that is added to the safelist
 const classNames = [
+	"light",
+	"dark",
 	// bg size
 	"bg-auto",
 	"bg-cover",
@@ -104,11 +106,19 @@ export const generateSafelist = () => {
 	// generate spacing combinations
 	breakpoints.forEach((breakpoint) => {
 		sides.forEach((side) => {
-			for (let i = 1; i <= 16; i++) {
+			// generate spacing combinations for 0px to 12px
+			for (let i = 0; i < 12; i++) {
 				safelist.push(`${breakpoint}m${side}-${i}`)
 				safelist.push(`${breakpoint}p${side}-${i}`)
 				safelist.push(`${breakpoint}gap-${i}`)
 			}
+			// generate spacing combinations for 12px to 16px
+			for (let i = 12; i < 16; i = i + 2) {
+				safelist.push(`${breakpoint}m${side}-${i}`)
+				safelist.push(`${breakpoint}p${side}-${i}`)
+				safelist.push(`${breakpoint}gap-${i}`)
+			}
+			// generate spacing combinations for 16px and up
 			for (let i = 16; i <= 64; i = i + 4) {
 				safelist.push(`${breakpoint}m${side}-${i}`)
 				safelist.push(`${breakpoint}p${side}-${i}`)

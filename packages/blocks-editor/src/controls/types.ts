@@ -93,6 +93,7 @@ type RangeControlConfigType<Props extends object = object> = {
 	path: NestedTypedKeyOf<Props, number>
 	min?: number
 	max?: number
+	step?: number | ((value: number) => number)
 	defaultValue?: number
 } & _ControlConfigType<Props>
 
@@ -101,6 +102,7 @@ type ResponsiveRangeControlConfigType<Props extends object = object> = {
 	path: NestedTypedKeyOf<Props, ResponsiveValue<number>>
 	min?: number
 	max?: number
+	step?: number | ((value: number) => number)
 	defaultValue?: ResponsiveValue<number>
 } & _ControlConfigType<Props>
 
