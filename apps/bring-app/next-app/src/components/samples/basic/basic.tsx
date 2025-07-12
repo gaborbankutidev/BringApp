@@ -19,7 +19,7 @@ export type BasicProps = {
 } & React.HTMLProps<HTMLDivElement>
 
 /**
- * This is a test and sample component that aims to use and present most of the features of bring App
+ * This is a test and sample component that aims to use and present most of the features of Bring App
  */
 const Basic = ({
 	bool,
@@ -34,15 +34,29 @@ const Basic = ({
 	const [state, setState] = useState(0)
 
 	return (
-		<div {...props}>
-			<h2 className="mb-4">Basic Sample block</h2>
+		<div
+			{...props}
+			className={cn("rounded-lg border border-gray-200 bg-white p-6 shadow-sm", props.className)}
+		>
+			<h2 className="text-xl mb-4 font-semibold text-gray-900">Basic Sample block</h2>
 			<div className="mb-4 flex flex-col gap-4">
-				<p>Bool: {bool ? "True" : "False"}</p>
-				<p>String: {string}</p>
-				{number && <p>Number: {number}</p>}
-				<p>
-					State value: {state} |{" "}
-					<button onClick={() => setState((state) => state + 1)} className="border">
+				<p className="text-gray-700">
+					<span className="font-medium">Bool:</span> {bool ? "True" : "False"}
+				</p>
+				<p className="text-gray-700">
+					<span className="font-medium">String:</span> {string}
+				</p>
+				{number && (
+					<p className="text-gray-700">
+						<span className="font-medium">Number:</span> {number}
+					</p>
+				)}
+				<p className="text-gray-700">
+					<span className="font-medium">State value:</span> {state}
+					<button
+						onClick={() => setState((state) => state + 1)}
+						className="text-sm ml-2 rounded bg-gray-400 px-2 py-1 text-white transition-colors hover:bg-gray-600"
+					>
 						+1
 					</button>
 				</p>
@@ -54,12 +68,17 @@ const Basic = ({
 					</Button>
 				)}
 			</div>
-			<div className={cn("mb-4 flex gap-3 border p-4", containerClassName)}>
-				<div className="h-12 w-12 bg-purple-400" />
-				<div className="h-12 w-12 bg-purple-400" />
-				<div className="h-12 w-12 bg-purple-400" />
+			<div
+				className={cn(
+					"mb-4 flex gap-3 rounded-lg border border-gray-200 bg-gray-50 p-4",
+					containerClassName
+				)}
+			>
+				<div className="h-12 w-12 rounded bg-purple-400 shadow-sm" />
+				<div className="h-12 w-12 rounded bg-purple-400 shadow-sm" />
+				<div className="h-12 w-12 rounded bg-purple-400 shadow-sm" />
 			</div>
-			<div className="border bg-gray-300 p-4">{children}</div>
+			<div className="rounded-lg border border-gray-200 bg-gray-50 p-4">{children}</div>
 		</div>
 	)
 }

@@ -13,7 +13,7 @@ const SectionBlock = ({
 	attributes: { className, dark, ...props },
 	children,
 }: BP<SectionBlockProps>) => (
-	<Background defaultBackgroundColor="background" {...props}>
+	<Background {...props}>
 		<Section className={cn(dark === true && "dark", dark === false && "light", className)}>
 			{children}
 		</Section>

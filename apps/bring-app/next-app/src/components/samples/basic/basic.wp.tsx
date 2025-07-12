@@ -6,7 +6,17 @@ import {
 	objectAttributeSource,
 	stringAttributeSource,
 } from "@bring/blocks-editor/blocks"
+import {
+	CheckboxControl,
+	RangeControl,
+	ResponsiveRangeControl,
+	SelectControl,
+	TextareaControl,
+	TextControl,
+	ToggleControl,
+} from "@bring/blocks-editor/controls"
 import { basic, type BasicBlockProps } from "./basic.block"
+import { BasicControls } from "./basic.controls"
 
 const basicConfig: BlockConfig<BasicBlockProps> = {
 	...basic,
@@ -80,6 +90,10 @@ const basicConfig: BlockConfig<BasicBlockProps> = {
 					min: 0,
 					max: 100,
 					/**
+					 * step is a number or a function that returns the step value based on the current value
+					 */
+					step: (value) => (value < 5 ? 1 : 2),
+					/**
 					 * setDefault: true by default,
 					 * number is nullable so it can be set to default value (undefined)
 					 * number is not displayed if it is undefined so we don't need to set a default value
@@ -117,6 +131,8 @@ const basicConfig: BlockConfig<BasicBlockProps> = {
 					label: "Container gap",
 					path: "containerGap",
 					min: 0,
+					max: 64,
+					step: (value) => (value < 12 ? 1 : value < 16 ? 2 : 4),
 					defaultValue: { "": 3 },
 				},
 			],
@@ -129,12 +145,75 @@ const basicConfig: BlockConfig<BasicBlockProps> = {
 		},
 		{
 			panel: "Basic settings - Components by path",
-			controls: [],
+			controls: [
+				/**
+				 * All controls can be implemented using control components, either by specifying a path or by providing a value directly.
+				 * When using controls by path, be sure to pass the block props type to the control component for proper type checking.
+				 // Controls can be implemented here or imported from a separate file for better organization.
+				 */
+				() => (
+					<ToggleControl<BasicBlockProps> path="bool" label="Bool - toggle" setDefault={false} />
+				),
+				() => (
+					<CheckboxControl<BasicBlockProps>
+						path="bool"
+						label="Bool - checkbox"
+						setDefault={false}
+					/>
+				),
+				() => (
+					<TextControl<BasicBlockProps> path="string" label="String - text" setDefault={false} />
+				),
+				() => (
+					<TextareaControl<BasicBlockProps>
+						path="string"
+						label="String - textarea"
+						setDefault={false}
+					/>
+				),
+				() => (
+					<RangeControl<BasicBlockProps>
+						path="number"
+						label="Number"
+						min={0}
+						max={100}
+						step={(value) => (value < 5 ? 1 : 2)}
+					/>
+				),
+				() => (
+					<TextControl<BasicBlockProps>
+						path="button.label"
+						label="Button label"
+						setDefault={false}
+					/>
+				),
+				() => (
+					<TextControl<BasicBlockProps> path="button.url" label="Button url" setDefault={false} />
+				),
+				() => (
+					<SelectControl<BasicBlockProps>
+						path="backgroundColor"
+						label="Background color"
+						options={colorOptions}
+						defaultValue="transparent"
+					/>
+				),
+				() => (
+					<ResponsiveRangeControl<BasicBlockProps>
+						path="containerGap"
+						label="Container gap"
+						min={0}
+						max={64}
+						step={(value) => (value < 12 ? 1 : value < 16 ? 2 : 4)}
+						defaultValue={{ "": 3 }}
+					/>
+				),
+			],
 			initialOpen: false,
 		},
 		{
 			panel: "Basic settings - Component by value",
-			controls: [],
+			controls: [BasicControls], // Controls imported from a separate file
 			initialOpen: false,
 		},
 		{

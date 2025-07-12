@@ -57,9 +57,6 @@ const config: StorybookConfig = {
 			[`${serverPath}/index.ts`]: mockPath,
 		})
 
-		console.log("Webpack aliases:", config.resolve.alias)
-		console.log("Mock path:", mockPath)
-		console.log("Server path:", serverPath)
 		return config
 	},
 }
