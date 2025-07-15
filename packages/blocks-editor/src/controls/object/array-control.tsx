@@ -8,8 +8,8 @@ import { defaultImageValue } from "../../utils"
 import { useControlContext } from "../context"
 import { TextControl } from "../primitive/text-control"
 import type {
-	ArrayControlByPath,
-	ArrayControlByValue,
+	ArrayControlByPathType,
+	ArrayControlByValueType,
 	ArrayControlType,
 	ControlByValue,
 } from "../types"
@@ -58,7 +58,7 @@ function ArrayControlByPath<pT extends object, vT>({
 	path,
 	updateHandling,
 	...props
-}: ArrayControlByPath<pT, vT> & ArrayControlArgs<vT>) {
+}: ArrayControlByPathType<pT, vT> & ArrayControlArgs<vT>) {
 	const { attributes, setAttributes } = useControlContext()
 	const value = get(attributes, path)
 
@@ -83,7 +83,7 @@ function ArrayControlByValue<vT>({
 	show = true,
 	Control,
 	defaultItem,
-}: ArrayControlByValue<vT> & ArrayControlArgs<vT>) {
+}: ArrayControlByValueType<vT> & ArrayControlArgs<vT>) {
 	return show ? (
 		<div className="components-base-control">
 			{label && (

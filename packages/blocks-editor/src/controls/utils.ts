@@ -1,6 +1,6 @@
 import { capitalize } from "../utils"
 import type {
-	ArrayControlByPath,
+	ArrayControlByPathType,
 	ArrayControlType,
 	ControlByPath,
 	ControlType,
@@ -28,7 +28,7 @@ export function isPathControl<vT, pT extends object = object>(
  */
 export function isArrayPathControl<vT, pT extends object = object>(
 	props: ArrayControlType<vT, pT>
-): props is ArrayControlByPath<pT, vT> {
+): props is ArrayControlByPathType<pT, vT> {
 	return props.updateHandling !== "by-value"
 }
 

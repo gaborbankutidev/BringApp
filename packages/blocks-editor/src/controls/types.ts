@@ -44,20 +44,20 @@ type _ArrayControlType = {
 	show?: boolean
 }
 
-export type ArrayControlByPath<pT extends object, vT> = _ArrayControlType & {
+export type ArrayControlByPathType<pT extends object, vT> = _ArrayControlType & {
 	updateHandling?: "by-path"
 	path: NestedTypedKeyOf<pT, vT[]>
 }
 
-export type ArrayControlByValue<vT> = _ArrayControlType & {
+export type ArrayControlByValueType<vT> = _ArrayControlType & {
 	updateHandling: "by-value"
 	value: vT[] | undefined
 	setValue: (newValue: vT[]) => void
 }
 
 export type ArrayControlType<vT, pT extends object = object> =
-	| ArrayControlByPath<pT, vT>
-	| ArrayControlByValue<vT>
+	| ArrayControlByPathType<pT, vT>
+	| ArrayControlByValueType<vT>
 
 // ===========
 
