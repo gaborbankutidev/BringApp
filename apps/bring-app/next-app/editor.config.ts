@@ -1,5 +1,6 @@
 // samples
 import basic from "@/components/samples/basic/basic.wp"
+import mediaAndArrays from "@/components/samples/media-and-arrays/media-and-arrays.wp"
 
 // layout
 import flex from "@/components/layout/flex/flex.wp"
@@ -19,6 +20,7 @@ import Editor from "@bring/blocks-editor"
 const blockList = [
 	// samples
 	basic,
+	mediaAndArrays,
 	// layout
 	flex,
 	grid,

@@ -1,5 +1,7 @@
 import { capitalize } from "../utils"
 import type {
+	ArrayControlByPath,
+	ArrayControlType,
 	ControlByPath,
 	ControlType,
 	NumberOptionList,
@@ -16,6 +18,17 @@ import type {
 export function isPathControl<vT, pT extends object = object>(
 	props: ControlType<vT, pT>
 ): props is ControlByPath<pT, vT> {
+	return props.updateHandling !== "by-value"
+}
+
+/**
+ * Checks if a control is an array path control.
+ * @param props - The control properties.
+ * @returns True if the control is an array path control, false otherwise.
+ */
+export function isArrayPathControl<vT, pT extends object = object>(
+	props: ArrayControlType<vT, pT>
+): props is ArrayControlByPath<pT, vT> {
 	return props.updateHandling !== "by-value"
 }
 

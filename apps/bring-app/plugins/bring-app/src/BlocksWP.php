@@ -20,6 +20,7 @@ class BlocksWP {
 	private static $blocks = [
 		// samples
 		"basic",
+		"mediaandarrays",
 		// layout
 		"section",
 		"flex",

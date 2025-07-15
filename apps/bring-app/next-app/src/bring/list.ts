@@ -1,5 +1,6 @@
 // sample
 import { basic } from "@/components/samples/basic"
+import { mediaAndArrays } from "@/components/samples/media-and-arrays"
 // layout
 import { flex } from "@/components/layout/flex"
 import { grid } from "@/components/layout/grid"
@@ -15,6 +16,7 @@ import { markdown } from "@/components/markdown"
 export const blockList = [
 	// sample
 	basic,
+	mediaAndArrays,
 	// layout
 	section,
 	flex,

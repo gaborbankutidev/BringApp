@@ -1,4 +1,3 @@
-import type { FC } from "react"
 import { ResponsiveValue } from "../styles/types"
 import type { ImageType, MediaType, NestedKeyOf, NestedTypedKeyOf } from "../types"
 
@@ -40,22 +39,20 @@ export type ControlType<vT, pT extends object = object, dVT = vT> =
 
 // ===========
 
-type _ArrayControlType<vT> = {
+type _ArrayControlType = {
 	label?: string
-	defaultItem?: vT
 	show?: boolean
-	control?: FC<ControlType<vT>>
 }
 
-export type ArrayControlByPath<pT extends object, vT> = _ArrayControlType<vT> & {
+export type ArrayControlByPath<pT extends object, vT> = _ArrayControlType & {
 	updateHandling?: "by-path"
-	path: NestedTypedKeyOf<pT, vT>
+	path: NestedTypedKeyOf<pT, vT[]>
 }
 
-export type ArrayControlByValue<vT> = _ArrayControlType<vT> & {
+export type ArrayControlByValue<vT> = _ArrayControlType & {
 	updateHandling: "by-value"
-	value: Array<vT>
-	setValue: (newValue: Array<vT>) => void
+	value: vT[] | undefined
+	setValue: (newValue: vT[]) => void
 }
 
 export type ArrayControlType<vT, pT extends object = object> =

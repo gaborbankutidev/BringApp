@@ -10,7 +10,7 @@ import {
 	TextControl,
 	ToggleControl,
 } from "@bring/blocks-editor/controls"
-import { BasicBlockProps } from "./basic.block"
+import { type BasicBlockProps } from "./basic.block"
 
 export const BasicControls: BlockControl<BasicBlockProps> = ({ attributes, setAttributes }) => (
 	<>

@@ -26,6 +26,7 @@ const Basic = ({
 	string,
 	number,
 	button,
+	className,
 	containerClassName,
 	children,
 	...props
@@ -35,10 +36,10 @@ const Basic = ({
 
 	return (
 		<div
+			className={cn("rounded-lg border border-gray-200 bg-white p-4 shadow-sm", className)}
 			{...props}
-			className={cn("rounded-lg border border-gray-200 bg-white p-6 shadow-sm", props.className)}
 		>
-			<h2 className="text-xl mb-4 font-semibold text-gray-900">Basic Sample block</h2>
+			<h2 className="mb-4 font-semibold text-gray-900">Basic Sample block</h2>
 			<div className="mb-4 flex flex-col gap-4">
 				<p className="text-gray-700">
 					<span className="font-medium">Bool:</span> {bool ? "True" : "False"}
@@ -55,7 +56,7 @@ const Basic = ({
 					<span className="font-medium">State value:</span> {state}
 					<button
 						onClick={() => setState((state) => state + 1)}
-						className="text-sm ml-2 rounded bg-gray-400 px-2 py-1 text-white transition-colors hover:bg-gray-600"
+						className="ml-2 rounded bg-gray-400 px-2 py-1 text-white transition-colors hover:bg-gray-600"
 					>
 						+1
 					</button>
