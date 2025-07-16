@@ -1,5 +1,19 @@
 # next-app
 
+## 1.9.0
+
+### Minor Changes
+
+- d714f58: Add basic sample block
+- d714f58: Refactor app layout components, add sample components for testing, refactor array controls, add responsive select and image controls
+
+### Patch Changes
+
+- Updated dependencies [d714f58]
+- Updated dependencies [d714f58]
+  - @bring/blocks-editor@2.15.0
+  - @bring/blocks-client@2.15.0
+
 ## 1.8.0
 
 ### Minor Changes
