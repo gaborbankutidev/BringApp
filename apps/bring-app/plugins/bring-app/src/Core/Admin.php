@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace BringApp\Core;
 
-use BringApp\Env\Env;
-
 // No direct access
 defined("ABSPATH") or die("Hey, do not do this 😱");
 
@@ -58,8 +56,7 @@ class Admin {
 			isset($_GET["action"]) &&
 			$_GET["action"] === "deactivate" &&
 			isset($_GET["plugin"]) &&
-			$_GET["plugin"] === "bring-app/bring-app.php" &&
-			Env::WORDPRESS_DEBUG() !== "true"
+			$_GET["plugin"] === "bring-app/bring-app.php"
 		) {
 			add_action("admin_notices", function () {
 				echo '<div class="notice notice-error"><p><strong>Bring App plugin</strong> cannot be deactivated.</p></div>';
@@ -77,7 +74,7 @@ class Admin {
 	 * @return array<string>
 	 */
 	private static function removeDeactivateBringAppButton($actions, $plugin_file) {
-		if ($plugin_file === "bring-app/bring-app.php" && Env::WORDPRESS_DEBUG() !== "true") {
+		if ($plugin_file === "bring-app/bring-app.php") {
 			unset($actions["deactivate"]);
 		}
 
@@ -120,6 +117,7 @@ class Admin {
 
 		$customize_url = add_query_arg(
 			"return",
+			/** @phpstan-ignore-next-line */
 			urlencode(remove_query_arg(wp_removable_query_args(), wp_unslash($_SERVER["REQUEST_URI"]))),
 			"customize.php",
 		);
@@ -136,8 +134,8 @@ class Admin {
 	 */
 	private static function addMenuPage() {
 		add_menu_page(
-			__("Menus", "text-domain"), // Page title
-			__("Menus", "text-domain"), // Menu title
+			__("Menus"), // Page title
+			__("Menus"), // Menu title
 			"edit_theme_options", // Capability
 			"nav-menus.php", // Menu slug
 			/** @phpstan-ignore-next-line */

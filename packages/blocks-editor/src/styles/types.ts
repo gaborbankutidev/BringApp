@@ -58,7 +58,7 @@ export type BlockStyles = {
 		m?: Sides
 		p?: Sides
 	}
-	visibility?: ResponsiveValue<boolean>
+	visibility?: ResponsiveValue<boolean | undefined>
 }
 
 export type BlockStylesClassNames = {

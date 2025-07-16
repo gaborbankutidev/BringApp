@@ -28,11 +28,6 @@ This is an unordered list:
 
 And a block quote:
 > Suspendisse tellus purus, pulvinar non ante ac, luctus euismod eros. Aenean laoreet tortor metus, eu ultricies dolor tristique congue. In eu libero nulla.
-
-A line break here  
-and a line:
-
----
 `
 
 export const inlineContentSample = `Hello world! 

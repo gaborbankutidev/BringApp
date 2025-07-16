@@ -18,12 +18,13 @@ class BlocksWP {
 	 * @var string[] $blocks
 	 */
 	private static $blocks = [
+		// samples
+		"basic",
+		"mediaandarrays",
 		// layout
-		"column",
-		"group",
-		"row",
 		"section",
-		"split",
+		"flex",
+		"grid",
 		// components
 		"button",
 		"divider",
@@ -64,9 +65,23 @@ class BlocksWP {
 			->editorPostTypes()
 			->layoutPostTypes()
 			->layoutTaxonomies()
+			/**
+			 * This setting allows you to disable the block editor for the main page.
+			 */
 			->nonEditorFront()
+			/**
+			 * This setting allows you to disable the block editor for specific post types or specific slugs.
+			 *
+			 * To disable the editor for an entire post type, set the post type name to true.
+			 *   (For custom post types, it's usually better to not enable the editor when registering the post type,
+			 *   but for default post types like "page" or "post", you can turn off the editor here.)
+			 *
+			 * To disable the editor for specific slugs (e.g., hardcoded pages), provide an array of slugs for the post type.
+			 *   This is useful if you want to keep the SEO settings and other meta boxes editable in the editor for those pages,
+			 *   but prevent editing the main content with blocks.
+			 */
 			->nonEditorPosts([
-				"page" => ["docs", "readme"], // add the slug hardcoded pages
+				"page" => ["docs", "readme"],
 			])
 			// Add entity props
 			->entityProps([])

@@ -3,6 +3,7 @@ import cloneDeep from "lodash.clonedeep"
 import get from "lodash.get"
 import set from "lodash.set"
 import React, { FC } from "react"
+import { SetToDefaultButton } from "../button"
 import { useControlContext } from "../context"
 import type { ControlByPath, ControlByValue, ControlType } from "../types"
 import { isPathControl } from "../utils"
@@ -86,13 +87,11 @@ const NumberSelectControlByValue: FC<ControlByValue<number> & _NumberSelectContr
 			help={
 				setDefault &&
 				value !== undefined && (
-					<button
+					<SetToDefaultButton
 						onClick={() => {
 							setValue(undefined)
 						}}
-					>
-						Set to default
-					</button>
+					/>
 				)
 			}
 			options={options.map((opt) => ({ ...opt, value: opt.value.toString() }))}

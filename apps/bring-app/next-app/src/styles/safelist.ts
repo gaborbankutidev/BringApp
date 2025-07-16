@@ -13,30 +13,22 @@ const breakpoints = ["", "md:", "lg:"]
 const sides = ["t", "b", "l", "r"]
 
 // Prefixes for color classes
-const colorPrefixes = ["text-", "bg-", "border-", "hover:bg-", "hover:text-"]
+const colorPrefixes = ["bg-", "border-", "from-", "hover:bg-", "hover:text-"]
+
+// Prefixes for responsive color classes
+const responsiveColorPrefixes = ["text-"]
 
 // Prefixes for grid classes
 const gridPrefixes = ["col-span-", "row-span-", "grid-cols-"]
 
 // Class list that is added to the safelist
 const classNames = [
-	//flex items
-	"justify-start",
-	"justify-center",
-	"justify-end",
-	"justify-between",
-	"items-start",
-	"items-center",
-	"items-end",
+	"light",
+	"dark",
 	// bg size
 	"bg-auto",
 	"bg-cover",
 	"bg-contain",
-	// text align
-	"text-left",
-	"text-right",
-	"text-center",
-	"text-justify",
 	// border
 	"border",
 	"border-t",
@@ -50,6 +42,39 @@ const classNames = [
 	"max-w-[800px]",
 ]
 
+// Class list that is responsively added to the safelist
+const responsiveClassNames = [
+	// display
+	"hidden",
+	"block",
+	"flex",
+	"grid",
+	// flex direction
+	"flex-row",
+	"flex-col",
+	"flex-row-reverse",
+	"flex-col-reverse",
+	//flex justify
+	"justify-start",
+	"justify-center",
+	"justify-end",
+	"justify-between",
+	"justify-around",
+	"justify-evenly",
+	"justify-stretch",
+	//flex items
+	"items-start",
+	"items-center",
+	"items-end",
+	"items-baseline",
+	"items-stretch",
+	// text align
+	"text-left",
+	"text-right",
+	"text-center",
+	"text-justify",
+]
+
 export const generateSafelist = () => {
 	const safelist: string[] = []
 
@@ -57,6 +82,15 @@ export const generateSafelist = () => {
 	Object.keys(colors).forEach((color) => {
 		colorPrefixes.forEach((colorPrefix) => {
 			safelist.push(`${colorPrefix}${color}`)
+		})
+	})
+
+	// generate responsive color combinations
+	breakpoints.forEach((breakpoint) => {
+		Object.keys(colors).forEach((color) => {
+			responsiveColorPrefixes.forEach((colorPrefix) => {
+				safelist.push(`${breakpoint}${colorPrefix}${color}`)
+			})
 		})
 	})
 
@@ -72,11 +106,19 @@ export const generateSafelist = () => {
 	// generate spacing combinations
 	breakpoints.forEach((breakpoint) => {
 		sides.forEach((side) => {
-			for (let i = 1; i <= 16; i++) {
+			// generate spacing combinations for 0px to 12px
+			for (let i = 0; i < 12; i++) {
 				safelist.push(`${breakpoint}m${side}-${i}`)
 				safelist.push(`${breakpoint}p${side}-${i}`)
 				safelist.push(`${breakpoint}gap-${i}`)
 			}
+			// generate spacing combinations for 12px to 16px
+			for (let i = 12; i < 16; i = i + 2) {
+				safelist.push(`${breakpoint}m${side}-${i}`)
+				safelist.push(`${breakpoint}p${side}-${i}`)
+				safelist.push(`${breakpoint}gap-${i}`)
+			}
+			// generate spacing combinations for 16px and up
 			for (let i = 16; i <= 64; i = i + 4) {
 				safelist.push(`${breakpoint}m${side}-${i}`)
 				safelist.push(`${breakpoint}p${side}-${i}`)
@@ -85,14 +127,13 @@ export const generateSafelist = () => {
 		})
 	})
 
-	// responsive safelist items
-	breakpoints.forEach((breakpoint) => {
-		;["hidden", "block", "flex", "grid"].forEach((display) =>
-			safelist.push(`${breakpoint}${display}`)
-		)
-	})
-
+	// class names
 	safelist.push(...classNames)
+
+	// responsive class names
+	breakpoints.forEach((breakpoint) => {
+		responsiveClassNames.forEach((className) => safelist.push(`${breakpoint}${className}`))
+	})
 
 	return safelist
 }

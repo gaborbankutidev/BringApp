@@ -1,6 +1,6 @@
 import type { StorybookConfig } from "@storybook/nextjs"
 
-import { dirname, join } from "path"
+import path, { dirname, join } from "path"
 
 /**
  * This function is used to resolve the absolute path of a package.
@@ -20,6 +20,8 @@ const config: StorybookConfig = {
 		"@chromatic-com/storybook",
 	],
 
+	// staticDirs: ["../public"], // Add public directory to Storybook
+
 	framework: {
 		name: getAbsolutePath("@storybook/nextjs"),
 		options: {},
@@ -27,15 +29,35 @@ const config: StorybookConfig = {
 
 	docs: {},
 
-	previewHead: (head) => `
-		${head}
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-	`,
+	// previewHead: (head) => `${head}`, // Add tags to head
 
 	typescript: {
 		reactDocgen: "react-docgen-typescript",
+	},
+
+	webpackFinal: async (config) => {
+		// Ensure resolve.alias exists
+		if (!config.resolve) {
+			config.resolve = {}
+		}
+		if (!config.resolve.alias) {
+			config.resolve.alias = {}
+		}
+
+		// Replace the server module with mocks for Storybook
+		const mockPath = path.resolve(__dirname, "mocks.ts")
+		const serverPath = path.resolve(__dirname, "../src/bring/server")
+
+		// Try multiple alias approaches
+		Object.assign(config.resolve.alias, {
+			"@/bring/server": mockPath,
+			[serverPath]: mockPath,
+			[`${serverPath}.ts`]: mockPath,
+			[`${serverPath}/index`]: mockPath,
+			[`${serverPath}/index.ts`]: mockPath,
+		})
+
+		return config
 	},
 }
 export default config

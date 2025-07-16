@@ -1,44 +1,85 @@
-import { cn } from "@/lib/utils"
-import MarkdownInline from "../markdown/markdown-inline"
-import ImageContent, { type ImageContentProps } from "./image-content"
+"use client"
 
-export type ImageProps = ImageContentProps & {
+import MarkdownInline from "@/components/markdown/markdown-inline"
+import { cn } from "@/lib/utils"
+import FSLightbox from "fslightbox-react"
+import NextImage, { type ImageProps as NextImageProps } from "next/image"
+import NextLink from "next/link"
+import { Fragment, type ReactNode, useState } from "react"
+
+export type ImageProps = {
+	image: Omit<NextImageProps, "with" | "height" | "quality"> & { width?: number; height?: number }
+	link?: {
+		href: string
+		newTab?: boolean
+	}
+	lightbox?: boolean
 	caption?: string
 	captionClassName?: string
 	source?: string
 	sourceClassName?: string
-} & React.HTMLProps<HTMLDivElement>
+} & Omit<React.HTMLProps<HTMLDivElement>, "children">
 
-/**
- * Image component with optional caption and source.
- */
 const Image = ({
-	image,
+	image: {
+		width: imageWidth = 1200,
+		height: imageHeight = 800,
+		className: imageClassName,
+		onClick: imageOnClick,
+		...imageProps
+	},
 	link,
 	lightbox,
 	caption,
 	captionClassName,
 	source,
 	sourceClassName,
-	className,
-	id,
 	...props
 }: ImageProps) => {
-	const imageProps = { image, link, lightbox }
+	const [lightboxOpen, setLightboxOpen] = useState(false)
 
-	if (!caption && !source) return <ImageContent {...imageProps} className={className} id={id} />
+	const Link =
+		link && !lightbox
+			? ({ children }: { children: ReactNode }) => (
+					<NextLink href={link.href} target={link.newTab ? "_blank" : "_self"}>
+						{children}
+					</NextLink>
+				)
+			: Fragment
 
 	return (
-		<figure {...props} id={id} className={className}>
-			<ImageContent {...imageProps} />
+		<figure {...props}>
+			<Link>
+				<NextImage
+					width={imageWidth}
+					height={imageHeight}
+					quality={100}
+					className={cn("h-full w-full rounded", lightbox && "cursor-pointer", imageClassName)}
+					onClick={(e) => {
+						if (imageOnClick) imageOnClick(e)
+						if (lightbox) setLightboxOpen((prev) => !prev)
+					}}
+					{...imageProps}
+				/>
+			</Link>
+
+			{lightbox && (
+				<FSLightbox
+					toggler={lightboxOpen}
+					sources={[imageProps.src as string]}
+					types={["image"]}
+					slide={1}
+				/>
+			)}
 
 			{caption && (
-				<figcaption className={cn("mt-2 text-center", captionClassName)}>
+				<figcaption className={cn("mt-2 px-4 text-16", captionClassName)}>
 					<MarkdownInline content={caption} />
 				</figcaption>
 			)}
+
 			{source && (
-				<div className={cn("mt-1 text-center text-14 italic text-opacity-70", sourceClassName)}>
+				<div className={cn("mt-1 px-4 text-14 italic text-opacity-70", sourceClassName)}>
 					Source: <MarkdownInline content={source} />
 				</div>
 			)}

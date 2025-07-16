@@ -1,4 +1,4 @@
-export const directionList = ["vertical", "horizontal"] as const
+export const directionList = ["row", "col", "row-reverse", "col-reverse"] as const
 export type DirectionType = (typeof directionList)[number]
 
 export const arrowDirectionList = ["up", "down", "left", "right"] as const
@@ -14,16 +14,17 @@ export const textSourceList = ["manual", "name", "excerpt", "description"] as co
 export type TextSourceType = (typeof textSourceList)[number]
 
 export const justifyList = [
-	"flex-start",
+	"start",
 	"center",
-	"flex-end",
-	"space-between",
-	"space-around",
-	"space-evenly",
+	"end",
+	"between",
+	"around",
+	"evenly",
+	"stretch",
 ] as const
 export type JustifyType = (typeof justifyList)[number]
 
-export const alignList = ["flex-start", "center", "flex-end", "stretch", "baseline"] as const
+export const alignList = ["start", "center", "end", "stretch", "baseline"] as const
 export type AlignType = (typeof alignList)[number]
 
 export const entityTypeList = ["post", "taxonomy", "author"]

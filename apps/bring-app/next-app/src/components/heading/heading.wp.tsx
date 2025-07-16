@@ -1,10 +1,12 @@
 import { colorOptions, textAlignOptions, textSourceOptions } from "@/editor/utils/options"
 import {
 	numberAttributeSource,
+	objectAttributeSource,
 	stringAttributeSource,
 	type BlockConfig,
 } from "@bring/blocks-editor/blocks"
-import { heading, type HeadingBlockProps } from "./heading.block"
+import { makeOptions } from "@bring/blocks-editor/controls"
+import { heading, headingVariantList, type HeadingBlockProps } from "./heading.block"
 
 const headingConfig: BlockConfig<HeadingBlockProps> = {
 	...heading,
@@ -15,7 +17,8 @@ const headingConfig: BlockConfig<HeadingBlockProps> = {
 		source: stringAttributeSource("manual"),
 		title: stringAttributeSource("Title"),
 		level: numberAttributeSource(),
-		align: stringAttributeSource(),
+		variant: stringAttributeSource(),
+		align: objectAttributeSource({}),
 		color: stringAttributeSource(),
 	},
 	Controls: [
@@ -49,10 +52,16 @@ const headingConfig: BlockConfig<HeadingBlockProps> = {
 				},
 				{
 					type: "select",
+					label: "Variant",
+					path: "variant",
+					options: makeOptions([...headingVariantList]),
+				},
+				{
+					type: "responsive-select",
 					label: "Align",
 					path: "align",
 					options: textAlignOptions,
-					defaultValue: "left",
+					defaultValue: { "": "left" },
 				},
 				{
 					type: "select",
@@ -62,6 +71,7 @@ const headingConfig: BlockConfig<HeadingBlockProps> = {
 					defaultValue: "primary",
 				},
 			],
+			initialOpen: true,
 		},
 	],
 }

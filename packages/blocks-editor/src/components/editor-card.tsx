@@ -29,6 +29,7 @@ export const EditorCard: FC<EditorCardType> = ({ color = "grey", name, children,
 				height: "100%",
 				minHeight: "28px",
 			}}
+			className="bring-editor"
 		>
 			<div
 				style={{
@@ -46,7 +47,15 @@ export const EditorCard: FC<EditorCardType> = ({ color = "grey", name, children,
 			>
 				<div>{name}</div>
 			</div>
-			<div>{children}</div>
+			<div
+				style={{
+					display: "flex",
+					flexDirection: "column",
+					height: "100%",
+				}}
+			>
+				{children}
+			</div>
 		</div>
 	)
 }

@@ -17,7 +17,7 @@ const markdownConfig: BlockConfig<MarkdownBlockProps> = {
 		source: stringAttributeSource("manual"),
 		content: stringAttributeSource(contentSample),
 		elementsClassName: objectAttributeSource({}),
-		align: stringAttributeSource(),
+		align: objectAttributeSource({}),
 		color: stringAttributeSource(),
 	},
 	Edit: MarkdownEdit,
@@ -38,7 +38,7 @@ const markdownConfig: BlockConfig<MarkdownBlockProps> = {
 			initialOpen: true,
 			controls: [
 				{
-					type: "select",
+					type: "responsive-select",
 					label: "Align",
 					path: "align",
 					options: alignOptions,

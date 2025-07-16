@@ -15,7 +15,11 @@ import { isPathControl } from "../utils"
 /**
  * Props for the ResponsiveRangeControl component.
  */
-type _NumberControl = { min?: number; max?: number }
+type _NumberControl = {
+	min?: number
+	max?: number
+	step?: number | ((value: number) => number)
+}
 
 /**
  * A control component that renders a responsive range control.
@@ -77,7 +81,7 @@ function ResponsiveRangeControlByPath<pT extends object>({
  * @param props - The rest of the props for the ResponsiveRangeControlByValue component.
  * @returns The rendered ResponsiveRangeControlByValue component.
  */
-const ResponsiveRangeControlByValue: FC<ControlByValue<ResponsiveValue>> = ({
+const ResponsiveRangeControlByValue: FC<ControlByValue<ResponsiveValue> & _NumberControl> = ({
 	label,
 	value = {},
 	setValue,
@@ -93,13 +97,16 @@ const ResponsiveRangeControlByValue: FC<ControlByValue<ResponsiveValue>> = ({
 			<div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
 				{objectKeys(screenSizes).map((screenSize) => (
 					<Button
+						key={screenSize}
 						variant={selectedSize === screenSize ? "primary" : "secondary"}
 						icon={<Icon icon={screenSizes[screenSize].icon} />}
 						onClick={() => setSelectedSize(screenSize)}
-						isSmall={true}
+						size="small"
 						className="responsive-screen-select-button"
 					>
-						{value[screenSize] !== undefined ? value[screenSize] : "-"}
+						{value[screenSize] !== undefined
+							? value[screenSize]
+							: (defaultValue?.[screenSize] ?? "-")}
 					</Button>
 				))}
 			</div>

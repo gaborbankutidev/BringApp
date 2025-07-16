@@ -137,11 +137,11 @@
 		@apply text-16;
 	}
 
-	#bringContent {
+	#bring-content {
 		@apply flex min-h-screen flex-col;
 	}
 
-	#bringContent > main {
+	#bring-content > main {
 		@apply flex-grow;
 	}
 

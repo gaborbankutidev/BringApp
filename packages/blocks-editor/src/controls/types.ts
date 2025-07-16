@@ -1,4 +1,3 @@
-import type { FC } from "react"
 import { ResponsiveValue } from "../styles/types"
 import type { ImageType, MediaType, NestedKeyOf, NestedTypedKeyOf } from "../types"
 
@@ -40,27 +39,25 @@ export type ControlType<vT, pT extends object = object, dVT = vT> =
 
 // ===========
 
-type _ArrayControlType<vT> = {
+type _ArrayControlType = {
 	label?: string
-	defaultItem?: vT
 	show?: boolean
-	control?: FC<ControlType<vT>>
 }
 
-export type ArrayControlByPath<pT extends object, vT> = _ArrayControlType<vT> & {
+export type ArrayControlByPathType<pT extends object, vT> = _ArrayControlType & {
 	updateHandling?: "by-path"
-	path: NestedTypedKeyOf<pT, vT>
+	path: NestedTypedKeyOf<pT, vT[]>
 }
 
-export type ArrayControlByValue<vT> = _ArrayControlType<vT> & {
+export type ArrayControlByValueType<vT> = _ArrayControlType & {
 	updateHandling: "by-value"
-	value: Array<vT>
-	setValue: (newValue: Array<vT>) => void
+	value: vT[] | undefined
+	setValue: (newValue: vT[]) => void
 }
 
 export type ArrayControlType<vT, pT extends object = object> =
-	| ArrayControlByPath<pT, vT>
-	| ArrayControlByValue<vT>
+	| ArrayControlByPathType<pT, vT>
+	| ArrayControlByValueType<vT>
 
 // ===========
 
@@ -93,6 +90,7 @@ type RangeControlConfigType<Props extends object = object> = {
 	path: NestedTypedKeyOf<Props, number>
 	min?: number
 	max?: number
+	step?: number | ((value: number) => number)
 	defaultValue?: number
 } & _ControlConfigType<Props>
 
@@ -101,6 +99,7 @@ type ResponsiveRangeControlConfigType<Props extends object = object> = {
 	path: NestedTypedKeyOf<Props, ResponsiveValue<number>>
 	min?: number
 	max?: number
+	step?: number | ((value: number) => number)
 	defaultValue?: ResponsiveValue<number>
 } & _ControlConfigType<Props>
 
@@ -137,6 +136,16 @@ type NumberSelectControlConfigType<Props extends object = object> = {
 	defaultValue?: string
 } & _ControlConfigType<Props>
 
+type ResponsiveSelectControlConfigType<Props extends object = object> = {
+	type: "responsive-select"
+	path: NestedTypedKeyOf<Props, ResponsiveValue<string>>
+	options: {
+		label: string
+		value: string
+	}[]
+	defaultValue?: ResponsiveValue<string>
+} & _ControlConfigType<Props>
+
 type ComboboxControlConfigType<Props extends object = object> = {
 	type: "combobox"
 	path: NestedTypedKeyOf<Props, string>
@@ -159,13 +168,24 @@ type NumberComboboxControlConfigType<Props extends object = object> = {
 
 type MediaControlConfigType<Props extends object = object> = {
 	type: "media"
-	allowedTypes?: string[]
 	path: NestedTypedKeyOf<Props, MediaType>
+	allowedTypes?: string[]
+} & _ControlConfigType<Props>
+
+type ResponsiveMediaControlConfigType<Props extends object = object> = {
+	type: "responsive-media"
+	path: NestedTypedKeyOf<Props, ResponsiveValue<MediaType>>
+	allowedTypes?: string[]
 } & _ControlConfigType<Props>
 
 type ImageControlConfigType<Props extends object = object> = {
 	type: "image"
 	path: NestedTypedKeyOf<Props, ImageType>
+} & _ControlConfigType<Props>
+
+type ResponsiveImageControlConfigType<Props extends object = object> = {
+	type: "responsive-image"
+	path: NestedTypedKeyOf<Props, ResponsiveValue<ImageType>>
 } & _ControlConfigType<Props>
 
 type TextArrayControlConfigType<Props extends object = object> = {
@@ -188,9 +208,12 @@ export type ControlConfigType<Props extends object = object> =
 	| TextareaControlConfigType<Props>
 	| SelectControlConfigType<Props>
 	| NumberSelectControlConfigType<Props>
+	| ResponsiveSelectControlConfigType<Props>
 	| ComboboxControlConfigType<Props>
 	| NumberComboboxControlConfigType<Props>
 	| MediaControlConfigType<Props>
+	| ResponsiveMediaControlConfigType<Props>
 	| ImageControlConfigType<Props>
+	| ResponsiveImageControlConfigType<Props>
 	| TextArrayControlConfigType<Props>
 	| ImageArrayControlConfigType<Props>

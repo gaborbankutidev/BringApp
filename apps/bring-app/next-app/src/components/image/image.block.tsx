@@ -1,39 +1,30 @@
-import type { BP } from "@/bring"
+import type { BP } from "@/bring/types"
 import type { SourceType } from "@/editor/utils/lists"
-import { cn } from "@/lib/utils"
 import type { ImageType } from "@bring/blocks-client/types"
 import { defaultImageValue } from "@bring/blocks-client/utils"
 import Image from "./image"
 
-export const sizes = {
-	"900": { width: 900, height: 600 },
-	"1200": { width: 1200, height: 800 },
-	"1800": { width: 1800, height: 1200 },
-	"2400": { width: 2400, height: 1600 },
-} as const
-
 export type ImageBlockProps = {
-	contentSource: SourceType
+	contentSource?: SourceType
 	image: ImageType
-	size?: keyof typeof sizes
+	imageClassName?: string
 	caption?: string
+	captionClassName?: string
 	source?: string
-	link?: string
-	newTab?: boolean
+	sourceClassName?: string
+	link: {
+		href?: string
+		newTab?: boolean
+	}
 	lightbox?: boolean
-	cover?: boolean
 }
 
 const ImageBlock = ({
 	attributes: {
 		contentSource = "manual",
 		image = defaultImageValue,
-		size = "900",
-		link = "",
-		newTab = false,
-		lightbox = false,
-		cover = false,
-		className,
+		imageClassName,
+		link = {},
 		...props
 	},
 	entityProps,
@@ -41,24 +32,15 @@ const ImageBlock = ({
 	const img = contentSource === "dynamic" ? entityProps?.image : image
 	if (!img?.src) return null
 
-	const classNames = cn(cover && "h-full object-cover", className)
-
 	return (
-		<Image // eslint-disable-line jsx-a11y/alt-text
+		// eslint-disable-next-line jsx-a11y/alt-text
+		<Image
 			image={{
 				src: img.src,
 				alt: img.alt ?? "",
-				width: sizes[size].width,
-				height: sizes[size].height,
+				className: imageClassName,
 			}}
-			link={
-				link && !lightbox
-					? // @ts-ignore
-						{ href: link, target: newTab ? "_blank" : "_self" }
-					: undefined
-			}
-			lightbox={lightbox}
-			className={classNames}
+			link={link.href ? { href: link.href, newTab: link.newTab } : undefined}
 			{...props}
 		/>
 	)
@@ -86,4 +68,4 @@ export const image = {
 	},
 } as const
 
-export default Image
+export default ImageBlock

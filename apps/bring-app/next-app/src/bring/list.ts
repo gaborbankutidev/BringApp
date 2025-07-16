@@ -1,24 +1,26 @@
+// sample
+import { basic } from "@/components/samples/basic"
+import { mediaAndArrays } from "@/components/samples/media-and-arrays"
 // layout
-import { column } from "@/components/layout/column"
-import { group } from "@/components/layout/group"
-import { row } from "@/components/layout/row"
+import { flex } from "@/components/layout/flex"
+import { grid } from "@/components/layout/grid"
 import { section } from "@/components/layout/section"
-import { split } from "@/components/layout/split"
 // components
+import { button } from "@/components/button"
 import { divider } from "@/components/divider"
 import { embed } from "@/components/embed"
 import { heading } from "@/components/heading"
 import { image } from "@/components/image"
 import { markdown } from "@/components/markdown"
-import { button } from "@/components/ui/button"
 
 export const blockList = [
+	// sample
+	basic,
+	mediaAndArrays,
 	// layout
-	column,
-	group,
-	row,
 	section,
-	split,
+	flex,
+	grid,
 	// components
 	button,
 	divider,

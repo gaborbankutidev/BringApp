@@ -34,6 +34,7 @@ class JWTAuth {
 	public static function conditionalInit() {
 		// Ensure the plugin admin functions are available for checking active status
 		if (!function_exists("is_plugin_active")) {
+			/** @phpstan-ignore-next-line */
 			require_once ABSPATH . "wp-admin/includes/plugin.php";
 		}
 
@@ -111,7 +112,7 @@ class JWTAuth {
 		}
 
 		// If JWT is invalid, attempt to validate the refresh token with device payload
-		if (isset($_COOKIE["refresh_token"])) {
+		if (isset($_COOKIE["refresh_token"]) && is_string($_COOKIE["refresh_token"])) {
 			/**
 			 * Retrieve the device information from the request parameter if JWT is absent
 			 * @var string $device
@@ -142,7 +143,7 @@ class JWTAuth {
 	 */
 	public static function handleLogout(WP_REST_Request $request) {
 		// Check if the refresh_token cookie is set
-		if (isset($_COOKIE["refresh_token"])) {
+		if (isset($_COOKIE["refresh_token"]) && is_string($_COOKIE["refresh_token"])) {
 			/**
 			 * Get the device information from the request parameter
 			 * @var string $device

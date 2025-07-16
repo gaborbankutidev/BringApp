@@ -4,6 +4,7 @@ import get from "lodash.get"
 import set from "lodash.set"
 import type { FC } from "react"
 import React from "react"
+import { SetToDefaultButton } from "../button"
 import { useControlContext } from "../context"
 import type { ControlByPath, ControlByValue, ControlType } from "../types"
 import { isPathControl } from "../utils"
@@ -14,7 +15,9 @@ import { isPathControl } from "../utils"
  * @param props - The props for the CheckboxControl component.
  * @returns The rendered CheckboxControl component.
  */
-export const CheckboxControl = <pT extends object = object>(props: ControlType<boolean, pT>) =>
+export const CheckboxControl = <pT extends object = object>(
+	props: ControlType<boolean | undefined, pT>
+) =>
 	isPathControl(props) ? (
 		<CheckboxControlByPath {...props} />
 	) : (
@@ -33,7 +36,7 @@ function CheckboxControlByPath<pT extends object>({
 	path,
 	updateHandling,
 	...props
-}: ControlByPath<pT, boolean>): JSX.Element {
+}: ControlByPath<pT, boolean | undefined>): JSX.Element {
 	const { attributes, setAttributes } = useControlContext()
 	const value = get(attributes, path)
 
@@ -62,7 +65,7 @@ function CheckboxControlByPath<pT extends object>({
  * @param show - Whether to show the checkbox control.
  * @returns The rendered CheckboxControlByValue component.
  */
-const CheckboxControlByValue: FC<ControlByValue<boolean>> = ({
+const CheckboxControlByValue: FC<ControlByValue<boolean | undefined>> = ({
 	label,
 	value,
 	setValue,
@@ -74,17 +77,15 @@ const CheckboxControlByValue: FC<ControlByValue<boolean>> = ({
 		<WPCheckboxControl
 			label={`${label} ${value === undefined ? " - Default" : ""}`}
 			onChange={setValue}
-			checked={value ?? defaultValue}
+			checked={value === undefined ? defaultValue : value}
 			help={
 				setDefault &&
 				value !== undefined && (
-					<button
+					<SetToDefaultButton
 						onClick={() => {
 							setValue(undefined)
 						}}
-					>
-						Set to default
-					</button>
+					/>
 				)
 			}
 		/>

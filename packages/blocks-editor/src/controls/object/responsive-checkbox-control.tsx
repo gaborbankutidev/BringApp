@@ -21,7 +21,7 @@ import { isPathControl } from "../utils"
  * @returns The rendered ResponsiveCheckboxControl component.
  */
 export const ResponsiveCheckboxControl = <pT extends object = {}>(
-	props: ControlType<ResponsiveValue<boolean>, pT>
+	props: ControlType<ResponsiveValue<boolean | undefined>, pT>
 ) =>
 	isPathControl(props) ? (
 		<ResponsiveCheckboxControlByPath {...props} />
@@ -43,7 +43,7 @@ function ResponsiveCheckboxControlByPath<pT extends object>({
 	path,
 	updateHandling,
 	...props
-}: ControlByPath<pT, ResponsiveValue<boolean>>) {
+}: ControlByPath<pT, ResponsiveValue<boolean | undefined>>) {
 	const { attributes, setAttributes } = useControlContext()
 	const value = get(attributes, path)
 
@@ -74,15 +74,9 @@ function ResponsiveCheckboxControlByPath<pT extends object>({
  *
  * @returns The rendered ResponsiveCheckboxControlByValue component.
  */
-const ResponsiveCheckboxControlByValue: FC<ControlByValue<ResponsiveValue<boolean>>> = ({
-	label,
-	value = {},
-	setValue,
-	show = true,
-	updateHandling,
-	defaultValue,
-	...props
-}) => {
+const ResponsiveCheckboxControlByValue: FC<
+	ControlByValue<ResponsiveValue<boolean | undefined>>
+> = ({ label, value = {}, setValue, show = true, updateHandling, defaultValue, ...props }) => {
 	const [selectedSize, setSelectedSize] = useState<keyof ResponsiveLabels>("")
 
 	return show ? (
@@ -90,17 +84,26 @@ const ResponsiveCheckboxControlByValue: FC<ControlByValue<ResponsiveValue<boolea
 			<div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
 				{objectKeys(screenSizes).map((screenSize) => (
 					<Button
+						key={screenSize}
 						variant={selectedSize === screenSize ? "primary" : "secondary"}
 						icon={<Icon icon={screenSizes[screenSize].icon} />}
 						onClick={() => setSelectedSize(screenSize)}
-						isSmall={true}
+						size="small"
 						style={{
 							paddingRight: "12px!important",
 							paddingLeft: "6px!important",
 							width: "initial!important",
 						}}
 					>
-						{value[screenSize] ? "H" : "V"}
+						{value[screenSize] !== undefined
+							? value[screenSize]
+								? "✓"
+								: "×"
+							: defaultValue?.[screenSize] !== undefined
+								? defaultValue[screenSize]
+									? "✓"
+									: "×"
+								: "-"}
 					</Button>
 				))}
 			</div>
@@ -108,13 +111,13 @@ const ResponsiveCheckboxControlByValue: FC<ControlByValue<ResponsiveValue<boolea
 			<CheckboxControl
 				updateHandling="by-value"
 				label={`${label} - ${screenSizes[selectedSize].label}`}
-				value={value[selectedSize] ?? false}
+				value={value[selectedSize]}
 				setValue={(newValue) => {
 					const newObject = { ...value }
 					newObject[selectedSize] = newValue
 					setValue(newObject)
 				}}
-				defaultValue={defaultValue ? defaultValue[selectedSize] : false}
+				defaultValue={defaultValue?.[selectedSize]}
 				{...props}
 			/>
 		</>

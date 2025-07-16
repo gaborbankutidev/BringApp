@@ -2,14 +2,11 @@ import { sourceOptions } from "@/editor/utils/options"
 import {
 	booleanAttributeSource,
 	imageAttributeSource,
+	objectAttributeSource,
 	stringAttributeSource,
 	type BlockConfig,
 } from "@bring/blocks-editor/blocks"
-import { makeOptions } from "@bring/blocks-editor/controls"
-import { image, sizes, type ImageBlockProps } from "./image.block"
-
-const sizeList = Object.keys(sizes)
-const sizeOptions = makeOptions([...sizeList])
+import { image, type ImageBlockProps } from "./image.block"
 
 const imageConfig: BlockConfig<ImageBlockProps> = {
 	...image,
@@ -18,11 +15,12 @@ const imageConfig: BlockConfig<ImageBlockProps> = {
 	attributes: {
 		contentSource: stringAttributeSource("manual"),
 		image: imageAttributeSource(),
-		size: stringAttributeSource(),
+		imageClassName: stringAttributeSource(),
 		caption: stringAttributeSource(),
+		captionClassName: stringAttributeSource(),
 		source: stringAttributeSource(),
-		link: stringAttributeSource(),
-		newTab: booleanAttributeSource(),
+		sourceClassName: stringAttributeSource(),
+		link: objectAttributeSource({}),
 		lightbox: booleanAttributeSource(),
 	},
 	Controls: [
@@ -41,30 +39,32 @@ const imageConfig: BlockConfig<ImageBlockProps> = {
 			panel: "Image settings",
 			controls: [
 				{ type: "image", label: "Image", path: "image" },
-				{
-					type: "select",
-					label: "Size",
-					path: "size",
-					options: sizeOptions,
-					defaultValue: "900",
-				},
 				{ type: "text", label: "Caption", path: "caption" },
 				{ type: "text", label: "Source", path: "source" },
 				{ type: "toggle", label: "Open in lightbox", path: "lightbox" },
 				{
 					type: "text",
 					label: "Url",
-					path: "link",
+					path: "link.href",
 					show: (attributes) => !attributes.lightbox,
 				},
 				{
 					type: "toggle",
 					label: "New tab",
-					path: "newTab",
-					show: (attributes) => !attributes.lightbox && !!attributes.link,
+					path: "link.newTab",
+					show: (attributes) => !attributes.lightbox,
 				},
 			],
 			show: (attributes) => attributes.contentSource === "manual",
+			initialOpen: true,
+		},
+		{
+			panel: "Advanced",
+			controls: [
+				{ type: "text", label: "Image ClassName", path: "imageClassName" },
+				{ type: "text", label: "Caption ClassName", path: "captionClassName" },
+				{ type: "text", label: "Source ClassName", path: "sourceClassName" },
+			],
 		},
 	],
 }

@@ -1,37 +1,23 @@
-import type { BP } from "@/bring"
+import type { BP } from "@/bring/types"
+import Background, { type BackgroundBlockProps } from "@/components/background/background.block"
 import { cn } from "@/lib/utils"
-import type { ColorType } from "@/styles/colors"
-import type { ImageType } from "@bring/blocks-client"
+import { type ContainerSizeType } from "@/styles/container"
 import Section from "./section"
 
 export type SectionBlockProps = {
-	backgroundColor?: ColorType
-	backgroundImage?: ImageType
 	dark?: boolean
-
-	backgroundImageClassName?: string
-	backgroundClassName?: string
-	containerClassName?: string
-}
+	containerSize?: ContainerSizeType
+} & BackgroundBlockProps
 
 const SectionBlock = ({
-	attributes: { backgroundColor = "transparent", backgroundImage, backgroundClassName, ...props },
+	attributes: { className, dark, ...props },
 	children,
 }: BP<SectionBlockProps>) => (
-	<Section
-		backgroundImage={
-			backgroundImage?.src
-				? {
-						src: backgroundImage.src,
-						alt: backgroundImage.alt ?? "Background image",
-					}
-				: undefined
-		}
-		backgroundClassName={cn(`bg-${backgroundColor}`, backgroundClassName)}
-		{...props}
-	>
-		{children}
-	</Section>
+	<Background {...props}>
+		<Section className={cn(dark === true && "dark", dark === false && "light", className)}>
+			{children}
+		</Section>
+	</Background>
 )
 
 export const section = {
@@ -48,4 +34,4 @@ export const section = {
 	},
 } as const
 
-export default Section
+export default SectionBlock

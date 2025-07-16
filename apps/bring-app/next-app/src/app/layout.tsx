@@ -1,11 +1,12 @@
-import Footer from "@/components/templates/footer"
-import Header from "@/components/templates/header"
+import Footer from "@/components/layout/footer"
+import Header from "@/components/layout/header"
 import { env } from "@/env.mjs"
 import "@/styles/globals.css"
 import { getRankMathTitle } from "@bring/blocks-client/rank-math"
 import { GoogleTagManager } from "@next/third-parties/google"
 import { Montserrat } from "next/font/google"
 import { headers } from "next/headers"
+import NextTopLoader from "nextjs-toploader"
 import { type ReactNode } from "react"
 import { Head } from "./head"
 import Providers from "./providers"
@@ -43,12 +44,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 			<Head />
 			{env.NEXT_PUBLIC_GTM && <GoogleTagManager gtmId={env.NEXT_PUBLIC_GTM} />}
 			<body className={montserrat.className}>
-				<div className="bringContent relative flex min-h-screen flex-col">
+				<NextTopLoader color="#9333EA" showSpinner={false} />
+				<div className="bring-content relative flex min-h-screen flex-col">
 					<Bg />
 					<Providers>
-						<Header />
+						<Header className="dark" />
 						<main className="flex-grow">{children}</main>
-						<Footer />
+						<Footer className="dark" />
 					</Providers>
 				</div>
 			</body>

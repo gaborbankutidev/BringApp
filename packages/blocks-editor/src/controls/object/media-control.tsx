@@ -78,7 +78,6 @@ function MediaControlByValue({
 		// @ts-ignore
 		<MediaUploadCheck fallback={null}>
 			<MediaUpload
-				title={label ?? "Select media"}
 				onSelect={(value) => {
 					const src = value.url
 					const v = value as MediaType
@@ -88,48 +87,66 @@ function MediaControlByValue({
 				allowedTypes={allowedTypes}
 				value={value?.id ?? undefined}
 				render={({ open }) => (
-					<div
-						style={{
-							border: "1px solid #ddd",
-							borderRadius: "4px",
-							marginBottom: "12px",
-							marginTop: "12px",
-						}}
-					>
-						<button
-							onClick={open}
-							style={{
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "center",
-								width: "100%",
-								padding: "12px",
-							}}
-						>
-							{value?.id ? <Preview {...value} /> : "No media selected"}
-						</button>
-
+					<div className="components-base-control">
 						<div
 							style={{
-								display: "grid",
-								gridAutoFlow: "column",
-								gap: "12px",
-								padding: "12px",
+								marginBottom: "8px",
+								textTransform: "uppercase",
+								fontSize: "11px",
+								fontWeight: "500",
+							}}
+							className="components-base-control__label"
+						>
+							{label}
+						</div>
+						<div
+							style={{
+								border: "1px solid #ddd",
+								borderRadius: "4px",
 							}}
 						>
-							<Button variant="primary" onClick={open}>
-								Select media
-							</Button>
-
-							<Button
-								isDestructive
-								variant="primary"
-								onClick={() => {
-									setValue(defaultMediaValue)
+							<button
+								onClick={open}
+								style={{
+									display: "flex",
+									alignItems: "center",
+									justifyContent: "center",
+									width: "100%",
+									padding: "12px",
+									borderBottom: "1px solid rgb(221, 221, 221)",
+									borderTop: "none",
+									borderLeft: "none",
+									borderRight: "none",
+									borderRadius: "0",
+									background: "none",
+									cursor: "pointer",
 								}}
 							>
-								Delete media
-							</Button>
+								{value?.id ? <Preview {...value} /> : "No media selected"}
+							</button>
+
+							<div
+								style={{
+									display: "grid",
+									gridAutoFlow: "column",
+									gap: "12px",
+									padding: "12px",
+								}}
+							>
+								<Button variant="primary" onClick={open}>
+									Select media
+								</Button>
+
+								<Button
+									isDestructive
+									variant="primary"
+									onClick={() => {
+										setValue(defaultMediaValue)
+									}}
+								>
+									Delete media
+								</Button>
+							</div>
 						</div>
 					</div>
 				)}
