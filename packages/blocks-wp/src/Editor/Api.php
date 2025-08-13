@@ -36,6 +36,13 @@ class Api {
 			"permission_callback" => Utils\Api::createPermissionCallback(),
 			"callback" => self::save(...),
 		]);
+
+		// update post content preview object
+		register_rest_route("bring", "/editor/preview", [
+			"methods" => "POST",
+			"permission_callback" => Utils\Api::createPermissionCallback(),
+			"callback" => self::preview(...),
+		]);
 	}
 
 	/**
@@ -151,7 +158,7 @@ class Api {
 	}
 
 	/**
-	 * Updates object content for the post
+	 * Updates content object for the post
 	 * @param WP_REST_Request<array<mixed>> $request
 	 * @return array{success: bool}|WP_Error
 	 */
@@ -192,6 +199,55 @@ class Api {
 			$entity_id,
 			"bring_content_object",
 			$request_body["contentObject"],
+		);
+
+		return [
+			"success" => is_int($object_update) ? true : $object_update,
+		];
+	}
+
+	/**
+	 * Updates preview content object for the post
+	 * @param WP_REST_Request<array<mixed>> $request
+	 * @return array{success: bool}|WP_Error
+	 */
+	private static function preview(WP_REST_Request $request) {
+		$request_body = $request->get_json_params();
+
+		// missing params
+		if (!isset($request_body["entityId"]) || !isset($request_body["previewObject"])) {
+			return new WP_Error("missing_params", "entityId or previewObject is missing", [
+				"status" => 400,
+			]);
+		}
+
+		$entity_id = sanitize_text_field($request_body["entityId"]);
+		if (!is_numeric($entity_id)) {
+			return new WP_Error("wrong_params", "entityId is not numeric", [
+				"status" => 400,
+			]);
+		}
+		$entity_id = intval($entity_id);
+
+		// return of post doesn't exist
+		if (!get_post_status($entity_id)) {
+			return new WP_Error("no_page", "Page not found.", [
+				"status" => 404,
+			]);
+		}
+
+		// check if post supports bring blocks
+		$post_type = get_post_type($entity_id);
+		if (!in_array($post_type, Config::getEditorPostTypes())) {
+			return new WP_Error("not_supported", "Post type doesn't support BringBlocks", [
+				"status" => 403,
+			]);
+		}
+
+		$object_update = update_post_meta(
+			$entity_id,
+			"bring_preview_object",
+			$request_body["previewObject"],
 		);
 
 		return [

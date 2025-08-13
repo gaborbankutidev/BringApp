@@ -78,6 +78,35 @@ export class Editor {
 		return this.instance
 	}
 
+	private asd() {
+		setInterval(() => {
+			const previewObject = this.parseBlocks(select("core/block-editor").getBlocks());
+			const entityId = select("core/editor").getCurrentPostId();
+
+			fetch(`/wp-json/bring/editor/preview`, {
+				method: "POST",
+				headers: {
+					Authorization: this.jwtToken,
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					previewObject,
+					entityId,
+				}),
+			})
+				.then((res) => {
+					if (res.status !== 200) {
+						console.error("🚀 There was an issue while saving preview!", res);
+					} else {
+						console.log("🚀 Preview saved successfully!");
+					}
+				})
+				.catch((err) => {
+					console.error("🚀 There was an issue while saving preview!", err);
+				});
+		}, 3000);
+	}
+
 	/**
 	 * Method to disable the reusable blocks.
 	 * @returns void
