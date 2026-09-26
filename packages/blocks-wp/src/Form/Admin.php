@@ -129,6 +129,9 @@ class Admin {
 			if (is_array($value)) {
 				$value = Utils\General::varDumpToString($value);
 			}
+			// escape on output too — stored submissions may predate input sanitization
+			$name = esc_html((string) $name);
+			$value = esc_html((string) $value);
 			$content .= "
 				<div style='display: flex;'>
 					<div style='width: 120px; font-weight:600;'>$name</div>
@@ -171,7 +174,7 @@ class Admin {
 		if (!is_string($form_name)) {
 			return;
 		}
-		echo "<div style='margin-bottom: 16px;'>Form name: $form_name</div>";
+		echo "<div style='margin-bottom: 16px;'>Form name: " . esc_html($form_name) . "</div>";
 
 		/**
 		 * @var array<string,string|array<mixed>>|false $form_data
@@ -187,6 +190,9 @@ class Admin {
 				$value = Utils\General::varDumpToString($value);
 			}
 
+			// escape on output too — stored submissions may predate input sanitization
+			$name = esc_html((string) $name);
+			$value = esc_html((string) $value);
 			$content .= "
 				<div style='display: flex; margin-bottom: 8px;'>
 					<div style='width: 200px; font-weight:600;'>$name</div>
