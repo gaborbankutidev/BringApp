@@ -14,12 +14,15 @@ type Options = {
 
 async function getEntityOptions(entityType: EntityType, entitySlug: string = "", customData = {}) {
 	try {
+		// The `Window` augmentation for `jwt` lives in editor.ts, which is a different
+		// build entry — cast locally so the hooks entry type-checks in isolation.
+		const jwt = (window as unknown as { jwt: { token: string } }).jwt
 		const response = await fetch("/wp-json/bring/editor/options", {
 			method: "POST",
 			body: JSON.stringify({ entityType, entitySlug, customData }),
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: window.jwt.token,
+				Authorization: jwt.token,
 			},
 		})
 
