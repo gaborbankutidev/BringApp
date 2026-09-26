@@ -92,14 +92,8 @@ class Api {
 				continue;
 			}
 
-			// store array field data directly (arrays will be serialized automatically by update_post_meta)
-			if (is_array($submitted_fields[$field_name])) {
-				$form_data[$field_name] = $submitted_fields[$field_name];
-			} elseif (is_scalar($submitted_fields[$field_name])) {
-				$form_data[$field_name] = sanitize_text_field((string) $submitted_fields[$field_name]);
-			} else {
-				$form_data[$field_name] = "";
-			}
+			// sanitize scalars and arrays alike (arrays will be serialized automatically by update_post_meta)
+			$form_data[$field_name] = self::sanitizeField($submitted_fields[$field_name]);
 		}
 
 		// insert form submission
@@ -161,5 +155,28 @@ class Api {
 			],
 			201,
 		);
+	}
+
+	/**
+	 * Recursively sanitizes a submitted field value. Values stored in form_data
+	 * end up echoed on the admin submission screens, so nothing may pass raw.
+	 *
+	 * @param mixed $value
+	 * @return string|array<mixed>
+	 */
+	private static function sanitizeField($value) {
+		if (is_array($value)) {
+			$sanitized = [];
+			foreach ($value as $key => $item) {
+				$sanitized[sanitize_text_field((string) $key)] = self::sanitizeField($item);
+			}
+			return $sanitized;
+		}
+
+		if (is_scalar($value)) {
+			return sanitize_text_field((string) $value);
+		}
+
+		return "";
 	}
 }
