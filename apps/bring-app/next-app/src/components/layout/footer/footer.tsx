@@ -2,6 +2,7 @@ import { getSiteProps } from "@/bring/server"
 import Section from "@/components/layout/section"
 import { cn } from "@/lib/utils"
 import { findMenu } from "@/utils/find-menu"
+import { sanitizeUrl } from "@bring/blocks-client/utils"
 import Link from "next/link"
 
 type FooterProps = Omit<React.HTMLProps<HTMLDivElement>, "as" | "children">
@@ -32,7 +33,7 @@ const Footer = async ({ className, ...props }: FooterProps) => {
 					{menu.map(({ name, url, id }) => (
 						<Link
 							key={id}
-							href={url}
+							href={sanitizeUrl(url)}
 							className="text-11 text-foreground opacity-90 hover:opacity-100"
 						>
 							{name}

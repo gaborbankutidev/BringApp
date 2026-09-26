@@ -61,4 +61,4 @@ export type {
 } from "./types"
 
 // Utils
-export { defaultImageValue, objectKeys, toAbsoluteUrl } from "./utils"
+export { defaultImageValue, objectKeys, sanitizeUrl, toAbsoluteUrl } from "./utils"

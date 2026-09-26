@@ -44,3 +44,25 @@ export function toAbsoluteUrl(base: string, relative: string) {
 
 	return base + relative
 }
+
+/**
+ * Allowlist-validates a URL for use in `href`/`src` attributes.
+ * Relative URLs and the http, https, mailto and tel schemes pass through;
+ * anything with another scheme (`javascript:`, `data:`, ...) returns the fallback.
+ * Block URL attributes are editor-controlled, so render them through this.
+ * @param url - The URL to validate.
+ * @param fallback - Returned for empty or disallowed URLs (default "#").
+ * @returns The original URL if safe, otherwise the fallback.
+ */
+export const sanitizeUrl = (url: string | null | undefined, fallback = "#"): string => {
+	if (!url) {
+		return fallback
+	}
+
+	const trimmed = url.trim()
+	// browsers strip control chars/whitespace when parsing schemes ("java\tscript:")
+	const detectable = trimmed.replace(/[\u0000- ]/g, "")
+	const hasScheme = /^[a-z][a-z\d+\-.]*:/i.test(detectable)
+
+	return !hasScheme || /^(https?|mailto|tel):/i.test(detectable) ? trimmed : fallback
+}

@@ -2,6 +2,7 @@
 
 import Button from "@/components/button"
 import { cn } from "@/lib/utils"
+import { sanitizeUrl } from "@bring/blocks-client/utils"
 import Link from "next/link"
 import { useState } from "react"
 
@@ -63,7 +64,7 @@ const Basic = ({
 				</p>
 				{button && (
 					<Button asChild>
-						<Link href={button.url} target="_blank">
+						<Link href={sanitizeUrl(button.url)} target="_blank">
 							{button.label}
 						</Link>
 					</Button>
