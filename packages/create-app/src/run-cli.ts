@@ -2,6 +2,7 @@ import { execSync } from "child_process"
 import fsExtra from "fs-extra"
 import type { CLIConfig } from "./config"
 import { GIT_URL } from "./constants"
+import { generateEnvFiles } from "./generate-env-files"
 import { removeBlocksWpRepository } from "./remove-blocks-wp-repository"
 import { updatePackageVersions } from "./update-package-versions"
 import { updateProjectName } from "./update-project-name"
@@ -71,6 +72,8 @@ export async function runCLI(config: CLIConfig) {
 
 	removeComposerLockFile(config.projectSlug)
 
+	generateEnvFiles(config.projectSlug)
+
 	if (config.runInstall) {
 		console.log()
 		console.log(`Running yarn install...`)
@@ -114,7 +117,7 @@ export async function runCLI(config: CLIConfig) {
 	console.log(`   cd ${config.projectSlug}`)
 
 	console.log()
-	console.log(`2. Set up the .env files in the following folders:`)
+	console.log(`2. Review the generated .env files (a fresh JWT secret was created for you):`)
 	console.log(`   - root`)
 	console.log(`   - next-app`)
 	console.log(`   - plugins/bring-app`)
