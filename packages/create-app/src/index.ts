@@ -19,6 +19,9 @@ async function main() {
 			message: "What should be the name of the project folder?",
 			default: kebabCase(projectName),
 			required: true,
+			// kebabCase("***") === "" would collapse the scaffold into the current folder
+			validate: (value) =>
+				kebabCase(value) !== "" || "The folder name needs at least one alphanumeric character",
 		})
 	)
 

@@ -19,9 +19,16 @@ export function updateProjectName(directory: string, projectName: string) {
 }
 
 function updatePluginName(directory: string, projectName: string) {
+	// The name is written into a PHP doc comment — never let it close the
+	// comment or open a PHP tag
+	const safeProjectName = projectName
+		.replace(/\*\/|<\?/g, "")
+		.replace(/[\r\n]+/g, " ")
+		.trim()
+
 	// Define the initial and updated plugin names
 	const initialPluginName = "Plugin Name:       Bring App"
-	const updatedPluginName = `Plugin Name:       Bring App | ${projectName}`
+	const updatedPluginName = `Plugin Name:       Bring App | ${safeProjectName}`
 
 	// Construct the plugin file path
 	const pluginPath = path.join(directory, "plugins/bring-app/bring-app.php")
