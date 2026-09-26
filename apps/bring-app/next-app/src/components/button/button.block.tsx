@@ -1,3 +1,4 @@
+import { sanitizeUrl } from "@bring/blocks-client/utils"
 import Link from "next/link"
 
 import { type BP } from "@/bring/types"
@@ -16,7 +17,7 @@ const ButtonBlock = ({
 }: BP<ButtonBlockProps>) => {
 	return (
 		<Button asChild {...props}>
-			<Link href={href} target={newTab ? "_blank" : "_self"}>
+			<Link href={sanitizeUrl(href)} target={newTab ? "_blank" : "_self"}>
 				{text}
 			</Link>
 		</Button>
