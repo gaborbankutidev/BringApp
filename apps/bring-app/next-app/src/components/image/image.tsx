@@ -1,6 +1,7 @@
 "use client"
 
 import MarkdownInline from "@/components/markdown/markdown-inline"
+import { safeHref } from "@/lib/safe-href"
 import { cn } from "@/lib/utils"
 import FSLightbox from "fslightbox-react"
 import NextImage, { type ImageProps as NextImageProps } from "next/image"
@@ -41,7 +42,7 @@ const Image = ({
 	const Link =
 		link && !lightbox
 			? ({ children }: { children: ReactNode }) => (
-					<NextLink href={link.href} target={link.newTab ? "_blank" : "_self"}>
+					<NextLink href={safeHref(link.href)} target={link.newTab ? "_blank" : "_self"}>
 						{children}
 					</NextLink>
 				)

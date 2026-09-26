@@ -1,5 +1,6 @@
 import { getSiteProps } from "@/bring/server"
 import Section from "@/components/layout/section"
+import { safeHref } from "@/lib/safe-href"
 import { cn } from "@/lib/utils"
 import { findMenu } from "@/utils/find-menu"
 import Link from "next/link"
@@ -32,7 +33,7 @@ const Footer = async ({ className, ...props }: FooterProps) => {
 					{menu.map(({ name, url, id }) => (
 						<Link
 							key={id}
-							href={url}
+							href={safeHref(url)}
 							className="text-11 text-foreground opacity-90 hover:opacity-100"
 						>
 							{name}

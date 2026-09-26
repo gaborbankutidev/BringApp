@@ -1,5 +1,6 @@
 import { getSiteProps } from "@/bring/server"
 import Section from "@/components/layout/section"
+import { safeHref } from "@/lib/safe-href"
 import { BiLogoGithub, BiLogoLinkedin } from "react-icons/bi"
 import Breadcrumb from "./breadcrumb"
 
@@ -21,7 +22,7 @@ const Header = async (props: HeaderProps) => {
 				{siteProps.socialLinks.linkedin && (
 					<a
 						className="cursor-pointer text-foreground transition-colors duration-300 hover:text-purple-600"
-						href={siteProps.socialLinks.linkedin}
+						href={safeHref(siteProps.socialLinks.linkedin)}
 						target="_blank"
 						rel="noopener noreferrer"
 					>
@@ -30,7 +31,7 @@ const Header = async (props: HeaderProps) => {
 				)}
 				<a
 					className="cursor-pointer text-foreground transition-colors duration-300 hover:text-purple-600"
-					href={siteProps.socialLinks.github ?? "https://github.com/gaborbankutidev/BringApp"}
+					href={safeHref(siteProps.socialLinks.github, "https://github.com/gaborbankutidev/BringApp")}
 					target="_blank"
 					rel="noopener noreferrer"
 				>
