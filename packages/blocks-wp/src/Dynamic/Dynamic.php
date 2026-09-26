@@ -6,6 +6,7 @@ namespace Bring\BlocksWP\Dynamic;
 
 use Bring\BlocksWP\Utils;
 use WP_REST_Request;
+use WP_Term;
 
 class Dynamic {
 	/**
@@ -69,12 +70,16 @@ class Dynamic {
 				"data" => null,
 			];
 		}
-		if ($entity_type == "taxonomy" && !get_term($entity_id)) {
-			return [
-				"data" => null,
-			];
+		// these are public routes — only publicly viewable entities may be exposed
+		if ($entity_type == "taxonomy") {
+			$term = get_term($entity_id);
+			if (!$term instanceof WP_Term || !is_taxonomy_viewable($term->taxonomy)) {
+				return [
+					"data" => null,
+				];
+			}
 		}
-		if ($entity_type == "post" && !get_post($entity_id)) {
+		if ($entity_type == "post" && !is_post_publicly_viewable($entity_id)) {
 			return [
 				"data" => null,
 			];
@@ -111,23 +116,34 @@ class Dynamic {
 			];
 		}
 
-		// Check if slug exists
-		if ($entity_type == "taxonomy" && !taxonomy_exists($entity_slug)) {
+		// Check the slug exists and is publicly viewable — this is a public route,
+		// internal post types (form submissions, redirects, layouts) must not list
+		if (
+			$entity_type == "taxonomy" &&
+			(!taxonomy_exists($entity_slug) || !is_taxonomy_viewable($entity_slug))
+		) {
 			return [
 				"data" => null,
 			];
 		}
-		if ($entity_type == "post" && !post_type_exists($entity_slug)) {
+		if (
+			$entity_type == "post" &&
+			(!post_type_exists($entity_slug) || !is_post_type_viewable($entity_slug))
+		) {
 			return [
 				"data" => null,
 			];
 		}
 
-		// limit
+		// limit — cap unbounded/oversized anonymous queries
 		$limit = Utils\Api::getLimit($request);
+		$max_limit = max(1, intval(apply_filters("bring_dynamic_list_max_limit", 500)));
+		if ($limit < 1 || $limit > $max_limit) {
+			$limit = $max_limit;
+		}
 
 		// offset
-		$offset = Utils\Api::getLimit($request);
+		$offset = Utils\Api::getOffset($request);
 
 		// page
 		$page = Utils\Api::getPage($request);
