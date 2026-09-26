@@ -1,4 +1,5 @@
 import type { Entity } from "../types"
+import { encodeSlug } from "../utils"
 
 /**
  * Represents a successful response with an entity.
@@ -65,7 +66,7 @@ async function getEntity<EP = object>(
 	onNotFound: () => void,
 	slug: string | string[] = ""
 ): Promise<Entity<EP> | null> {
-	const joinedSlug = typeof slug === "string" ? slug : slug.join("/")
+	const joinedSlug = encodeSlug(slug)
 
 	// fetch entity
 	let responseData = null
