@@ -188,6 +188,13 @@ class Api {
 			]);
 		}
 
+		// check the user can edit this specific post, not just posts in general
+		if (!current_user_can("edit_post", $entity_id)) {
+			return new WP_Error("no_permission", "No permission to edit this post", [
+				"status" => 403,
+			]);
+		}
+
 		$object_update = update_post_meta(
 			$entity_id,
 			"bring_content_object",
