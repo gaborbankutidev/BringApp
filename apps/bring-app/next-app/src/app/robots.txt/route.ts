@@ -1,13 +1,15 @@
-const generateRobotsTxt = (request: Request) =>
+import { env } from "@/env.mjs"
+
+const generateRobotsTxt = () =>
 	`User-Agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: http://${new URL(request.url).host}/sitemap/sitemap_index.xml 
-` // TODO: add NEXT_PUBLIC_BASE_URL to env.mjs and use it here
+Sitemap: ${env.NEXT_PUBLIC_BASE_URL.replace(/\/$/, "")}/sitemap.xml
+`
 
-export function GET(request: Request) {
-	const response = new Response(generateRobotsTxt(request), {
+export function GET() {
+	const response = new Response(generateRobotsTxt(), {
 		status: 200,
 		statusText: "ok",
 	})
