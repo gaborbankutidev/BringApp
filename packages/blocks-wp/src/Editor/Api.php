@@ -26,7 +26,7 @@ class Api {
 		// options for controls in editor
 		register_rest_route("bring", "/editor/options", [
 			"methods" => "POST",
-			"permission_callback" => "__return_true",
+			"permission_callback" => Utils\Api::createPermissionCallback(),
 			"callback" => self::options(...),
 		]);
 

@@ -19,6 +19,7 @@ async function getEntityOptions(entityType: EntityType, entitySlug: string = "",
 			body: JSON.stringify({ entityType, entitySlug, customData }),
 			headers: {
 				"Content-Type": "application/json",
+				Authorization: window.jwt.token,
 			},
 		})
 
