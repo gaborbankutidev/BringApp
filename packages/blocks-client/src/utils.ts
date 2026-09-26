@@ -20,6 +20,22 @@ export const objectKeys = <Obj extends object>(obj?: Obj): (keyof Obj)[] => {
 }
 
 /**
+ * Encodes a visitor-supplied slug for safe interpolation into a URL path.
+ * Splits on "/", drops empty, "." and ".." segments (path traversal) and
+ * percent-encodes each remaining segment (neutralizes "?", "#", "&", ...).
+ * @param slug - The slug as a string or array of path segments.
+ * @returns The encoded slug, segments joined with "/".
+ */
+export const encodeSlug = (slug: string | string[]): string => {
+	const segments = typeof slug === "string" ? slug.split("/") : slug.flatMap((s) => s.split("/"))
+
+	return segments
+		.filter((segment) => segment !== "" && segment !== "." && segment !== "..")
+		.map(encodeURIComponent)
+		.join("/")
+}
+
+/**
  * Converts a relative URL to an absolute URL based on the base URL.
  * @param base - The base URL.
  * @param relative - The relative URL.

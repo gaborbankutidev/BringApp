@@ -1,10 +1,14 @@
+import { encodeSlug } from "../utils"
+
 type ResponseDataType = {
 	success: boolean
 	head: string
 }
 
 export const getRankMathHead = async (wpURL: string, nextURL: string, slug = "") => {
-	const requestUrl = `${wpURL}/wp-json/rankmath/v1/getHead?url=${nextURL}/${slug}`
+	const requestUrl = `${wpURL}/wp-json/rankmath/v1/getHead?url=${encodeURIComponent(
+		`${nextURL}/${encodeSlug(slug)}`
+	)}`
 
 	try {
 		const response = await fetch(requestUrl, {
