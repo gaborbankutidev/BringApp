@@ -2,7 +2,9 @@ import { withSentryConfig } from "@sentry/nextjs"
 
 const { env } = await import("./src/env.mjs")
 
-const sentryProject = "template"
+// Generated apps override these so sourcemaps don't upload to Bring's own org
+const sentryOrg = process.env.SENTRY_ORG ?? "bring-team"
+const sentryProject = process.env.SENTRY_PROJECT ?? "template"
 
 // Have a really good reason to touch the part below
 
@@ -55,8 +57,36 @@ function wpRemotePattern() {
 	}
 }
 
+function wpOrigin() {
+	try {
+		return new URL(env.NEXT_PUBLIC_WP_BASE_URL ?? "").origin
+	} catch {
+		return ""
+	}
+}
+
 /** @type {import("next").NextConfig} */
 const nextConfig = {
+	async headers() {
+		return [
+			{
+				source: "/(.*)",
+				headers: [
+					{ key: "X-Content-Type-Options", value: "nosniff" },
+					{ key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+					// The WP origin stays allowed so wp-admin can iframe the app (e.g. preview)
+					{
+						key: "Content-Security-Policy",
+						value: `frame-ancestors 'self' ${wpOrigin()}`.trim(),
+					},
+					{
+						key: "Strict-Transport-Security",
+						value: "max-age=63072000; includeSubDomains",
+					},
+				],
+			},
+		]
+	},
 	images: {
 		remotePatterns: [
 			...(process.env.NODE_ENV === "development" ? placeholderPatterns : []),
@@ -71,7 +101,7 @@ const sentryWebpackPluginOptions = {
 	disableServerWebpackPlugin: true,
 	disableClientWebpackPlugin: true,
 
-	org: "bring-team",
+	org: sentryOrg,
 	project: sentryProject,
 
 	silent: true,

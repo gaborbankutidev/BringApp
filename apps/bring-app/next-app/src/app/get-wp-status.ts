@@ -3,18 +3,9 @@ import { env } from "@/env.mjs"
 export type WpStatus = "ok" | "not-set-up" | "plugin-not-activated" | "unavailable" | "error"
 
 export const getWpStatus = async (): Promise<WpStatus> => {
-	console.log("Checking WordPress status...")
 	let wpStatus: WpStatus = "ok"
 
-	// Check if WordPress site is running
-	try {
-		await fetch(`${env.NEXT_PUBLIC_WP_BASE_URL}/wp-json/`)
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	} catch (e) {
-		console.error("WordPress health check failed, make sure the WordPress site is running")
-		return "unavailable"
-	}
-
+	// Check if WordPress site is running and set up
 	try {
 		const res = await fetch(`${env.NEXT_PUBLIC_WP_BASE_URL}/wp-json/`)
 		if (res.status === 200 && res.redirected && res.url.includes("/wp-admin/install.php")) {
@@ -23,8 +14,8 @@ export const getWpStatus = async (): Promise<WpStatus> => {
 		}
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	} catch (e) {
-		console.error("WordPress health check failed while checking if WordPress is set up")
-		wpStatus = "error"
+		console.error("WordPress health check failed, make sure the WordPress site is running")
+		return "unavailable"
 	}
 
 	// Check if WordPress plugin is activated
@@ -49,11 +40,6 @@ export const getWpStatus = async (): Promise<WpStatus> => {
 	} catch (e) {
 		console.error("WordPress health check failed while checking if WordPress plugin is activated")
 		wpStatus = "error"
-	}
-
-	// If no specific errors were found, and status is still "ok"
-	if (wpStatus === "ok") {
-		console.log("WordPress is active and set up")
 	}
 
 	return wpStatus
