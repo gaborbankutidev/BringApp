@@ -7,6 +7,10 @@
 			"inputs": ["$TURBO_DEFAULT$", ".env*"],
 			"outputs": ["dist/", "template/"]
 		},
+		"@bring/bring-app#build": {
+			"dependsOn": ["^build", "@bring/blocks-client#build", "@bring/blocks-editor#build"],
+			"cache": false
+		},
 		"lint": {
 			"dependsOn": ["^lint"]
 		},
